@@ -1,0 +1,18 @@
+{
+  "name": "bower-designsystem",
+  "version": "0.0.1",
+  "homepage": "https://github.com/PBGUX/bower-designsystem",
+  "authors": [
+    "danielcollette <daniel.collette@pb.com>"
+  ],
+  "description": "design system bower",
+  "main": "design_system.css",
+  "license": "MIT",
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "test",
+    "tests"
+  ]
+}
