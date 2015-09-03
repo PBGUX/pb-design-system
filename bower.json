@@ -1,12 +1,12 @@
 {
   "name": "bower-designsystem",
-  "version": "0.0.1",
+  "version": "0.0.4",
   "homepage": "https://github.com/PBGUX/bower-designsystem",
   "authors": [
-    "danielcollette <daniel.collette@pb.com>"
+    "danielcollette <daniel.collette@pb.com>",
   ],
   "description": "design system bower",
-  "main": "design_system.css",
+  "main": "css/design_system.css",
   "license": "MIT",
   "ignore": [
     "**/.*",
