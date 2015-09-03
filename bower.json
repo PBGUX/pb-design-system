@@ -3,7 +3,7 @@
   "version": "0.0.4",
   "homepage": "https://github.com/PBGUX/bower-designsystem",
   "authors": [
-    "danielcollette <daniel.collette@pb.com>",
+    "danielcollette <daniel.collette@pb.com>"
   ],
   "description": "design system bower",
   "main": "css/design_system.css",
