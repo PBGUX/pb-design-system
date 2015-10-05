@@ -1,0 +1,174 @@
+// for vertical spacing, add to elements
+$spacers: (xs: 10px,sm: 20px, md: 30px, lg: 40px, xl: 50px);
+$directions: (top, bottom);
+
+// added smartphone MQ, reduced each spacer size to 75% for that
+@each $direction in $directions {
+  @each $spacer, $amt in $spacers {
+    .spacer-#{$direction}-#{$spacer} {
+      margin-#{$direction}: $amt;
+      @media only screen and (max-device-width: 480px) {
+        margin-#{$direction}: 0.75 * $amt;
+      }
+    }
+  }
+}
+
+// older iteration of above
+// @each $direction in $directions {
+//   @each $spacer, $amt in $spacers {
+//       .spacer-#{$direction}-#{$spacer} {
+//           margin-#{$direction}: $amt;
+//           @include breakpoint($screen-xs) {
+//              margin-#{$direction}: ($amt * .75);
+//            }
+//       }
+//   }
+// }
+
+
+
+// .visually-hidden,
+// .screen-reader {
+//   overflow: hidden;
+//   position: absolute;
+//   width: 1px;
+//   height: 1px;
+//   margin: -1px;
+//   border: 0;
+//   padding: 0;
+//   clip: rect(0 0 0 0);
+// }
+
+
+.no-margin-top, .nmt {
+  margin-top: 0;
+}
+
+.no-margin-bottom, .nmb {
+  margin-bottom: 0;
+}
+
+.no-margins {
+  margin: 0;
+}
+
+.header-color {color: $header-color;}
+.header-color-alt {color: $header-color-alt;}
+
+// color classes, first foreground
+.white                 { color            : #fff; }
+.bk                    { color            : #000;}
+.text-bg1              { color            : $pb-bg1;}
+.text-bg2              { color            : $pb-bg2;}
+.text-bg3              { color            : $pb-bg3;}
+.text-bg4              { color            : $pb-bg4;}
+.text-bg5              { color            : $pb-bg5;}
+.text-blue             { color            : $pb-blue;}
+.text-blue-300         { color            : $pb-blue-300;}
+.text-blue-500         { color            : $pb-blue-500;}
+.text-blue-700         { color            : $pb-blue-700;}
+.text-cyan             { color            : $pb-cyan;}
+.text-cyan-300         { color            : $pb-cyan-300;}
+.text-cyan-500         { color            : $pb-cyan-500;}
+.text-cyan-700         { color            : $pb-cyan-700;}
+.text-dark-green       { color            : $pb-dark-green;}
+.text-dark-green-300   { color            : $pb-dark-green-300;}
+.text-dark-green-500   { color            : $pb-dark-green-500;}
+.text-dark-green-700   { color            : $pb-dark-green-700;}
+.text-dark-orange      { color            : $pb-dark-orange;}
+.text-dark-orange-300  { color            : $pb-dark-orange-300;}
+.text-dark-orange-500  { color            : $pb-dark-orange-500;}
+.text-dark-orange-700  { color            : $pb-dark-orange-700;}
+.text-danger           { color            : $brand-danger;}
+.text-error            {color             : $brand-danger;}
+.text-gray             { color            : $pb-gray;}
+.text-gray-50          { color            : $pb-light-gray;}
+.text-gray-300         { color            : $pb-gray-300;}
+.text-gray-400         { color            : $pb-gray-400;}
+.text-gray-500         { color            : $pb-gray-500;}
+.text-gray-700         { color            : $pb-gray-700;}
+.text-green            { color            : $pb-green;}
+.text-green-300        { color            : $pb-green-300;}
+.text-green-500        { color            : $pb-green-500;}
+.text-green-700        { color            : $pb-green-700;}
+.text-magenta          { color            : $pb-magenta;}
+.text-magenta-300      { color            : $pb-magenta-300;}
+.text-magenta-500      { color            : $pb-magenta-500;}
+.text-magenta-700      { color            : $pb-magenta-700;}
+.text-medium-blue      { color            : $pb-medium-blue;}
+.text-medium-blue-300  { color            : $pb-medium-blue-300;}
+.text-medium-blue-500  { color            : $pb-medium-blue-500;}
+.text-medium-blue-700  { color            : $pb-medium-blue-700;}
+.text-orange           { color            : $pb-orange;}
+.text-orange-300       { color            : $pb-orange-300;}
+.text-orange-500       { color            : $pb-orange-500;}
+.text-orange-700       { color            : $pb-orange-700;}
+.text-purple           { color            : $pb-purple;}
+.text-purple-300       { color            : $pb-purple-300;}
+.text-purple-500       { color            : $pb-purple-500;}
+.text-purple-700       { color            : $pb-purple-700;}
+.text-warning          { color            : $brand-warning;}
+.text-yellow           { color            : $pb-yellow;}
+.text-yellow-300       { color            : $pb-yellow-300;}
+.text-yellow-500       { color            : $pb-yellow-500;}
+.text-yellow-700       { color            : $pb-yellow-700;}
+
+// then background-color
+.bg-header-color       {background-color  : $header-color;}
+.bg-header-color-alt   {background-color  : $header-color-alt;}
+.bg-white              { background-color : #fff; }
+.bg-pb-bg1             { background-color : $pb-bg1;}
+.bg-pb-bg2             { background-color : $pb-bg2;}
+.bg-pb-bg3             { background-color : $pb-bg3;}
+.bg-pb-bg4             { background-color : $pb-bg4;}
+.bg-pb-bg5             { background-color : $pb-bg5;}
+.bg-pb-blue            { background-color : $pb-blue;}
+.bg-pb-blue-300        { background-color : $pb-blue-300;}
+.bg-pb-blue-500        { background-color : $pb-blue-500;}
+.bg-pb-blue-700        { background-color : $pb-blue-700;}
+.bg-pb-cyan            { background-color : $pb-cyan;}
+.bg-pb-cyan-300        { background-color : $pb-cyan-300;}
+.bg-pb-cyan-500        { background-color : $pb-cyan-500;}
+.bg-pb-cyan-700        { background-color : $pb-cyan-700;}
+.bg-pb-error           { background-color : $brand-danger;}
+.bg-pb-danger          { background-color : $brand-danger;}
+.bg-pb-dark-orange     { background-color : $pb-dark-orange;}
+.bg-pb-dark-orange-300 { background-color : $pb-dark-orange-300;}
+.bg-pb-dark-orange-500 { background-color : $pb-dark-orange-500;}
+.bg-pb-dark-orange-700 { background-color : $pb-dark-orange-700;}
+.bg-pb-dark-green      { background-color : $pb-dark-green;}
+.bg-pb-dark-green-300  { background-color : $pb-dark-green-300;}
+.bg-pb-dark-green-500  { background-color : $pb-dark-green-500;}
+.bg-pb-dark-green-700  { background-color : $pb-dark-green-700;}
+.bg-pb-gray            { background-color : $pb-gray;}
+.bg-pb-gray-50         { background-color : $pb-light-gray;}
+.bg-pb-gray-300        { background-color : $pb-gray-300;}
+.bg-pb-gray-400        { background-color : $pb-gray-400;}
+.bg-pb-gray-500        { background-color : $pb-gray-500;}
+.bg-pb-gray-700        { background-color : $pb-gray-700;}
+.bg-pb-green           { background-color : $pb-green;}
+.bg-pb-green-300       { background-color : $pb-green-300;}
+.bg-pb-green-500       { background-color : $pb-green-500;}
+.bg-pb-green-700       { background-color : $pb-green-700;}
+.bg-pb-magenta         { background-color : $pb-magenta;}
+.bg-pb-magenta-300     { background-color : $pb-magenta-300;}
+.bg-pb-magenta-500     { background-color : $pb-magenta-500;}
+.bg-pb-magenta-700     { background-color : $pb-magenta-700;}
+.bg-pb-medium-blue     { background-color : $pb-medium-blue;}
+.bg-pb-medium-blue-300 { background-color : $pb-medium-blue-300;}
+.bg-pb-medium-blue-500 { background-color : $pb-medium-blue-500;}
+.bg-pb-medium-blue-700 { background-color : $pb-medium-blue-700;}
+.bg-pb-orange          { background-color : $pb-orange;}
+.bg-pb-orange-300      { background-color : $pb-orange-300;}
+.bg-pb-orange-500      { background-color : $pb-orange-500;}
+.bg-pb-orange-700      { background-color : $pb-orange-700;}
+.bg-pb-purple          { background-color : $pb-purple;}
+.bg-pb-purple-300      { background-color : $pb-purple-300;}
+.bg-pb-purple-500      { background-color : $pb-purple-500;}
+.bg-pb-purple-700      { background-color : $pb-purple-700;}
+.bg-pb-warning         { background-color : $brand-warning;}
+.bg-pb-yellow          { background-color : $pb-yellow;}
+.bg-pb-yellow-300      { background-color : $pb-yellow-300;}
+.bg-pb-yellow-500      { background-color : $pb-yellow-500;}
+.bg-pb-yellow-700      { background-color : $pb-yellow-700;}

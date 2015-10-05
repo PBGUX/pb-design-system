@@ -1,0 +1,335 @@
+@mixin clearfix {
+  zoom: 1;
+  &:before,
+  &:after {
+    content: '';
+    display: table;
+  }
+  &:after {
+    clear: both;
+  }
+}
+
+@mixin breakpoint($point) {
+  @if $point == screen-xs {
+    @media (max-width: 767px) {
+      @content;
+    }
+  } @else if $point == screen-sm {
+    @media (min-width: 768px) {
+      @content;
+    }
+  } @else if $point == screen-md {
+    @media (min-width: 992px) {
+      @content;
+    }
+  } @else if $point == screen-lg {
+    @media (min-width: 1200px) {
+      @content;
+    }
+  }
+}
+
+
+
+
+// HiDPI mixin. Default value set to 1.3 to target Google Nexus 7 (http://bjango.com/articles/min-device-pixel-ratio/)
+@mixin hidpi($ratio: 1.3) {
+  @media only screen and (-webkit-min-device-pixel-ratio: $ratio),
+  only screen and (min--moz-device-pixel-ratio: $ratio),
+  only screen and (-o-min-device-pixel-ratio: #{$ratio}/1),
+  only screen and (min-resolution: round($ratio * 96dpi)),
+  only screen and (min-resolution: $ratio * 1dppx) {
+    @content;
+  }
+}
+// usage:
+// @include hidpi(1.5) {
+//   --stuff
+// }
+
+
+// tint and shade functions
+@function tint($color, $percentage) {
+  @return mix($color, #fff, $percentage);
+}
+@function shade($color, $percentage) {
+  @return mix($color, #000, $percentage);
+}
+
+
+// Panels
+
+@mixin panel-variant($border, $heading-text-color, $heading-bg-color, $heading-border) {
+  border-color: $border;
+
+  >.panel-heading {
+    color: $heading-text-color;
+    background-color: $heading-bg-color;
+    border-color: $heading-border;
+
+    +.panel-collapse >.panel-body {
+      border-top-color: $border;
+    }
+    .badge {
+      color: $heading-bg-color;
+      background-color: $heading-text-color;
+    }
+  }
+  >.panel-footer {
+    +.panel-collapse >.panel-body {
+      border-bottom-color: $border;
+    }
+  }
+}
+
+
+
+/// Hides the text in an element, commonly used to show an image. Some elements will need block-level styles applied.
+///
+/// @link http://zeldman.com/2012/03/01/replacing-the-9999px-hack-new-image-replacement
+///
+/// @example scss - Usage
+///   .element {
+///     @include hide-text;
+///   }
+///
+/// @example css - CSS Output
+///   .element {
+///     overflow: hidden;
+///     text-indent: 101%;
+///     white-space: nowrap;
+///   }
+///
+
+@mixin hide-text {
+  overflow: hidden;
+  text-indent: 101%;
+  white-space: nowrap;
+}
+
+
+// Required mixins pulled from Bootstrap's mixins.scss
+
+// Creates a wrapper for a series of columns
+@mixin make-row($gutter: $grid-gutter-width) {
+  margin-left: ($gutter / -2);
+  margin-right: ($gutter / -2);
+  @include clearfix();
+}
+
+// Box sizing
+@mixin box-sizing($boxmodel) {
+  box-sizing: $boxmodel;
+}
+$grid-column-padding: 15px;
+
+
+// Contextual backgrounds
+
+// [converter] $parent hack
+@mixin bg-variant($parent, $color) {
+  #{$parent} {
+    background-color: $color;
+  }
+  a#{$parent}:hover {
+    background-color: darken($color, 10%);
+  }
+}
+
+
+// Typography
+// [converter] $parent hack
+@mixin text-emphasis-variant($parent, $color) {
+  #{$parent} {
+    color: $color;
+  }
+  a#{$parent}:hover {
+    color: darken($color, 10%);
+  }
+}
+
+@mixin triangle-closed {
+  content: '\25B8'; // triangle right
+  transform: rotate(0deg);
+}
+@mixin triangle-opened {
+  content: '\25B8'; // triangle right
+  transform: rotate(90deg);
+}
+
+
+
+@mixin flat-right($r: $border-radius-base) {
+  border-bottom-left-radius: $r;
+  border-top-left-radius: $r;
+  border-top-right-radius: 0;
+  border-bottom-right-radius: 0;
+}
+
+@mixin flat-left ($r: $border-radius-base) {
+  border-bottom-left-radius: 0;
+  border-top-left-radius: 0;
+  border-top-right-radius: $r;
+  border-bottom-right-radius: $r;
+}
+
+// Button variants
+//
+// Easily pump out default styles, as well as :hover, :focus, :active,
+// and disabled options for all buttons
+
+
+// solid 'primary' buttons
+@mixin button-variant($fg, $bg, $border, $disabled-fg, $disabled-bg, $hover-fg: $fg, $hover-bg:$bg) {
+  color: $fg;
+  background-color: $bg;
+  border-color: $border;
+
+  &:hover,
+  &.hover,
+  &:focus,
+  &.focus,
+  &:active,
+  &.active,
+  .open >&.dropdown-toggle {
+    color: $hover-fg;
+    background-color: $hover-bg;
+    border-color: $border;
+  }
+
+  &:active,
+  &.active,
+  .open >&.dropdown-toggle {
+    background-image: none;
+  }
+
+  &.disabled,
+  &[disabled],
+  fieldset[disabled] & {
+    &,
+    &:hover,
+    &.hover,
+    &:focus,
+    &.focus,
+    &:active,
+    &.active {
+      background-color: $disabled-bg;
+      border-color: $disabled-fg;
+      color: $disabled-fg;
+    }
+  }
+
+  .badge {
+    color: #fff;
+    background-color: $pb-magenta;
+    margin-left: 10px;
+  }
+}
+
+
+// these are the newer gray outline buttons
+@mixin tertiary-button-variant($color, $background, $border) {
+  color: $color;
+  background-color: $background;
+  border-color: $border;
+
+  &:focus,
+  &.focus,
+  &:active,
+  &.active,
+  .open >&.dropdown-toggle {
+    color: #fff;
+    background-color: $pb-gray-300;
+    border-color: $border;
+    &:hover {
+      color: #fff;
+      background-color: $pb-gray-400;
+      border-color: $border;
+    }
+  }
+  &:hover {
+    color: $color;
+    background-color: $pb-gray-50;
+    border-color: $border;
+  }
+  &:active,
+  &.active,
+  .open >&.dropdown-toggle {
+    background-image: none;
+  }
+  &.disabled,
+  &[disabled],
+  fieldset[disabled] & {
+    &,
+    &:hover,
+    &:focus,
+    &.focus,
+    &:active,
+    &.active {
+      background-color: $background;
+      border-color: $border;
+    }
+  }
+}
+
+// Button sizes
+@mixin button-size($padding-vertical, $padding-horizontal, $font-size, $line-height, $border-radius) {
+  padding: $padding-vertical $padding-horizontal;
+  font-size: $font-size;
+  line-height: $line-height;
+  border-radius: $border-radius;
+}
+
+@mixin border-top-radius($radius) {
+  border-top-right-radius: $radius;
+  border-top-left-radius: $radius;
+}
+@mixin border-right-radius($radius) {
+  border-bottom-right-radius: $radius;
+  border-top-right-radius: $radius;
+}
+@mixin border-bottom-radius($radius) {
+  border-bottom-right-radius: $radius;
+  border-bottom-left-radius: $radius;
+}
+@mixin border-left-radius($radius) {
+  border-bottom-left-radius: $radius;
+  border-top-left-radius: $radius;
+}
+
+
+// Single side border-radius
+
+@mixin border-top-radius($radius) {
+  border-top-right-radius: $radius;
+   border-top-left-radius: $radius;
+}
+@mixin border-right-radius($radius) {
+  border-bottom-right-radius: $radius;
+     border-top-right-radius: $radius;
+}
+@mixin border-bottom-radius($radius) {
+  border-bottom-right-radius: $radius;
+   border-bottom-left-radius: $radius;
+}
+@mixin border-left-radius($radius) {
+  border-bottom-left-radius: $radius;
+     border-top-left-radius: $radius;
+}
+
+
+// @each $item, $color in $pbcolors {
+//   @each $shade, $value in $color {
+//     .bg-#{$item}-#{$shade} {
+//       background-color: $value;
+//     }
+//   }
+// }
+// @each $item, $color in $pbcolors {
+//   @each $shade, $value in $color {
+//     .text-#{$item}-#{$shade} {
+//       color: $value;
+//     }
+//   }
+// }
