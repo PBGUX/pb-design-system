@@ -1,12 +1,12 @@
 {
   "name": "bower-designsystem",
+  "description": "Design System Bower",
   "version": "2.1.0",
   "homepage": "https://github.com/PBGUX/bower-designsystem",
   "authors": [
     "danielcollette <daniel.collette@pb.com>",
     "stevelombard <steve.lombardi@pb.com>"
   ],
-  "description": "Design System Bower",
   "main": "dist/css/design_system.css",
   "license": "",
   "ignore": [
