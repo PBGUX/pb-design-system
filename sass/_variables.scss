@@ -1,8 +1,10 @@
 //
 // Variables
+// Do not actually define any selectors here
+// This is only to set variables
 // --------------------------------------------------
-// updated 9/18/15
-// FA 2.0 design final colors
+// updated 10/6/15
+// DS 2.1.1
 
 //Use this color palette for primary or accent colors
 // note that the 500 color is the main color
@@ -24,6 +26,7 @@ $pb-purple-700:          #80327c;
 $pb-purple:              $pb-purple-500;
 
 //Use this color palette for accent colors
+// note that the 500 color is the main color
 $pb-cyan-300:            #66c3ec;
 $pb-cyan-500:            #009dbf;
 $pb-cyan-700:            #007cb2;
@@ -38,6 +41,7 @@ $pb-dark-orange-700:     #be5000;
 $pb-dark-orange:         $pb-dark-orange-500;
 
 //Use this color palette for auxiliary colors
+// note that the 500 color is the main color
 $pb-green-300:           #aad88f;
 $pb-green-500:           #72bf44;
 $pb-green-700:           #5a9836;
@@ -817,7 +821,43 @@ $pre-border-color: #ccc;
 $pre-scrollable-max-height: 340px;
 
 
-//== Type
+//-- Bootstrap Iconography
+//** Load fonts from this directory.
+$icon-font-path: '../fonts/';
+//** File name for all font files.
+$icon-font-name: 'glyphicons-halflings-regular';
+//** Element ID within SVG icon file.
+$icon-font-svg-id: 'glyphicons_halflingsregular';
+
+
+//==  Typography
+
+$font-family-sans-serif:        'Helvetica Neue', Helvetica, Arial, sans-serif;
+$font-family-serif:             Georgia, Times, 'Times New Roman', serif;
+$font-family-base:              $font-family-sans-serif;
+$font-family-monospace:         Menlo, Consolas, Monaco, 'Courier New', monospace;
+$font-family-ps-light:          'PrecisionSans_W_Lt', 'Helvetica Neue', Arial, sans-serif;
+$font-family-ps-light-italic:   'PrecisionSans_W_LtIt', 'Helvetica Neue', Arial, sans-serif;
+$font-family-ps-regular:        'PrecisionSans_W_Rg', 'Helvetica Neue', Arial, sans-serif;
+$font-family-ps-regular-italic: 'PrecisionSans_W_RgIt', 'Helvetica Neue', Arial, sans-serif;
+$font-family-ps-medium:         'PrecisionSans_W_Md', 'Helvetica Neue', Arial, sans-serif;
+$font-family-ps-medium-italic:  'PrecisionSans_W_MdIt', 'Helvetica Neue', Arial, sans-serif;
+$font-family-ps-bold:           'PrecisionSans_W_Bd', 'Helvetica Neue', Arial, sans-serif;
+$font-family-ps-bold-italic:    'PrecisionSans_W_BdIt', 'Helvetica Neue', Arial, sans-serif;
+$headings-font-weight:          normal;
+$headings-line-height:          1.1;
+$headings-color:                inherit;
+$btn-font-weight:               normal;
+
+
+//== Font Sizes
+
+$font-size-base:   14px;
+$font-size-large:  ceil(($font-size-base * 1.15)); // ~16px
+$font-size-small:  ceil(($font-size-base * .85)); // ~12px
+$font-size-xsmall: ceil(($font-size-base * .72)); // ~10px
+
+//== Type styles
 
 //** Horizontal offset for forms and lists.
 $component-offset-horizontal: 180px;
@@ -842,8 +882,6 @@ $hr-border: $pb-light-gray;
 
 
 //== Miscellaneous
-//
-//##
 
 //** Horizontal line color.
 $hr-border: $pb-light-gray;
