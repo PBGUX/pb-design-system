@@ -1,6 +1,6 @@
 # packaged design system
 
-This repo is for distrubution of the Design System on `bower`. The source is the main [Design System repo](https://github.com/PBGUX/bower-designsystem). Please file issues against that repo.
+This repo is for distribution of the Design System on `bower`. The source is the main [Design System repo](https://github.com/PBGUX/bower-designsystem). Please file issues against that repo.
 
 ##Install
 You can install this package with `bower`:
@@ -19,5 +19,6 @@ Then add a link tag in the document head AFTER the Bootstrap CSS:
 Reference the Design System .scss variables within your application Sass file to use the variables:
 
 ```scss
+@import 'bower_components/bower-designsystem/sass/mixins';
 @import 'bower_components/bower-designsystem/sass/variables';
 ```

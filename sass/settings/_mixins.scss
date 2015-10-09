@@ -1,3 +1,4 @@
+/// Deprecated clearfix
 @mixin clearfix {
   zoom: 1;
   &:before,
@@ -10,6 +11,13 @@
   }
 }
 
+
+/// @example scss - Usage
+/// @include breakpoint(screen-xs) {
+///   .copyright {
+///     font-size: 11px;
+///   }
+/// }
 @mixin breakpoint($point) {
   @if $point == screen-xs {
     @media (max-width: 767px) {
@@ -33,7 +41,13 @@
 
 
 
-// HiDPI mixin. Default value set to 1.3 to target Google Nexus 7 (http://bjango.com/articles/min-device-pixel-ratio/)
+/// HiDPI mixin. Default value set to 1.3 to target Google Nexus 7 (http://bjango.com/articles/min-device-pixel-ratio/)
+
+/// @example scss - Usage
+// @include hidpi(1.5) {
+//  --stuff
+// }
+/// @param {number} $ratio
 @mixin hidpi($ratio: 1.3) {
   @media only screen and (-webkit-min-device-pixel-ratio: $ratio),
   only screen and (min--moz-device-pixel-ratio: $ratio),
@@ -43,23 +57,22 @@
     @content;
   }
 }
-// usage:
-// @include hidpi(1.5) {
-//   --stuff
-// }
 
 
-// tint and shade functions
+
+
+/// tint function
 @function tint($color, $percentage) {
   @return mix($color, #fff, $percentage);
 }
+
+/// shade function
 @function shade($color, $percentage) {
   @return mix($color, #000, $percentage);
 }
 
 
-// Panels
-
+/// Panel Variants
 @mixin panel-variant($border, $heading-text-color, $heading-bg-color, $heading-border) {
   border-color: $border;
 
@@ -88,6 +101,7 @@
 /// Hides the text in an element, commonly used to show an image. Some elements will need block-level styles applied.
 ///
 /// @link http://zeldman.com/2012/03/01/replacing-the-9999px-hack-new-image-replacement
+
 ///
 /// @example scss - Usage
 ///   .element {
@@ -149,10 +163,12 @@ $grid-column-padding: 15px;
   }
 }
 
+///
 @mixin triangle-closed {
   content: '\25B8'; // triangle right
   transform: rotate(0deg);
 }
+///
 @mixin triangle-opened {
   content: '\25B8'; // triangle right
   transform: rotate(90deg);
@@ -174,13 +190,16 @@ $grid-column-padding: 15px;
   border-bottom-right-radius: $r;
 }
 
-// Button variants
-//
-// Easily pump out default styles, as well as :hover, :focus, :active,
-// and disabled options for all buttons
+/// @name Button variant
+///
+/// Easily pump out default styles, as well as :hover, :focus, :active,
+/// and disabled options for all buttons
 
+/// @example scss - Usage
+/// .btn-primary {
+///  @include button-variant(#fff, $button-primary, $button-primary, $pb-gray-500, $pb-bg2, #fff, $pb-blue-700);
+/// }
 
-// solid 'primary' buttons
 @mixin button-variant($fg, $bg, $border, $disabled-fg, $disabled-bg, $hover-fg: $fg, $hover-bg:$bg) {
   color: $fg;
   background-color: $bg;
@@ -228,6 +247,8 @@ $grid-column-padding: 15px;
 }
 
 
+
+
 // these are the newer gray outline buttons
 @mixin tertiary-button-variant($color, $background, $border) {
   color: $color;
@@ -273,50 +294,34 @@ $grid-column-padding: 15px;
   }
 }
 
-// Button sizes
+/// Button sizes
 @mixin button-size($padding-vertical, $padding-horizontal, $font-size, $line-height, $border-radius) {
   padding: $padding-vertical $padding-horizontal;
   font-size: $font-size;
   line-height: $line-height;
   border-radius: $border-radius;
 }
-
+/// top
 @mixin border-top-radius($radius) {
   border-top-right-radius: $radius;
   border-top-left-radius: $radius;
 }
-@mixin border-right-radius($radius) {
-  border-bottom-right-radius: $radius;
-  border-top-right-radius: $radius;
-}
-@mixin border-bottom-radius($radius) {
-  border-bottom-right-radius: $radius;
-  border-bottom-left-radius: $radius;
-}
-@mixin border-left-radius($radius) {
-  border-bottom-left-radius: $radius;
-  border-top-left-radius: $radius;
-}
-
-
-// Single side border-radius
-
-@mixin border-top-radius($radius) {
-  border-top-right-radius: $radius;
-   border-top-left-radius: $radius;
-}
-@mixin border-right-radius($radius) {
-  border-bottom-right-radius: $radius;
-     border-top-right-radius: $radius;
-}
+/// bottom
 @mixin border-bottom-radius($radius) {
   border-bottom-right-radius: $radius;
    border-bottom-left-radius: $radius;
 }
+/// right
+@mixin border-right-radius($radius) {
+  border-bottom-right-radius: $radius;
+  border-top-right-radius: $radius;
+}
+/// left
 @mixin border-left-radius($radius) {
   border-bottom-left-radius: $radius;
-     border-top-left-radius: $radius;
+  border-top-left-radius: $radius;
 }
+
 
 
 // @each $item, $color in $pbcolors {

@@ -2,7 +2,7 @@
  * DesignSystem - 
  * @version v2.1.1
  * @link http://guxstaging.pbi.global.pvt/design_system
- * Built Tue Oct 06 2015 09:49:39 GMT-0400 (EDT) 
+ * Built Fri Oct 09 2015 10:02:13 GMT-0400 (EDT) 
  */
 .container-fluid {
   padding-left: 40px;
@@ -2929,7 +2929,7 @@ form.magic-search input[type=search] {
   padding: 7px 10px 7px 32px;
   display: inline-block;
   width: 15px;
-  padding-left: 10px;
+  padding-left: 20px;
   color: transparent;
   cursor: pointer;
   border-radius: 20px;
@@ -3028,7 +3028,7 @@ a.app-launcher {
   margin: 10px 5px;
   border-left: 1px solid rgba(255, 255, 255, 0.3); }
 .navbar-default .navbar-nav > li > a {
-  color: rgba(255, 255, 255, 0.75);
+  color: white;
   font-size: 14px;
   font-family: "PrecisionSans_W_Rg", "Helvetica Neue", Arial, sans-serif;
   font-weight: normal; }
@@ -3077,10 +3077,9 @@ a.app-launcher {
   background-color: #9b9b9b; }
 .navbar-default .dropdown-menu > li.section-head {
   font-family: "PrecisionSans_W_Rg", "Helvetica Neue", Arial, sans-serif;
-  margin: 12px 30px 6px;
+  margin: 12px 20px 5px;
   color: #2e2e2e;
   padding-bottom: 5px;
-  margin-bottom: 10px;
   border-bottom: 1px solid #e1e1e1; }
 .navbar-default .dropdown-menu > li > a {
   padding: 16px 30px 16px 20px;
@@ -3476,7 +3475,7 @@ th {
 .table .table {
   background-color: #fff; }
 .table .table-row-selected td {
-  background-color: #c5cbe4; }
+  background-color: #e4e6fa; }
 .table .table-details td {
   padding: 0;
   background-color: #f0f0f0;
