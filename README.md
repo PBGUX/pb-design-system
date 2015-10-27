@@ -19,6 +19,6 @@ Then add a link tag in the document head AFTER the Bootstrap CSS:
 Reference the Design System .scss variables within your application Sass file to use the variables:
 
 ```scss
-@import 'bower_components/bower-designsystem/sass/mixins';
-@import 'bower_components/bower-designsystem/sass/variables';
+@import 'bower_components/bower-designsystem/sass/settings/mixins';
+@import 'bower_components/bower-designsystem/sass/settings/variables';
 ```
