@@ -200,7 +200,11 @@ $grid-column-padding: 15px;
 ///  @include button-variant(#fff, $button-primary, $button-primary, $pb-gray-500, $pb-bg2, #fff, $pb-blue-700);
 /// }
 
-@mixin button-variant($fg, $bg, $border, $disabled-fg, $disabled-bg, $hover-fg: $fg, $hover-bg:$bg) {
+@mixin button-variant(
+                      $fg, $bg, $border,
+                      $disabled-fg, $disabled-bg, $disabled-border,
+                      $hover-fg: $fg, $hover-bg:$bg
+                      ) {
   color: $fg;
   background-color: $bg;
   border-color: $border;
@@ -234,7 +238,7 @@ $grid-column-padding: 15px;
     &:active,
     &.active {
       background-color: $disabled-bg;
-      border-color: $disabled-fg;
+      border-color: $disabled-border;
       color: $disabled-fg;
     }
   }
