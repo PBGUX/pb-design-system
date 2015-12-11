@@ -68,7 +68,7 @@ $pb-gray-50:             $pb-light-gray;
 $pb-bg1:                 #f0f0f0; //footers
 $pb-bg2:                 #f8f8f8; //containers, backgrounds
 $pb-bg3:                 #eaedf8; //row hover states
-$pb-bg4:                 #e4e6fa; //summary tables, vertical dividers
+$pb-bg4:                 #d8dbf1; //summary tables, vertical dividers
 $pb-bg5:                 #c5cbe3; //data cell borders
 
 $pb-error-red:           #dc0000;
@@ -385,6 +385,11 @@ $grid-float-breakpoint-max: ($grid-float-breakpoint - 1);
   padding-right: 40px;
   margin-left: auto;
   margin-right: auto;
+  // which needs to be re-set for phone
+  @media (max-width: $screen-sm) {
+      padding-left: 15px;
+      padding-right: 15px;
+    }
 }
 
 
