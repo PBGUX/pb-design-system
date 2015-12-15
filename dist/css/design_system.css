@@ -2,7 +2,7 @@
  * DesignSystem - 
  * @version v2.3.0
  * @link http://guxstaging.pbi.global.pvt/design_system
- * Built Fri Dec 11 2015 13:32:49 GMT-0500 (EST) 
+ * Built Tue Dec 15 2015 15:21:39 GMT-0500 (EST) 
  */
 .container-fluid {
   padding-left: 40px;
@@ -3320,7 +3320,8 @@ a.app-launcher {
 .footer-wrapper {
   background-color: #e1e1e1;
   width: 100vw;
-  margin-top: 40px; }
+  margin-top: 40px;
+  padding: 10px 0; }
 .footer-wrapper.demo {
   margin-top: 0; }
 
@@ -3341,8 +3342,7 @@ a.app-launcher {
   width: 100%;
   -webkit-justify-content: space-between;
       -ms-flex-pack: justify;
-          justify-content: space-between;
-  padding: 10px 0; }
+          justify-content: space-between; }
 #footer > div, footer > div {
   padding: 0 20px 0 0; }
 @media (max-width: 767px) {
