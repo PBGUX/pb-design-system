@@ -359,20 +359,3 @@ $grid-column-padding: 15px;
   border-bottom-left-radius: $radius;
   border-top-left-radius: $radius;
 }
-
-
-
-// @each $item, $color in $pbcolors {
-//   @each $shade, $value in $color {
-//     .bg-#{$item}-#{$shade} {
-//       background-color: $value;
-//     }
-//   }
-// }
-// @each $item, $color in $pbcolors {
-//   @each $shade, $value in $color {
-//     .text-#{$item}-#{$shade} {
-//       color: $value;
-//     }
-//   }
-// }
