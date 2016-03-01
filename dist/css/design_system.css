@@ -2,7 +2,7 @@
  * DesignSystem - 
  * @version v2.5.0
  * @link http://guxstaging.pbi.global.pvt/design_system
- * Built Mon Feb 29 2016 12:57:16 GMT-0500 (EST) 
+ * Built Tue Mar 01 2016 16:48:43 GMT-0500 (EST) 
  */
 @charset "UTF-8";
 .container-fluid {
@@ -5607,7 +5607,7 @@ td.centered, th.centered {
   background-image: none;
   border: 1px solid transparent;
   border-right: 1px solid rgba(255, 255, 255, 0.3);
-  border-radius: 4px; }
+  border-radius: 0; }
 .hamburger .navbar-brand.brand-text {
   font-family: 'PrecisionSans_W_Rg', 'Helvetica Neue', Arial, sans-serif;
   font-weight: normal;
