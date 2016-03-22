@@ -15,5 +15,8 @@
   "bugs": {
     "url": "https://github.com/PBGUX/bower-designsystem/issues"
   },
-  "homepage": "https://github.com/PBGUX/bower-designsystem#readme"
+  "homepage": "https://github.com/PBGUX/bower-designsystem#readme",
+  "dependencies": {
+    "bootstrap": "~3.3.5"
+  }
 }
