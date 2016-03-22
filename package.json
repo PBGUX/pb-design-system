@@ -1,5 +1,5 @@
 {
-  "name": "designsystem",
+  "name": "pb-design-system",
   "version": "2.5.2",
   "description": "Design System NPM",
   "main": "dist/css/design_system.css",
