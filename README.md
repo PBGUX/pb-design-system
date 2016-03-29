@@ -2,7 +2,7 @@
 
 This repo is for distribution of the Design System on `bower`. The source is the main [Design System repo](https://github.com/PBGUX/bower-designsystem). Please file issues against that repo.
 
-##Install
+##Bower Install
 You can install this package with `bower`:
 
 ```shell
@@ -13,6 +13,19 @@ Then add a link tag in the document head AFTER the Bootstrap CSS:
 
 ```html
 <link rel="stylesheet" href="bower_components/pb-design-system/dist/css/design_system.css">
+```
+
+##NPM Install
+You can install this package with `npm`:
+
+```shell
+npm install pb-design-system --save
+```
+
+Then add a link tag in the document head AFTER the Bootstrap CSS:
+
+```html
+<link rel="stylesheet" href="node_modules/pb-design-system/dist/css/design_system.css">
 ```
 
 ##Sass
