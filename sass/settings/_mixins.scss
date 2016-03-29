@@ -68,7 +68,7 @@
       @content;
     }
   } @else if $point == screen-lg {
-    @media (min-width: 1200px) {
+    @media (min-width: 1300px) {
       @content;
     }
   }

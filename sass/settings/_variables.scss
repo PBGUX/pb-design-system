@@ -63,6 +63,7 @@ $pb-gray-300:            #9b9b9b; // field borders, icons
 $pb-gray:                #c0c0c0; // disabled
 $pb-light-gray:          #e1e1e1; //section dividers, tab borders
 $pb-gray-50:             $pb-light-gray;
+$pb-gray-100:            $pb-gray;
 
 //Neutral Light Color Palette
 $pb-bg1:                 #f0f0f0; //footers
@@ -70,6 +71,13 @@ $pb-bg2:                 #f8f8f8; //containers, backgrounds
 $pb-bg3:                 #eaedf8; //row hover states
 $pb-bg4:                 #d8dbf1; //summary tables, vertical dividers
 $pb-bg5:                 #c5cbe3; //data cell borders
+
+$pb-bg-100: $pb-bg1;
+$pb-bg-200: $pb-bg2;
+$pb-bg-300: $pb-bg3;
+$pb-bg-400: $pb-bg4;
+$pb-bg-500: $pb-bg5;
+$pb-bg-700: $pb-gray-700;
 
 $pb-error-red:           #dc0000;
 
@@ -249,7 +257,7 @@ $input-border-radius-large: $border-radius-large;
 $input-border-radius-small: $border-radius-small;
 
 //** Placeholder text color
-$input-color-placeholder: $pb-light-gray;
+$input-color-placeholder: $pb-gray;
 
 //** Default `.form-control` height
 $input-height-base: ($line-height-computed + ($padding-base-vertical * 2) + 2);
@@ -323,6 +331,9 @@ $zindex-modal: 1050;
 //== Media queries breakpoints
 //
 //## Define the breakpoints at which your layout will change, adapting to different screen sizes.
+//
+//## IMPORTANT NOTE: if you use the mixin breakpoint(screen-x) sizes below are not used!
+//## The sizes are defined in the mixin in _mixins.scss
 
 // Extra small screen / phone
 //** Deprecated `$screen-xs` as of v3.0.1
@@ -348,7 +359,7 @@ $screen-desktop: $screen-md-min;
 
 // Large screen / wide desktop
 //** Deprecated `$screen-lg` as of v3.0.1
-$screen-lg: 1200px;
+$screen-lg: 1300px;
 $screen-lg-min: $screen-lg;
 //** Deprecated `$screen-lg-desktop` as of v3.0.1
 $screen-lg-desktop: $screen-lg-min;
@@ -369,7 +380,7 @@ $grid-columns: 12;
 $grid-gutter-width: 30px;
 // Navbar collapse
 //** Point at which the navbar becomes uncollapsed.
-$grid-float-breakpoint: $screen-sm-min;
+$grid-float-breakpoint: $screen-md-min;
 //** Point at which the navbar begins collapsing.
 $grid-float-breakpoint-max: ($grid-float-breakpoint - 1);
 
