@@ -76,8 +76,6 @@
   }
 }
 
-
-
 /// Mixes a color with white by a supplied percentage
 /// @param {Percent} $percentage [] - From 0-100%
 /// @example scss - Usage
@@ -87,7 +85,6 @@
 @function tint($color, $percentage) {
   @return mix($color, #fff, $percentage);
 }
-
 
 /// Mixes a color with black by a supplied percentage
 /// @param {Percent} $percentage [] - From 0-100%
@@ -182,7 +179,6 @@ $grid-column-padding: 15px;
   }
 }
 
-
 @mixin triangle-closed {
   content: '\25B8'; // triangle right
   transform: rotate(0deg);
@@ -205,83 +201,6 @@ $grid-column-padding: 15px;
   border-top-left-radius: 0;
   border-top-right-radius: $r;
   border-bottom-right-radius: $r;
-}
-
-/// @name Button variant
-///
-/// Easily pump out default styles, as well as :hover, :focus, :active,
-/// and disabled options for all buttons
-
-/// @example scss - Usage
-/// .btn-primary {
-///  @include button-variant(#fff, $button-primary, $button-primary, $pb-gray-500, $pb-bg2, #fff, $pb-blue-700);
-/// }
-
-@mixin button-variant(
-                      $fg, $bg, $border,
-                      $disabled-fg, $disabled-bg, $disabled-border,
-                      $hover-fg: $fg, $hover-bg:$bg
-                      ) {
-  color: $fg;
-  background-color: $bg;
-  border-color: $border;
-
-  &:hover, &.hover, &:focus, &.focus, &:active, &.active, .open > &.dropdown-toggle {
-    color: $hover-fg;
-    background-color: $hover-bg;
-    border-color: $border;
-  }
-
-  &:active, &.active, .open > &.dropdown-toggle {
-    background-image: none;
-  }
-
-  &.disabled, &[disabled], fieldset[disabled] & {
-    &, &:hover, &.hover, &:focus, &.focus, &:active, &.active {
-      background-color: $disabled-bg;
-      border-color: $disabled-border;
-      color: $disabled-fg;
-    }
-  }
-
-  .badge {
-    color: #fff;
-    background-color: $pb-magenta;
-    margin-left: 10px;
-  }
-}
-
-
-// these are the newer gray outline buttons
-@mixin tertiary-button-variant($color, $background, $border) {
-  color: $color;
-  background-color: $background;
-  border-color: $border;
-
-  &:focus, &.focus, &:active, &.active, .open > &.dropdown-toggle {
-    color: #fff;
-    background-color: $pb-gray-300;
-    border-color: $border;
-    &:hover {
-      color: #fff;
-      background-color: $pb-gray-400;
-      border-color: $border;
-    }
-  }
-  &:hover {
-    color: $color;
-    background-color: $pb-gray-50;
-    border-color: $border;
-  }
-  &:active, &.active, .open > &.dropdown-toggle {
-    background-image: none;
-  }
-  &.disabled, &[disabled], fieldset[disabled] & {
-    &, &:hover, &:focus, &.focus, &:active, &.active {
-      background-color: $background;
-      border-color: $border;
-    }
-  }
 }
 
 /// Button sizes
@@ -310,4 +229,32 @@ $grid-column-padding: 15px;
 @mixin border-left-radius($radius) {
   border-bottom-left-radius: $radius;
   border-top-left-radius: $radius;
+}
+
+
+@mixin functional-button($color) {
+  background-color: $color;
+  border-color: $color;
+  &:hover {
+    background-color: darken($color, 10%);
+    border-color: darken($color, 10%);
+  }
+}
+
+
+
+@mixin focus-ring {
+  border-color: #189dbd;
+  // outline-width: 6px;
+  // outline-style: solid;
+  // outline-color: hsla(190, 58%, 79%, .6);
+  outline: none;
+  box-shadow: 0 0 10px rgba(76, 211, 255, 0.77);
+  
+}
+
+@mixin webkit-only {
+  @media (-webkit-min-device-pixel-ratio:0) {
+    @content;
+  }
 }
