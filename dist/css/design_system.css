@@ -1,8 +1,8 @@
 /**
  * DesignSystem - 
- * @version v2.8.0
+ * @version v2.8.2
  * @link http://guxstaging.pbi.global.pvt/design_system
- * Built Tue May 31 2016 16:02:37 GMT-0400 (EDT) 
+ * Built Thu Jun 16 2016 15:12:18 GMT-0400 (EDT) 
  */
 @charset "UTF-8";
 #header, header, .signin, .landing .bg {
@@ -13824,7 +13824,7 @@ a i.nc-icon-mini {
   padding: 0; }
 
 .btn-group .btn {
-  min-width: auto; }
+  min-width: 1px; }
 .btn-group-sm .btn i.fa {
   font-size: 16px; }
 .btn-group-xs .btn i.fa {
