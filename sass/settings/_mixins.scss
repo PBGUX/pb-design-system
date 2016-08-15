@@ -179,13 +179,14 @@ $grid-column-padding: 15px;
   }
 }
 
-@mixin triangle-closed {
-  content: '\25B8'; // triangle right
+@mixin chevron-closed {
+  font: normal normal normal 25px/1 'Nucleo Outline';
+  content: '\eaf7'; // chevron right
   transform: rotate(0deg);
+  transition: transform 200ms;
 }
 
-@mixin triangle-opened {
-  content: '\25B8'; // triangle right
+@mixin chevron-opened {
   transform: rotate(90deg);
 }
 
@@ -204,12 +205,16 @@ $grid-column-padding: 15px;
 }
 
 /// Button sizes
-@mixin button-size($padding-vertical, $padding-horizontal, $font-size, $line-height, $border-radius) {
+@mixin button-size($padding-vertical, $padding-horizontal, $font-size, $line-height, $border-radius, $btn-min-width:0) {
   padding: $padding-vertical $padding-horizontal;
   font-size: $font-size;
   line-height: $line-height;
   border-radius: $border-radius;
+  min-width: $btn-min-width;
 }
+
+//Radii
+
 /// top
 @mixin border-top-radius($radius) {
   border-top-right-radius: $radius;
@@ -241,20 +246,26 @@ $grid-column-padding: 15px;
   }
 }
 
-
-
 @mixin focus-ring {
   border-color: #189dbd;
   // outline-width: 6px;
   // outline-style: solid;
   // outline-color: hsla(190, 58%, 79%, .6);
   outline: none;
-  box-shadow: 0 0 10px rgba(76, 211, 255, 0.77);
-  
+  box-shadow: 0 0 10px rgba(76, 211, 255, .77);
 }
 
 @mixin webkit-only {
-  @media (-webkit-min-device-pixel-ratio:0) {
+  @media (-webkit-min-device-pixel-ratio: 0) {
     @content;
   }
+}
+
+
+@mixin vertical-align($position: relative) {
+  position: $position;
+  top: 50%;
+  transform: translateY(-50%);
+  left: 50%;
+  transform: translateX(-50%);
 }

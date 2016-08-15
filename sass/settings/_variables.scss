@@ -2,36 +2,73 @@
 // Variables
 // Do not actually define any selectors here
 // This is only to set variables
-// --------------------------------------------------
-// updated 10/6/15
-// DS 2.1.1
 
-//Use this color palette for primary or accent colors
-// note that the 500 color is the main color
-$pb-blue-300: #8b98c8;
-$pb-blue-500: #3e53a4;
+
+// Primary Palette
+
+/// PB Blue 700
+/// @type Color
 $pb-blue-700: #314183;
+
+/// PB Blue 500
+/// @type Color
+$pb-blue-500: #3e53a4;
+
+/// PB Blue 300
+/// @type Color
+$pb-blue-300: #8b98c8;
+
+/// PB Blue 100
+/// @type Color
+$pb-blue-100: #c8cee4;
+
+/// PB Medium Blue 500
+/// @type Color
+$pb-medium-blue-500: #0072b8;
+
+/// PB Cyan 500
+/// @type Color
+$pb-cyan-500: #009bdf;
+
+/// PB Purple 500
+/// @type Color
+$pb-purple-500: #a03f9b;
+
+/// PB Magenta 500
+/// @type Color
+$pb-magenta-500: #cf0989;
+
+//Neutral Color Palette
+$pb-gray-700: #2e2e2e;
+$pb-gray-600: #4e4e4e;
+$pb-gray-500: #717171;
+$pb-gray-400: #9b9b9b;
+$pb-gray-300: #c0c0c0;
+$pb-gray-200: #eaeaea;
+$pb-gray-100: #f0f0f0;
+$pb-gray-50:  #f8f8f8;
+$pb-gray-blue: #eaedf8;
+
+$pb-bg4: #d8dbf1; //summary tables, vertical dividers
+
+/// PB Error Red
+/// @type Color
+$pb-error-red: #d30c0c;
+
+// deprecated 3.0
 $pb-blue: $pb-blue-500;
 $pb-magenta-300: #e26bb8;
-$pb-magenta-500: #cf0989;
 $pb-magenta-700: #a5076e;
 $pb-magenta: $pb-magenta-500;
-$pb-medium-blue-300: #66aad4;
-$pb-medium-blue-500: #0072b8;
-$pb-medium-blue-700: #005a93;
-$pb-medium-blue: $pb-medium-blue-500;
+$pb-blue: $pb-blue-500;
 $pb-purple-300: #c68cc3;
-$pb-purple-500: #a03f9b;
 $pb-purple-700: #80327c;
 $pb-purple: $pb-purple-500;
-
-//Use this color palette for accent colors
-// note that the 500 color is the main color
 $pb-cyan-300: #66c4d9;
-$pb-cyan-500: #009dbf;
 $pb-cyan-700: #007d99;
 $pb-cyan: $pb-cyan-500;
 $pb-dark-green-300: #66ca8c;
+$pb-light-green-500: #aad88f;
 $pb-dark-green-500: #00a740;
 $pb-dark-green-700: #008500;
 $pb-dark-green: $pb-dark-green-500;
@@ -39,9 +76,6 @@ $pb-dark-orange-300: #f5a466;
 $pb-dark-orange-500: #ee6700;
 $pb-dark-orange-700: #be5000;
 $pb-dark-orange: $pb-dark-orange-500;
-
-//Use this color palette for auxiliary colors
-// note that the 500 color is the main color
 $pb-green-300: #aad88f;
 $pb-green-500: #72bf44;
 $pb-green-700: #5a9836;
@@ -55,50 +89,25 @@ $pb-yellow-500: #edb700;
 $pb-yellow-700: #bd9100;
 $pb-yellow: $pb-yellow-500;
 
-//Neutral Dark Color Palette
-$pb-gray-700: #2e2e2e; //section headers
-$pb-gray-500: #4e4e4e; //sub headers
-$pb-gray-400: #717171; //body text
-$pb-gray-300: #9b9b9b; // field borders, icons
-$pb-gray: #c0c0c0; // disabled
-$pb-light-gray: #e1e1e1; //section dividers, tab borders
-$pb-gray-50: $pb-light-gray;
-$pb-gray-100: $pb-gray;
-
-//Neutral Light Color Palette
-$pb-bg1: #f0f0f0; //footers
-$pb-bg2: #f8f8f8; //containers, backgrounds
-$pb-bg3: #eaedf8; //row hover states
-$pb-bg4: #d8dbf1; //summary tables, vertical dividers
-$pb-bg5: #c5cbe3; //data cell borders
-
-$pb-bg-100: $pb-bg1;
-$pb-bg-200: $pb-bg2;
-$pb-bg-300: $pb-bg3;
-$pb-bg-400: $pb-bg4;
-$pb-bg-500: $pb-bg5;
-$pb-bg-700: $pb-gray-700;
-$pb-error-red: #dc0000;
-
 // bootstrap functional colors
 $brand-primary: $pb-blue;
-$brand-success: $pb-dark-green;
+$brand-success: $pb-dark-green-700;
 $brand-info: $pb-blue;
 $brand-warning: $pb-dark-orange;
 $brand-danger: $pb-error-red;
-$bg-hover: $pb-bg3;
-$bg-active: $pb-bg5;
+$bg-hover: $pb-gray-blue;
+$bg-active: $pb-blue-100;
 
 
 // legacy color names
 // links
-$link-color: $pb-medium-blue;
-$link-hover: $pb-medium-blue-700;
-$link-hover-color: $pb-medium-blue-700;
+$link-color: $pb-blue-500;
+$link-hover: $pb-blue-700;
+$link-hover-color: $pb-blue-700;
 
 // buttons
-$button-primary: $pb-blue;
-$button-primary-hover: #324184;
+$button-primary: $pb-blue-500;
+$button-primary-hover: $pb-blue-700;
 $button-secondary: $pb-blue;
 $button-secondary-hover: #324184;
 $button-disabled: #dbdbdb;
@@ -108,9 +117,9 @@ $body-bg: #fff;
 $background-color: $body-bg;
 
 // text color
-$text-color: $pb-gray-400;
+$text-color: $pb-gray-500;
 $text-active-color: $pb-gray-700;
-$pb-disabled-text: #c0c0c0;
+$pb-disabled-text: $pb-gray-300;
 $header-color: $pb-gray-700;
 $header-color-alt: $pb-gray-500;
 $page-header-color: $pb-magenta;
@@ -155,19 +164,26 @@ $line-height-computed: floor(($font-size-base * $line-height-base)); // ~20px
 // Components
 //## Define common padding and border radius sizes and more. Values based on 14px text and 1.428 line-height (~20px to start).
 
-$padding-base-vertical: 6px;
+$padding-base-vertical: 9px;
 $padding-base-horizontal: 12px;
-$padding-large-vertical: 10px;
+$padding-large-vertical: 13px;
 $padding-large-horizontal: 16px;
-$padding-small-vertical: 5px;
+$padding-small-vertical: 7px;
 $padding-small-horizontal: 10px;
-$padding-xs-vertical: 1px;
+$padding-xs-vertical: 5px;
 $padding-xs-horizontal: 5px;
 $line-height-large: 1.3333333; // extra decimals for Win 8.1 Chrome
 $line-height-small: 1.5;
+$border-radius-small: 4px;
 $border-radius-base: 4px;
 $border-radius-large: 6px;
-$border-radius-small: 3px;
+$border-radius-xlarge: 8px;
+
+// button min widths (3.0)
+$btn-min-width: 120px;
+$btn-min-width-large: 136px;
+$btn-min-width-small: 96px;
+$btn-min-width-xsmall: 80px;
 
 // Global color for active items (e.g., navs or dropdowns).
 $component-active-color: #fff;
@@ -191,20 +207,36 @@ $table-condensed-cell-padding: 5px;
 // Padding for cells in `.table-condensed-extra`.
 $table-condensed-extra-cell-padding: 2px;
 
+// Design System 3 / One Design System makes life complicated
+// normal tables:
+$table-header-padding-vertical: 15px;
+$table-cell-padding-vertical: 11px;
+
+// condensed table:
+$table-condensed-header-padding-vertical: 10px;
+$table-condensed-cell-padding-vertical: 8px;
+
+// extra condensed table:
+$table-condensed-extra-header-padding-vertical: 6px;
+$table-condensed-extra-cell-padding-vertical: 4px;
+
+$table-cell-padding-vertical-large: 20px;
+
+
 // Default background color used for all tables.
 $table-bg: #fff;
 // Background color used for `.table-striped`.
 $table-bg-accent: #f9f9f9;
 // Border color for table and cell borders.
-$table-border-color: #c5cbe3;
+$table-border-color: $pb-blue-100;
 $table-vertical-cell-dividers: #eaedf8;
 // Background color used for `.table-hover`.
 $table-bg-hover: $bg-hover;
 $table-bg-active: $bg-active;
 
 $table-text-color: $pb-gray-700;    //td
-$table-header-text-color: $pb-gray-500;    //th
-$table-header-background-color: $pb-bg2;
+$table-header-text-color: $pb-gray-600;    //th
+$table-header-background-color: $pb-gray-50;
 
 // Buttons  // see buttons.scss
 
@@ -238,7 +270,7 @@ $input-border-radius-large: $border-radius-large;
 $input-border-radius-small: $border-radius-small;
 
 // Placeholder text color
-$input-color-placeholder: $pb-gray;
+$input-color-placeholder: $pb-gray-300;
 
 // Default `.form-control` height
 $input-height-base: ($line-height-computed + ($padding-base-vertical * 2) + 2);
@@ -250,7 +282,7 @@ $legend-color: $pb-gray-300;
 $legend-border-color: $input-border;
 
 // Background color for textual input addons
-$input-group-addon-bg: $pb-light-gray;
+$input-group-addon-bg: $pb-gray-100;
 // Border color for textual input addons
 $input-group-addon-border-color: $input-border;
 
@@ -262,13 +294,13 @@ $cursor-disabled: not-allowed;
 //## Dropdown menu container and contents.
 
 // Background for the dropdown menu.
-$dropdown-bg: $pb-light-gray;
+$dropdown-bg: $pb-gray-100;
 // Dropdown menu `border-color`.
 $dropdown-border: rgba(0, 0, 0, .15);
 // Dropdown menu `border-color` **for IE8**.
 $dropdown-fallback-border: #ccc;
 // Divider color for between dropdown items.
-$dropdown-divider-bg: $pb-light-gray;
+$dropdown-divider-bg: $pb-gray-100;
 
 // Dropdown link text color.
 $dropdown-link-color: $text-color;
@@ -283,10 +315,10 @@ $dropdown-link-active-color: $component-active-color;
 $dropdown-link-active-bg: $component-active-bg;
 
 // Disabled dropdown menu item background color.
-$dropdown-link-disabled-color: $pb-light-gray;
+$dropdown-link-disabled-color: $pb-gray-100;
 
 // Text color for headers within dropdown menus.
-$dropdown-header-color: $pb-light-gray;
+$dropdown-header-color: $pb-gray-100;
 
 // Note: Deprecated $dropdown-caret-color as of v3.1.0
 $dropdown-caret-color: #000;
@@ -397,13 +429,13 @@ $container-lg: $container-large-desktop;
 // Navbar
 
 // Basics of a navbar
-$navbar-height: 50px;
+$navbar-height: 70px;
 $navbar-margin-bottom: $line-height-computed;
 $navbar-border-radius: $border-radius-base;
 $navbar-padding-horizontal: floor(($grid-gutter-width / 2));
 $navbar-padding-vertical: (($navbar-height - $line-height-computed) / 2);
 $navbar-collapse-max-height: 340px;
-$navbar-default-color: $pb-light-gray;
+$navbar-default-color: $pb-gray-100;
 $navbar-default-bg: #f8f8f8;
 $navbar-default-border: darken($navbar-default-bg, 6.5%);
 
@@ -413,7 +445,7 @@ $navbar-default-link-hover-color: #333;
 $navbar-default-link-hover-bg: transparent;
 $navbar-default-link-active-color: #555;
 $navbar-default-link-active-bg: darken($navbar-default-bg, 6.5%);
-$navbar-default-link-disabled-color: $pb-light-gray;
+$navbar-default-link-disabled-color: $pb-gray-100;
 $navbar-default-link-disabled-bg: transparent;
 
 // Navbar brand label
@@ -428,12 +460,12 @@ $navbar-default-toggle-border-color: #ddd;
 
 // Inverted navbar
 // Reset inverted navbar basics
-$navbar-inverse-color: $pb-light-gray;
+$navbar-inverse-color: $pb-gray-100;
 $navbar-inverse-bg: #222;
 $navbar-inverse-border: darken($navbar-inverse-bg, 10%);
 
 // Inverted navbar links
-$navbar-inverse-link-color: $pb-light-gray;
+$navbar-inverse-link-color: $pb-gray-100;
 $navbar-inverse-link-hover-color: #fff;
 $navbar-inverse-link-hover-bg: transparent;
 $navbar-inverse-link-active-color: $navbar-inverse-link-hover-color;
@@ -455,18 +487,18 @@ $navbar-inverse-toggle-border-color: #333;
 
 //= Shared nav styles
 $nav-link-padding: 10px 15px;
-$nav-link-hover-bg: $pb-light-gray;
-$nav-disabled-link-color: $pb-light-gray;
-$nav-disabled-link-hover-color: $pb-light-gray;
+$nav-link-hover-bg: $pb-gray-100;
+$nav-disabled-link-color: $pb-gray-100;
+$nav-disabled-link-hover-color: $pb-gray-100;
 $nav-open-link-hover-color: #fff;
 
 // Tabs
-$nav-tabs-border-color: $pb-light-gray;
-$nav-tabs-link-hover-border-color: $pb-light-gray;
+$nav-tabs-border-color: $pb-gray-200;
+$nav-tabs-link-hover-border-color: $pb-gray-200;
 $nav-tabs-active-link-hover-bg: $body-bg;
 $nav-tabs-active-link-hover-color: $link-hover;
-$nav-tabs-active-link-hover-border-color: $pb-light-gray;
-$nav-tabs-justified-link-border-color: $pb-light-gray;
+$nav-tabs-active-link-hover-border-color: $pb-gray-200;
+$nav-tabs-justified-link-border-color: $pb-gray-200;
 $nav-tabs-justified-active-link-border-color: $body-bg;
 
 // Pills
@@ -484,9 +516,9 @@ $pagination-hover-border: $link-hover;
 $pagination-active-color: #fff;
 $pagination-active-bg: $link-color;
 $pagination-active-border: $link-color;
-$pagination-disabled-color: $pb-light-gray;
+$pagination-disabled-color: $pb-gray-100;
 $pagination-disabled-bg: #fff;
-$pagination-disabled-border: $pb-light-gray;
+$pagination-disabled-border: $pb-gray-100;
 
 // Pager
 
@@ -502,7 +534,7 @@ $pager-disabled-color: $pagination-disabled-color;
 
 $jumbotron-padding: 30px;
 $jumbotron-color: inherit;
-$jumbotron-bg: $pb-light-gray;
+$jumbotron-bg: $pb-gray-100;
 $jumbotron-heading-color: inherit;
 $jumbotron-font-size: ceil(($font-size-base * 1.5));
 
@@ -614,9 +646,9 @@ $progress-border-radius: $border-radius-base;
 // Default progress bar color
 $progress-bar-bg: $pb-blue;
 // Success progress bar color
-$progress-bar-success-bg: $brand-success;
+$progress-bar-success-bg: #007d00;
 // Warning progress bar color
-$progress-bar-warning-bg: $brand-warning;
+$progress-bar-warning-bg: #c55200;
 // Danger progress bar color
 $progress-bar-danger-bg: $brand-danger;
 // Info progress bar color
@@ -645,7 +677,7 @@ $list-group-active-text-color: lighten($list-group-active-bg, 40%);
 // Text color of disabled list items
 $list-group-disabled-color: $pb-gray-300;
 // Background color of disabled list items
-$list-group-disabled-bg: $pb-light-gray;
+$list-group-disabled-bg: $pb-gray-100;
 // Text color for content within disabled list items
 $list-group-disabled-text-color: $list-group-disabled-color;
 $list-group-link-color: #555;
@@ -658,10 +690,10 @@ $panel-bg: #fff;
 $panel-body-padding: 30px;
 $panel-heading-padding: 20px 30px;
 $panel-footer-padding: $panel-heading-padding;
-$panel-border-radius: 0;
+$panel-border-radius: 4px;
 
 // Border color for elements within panels
-$panel-inner-border: $pb-gray;
+$panel-inner-border: $pb-gray-300;
 $panel-footer-bg: $pb-gray-50;
 
 $panel-default-text: $text-color;
@@ -716,7 +748,7 @@ $well-border: darken($well-bg, 7%);
 $badge-color: #fff;
 // Linked badge text color on hover
 $badge-link-hover-color: #fff;
-$badge-bg: $pb-light-gray;
+$badge-bg: $pb-gray-100;
 
 // Badge text color in active nav link
 $badge-active-color: $link-color;
@@ -735,7 +767,7 @@ $breadcrumb-bg: #f5f5f5;
 // Breadcrumb text color
 $breadcrumb-color: #ccc;
 // Text color of current page in the breadcrumb
-$breadcrumb-active-color: $pb-light-gray;
+$breadcrumb-active-color: $pb-gray-100;
 // Textual separator for between breadcrumb elements
 $breadcrumb-separator: '/';
 
@@ -822,19 +854,19 @@ $blockquote-small-color: $pb-gray-300;
 // Blockquote font size
 $blockquote-font-size: ($font-size-base * 1.25);
 // Blockquote border color
-$blockquote-border-color: $pb-light-gray;
+$blockquote-border-color: $pb-gray-100;
 // Page header border color
-$page-header-border-color: $pb-light-gray;
+$page-header-border-color: $pb-gray-100;
 // Width of horizontal description list titles
 $dl-horizontal-offset: $component-offset-horizontal;
 // Horizontal line color.
-$hr-border: $pb-light-gray;
+$hr-border: $pb-gray-100;
 
 
 // Miscellaneous
 
 // Horizontal line color.
-$hr-border: $pb-light-gray;
+$hr-border: $pb-gray-100;
 
 // Horizontal offset for forms and lists.
 $component-offset-horizontal: 180px;
