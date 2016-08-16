@@ -8,7 +8,7 @@
     "stevelombard <steve.lombardi@pb.com>",
     "nickroberts <nick.roberts@pb.com>"
   ],
-  "main": "dist/css/design_system.css",
+  "main": ["dist/css/design_system.css", "dist/js/pb.ds.components.js"],
   "license": "",
   "ignore": [
     "**/.*",
