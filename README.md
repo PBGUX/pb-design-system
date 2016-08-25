@@ -24,7 +24,7 @@ After installing, just add a link tag in the document head AFTER the Bootstrap C
 
 You are now all set, and will be using the Design System.  Create an additional css file if needed with styles unique to your application.
 
-If your project uses Sass for css, you can import the 2 provided partials into your scss file to gain access to the mixins and variables we used in creating the Design System.:
+If your project uses Sass for css, you can import the 2 provided partials into your scss file to gain access to the mixins and variables we used in creating the Design System.  Add the following to the top of your main scss file:
 
 ```scss
 @import 'bower_components/pb-design-system/sass/settings/mixins';
