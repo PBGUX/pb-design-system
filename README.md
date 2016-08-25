@@ -1,4 +1,4 @@
-# packaged design system
+#PB Design System Bower Package
 
 This repo is for distribution of the Design System on `bower`. The source is the main [Design System repo](https://github.com/PBGUX/designsystem-3/tree/master). Please file issues against that repo.
 
