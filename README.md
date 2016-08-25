@@ -1,18 +1,12 @@
 # packaged design system
 
-This repo is for distribution of the Design System on `bower`. The source is the main [Design System repo](https://github.com/PBGUX/bower-designsystem). Please file issues against that repo.
+This repo is for distribution of the Design System on `bower`. The source is the main [Design System repo](https://github.com/PBGUX/designsystem-3/tree/master). Please file issues against that repo.
 
 ##Bower Install
 You can install this package with `bower`:
 
 ```shell
 bower install pb-design-system --save
-```
-
-Then add a link tag in the document head AFTER the Bootstrap CSS:
-
-```html
-<link rel="stylesheet" href="bower_components/pb-design-system/dist/css/design_system.css">
 ```
 
 ##NPM Install
@@ -22,14 +16,15 @@ You can install this package with `npm`:
 npm install pb-design-system --save
 ```
 
-Then add a link tag in the document head AFTER the Bootstrap CSS:
+After installing, just add a link tag in the document head AFTER the Bootstrap CSS:
 
 ```html
 <link rel="stylesheet" href="node_modules/pb-design-system/dist/css/design_system.css">
 ```
 
-##Sass
-Reference the Design System .scss variables within your application Sass file to use the variables:
+You are now all set, and will be using the Design System.  Create an additional css file if needed with styles unique to your application.
+
+If your project uses Sass for css, you can import the 2 provided partials into your scss file to gain access to the mixins and variables we used in creating the Design System.:
 
 ```scss
 @import 'bower_components/pb-design-system/sass/settings/mixins';
