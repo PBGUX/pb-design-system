@@ -1,6 +1,6 @@
 #PB Design System Package
 
-This repo is for distribution of the Design System. This package simplifies installing and maintaining your app's use of the Design System.
+This package simplifies installing and maintaining your app's use of the PB Design System.
 
 Please file any issues against the main [Design System repo](https://github.com/PBGUX/designsystem-3/tree/master).
 
