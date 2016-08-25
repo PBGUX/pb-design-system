@@ -33,4 +33,4 @@ If your project uses Sass for css, you can import the 2 provided partials into y
 @import '../../bower_components/pb-design-system/sass/settings/mixins';
 ```
 
-This assumes your parent scss file is in `./assets/sass`. Also not that the above order is important, *variables first*.
+This assumes your parent scss file is in `./assets/sass`. Also note that the above order is important, *variables first*.
