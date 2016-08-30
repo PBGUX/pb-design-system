@@ -1,6 +1,6 @@
-# packaged design system
+# PB Design System 
 
-This repo is for distribution of the Design System on `bower`. The source is the main [Design System repo](https://github.com/PBGUX/bower-designsystem). Please file issues against that repo.
+This repo is for distribution of the Design System on `bower` and `npm`. 
 
 ##Bower Install
 You can install this package with `bower`:
