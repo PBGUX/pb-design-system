@@ -15,7 +15,7 @@ Then add a link tag in the document head AFTER the Bootstrap CSS:
 <link rel="stylesheet" href="bower_components/pb-design-system/dist/css/design_system.css">
 ```
 
-##NPM Install
+##npm Install
 You can install this package with `npm`:
 
 ```shell
