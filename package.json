@@ -1,6 +1,6 @@
 {
   "name": "pb-design-system",
-  "version": "2.8.2",
+  "version": "3.0.0",
   "description": "Design System NPM",
   "main": "dist/css/design_system.css",
   "scripts": {
@@ -17,6 +17,6 @@
   },
   "homepage": "https://github.com/PBGUX/bower-designsystem#readme",
   "dependencies": {
-    "bootstrap": "~3.3.5"
+    "bootstrap": "~3.3.6"
   }
 }
