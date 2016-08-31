@@ -17,6 +17,6 @@
   },
   "homepage": "https://github.com/PBGUX/bower-designsystem#readme",
   "dependencies": {
-    "bootstrap": "~3.3.5"
+    "bootstrap": "~3.3.6"
   }
 }
