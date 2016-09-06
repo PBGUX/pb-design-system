@@ -10,9 +10,6 @@ Beginning with 3.0, we have greatly simplified how to consume the Design System:
 
 Any of the above three methods is the best way to get going with Design System 3.x.
 
-The release notes for 3.0.0 are divided into two main sections: **Code Changes** and **Site Changes**.
-
-
 
 ## Code Changes
 
