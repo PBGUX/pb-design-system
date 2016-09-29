@@ -1,5 +1,12 @@
 # Release Notes
 
+##3.0.1 - September 29, 2016
+
+This hotfix includes a fix for bugs in IE11.  This is a non-breaking change.
+
+- The footer was not staying at the bottom in IE11.  This was due to a known flexbox bug in IE11 that was fixed by Microsoft in Edge.  To make it work in IE11 we made a change in the CSS of the `body` tag's height from `min-height:100%` to `height:100%`.  No html changes are required.
+
+
 ##3.0.0 – August 31, 2016
 
 Beginning with 3.0, we have greatly simplified how to consume the Design System:
