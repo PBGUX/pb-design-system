@@ -1,7 +1,7 @@
 {
   "name": "pb-design-system",
   "description": "Design System Bower",
-  "version": "3.0.0",
+  "version": "3.0.1",
   "homepage": "https://github.com/PBGUX/bower-designsystem",
   "authors": [
     "danielcollette <daniel.collette@pb.com>",
