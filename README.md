@@ -32,6 +32,8 @@ Then add a link tag in the document head AFTER the Bootstrap CSS:
 Reference the Design System .scss variables within your application Sass file to use the variables:
 
 ```scss
-@import 'bower_components/pb-design-system/sass/settings/mixins';
-@import 'bower_components/pb-design-system/sass/settings/variables';
+@import '../bower_components/pb-design-system/sass/settings/variables';
+@import '../bower_components/pb-design-system/sass/settings/mixins';
 ```
+
+**NOTE: variables import must go first. The above relative path assumes `bower_components` is a sibling of your `sass` directory.**
