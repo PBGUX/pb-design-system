@@ -1,5 +1,9 @@
 # Release Notes
 
+##3.0.2 - October 18, 2016
+
+- Fix pbds-progress-button double click issue (reported by Cameron Chu)
+
 ##3.0.1 - September 29, 2016
 
 This hotfix includes a fix for bugs in IE11.  This is a non-breaking change.
@@ -45,7 +49,7 @@ Any of the above three methods is the best way to get going with Design System 3
 - The footer is now light blue, and is also 70px tall.  Both of these are in the updated CSS. *Be sure you are using the latest footer code* as shown on the  *Web > Headers and Footers* page.
 - Language and capitalization for the footer's content has been updated and standardized.
 
-##### Other breaking changes: 
+##### Other breaking changes:
 
 - **Welcome** pages have new HTML and CSS for improved layout.
 - **Hamburger Menu** and **Split View** layouts with expand/collapse side navigation have completely updated HTML. They now use Angular UI Bootstrap for expanding and collapsing behaviors. Non-expanding side navigation variants should not require code changes.
@@ -70,7 +74,7 @@ The team's work has resulted in a cohesive set of standards for common master-br
 #####Foundations
 - **Color palette**
   - Colors have been streamlined, and Sass variable names for the Neutral Palette have been updated and made more consistent with other color variable names. This is documented on the *Web > Color* page. These updates are all compiled into the 3.0 CSS and should not require any changes on your part, but Sass variable names and hex colors are provided for those who may need them.
-- **Typography** now includes display text styles and comprehensive styling for Header, Body, Navigation and UI Controls. 
+- **Typography** now includes display text styles and comprehensive styling for Header, Body, Navigation and UI Controls.
   - Sass variables, CSS class names, and  hex colors are now displayed inline to simplify usage in code.
   - Code snippets are now provided for list types.
 - The **PBDS Components** page has been expanded with more directives and more code samples:
@@ -98,7 +102,7 @@ The team's work has resulted in a cohesive set of standards for common master-br
 - There is a new **Numeric Stepper** control.
 - **Panels** have been renamed to **Cards**.  Therefore all `panel-*` classes are now `card-*` classes.  For the time being, we are maintaining the older panel classes, for backward compatibility. See updated code snippets on *Web > Elements > Cards*.
 - **Progress indicators**: Colors have been updated for accessibility and a new "Step Progress" indicator has been added. The progress button has a new directive (see above).
-- **Tabs** 
+- **Tabs**
   - These have been updated with rounded corners.
   - **“Sliding” tabs** have been updated and classes added to simplify having alternate numbers of tabs, from 3 to 6. See *Web > Elements > Tabs > Sliding > Custom Tab Number*.
   - **Sliding Section Tabs** and **Sliding Boxed Tabs** were added.
@@ -118,4 +122,4 @@ The team's work has resulted in a cohesive set of standards for common master-br
 
 Thank you to the following individuals and the entire PB community, who have given us the feedback needed to get to this 3.0 milestone. Please keep the feedback coming.
 
-Abhijeet Gupta, Abhiraj Satarate, Amod Kumar Singh, Andrea Greggo-McManus, Andrew Wong, Andy Grossman, Bryant Gutierrez, Cameron Chu, Cassie Gunn, Christopher Rued, Colin Brunger, Daniel Roestorf, Dave Fondacaro, Dustin Clark, Eric Robinson, Hemant Sharma, Ian Pitts, Irshad Khan, James R Norris, Jayachandra M, Jenn Church, Joan Doutney, John Rosendahl, John Winkleman, Jorge A Rodriguez, Kenneth S Zaldo, Kevin Bodie, Luke Daugherty, Nicholas Roberts, Nilkantha Aryal, Paresh Sahasrabudhe, Rajeev Verma, Ray Navarette, Richard Collette, Richard J Cole, Rick Dukeshier, Ron Cianfaglione, Sam Singh, Shaishav Saraswat, Shawn Sharifi, Steve Evermore, Steve King, Sula Veneti, Sung Kim, Tom Tyrell 
+Abhijeet Gupta, Abhiraj Satarate, Amod Kumar Singh, Andrea Greggo-McManus, Andrew Wong, Andy Grossman, Bryant Gutierrez, Cameron Chu, Cassie Gunn, Christopher Rued, Colin Brunger, Daniel Roestorf, Dave Fondacaro, Dustin Clark, Eric Robinson, Hemant Sharma, Ian Pitts, Irshad Khan, James R Norris, Jayachandra M, Jenn Church, Joan Doutney, John Rosendahl, John Winkleman, Jorge A Rodriguez, Kenneth S Zaldo, Kevin Bodie, Luke Daugherty, Nicholas Roberts, Nilkantha Aryal, Paresh Sahasrabudhe, Rajeev Verma, Ray Navarette, Richard Collette, Richard J Cole, Rick Dukeshier, Ron Cianfaglione, Sam Singh, Shaishav Saraswat, Shawn Sharifi, Steve Evermore, Steve King, Sula Veneti, Sung Kim, Tom Tyrell
