@@ -1,5 +1,120 @@
 # Release Notes
 
+##3.1.0 - December 15, 2016
+
+### Code Changes
+
+####BREAKING CHANGES
+
+- **Web > Patterns > Headers and Footers** 
+
+  - Removed the vertical divider line  on the right side of the header (to the left of utility items).  You will need to delete the `li` tag with the `divider-vertical` class — the second line below:
+
+  ```html
+    <!-- start right menus -->
+    <ul class="nav navbar-nav navbar-right">
+      <li class="divider-vertical hidden-xs"></li>
+  ```
+
+  - Footer is now consistent on both sign in pages and other pages.  The old sign-in footer has been removed. The only difference between the footer on sign in pages and other pages are the links on the right.  Please see the screenshots and code snippets on the site.
+
+- **Web > Patterns > Tour** was updated to use the new footer.  The HTML has been simplified as well, which should make it easier to add this tour to a typical sign-in screen.
+
+- **Web > Patterns > Error Pages** have updated design/layout, HTML, CSS and icons.  Icons are now SVG embedded in CSS.  See code snippets for usage.
+
+- **Web > Elements > Buttons:** "Pill" buttons are deprecated.  Please switch to standard buttons, as the pill button CSS *will be removed in the next release*.
+
+- **Web > Elements > Tables > Tables with Data > Row Details:** Tables nested inside expanded "detail rows" used to have their cell backgrounds set to gray. This caused issues if you needed to use a table in a detail row with a white background.  Due to this change, it's easier to set your own cell backgrounds on such tables.
+
+- **Web > Elements > Tables > Table Toolbar:** The class `.toolbar` has been modified to use `display:flex` instead of relying on Bootstrap columns and floats. This gives more flexibility for laying out buttons and menus. See the code snippets in the Tables section for instructions on usage. Older toolbars will need to be updated.
+
+  ````html
+  <div class="toolbar">
+    <!-- immediate child items must be block items, like divs-->
+    <div class="toolbar-left">
+      <!-- these buttons will be on the left -->
+      <button class="btn btn-link" type="button">...</button>
+    </div>
+
+    <!-- add a third div here for centered buttons -->
+
+    <div class="toolbar-right">
+      <!-- these buttons will be on the left -->
+      <!-- or simply add an empty div for proper flexbox spacing end-to-end-->
+    </div>
+  </div>
+  ````
+
+- **Web > Foundation > PBDS Directives** that support angular-translate now have a consistent syntax, see examples.
+
+
+
+####NON-BREAKING CHANGES
+
+- **Web > Foundation > Iconography:** PB font now works correctly with size modifier classes (e.g. `x2`).
+
+- **Web > Patterns > Headers and Footers**: The footer logo has been updated with a version optimized for its size. The logo is embedded in CSS as before, so no code changes are required.
+
+- **Web > Foundation > PBDS Directives:**
+
+  - `<pbds-checkbox>` added use of ng-true-value, ng-false-value and ng-required attributes.
+  - `<pbds-radio>` added use of ng-value and ng-required attributes.
+
+- **Web > Patterns > Hamburger Menu:** Added in new responsive version.
+
+  - The `.burger-backdrop` and `.hamburger-modal` classes are no longer needed and are deprecated. These will be removed from CSS in a future release.
+  - Various bugs were addressed, such as non-working *push* and *slide* examples and footer position.
+  - We updated code snippets so the examples will work correctly.
+
+- **Web > Patterns > Sign In/Sign Up:** 
+
+  - Added a new screen for "session time out."
+  - Pages are now using angular-translate to support translation. Localized translations will be included in the next release.
+  - Containers (e.g. the white box) now have rounded corners.
+
+- **Web > Elements > Miller Column** border colors have been fixed to be consistent with other borders, and list item hover color fixed.
+
+- **Web > Foundation > Color:** The $pb-gray-200 variable changed from #eaeaea to #e1e1e1.
+
+- **Web > Elements > Tabs:** The text color of the active tab has been fixed.
+
+- **Web > Elements > Notifications:** Toastr backgrounds no longer semi-transparent, fixing a bug caused by a plugin update.
+
+- **Web > Elements > Gallery:** Image carousel hover states were updated to match the rest of the DS.
+
+  ​
+
+
+####Updated Libraries
+
+angular-bootstrap: 2.2.0
+
+angular-chart.js: 1.0.3
+
+angular-dragula: 1.2.8
+
+angular-moment: 1.0.0
+
+angular-ui-select: 0.19.6
+
+bootstrap: 3.3.7
+
+moment: 2.11.0
+
+ng-file-upload: 12.2.13
+
+ng-tags-input: 3.1.1
+
+progress-tracker: 1.4.0
+
+
+## Thank You
+
+As always, we've relied on the ideas and support from the entire PB community to keep Design System moving forward. Please keep the feedback coming. In particular, we'd like to thank the following individuals for helping with this release:
+
+Anshul Jindal, Arman Bedonian, Beth Jennings, Cameron Chu, Christopher Rued, Dustin Clark, Erik Balisi, Esther Raice, Ishan Misra, Jayachandra, Jessica Spinel-Merete, Jim Zhao, Joan Doutney, John Gomersall, Lawrence Najjar, Luke Daugherty, Maciej Siedlaczek, Mariusz Krymkowski, Matt Lavalle, Neil Sampson, Richard Collette, Ron Cianfaglione, Ron Michaud, Sara Conklin, Vinay Nijhawan, Yuhua Lee
+
+
 ##3.0.2 - October 18, 2016
 
 - Fix pbds-progress-button double click issue (reported by Cameron Chu)
