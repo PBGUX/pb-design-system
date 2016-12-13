@@ -7,21 +7,21 @@
 /// ul {
 ///   zoom: 1;
 /// }
-/// ul:before, ul:after {
+/// ul::before, ul::after {
 ///   content: '';
 ///   display: table;
 /// }
-/// ul:after {
+/// ul::after {
 ///   clear: both;
 /// }
 
 @mixin clearfix {
   zoom: 1;
-  &:before, &:after {
+  &::before, &::after {
     content: '';
     display: table;
   }
-  &:after {
+  &::after {
     clear: both;
   }
 }
@@ -96,6 +96,41 @@
   @return mix($color, #000, $percentage);
 }
 
+/// improved breakpoint mixins
+/// @example scss - Usage
+/// .my-box {
+////  padding: 10px;
+////  @include for-desktop-up {
+///    padding: 20px;
+///   }
+/// }
+/// @link https://medium.freecodecamp.com/the-100-correct-way-to-do-css-breakpoints-88d6a5ba1862#.dlj52u7ju
+
+
+@mixin for-phone-only {
+  @media (max-width: 599px) { @content; }
+}
+@mixin for-tablet-portrait-up {
+  @media (min-width: 600px) { @content; }
+}
+@mixin for-tablet-portrait-only {
+  @media (min-width: 600px) and (max-width: 899px) { @content; }
+}
+@mixin for-tablet-landscape-up {
+  @media (min-width: 900px) { @content; }
+}
+@mixin for-tablet-landscape-only {
+  @media (min-width: 900px) and (max-width: 1199px) { @content; }
+}
+@mixin for-desktop-up {
+  @media (min-width: 1200px) { @content; }
+}
+@mixin for-desktop-only {
+  @media (min-width: 1200px) and (max-width: 1799px) { @content; }
+}
+@mixin for-big-desktop-up {
+  @media (min-width: 1800px) { @content; }
+}
 
 /// Panel Variants
 @mixin panel-variant($border, $heading-text-color, $heading-bg-color, $heading-border) {
@@ -308,7 +343,7 @@ $grid-column-padding: 15px;
 
 
 @mixin arrow-inside($color: #fff, $left: 65px) {
-  &:after {
+  &::after {
     content: '';
     position: absolute;
     bottom: -13px;
@@ -321,7 +356,7 @@ $grid-column-padding: 15px;
 
 
 @mixin arrow-outside($color: $pb-blue, $left: 65px) {
-  &:before {
+  &::before {
     content: '';
     position: absolute;
     bottom: -15px;
