@@ -20,9 +20,9 @@
 
 - **Web > Patterns > Tour** was updated to use the new footer.  The HTML has been simplified as well, which should make it easier to add this tour to a typical sign-in screen.
 
-- **Web > Patterns > Error Pages** have updated design/layout, HTML, CSS and icons.  Icons are now SVG embedded in CSS.  See code snippets for usage.
+- **Web > Patterns > Error Pages** have updated design/layout, HTML, CSS and icons.  Icons are now SVG embedded in CSS.  See code snippets for usage. *Note*: each error page needs a class on its `body` tag matching the error, such as `class="errors error-400">`.
 
-- **Web > Elements > Buttons:** "Pill" buttons are deprecated.  Please switch to standard buttons, as the pill button CSS *will be removed in the next release*.
+- **Web > Elements > Buttons:** "Pill" buttons are deprecated.  Please switch to standard buttons, as the pill button CSS *will be removed in the next release*. 
 
 - **Web > Elements > Tables > Tables with Data > Row Details:** Tables nested inside expanded "detail rows" used to have their cell backgrounds set to gray. This caused issues if you needed to use a table in a detail row with a white background.  Due to this change, it's easier to set your own cell backgrounds on such tables.
 
