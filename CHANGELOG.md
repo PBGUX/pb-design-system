@@ -20,7 +20,7 @@
 
 - **Web > Patterns > Tour** was updated to use the new footer.  The HTML has been simplified as well, which should make it easier to add this tour to a typical sign-in screen.
 
-- **Web > Patterns > Error Pages** have updated design/layout, HTML, CSS and icons.  Icons are now SVG embedded in CSS.  See code snippets for usage. *Note*: each error page needs a class on its `body` tag matching the error, such as `class="errors error-400">`.
+- **Web > Patterns > Error Pages** have updated design/layout, HTML, CSS and icons.  Icons are now SVG embedded in CSS.  See code snippets for usage. *Note*: each error page needs a class on its `body` tag matching the error, such as `class="errors error-400"`.
 
 - **Web > Elements > Buttons:** "Pill" buttons are deprecated.  Please switch to standard buttons, as the pill button CSS *will be removed in the next release*. 
 
