@@ -1,5 +1,12 @@
 # Release Notes
 
+##3.1.1 - December 20, 2016
+
+- Removed an image reference from the CSS which interfered with users wishing to use Webpack.  There should be no images in the css now.
+
+- `pbds-checkboxes` was incorrectly checking for the existence of controller properties (for `ng-model`, `ng-true-value`, `ng-false-value` and `ng-required`), rather than checking for the element attributes. If the controller property for `ng-model` was not explicitly defined an error would be thrown. This is fixed.
+
+
 ##3.1.0 - December 15, 2016
 
 ### Code Changes
