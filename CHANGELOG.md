@@ -1,5 +1,9 @@
 # Release Notes
 
+##3.1.2 - January 4, 2017
+
+- Added CSS prefixes to support Safari 5 (which is the equivalent for CSD/SendPro)
+
 ##3.1.1 - December 20, 2016
 
 - Removed an image reference from the CSS which interfered with users wishing to use Webpack.  There should be no images in the css now.
