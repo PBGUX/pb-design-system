@@ -1,6 +1,6 @@
 # Release Notes
 
-##3.1.2 - January 4, 2017
+##3.1.3 - January 4, 2017
 
 - Added CSS prefixes to support Safari 5 (which is the equivalent for CSD/SendPro)
 
