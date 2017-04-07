@@ -216,7 +216,7 @@ $grid-column-padding: 15px;
 
 @mixin chevron-closed {
   font: normal normal normal 25px/1 'Nucleo Outline';
-  content: '\eaf7'; // chevron right
+  content: '\eaaf'; // chevron right
   transform: rotate(0deg);
   transition: transform 200ms;
 }
@@ -305,40 +305,6 @@ $grid-column-padding: 15px;
   transform: translateY(-50%) translateX(-50%);
   left: 50%;
   // transform: translateX(-50%);
-}
-
-
-// for the item buttons
-@mixin logo-button($logo, $w: 160px, $h:120px) {
-  position: relative;
-  cursor: pointer;
-  border: 1px solid $input-border;
-  padding: 15px;
-  border-radius: 0;
-  color: #000;
-  width: 160px;
-  height: 120px;
-  background: #fff url('../images/logo-#{$logo}.png') center center no-repeat;
-  transition: border-color ease-in-out .15s, box-shadow ease-in-out .15s;
-  &:hover, &.hover {
-    @extend %fancy-focus;
-  }
-
-
-  &:active, &.active {
-    border-width: 2px;
-    border-color: $pb-blue;
-  }
-
-
-  &.disabled {
-    cursor: not-allowed;
-
-    &:hover {
-      border: 1px solid $input-border;
-      box-shadow: none;
-    }
-  }
 }
 
 
