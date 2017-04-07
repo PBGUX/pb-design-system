@@ -1,21 +1,21 @@
 # Release Notes
 
-##3.1.3 - January 4, 2017
+## 3.1.3 - January 4, 2017
 
 - Added CSS prefixes to support Safari 5 (which is the equivalent for CSD/SendPro)
 
-##3.1.1 - December 20, 2016
+## 3.1.1 - December 20, 2016
 
 - Removed an image reference from the CSS which interfered with users wishing to use Webpack.  There should be no images in the css now.
 
 - `pbds-checkboxes` was incorrectly checking for the existence of controller properties (for `ng-model`, `ng-true-value`, `ng-false-value` and `ng-required`), rather than checking for the element attributes. If the controller property for `ng-model` was not explicitly defined an error would be thrown. This is fixed.
 
 
-##3.1.0 - December 15, 2016
+## 3.1.0 - December 15, 2016
 
 ### Code Changes
 
-####BREAKING CHANGES
+#### BREAKING CHANGES
 
 - **Web > Patterns > Headers and Footers** 
 
@@ -60,7 +60,7 @@
 
 
 
-####NON-BREAKING CHANGES
+#### NON-BREAKING CHANGES
 
 - **Web > Foundation > Iconography:** PB font now works correctly with size modifier classes (e.g. `x2`).
 
@@ -96,7 +96,7 @@
   ​
 
 
-####Updated Libraries
+#### Updated Libraries
 
 angular-bootstrap: 2.2.0
 
@@ -126,18 +126,18 @@ As always, we've relied on the ideas and support from the entire PB community to
 Anshul Jindal, Arman Bedonian, Beth Jennings, Cameron Chu, Christopher Rued, Dustin Clark, Erik Balisi, Esther Raice, Ishan Misra, Jayachandra, Jessica Spinel-Merete, Jim Zhao, Joan Doutney, John Gomersall, Lawrence Najjar, Luke Daugherty, Maciej Siedlaczek, Mariusz Krymkowski, Matt Lavalle, Neil Sampson, Richard Collette, Ron Cianfaglione, Ron Michaud, Sara Conklin, Vinay Nijhawan, Yuhua Lee
 
 
-##3.0.2 - October 18, 2016
+## 3.0.2 - October 18, 2016
 
 - Fix pbds-progress-button double click issue (reported by Cameron Chu)
 
-##3.0.1 - September 29, 2016
+## 3.0.1 - September 29, 2016
 
 This hotfix includes a fix for bugs in IE11.  This is a non-breaking change.
 
 - The footer was not staying at the bottom in IE11.  This was due to a known flexbox bug in IE11 that was fixed by Microsoft in Edge.  To make it work in IE11 we made a change in the CSS of the `body` tag's height from `min-height:100%` to `height:100%`.  No html changes are required.
 
 
-##3.0.0 – August 31, 2016
+## 3.0.0 – August 31, 2016
 
 Beginning with 3.0, we have greatly simplified how to consume the Design System:
 
@@ -184,7 +184,7 @@ Any of the above three methods is the best way to get going with Design System 3
 
 ### NON-BREAKING CHANGES
 
-####Look and Feel: One Design System
+#### Look and Feel: One Design System
 
 Our ongoing _One Design System_ initiative has brought together leaders in Global User Experience, Digital Marketing, Branding Strategy and Tech Central to devise strategies for achieving better alignment and harmony across the PB.com domain and our products.
 
@@ -197,7 +197,7 @@ The team's work has resulted in a cohesive set of standards for common master-br
 
 - **CSS animation** classes have been added to the CSS file.  Many don't require any changes to use, but there are several optional classes you can add to your HTML. Documentation can be found at _Web > Motion_. Note these require the installation of the AngularJS ng-animate package.  
 
-#####Foundations
+##### Foundations
 - **Color palette**
   - Colors have been streamlined, and Sass variable names for the Neutral Palette have been updated and made more consistent with other color variable names. This is documented on the *Web > Color* page. These updates are all compiled into the 3.0 CSS and should not require any changes on your part, but Sass variable names and hex colors are provided for those who may need them.
 - **Typography** now includes display text styles and comprehensive styling for Header, Body, Navigation and UI Controls.
