@@ -1,7 +1,7 @@
 # Release Notes
 
 
-## 3.2.1 - April 13, 2017
+## 3.2.1 - April 27, 2017
 
 ### Code Changes
 
