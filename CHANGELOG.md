@@ -1,6 +1,18 @@
 # Release Notes
 
-## 3.2 - April 13, 2017
+
+## 3.2.1 - April 13, 2017
+
+### Code Changes
+
+#### NON-BREAKING CHANGES
+
+- Slight adjustments to a couple of colors:
+  - pb-green-500 is now #00b140.  This is also called "success-green."
+  - The text version of this color is now #007d00.
+  - pb-cyan-500 was incorrect on the **Web > Elements > Charts** and **Fundamentals > Accessibility** pages.  This only affects the documentation.
+
+## 3.2.0 - April 13, 2017
 
 ### Code Changes
 
