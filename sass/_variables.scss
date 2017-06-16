@@ -3,39 +3,27 @@
 // Do not actually define any selectors here
 // This is only to set variables
 
+// redefine bootstrap 4 colors
+$white:  #fff !default;
+$black:  #000 !default;
+$red:    #d30c0c !default;
+$orange: #ef8200 !default;
+$yellow: #edb700 !default;
+$green:  #72bf44 !default;
+$blue:   #3e53a4 !default;
+$teal:   #009bdf !default;
+$pink:   #cf0989 !default;
+$purple: #a03f9b !default;
+
 
 // Primary Palette
-
-/// PB Blue 700
-/// @type Color
 $pb-blue-700: #314183;
-
-/// PB Blue 500
-/// @type Color
 $pb-blue-500: #3e53a4;
-
-/// PB Blue 300
-/// @type Color
 $pb-blue-300: #8b98c8;
-
-/// PB Blue 100
-/// @type Color
 $pb-blue-100: #c8cee4;
-
-/// PB Medium Blue 500
-/// @type Color
 $pb-medium-blue-500: #0072b8;
-
-/// PB Cyan 500
-/// @type Color
 $pb-cyan-500: #009bdf;
-
-/// PB Purple 500
-/// @type Color
 $pb-purple-500: #a03f9b;
-
-/// PB Magenta 500
-/// @type Color
 $pb-magenta-500: #cf0989;
 
 //Neutral Color Palette
@@ -44,32 +32,39 @@ $pb-gray-600: #4e4e4e;
 $pb-gray-500: #717171;
 $pb-gray-400: #9b9b9b;
 $pb-gray-300: #c0c0c0;
-$pb-gray-200: #eaeaea;
+$pb-gray-200: #e1e1e1;
 $pb-gray-100: #f0f0f0;
 $pb-gray-50:  #f8f8f8;
 $pb-gray-blue: #eaedf8;
 
 $pb-bg4: #d8dbf1; //summary tables, vertical dividers
 
-/// PB Error Red
-/// @type Color
 $pb-error-red: #d30c0c;
 
-// deprecated 3.0
+
+// POI mapping categories
+$pb-poi-parks: #388846;
+$pb-poi-outdoors: #527b5a;
+$pb-poi-public-transit: #dd9566;
+$pb-poi-retail: #a56d9b;
+$pb-poi-tourism: #cc9e2e;
+$pb-poi-education: #ae9660;
+$pb-poi-healthcare: #af6d6d;
+$pb-poi-hospital: #ba3a54;
+$pb-poi-automotive: #be8144;
+$pb-poi-entertainment: #4b80a5;
+$pb-poi-government: #667d80;
+$pb-poi-business: #7f7973;
+$pb-poi-railways: #5184aa;
+$pb-poi-railways: #5b6a6c;
+
 $pb-blue: $pb-blue-500;
-$pb-magenta-300: #e26bb8;
-$pb-magenta-700: #a5076e;
-$pb-magenta: $pb-magenta-500;
 $pb-blue: $pb-blue-500;
-$pb-purple-300: #c68cc3;
-$pb-purple-700: #80327c;
-$pb-purple: $pb-purple-500;
 $pb-cyan-300: #66c4d9;
 $pb-cyan-700: #007d99;
 $pb-cyan: $pb-cyan-500;
 $pb-dark-green-300: #66ca8c;
-$pb-light-green-500: #aad88f;
-$pb-dark-green-500: #00a740;
+$pb-dark-green-500: #00b140;
 $pb-dark-green-700: #008500;
 $pb-dark-green: $pb-dark-green-500;
 $pb-dark-orange-300: #f5a466;
@@ -80,10 +75,17 @@ $pb-green-300: #aad88f;
 $pb-green-500: #72bf44;
 $pb-green-700: #5a9836;
 $pb-green: $pb-green-500;
+$pb-light-green-500: #aad88f;
+$pb-magenta-300: #e26bb8;
+$pb-magenta-700: #a5076e;
+$pb-magenta: $pb-magenta-500;
 $pb-orange-300: #f5a66d;
 $pb-orange-500: #ef8200;
 $pb-orange-700: #bf6800;
 $pb-orange: $pb-orange-500;
+$pb-purple-300: #c68cc3;
+$pb-purple-700: #80327c;
+$pb-purple: $pb-purple-500;
 $pb-yellow-300: #f4d466;
 $pb-yellow-500: #edb700;
 $pb-yellow-700: #bd9100;
@@ -91,7 +93,7 @@ $pb-yellow: $pb-yellow-500;
 
 // bootstrap functional colors
 $brand-primary: $pb-blue;
-$brand-success: $pb-dark-green-700;
+$brand-success: $pb-dark-green-500;
 $brand-info: $pb-medium-blue-500;
 $brand-warning: $pb-dark-orange;
 $brand-danger: $pb-error-red;
@@ -135,13 +137,20 @@ $chart-orange: #ee6b0b;
 $chart-red: $pb-magenta;
 
 
-// Blue TINTS (monotone charts)
+// Blue TINTS (monotone charts) DEPRECATED 3.0, use below instead
 $blue1: $pb-blue;
 $blue2: scale-color($pb-blue, $lightness: 20%, $saturation: -5%);
 $blue3: scale-color($pb-blue, $lightness: 40%, $saturation: 1%);
 $blue4: scale-color($pb-blue, $lightness: 50%, $saturation: -5%);
 $blue5: scale-color($pb-blue, $lightness: 60%, $saturation: -10%);
 $blue6: scale-color($pb-blue, $lightness: 70%, $saturation: -20%);
+
+//Blue Tints - 3.0+
+$pb-medium-blue-900: #00436e;
+$pb-medium-blue-700: #005a93;
+$pb-medium-blue-300: #66aad4;
+$pb-medium-blue-100: #cce3f1;
+$pb-medium-blue-50:  #e5f1f8;
 
 $social-colors: ('twitter' #55acee) ('facebook' #4964a1) ('linkedin' #1a85bc) ('youtube' #cc181e) ('google-plus' #d94e40);
 
@@ -208,9 +217,14 @@ $table-condensed-cell-padding: 5px;
 $table-condensed-extra-cell-padding: 2px;
 
 // Design System 3 / One Design System makes life complicated
+
 // normal tables:
 $table-header-padding-vertical: 15px;
 $table-cell-padding-vertical: 11px;
+
+// large tables:
+$table-large-header-padding-vertical: 18px;
+$table-large-cell-padding-vertical: 18px;
 
 // condensed table:
 $table-condensed-header-padding-vertical: 10px;
@@ -220,7 +234,8 @@ $table-condensed-cell-padding-vertical: 8px;
 $table-condensed-extra-header-padding-vertical: 6px;
 $table-condensed-extra-cell-padding-vertical: 4px;
 
-$table-cell-padding-vertical-large: 20px;
+
+
 
 
 // Default background color used for all tables.
@@ -334,7 +349,7 @@ $dropdown-caret-color: #000;
 $zindex-navbar: 1000;
 $zindex-dropdown: 1000;
 $zindex-popover: 3;
-$zindex-tooltip: 1070;
+$zindex-tooltip: 3;
 $zindex-navbar-fixed: 1030;
 $zindex-modal-background: 1040;
 $zindex-modal: 1050;

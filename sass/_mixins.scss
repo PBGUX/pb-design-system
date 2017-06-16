@@ -1,27 +1,10 @@
-/// your basic clearfix
-/// @example css - Usage
-/// ul {
-///  @include clearfix;
-/// }
-/// @example css - CSS Output
-/// ul {
-///   zoom: 1;
-/// }
-/// ul:before, ul:after {
-///   content: '';
-///   display: table;
-/// }
-/// ul:after {
-///   clear: both;
-/// }
-
 @mixin clearfix {
   zoom: 1;
-  &:before, &:after {
+  &::before, &::after {
     content: '';
     display: table;
   }
-  &:after {
+  &::after {
     clear: both;
   }
 }
@@ -33,26 +16,27 @@
 }
 
 
-/// Breakpoint mixins.
-/// The widths are customizable per project.  These have been changed from defaults.
-/// @param {String} $point [] - String representing sizes defined below
-/// @example scss - Usage
-/// .media-thing {
-///   width:300px;
-///   @include breakpoint(screen-xs) {
-///     width: 100px;
-///   }
-/// }
-/// @example css - CSS Output
-/// .media-thing {
-///   width: 300px;
-/// }
-///   @media (max-width: 767px) {
-///     .media-thing {
-///       width: 100px;
-///     }
-/// }
-/// @link http://www.sitepoint.com/managing-responsive-breakpoints-sass/
+// styling for dropdown menus (such as Bootstrap dropdowns)
+%dropdown-items {
+  padding: 10px 30px 5px 20px;
+  color: $text-color;
+  white-space: nowrap;
+  font-weight: normal;
+  font-size: 13px;
+  font-family: $font-family-sans-serif;
+  line-height: 1.4;
+
+  &:last-child {
+    padding-bottom: 10px;
+  }
+
+  &.disabled {
+    color: $pb-gray-300;
+  }
+}
+
+
+
 @mixin breakpoint($point) {
   @if $point == screen-xs {
     @media (max-width: 767px) {
@@ -96,6 +80,41 @@
   @return mix($color, #000, $percentage);
 }
 
+/// improved breakpoint mixins
+/// @example scss - Usage
+/// .my-box {
+////  padding: 10px;
+////  @include for-desktop-up {
+///    padding: 20px;
+///   }
+/// }
+/// @link https://medium.freecodecamp.com/the-100-correct-way-to-do-css-breakpoints-88d6a5ba1862#.dlj52u7ju
+
+
+@mixin for-phone-only {
+  @media (max-width: 599px) { @content; }
+}
+@mixin for-tablet-portrait-up {
+  @media (min-width: 600px) { @content; }
+}
+@mixin for-tablet-portrait-only {
+  @media (min-width: 600px) and (max-width: 899px) { @content; }
+}
+@mixin for-tablet-landscape-up {
+  @media (min-width: 900px) { @content; }
+}
+@mixin for-tablet-landscape-only {
+  @media (min-width: 900px) and (max-width: 1199px) { @content; }
+}
+@mixin for-desktop-up {
+  @media (min-width: 1200px) { @content; }
+}
+@mixin for-desktop-only {
+  @media (min-width: 1200px) and (max-width: 1799px) { @content; }
+}
+@mixin for-big-desktop-up {
+  @media (min-width: 1800px) { @content; }
+}
 
 /// Panel Variants
 @mixin panel-variant($border, $heading-text-color, $heading-bg-color, $heading-border) {
@@ -181,7 +200,7 @@ $grid-column-padding: 15px;
 
 @mixin chevron-closed {
   font: normal normal normal 25px/1 'Nucleo Outline';
-  content: '\eaf7'; // chevron right
+  content: '\eaaf'; // chevron right
   transform: rotate(0deg);
   transition: transform 200ms;
 }
@@ -273,42 +292,8 @@ $grid-column-padding: 15px;
 }
 
 
-// for the item buttons
-@mixin logo-button($logo, $w: 160px, $h:120px) {
-  position: relative;
-  cursor: pointer;
-  border: 1px solid $input-border;
-  padding: 15px;
-  border-radius: 0;
-  color: #000;
-  width: 160px;
-  height: 120px;
-  background: #fff url('../images/logo-#{$logo}.png') center center no-repeat;
-  transition: border-color ease-in-out .15s, box-shadow ease-in-out .15s;
-  &:hover, &.hover {
-    @extend %fancy-focus;
-  }
-
-
-  &:active, &.active {
-    border-width: 2px;
-    border-color: $pb-blue;
-  }
-
-
-  &.disabled {
-    cursor: not-allowed;
-
-    &:hover {
-      border: 1px solid $input-border;
-      box-shadow: none;
-    }
-  }
-}
-
-
 @mixin arrow-inside($color: #fff, $left: 65px) {
-  &:after {
+  &::after {
     content: '';
     position: absolute;
     bottom: -13px;
@@ -321,7 +306,7 @@ $grid-column-padding: 15px;
 
 
 @mixin arrow-outside($color: $pb-blue, $left: 65px) {
-  &:before {
+  &::before {
     content: '';
     position: absolute;
     bottom: -15px;
