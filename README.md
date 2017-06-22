@@ -15,7 +15,7 @@ Add the design system css after the Bootstrap 4 css in the styles array
 ```
 "styles": [
   "../node_modules/bootstrap/dist/css/bootstrap.css", // Bootstrap 4 Alpha 6
-  "../node_modules/pb-design-system/dist/designsystem.css",
+  "../node_modules/pb-design-system/dist/css/designsystem.css",
   "styles.scss"
 ],
 ```
