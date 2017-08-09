@@ -6,7 +6,7 @@ This repo is for distribution of the Design System on `npm`.
 You can install this package with `npm`:
 
 ```shell
-npm install git://github.com/PBGUX/bower-designsystem.git#ng-ds-alpha --save
+npm install pb-design-system@5.0.0-beta.1 --save
 ```
 
 ## .angular-cli.json

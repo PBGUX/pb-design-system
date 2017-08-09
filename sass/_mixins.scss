@@ -36,7 +36,6 @@
 }
 
 
-
 @mixin breakpoint($point) {
   @if $point == screen-xs {
     @media (max-width: 767px) {
@@ -60,35 +59,33 @@
   }
 }
 
-/// Mixes a color with white by a supplied percentage
-/// @param {Percent} $percentage [] - From 0-100%
-/// @example scss - Usage
-/// .tintexample {
-///   color: tint(#e86ea4, 10%); //#fdf1f6
-///  }
+// Mixes a color with white by a supplied percentage
+// Usage
+// .tintexample {
+//   color: tint(#e86ea4, 10%); //#fdf1f6
+//  }
 @function tint($color, $percentage) {
   @return mix($color, #fff, $percentage);
 }
 
-/// Mixes a color with black by a supplied percentage
-/// @param {Percent} $percentage [] - From 0-100%
-/// @example scss - Usage
-/// .shadeexample {
-///   color: shade(#e86ea4, 10%);
-/// }
+// Mixes a color with black by a supplied percentage
+// Usage
+// .shadeexample {
+//   color: shade(#e86ea4, 10%);
+// }
 @function shade($color, $percentage) {
   @return mix($color, #000, $percentage);
 }
 
-/// improved breakpoint mixins
-/// @example scss - Usage
-/// .my-box {
-////  padding: 10px;
-////  @include for-desktop-up {
-///    padding: 20px;
-///   }
-/// }
-/// @link https://medium.freecodecamp.com/the-100-correct-way-to-do-css-breakpoints-88d6a5ba1862#.dlj52u7ju
+// improved breakpoint mixins
+// Usage
+// .my-box {
+//  padding: 10px;
+//  @include for-desktop-up {
+//    padding: 20px;
+//  }
+// }
+// @link https://medium.freecodecamp.com/the-100-correct-way-to-do-css-breakpoints-88d6a5ba1862#.dlj52u7ju
 
 
 @mixin for-phone-only {
@@ -140,20 +137,12 @@
   }
 }
 
-/// Hides the text in an element, commonly used to show an image. Some elements will need block-level styles applied.
-/// @link http://zeldman.com/2012/03/01/replacing-the-9999px-hack-new-image-replacement
-/// @example scss - Usage
-///   .element {
-///     @include hide-text;
-///   }
-///
-/// @example css - CSS Output
-///   .element {
-///     overflow: hidden;
-///     text-indent: 101%;
-///     white-space: nowrap;
-///   }
-///
+// Hides the text in an element, commonly used to show an image. Some elements will need block-level styles applied.
+// http://zeldman.com/2012/03/01/replacing-the-9999px-hack-new-image-replacement
+// Usage
+//   .element {
+//     @include hide-text;
+//   }
 @mixin hide-text {
   overflow: hidden;
   text-indent: 101%;
@@ -162,7 +151,7 @@
 
 // Required mixin pulled from Bootstrap's mixins.scss
 // Creates a wrapper for a series of columns
-/// @param {Number} $gutter [$grid-gutter-width] - Typically 15px
+// @param {Number} $gutter [$grid-gutter-width] - Typically 15px
 @mixin make-row($gutter: $grid-gutter-width) {
   margin-left: ($gutter / -2);
   margin-right: ($gutter / -2);
@@ -199,7 +188,7 @@ $grid-column-padding: 15px;
 }
 
 @mixin chevron-closed {
-  font: normal normal normal 25px/1 'Nucleo Outline';
+  font: normal normal normal 18px/1 'Nucleo Outline';
   content: '\eaaf'; // chevron right
   transform: rotate(0deg);
   transition: transform 200ms;
@@ -210,22 +199,14 @@ $grid-column-padding: 15px;
 }
 
 @mixin flat-right($r: $border-radius-base) {
-  // border-bottom-left-radius: $r;
-  // border-top-left-radius: $r;
-  // border-top-right-radius: 0;
-  // border-bottom-right-radius: 0;
   border-radius: $r 0 0 $r;
 }
 
 @mixin flat-left ($r: $border-radius-base) {
-  // border-bottom-left-radius: 0;
-  // border-top-left-radius: 0;
-  // border-top-right-radius: $r;
-  // border-bottom-right-radius: $r;
   border-radius: 0 $r $r 0;
 }
 
-/// Button sizes
+// Button sizes
 @mixin button-size($padding-vertical, $padding-horizontal, $font-size, $line-height, $border-radius, $btn-min-width:0) {
   padding: $padding-vertical $padding-horizontal;
   font-size: $font-size;
@@ -236,22 +217,22 @@ $grid-column-padding: 15px;
 
 //Radii
 
-/// top
+// top
 @mixin border-top-radius($radius) {
   border-top-right-radius: $radius;
   border-top-left-radius: $radius;
 }
-/// bottom
+// bottom
 @mixin border-bottom-radius($radius) {
   border-bottom-right-radius: $radius;
   border-bottom-left-radius: $radius;
 }
-/// right
+// right
 @mixin border-right-radius($radius) {
   border-bottom-right-radius: $radius;
   border-top-right-radius: $radius;
 }
-/// left
+// left
 @mixin border-left-radius($radius) {
   border-bottom-left-radius: $radius;
   border-top-left-radius: $radius;
