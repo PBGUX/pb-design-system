@@ -1,5 +1,57 @@
 # Release Notes
 
+## 4.0 - September 15, 2017
+
+### Code Changes
+
+#### BREAKING CHANGES
+
+- **Web > Basics > Iconography:** Updated PBFont to add Data Hub icons
+- **Web > Components > Miller Columns:** Updated to use Flexbox instead of BS columns
+- **Web > Components > Modals:**  Draggable modal removed
+- **Web > Data Visualization:** C3 charts have been deprecated in favor of D3 charts. ChartJS is still supported.
+
+#### NON-BREAKING CHANGES
+
+- **Web > Data Visualization:** 
+  - Added Dashboard examples and guidance
+  - Added D3 charts along with code samples and guidance around best practices and chart accessibility
+    - Area Chart
+    - Bar Chart
+    - Bubble Chart
+    - Bubble Map
+    - Choropleth Map
+    - Donut Chart
+    - Dot Map
+    - Gauge
+    - Line Chart
+    - Metric Blocks
+    - Pie Chart
+    - Scatterplot Chart
+    - Sparkline
+    - Stacked Bar Chart
+- **Web > Components > Directives:** Added a Password Reveal directive
+- **Web > Components > Error Pages:** added translation strings as json for download
+- **Web > Components > Forms:** space between label and field tightened; space between form fields tightened
+- **Web > Components > Headers & Footers:** Header height adjusted slightly to match PB.com header (from 70px to 75px)
+- **Web > Components > Maps:** 
+  - Add UI-Leaflet examples
+  - Add POI icons and color palette
+  - Update fullscreen icon to change state when map is fullscreened
+- **Web > Components > Sliders:** Added new slider control
+- **Web > Components > Switches:** Fixed "off" color
+- **Web > Components > Tabs:** Fix active tab label color
+
+### Kudos and Thanks
+
+The Design System [team](https://designsystem.pitneycloud.com/#/about/theteam) relies on your feedback, ideas and perspective for every improvement and addition.
+
+For our 4.0 release, heaping loads of gratitude go to Nick Roberts and Jim Norris for their help on Tech Stack 2.
+
+ **These people also deserve a nod of recognition:**  
+ Awkash Agrawal, Yarin Assaraf, Erik Balisi, Jenn Bird, Eric Booth, Market Bredholt, Kenn Bryant, Cameron Chu, Ron Cianfaglione, Dustin Clark, Richard Cole, Richard Collette, Sara Conklin, James Crisp, Nathan Curtis, Adam Czarnik, Luke Daugherty, Joan Doutney, Rick Dukeshier, Eric Dunsker, Stephen Evermore, Noam Feldman, Dave Fondacaro, Darin Gachne, Bama Govindaraja, Andy Grossman, Alexandra Gruggett, Cassie Gunn, Beth Jennings, Deepa Karodkar, Irshad A. Khan, Colin Kirkham, Jennie Lee, Robin Lupo, Jayachandra Madarapu, Ania Mastriano, Ronald Michaud, Lawrence Najjar, Erika Osterberg, Nitya Reddy Pannala, Christine Peckaitis, Ian Pitts, Sean Prince, Esther Raice, John Rosendahl, Christopher Rued, Consuelo Ruybal, Surya Sagi, Paresh Sahasrabudhe, Sikhar Jyoti Saikia, David Saunders, Daisuke Sawaki, Jerome Selinger, Shawn Sharifi, Chandra Prakash Sharma, Sanket Singh, Nat Sweeney, Jake Taylor, LI API Team, Gail Thomas, Benny Tseng, Connie Tuck, Aaran Williams , Marek Wisniewski
+
+------
 
 ## 3.2.1 - April 27, 2017
 
