@@ -153,7 +153,7 @@ $grid-column-padding: 15px;
 }
 
 @mixin chevron-closed {
-  font: normal normal normal 25px/1 'Nucleo Outline';
+  font: normal normal normal 18px/1 'Nucleo Outline';
   content: '\eaaf'; // chevron right
   transform: rotate(0deg);
   transition: transform 200ms;

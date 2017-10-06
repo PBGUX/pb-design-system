@@ -1,6 +1,14 @@
 # Release Notes
 
-## 4.0 - September 15, 2017
+## 4.0.1 - October 6, 2017
+
+#### NON-BREAKING CHANGES
+
+- **Web > Components > Menus:** fixed line height on XS menus
+- **Web > Components > Address Blocks:** fixed alignment of error messages on floating label variant
+- **Web > Components > Accordions:** reduced size of carets
+
+## 4.0 - October 3, 2017
 
 ### Code Changes
 
