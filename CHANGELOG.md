@@ -1,5 +1,9 @@
 # Release Notes
 
+## 4.0.2 - October 16, 2017
+
+- **Web > Components > Cards:** every last-child inside `card-body` was set to `margin-bottom 0`.  This has been removed.
+
 ## 4.0.1 - October 6, 2017
 
 #### NON-BREAKING CHANGES
