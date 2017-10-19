@@ -1,5 +1,9 @@
 # Release Notes
 
+## 4.0.3 - October 19, 2017
+
+- **Web > Components > Menus:** fixed line height on XS menus
+
 ## 4.0.2 - October 16, 2017
 
 - **Web > Components > Cards:** every last-child inside `card-body` was set to `margin-bottom 0`.  This has been removed.
@@ -8,7 +12,6 @@
 
 #### NON-BREAKING CHANGES
 
-- **Web > Components > Menus:** fixed line height on XS menus
 - **Web > Components > Address Blocks:** fixed alignment of error messages on floating label variant
 - **Web > Components > Accordions:** reduced size of carets
 

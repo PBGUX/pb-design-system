@@ -1,6 +1,6 @@
 {
   "name": "pb-design-system",
-  "version": "4.0.2",
+  "version": "4.0.3",
   "description": "Design System NPM",
   "main": "dist/css/design_system.css",
   "scripts": {
