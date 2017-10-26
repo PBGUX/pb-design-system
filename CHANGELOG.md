@@ -1,5 +1,10 @@
 # Release Notes
 
+
+## 4.0.4 - October 26, 2017
+
+- **Web > Components > Drag and Drop:** Fixed icons in draggable table row to hide while dragging.  Added right padding to table columns to prevent content from crashing into next column.
+
 ## 4.0.3 - October 19, 2017
 
 - **Web > Components > Menus:** fixed line height on XS menus
