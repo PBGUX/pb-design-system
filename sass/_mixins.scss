@@ -15,3 +15,23 @@
   outline: 0;
   box-shadow: 0 2px 10px rgba(0, 0, 0, .3);
 }
+
+
+// Contextual backgrounds
+
+@mixin bg-variant($parent, $color) {
+  #{$parent} {
+    background-color: $color !important;
+  }
+  a#{$parent} {
+    @include hover-focus {
+      background-color: darken($color, 10%) !important;
+    }
+  }
+}
+
+@mixin bg-gradient-variant($parent, $leftcolor, $rightcolor) {
+  #{$parent} {
+    background: $leftcolor linear-gradient(180deg, mix($body-bg, $leftcolor, 15%), $leftcolor) repeat-x !important;
+  }
+}

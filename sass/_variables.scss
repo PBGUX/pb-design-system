@@ -85,9 +85,9 @@ $purple:  #a03f9b;
 $pink:    #cf0989;
 $magenta: #cf0989;
 $red:     #d30c0c;
-$orange:  #ef8200;
+$orange:  #ee6b0b;
 $yellow:  #edb700;
-$green:   #72bf44;
+$green:   #00b140;
 $teal:    #0072b8;
 $cyan:    #009bdf;
 
@@ -118,8 +118,11 @@ $theme-colors: (
   primary: $blue,
   secondary: $gray-500,
   success: $green,
-  info: $cyan,
+  success-dark: #007d00,
+  info: $teal,
+  info-dark: $blue,
   warning: $yellow,
+  warning-dark: #c55200,
   danger: $red,
   light: $gray-100,
   dark: $gray-800,
@@ -256,7 +259,8 @@ $transition-collapse:    height .35s ease;
 //
 // Font, line-height, and color for body text, headings, and more.
 
-$font-family-sans-serif: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol";
+// $font-family-sans-serif: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol";
+$font-family-sans-serif: "Helvetica Neue", Helvetica, Arial, sans-serif;
 $font-family-monospace:  "SFMono-Regular", Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace;
 $font-family-base:       $font-family-sans-serif;
 
@@ -271,8 +275,9 @@ $font-family-ps-bold: 'PrecisionSans_W_Bd', 'Helvetica Neue', Arial, sans-serif;
 $font-family-ps-bold-italic: 'PrecisionSans_W_BdIt', 'Helvetica Neue', Arial, sans-serif;
 
 $font-size-base: .875rem; // 14px
-$font-size-lg:   1rem;    // 16px
-$font-size-sm:   .75rem;  // 12px
+$font-size-lg:   ($font-size-base * 1.25);    // 16px (1 rem)
+$font-size-sm:   ($font-size-base * .857);  // 12px (.75 rem)
+
 
 $font-weight-light: 300;
 $font-weight-normal: normal;
@@ -566,7 +571,7 @@ $zindex-tooltip:            1070;
 
 // Navs
 
-$nav-link-padding-y:            .5rem; // increased from .5 to match our 75 pixel height
+$nav-link-padding-y:            1.5rem; // increased from .5 to match our 75 pixel height
 $nav-link-padding-x:            1rem;
 $nav-link-disabled-color:       $gray-600;
 
@@ -587,10 +592,12 @@ $nav-pills-link-active-bg:    $component-active-bg;
 $navbar-padding-y:                  ($spacer / 2);
 $navbar-padding-x:                  $spacer;
 
-$navbar-brand-font-size:            1.5rem; // 24 px
+// $navbar-brand-font-size:            1.5rem; // 24 px
+$navbar-brand-font-size:            ($font-size-lg * 1.5);
 // Compute the navbar-brand padding-y so the navbar-brand will have the same height as navbar-text and nav-link
 $nav-link-height:                   $navbar-brand-font-size * $line-height-base;
 $navbar-brand-height:               ($font-size-base * $line-height-base + $nav-link-padding-y * 2);
+// $navbar-brand-height:               2.8rem;
 $navbar-brand-padding-y:            ($navbar-brand-height - $nav-link-height) / 2;
 
 $navbar-toggler-padding-y:           .25rem;
@@ -790,13 +797,17 @@ $state-danger-border: theme-color("danger");
 
 // Progress bars
 
-$progress-height:               1rem;
+$progress-height:               1.25rem;
 $progress-font-size:            .75rem;
-$progress-bg:                   $gray-200;
+$progress-bg:                   $gray-100;
 $progress-border-radius:        $border-radius;
 $progress-box-shadow:           inset 0 .1rem .1rem rgba($black, .1);
 $progress-bar-color:            $white;
 $progress-bar-bg:               theme-color("primary");
+// $progress-bar-success-bg:       theme-color("info");
+// $progress-bar-warning-bg:       theme-color("warning");
+// $progress-bar-danger-bg:        theme-color("danger");
+// $progress-bar-info-bg:          theme-color("info");
 $progress-bar-animation-timing: 1s linear infinite;
 $progress-bar-transition:       width .6s ease;
 
