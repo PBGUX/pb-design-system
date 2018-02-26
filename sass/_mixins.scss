@@ -1,6 +1,6 @@
 @mixin chevron-closed {
-  font: normal normal normal 18px/1 'Nucleo Outline';
   content: '\eaaf'; // chevron right
+  font: normal normal normal 18px/1 'Nucleo Outline';
   transform: rotate(0deg);
   transition: transform 200ms;
 }
@@ -10,12 +10,11 @@
 }
 
 @mixin fancy-focus {
-  border-color: $blue;
+  border-color: theme-color('primary');
   border-width: 1px;
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.3);
   outline: 0;
-  box-shadow: 0 2px 10px rgba(0, 0, 0, .3);
 }
-
 
 // Contextual backgrounds
 
@@ -34,4 +33,37 @@
   #{$parent} {
     background: $leftcolor linear-gradient(180deg, mix($body-bg, $leftcolor, 15%), $leftcolor) repeat-x !important;
   }
+}
+
+@mixin arrow-inside($color: #fff, $left: 65px) {
+  &::after {
+    position: absolute;
+    bottom: -13px;
+    left: 66px;
+    border-color: $color transparent;
+    border-style: solid;
+    border-width: 14px 14px 0;
+    content: '';
+  }
+}
+
+@mixin arrow-outside($color: $blue, $left: 65px) {
+  &::before {
+    position: absolute;
+    bottom: -15px;
+    left: 66px;
+    border-color: $color transparent;
+    border-style: solid;
+    border-width: 14px 14px 0;
+    content: '';
+  }
+}
+
+@mixin focus-ring {
+  border-color: #189dbd;
+  box-shadow: $btn-focus-box-shadow;
+  // outline-width: 6px;
+  // outline-style: solid;
+  // outline-color: hsla(190, 58%, 79%, .6);
+  outline: none;
 }
