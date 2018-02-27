@@ -158,26 +158,28 @@ $social-colors: ('twitter' #55acee) ('facebook' #4964a1) ('linkedin' #1a85bc) ('
 $font-size-base: 14px;
 $font-size-large: 16px;
 $font-size-small: 12px;
+$font-size-xsmall: 12px;
 
 // Unit-less `line-height` for use in components like buttons.
-$line-height-base: 1.428571429; // 20/14
+$line-height-base: 1.5;
 // Computed 'line-height' (`font-size` * `line-height`) for use with `margin`, `padding`, etc.
-$line-height-computed: floor(($font-size-base * $line-height-base)); // ~20px
+$line-height-computed: ceil(($font-size-base * $line-height-base)); // ~20px
 
 
 // Components
 //## Define common padding and border radius sizes and more. Values based on 14px text and 1.428 line-height (~20px to start).
 
-$padding-base-vertical: 9px;
-$padding-base-horizontal: 12px;
-$padding-large-vertical: 13px;
+$padding-base-vertical: 8px;
+$padding-base-horizontal: 16px;
+$padding-large-vertical: 8px;
 $padding-large-horizontal: 16px;
-$padding-small-vertical: 7px;
-$padding-small-horizontal: 10px;
-$padding-xs-vertical: 5px;
-$padding-xs-horizontal: 5px;
-$line-height-large: 1.3333333; // extra decimals for Win 8.1 Chrome
-$line-height-small: 1.5;
+$padding-small-vertical: 4px;
+$padding-small-horizontal: 8px;
+$padding-xs-vertical: 3px;
+$padding-xs-horizontal: 6px;
+$line-height-large: 1.5; // extra decimals for Win 8.1 Chrome
+$line-height-small: 1.3333333;
+$line-height-xsmall: 1;
 $border-radius-small: 4px;
 $border-radius-base: 4px;
 $border-radius-large: 6px;
@@ -187,7 +189,7 @@ $border-radius-xlarge: 8px;
 $btn-min-width: 120px;
 $btn-min-width-large: 136px;
 $btn-min-width-small: 96px;
-$btn-min-width-xsmall: 80px;
+$btn-min-width-xsmall: 64px;
 
 // Global color for active items (e.g., navs or dropdowns).
 $component-active-color: #fff;
@@ -396,7 +398,7 @@ $screen-md-max: ($screen-lg-min - 1);
 // Number of columns in the grid.
 $grid-columns: 12;
 // Padding between columns. Gets divided in half for the left and right.
-$grid-gutter-width: 30px;
+$grid-gutter-width: 32px;
 // Navbar collapse
 // Point at which the navbar becomes uncollapsed.
 $grid-float-breakpoint: $screen-md-min;
@@ -830,7 +832,7 @@ $icon-font-svg-id: 'glyphicons_halflingsregular';
 $font-family-sans-serif: 'Helvetica Neue', Helvetica, Arial, sans-serif;
 $font-family-serif: Georgia, Times, 'Times New Roman', serif;
 $font-family-base: $font-family-sans-serif;
-$font-family-monospace: Menlo, Consolas, Monaco, 'Courier New', monospace;
+$font-family-monospace: 'SF Mono', Menlo, Consolas, Monaco, 'Courier New', monospace;
 $font-family-ps-light: 'PrecisionSans_W_Lt', 'Helvetica Neue', Arial, sans-serif;
 $font-family-ps-light-italic: 'PrecisionSans_W_LtIt', 'Helvetica Neue', Arial, sans-serif;
 $font-family-ps-regular: 'PrecisionSans_W_Rg', 'Helvetica Neue', Arial, sans-serif;

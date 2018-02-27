@@ -1,6 +1,73 @@
 # Release Notes
 
-## 4.0 - September 15, 2017
+## 4.1 - December 15, 2017
+
+### Code Changes
+
+#### ADDITIONS
+
+- **Web > Basics > Color Themes:** Added 3 new color themes. To use, add a `theme` attribute to your main `body` tag, as in
+  ```html
+  <body ng-controller="AppController as app" theme="ocean">
+  ```
+  See the Color Themes page for detailed instructions.
+- **Gradients** on large areas, such as Sign In page backgrounds, are now at an angle on all themes.
+- **Web > Components > Address Blocks:** Added a 7th "generic" address block type, along with guidance for additional countries
+- **Web > Components > Buttons:** Added a white button, to use on image or dark backgrounds
+- **Web > Components > Input Fields:** "Floating label" examples added
+- **Web > Components > Payment Blocks:** New section with code, plug-ins, and code examples
+- **Web > Components > Promotional:** A collapsible and configurable promotional "Hero" pattern
+- **Web > Components > Widgets:** HTML structure of Data Widgets has been updated and simplified. New classes for applying colors to Data Widgets have been added. Existing Data Widgets should still work as before.
+
+
+
+#### NON-BREAKING CHANGES
+
+- **Web > Basics > Typography:** Line spacing with geometric progress to promote a better visual rhythm. 
+  - Line height has been standardized to 1.5. 
+  - Space above and below headers, paragraphs, and list items are now based on multiples of 8 (e.g. 4px, 8px, 16px, 32px).
+- **Web > Components > Accordions:** The size of the carets has been reduced
+- **Web > Components > Buttons:** 
+  - Fixed styling of table toolbar dropdown button menu
+  - Fixed code snippet for Block Button Group
+  - Added class for Icon Buttons in tables, to override the normal min-width:
+  ```html
+      <button class="btn btn-default btn-icon">
+    <i class="nc-icon-mini ui-1_email-84"></i>
+  </button>
+  ```
+- **Web > Components > Checkboxes:** Fixed code snippet for Enhanced Checkboxes
+- **Web > Components > Drag & Drop:** Fixed icon positioning issue while dragging a table row
+- **Web > Components > Headers & Footers:** Fixed padding-right on last header item in right menu icons.  Fixed padding on footer to match container
+- **Web > Components > Signin and Signup:** Fixed field names in code snippets
+- **Web > Components > Tables:** Table column headers are now bold
+
+## Thank You
+
+As always, we've relied on the ideas and support from the entire PB community to keep Design System moving forward. Please keep the feedback coming. In particular, we'd like to thank the following individuals for helping with this release:
+
+Abraham Dybvig, Alexandra Gruggett, Andrzej Krzysztof Gdula, Ania Mastriano, Beth Jennings, Cameron Chu, Consuelo Ruybal, Dave Fondacaro, Eric Dunsker, Gaurav Tikekar, Jake Taylor, James Crisp, Jennifer Bird, Jim Norris, Joan Doutney, Lawrence Najjar, Manisha Monga, Ron Cianfaglione, Sean Prince
+
+## 4.0.4 - October 26, 2017
+
+- **Web > Components > Drag and Drop:** Fixed icons in draggable table row to hide while dragging.  Added right padding to table columns to prevent content from crashing into next column.
+
+## 4.0.3 - October 19, 2017
+
+- **Web > Components > Menus:** fixed line height on XS menus
+
+## 4.0.2 - October 16, 2017
+
+- **Web > Components > Cards:** every last-child inside `card-body` was set to `margin-bottom 0`.  This has been removed.
+
+## 4.0.1 - October 6, 2017
+
+#### NON-BREAKING CHANGES
+
+- **Web > Components > Address Blocks:** fixed alignment of error messages on floating label variant
+- **Web > Components > Accordions:** reduced size of carets
+
+## 4.0 - October 3, 2017
 
 ### Code Changes
 
