@@ -1,7 +1,7 @@
 {
   "name": "pb-design-system",
   "description": "Design System Bower",
-  "version": "4.1.0",
+  "version": "4.1.1",
   "homepage": "https://github.com/PBGUX/bower-designsystem",
   "authors": [
     "danielcollette <daniel.collette@pb.com>",
@@ -10,13 +10,7 @@
   ],
   "main": ["dist/css/design_system.css", "dist/js/pb.ds.components.js"],
   "license": "",
-  "ignore": [
-    "**/.*",
-    "node_modules",
-    "bower_components",
-    "test",
-    "tests"
-  ],
+  "ignore": ["**/.*", "node_modules", "bower_components", "test", "tests"],
   "dependencies": {
     "bootstrap": "~3.3.7"
   }
