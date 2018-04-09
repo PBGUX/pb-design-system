@@ -232,10 +232,10 @@ $line-height-lg: 1.5;
 $line-height-sm: 1.5;
 
 $border-width: 1px;
-$border-color: $gray-200;
+$border-color: $gray-300;
 
 $border-radius: 0.25rem;
-$border-radius-lg: 0.3rem;
+$border-radius-lg: 0.5rem;
 $border-radius-sm: 0.2rem;
 
 $component-active-color: $white;
@@ -249,6 +249,9 @@ $transition-collapse: height 0.35s ease;
 
 // Fonts
 //
+
+$pb-poi-icon-size: 24px;
+
 // Font, line-height, and color for body text, headings, and more.
 
 // $font-family-sans-serif: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol";
@@ -270,6 +273,7 @@ $font-family-ps-bold-italic: 'PrecisionSans_W_BdIt', 'Helvetica Neue', Arial, sa
 $font-size-base: 0.875rem; // 14px
 $font-size-lg: ($font-size-base * 1.25); // 16px (1 rem)
 $font-size-sm: ($font-size-base * 0.857); // 12px (.75 rem)
+$font-size-xs: ($font-size-base * 0.625); // 10px
 
 $font-weight-light: 300;
 $font-weight-normal: normal;
@@ -307,7 +311,7 @@ $lead-font-weight: normal;
 
 $small-font-size: 80%;
 
-$text-muted: $gray-600;
+$text-muted: $gray-400;
 
 $blockquote-small-color: $gray-600;
 $blockquote-font-size: ($font-size-base * 1.25);
