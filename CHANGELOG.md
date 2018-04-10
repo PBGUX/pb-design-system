@@ -1,3 +1,44 @@
+# 5.0.0-beta.5 — April 2018
+
+## Breaking Changes and Notes
+
+* Implemented Error Pages. The HTML structure is different from 4.1, please review code snippets.
+* Buttons in Bootstrap 4 are set to `white-space: nowrap`. If you need a button's text to wrap, perhaps in a foreign language, apply the class `btn-wrap` to the button.
+
+## Non-Breaking Changes
+
+* Fixed left padding on Compact Address Blocks
+* If Header has no menu items (just a logo and product name) the height remains correct
+* Changed style of open accordions to not have a rule between the header and its content
+* H3s have been changed from Precision Sans Regular to Precision Sans Light
+
+## Additions
+
+* Time Picker
+* Addtional table types, created with PrimeNG:
+  * Responsive table
+  * Sortable table
+  * Row selection
+  * Expanding row details
+* Slider component
+* Loading screen
+* Drag and drop
+* Address Blocks page started
+* Globalization page content added and example code updated
+* "Sign In and Sign Up" section has been renamed to "Account Access" and all examples have been added.
+* "Floating" labels have been added to the Input Fields page
+* Added download link for translation JSON for address blocks and footers
+
+## Updates
+
+* Updated Angular and associated plugins to 5.2.9
+* Updated PrimeNG to 5.2.4
+* Updated NG-Bootstrap to 1.0.4
+* Updated layout and design of Web > Components pages to make component and code examples more prominent and better organized.
+* Updated angular-l10n to 4.1.5
+
+---
+
 # 5.0.0-beta.4 — February 2018
 
 ## Breaking Changes and Notes
