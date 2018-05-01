@@ -1,3 +1,30 @@
+# 5.0.0-beta.6 – May 2018
+
+## Breaking Changes and Notes
+
+* There are no breaking changes in this release
+
+## Non-Breaking Changes
+
+* Update typography page with font samples
+* Fix dropdown carets in table toolbar, including using ng-bootrap dropdowns
+* Fix footer logo missing in Firefox
+* Fix code snippet for PrimeNG expanding table rows
+* Fix to loading screen
+
+## Additions
+
+* Color Picker
+* Editable table cells
+* Drag and drop table rows
+* Address block patterns for checkout and registration
+* Promotional hero
+* Preliminary "Compact UI" CSS option under Web > Basics. Full documentation page coming in a future beta. If you have usage questions or bugs, contact us.
+* Movable modal dialog
+* Globalization JSON comments
+
+---
+
 # 5.0.0-beta.5 — April 2018
 
 ## Breaking Changes and Notes
@@ -91,13 +118,13 @@ As you use the site, you will see some placeholder "TODO" boxes for missing comp
 
 ## 5.0.0-beta.2 – September 25, 2017
 
-- Updated to Bootstrap Beta 4.0.0-beta.
+* Updated to Bootstrap Beta 4.0.0-beta.
 
-- Bootstrap 4 scss is imported *directly into designsystem.scss*. Therefore, Bootstrap is no longer installed as a dependency.  In the 2 optional cases described below, you will need to install Bootstrap yourself.
+* Bootstrap 4 scss is imported _directly into designsystem.scss_. Therefore, Bootstrap is no longer installed as a dependency. In the 2 optional cases described below, you will need to install Bootstrap yourself.
 
-- Due to this, changed angular-cli config to no longer process Bootstrap css file. 
+* Due to this, changed angular-cli config to no longer process Bootstrap css file.
 
-- *Optional*: to use Bootstrap 4's javascript components (dropdowns, tooltips, and/or popovers) you will also need to install Boostrap 4 (`npm install bootstrap@4.0.0-beta`) and load its js files in the scripts array
+* _Optional_: to use Bootstrap 4's javascript components (dropdowns, tooltips, and/or popovers) you will also need to install Boostrap 4 (`npm install bootstrap@4.0.0-beta`) and load its js files in the scripts array
 
 ```json
  "scripts": [
@@ -107,20 +134,18 @@ As you use the site, you will see some placeholder "TODO" boxes for missing comp
  ],
 ```
 
-- *Optional*: to use the DS variables and mixins in your scss file, you will need to install Bootstrap 4 and include the following at the top of your main scss file:
+* _Optional_: to use the DS variables and mixins in your scss file, you will need to install Bootstrap 4 and include the following at the top of your main scss file:
 
 ```scss
-@import '../../../node_modules/bootstrap/scss/functions';
-@import '../../../node_modules/pb-design-system/dist/sass/variables';
-@import '../../../node_modules/pb-design-system/dist/sass/mixins';
+@import "../../../node_modules/bootstrap/scss/functions";
+@import "../../../node_modules/pb-design-system/dist/sass/variables";
+@import "../../../node_modules/pb-design-system/dist/sass/mixins";
 ```
 
--  All DS breakpoint mixins have been removed in favor of using the Boostrap 4 mixins and utilities.
-   See [Bootstrap 4 docs](https://getbootstrap.com/docs/4.0/getting-started/introduction/) for more detail.  This is still a work in progress..
--  All libraries updated to their latest versions as of 9/23/15
+* All DS breakpoint mixins have been removed in favor of using the Boostrap 4 mixins and utilities.
+  See [Bootstrap 4 docs](https://getbootstrap.com/docs/4.0/getting-started/introduction/) for more detail. This is still a work in progress..
+* All libraries updated to their latest versions as of 9/23/15
 
 ## 5.0.0-beta.1 - September 15, 2017
 
-- initial release
-
-
+* initial release

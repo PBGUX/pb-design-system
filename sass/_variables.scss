@@ -78,22 +78,23 @@ $grays: (
   900: $gray-900
 );
 
-$blue: #3e53a4;
-$indigo: #80327c;
-$purple: #a03f9b;
-$pink: #cf0989;
-$magenta: #cf0989;
-$red: #d30c0c;
-$orange: #ee6b0b;
-$yellow: #edb700;
-$green: #00b140;
-$teal: #0072b8;
-$cyan: #009bdf;
-
-$blue-700: #314183;
-$blue-500: #3e53a4;
-$blue-300: #8b98c8;
 $blue-100: #c8cee4;
+$blue-300: #8b98c8;
+$blue-500: #3e53a4;
+$blue-700: #314183;
+$blue: #3e53a4;
+$cyan: #009bdf;
+$green-700: #007d00;
+$green: #00b140;
+$indigo: #80327c;
+$magenta: #cf0989;
+$orange-700: #c55200;
+$orange: #ee6b0b;
+$pink: #cf0989;
+$purple: #a03f9b;
+$red: #d30c0c;
+$teal: #0072b8;
+$yellow: #edb700;
 
 $colors: (
   blue: $blue,
@@ -116,17 +117,19 @@ $theme-colors: (
   primary: $blue,
   secondary: $gray-500,
   success: $green,
-  success-dark: #007d00,
+  success-dark: $green-700,
   info: $teal,
   info-dark: $blue,
   warning: $yellow,
-  warning-dark: #c55200,
+  warning-dark: $orange-700,
   danger: $red,
   light: $gray-100,
   dark: $gray-800,
   grad-left: $blue,
   grad-right: $magenta,
-  focus: $cyan
+  focus: #189dbd,
+  button: $blue,
+  link: $blue
 );
 
 // Set a specific jump point for requesting color jumps
@@ -179,7 +182,7 @@ $body-color: $gray-500;
 //
 // Style anchor elements.
 
-$link-color: theme-color('primary');
+$link-color: theme-color('link');
 $link-decoration: none;
 $link-hover-color: darken($link-color, 15%);
 $link-hover-decoration: underline;
@@ -260,15 +263,14 @@ $font-family-sans-serif: 'Helvetica Neue', Helvetica, Arial, sans-serif;
 $font-family-monospace: 'SFMono-Regular', Menlo, Monaco, Consolas, 'Liberation Mono', 'Courier New', monospace;
 $font-family-base: $font-family-sans-serif;
 
-$font-family-monospace: 'SFMono-Regular', Menlo, Consolas, Monaco, 'Courier New', monospace;
-$font-family-ps-light: 'PrecisionSans_W_Lt', 'Helvetica Neue', Arial, sans-serif;
-$font-family-ps-light-italic: 'PrecisionSans_W_LtIt', 'Helvetica Neue', Arial, sans-serif;
-$font-family-ps-regular: 'PrecisionSans_W_Rg', 'Helvetica Neue', Arial, sans-serif;
-$font-family-ps-regular-italic: 'PrecisionSans_W_RgIt', 'Helvetica Neue', Arial, sans-serif;
-$font-family-ps-medium: 'PrecisionSans_W_Md', 'Helvetica Neue', Arial, sans-serif;
-$font-family-ps-medium-italic: 'PrecisionSans_W_MdIt', 'Helvetica Neue', Arial, sans-serif;
-$font-family-ps-bold: 'PrecisionSans_W_Bd', 'Helvetica Neue', Arial, sans-serif;
-$font-family-ps-bold-italic: 'PrecisionSans_W_BdIt', 'Helvetica Neue', Arial, sans-serif;
+$font-family-brand-light: 'PrecisionSans_W_Lt', 'Helvetica Neue', Arial, sans-serif !default;
+$font-family-brand-light-italic: 'PrecisionSans_W_LtIt', 'Helvetica Neue', Arial, sans-serif !default;
+$font-family-brand-regular: 'PrecisionSans_W_Rg', 'Helvetica Neue', Arial, sans-serif !default;
+$font-family-brand-regular-italic: 'PrecisionSans_W_RgIt', 'Helvetica Neue', Arial, sans-serif !default;
+$font-family-brand-medium: 'PrecisionSans_W_Md', 'Helvetica Neue', Arial, sans-serif !default;
+$font-family-brand-medium-italic: 'PrecisionSans_W_MdIt', 'Helvetica Neue', Arial, sans-serif !default;
+$font-family-brand-bold: 'PrecisionSans_W_Bd', 'Helvetica Neue', Arial, sans-serif !default;
+$font-family-brand-bold-italic: 'PrecisionSans_W_BdIt', 'Helvetica Neue', Arial, sans-serif !default;
 
 $font-size-base: 0.875rem; // 14px
 $font-size-lg: ($font-size-base * 1.25); // 16px (1 rem)
@@ -379,7 +381,7 @@ $btn-active-box-shadow: inset 0 3px 5px rgba($black, 0.125);
 
 $btn-disabled-color: $gray-300; // the text
 $btn-link-disabled-color: $btn-disabled-color;
-$btn-hover-background-color: lighten(theme-color('primary'), 50%);
+$btn-hover-background-color: lighten(theme-color('button'), 50%);
 
 $btn-block-spacing-y: 0.5rem;
 
@@ -592,13 +594,13 @@ $nav-link-padding-y: 1.5rem; // increased from .5 to match our 75 pixel height
 $nav-link-padding-x: 1rem;
 $nav-link-disabled-color: $gray-500;
 
-$nav-tabs-border-color: #ddd;
+$nav-tabs-border-color: $border-color;
 $nav-tabs-border-width: $border-width;
 $nav-tabs-border-radius: 0;
 $nav-tabs-link-hover-border-color: $gray-200;
 $nav-tabs-link-active-color: $gray-700;
 $nav-tabs-link-active-bg: $body-bg;
-$nav-tabs-link-active-border-color: #ddd;
+$nav-tabs-link-active-border-color: $border-color;
 
 $nav-pills-border-radius: $border-radius;
 $nav-pills-link-active-color: $component-active-color;
@@ -696,7 +698,7 @@ $card-columns-gap: 1.25rem;
 $card-columns-margin: $card-spacer-y;
 
 // added for DS:
-$card-header-font: $font-family-ps-regular;
+$card-header-font: $font-family-brand-regular;
 
 // Tooltips
 

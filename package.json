@@ -1,6 +1,6 @@
 {
   "name": "pb-design-system",
-  "version": "5.0.0-beta.5.0.1",
+  "version": "5.0.0-beta.6",
   "description": "PB Design System",
   "main": "dist/css/design_system.css",
   "scripts": {},
@@ -8,7 +8,7 @@
     "type": "git",
     "url": "https://github.com/PBGUX/pb-design-system.git"
   },
-  "author": "Daniel Collette",
+  "author": "Design System Team",
   "license": "",
   "bugs": {
     "url": "https://github.com/PBGUX/pb-design-system/issues"

@@ -1,6 +1,6 @@
 @mixin chevron-closed {
   content: '\eaaf'; // chevron right
-  font: normal normal normal 18px/1 'Nucleo Outline';
+  font: normal normal normal 16px/1.5 'Nucleo Outline';
   transform: rotate(0deg);
   transition: transform 200ms;
 }
@@ -10,10 +10,20 @@
 }
 
 @mixin fancy-focus {
-  border-color: theme-color('primary');
+  border-color: theme-color('button');
   border-width: 1px;
   box-shadow: 0 2px 10px rgba(0, 0, 0, 0.3);
   outline: 0;
+}
+
+@mixin data-widget($bgcolor: $blue, $color: $white) {
+  &.data-widget {
+    background-color: $bgcolor;
+    .data-widget-icon,
+    .data-widget-data {
+      color: $color;
+    }
+  }
 }
 
 // Contextual backgrounds
@@ -60,7 +70,7 @@
 }
 
 @mixin focus-ring {
-  border-color: #189dbd;
+  border-color: theme-color('focus');
   box-shadow: $btn-focus-box-shadow;
   // outline-width: 6px;
   // outline-style: solid;
