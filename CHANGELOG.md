@@ -2,7 +2,7 @@
 
 ## Breaking Changes and Notes
 
-* There are no breaking changes in this release
+* The header gradient's class has changed from `bg-pb-header-gradient` to `bg-brand-header`.  Failing to change this will cause the header to appear to vanish.
 
 ## Non-Breaking Changes
 
