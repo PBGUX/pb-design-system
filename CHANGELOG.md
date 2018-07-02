@@ -11,6 +11,9 @@
   See the Headers page for updated code snippets.
 
 - The footer also now has a `container-fluid` version and a `container` version. See the Footers page for updated code snippets.
+- Renamed the "bluish-gray" sass variables to reflect they are really shades of blue:
+  - `$gray-60` is now `$blue-50`
+  - `$gray-80` is now `$blue-100`
 
 ## Non-Breaking Changes
 
