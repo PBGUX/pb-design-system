@@ -50,8 +50,6 @@
 
 $white: #fff;
 $gray-50: #f8f8f8;
-$gray-60: #eaedf8; // light bluish gray
-$gray-80: #c8cee4; // table borders
 $gray-100: #f0f0f0;
 $gray-200: #e1e1e1;
 $gray-300: #c0c0c0;
@@ -59,14 +57,12 @@ $gray-400: #9b9b9b;
 $gray-500: #717171;
 $gray-600: #4e4e4e;
 $gray-700: #2e2e2e;
-$gray-800: #212529;
+$blue-1000: #212529;
 $gray-900: #121212;
 $black: #000;
 
 $grays: (
   50: $gray-50,
-  60: $gray-60,
-  80: $gray-80,
   100: $gray-100,
   200: $gray-200,
   300: $gray-300,
@@ -74,26 +70,31 @@ $grays: (
   500: $gray-500,
   600: $gray-600,
   700: $gray-700,
-  800: $gray-800,
+  800: $blue-1000,
   900: $gray-900
 );
 
+$blue-50: #eaedf8; // light bluish gray
 $blue-100: #c8cee4;
-$blue-300: #8b98c8;
+$blue-300: hsl(227, 36%, 66%);
 $blue-500: #3e53a4;
 $blue-700: #314183;
 $blue: #3e53a4;
 $cyan: #009bdf;
 $green-700: #007d00;
 $green: #00b140;
+$green-dark: $green-700;
 $indigo: #80327c;
 $magenta: #cf0989;
 $orange-700: #c55200;
-$orange: #ee6b0b;
+$orange: #ef8200;
+$orange-dark: #ee6700;
 $pink: #cf0989;
 $purple: #a03f9b;
 $red: #d30c0c;
 $teal: #0072b8;
+$medium-blue: $teal;
+$focus: #189dbd;
 $yellow: #edb700;
 
 $colors: (
@@ -109,25 +110,24 @@ $colors: (
   teal: $teal,
   cyan: $cyan,
   white: $white,
-  gray: $gray-600,
-  gray-dark: $gray-800
+  gray: $gray-100
 );
 
 $theme-colors: (
   primary: $blue,
   secondary: $gray-500,
-  success: $green,
-  success-dark: $green-700,
+  success: $green-700,
+  success-text: $green-700,
   info: $teal,
   info-dark: $blue,
-  warning: $yellow,
+  warning: $orange,
   warning-dark: $orange-700,
   danger: $red,
   light: $gray-100,
-  dark: $gray-800,
+  dark: $blue-100,
   grad-left: $blue,
   grad-right: $magenta,
-  focus: #189dbd,
+  focus: $focus,
   button: $blue,
   link: $blue
 );
@@ -156,11 +156,19 @@ $enable-print-styles: true;
 $spacer: 1rem;
 $spacers: (
   0: 0,
-  1: ($spacer * 0.25),
-  2: ($spacer * 0.5),
+  1: (
+    $spacer * 0.25
+  ),
+  2: (
+    $spacer * 0.5
+  ),
   3: $spacer,
-  4: ($spacer * 1.5),
-  5: ($spacer * 3)
+  4: (
+    $spacer * 1.5
+  ),
+  5: (
+    $spacer * 3
+  )
 );
 
 // This variable affects the `.h-*` and `.w-*` classes.
@@ -315,7 +323,7 @@ $small-font-size: 80%;
 
 $text-muted: $gray-400;
 
-$blockquote-small-color: $gray-600;
+$blockquote-small-color: $blue-500;
 $blockquote-font-size: ($font-size-base * 1.25);
 
 $hr-border-color: rgba($black, 0.1);
@@ -342,14 +350,14 @@ $table-cell-padding-lg: 1rem;
 
 $table-bg: transparent;
 $table-accent-bg: $gray-50; // stripes
-$table-hover-bg: $gray-60;
+$table-hover-bg: $blue-50;
 $table-active-bg: $table-hover-bg;
 
 $table-border-width: $border-width;
-$table-border-color: $gray-80;
+$table-border-color: $blue-100;
 
 $table-head-bg: $gray-50;
-$table-head-color: $gray-600;
+$table-head-color: $blue-500;
 
 $table-inverse-bg: $gray-900;
 $table-inverse-accent-bg: rgba($white, 0.05); // stripes
@@ -573,7 +581,7 @@ $dropdown-link-disabled-color: $gray-500;
 $dropdown-item-padding-y: 0.25rem;
 $dropdown-item-padding-x: 1.5rem;
 
-$dropdown-header-color: $gray-600;
+$dropdown-header-color: $blue-500;
 
 // Z-index master list
 //
@@ -669,7 +677,7 @@ $pagination-active-color: $white;
 $pagination-active-bg: theme-color('primary');
 $pagination-active-border-color: theme-color('primary');
 
-$pagination-disabled-color: $gray-600;
+$pagination-disabled-color: $blue-500;
 $pagination-disabled-bg: $white;
 $pagination-disabled-border-color: #ddd;
 
@@ -844,7 +852,7 @@ $list-group-active-color: $component-active-color;
 $list-group-active-bg: $component-active-bg;
 $list-group-active-border-color: $list-group-active-bg;
 
-$list-group-disabled-color: $gray-600;
+$list-group-disabled-color: $blue-500;
 $list-group-disabled-bg: $list-group-bg;
 
 $list-group-action-color: $gray-700;
@@ -866,7 +874,7 @@ $thumbnail-transition: all 0.2s ease-in-out;
 // Figures
 
 $figure-caption-font-size: 90%;
-$figure-caption-color: $gray-600;
+$figure-caption-color: $blue-500;
 
 // Breadcrumbs
 
@@ -877,8 +885,8 @@ $breadcrumb-item-padding: 0.5rem;
 $breadcrumb-margin-bottom: 1rem;
 
 $breadcrumb-bg: $gray-200;
-$breadcrumb-divider-color: $gray-600;
-$breadcrumb-active-color: $gray-600;
+$breadcrumb-divider-color: $blue-500;
+$breadcrumb-active-color: $blue-500;
 $breadcrumb-divider: '/';
 
 // Carousel
