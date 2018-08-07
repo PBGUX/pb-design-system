@@ -1,3 +1,33 @@
+# 5.0.0-beta.8 - August 2018
+
+## Breaking Changes and Notes
+
+- Changed toastrs to use `ngx-toastr` instead of the no-longer-supported `ng2-toastr` plugin
+- "Select language" menus for users should be changed to use the names of the languages in the actual languages. See the updated sample on the Globalization page.
+- Updated "Invalid email or password" error on Account Access screen to be displayed in a notification, instead of under each field.
+- If you are using PrimeNG components in your app:
+  - As of version 6 they added their own icon font which needs to be installed and added to your css paths. See [their setup docs](https://www.primefaces.org/primeng/#/setup) for details.
+  - However **do not** add the PrimeNG css to your paths. Our CSS assumes no CSS has been added. If you notice something is not styled yet, please file a bug with us.
+
+## Non-Breaking Changes
+
+- FIX Non-Roman characters in table header should now be correct font weight
+- FIX Header menu on phone screens could be seen when closed, on a colored page background
+- PrimeNG updated to 6.0.2
+- Fixes to README.md in our Github repo
+
+## Additions
+
+- Miller column component
+- Split views component
+- Table infinite scroll component
+- Table faceted search component
+- Table paginator with number of pages select menu
+- Dropdown Menu multi-select with tokens component (ng-select)
+- Restore `table-open` class as it was in 4.1
+
+---
+
 # 5.0.0-beta.7 - July 2018
 
 ## Breaking Changes and Notes
