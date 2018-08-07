@@ -25,7 +25,7 @@ npm install pb-design-system --save
 Then add a link tag in the document head AFTER the Bootstrap CSS:
 
 ```html
-<link rel="stylesheet" href="node_modules/pb-design-system/dist/css/design_system.css">
+<link rel="stylesheet" href="node_modules/pb-design-system/css/design_system.css">
 ```
 
 ##Sass
