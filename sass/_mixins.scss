@@ -77,3 +77,11 @@
   // outline-color: hsla(190, 58%, 79%, .6);
   outline: none;
 }
+
+@function tint($color, $percentage) {
+  @return mix(white, $color, $percentage);
+}
+
+@function shade($color, $percentage) {
+  @return mix(black, $color, $percentage);
+}

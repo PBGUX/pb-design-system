@@ -135,6 +135,33 @@ $theme-colors: (
 // Set a specific jump point for requesting color jumps
 $theme-color-interval: 8%;
 
+// // charts
+// $chart-mono-base: #0072b8;
+
+// .chart-mono-1 {
+//   background-color: shade($chart-mono-base, 50%);
+// }
+
+// .chart-mono-2 {
+//   background-color: shade($chart-mono-base, 30%);
+// }
+
+// .chart-mono-3 {
+//   background-color: $chart-mono-base;
+// }
+
+// .chart-mono-4 {
+//   background-color: tint($chart-mono-base, 40%);
+// }
+
+// .chart-mono-5 {
+//   background-color: tint($chart-mono-base, 70%);
+// }
+
+// .chart-mono-6 {
+//   background-color: tint($chart-mono-base, 90%);
+// }
+
 // Options
 //
 // Quickly modify global styling by enabling or disabling optional features.
