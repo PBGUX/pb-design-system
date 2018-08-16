@@ -1,3 +1,11 @@
+# 5.0.0-beta.8.0.1 - August 16, 2018
+
+## Non-Breaking Changes
+
+Removed CSS grid from "welcome page - 3-column, switched back to flexbox to avoid annoying notification on compile.
+
+---
+
 # 5.0.0-beta.8 - August 2018
 
 ## Breaking Changes and Notes
