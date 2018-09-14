@@ -1,6 +1,6 @@
 @mixin chevron-closed {
-  content: '\eaaf'; // chevron right
-  font: normal normal normal 16px/1.5 'Nucleo Outline';
+  content: '\eb47'; // chevron right
+  font: normal normal normal 16px/1.5 'pbi-icon-outline';
   transform: rotate(0deg);
   transition: transform 200ms;
 }
@@ -84,4 +84,12 @@
 
 @function shade($color, $percentage) {
   @return mix(black, $color, $percentage);
+}
+
+@mixin pbi-rotate($degrees, $rotation) {
+  transform: rotate($degrees);
+}
+
+@mixin pbi-flip($horiz, $vert, $rotation) {
+  transform: scale($horiz, $vert);
 }

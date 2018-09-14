@@ -1,3 +1,38 @@
+# 5.0.0-beta.9 - September 2018
+
+## Breaking Changes and Notes
+
+- Due to licensing compliance issues, the Nucleo fonts have been deprecated and will be removed in 5.0 final. We have used a subset of their icons to create a pair of PBI fonts. The former "PBfont" has also been merged into these fonts. We provide a PDF conversion table of Nucleo icon names to PBI Font icon names, links are below each font on the [Iconography page](https://ng.designsystem.pitneycloud.com/web/iconography).
+- NG-Dragula was updated to 2.0, which requires code changes if you are using it in your project. See updated code and links to their migration guide on the [Drag and Drop page](https://ng.designsystem.pitneycloud.com/web/dragdrop)
+- The latest version of the site-wide loading bar, ngx-loading-bar 2.0.0, now requires you to specify the color in the component code directly:
+  `<ngx-loading-bar color="#009bdf"></ngx-loading-bar>`
+- Updated to Bootstrap 4.1 and NG-Bootstrap 3.0.0. There were changes in Bootstrap's HTML for several items, notably accordions, which affects both native and ng-bootstrap. See the [Accordions page](https://ng.designsystem.pitneycloud.com/web/accordions) for updated code snippets. You can read about the other 4.1 changes [in their blog post](https://blog.getbootstrap.com/2018/04/09/bootstrap-4-1/).
+- FIX Some drop-buttons had double drop-down icons. These buttons no longer need an icon added in the HTML
+
+## Non-breaking Changes
+
+- FIX Disabled primary button should be gray
+- FIX Date range picker only allowed selecting single date
+- FIX Category widget hover state
+- FIX Mobile header logo centering, logo and logotype made smaller
+- Slight changes to address blocks
+- Changed table heads to Helvetica Neue, due to issue with Precision Sans and non-English characters
+- Fine-tune colors for Dark themes
+
+## Additions
+
+- Added ZIP code autocomplete example in Address Blocks Basic section
+- Added chart specs to all Data Viz example pages, to facilitate using Design System styles regardless of charting tool
+- Added CSS for `h6` tags. The font spec matches that of `h5`.
+- Numeric stepper control
+- New table examples and code:
+  - Added a comprehensive Faceted Search Table
+  - Infinite scroll
+  - Pagination
+  - "Open table" styling for PrimeNG tables
+
+---
+
 # 5.0.0-beta.8.0.1 - August 16, 2018
 
 ## Non-Breaking Changes
