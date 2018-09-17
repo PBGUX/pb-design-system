@@ -18,6 +18,7 @@
 - Slight changes to address blocks
 - Changed table heads to Helvetica Neue, due to issue with Precision Sans and non-English characters
 - Fine-tune colors for Dark themes
+- PB Logo in the header updated to use the updated "4-ring" logo. All PB logos are now supposed to use this version. Code change is in CSS, so no HTML cjanges required.
 
 ## Additions
 
@@ -25,11 +26,13 @@
 - Added chart specs to all Data Viz example pages, to facilitate using Design System styles regardless of charting tool
 - Added CSS for `h6` tags. The font spec matches that of `h5`.
 - Numeric stepper control
+- Hamburger menu examples and code
 - New table examples and code:
   - Added a comprehensive Faceted Search Table
   - Infinite scroll
   - Pagination
   - "Open table" styling for PrimeNG tables
+  - "All features" PrimeNG table example added
 
 ---
 
