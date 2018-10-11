@@ -1,3 +1,33 @@
+# 5.0.0-beta.10 - October 2018
+
+## Breaking changes
+
+- There are no breaking changes in Beta 10
+- Remember to migrate your icons: **Nucleo icons are being removed in the final 5.0 release**
+
+## Non-breaking Changes
+
+- FIX Compact UI breadcrumb and checkbox alignment
+- FIX Popover/Tooltip icons broken on site
+- FIX sample code for date picker (fixes [#56](https://github.com/PBGUX/pb-design-system/issues/56))
+- FIX remove erronous styling on fieldsets (fixes [#55](https://github.com/PBGUX/pb-design-system/issues/55))
+- FIX remove focus ring on accordions in Chrome (fixes [#54](https://github.com/PBGUX/pb-design-system/issues/54))
+- FIX wrong character uses for breadcrumbs (fixes [#58](https://github.com/PBGUX/pb-design-system/issues/58))
+- FIX hover and border being applied to nested tables in expanded rows in PrimeNG tables
+- Updated Layout guidance to use router-outlets
+- Updated Header/Footer code snippets to include `@HostBinding` examples
+- Adjusted breakpoint on Hamburger Menu samples
+
+## Additions
+
+- Added additional glyphs to PBI icon fonts as requested by teams
+- Added PrimeNG table with all options to Compact UI and theme demo and confirmed compliance
+- Added PrimeNG Tree Control
+- Added Show/Hide password fields
+- Added Payment Blocks
+
+---
+
 # 5.0.0-beta.9 - September 2018
 
 ## Breaking Changes and Notes
