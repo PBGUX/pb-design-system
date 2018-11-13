@@ -27,11 +27,10 @@
 </button>
 ```
 
-- removed excess div wrapping the search in mobile menu
+- removed outer div wrapping the search in mobile menu (`<div class="nav-link d-sm-none">...</div>`)
 
 ```html
 <div class="nav-link d-sm-none">
-  <-- REMOVED
   <div class="form-group d-lg-none">...</div>
 </div>
 ```
@@ -112,7 +111,7 @@
 
 ### Sample App and Starter App
 
-- Both hve been updated to use 5.0 release code
+- Both have been updated to use 5.0 release code
 
 ## Fixes
 
@@ -120,6 +119,12 @@
 - Fix mis-alignment in tree view
 - Fix PrimeNG checkboxes have double checkmarks
 - Fix translation strings not correctly displaying HTML in Safari
+
+## Thank You
+
+As always, we've relied on the ideas and support from the entire PB community to keep Design System moving forward. Please keep the feedback coming. In particular, we'd like to thank the following individuals for helping with this release:
+
+Abhinav Shrivastav, Adam Czarnik, Ajay Manas, Andrezej Krzystof Gdula, Ania Mastriano, Ankit Pruthi, Beth Jennings, Bhalchandra Bhosale, Cassie Gunn, Chandra Singh, Colin Kirkham, Dave Fondacaro, Daisuke Sawaki, Devendra Tankar, Eric Dunsker, Gaston Hummel, Gaurav Tikekar, Jaychandra M, Jheel Vala Rawal, Joan Doutney, John Gomersall, John Hall, Joseph Cotton, Ken Zaldo, LocateAPI team, Luke Daughtery, Maciej Pyszka, Mikolaj Chybowski, Monika Szulcfabijanowski, Naga Sagi, Nick Roberts, Nitya Reddy Pannala, Paul Hutson, Rachel Hegeman, Rajesh Karnam, Rajesh Kumar, Rich Collette, Rick Dukeshier, Robert Curran, Ron Cianfaglione, Seema Pawar, Shawn Sharifi, Simranjit Singh, Steven Bickmore, Szymon Holisz, Umesh Mishra, Vaughn Lindquist, William Mitchell, Yuhua Lee
 
 ---
 
@@ -180,22 +185,14 @@
 - Added ZIP code autocomplete example in Address Blocks Basic section
 - Added chart specs to all Data Viz example pages, to facilitate using Design System styles regardless of charting tool
 - Added CSS for `h6` tags. The font spec matches that of `h5`.
-- Numeric stepper control
 - Hamburger menu examples and code
+- Numeric stepper control
 - New table examples and code:
   - Added a comprehensive Faceted Search Table
   - Infinite scroll
   - Pagination
   - "Open table" styling for PrimeNG tables
   - "All features" PrimeNG table example added
-
----
-
-# 5.0.0-beta.8.0.1 - August 16, 2018
-
-## Non-Breaking Changes
-
-Removed CSS grid from "welcome page - 3-column, switched back to flexbox to avoid annoying notification on compile.
 
 ---
 
@@ -272,7 +269,7 @@ Removed CSS grid from "welcome page - 3-column, switched back to flexbox to avoi
 
 ## Breaking Changes and Notes
 
-- The header gradient's class has changed from `bg-pb-header-gradient` to `bg-brand-header`. Failing to change this will cause the header to appear to vanish.
+- There are no breaking changes in this release
 
 ## Non-Breaking Changes
 
@@ -386,6 +383,32 @@ It is worth reviewing the [entire migration page](https://getbootstrap.com/docs/
 
 As you use the site, you will see some placeholder "TODO" boxes for missing components. These are currently being investigated and/or worked on. If there are components you would like to see in the next beta, please use the HelpScout "beacon" at the lower right of every page.
 
+# 5.0.0-beta.3 - December 15, 2017
+
+## Breaking Changes and Notes
+
+- Updated Bootstrap 4 to beta 2. There are several changes to class names. See [their documentation](https://getbootstrap.com/docs/4.0/migration/#beta-2-changes) for details
+- "Block Level Button Group" is unsupported in Bootstrap 4, and has been removed
+- The structure on the top navbar/header is completely different from Bootstrap 3. See the new code sample for details.
+- The BS4 `.badge` class has no background. To get the magenta default badge from Bootstrap 3, you need to add the class `badge-default`, as in
+  ```html
+  <span class="badge badge-pill badge-default">Default</span>
+  ```
+- To use the DS Sass files, you will need to import the "functions" sass file from Bootstrap 4's npm package at the top of your sass file, in this order:
+
+  ```scss
+  @import "../../../node_modules/bootstrap/scss/functions";
+  @import "fonts";
+  @import "variables";
+  @import "../../../node_modules/bootstrap/scss/bootstrap";
+  @import "nucleo_mini/nucleo-mini";
+  @import "nucleo_outline/nucleo-outline";
+  @import "mixins";
+  // and then your sass partials, if any
+  ```
+
+---
+
 ## 5.0.0-beta.2 – September 25, 2017
 
 - Updated to Bootstrap Beta 4.0.0-beta.
@@ -415,6 +438,8 @@ As you use the site, you will see some placeholder "TODO" boxes for missing comp
 - All DS breakpoint mixins have been removed in favor of using the Boostrap 4 mixins and utilities.
   See [Bootstrap 4 docs](https://getbootstrap.com/docs/4.0/getting-started/introduction/) for more detail. This is still a work in progress..
 - All libraries updated to their latest versions as of 9/23/15
+
+---
 
 ## 5.0.0-beta.1 - September 15, 2017
 

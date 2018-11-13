@@ -56,7 +56,7 @@ $gray-300: #c0c0c0;
 $gray-400: #9b9b9b;
 $gray-500: #717171;
 $gray-600: #4e4e4e;
-$gray-700: #2e2e2e;
+$gray-700: #222;
 $blue-1000: #212529;
 $gray-900: #121212;
 $black: #000;
@@ -74,7 +74,7 @@ $grays: (
   900: $gray-900
 );
 
-$blue-50: #eaedf8; // light bluish gray
+$blue-50: #eef1fb; // light bluish gray
 $blue-100: #c8cee4;
 $blue-300: hsl(227, 36%, 66%);
 $blue-500: #3e53a4;
@@ -129,7 +129,7 @@ $theme-colors: (
   grad-right: $magenta,
   focus: $focus,
   button: $blue,
-  link: $blue
+  link: $teal
 );
 
 // Set a specific jump point for requesting color jumps
@@ -217,7 +217,7 @@ $sizes: (
 // Settings for the `<body>` element.
 
 $body-bg: $white;
-$body-color: $gray-500;
+$body-color: $gray-700;
 
 // Links
 //
@@ -225,7 +225,7 @@ $body-color: $gray-500;
 
 $link-color: theme-color('link');
 $link-decoration: none;
-$link-hover-color: darken($link-color, 15%);
+$link-hover-color: #00436e;
 $link-hover-decoration: underline;
 
 // Paragraphs
@@ -657,6 +657,7 @@ $navbar-brand-font-size: ($font-size-lg * 1.5);
 // Compute the navbar-brand padding-y so the navbar-brand will have the same height as navbar-text and nav-link
 $nav-link-height: $navbar-brand-font-size * $line-height-base;
 $navbar-brand-height: ($font-size-base * $line-height-base + $nav-link-padding-y * 2);
+$navbar-brand-height-responsive: 3.625rem;
 // $navbar-brand-height:               2.8rem;
 $navbar-brand-padding-y: ($navbar-brand-height - $nav-link-height) / 2;
 
@@ -798,7 +799,7 @@ $badge-pill-border-radius: 10rem;
 // Padding applied to the modal body
 $modal-inner-padding: 15px;
 
-$modal-dialog-margin: 10px;
+$modal-dialog-margin: 30px;
 $modal-dialog-margin-y-sm-up: 30px;
 
 $modal-title-line-height: $line-height-base;
@@ -917,10 +918,12 @@ $breadcrumb-item-padding: 0.5rem;
 
 $breadcrumb-margin-bottom: 1rem;
 
-$breadcrumb-bg: $gray-200;
-$breadcrumb-divider-color: $blue-500;
-$breadcrumb-active-color: $blue-500;
-$breadcrumb-divider: '/';
+$breadcrumb-bg: transparent;
+$breadcrumb-divider-color: #c0c0c0;
+$breadcrumb-active-color: $teal;
+// $breadcrumb-divider: '/';
+// $breadcrumb-divider: quote('>');
+$breadcrumb-divider: url(data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSI5IiBoZWlnaHQ9IjE0Ij4KICAgIDxwYXRoIGZpbGw9InNpbHZlciIgZmlsbC1ydWxlPSJub256ZXJvIiBkPSJNNS41ODYgN0wuMjkzIDEuNzA3IDEuNzA3LjI5MyA4LjQxNCA3bC02LjcwNyA2LjcwNy0xLjQxNC0xLjQxNHoiLz4KPC9zdmc+Cg==);
 
 // Carousel
 
