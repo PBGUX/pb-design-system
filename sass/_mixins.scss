@@ -1,0 +1,84 @@
+@mixin fancy-focus {
+  border-color: theme-color('button');
+  border-width: 1px;
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.3);
+  outline: 0;
+}
+
+@mixin data-widget($bgcolor: $blue, $color: $white) {
+  &.data-widget {
+    background-color: $bgcolor;
+    .data-widget-icon,
+    .data-widget-data {
+      color: $color;
+    }
+  }
+}
+
+// Contextual backgrounds
+
+@mixin bg-variant($parent, $color) {
+  #{$parent} {
+    background-color: $color !important;
+  }
+  a#{$parent} {
+    @include hover-focus {
+      background-color: darken($color, 10%) !important;
+    }
+  }
+}
+
+@mixin bg-gradient-variant($parent, $leftcolor, $rightcolor) {
+  #{$parent} {
+    background: $leftcolor linear-gradient(180deg, mix($body-bg, $leftcolor, 15%), $leftcolor) repeat-x !important;
+  }
+}
+
+@mixin arrow-inside($color: #fff, $left: 65px) {
+  &::after {
+    position: absolute;
+    bottom: -13px;
+    left: 4rem;
+    border-color: $color transparent;
+    border-style: solid;
+    border-width: 14px 14px 0;
+    content: '';
+  }
+}
+
+@mixin arrow-outside($color: $blue, $left: 65px) {
+  &::before {
+    position: absolute;
+    bottom: -15px;
+    left: 4rem;
+    border-color: $color transparent;
+    border-style: solid;
+    border-width: 14px 14px 0;
+    content: '';
+  }
+}
+
+@mixin focus-ring {
+  border-color: theme-color('focus');
+  box-shadow: $btn-focus-box-shadow;
+  // outline-width: 6px;
+  // outline-style: solid;
+  // outline-color: hsla(190, 58%, 79%, .6);
+  outline: none;
+}
+
+@function tint($color, $percentage) {
+  @return mix(white, $color, $percentage);
+}
+
+@function shade($color, $percentage) {
+  @return mix(black, $color, $percentage);
+}
+
+@mixin pbi-rotate($degrees, $rotation) {
+  transform: rotate($degrees);
+}
+
+@mixin pbi-flip($horiz, $vert, $rotation) {
+  transform: scale($horiz, $vert);
+}
