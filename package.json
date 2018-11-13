@@ -1,22 +1,19 @@
 {
   "name": "pb-design-system",
-  "version": "4.1.2",
-  "description": "Design System NPM",
-  "main": "dist/css/design_system.css",
+  "version": "5.0.0",
+  "description": "PB Design System",
+  "main": "dist/css/designsystem.css",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "repository": {
     "type": "git",
-    "url": "https://github.com/PBGUX/bower-designsystem.git"
+    "url": "https://github.com/PBGUX/pb-design-system.git"
   },
   "author": "Pitney Bowes",
   "license": "",
   "bugs": {
-    "url": "https://github.com/PBGUX/bower-designsystem/issues"
+    "url": "https://github.com/PBGUX/pb-design-system/issues"
   },
-  "homepage": "https://github.com/PBGUX/bower-designsystem",
-  "dependencies": {
-    "bootstrap": "~3.3.7"
-  }
+  "homepage": "https://github.com/PBGUX/pb-design-system"
 }
