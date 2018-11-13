@@ -1,3 +1,128 @@
+# 5.0.0 - November 2018
+
+## Breaking Changes
+
+### Iconography
+
+- All references to Nucleo fonts have been removed and replaced with the new PBI-Icon fonts. There are PDF tables showing the old icon names and their new counterparts.
+- The PB logo has been replaced everywhere with the newer "4-ring" logo. This is embedded in the CSS and should require no changes; however, if you have added any logos apart from DS code you must update to the newer logo
+- The white PB logo now has an opacity gradient in its icon. The embedded CSS is updated.
+
+### Headers
+
+- removed old AngularJS classes (`ng-pristine` `ng-empty` `ng-invalid` `ng-invalid-required` `ng-touched`)
+- added margin to the navbar toggler (`mt-2` class)
+
+```html
+<button
+  class="navbar-toggler p-0 mt-2"
+  type="button"
+  data-toggle="collapse"
+  data-target="#navbarSupportedContent"
+  aria-controls="navbarSupportedContent"
+  aria-expanded="false"
+  aria-label="Toggle navigation"
+>
+  <span class="navbar-toggler-icon"></span>
+</button>
+```
+
+- removed excess div wrapping the search in mobile menu
+
+```html
+<div class="nav-link d-sm-none">
+  <-- REMOVED
+  <div class="form-group d-lg-none">...</div>
+</div>
+```
+
+- added classes to hide the header search on mobile (added `d-none` and `d-sm-block` classes)
+
+```html
+<div
+  class="header-search d-none d-sm-block"
+  [ngClass]="{'search-active': searchActive}"
+></div>
+```
+
+- changed classes on the search reset button (removed btn and btn-link classes, added border-0 class)
+
+```html
+<button
+  class="search-clear border-0"
+  type="reset"
+  (click)="toggleSearch($event)"
+  aria-label="clear search"
+>
+  ...
+</button>
+```
+
+- fixed search icon focus (see component TypeScript code snippet)
+  - pass `$event` in `(click)` to `preventDefault()`
+  - add template variable to add focus when search is closed (`#searchLink`)
+
+```html
+<a
+  #searchLink
+  class="nav-link d-none d-sm-block"
+  aria-label="Search"
+  href=""
+  (click)="toggleSearch($event)"
+>
+  ...
+</a>
+```
+
+### Promotional Heros
+
+- updated code to use BS4 classes, reduce custom css
+- removed extra elements
+- added breakpoint for responsive display
+
+### Welcome Screens
+
+- updated code to use BS4 classes to reduce custom css
+- removed extra elements
+- added breakpoint for responsive display
+
+### Error Pages
+
+- updated code to use BS4 classes, reduce custom css
+- removed extra elements
+- added breakpoint for responsive display
+
+### Accessibility
+
+- reviewed all components and updated code to support accessibility
+- marked non-accessible components
+- please see component code snippets for changes
+
+## Non-breaking Changes
+
+### Typography
+
+- All body text is now `#222222` instead of `#717171`
+- Links are now `#0072b8` and _are no longer underlined anywhere_
+
+### Colors
+
+- Gray-700 has been changed from `#2e2e2e` to `#222222`
+- Blue-50 has been changed from `#eaedf8` to `#eef1fb`
+
+### Sample App and Starter App
+
+- Both hve been updated to use 5.0 release code
+
+## Fixes
+
+- Fix splitview footer not staying at bottom of page
+- Fix mis-alignment in tree view
+- Fix PrimeNG checkboxes have double checkmarks
+- Fix translation strings not correctly displaying HTML in Safari
+
+---
+
 # 5.0.0-beta.10 - October 2018
 
 ## Breaking changes
@@ -111,7 +236,7 @@ Removed CSS grid from "welcome page - 3-column, switched back to flexbox to avoi
 - The header now has a `container-fluid` version and a `container` version. To properly accomdated this change, the class `bg-brand-header` has to be moved to the `header` tag (it was on the `nav` tag) to show the gradient properly.
 
   ```html
-  <header class="bg-brand-header fixed-top" appHeaderShadow>
+  <header class="bg-brand-header fixed-top" appHeaderShadow></header>
   ```
 
   See the Headers page for updated code snippets.
