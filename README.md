@@ -16,7 +16,7 @@ or install a specific version:
 npm install pb-design-system@5.0.0 --save
 ```
 
-## .angular.json
+## angular.json
 
 Add your app's `styles.scss` after the Design System css file in the styles array
 
