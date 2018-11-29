@@ -1,4 +1,19 @@
-# 5.0.0 - November 2018
+# 5.0.1 - November 29, 2018
+
+## Fixes
+
+- FIX PrimeNG icon-only button, as in drag-and-drop UI
+- FIX Metric block badge color for accessiblity issue
+
+## Additions
+
+- Added PrimeNG calendar "date and time" picker (closes [#57](https://github.com/PBGUX/pb-design-system/issues/57))
+- Added "expand all" and "collapse all" icons (closes [#65](https://github.com/PBGUX/pb-design-system/issues/65))
+- Added additional requested icons: help (without circle), coins, left&amp;right direction arrows, newsletter, glasses, basket, palette, telephone, bullet, outline mini envelope, and a second style of globe and refresh icons.
+
+---
+
+# 5.0.0 - November 14, 2018
 
 ## Breaking Changes
 
@@ -397,13 +412,13 @@ As you use the site, you will see some placeholder "TODO" boxes for missing comp
 - To use the DS Sass files, you will need to import the "functions" sass file from Bootstrap 4's npm package at the top of your sass file, in this order:
 
   ```scss
-  @import '../../../node_modules/bootstrap/scss/functions';
-  @import 'fonts';
-  @import 'variables';
-  @import '../../../node_modules/bootstrap/scss/bootstrap';
-  @import 'nucleo_mini/nucleo-mini';
-  @import 'nucleo_outline/nucleo-outline';
-  @import 'mixins';
+  @import "../../../node_modules/bootstrap/scss/functions";
+  @import "fonts";
+  @import "variables";
+  @import "../../../node_modules/bootstrap/scss/bootstrap";
+  @import "nucleo_mini/nucleo-mini";
+  @import "nucleo_outline/nucleo-outline";
+  @import "mixins";
   // and then your sass partials, if any
   ```
 
@@ -430,9 +445,9 @@ As you use the site, you will see some placeholder "TODO" boxes for missing comp
 - _Optional_: to use the DS variables and mixins in your scss file, you will need to install Bootstrap 4 and include the following at the top of your main scss file:
 
 ```scss
-@import '../../../node_modules/bootstrap/scss/functions';
-@import '../../../node_modules/pb-design-system/dist/sass/variables';
-@import '../../../node_modules/pb-design-system/dist/sass/mixins';
+@import "../../../node_modules/bootstrap/scss/functions";
+@import "../../../node_modules/pb-design-system/dist/sass/variables";
+@import "../../../node_modules/pb-design-system/dist/sass/mixins";
 ```
 
 - All DS breakpoint mixins have been removed in favor of using the Boostrap 4 mixins and utilities.
