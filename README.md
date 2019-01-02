@@ -27,7 +27,9 @@ Add your app's `styles.scss` after the Design System css file in the styles arra
 ],
 ```
 
-_Optional_: to use Bootstrap 4's javascript components (dropdowns, tooltips, and/or popovers) you will also need to install Boostrap 4 `npm install bootstrap` and load its js files in the scripts array:
+## Optional: 
+
+To use Bootstrap 4's javascript components (dropdowns, tooltips, and/or popovers) you will also need to install Boostrap 4 `npm install bootstrap` and load its js files in the scripts array:
 
 ```json
  "scripts": [
