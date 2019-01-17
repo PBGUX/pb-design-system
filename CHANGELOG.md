@@ -1,6 +1,6 @@
 # Release Notes
 
-## 4.1.3 - January 17, 2019
+## 4.1.4 - January 17, 2019
 
 - Update logo (embedded in CSS) to new "4-ring" logo mark.
 
