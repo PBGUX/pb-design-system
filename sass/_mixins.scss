@@ -1,6 +1,6 @@
 @mixin fancy-focus {
-  border-color: theme-color('button');
   border-width: 1px;
+  border-color: theme-color('button') !important;
   box-shadow: 0 2px 10px rgba(0, 0, 0, 0.3);
   outline: 0;
 }
@@ -39,9 +39,9 @@
     position: absolute;
     bottom: -13px;
     left: 4rem;
-    border-color: $color transparent;
-    border-style: solid;
     border-width: 14px 14px 0;
+    border-style: solid;
+    border-color: $color transparent;
     content: '';
   }
 }
@@ -51,9 +51,9 @@
     position: absolute;
     bottom: -15px;
     left: 4rem;
-    border-color: $color transparent;
-    border-style: solid;
     border-width: 14px 14px 0;
+    border-style: solid;
+    border-color: $color transparent;
     content: '';
   }
 }

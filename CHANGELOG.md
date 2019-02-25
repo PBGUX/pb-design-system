@@ -1,3 +1,30 @@
+# 5.1.0-beta.1 - February 25, 2019
+
+## Breaking Changes
+
+- Updated Angular version to 7.2.2. For a smooth update, follow the instructions at [https://update.angular.io/](https://update.angular.io/)
+- Updated libraries to support Angular 7: PrimeNG 7.0.5, ng-bootstrap 4.0.2
+
+## Fixes
+
+- Fix PrimeNG calendar pushing down content below
+- Fix `pbi-screen-reduce` icon class name (closes [#67](https://github.com/PBGUX/pb-design-system/issues/67))
+- Fix background color of search field in header (closes [#61](https://github.com/PBGUX/pb-design-system/issues/61))
+- Fix styling of items in table toolbars
+- Fix code snippet for cards
+- Fix hover color for striped tables
+
+## Additions
+
+- Added new glyphs to PBI icon fonts: headset, checkmark/x/- inside square, refresh, empty outline circle, outline circle with diagonal line
+- Add Sliding Tabs (Angular Material tabs, needs plugin)
+- Add PrimeNG draggable table rows
+- Add table row "action menu" pattern
+- Add PrimeNG "Virtual Scroller" component
+- We now have approval from the Open Source Committee for all our open-source plugins, so teams will not need separate approval for these plugins. See the Tech Stack page for details.
+
+---
+
 # 5.0.0 - November 2018
 
 ## Breaking Changes
