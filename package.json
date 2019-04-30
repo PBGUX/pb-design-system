@@ -1,6 +1,6 @@
 {
   "name": "pb-design-system",
-  "version": "5.0.1",
+  "version": "5.1.0",
   "description": "PB Design System",
   "main": "dist/css/designsystem.css",
   "scripts": {

@@ -1,15 +1,49 @@
+<<<<<<< Updated upstream
 # 5.0.1 - November 29, 2018
+=======
+# 5.1.0 - May 1, 2019 (includes changes from beta)
+
+## Changes
+
+- Updated Angular version to 7.2.2. Although updating Angular is not required to use the Design System CSS, it is recommended. For a smooth update, follow the instructions at [https://update.angular.io/](https://update.angular.io/)
+- Updated libraries to support Angular 7
+  - PrimeNG 7.0.5
+  - ng-bootstrap 4.0.2
+  - ngx-loading-bar 4.2.0
+>>>>>>> Stashed changes
 
 ## Fixes
 
 - FIX PrimeNG icon-only button, as in drag-and-drop UI
 - FIX Metric block badge color for accessiblity issue
 
-## Additions
+## **Additions**
 
+<<<<<<< Updated upstream
 - Added PrimeNG calendar "date and time" picker (closes [#57](https://github.com/PBGUX/pb-design-system/issues/57))
 - Added "expand all" and "collapse all" icons (closes [#65](https://github.com/PBGUX/pb-design-system/issues/65))
 - Added additional requested icons: help (without circle), coins, left&amp;right direction arrows, newsletter, glasses, basket, palette, telephone, bullet, outline mini envelope, and a second style of globe and refresh icons.
+=======
+- Added Pricing Plans 
+- Added Sliding Tabs (Angular Material)
+- Added Draggable table rows (PrimeNG)
+- Added table row "action menu" 
+- Added example of table with row headers
+- Added PrimeNG "Virtual Scroller" component
+- Added links to download fonts and icons
+- Added specs for gradient and header colors in themes
+- Added new glyphs to PBI icon fonts: headset, checkmark/x/- inside square, refresh, empty outline circle, outline circle with diagonal line
+- We now have approval from the PB Open Source Committee for all our open-source plugins, so teams will not need separate approval for these plugins. See the Tech Stack page for details.
+- Updated Geosearch API information
+
+
+## Thank You
+
+As always, we've relied on the ideas and support from the entire PB community to keep Design System moving forward. Please keep the feedback coming. In particular, we'd like to thank the following individuals for helping with this release:
+
+Andrew Dimola, Beth Jennings, Bhalchandra Bhosale, Gaston Hummel, Joan Doutney, Joe Cotton, Ken Zaldo, Rich Collette, Richard Morris, Rick Dukeshier, Ron Cianfaglione, Shawn Sharifi, Tanuj Chauhan, Yuhua “Jennie” Lee
+
+>>>>>>> Stashed changes
 
 ---
 

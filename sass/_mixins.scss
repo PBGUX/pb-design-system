@@ -1,6 +1,10 @@
 @mixin fancy-focus {
+<<<<<<< Updated upstream
   border-color: theme-color('button');
   border-width: 1px;
+=======
+  border: 1px solid theme-color('button') !important;
+>>>>>>> Stashed changes
   box-shadow: 0 2px 10px rgba(0, 0, 0, 0.3);
   outline: 0;
 }
