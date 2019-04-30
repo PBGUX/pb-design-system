@@ -1,6 +1,6 @@
-# 5.1.0 - May 1, 2019 (includes changes from beta)
+# 5.1.0 - May 1, 2019
 
-## Changes
+## Changes (includes changes from beta)
 
 - Updated Angular version to 7.2.2. Although updating Angular is not required to use the Design System CSS, it is recommended. For a smooth update, follow the instructions at [https://update.angular.io/](https://update.angular.io/)
 - Updated libraries to support Angular 7
