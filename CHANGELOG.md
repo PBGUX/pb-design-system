@@ -1,6 +1,3 @@
-<<<<<<< Updated upstream
-# 5.0.1 - November 29, 2018
-=======
 # 5.1.0 - May 1, 2019 (includes changes from beta)
 
 ## Changes
@@ -10,7 +7,6 @@
   - PrimeNG 7.0.5
   - ng-bootstrap 4.0.2
   - ngx-loading-bar 4.2.0
->>>>>>> Stashed changes
 
 ## Fixes
 
@@ -19,11 +15,6 @@
 
 ## **Additions**
 
-<<<<<<< Updated upstream
-- Added PrimeNG calendar "date and time" picker (closes [#57](https://github.com/PBGUX/pb-design-system/issues/57))
-- Added "expand all" and "collapse all" icons (closes [#65](https://github.com/PBGUX/pb-design-system/issues/65))
-- Added additional requested icons: help (without circle), coins, left&amp;right direction arrows, newsletter, glasses, basket, palette, telephone, bullet, outline mini envelope, and a second style of globe and refresh icons.
-=======
 - Added Pricing Plans 
 - Added Sliding Tabs (Angular Material)
 - Added Draggable table rows (PrimeNG)
@@ -43,7 +34,6 @@ As always, we've relied on the ideas and support from the entire PB community to
 
 Andrew Dimola, Beth Jennings, Bhalchandra Bhosale, Gaston Hummel, Joan Doutney, Joe Cotton, Ken Zaldo, Rich Collette, Richard Morris, Rick Dukeshier, Ron Cianfaglione, Shawn Sharifi, Tanuj Chauhan, Yuhua “Jennie” Lee
 
->>>>>>> Stashed changes
 
 ---
 
