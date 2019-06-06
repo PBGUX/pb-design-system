@@ -1,19 +1,19 @@
-# PB Design System 5
+# PB Design System 6 Beta
 
 This repo is for distribution of the Design System on `npm` using Bootstrap 4 and Angular.
 
 ## npm Install
 
-You can install this package with `npm`:
+You can install this beta package with `npm`:
 
 ```shell
-npm install pb-design-system --save
+npm install pb-design-system@beta --save
 ```
 
-or install a specific version:
+or install a specific beta version:
 
 ```shell
-npm install pb-design-system@5.0.0 --save
+npm install pb-design-system@6.0.0-beta.2 --save
 ```
 
 ## angular.json
