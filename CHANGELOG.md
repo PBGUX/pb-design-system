@@ -1,28 +1,38 @@
-# 6.0.0-beta.1 — June 11, 2019
+# 6.0.0-beta.1 — June 13, 2019
 
 ## Breaking Changes
 
-- The layout method for pages has changed.  The footer is now fiexed to the bottom of the page, similar to how the heade is fixed to the top.  The need for Flexbox to position the header and footer has been eliminated.  This should eliminate a major problem developers had with the footer position. See the **Web > Basics > Layout** page for details.  Feedback on this during the beta is appreciated.
-- Added preliminary animation on components such as buttons, accordions, checkboxes, radio buttons, and global alerts. This utilizes a combination of Angular Material components and Angular Animation on custom components such as the global alert. See the **Web > Basics > Animation** page for details. 
+- The layout method for pages has changed. The footer is now fixed to the bottom of the page, similar to how the header is fixed to the top. The need for Flexbox to position the header and footer has been eliminated. This should eliminate a major problem developers had with the footer position. See the **Web > Basics > Layout** page for details. Feedback on this during the beta is appreciated.
+- Added preliminary animation on components such as buttons, accordions, checkboxes, radio buttons, and global alerts. This utilizes a combination of Angular Material components and Angular Animation on custom components such as the global alert. See the **Web > Basics > Animation** page for details.
+- Custom checkboxes and radio buttons have been deprecated in favor of Angular Material checkboxes and radio buttons
 
 ## Changes
 
-- Custom checkboxes and radio buttons have been deprecated in favor of Angular Material checkboxes and radio buttons
 - Updated libraries:
   - PrimeNG 7.1.3
   - Bootstrap 4.3.1
   - ng-bootstrap 4.1.3
   - ng2-ion-range-slider 2.0.0
   - D3 5.7.0
-- (future versions of the 6.0.0 beta will be on Angular 8)
+- Future versions of the 6.0.0 beta will be on Angular 8
 
 ## Additions
 
-- Added several DataViz D3 components. These enable creating D3 charts by simply entering component parameters, rether than needed to edit D3 code. See the individual dataviz component pages for usage.
-- Added a "pbds" component library to simplify using the DataViz components and other custom DS components and directives.
+- Added a "pbds" component library. See the following components for documentation, additional usage documentation will be added in future betas:
+  - Added chart components for area, bar, stacked bar, donut, line, pie, and sparklines. These enable creating D3.js based charts with Angular component inputs, rather than writing D3 code. See the individual **Web > Dataviz** component pages for usage, input, output and interface documentation.
+  - Added Metric Block components that are composed with block, indicator and sparkline components. See the **Web > Dataviz > Metric Blocks** for documentation.
+  - Added a directive to apply the header shadow. See the **Web > Headers** for information on importing the PbdsHeaderShadowModule. There is no need to apply the directive to the header in the html, the old `appHeaderShadow` directive can be removed. The directive css selector targets `header.bg-brand-header` and applies the `.pbds-header-shadow` class when the page is scrolled.
 
+## Known Issues
 
+- Dataviz chart animations are exploratory, not all components have animations. These animations will be refined and examples updated to demonstrate the animations in future betas.
+- Dataviz chart SVG gradients and filters do not work in Safari due to support of the `<base href="/">`. Currently this impacts the bar and line charts.
 
+## Thank You
+
+As always, we've relied on the ideas and support from the entire PB community to keep Design System moving forward. Please keep the feedback coming. In particular, we'd like to thank the following individuals for helping with this release:
+
+Ken Zaldo, Rich Collette, Shawn Sharifi, Daniel Holmes, Nick Roberts
 
 # 5.1.0 - May 1, 2019
 
@@ -41,10 +51,10 @@
 
 ## Additions
 
-- Added Pricing Plans 
+- Added Pricing Plans
 - Added Sliding Tabs (Angular Material)
 - Added Draggable table rows (PrimeNG)
-- Added table row "action menu" 
+- Added table row "action menu"
 - Added example of table with row headers
 - Added PrimeNG "Virtual Scroller" component
 - Added links to download fonts and icons
@@ -53,13 +63,11 @@
 - We now have approval from the PB Open Source Committee for all our open-source plugins, so teams will not need separate approval for these plugins. See the Tech Stack page for details.
 - Updated Geosearch API information
 
-
 ## Thank You
 
 As always, we've relied on the ideas and support from the entire PB community to keep Design System moving forward. Please keep the feedback coming. In particular, we'd like to thank the following individuals for helping with this release:
 
 Andrew Dimola, Beth Jennings, Bhalchandra Bhosale, Gaston Hummel, Joan Doutney, Joe Cotton, Ken Zaldo, Rich Collette, Richard Morris, Rick Dukeshier, Ron Cianfaglione, Shawn Sharifi, Tanuj Chauhan, Yuhua “Jennie” Lee
-
 
 ---
 
