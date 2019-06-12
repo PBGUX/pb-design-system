@@ -1,0 +1,45 @@
+import { OnInit, ElementRef, OnChanges, SimpleChanges } from '@angular/core';
+import { PbdsDatavizService } from './dataviz.service';
+import { PbdsDatavizGauge } from './dataviz.interfaces';
+export declare class PbdsDatavizGaugeComponent implements OnInit, OnChanges {
+    private _dataviz;
+    private _element;
+    chartClass: boolean;
+    pieClass: boolean;
+    data: PbdsDatavizGauge;
+    width: number;
+    type: 'halfmoon' | 'horseshoe' | 'circle';
+    color: string;
+    hideLabel: boolean;
+    labelFormatString: string;
+    labelSmall: boolean;
+    description: any;
+    gaugeWidth: number;
+    private chart;
+    private svg;
+    private gauge;
+    private labelTween;
+    label: any;
+    private startAngle;
+    private endAngle;
+    private radius;
+    private backgroundColor;
+    private arc;
+    private labelFormat;
+    private oldValue;
+    private height;
+    private rounded;
+    constructor(_dataviz: PbdsDatavizService, _element: ElementRef);
+    ngOnInit(): void;
+    ngOnChanges(changes: SimpleChanges): void;
+    degreesToRadians: (degree: any) => number;
+    calculateMinMax: () => number;
+    calculateCurve: (data: any) => {
+        startAngle: number;
+        endAngle: number;
+    }[];
+    drawChart: () => void;
+    updateChart: () => void;
+    arcTween: (transition: any, value: any) => void;
+    textTween: (transition: any, value: any) => void;
+}
