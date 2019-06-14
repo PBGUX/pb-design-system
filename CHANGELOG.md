@@ -3,6 +3,14 @@
 ## Breaking Changes
 
 - The layout method for pages has changed. The footer is now fixed to the bottom of the page, similar to how the header is fixed to the top. The need for Flexbox to position the header and footer has been eliminated. This should eliminate a major problem developers had with the footer position. See the **Web > Basics > Layout** page for details. Feedback on this during the beta is appreciated.
+  NOTE: For the fixed class to be added, add a second HostBinding to your footer.component.ts like so:
+```
+export class FooterComponent implements OnInit {
+  @HostBinding('class.site-footer')
+  @HostBinding('class.fixed-bottom') //add this line
+  private startYear = 2015;
+  public date: string;
+  ```
 - Added preliminary animation on components such as buttons, accordions, checkboxes, radio buttons, and global alerts. This utilizes a combination of Angular Material components and Angular Animation on custom components such as the global alert. See the **Web > Basics > Animation** page for details.
 - Custom checkboxes and radio buttons have been deprecated in favor of Angular Material checkboxes and radio buttons
 
