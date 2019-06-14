@@ -15,6 +15,12 @@ or install a specific beta version:
 ```shell
 npm install pb-design-system@6.0.0-beta.2 --save
 ```
+You will also need to install angular material and angular animations:
+
+```shell
+npm install --save @angular/material@7.3.0 @angular/cdk@7.3.0 @angular/animations@7.2.2
+```
+Note that for beta 1, you will need to specify versions for these libraries, otherwise npm will install versions for Angular 8 by default.
 
 ## angular.json
 
