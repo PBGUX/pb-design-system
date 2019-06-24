@@ -27,6 +27,7 @@ export class FooterComponent implements OnInit {
 ## Additions
 
 - Added an Account Switcher menu component
+- Added a new global alert, replacing the type used in DS 4.x
 - Added a "pbds" component library. See the following components for documentation, additional usage documentation will be added in future betas:
   - Added chart components for area, bar, stacked bar, donut, line, pie, and sparklines. These enable creating D3.js based charts with Angular component inputs, rather than writing D3 code. See the individual **Web > Dataviz** component pages for usage, input, output and interface documentation.
   - Added Metric Block components that are composed with block, indicator and sparkline components. See the **Web > Dataviz > Metric Blocks** for documentation.
