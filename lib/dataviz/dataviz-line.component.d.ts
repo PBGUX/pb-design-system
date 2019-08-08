@@ -1,11 +1,12 @@
 import { OnInit, OnChanges, EventEmitter, ElementRef, OnDestroy, SimpleChanges } from '@angular/core';
-import { ViewportScroller } from '@angular/common';
+import { ViewportScroller, Location } from '@angular/common';
 import { PbdsDatavizService } from './dataviz.service';
 import { PbdsDatavizLine } from './dataviz.interfaces';
 export declare class PbdsDatavizLineComponent implements OnInit, OnDestroy, OnChanges {
     private _dataviz;
     private _element;
     private _scroll;
+    private _location;
     chartClass: boolean;
     lineClass: boolean;
     data: PbdsDatavizLine;
@@ -33,6 +34,7 @@ export declare class PbdsDatavizLineComponent implements OnInit, OnDestroy, OnCh
     marginRight: number;
     marginBottom: number;
     marginLeft: number;
+    theme: any;
     hovered: EventEmitter<object>;
     clicked: EventEmitter<object>;
     tooltipHovered: EventEmitter<object>;
@@ -81,7 +83,7 @@ export declare class PbdsDatavizLineComponent implements OnInit, OnDestroy, OnCh
     private tooltipValueFormat;
     private tooltipLabelFormat;
     private mousedata;
-    constructor(_dataviz: PbdsDatavizService, _element: ElementRef, _scroll: ViewportScroller);
+    constructor(_dataviz: PbdsDatavizService, _element: ElementRef, _scroll: ViewportScroller, _location: Location);
     ngOnInit(): void;
     ngOnChanges(changes: SimpleChanges): void;
     ngOnDestroy(): void;

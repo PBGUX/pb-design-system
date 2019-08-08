@@ -1,11 +1,12 @@
 import { OnInit, OnChanges, EventEmitter, ElementRef, OnDestroy, SimpleChanges } from '@angular/core';
-import { ViewportScroller } from '@angular/common';
+import { ViewportScroller, Location } from '@angular/common';
 import { PbdsDatavizService } from './dataviz.service';
 import { PbdsDatavizBar } from './dataviz.interfaces';
 export declare class PbdsDatavizBarComponent implements OnInit, OnDestroy, OnChanges {
     private _dataviz;
     private _element;
     private _scroll;
+    private _location;
     chartClass: boolean;
     barClass: boolean;
     data: PbdsDatavizBar[];
@@ -35,6 +36,7 @@ export declare class PbdsDatavizBarComponent implements OnInit, OnDestroy, OnCha
     marginLeft: number;
     threshold: any;
     average: any;
+    theme: any;
     hovered: EventEmitter<object>;
     clicked: EventEmitter<object>;
     private chart;
@@ -76,13 +78,13 @@ export declare class PbdsDatavizBarComponent implements OnInit, OnDestroy, OnCha
     private hideTooltipLabel;
     private tooltipValueFormat;
     private tooltipLabelFormat;
-    constructor(_dataviz: PbdsDatavizService, _element: ElementRef, _scroll: ViewportScroller);
+    constructor(_dataviz: PbdsDatavizService, _element: ElementRef, _scroll: ViewportScroller, _location: Location);
     ngOnInit(): void;
     ngOnChanges(changes: SimpleChanges): void;
     ngOnDestroy(): void;
     updateChart: () => void;
-    barMouseOverFocus: (event: any, data: any, index: any, nodes: any) => void;
-    barMouseOutBlur: () => void;
+    barMouseOver: (event: any, data: any, index: any, nodes: any) => void;
+    barMouseOut: () => void;
     barMouseClick: (event: any, data: any, index: any, nodes: any) => void;
     legendMouseOver: (event: any, data: any, index: any, nodes: any) => void;
     legendMouseOut: () => void;

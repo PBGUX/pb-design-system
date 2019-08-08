@@ -1,6 +1,6 @@
 {
   "name": "pb-design-system",
-  "version": "6.0.0-beta.1.0.1",
+  "version": "6.0.0-beta.2",
   "description": "Pitney Bowes Design System",
   "repository": {
     "type": "git",
@@ -13,15 +13,17 @@
   },
   "homepage": "https://github.com/PBGUX/pb-design-system",
   "peerDependencies": {
-    "@angular/common": "^7.2.0",
-    "@angular/core": "^7.2.0",
-    "d3": "^5.9.0"
+    "@angular/common": "^8.0.0",
+    "@angular/core": "^8.0.0",
+    "d3": "^5.9.0",
+    "topojson": "^3.0.0"
   },
   "dependencies": {
     "tslib": "^1.9.0"
   },
   "devDependencies": {
-    "@types/d3": "^5.7.0"
+    "@types/d3": "^5.7.0",
+    "@types/topojson": "3.2.2"
   },
   "main": "bundles/pb-design-system.umd.js",
   "module": "fesm5/pb-design-system.js",

@@ -16,6 +16,7 @@ export declare class PbdsDatavizPieComponent implements OnInit, OnChanges, OnDes
     tooltipLabelFormatType: 'time';
     tooltipLabelFormatString: string;
     tooltipValueFormatString: string;
+    theme: any;
     hovered: EventEmitter<object>;
     clicked: EventEmitter<object>;
     private currentData;

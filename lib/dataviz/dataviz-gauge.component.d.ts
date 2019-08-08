@@ -5,14 +5,13 @@ export declare class PbdsDatavizGaugeComponent implements OnInit, OnChanges {
     private _dataviz;
     private _element;
     chartClass: boolean;
-    pieClass: boolean;
+    gaugeClass: boolean;
     data: PbdsDatavizGauge;
     width: number;
     type: 'halfmoon' | 'horseshoe' | 'circle';
     color: string;
     hideLabel: boolean;
     labelFormatString: string;
-    labelSmall: boolean;
     description: any;
     gaugeWidth: number;
     private chart;

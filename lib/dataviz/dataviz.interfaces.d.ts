@@ -27,3 +27,15 @@ export interface PbdsDatavizStackedBar {
     key: string;
     [propName: string]: any;
 }
+export interface PbdsDatavizMapData {
+    label: string;
+    longitude: number;
+    latitude: number;
+    value: number | string;
+    [propName: string]: any;
+}
+export interface PbdsDatavizHeatmap {
+    yLabel: string;
+    xLabel: string;
+    value: number;
+}

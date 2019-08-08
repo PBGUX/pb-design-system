@@ -1,3 +1,47 @@
+# 6.0.0-beta.2 — August 8, 2019
+
+## Changes
+
+- Moved to Angular 8.1.2. This required the updating of many supporting libraries:
+  - Angular CDK 8.1.1
+  - Angular Material 8.1.1
+  - ng-bootstrap 5.1.0
+  - PrimeNg 8.0.1
+  - ng-select 3.0.3
+  - D3 5.9.7
+  - angular-l10n 7.2.0
+- Updated Leaflet to 1.5.1 and examples with ES6 imports
+
+## Fixes
+
+- Dataviz
+  - Chart gradients in Safari now work as expected
+  - Removed accessibility focus warning in chart legends
+  - Fix issue with X axis in line charts
+  - Fix font size of text in charts
+- Fixed several layout issues on phone screens
+- Fixed erroneous leftmargin on buttons in button groups
+- Dropdown items should have cursor:pointer
+
+## Additions
+
+- Added Component Libray overview
+- Add "skip navigation" link to header for screen reader users
+- Added resizable split pane views
+- Added sticky table headers for HTML tables
+- Promotional hero now an animated component
+- Dashboards now use actual chart components in demos
+- Dataviz:
+  - Added new chart types: Heat Map, Dot Map, Bubble Map, Gauge
+  - Added themes to Colors page with chart examples
+
+## Known Issues
+
+- Dataviz Heat Map colors may be difficult to differentiate with current themes. Colors will be refined in future betas.
+- The leaflet.locate plugin is not es6 compatible, this requires importing the entire leaflet library
+
+---
+
 # 6.0.0-beta.1 — June 13, 2019
 
 ## Breaking Changes

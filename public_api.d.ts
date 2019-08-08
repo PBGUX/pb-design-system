@@ -8,5 +8,8 @@ export * from './lib/dataviz/dataviz-gauge.component';
 export * from './lib/dataviz/dataviz-sparkline.component';
 export * from './lib/dataviz/dataviz-metric-indicator.component';
 export * from './lib/dataviz/dataviz-metric-block.component';
+export * from './lib/dataviz/dataviz-stacked-bar.component';
+export * from './lib/dataviz/dataviz-bubble-map.component';
+export * from './lib/dataviz/dataviz-heatmap.component';
 export * from './lib/header-shadow/header-shadow.module';
 export * from './lib/header-shadow/header-shadow.directive';
