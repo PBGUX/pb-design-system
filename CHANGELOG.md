@@ -1,5 +1,9 @@
 # Release Notes
 
+## 4.1.6 - August 12, 2019
+
+- Update Bootstrap dependency to 3.4.1 (latest 3.x version)
+
 ## 4.1.4 - January 17, 2019
 
 - Update logo (embedded in CSS) to new "4-ring" logo mark.
