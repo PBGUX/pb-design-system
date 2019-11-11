@@ -1,3 +1,54 @@
+# 6.0.0 - November 11, 2019
+
+## Breaking Changes from 5.1
+
+- _Internet Explorer 11 is no longer supported_. Use latest Chrome, Edge, Safari, or Firefox for best results.
+- Page layout no longer requires Flexbox, the footer is now fixed to the bottom of the screen. See the **Web > Basics > Layout** page for specific change and instructions.
+- Since the footer is now fixed to the bottom, your main content area should have `padding-bottom` of 200px.
+- There is a new Page Title component. The main H1 of your page should be converted to use this code. See **Web > Components > Page Title** for details.
+- Animation is now integrated. When you npm install the Design System package, you will see warnings for peer dependencies. You should install those for proper operation.
+- To enable animation, some components require simple HTML changes. See the **Web > Basics > Animation** page for details.
+- Buttons and controls in the table toolbar must no longer use the `*-sm` classes (i.e. `btn-sm`)
+- Old "custom" checkboxes and radio buttons have been replaced with Angular Material checkboxes and radio buttons.
+- "Empty State" icons are now inline SVG icons. See **Web > Components > Empty States** for code snippets and details.
+- Error Page SVG icons have been updated to use gradient icons. See **Web > Components > Error Pages** for code snippets and details.
+- Dashboards have new HTML code for transparent cards and borders between cards and rows. See the **Web > Data Visualization > Dashboards** page for details and code.
+
+## Changes
+
+- The default page background is a gray that incorporates a tint from your chosen theme. A white background can be used instead by adding the class `bgwhite` to the `body` tag. See the **Web > Themes > Background** page for details.
+- We no longer use the color variables in the optional `_variables.scss` file, we now use CSS variables so that the colors can be accessed in your CSS without needing to compile and SCSS files.
+- Form input field labels are uppercase. The label and input must be wrapped in a `form-group` class, as shown on **Web > Components > Input Fields**. If you text in a label (such as "(required)" or "(optional)") that is in parentheses and should be upper/lowercase, wrap that in a `span` tag.
+- There is now only one style of Accordions. Gray and bordered accordions are no longer supported.
+- Tab content no longer has a bordered option. The style of the inactive tabs has changed.
+- Category widgets now use gradient icons. Gradient icons will be solid primary color on Safari <13 due to a Safari bug.
+
+## Additions
+
+- We have added a PBDS component library. This simplifies using custom components we have provided for elements such as D3 charts. See the **Web > Basics > Component Library** page for details.
+- Added 15 new D3 chart components. These greatly simplify working with D3 charts. The new chart components are Area, Bar (vertical/horizontal, grouped, stacked), Bubble Map, Choropleth Map, Donut, Dot Map, Gauge, Heat Map, Line, Metric Block, Pie, and Sparkline.
+  - **Note:** component names and interfaces for bar charts has changed from beta releases for consistency:
+    - `<pbds-dataviz-stacked-bar>` is now `<pbds-dataviz-bar-stacked>`
+    - PbdsDatavizStackedBar is now PbdsDatavizBarStacked
+- Added an Account Switcher Menu component.
+- Added Split Panes component, see **Web > Components > Split Panes**.
+- A new type of button has be added, called a Page-Level Button. Use a page-level button when you have an action that will affect the entire page, such as "Save" or "Submit" or "Sign In". For more information, see **Web > Components > Buttons**.
+
+## Updated Libraries
+
+- Moved to Angular 8.2.4. This required the updating of many supporting libraries:
+  - Angular CDK 8.1.4
+  - Angular Material 8.1.4
+  - ng-bootstrap 5.1.1
+  - PrimeNg 8.0.2
+  - ng-select 3.0.7
+  - D3 5.11.0
+  - angular-l10n 8.0.0
+- Updated Leaflet to 1.5.1 and examples with ES6 imports
+
+**Note:** PrimeNG 8.0.4 changed the implementation of table custom filters, use 8.0.2 if you are using filterConstraints. [See issue #8123](https://github.com/primefaces/primeng/issues/8123) for details.
+
+
 # 5.1.0 - May 1, 2019
 
 ## Changes (includes changes from beta)

@@ -1,0 +1,20 @@
+/**
+ * @fileoverview added by tsickle
+ * @suppress {checkTypes,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+ */
+import { NgModule } from '@angular/core';
+import { CommonModule } from '@angular/common';
+import { FormsModule } from '@angular/forms';
+import { NgbDatepickerModule, NgbPopoverModule, NgbDropdownModule } from '@ng-bootstrap/ng-bootstrap';
+import { MatRadioModule } from '@angular/material/radio';
+import { PbdsDaterangePopoverComponent } from './daterange-popover.component';
+export class PbdsDaterangePopoverModule {
+}
+PbdsDaterangePopoverModule.decorators = [
+    { type: NgModule, args: [{
+                declarations: [PbdsDaterangePopoverComponent],
+                imports: [CommonModule, FormsModule, MatRadioModule, NgbDatepickerModule, NgbPopoverModule, NgbDropdownModule],
+                exports: [PbdsDaterangePopoverComponent]
+            },] }
+];
+//# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoiZGF0ZXJhbmdlLXBvcG92ZXIubW9kdWxlLmpzIiwic291cmNlUm9vdCI6Im5nOi8vcGItZGVzaWduLXN5c3RlbS8iLCJzb3VyY2VzIjpbImxpYi9kYXRlcmFuZ2UtcG9wb3Zlci9kYXRlcmFuZ2UtcG9wb3Zlci5tb2R1bGUudHMiXSwibmFtZXMiOltdLCJtYXBwaW5ncyI6Ijs7OztBQUFBLE9BQU8sRUFBRSxRQUFRLEVBQUUsTUFBTSxlQUFlLENBQUM7QUFDekMsT0FBTyxFQUFFLFlBQVksRUFBRSxNQUFNLGlCQUFpQixDQUFDO0FBQy9DLE9BQU8sRUFBRSxXQUFXLEVBQUUsTUFBTSxnQkFBZ0IsQ0FBQztBQUU3QyxPQUFPLEVBQUUsbUJBQW1CLEVBQUUsZ0JBQWdCLEVBQUUsaUJBQWlCLEVBQUUsTUFBTSw0QkFBNEIsQ0FBQztBQUV0RyxPQUFPLEVBQUUsY0FBYyxFQUFFLE1BQU0seUJBQXlCLENBQUM7QUFFekQsT0FBTyxFQUFFLDZCQUE2QixFQUFFLE1BQU0sK0JBQStCLENBQUM7QUFPOUUsTUFBTSxPQUFPLDBCQUEwQjs7O1lBTHRDLFFBQVEsU0FBQztnQkFDUixZQUFZLEVBQUUsQ0FBQyw2QkFBNkIsQ0FBQztnQkFDN0MsT0FBTyxFQUFFLENBQUMsWUFBWSxFQUFFLFdBQVcsRUFBRSxjQUFjLEVBQUUsbUJBQW1CLEVBQUUsZ0JBQWdCLEVBQUUsaUJBQWlCLENBQUM7Z0JBQzlHLE9BQU8sRUFBRSxDQUFDLDZCQUE2QixDQUFDO2FBQ3pDIiwic291cmNlc0NvbnRlbnQiOlsiaW1wb3J0IHsgTmdNb2R1bGUgfSBmcm9tICdAYW5ndWxhci9jb3JlJztcbmltcG9ydCB7IENvbW1vbk1vZHVsZSB9IGZyb20gJ0Bhbmd1bGFyL2NvbW1vbic7XG5pbXBvcnQgeyBGb3Jtc01vZHVsZSB9IGZyb20gJ0Bhbmd1bGFyL2Zvcm1zJztcblxuaW1wb3J0IHsgTmdiRGF0ZXBpY2tlck1vZHVsZSwgTmdiUG9wb3Zlck1vZHVsZSwgTmdiRHJvcGRvd25Nb2R1bGUgfSBmcm9tICdAbmctYm9vdHN0cmFwL25nLWJvb3RzdHJhcCc7XG5cbmltcG9ydCB7IE1hdFJhZGlvTW9kdWxlIH0gZnJvbSAnQGFuZ3VsYXIvbWF0ZXJpYWwvcmFkaW8nO1xuXG5pbXBvcnQgeyBQYmRzRGF0ZXJhbmdlUG9wb3ZlckNvbXBvbmVudCB9IGZyb20gJy4vZGF0ZXJhbmdlLXBvcG92ZXIuY29tcG9uZW50JztcblxuQE5nTW9kdWxlKHtcbiAgZGVjbGFyYXRpb25zOiBbUGJkc0RhdGVyYW5nZVBvcG92ZXJDb21wb25lbnRdLFxuICBpbXBvcnRzOiBbQ29tbW9uTW9kdWxlLCBGb3Jtc01vZHVsZSwgTWF0UmFkaW9Nb2R1bGUsIE5nYkRhdGVwaWNrZXJNb2R1bGUsIE5nYlBvcG92ZXJNb2R1bGUsIE5nYkRyb3Bkb3duTW9kdWxlXSxcbiAgZXhwb3J0czogW1BiZHNEYXRlcmFuZ2VQb3BvdmVyQ29tcG9uZW50XVxufSlcbmV4cG9ydCBjbGFzcyBQYmRzRGF0ZXJhbmdlUG9wb3Zlck1vZHVsZSB7fVxuIl19

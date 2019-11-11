@@ -1,0 +1,55 @@
+import { OnInit, OnChanges, SimpleChanges } from '@angular/core';
+import { NgbDate, NgbCalendar, NgbDatepickerI18n, NgbDateStruct } from '@ng-bootstrap/ng-bootstrap';
+import { PbdsDaterangePreset, PbdsDaterangeFilter } from './daterange-popover.interfaces';
+import { PbdsDaterangeService } from './daterange-popover.service';
+export declare class CustomDatepickerI18n extends NgbDatepickerI18n {
+    daterangeService: PbdsDaterangeService;
+    constructor(daterangeService: PbdsDaterangeService);
+    getWeekdayShortName(weekday: number): string;
+    getMonthShortName(month: number): string;
+    getMonthFullName(month: number): string;
+    getDayAriaLabel(date: NgbDateStruct): string;
+}
+export declare class PbdsDaterangePopoverComponent implements OnInit, OnChanges {
+    private calendar;
+    private daterangeService;
+    private datepickerPopup;
+    presets: Array<PbdsDaterangePreset>;
+    presetSelected: number | null | 'custom';
+    filters: Array<PbdsDaterangeFilter>;
+    filterSelected: number;
+    showCustomPreset: boolean;
+    applyText: string;
+    cancelText: string;
+    customRangeText: string;
+    minDate: NgbDate;
+    maxDate: NgbDate;
+    fromDate: NgbDate | null;
+    toDate: NgbDate | null;
+    inputFormat: string;
+    private change;
+    firstDayOfWeek: import("@angular/common").WeekDay;
+    hoveredDate: NgbDate;
+    dateRange: string;
+    isDatepickerVisible: boolean;
+    selectedFilter: any;
+    constructor(calendar: NgbCalendar, daterangeService: PbdsDaterangeService);
+    ngOnInit(): void;
+    ngOnChanges(changes: SimpleChanges): void;
+    apply(): void;
+    cancel(): void;
+    onDateSelection(date: NgbDate): void;
+    presetSelect: ($event: any) => boolean;
+    presetClick(preset: any): boolean;
+    private getFormattedDate;
+    isHovered: (date: NgbDate) => boolean;
+    isInside: (date: NgbDate) => boolean;
+    isRange: (date: NgbDate) => boolean;
+    showDatepicker(): void;
+    onFilterChange(filter: any, index: any): void;
+    setPreset(value: number | null): void;
+    setFilter(index: number): void;
+    setDateRange(value: any): void;
+    private setInputLabel;
+    private dateFormat;
+}
