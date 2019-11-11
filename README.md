@@ -1,60 +1,73 @@
-# PB Design System 5
+# Design System 6.0.0
 
-This repo is for distribution of the Design System on `npm` using Bootstrap 4 and Angular.
+Your npm version must be at least 6.11.2, please check by running `npm -v`.
+Your node version must at least be 10.16.0, please check by running `node -v`.
 
-## npm Install
+## Local Development
 
-You can install this package with `npm`:
+Run `npm run setup` from the root folder which installs node modules for each of the root, client, library and server folders.
 
-```shell
-npm install pb-design-system --save
+Use the following commands to install dependencies for each as needed:
+
+```
+npm run setup:root
+npm run setup:client
+npm run setup:server
+npm run setup:library
 ```
 
-or install a specific version:
+After all installs complete, from the root folder run:
 
-```shell
-npm install pb-design-system@5.0.0 --save
+```
+npm start
 ```
 
-## angular.json
+This will start the server at port `:8083`, the client at `:8082`. Open your browser to `http://localhost:8083`.
 
-Add your app's `styles.scss` after the Design System css file in the styles array
+**Note:** You may need to delete the `package-lock.json` file and reinstall node modules if there is an error running the app.
 
-```json
-"styles": [
-  "../node_modules/pb-design-system/dist/css/designsystem.css",
-  "styles.scss"
-],
+## Local Library Development
+
+Run `npm run setup` if dependencies have not been installed.
+
+In one run `npm run watch:library`. This will rebuild the library and watch files for changes, then rebuild.
+
+In another terminal run `npm start:library` from the root of the project. This will start the client without AOT and increase the poll time to 10 seconds.
+
+**Note:** be sure to run `npm run build` or `npm start` from the root folder to enusre there are no build errors since the library development does not use AOT compilation.
+
+## Local Build
+
+Install node-sass and bestzip globally:
+
+```
+npm install -g node-sass
+npm install -g bestzip
 ```
 
-## Optional: 
+Run `npm run build` from the root folder. This will compile:
 
-To use Bootstrap 4's javascript components (dropdowns, tooltips, and/or popovers) you will also need to install Boostrap 4 `npm install bootstrap` and load its js files in the scripts array:
+- the Angular app into `./deploy/public` (including all assets: fonts, images, etc)
+- run tsc to compile the typescript files into `./deploy`
+- create `./deploy/deploy.zip`
 
-```json
- "scripts": [
-     "../node_modules/jquery/dist/jquery.slim.js",
-     "../node_modules/popper.js/dist/umd//popper.min.js",
-     "../node_modules/bootstrap/dist/js/bootstrap.js"
- ],
+## Design System Distribution
+
+Install postcss-cli globally:
+
+```
+npm install postcss-cli
 ```
 
-This is not required if you use the `ng-bootstrap` version of the components (recommended).
+To build the distributable files for the `pb-design-system`, run:
 
-**IMPORTANT: You do not need to load the Boostrap css files. They are compiled into the designsystem.css.**
-
-## Using the Design System scss files:
-
-_Optional_: to use the Design System variables and mixins in your scss file, you will need to install Bootstrap 4 and include the following at the top of your main scss file:
-
-```scss
-@import "../../../node_modules/bootstrap/scss/functions";
-@import "../../../node_modules/pb-design-system/sass/variables";
-@import "../../../node_modules/pb-design-system/sass/mixins";
+```
+npm run package
 ```
 
-## Using the optional "Unbranded" CSS
+This will compile:
 
-We provide a file, `unbranded.css`, which can be used to completely override the colors in the default Design System. This is intended for those cases where the application needs to branded for a client, for example.
-
-Simply edit this file and load it in your project after the `designsystem.css` file. See https://designsystem.pitneycloud.com/web/unbranded-theme for details on usage and limitations.
+- the design system scss files to `./package/dist/css/designsystem.css`
+- copy the fonts to `./package/dist/fonts`
+- copy the mixins and variables scss files to `./package/sass`
+- build the library and copy files to the root of `./package`
