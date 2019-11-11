@@ -1,3 +1,11 @@
+# 6.0.2 - November 11, 2019
+
+## Fixes
+
+- Fix active tab on white background should be white
+
+---
+
 # 6.0.0 - November 11, 2019
 
 ## Breaking Changes from 5.1
