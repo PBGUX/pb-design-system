@@ -1,3 +1,10 @@
+# 6.0.3 - November 13, 2019
+
+## Fixes
+
+- Chart color updated
+- Fix for sparklines
+
 # 6.0.2 - November 11, 2019
 
 ## Fixes
