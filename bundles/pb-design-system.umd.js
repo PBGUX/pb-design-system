@@ -2,7 +2,7 @@
     typeof exports === 'object' && typeof module !== 'undefined' ? factory(exports, require('@angular/core'), require('@angular/common'), require('d3'), require('topojson'), require('@angular/forms'), require('@ng-bootstrap/ng-bootstrap'), require('@angular/material/radio')) :
     typeof define === 'function' && define.amd ? define('pb-design-system', ['exports', '@angular/core', '@angular/common', 'd3', 'topojson', '@angular/forms', '@ng-bootstrap/ng-bootstrap', '@angular/material/radio'], factory) :
     (global = global || self, factory(global['pb-design-system'] = {}, global.ng.core, global.ng.common, global['^5']['9']['0'], global['^3']['0']['0'], global.ng.forms, global['^5']['1']['0'], global.ng.material.radio));
-}(this, function (exports, core, common, d3, topojson, forms, ngBootstrap, radio) { 'use strict';
+}(this, (function (exports, core, common, d3, topojson, forms, ngBootstrap, radio) { 'use strict';
 
     /*! *****************************************************************************
     Copyright (c) Microsoft Corporation. All rights reserved.
@@ -211,69 +211,69 @@
             this.colors = {
                 classic: {
                     full: [
-                        '#E23DA8',
-                        '#1BB9FF',
-                        '#FF8B00',
-                        '#A319B1',
-                        '#00B140',
+                        '#B70077',
                         '#0384D4',
-                        '#314183',
+                        '#EE6B0B',
+                        '#A319B1',
+                        '#11A611',
+                        '#1BB9FF',
+                        '#495A9C',
                         '#EDB700',
-                        '#8b98c8',
-                        '#ccb8ce',
-                        '#e6c49c',
-                        '#9b9b9b'
+                        '#8B98C8',
+                        '#E6C49C',
+                        '#CCB8CE',
+                        '#9B9B9B'
                     ],
                     mono: ['#001D56', '#003296', '#4B74C5', '#89A1D0', '#A3BCEE', '#C9D7F3'] // blue
                 },
                 twilight: {
                     full: [
                         '#A319B1',
-                        '#00B140',
-                        '#FF8B00',
+                        '#11A611',
                         '#1BB9FF',
-                        '#E23DA8',
+                        '#EE6B0B',
+                        '#B70077',
                         '#0384D4',
-                        '#314183',
+                        '#495A9C',
                         '#EDB700',
-                        '#8b98c8',
-                        '#ccb8ce',
-                        '#e6c49c',
-                        '#9b9b9b'
+                        '#8B98C8',
+                        '#E6C49C',
+                        '#CCB8CE',
+                        '#9B9B9B'
                     ],
                     mono: ['#05395C', '#0A5B92', '#0072B8', '#5DA9DC', '#A5D4F3', '#D1EDFF'] // light blue
                 },
                 ocean: {
                     full: [
                         '#0384D4',
-                        '#E23DA8',
+                        '#B70077',
                         '#1BB9FF',
-                        '#314183',
-                        '#FFC500',
+                        '#495A9C',
+                        '#EDB700',
                         '#A319B1',
-                        '#FF8B00',
-                        '#14767D',
-                        '#8b98c8',
-                        '#e6c49c',
-                        '#ccb8ce',
-                        '#9b9b9b'
+                        '#EE6B0B',
+                        '#11A611',
+                        '#8B98C8',
+                        '#E6C49C',
+                        '#CCB8CE',
+                        '#9B9B9B'
                     ],
                     mono: ['#394B4D', '#3A6B6E', '#14767D', '#99BFC2', '#C9E6E8', '#DEECED'] // blue-green
                 },
                 sunset: {
                     full: [
-                        '#CE2060',
-                        '#FF8B00',
+                        '#B70077',
+                        '#EE6B0B',
                         '#1BB9FF',
-                        '#FFC500',
-                        '#00B140',
-                        '#50248F',
-                        '#0384d4',
+                        '#EDB700',
+                        '#11A611',
+                        '#A319B1',
+                        '#0384D4',
                         '#CCB8CE',
-                        '#314183',
+                        '#495A9C',
                         '#E6C49C',
-                        '#8b98c8',
-                        '#9b9b9b'
+                        '#8B98C8',
+                        '#9B9B9B'
                     ],
                     mono: ['#31254A', '#50248F', '#7945C4', '#9A79E2', '#C4A8FF', '#D9C7FF'] // purple
                 }
@@ -4114,7 +4114,6 @@
          * @return {?}
          */
         function () {
-            var _this = this;
             this.margin = { top: 1, right: 0, bottom: 1, left: 0 };
             if (this.type === 'bar') {
                 this.margin = { top: 0, right: 0, bottom: 0, left: 0 };
@@ -4125,12 +4124,62 @@
             if (this.colorNegative === null) {
                 this.colorNegative = this.color;
             }
+            this.chart = d3.select(this._element.nativeElement).attr('aria-hidden', 'true');
+            this.svg = this.chart
+                .append('svg')
+                .attr('width', this.width)
+                .attr('height', this.height)
+                .attr('class', 'img-fluid')
+                .attr('preserveAspectRatio', 'xMinYMin meet')
+                .attr('viewBox', "-" + this.margin.left + " -" + this.margin.top + " " + this.width + " " + this.height);
+            if (this.type === 'line' || this.type === 'line-high' || this.type === 'area' || this.type === 'area-high') {
+                this.svg
+                    .append('path')
+                    .attr('class', 'sparkline')
+                    .attr('fill', 'none')
+                    .attr('stroke-width', this.strokeWidth)
+                    .attr('stroke', this.color);
+            }
+            if (this.type === 'area' || this.type === 'area-high') {
+                this.svg
+                    .append('path')
+                    .attr('class', 'sparkarea')
+                    .attr('fill', this.color)
+                    .attr('fill-opacity', 0.3);
+            }
+            this.updateChart();
+        };
+        /**
+         * @param {?} changes
+         * @return {?}
+         */
+        PbdsDatavizSparklineComponent.prototype.ngOnChanges = /**
+         * @param {?} changes
+         * @return {?}
+         */
+        function (changes) {
+            if (changes.data && !changes.data.firstChange) {
+                this.updateChart();
+            }
+        };
+        /**
+         * @return {?}
+         */
+        PbdsDatavizSparklineComponent.prototype.updateChart = /**
+         * @return {?}
+         */
+        function () {
+            var _this = this;
             /** @type {?} */
-            var x = d3.scaleLinear().range([0, this.width - this.margin.left - this.margin.right]);
+            var data = this.data;
             /** @type {?} */
-            var y = d3.scaleLinear().range([this.height - this.margin.top - this.margin.bottom, 0]);
-            y.domain([+d3.min(this.data) - this.yAxisMinBuffer, +d3.max(this.data) + this.yAxisMaxBuffer]);
-            x.domain([0, this.data.length]);
+            var x = d3.scaleLinear()
+                .domain([0, this.data.length])
+                .range([0, this.width - this.margin.left - this.margin.right]);
+            /** @type {?} */
+            var y = d3.scaleLinear()
+                .domain([+d3.min(this.data) - this.yAxisMinBuffer, +d3.max(this.data) + this.yAxisMaxBuffer])
+                .range([this.height - this.margin.top - this.margin.bottom, 0]);
             /** @type {?} */
             var line$1 = d3.line()
                 .x((/**
@@ -4158,65 +4207,111 @@
              * @return {?}
              */
             function (d) { return y(d); }));
-            this.chart = d3.select(this._element.nativeElement).attr('aria-hidden', 'true');
-            this.svg = this.chart
-                .append('svg')
-                .attr('width', this.width)
-                .attr('height', this.height)
-                .attr('class', 'img-fluid')
-                .attr('preserveAspectRatio', 'xMinYMin meet')
-                .attr('viewBox', "-" + this.margin.left + " -" + this.margin.top + " " + this.width + " " + this.height);
             if (this.type === 'line' || this.type === 'line-high' || this.type === 'area' || this.type === 'area-high') {
                 this.svg
-                    .append('path')
-                    .datum(this.data)
-                    .attr('class', 'sparkline')
-                    .attr('fill', 'none')
-                    .attr('stroke-width', this.strokeWidth)
-                    .attr('stroke', this.color)
-                    .attr('d', line$1);
+                    .selectAll('.sparkline')
+                    .transition()
+                    .duration(750)
+                    .attr('d', (/**
+                 * @return {?}
+                 */
+                function () { return line$1(data); }));
             }
             if (this.type === 'area' || this.type === 'area-high') {
                 this.svg
-                    .append('path')
-                    .datum(this.data)
-                    .attr('class', 'sparkarea')
-                    .attr('fill', this.color)
-                    .attr('fill-opacity', 0.3)
-                    .attr('d', area$1);
+                    .selectAll('.sparkarea')
+                    .transition()
+                    .duration(750)
+                    .attr('d', (/**
+                 * @return {?}
+                 */
+                function () { return area$1(data); }));
             }
             if (this.type === 'bar') {
                 /** @type {?} */
-                var barWidth = (this.width - this.data.length) / this.data.length;
+                var barWidth_1 = (this.width - this.data.length) / this.data.length;
                 // handles negative values, see example https://www.essycode.com/posts/create-sparkline-charts-d3/
                 this.svg
-                    .selectAll('.bar')
+                    .selectAll('.sparkbar')
                     .data(this.data)
-                    .enter()
-                    .append('rect')
-                    .attr('class', 'sparkbar')
-                    .attr('x', (/**
-                 * @param {?} d
-                 * @param {?} i
+                    .join((/**
+                 * @param {?} enter
                  * @return {?}
                  */
-                function (d, i) { return x(i); }))
-                    .attr('y', (/**
-                 * @param {?} d
+                function (enter) {
+                    return enter
+                        .append('rect')
+                        .attr('class', 'sparkbar')
+                        .attr('x', (/**
+                     * @param {?} d
+                     * @param {?} i
+                     * @return {?}
+                     */
+                    function (d, i) { return x(i); }))
+                        .attr('y', _this.height)
+                        .attr('width', barWidth_1)
+                        .attr('fill', (/**
+                     * @param {?} d
+                     * @return {?}
+                     */
+                    function (d) { return (d > 0 ? _this.color : _this.colorNegative); })) // still uses undocumented negative color values
+                        .attr('height', 0)
+                        .call((/**
+                     * @param {?} enter
+                     * @return {?}
+                     */
+                    function (enter) {
+                        enter
+                            .transition()
+                            .duration(750)
+                            .attr('y', (/**
+                         * @param {?} d
+                         * @return {?}
+                         */
+                        function (d) { return (d > 0 ? y(d) : y(0)); }))
+                            .attr('height', (/**
+                         * @param {?} d
+                         * @return {?}
+                         */
+                        function (d) { return Math.abs(y(d) - y(0)); }));
+                        return enter;
+                    }));
+                }), (/**
+                 * @param {?} update
                  * @return {?}
                  */
-                function (d) { return (d > 0 ? y(d) : y(0)); }))
-                    .attr('width', barWidth)
-                    .attr('height', (/**
-                 * @param {?} d
+                function (update) {
+                    return update
+                        .transition()
+                        .duration(750)
+                        .attr('x', (/**
+                     * @param {?} d
+                     * @param {?} i
+                     * @return {?}
+                     */
+                    function (d, i) { return x(i); }))
+                        .attr('y', (/**
+                     * @param {?} d
+                     * @return {?}
+                     */
+                    function (d) { return (d > 0 ? y(d) : y(0)); }))
+                        .attr('width', barWidth_1)
+                        .attr('height', (/**
+                     * @param {?} d
+                     * @return {?}
+                     */
+                    function (d) { return Math.abs(y(d) - y(0)); }))
+                        .attr('fill', (/**
+                     * @param {?} d
+                     * @return {?}
+                     */
+                    function (d) { return (d > 0 ? _this.color : _this.colorNegative); }));
+                }), (/**
+                 * @param {?} exit
                  * @return {?}
                  */
-                function (d) { return Math.abs(y(d) - y(0)); }))
-                    .attr('fill', (/**
-                 * @param {?} d
-                 * @return {?}
-                 */
-                function (d) { return (d > 0 ? _this.color : _this.colorNegative); })); // still uses undocumented negative color values
+                function (exit) { return exit.remove(); }))
+                    .enter();
             }
         };
         PbdsDatavizSparklineComponent.decorators = [
@@ -11712,5 +11807,5 @@
 
     Object.defineProperty(exports, '__esModule', { value: true });
 
-}));
+})));
 //# sourceMappingURL=pb-design-system.umd.js.map
