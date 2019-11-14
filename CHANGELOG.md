@@ -1,13 +1,18 @@
-# 6.0.3 - November 13, 2019
+# 6.0.4 - November 14, 2019
 
-## Fixes
+- Fixes for styling of drag and drop to upload component
+- Fixes for chart tooltips
+
+---
+
+# 6.0.3 - November 13, 2019
 
 - Chart color updated
 - Fix for sparklines
 
-# 6.0.2 - November 11, 2019
+---
 
-## Fixes
+# 6.0.2 - November 11, 2019
 
 - Fix active tab on white background should be white
 

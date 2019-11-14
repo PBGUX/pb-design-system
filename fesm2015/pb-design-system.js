@@ -9516,6 +9516,7 @@ class PbdsDatavizBarSingleHorizontalComponent {
             let tooltipIndicator = '';
             // tooltip label
             if (!this.isSingleData) {
+                this.tooltip.classed('pbds-tooltip-compare', null);
                 switch (this.tooltipLabelFormatType) {
                     case 'number':
                         tooltipLabel = this.tooltipLabelFormat(data.label);
@@ -9531,6 +9532,7 @@ class PbdsDatavizBarSingleHorizontalComponent {
             }
             // tooltip compare daterange
             if (this.isCompare && data.compareStartDate && data.compareEndDate) {
+                this.tooltip.classed('pbds-tooltip-compare', this.isCompare);
                 tooltipCompareDaterangeMargin = `mt-2`;
                 tooltipCompareDaterange = `${this.tooltipDateFormat(isoParse(data.compareStartDate))} - ${this.tooltipDateFormat(isoParse(data.compareEndDate))}`;
             }

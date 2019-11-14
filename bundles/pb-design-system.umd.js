@@ -9832,6 +9832,7 @@
                 var tooltipIndicator = '';
                 // tooltip label
                 if (!_this.isSingleData) {
+                    _this.tooltip.classed('pbds-tooltip-compare', null);
                     switch (_this.tooltipLabelFormatType) {
                         case 'number':
                             tooltipLabel = _this.tooltipLabelFormat(data.label);
@@ -9847,6 +9848,7 @@
                 }
                 // tooltip compare daterange
                 if (_this.isCompare && data.compareStartDate && data.compareEndDate) {
+                    _this.tooltip.classed('pbds-tooltip-compare', _this.isCompare);
                     tooltipCompareDaterangeMargin = "mt-2";
                     tooltipCompareDaterange = _this.tooltipDateFormat(d3.isoParse(data.compareStartDate)) + " - " + _this.tooltipDateFormat(d3.isoParse(data.compareEndDate));
                 }
