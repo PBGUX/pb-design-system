@@ -8,6 +8,7 @@ export declare class PbdsDatavizMetricBlockComponent implements OnInit {
     centered: boolean;
     centeredText: boolean;
     vertical: boolean;
+    infoMessage: string | null;
     hideValueMargin: boolean;
     isPercentUnit: boolean;
     isUnit: boolean;

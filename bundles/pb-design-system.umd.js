@@ -1,8 +1,8 @@
 (function (global, factory) {
-    typeof exports === 'object' && typeof module !== 'undefined' ? factory(exports, require('@angular/core'), require('@angular/common'), require('d3'), require('topojson'), require('@angular/forms'), require('@ng-bootstrap/ng-bootstrap'), require('@angular/material/radio')) :
-    typeof define === 'function' && define.amd ? define('pb-design-system', ['exports', '@angular/core', '@angular/common', 'd3', 'topojson', '@angular/forms', '@ng-bootstrap/ng-bootstrap', '@angular/material/radio'], factory) :
-    (global = global || self, factory(global['pb-design-system'] = {}, global.ng.core, global.ng.common, global['^5']['9']['0'], global['^3']['0']['0'], global.ng.forms, global['^5']['1']['0'], global.ng.material.radio));
-}(this, (function (exports, core, common, d3, topojson, forms, ngBootstrap, radio) { 'use strict';
+    typeof exports === 'object' && typeof module !== 'undefined' ? factory(exports, require('@angular/core'), require('@angular/common'), require('@ng-bootstrap/ng-bootstrap'), require('d3'), require('topojson'), require('@angular/forms'), require('@angular/material/radio')) :
+    typeof define === 'function' && define.amd ? define('pb-design-system', ['exports', '@angular/core', '@angular/common', '@ng-bootstrap/ng-bootstrap', 'd3', 'topojson', '@angular/forms', '@angular/material/radio'], factory) :
+    (global = global || self, factory(global['pb-design-system'] = {}, global.ng.core, global.ng.common, global['^5']['1']['0'], global['^5']['9']['0'], global['^3']['0']['0'], global.ng.forms, global.ng.material.radio));
+}(this, (function (exports, core, common, ngBootstrap, d3, topojson, forms, radio) { 'use strict';
 
     /*! *****************************************************************************
     Copyright (c) Microsoft Corporation. All rights reserved.
@@ -5819,6 +5819,7 @@
             this.centered = false;
             this.centeredText = false;
             this.vertical = false;
+            this.infoMessage = null;
             this.hideValueMargin = false;
             this.isPercentUnit = false;
             this.isUnit = false;
@@ -5859,7 +5860,7 @@
         PbdsDatavizMetricBlockComponent.decorators = [
             { type: core.Component, args: [{
                         selector: 'pbds-dataviz-metric-block',
-                        template: "\n    <div class=\"metric-block-inner\">\n      <div *ngIf=\"heading\" class=\"metric-block-heading\">{{ heading }}</div>\n      <div class=\"metric-block-data-block\">\n        <div class=\"metric-block-contents\">\n          <div class=\"metric-block-value\" [ngClass]=\"{ 'mr-0': hideValueMargin }\">\n            {{ value\n            }}<span [ngClass]=\"{ 'metric-block-unit': isUnit, 'metric-block-percentage': isPercentUnit }\">{{\n              unit\n            }}</span>\n          </div>\n\n          <div>\n            <ng-content select=\"pbds-dataviz-metric-indicator\"></ng-content>\n          </div>\n          <div *ngIf=\"description\" class=\"metric-block-description\">{{ description }}</div>\n        </div>\n        <ng-content select=\"pbds-dataviz-sparkline\"></ng-content>\n      </div>\n    </div>\n  "
+                        template: "\n    <div class=\"metric-block-inner\">\n      <div *ngIf=\"heading\" class=\"metric-block-heading\">\n        {{ heading }}\n        <i\n          *ngIf=\"infoMessage\"\n          class=\"pbi-icon-mini pbi-info-circle-open ml-1 text-muted align-middle\"\n          ngbTooltip=\"{{ infoMessage }}\"\n          container=\"body\"\n        ></i>\n      </div>\n      <div class=\"metric-block-data-block\">\n        <div class=\"metric-block-contents\">\n          <div class=\"metric-block-value\" [ngClass]=\"{ 'mr-0': hideValueMargin }\">\n            {{ value\n            }}<span [ngClass]=\"{ 'metric-block-unit': isUnit, 'metric-block-percentage': isPercentUnit }\">{{\n              unit\n            }}</span>\n          </div>\n\n          <div>\n            <ng-content select=\"pbds-dataviz-metric-indicator\"></ng-content>\n          </div>\n          <div *ngIf=\"description\" class=\"metric-block-description\">{{ description }}</div>\n        </div>\n        <ng-content select=\"pbds-dataviz-sparkline\"></ng-content>\n      </div>\n    </div>\n  "
                     }] }
         ];
         PbdsDatavizMetricBlockComponent.propDecorators = {
@@ -5871,6 +5872,7 @@
             centered: [{ type: core.Input }],
             centeredText: [{ type: core.Input }],
             vertical: [{ type: core.Input }],
+            infoMessage: [{ type: core.Input }],
             hostClasses: [{ type: core.HostBinding, args: ['class',] }],
             indicatorRef: [{ type: core.ContentChild, args: [PbdsDatavizMetricIndicatorComponent, { static: true },] }]
         };
@@ -5893,6 +5895,8 @@
         PbdsDatavizMetricBlockComponent.prototype.centeredText;
         /** @type {?} */
         PbdsDatavizMetricBlockComponent.prototype.vertical;
+        /** @type {?} */
+        PbdsDatavizMetricBlockComponent.prototype.infoMessage;
         /** @type {?} */
         PbdsDatavizMetricBlockComponent.prototype.hideValueMargin;
         /** @type {?} */
@@ -10900,7 +10904,7 @@
                             PbdsDatavizBarGroupedComponent,
                             PbdsDatavizBarSingleHorizontalComponent
                         ],
-                        imports: [common.CommonModule],
+                        imports: [common.CommonModule, ngBootstrap.NgbTooltipModule],
                         exports: [
                             PbdsDatavizPieComponent,
                             PbdsDatavizBarComponent,

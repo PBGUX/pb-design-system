@@ -1,3 +1,9 @@
+# 6.0.5 - November 14, 2019
+
+- H1s are the secondary color of each theme
+
+---
+
 # 6.0.4 - November 14, 2019
 
 - Fixes for styling of drag and drop to upload component

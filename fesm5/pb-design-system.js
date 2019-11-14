@@ -1,10 +1,10 @@
 import { Injectable, ɵɵdefineInjectable, EventEmitter, Component, ChangeDetectionStrategy, ElementRef, HostBinding, Input, Output, ContentChild, NgModule, Directive, HostListener, Inject, LOCALE_ID, ɵɵinject, ViewChild } from '@angular/core';
 import { ViewportScroller, Location, CommonModule, registerLocaleData, getLocaleDayNames, FormStyle, TranslationWidth, getLocaleMonthNames, getLocaleFirstDayOfWeek, getLocaleDateFormat, FormatWidth, formatDate } from '@angular/common';
+import { NgbTooltipModule, NgbDatepickerI18n, NgbDate, NgbCalendar, NgbDatepickerModule, NgbPopoverModule, NgbDropdownModule } from '@ng-bootstrap/ng-bootstrap';
 import { isoParse, event as event$1, interpolate, mouse, format, timeFormat, scaleOrdinal, pie, arc, select, min, max, scaleBand, axisBottom, scaleLinear, axisLeft, extent, bisectLeft, isoFormat, line, curveCatmullRom, area, scaleTime, stack, stackOrderNone, geoMercator, geoAlbersUsa, geoAlbers, geoPath, scaleQuantize, scaleQuantile, scaleThreshold, range, values, sum, easeLinear } from 'd3';
 import { feature, mesh } from 'topojson';
 import { __spread, __assign, __extends } from 'tslib';
 import { FormsModule } from '@angular/forms';
-import { NgbDatepickerI18n, NgbDate, NgbCalendar, NgbDatepickerModule, NgbPopoverModule, NgbDropdownModule } from '@ng-bootstrap/ng-bootstrap';
 import { MatRadioModule } from '@angular/material/radio';
 
 /**
@@ -5625,6 +5625,7 @@ var PbdsDatavizMetricBlockComponent = /** @class */ (function () {
         this.centered = false;
         this.centeredText = false;
         this.vertical = false;
+        this.infoMessage = null;
         this.hideValueMargin = false;
         this.isPercentUnit = false;
         this.isUnit = false;
@@ -5665,7 +5666,7 @@ var PbdsDatavizMetricBlockComponent = /** @class */ (function () {
     PbdsDatavizMetricBlockComponent.decorators = [
         { type: Component, args: [{
                     selector: 'pbds-dataviz-metric-block',
-                    template: "\n    <div class=\"metric-block-inner\">\n      <div *ngIf=\"heading\" class=\"metric-block-heading\">{{ heading }}</div>\n      <div class=\"metric-block-data-block\">\n        <div class=\"metric-block-contents\">\n          <div class=\"metric-block-value\" [ngClass]=\"{ 'mr-0': hideValueMargin }\">\n            {{ value\n            }}<span [ngClass]=\"{ 'metric-block-unit': isUnit, 'metric-block-percentage': isPercentUnit }\">{{\n              unit\n            }}</span>\n          </div>\n\n          <div>\n            <ng-content select=\"pbds-dataviz-metric-indicator\"></ng-content>\n          </div>\n          <div *ngIf=\"description\" class=\"metric-block-description\">{{ description }}</div>\n        </div>\n        <ng-content select=\"pbds-dataviz-sparkline\"></ng-content>\n      </div>\n    </div>\n  "
+                    template: "\n    <div class=\"metric-block-inner\">\n      <div *ngIf=\"heading\" class=\"metric-block-heading\">\n        {{ heading }}\n        <i\n          *ngIf=\"infoMessage\"\n          class=\"pbi-icon-mini pbi-info-circle-open ml-1 text-muted align-middle\"\n          ngbTooltip=\"{{ infoMessage }}\"\n          container=\"body\"\n        ></i>\n      </div>\n      <div class=\"metric-block-data-block\">\n        <div class=\"metric-block-contents\">\n          <div class=\"metric-block-value\" [ngClass]=\"{ 'mr-0': hideValueMargin }\">\n            {{ value\n            }}<span [ngClass]=\"{ 'metric-block-unit': isUnit, 'metric-block-percentage': isPercentUnit }\">{{\n              unit\n            }}</span>\n          </div>\n\n          <div>\n            <ng-content select=\"pbds-dataviz-metric-indicator\"></ng-content>\n          </div>\n          <div *ngIf=\"description\" class=\"metric-block-description\">{{ description }}</div>\n        </div>\n        <ng-content select=\"pbds-dataviz-sparkline\"></ng-content>\n      </div>\n    </div>\n  "
                 }] }
     ];
     PbdsDatavizMetricBlockComponent.propDecorators = {
@@ -5677,6 +5678,7 @@ var PbdsDatavizMetricBlockComponent = /** @class */ (function () {
         centered: [{ type: Input }],
         centeredText: [{ type: Input }],
         vertical: [{ type: Input }],
+        infoMessage: [{ type: Input }],
         hostClasses: [{ type: HostBinding, args: ['class',] }],
         indicatorRef: [{ type: ContentChild, args: [PbdsDatavizMetricIndicatorComponent, { static: true },] }]
     };
@@ -5699,6 +5701,8 @@ if (false) {
     PbdsDatavizMetricBlockComponent.prototype.centeredText;
     /** @type {?} */
     PbdsDatavizMetricBlockComponent.prototype.vertical;
+    /** @type {?} */
+    PbdsDatavizMetricBlockComponent.prototype.infoMessage;
     /** @type {?} */
     PbdsDatavizMetricBlockComponent.prototype.hideValueMargin;
     /** @type {?} */
@@ -10706,7 +10710,7 @@ var PbdsDatavizModule = /** @class */ (function () {
                         PbdsDatavizBarGroupedComponent,
                         PbdsDatavizBarSingleHorizontalComponent
                     ],
-                    imports: [CommonModule],
+                    imports: [CommonModule, NgbTooltipModule],
                     exports: [
                         PbdsDatavizPieComponent,
                         PbdsDatavizBarComponent,
