@@ -1189,6 +1189,7 @@
             this.singleSeries = false;
             this.xAxisFormatType = null;
             this.xAxisFormatString = '';
+            this.xAxisTitle = null;
             this.yAxisFormatType = null;
             this.yAxisFormatString = '';
             this.yAxisTicks = 5;
@@ -1213,7 +1214,9 @@
             this.marginLeft = 55; // hardcoded on purpose, do not document until feedback
             // hardcoded on purpose, do not document until feedback
             this.threshold = null;
+            this.thresholdLabel = 'Threshold';
             this.average = null;
+            this.averageLabel = 'Average';
             this.hovered = new core.EventEmitter();
             this.clicked = new core.EventEmitter();
             this.updateChart = (/**
@@ -1520,7 +1523,7 @@
                     /** @type {?} */
                     var enterLegendItem = legendItem
                         .enter()
-                        .append('li')
+                        .insert('li', 'li.legend-static')
                         .attr('class', 'legend-item');
                     enterLegendItem
                         .append('span')
@@ -1882,6 +1885,7 @@
             this.hideYAxisTicks = false;
             this.xAxisTickSize = 8;
             this.xAxisTickSizeOuter = 0;
+            this.xAxisTitleMargin = this.xAxisTitle ? 20 : 0;
             this.yAxisTickSize = 8;
             this.yAxisTickSizeOuter = 0;
             this.hideTooltipLabel = false;
@@ -1939,10 +1943,13 @@
             this.svg = this.chart
                 .append('svg')
                 .attr('width', +this.width)
-                .attr('height', +this.height + this.margin.top + this.margin.bottom)
+                .attr('height', +this.height + this.margin.top + this.margin.bottom + this.xAxisTitleMargin)
                 .attr('class', 'img-fluid')
                 .attr('preserveAspectRatio', 'xMinYMin meet')
-                .attr('viewBox', "-" + this.margin.left + " -" + this.margin.top + " " + +this.width + " " + (+this.height + this.margin.top + this.margin.bottom));
+                .attr('viewBox', "-" + this.margin.left + " -" + this.margin.top + " " + +this.width + " " + (+this.height +
+                this.margin.top +
+                this.margin.bottom +
+                this.xAxisTitleMargin));
             // build color ranges
             this.colorRange = d3.scaleOrdinal().range(this._dataviz.createGradientDefs(this.svg, this.singleSeries, this.theme));
             // X AXIS
@@ -1980,6 +1987,16 @@
                     .classed('grid-zero-hidden', this.hideXAxisZero)
                     .attr('transform', "translate(0, " + this.height + ")")
                     .call(this.xGridCall);
+            }
+            // X AXIS TITLE
+            if (this.xAxisTitle) {
+                this.svg
+                    .append('text')
+                    .attr('class', 'axis-title')
+                    .attr('text-anchor', 'center')
+                    .attr('x', this.width / 2 - this.margin.left)
+                    .attr('y', this.height + this.margin.top + (this.hideXAxis ? 15 : 0))
+                    .text(this.xAxisTitle);
             }
             // Y AXIS
             this.yAxisScale = d3.scaleLinear()
@@ -2027,7 +2044,7 @@
                 this.yThreshold = this.svg
                     .append('line')
                     .attr('class', 'threshold')
-                    .attr('x2', +this.width)
+                    .attr('x2', +this.width - this.margin.right - this.margin.left)
                     .attr('transform', "translate(0,  " + this.yAxisScale(+this.threshold) + ")");
             }
             // Y AVERAGE
@@ -2035,7 +2052,7 @@
                 this.yAverage = this.svg
                     .append('line')
                     .attr('class', 'average')
-                    .attr('x2', +this.width)
+                    .attr('x2', +this.width - this.margin.right - this.margin.left)
                     .attr('transform', "translate(0,  " + this.yAxisScale(+this.average) + ")");
             }
             // TOOLTIP
@@ -2050,6 +2067,32 @@
             if (!this.hideLegend) {
                 this.chart.classed('pbds-chart-legend-bottom', this.legendPosition === 'bottom' ? true : false);
                 this.chart.append('ul').attr('class', "legend legend-" + this.legendPosition);
+            }
+            // add average to legend
+            if (this.average && !this.hideLegend) {
+                this.chart
+                    .select('.legend')
+                    .append('li')
+                    .attr('class', 'legend-static legend-average')
+                    .html((/**
+                 * @return {?}
+                 */
+                function () {
+                    return "\n          <span class=\"legend-key\"></span>\n          <span class=\"legend-label\">" + _this.averageLabel + "</span>\n        ";
+                }));
+            }
+            // add threshold to legend
+            if (this.threshold && !this.hideLegend) {
+                this.chart
+                    .select('.legend')
+                    .append('li')
+                    .attr('class', 'legend-static legend-threshold')
+                    .html((/**
+                 * @return {?}
+                 */
+                function () {
+                    return "\n          <span class=\"legend-key\"></span>\n          <span class=\"legend-label\">" + _this.thresholdLabel + "</span>\n        ";
+                }));
             }
             this.updateChart();
         };
@@ -2100,6 +2143,7 @@
             singleSeries: [{ type: core.Input }],
             xAxisFormatType: [{ type: core.Input }],
             xAxisFormatString: [{ type: core.Input }],
+            xAxisTitle: [{ type: core.Input }],
             yAxisFormatType: [{ type: core.Input }],
             yAxisFormatString: [{ type: core.Input }],
             yAxisTicks: [{ type: core.Input }],
@@ -2119,7 +2163,9 @@
             marginBottom: [{ type: core.Input }],
             marginLeft: [{ type: core.Input }],
             threshold: [{ type: core.Input }],
+            thresholdLabel: [{ type: core.Input }],
             average: [{ type: core.Input }],
+            averageLabel: [{ type: core.Input }],
             theme: [{ type: core.Input }],
             hovered: [{ type: core.Output }],
             clicked: [{ type: core.Output }]
@@ -2145,6 +2191,8 @@
         PbdsDatavizBarComponent.prototype.xAxisFormatType;
         /** @type {?} */
         PbdsDatavizBarComponent.prototype.xAxisFormatString;
+        /** @type {?} */
+        PbdsDatavizBarComponent.prototype.xAxisTitle;
         /** @type {?} */
         PbdsDatavizBarComponent.prototype.yAxisFormatType;
         /** @type {?} */
@@ -2184,7 +2232,11 @@
         /** @type {?} */
         PbdsDatavizBarComponent.prototype.threshold;
         /** @type {?} */
+        PbdsDatavizBarComponent.prototype.thresholdLabel;
+        /** @type {?} */
         PbdsDatavizBarComponent.prototype.average;
+        /** @type {?} */
+        PbdsDatavizBarComponent.prototype.averageLabel;
         /** @type {?} */
         PbdsDatavizBarComponent.prototype.theme;
         /** @type {?} */
@@ -2246,6 +2298,11 @@
          * @private
          */
         PbdsDatavizBarComponent.prototype.xAxisFormat;
+        /**
+         * @type {?}
+         * @private
+         */
+        PbdsDatavizBarComponent.prototype.xAxisTitleMargin;
         /**
          * @type {?}
          * @private
@@ -5860,7 +5917,7 @@
         PbdsDatavizMetricBlockComponent.decorators = [
             { type: core.Component, args: [{
                         selector: 'pbds-dataviz-metric-block',
-                        template: "\n    <div class=\"metric-block-inner\">\n      <div *ngIf=\"heading\" class=\"metric-block-heading\">\n        {{ heading }}\n        <i\n          *ngIf=\"infoMessage\"\n          class=\"pbi-icon-mini pbi-info-circle-open ml-1 text-muted align-middle\"\n          ngbTooltip=\"{{ infoMessage }}\"\n          container=\"body\"\n        ></i>\n      </div>\n      <div class=\"metric-block-data-block\">\n        <div class=\"metric-block-contents\">\n          <div class=\"metric-block-value\" [ngClass]=\"{ 'mr-0': hideValueMargin }\">\n            {{ value\n            }}<span [ngClass]=\"{ 'metric-block-unit': isUnit, 'metric-block-percentage': isPercentUnit }\">{{\n              unit\n            }}</span>\n          </div>\n\n          <div>\n            <ng-content select=\"pbds-dataviz-metric-indicator\"></ng-content>\n          </div>\n          <div *ngIf=\"description\" class=\"metric-block-description\">{{ description }}</div>\n        </div>\n        <ng-content select=\"pbds-dataviz-sparkline\"></ng-content>\n      </div>\n    </div>\n  "
+                        template: "\n    <div class=\"metric-block-inner\">\n      <div *ngIf=\"heading\" class=\"metric-block-heading\">\n        {{ heading }}\n        <i\n          *ngIf=\"infoMessage\"\n          class=\"pbi-icon-mini pbi-info-circle-open ml-1 align-middle\"\n          ngbTooltip=\"{{ infoMessage }}\"\n          container=\"body\"\n        ></i>\n      </div>\n      <div class=\"metric-block-data-block\">\n        <div class=\"metric-block-contents\">\n          <div class=\"metric-block-value\" [ngClass]=\"{ 'mr-0': hideValueMargin }\">\n            {{ value\n            }}<span [ngClass]=\"{ 'metric-block-unit': isUnit, 'metric-block-percentage': isPercentUnit }\">{{\n              unit\n            }}</span>\n          </div>\n\n          <div>\n            <ng-content select=\"pbds-dataviz-metric-indicator\"></ng-content>\n          </div>\n          <div *ngIf=\"description\" class=\"metric-block-description\">{{ description }}</div>\n        </div>\n        <ng-content select=\"pbds-dataviz-sparkline\"></ng-content>\n      </div>\n    </div>\n  "
                     }] }
         ];
         PbdsDatavizMetricBlockComponent.propDecorators = {

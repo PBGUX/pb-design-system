@@ -1,3 +1,13 @@
+#6.0.6 - November 19, 2019
+
+- Dataviz:
+  - add average and threshold keys to legend
+  - change average line color (slightly darker)
+  - add x axis title
+  - add threshold and average label inputs (for globalization)
+  - tweak legend styling
+  - update documentation
+
 # 6.0.5 - November 14, 2019
 
 - H1s are the secondary color of each theme
@@ -110,7 +120,6 @@
 As always, we've relied on the ideas and support from the entire PB community to keep Design System moving forward. Please keep the feedback coming. In particular, we'd like to thank the following individuals for helping with this release:
 
 Andrew Dimola, Beth Jennings, Bhalchandra Bhosale, Gaston Hummel, Joan Doutney, Joe Cotton, Ken Zaldo, Rich Collette, Richard Morris, Rick Dukeshier, Ron Cianfaglione, Shawn Sharifi, Tanuj Chauhan, Yuhua “Jennie” Lee
-
 
 ---
 

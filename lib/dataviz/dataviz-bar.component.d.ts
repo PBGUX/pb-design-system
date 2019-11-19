@@ -16,6 +16,7 @@ export declare class PbdsDatavizBarComponent implements OnInit, OnDestroy, OnCha
     singleSeries: boolean;
     xAxisFormatType: 'number' | 'time';
     xAxisFormatString: string;
+    xAxisTitle: string | null;
     yAxisFormatType: 'number' | 'time';
     yAxisFormatString: string;
     yAxisTicks: number;
@@ -35,7 +36,9 @@ export declare class PbdsDatavizBarComponent implements OnInit, OnDestroy, OnCha
     marginBottom: number;
     marginLeft: number;
     threshold: any;
+    thresholdLabel: string;
     average: any;
+    averageLabel: string;
     theme: any;
     hovered: EventEmitter<object>;
     clicked: EventEmitter<object>;
@@ -50,6 +53,7 @@ export declare class PbdsDatavizBarComponent implements OnInit, OnDestroy, OnCha
     private xAxisCall;
     private xAxis;
     private xAxisFormat;
+    private xAxisTitleMargin;
     private yAxisScale;
     private yAxisCall;
     private yAxis;

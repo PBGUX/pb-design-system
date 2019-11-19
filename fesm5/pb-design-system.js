@@ -995,6 +995,7 @@ var PbdsDatavizBarComponent = /** @class */ (function () {
         this.singleSeries = false;
         this.xAxisFormatType = null;
         this.xAxisFormatString = '';
+        this.xAxisTitle = null;
         this.yAxisFormatType = null;
         this.yAxisFormatString = '';
         this.yAxisTicks = 5;
@@ -1019,7 +1020,9 @@ var PbdsDatavizBarComponent = /** @class */ (function () {
         this.marginLeft = 55; // hardcoded on purpose, do not document until feedback
         // hardcoded on purpose, do not document until feedback
         this.threshold = null;
+        this.thresholdLabel = 'Threshold';
         this.average = null;
+        this.averageLabel = 'Average';
         this.hovered = new EventEmitter();
         this.clicked = new EventEmitter();
         this.updateChart = (/**
@@ -1326,7 +1329,7 @@ var PbdsDatavizBarComponent = /** @class */ (function () {
                 /** @type {?} */
                 var enterLegendItem = legendItem
                     .enter()
-                    .append('li')
+                    .insert('li', 'li.legend-static')
                     .attr('class', 'legend-item');
                 enterLegendItem
                     .append('span')
@@ -1688,6 +1691,7 @@ var PbdsDatavizBarComponent = /** @class */ (function () {
         this.hideYAxisTicks = false;
         this.xAxisTickSize = 8;
         this.xAxisTickSizeOuter = 0;
+        this.xAxisTitleMargin = this.xAxisTitle ? 20 : 0;
         this.yAxisTickSize = 8;
         this.yAxisTickSizeOuter = 0;
         this.hideTooltipLabel = false;
@@ -1745,10 +1749,13 @@ var PbdsDatavizBarComponent = /** @class */ (function () {
         this.svg = this.chart
             .append('svg')
             .attr('width', +this.width)
-            .attr('height', +this.height + this.margin.top + this.margin.bottom)
+            .attr('height', +this.height + this.margin.top + this.margin.bottom + this.xAxisTitleMargin)
             .attr('class', 'img-fluid')
             .attr('preserveAspectRatio', 'xMinYMin meet')
-            .attr('viewBox', "-" + this.margin.left + " -" + this.margin.top + " " + +this.width + " " + (+this.height + this.margin.top + this.margin.bottom));
+            .attr('viewBox', "-" + this.margin.left + " -" + this.margin.top + " " + +this.width + " " + (+this.height +
+            this.margin.top +
+            this.margin.bottom +
+            this.xAxisTitleMargin));
         // build color ranges
         this.colorRange = scaleOrdinal().range(this._dataviz.createGradientDefs(this.svg, this.singleSeries, this.theme));
         // X AXIS
@@ -1786,6 +1793,16 @@ var PbdsDatavizBarComponent = /** @class */ (function () {
                 .classed('grid-zero-hidden', this.hideXAxisZero)
                 .attr('transform', "translate(0, " + this.height + ")")
                 .call(this.xGridCall);
+        }
+        // X AXIS TITLE
+        if (this.xAxisTitle) {
+            this.svg
+                .append('text')
+                .attr('class', 'axis-title')
+                .attr('text-anchor', 'center')
+                .attr('x', this.width / 2 - this.margin.left)
+                .attr('y', this.height + this.margin.top + (this.hideXAxis ? 15 : 0))
+                .text(this.xAxisTitle);
         }
         // Y AXIS
         this.yAxisScale = scaleLinear()
@@ -1833,7 +1850,7 @@ var PbdsDatavizBarComponent = /** @class */ (function () {
             this.yThreshold = this.svg
                 .append('line')
                 .attr('class', 'threshold')
-                .attr('x2', +this.width)
+                .attr('x2', +this.width - this.margin.right - this.margin.left)
                 .attr('transform', "translate(0,  " + this.yAxisScale(+this.threshold) + ")");
         }
         // Y AVERAGE
@@ -1841,7 +1858,7 @@ var PbdsDatavizBarComponent = /** @class */ (function () {
             this.yAverage = this.svg
                 .append('line')
                 .attr('class', 'average')
-                .attr('x2', +this.width)
+                .attr('x2', +this.width - this.margin.right - this.margin.left)
                 .attr('transform', "translate(0,  " + this.yAxisScale(+this.average) + ")");
         }
         // TOOLTIP
@@ -1856,6 +1873,32 @@ var PbdsDatavizBarComponent = /** @class */ (function () {
         if (!this.hideLegend) {
             this.chart.classed('pbds-chart-legend-bottom', this.legendPosition === 'bottom' ? true : false);
             this.chart.append('ul').attr('class', "legend legend-" + this.legendPosition);
+        }
+        // add average to legend
+        if (this.average && !this.hideLegend) {
+            this.chart
+                .select('.legend')
+                .append('li')
+                .attr('class', 'legend-static legend-average')
+                .html((/**
+             * @return {?}
+             */
+            function () {
+                return "\n          <span class=\"legend-key\"></span>\n          <span class=\"legend-label\">" + _this.averageLabel + "</span>\n        ";
+            }));
+        }
+        // add threshold to legend
+        if (this.threshold && !this.hideLegend) {
+            this.chart
+                .select('.legend')
+                .append('li')
+                .attr('class', 'legend-static legend-threshold')
+                .html((/**
+             * @return {?}
+             */
+            function () {
+                return "\n          <span class=\"legend-key\"></span>\n          <span class=\"legend-label\">" + _this.thresholdLabel + "</span>\n        ";
+            }));
         }
         this.updateChart();
     };
@@ -1906,6 +1949,7 @@ var PbdsDatavizBarComponent = /** @class */ (function () {
         singleSeries: [{ type: Input }],
         xAxisFormatType: [{ type: Input }],
         xAxisFormatString: [{ type: Input }],
+        xAxisTitle: [{ type: Input }],
         yAxisFormatType: [{ type: Input }],
         yAxisFormatString: [{ type: Input }],
         yAxisTicks: [{ type: Input }],
@@ -1925,7 +1969,9 @@ var PbdsDatavizBarComponent = /** @class */ (function () {
         marginBottom: [{ type: Input }],
         marginLeft: [{ type: Input }],
         threshold: [{ type: Input }],
+        thresholdLabel: [{ type: Input }],
         average: [{ type: Input }],
+        averageLabel: [{ type: Input }],
         theme: [{ type: Input }],
         hovered: [{ type: Output }],
         clicked: [{ type: Output }]
@@ -1951,6 +1997,8 @@ if (false) {
     PbdsDatavizBarComponent.prototype.xAxisFormatType;
     /** @type {?} */
     PbdsDatavizBarComponent.prototype.xAxisFormatString;
+    /** @type {?} */
+    PbdsDatavizBarComponent.prototype.xAxisTitle;
     /** @type {?} */
     PbdsDatavizBarComponent.prototype.yAxisFormatType;
     /** @type {?} */
@@ -1990,7 +2038,11 @@ if (false) {
     /** @type {?} */
     PbdsDatavizBarComponent.prototype.threshold;
     /** @type {?} */
+    PbdsDatavizBarComponent.prototype.thresholdLabel;
+    /** @type {?} */
     PbdsDatavizBarComponent.prototype.average;
+    /** @type {?} */
+    PbdsDatavizBarComponent.prototype.averageLabel;
     /** @type {?} */
     PbdsDatavizBarComponent.prototype.theme;
     /** @type {?} */
@@ -2052,6 +2104,11 @@ if (false) {
      * @private
      */
     PbdsDatavizBarComponent.prototype.xAxisFormat;
+    /**
+     * @type {?}
+     * @private
+     */
+    PbdsDatavizBarComponent.prototype.xAxisTitleMargin;
     /**
      * @type {?}
      * @private
@@ -5666,7 +5723,7 @@ var PbdsDatavizMetricBlockComponent = /** @class */ (function () {
     PbdsDatavizMetricBlockComponent.decorators = [
         { type: Component, args: [{
                     selector: 'pbds-dataviz-metric-block',
-                    template: "\n    <div class=\"metric-block-inner\">\n      <div *ngIf=\"heading\" class=\"metric-block-heading\">\n        {{ heading }}\n        <i\n          *ngIf=\"infoMessage\"\n          class=\"pbi-icon-mini pbi-info-circle-open ml-1 text-muted align-middle\"\n          ngbTooltip=\"{{ infoMessage }}\"\n          container=\"body\"\n        ></i>\n      </div>\n      <div class=\"metric-block-data-block\">\n        <div class=\"metric-block-contents\">\n          <div class=\"metric-block-value\" [ngClass]=\"{ 'mr-0': hideValueMargin }\">\n            {{ value\n            }}<span [ngClass]=\"{ 'metric-block-unit': isUnit, 'metric-block-percentage': isPercentUnit }\">{{\n              unit\n            }}</span>\n          </div>\n\n          <div>\n            <ng-content select=\"pbds-dataviz-metric-indicator\"></ng-content>\n          </div>\n          <div *ngIf=\"description\" class=\"metric-block-description\">{{ description }}</div>\n        </div>\n        <ng-content select=\"pbds-dataviz-sparkline\"></ng-content>\n      </div>\n    </div>\n  "
+                    template: "\n    <div class=\"metric-block-inner\">\n      <div *ngIf=\"heading\" class=\"metric-block-heading\">\n        {{ heading }}\n        <i\n          *ngIf=\"infoMessage\"\n          class=\"pbi-icon-mini pbi-info-circle-open ml-1 align-middle\"\n          ngbTooltip=\"{{ infoMessage }}\"\n          container=\"body\"\n        ></i>\n      </div>\n      <div class=\"metric-block-data-block\">\n        <div class=\"metric-block-contents\">\n          <div class=\"metric-block-value\" [ngClass]=\"{ 'mr-0': hideValueMargin }\">\n            {{ value\n            }}<span [ngClass]=\"{ 'metric-block-unit': isUnit, 'metric-block-percentage': isPercentUnit }\">{{\n              unit\n            }}</span>\n          </div>\n\n          <div>\n            <ng-content select=\"pbds-dataviz-metric-indicator\"></ng-content>\n          </div>\n          <div *ngIf=\"description\" class=\"metric-block-description\">{{ description }}</div>\n        </div>\n        <ng-content select=\"pbds-dataviz-sparkline\"></ng-content>\n      </div>\n    </div>\n  "
                 }] }
     ];
     PbdsDatavizMetricBlockComponent.propDecorators = {
