@@ -86,7 +86,7 @@ export declare class PbdsDatavizBarStackedComponent implements OnInit, OnDestroy
     ngOnInit(): void;
     ngOnDestroy(): void;
     ngOnChanges(changes: SimpleChanges): void;
-    updateChart: () => void;
+    updateChart: (firstRun?: boolean) => void;
     barMouseOver: (event: any, data: any, index: any, nodes: any) => void;
     barMouseOut: () => void;
     barMouseClick: (event: any, data: any, index: any, nodes: any) => void;

@@ -46,6 +46,7 @@ export declare class PbdsDatavizLineComponent implements OnInit, OnDestroy, OnCh
     private mouserect;
     private tooltipLine;
     private margin;
+    private clipPathId;
     private d3line;
     private d3area;
     private lineWidth;

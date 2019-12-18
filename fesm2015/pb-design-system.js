@@ -1,7 +1,7 @@
 import { Injectable, ɵɵdefineInjectable, EventEmitter, Component, ChangeDetectionStrategy, ElementRef, HostBinding, Input, Output, ContentChild, NgModule, Directive, HostListener, Inject, LOCALE_ID, ɵɵinject, ViewChild } from '@angular/core';
 import { ViewportScroller, Location, CommonModule, registerLocaleData, getLocaleDayNames, FormStyle, TranslationWidth, getLocaleMonthNames, getLocaleFirstDayOfWeek, getLocaleDateFormat, FormatWidth, formatDate } from '@angular/common';
 import { NgbTooltipModule, NgbDatepickerI18n, NgbDate, NgbCalendar, NgbDatepickerModule, NgbPopoverModule, NgbDropdownModule } from '@ng-bootstrap/ng-bootstrap';
-import { isoParse, event as event$1, interpolate, mouse, format, timeFormat, scaleOrdinal, pie, arc, select, min, max, scaleBand, axisBottom, scaleLinear, axisLeft, extent, bisectLeft, isoFormat, line, curveCatmullRom, area, scaleTime, stack, stackOrderNone, geoMercator, geoAlbersUsa, geoAlbers, geoPath, scaleQuantize, scaleQuantile, scaleThreshold, range, values, sum, easeLinear } from 'd3';
+import { timeFormat, format, event as event$1, isoParse, interpolate, mouse, scaleOrdinal, pie, arc, select, min, max, scaleBand, axisBottom, scaleLinear, axisLeft, extent, easeQuadInOut, bisectLeft, isoFormat, line, curveCatmullRom, area, scaleTime, stack, stackOrderNone, geoMercator, geoAlbersUsa, geoAlbers, geoPath, scaleQuantize, scaleQuantile, scaleThreshold, range, values, sum, easeLinear } from 'd3';
 import { feature, mesh } from 'topojson';
 import { FormsModule } from '@angular/forms';
 import { MatRadioModule } from '@angular/material/radio';
@@ -203,6 +203,27 @@ class PbdsDatavizService {
             }
         });
     }
+    /**
+     * @param {?} type
+     * @param {?} string
+     * @return {?}
+     */
+    d3Format(type, string) {
+        /** @type {?} */
+        let format$1;
+        switch (type) {
+            case 'number':
+                format$1 = format(string);
+                break;
+            case 'time':
+                format$1 = timeFormat(string);
+                break;
+            default:
+                format$1 = null;
+                break;
+        }
+        return format$1;
+    }
 }
 PbdsDatavizService.decorators = [
     { type: Injectable, args: [{
@@ -253,130 +274,210 @@ class PbdsDatavizPieComponent {
         this.clicked = new EventEmitter();
         this.currentData = [];
         this.updateChart = (/**
+         * @param {?=} firstRun
          * @return {?}
          */
-        () => {
-            /** @type {?} */
-            const paths = this.svg.selectAll('path').data(this.pie(this.data));
-            paths
-                .exit()
-                .transition()
-                .attr('pointer-events', 'none')
-                .remove();
-            //update existing items
-            paths
-                .each((/**
-             * @param {?} d
+        (firstRun = true) => {
+            // slices
+            this.svg
+                .selectAll('path')
+                .data(this.pie(this.data))
+                .join((/**
+             * @param {?} enter
              * @return {?}
              */
-            (d) => (d.outerRadius = this.outerRadius)))
-                .attr('pointer-events', 'none')
-                .transition()
-                .duration(500)
-                .attrTween('d', this.arcTween)
-                .transition()
-                .attr('pointer-events', 'auto');
-            // paths on enter
-            /** @type {?} */
-            const enterPaths = paths
-                .enter()
-                .append('path')
-                .each((/**
-             * @param {?} d
+            enter => {
+                /** @type {?} */
+                const path = enter.append('path');
+                path
+                    .each((/**
+                 * @param {?} d
+                 * @return {?}
+                 */
+                (d) => (d.outerRadius = this.outerRadius)))
+                    .attr('fill', (/**
+                 * @param {?} d
+                 * @return {?}
+                 */
+                (d) => this.colorRange(d.data.label)))
+                    .attr('class', 'slice')
+                    .each((/**
+                 * @param {?} d
+                 * @param {?} i
+                 * @param {?} nodes
+                 * @return {?}
+                 */
+                (d, i, nodes) => {
+                    this.currentData.splice(i, 1, d);
+                }));
+                if (this.type === 'pie') {
+                    path
+                        .style('stroke', '#fff')
+                        .style('stroke-width', 2)
+                        .style('stroke-alignment', 'inner');
+                }
+                path.call((/**
+                 * @param {?} path
+                 * @return {?}
+                 */
+                path => path
+                    .transition()
+                    .duration((/**
+                 * @param {?} d
+                 * @param {?} i
+                 * @param {?} n
+                 * @return {?}
+                 */
+                (d, i, n) => (firstRun ? 0 : 500)))
+                    .attrTween('d', this.arcEnterTween)));
+                return path;
+            }), (/**
+             * @param {?} update
              * @return {?}
              */
-            (d) => (d.outerRadius = this.outerRadius)))
-                .attr('d', this.arc)
-                .attr('fill', (/**
-             * @param {?} d
+            update => {
+                this.tooltipHide();
+                update
+                    .each((/**
+                 * @param {?} d
+                 * @return {?}
+                 */
+                (d) => (d.outerRadius = this.outerRadius)))
+                    .call((/**
+                 * @param {?} update
+                 * @return {?}
+                 */
+                update => update
+                    .transition()
+                    .duration(500)
+                    .attrTween('d', this.arcTween)));
+                return update;
+            }), (/**
+             * @param {?} exit
              * @return {?}
              */
-            (d) => this.colorRange(d.data.label)))
-                .attr('class', 'slice')
-                .each((/**
-             * @param {?} d
-             * @param {?} i
+            exit => exit.remove()))
+                .on('mouseover', (/**
+             * @param {?} data
+             * @param {?} index
              * @param {?} nodes
              * @return {?}
              */
-            (d, i, nodes) => {
-                this.currentData.splice(i, 1, d);
+            (data, index, nodes) => {
+                this.pathMouseOver(event$1, data, index, nodes);
+                // this.tooltipShow(this.chart.node(), data);
+            }))
+                .on('mousemove', (/**
+             * @param {?} data
+             * @param {?} index
+             * @param {?} nodes
+             * @return {?}
+             */
+            (data, index, nodes) => {
+                this.tooltipShow(this.chart.node(), data);
+                this.tooltipMove(this.chart.node());
+            }))
+                .on('mouseout', (/**
+             * @param {?} data
+             * @param {?} index
+             * @param {?} nodes
+             * @return {?}
+             */
+            (data, index, nodes) => {
+                this.pathMouseOut(data, index, nodes);
+                this.tooltipHide();
+            }))
+                .on('click', (/**
+             * @param {?} data
+             * @param {?} index
+             * @param {?} nodes
+             * @return {?}
+             */
+            (data, index, nodes) => {
+                this.pathClick(event$1, data, index, nodes);
             }));
-            if (this.type === 'pie') {
-                enterPaths
-                    .style('stroke', '#fff')
-                    .style('stroke-width', 2)
-                    .style('stroke-alignment', 'inner');
-            }
-            /** @type {?} */
-            const legendItem = this.chart
+            // legend
+            this.chart
                 .select('.legend')
                 .selectAll('.legend-item')
-                .data(this.data);
-            legendItem.exit().remove();
-            // update existing items
-            legendItem.select('.legend-label').html((/**
-             * @param {?} d
+                .data(this.data)
+                .join((/**
+             * @param {?} enter
              * @return {?}
              */
-            (d) => {
-                switch (this.legendLabelFormatType) {
-                    case 'time':
-                        /** @type {?} */
-                        const parsedTime = isoParse(d.label);
-                        return this.legendLabelFormat(parsedTime);
-                    default:
-                        return d.label;
-                }
-            }));
-            legendItem.select('.legend-value').html((/**
-             * @param {?} d
+            enter => {
+                /** @type {?} */
+                const li = enter.append('li').attr('class', 'legend-item');
+                li.append('span')
+                    .attr('class', 'legend-key')
+                    .style('background-color', (/**
+                 * @param {?} d
+                 * @return {?}
+                 */
+                (d) => this.colorRange(d.label)));
+                /** @type {?} */
+                const description = li.append('span').attr('class', 'legend-description');
+                description
+                    .append('span')
+                    .attr('class', 'legend-label')
+                    .html((/**
+                 * @param {?} d
+                 * @return {?}
+                 */
+                (d) => {
+                    switch (this.legendLabelFormatType) {
+                        case 'time':
+                            /** @type {?} */
+                            const parsedTime = isoParse(d.label);
+                            return this.legendLabelFormat(parsedTime);
+                        default:
+                            return d.label;
+                    }
+                }));
+                description
+                    .append('span')
+                    .attr('class', 'legend-value')
+                    .html((/**
+                 * @param {?} d
+                 * @return {?}
+                 */
+                (d) => this.legendValueFormat(d.value)));
+                return li;
+            }), (/**
+             * @param {?} update
              * @return {?}
              */
-            (d) => this.legendValueFormat(d.value)));
-            // legend items on enter
-            /** @type {?} */
-            const enterLegendItem = legendItem
-                .enter()
-                .append('li')
-                // .attr('tabindex', 0)
-                .attr('class', 'legend-item');
-            enterLegendItem
-                .append('span')
-                .attr('class', 'legend-key')
-                .style('background-color', (/**
-             * @param {?} d
+            update => {
+                update.selectAll('.legend-key').style('background-color', (/**
+                 * @param {?} d
+                 * @return {?}
+                 */
+                (d) => this.colorRange(d.label)));
+                update.select('.legend-label').html((/**
+                 * @param {?} d
+                 * @return {?}
+                 */
+                (d) => {
+                    switch (this.legendLabelFormatType) {
+                        case 'time':
+                            /** @type {?} */
+                            const parsedTime = isoParse(d.label);
+                            return this.legendLabelFormat(parsedTime);
+                        default:
+                            return d.label;
+                    }
+                }));
+                update.select('.legend-value').html((/**
+                 * @param {?} d
+                 * @return {?}
+                 */
+                (d) => this.legendValueFormat(d.value)));
+                return update;
+            }), (/**
+             * @param {?} exit
              * @return {?}
              */
-            (d) => this.colorRange(d.label)));
-            /** @type {?} */
-            const legendDescription = enterLegendItem.append('span').attr('class', 'legend-description');
-            legendDescription
-                .append('span')
-                .attr('class', 'legend-label')
-                .html((/**
-             * @param {?} d
-             * @return {?}
-             */
-            (d) => {
-                switch (this.legendLabelFormatType) {
-                    case 'time':
-                        /** @type {?} */
-                        const parsedTime = isoParse(d.label);
-                        return this.legendLabelFormat(parsedTime);
-                    default:
-                        return d.label;
-                }
-            }));
-            legendDescription
-                .append('span')
-                .attr('class', 'legend-value')
-                .html((/**
-             * @param {?} d
-             * @return {?}
-             */
-            (d) => this.legendValueFormat(d.value)));
-            enterLegendItem
+            exit => exit.remove()))
                 .on('mouseover focus', (/**
              * @param {?} data
              * @param {?} index
@@ -406,45 +507,24 @@ class PbdsDatavizPieComponent {
             (data, index, nodes) => {
                 this.clicked.emit({ event: event$1, data: data });
             }));
-            enterPaths
-                .on('mouseover', (/**
-             * @param {?} data
-             * @param {?} index
-             * @param {?} nodes
+        });
+        this.arcEnterTween = (/**
+         * @param {?} data
+         * @param {?} index
+         * @param {?} nodes
+         * @return {?}
+         */
+        (data, index, nodes) => {
+            /** @type {?} */
+            const i = interpolate(data.startAngle, data.endAngle);
+            return (/**
+             * @param {?} t
              * @return {?}
              */
-            (data, index, nodes) => {
-                this.pathMouseOver(event$1, data, index, nodes);
-                this.tooltipShow(this.chart.node(), data);
-            }))
-                .on('mousemove', (/**
-             * @param {?} data
-             * @param {?} index
-             * @param {?} nodes
-             * @return {?}
-             */
-            (data, index, nodes) => {
-                this.tooltipMove(this.chart.node());
-            }))
-                .on('mouseout', (/**
-             * @param {?} data
-             * @param {?} index
-             * @param {?} nodes
-             * @return {?}
-             */
-            (data, index, nodes) => {
-                this.pathMouseOut(data, index, nodes);
-                this.tooltipHide();
-            }))
-                .on('click', (/**
-             * @param {?} data
-             * @param {?} index
-             * @param {?} nodes
-             * @return {?}
-             */
-            (data, index, nodes) => {
-                this.pathClick(event$1, data, index, nodes);
-            }));
+            t => {
+                data.endAngle = i(t);
+                return this.arc(data);
+            });
         });
         this.arcTween = (/**
          * @param {?} data
@@ -462,6 +542,61 @@ class PbdsDatavizPieComponent {
              * @return {?}
              */
             t => this.arc(i(t)));
+        });
+        this.arcExitTween = (/**
+         * @param {?} data
+         * @param {?} index
+         * @param {?} nodes
+         * @return {?}
+         */
+        (data, index, nodes) => {
+            /** @type {?} */
+            const end = Object.assign({}, this.currentData[index], { startAngle: this.currentData[index].endAngle });
+            /** @type {?} */
+            const i = interpolate(data, end);
+            return (/**
+             * @param {?} t
+             * @return {?}
+             */
+            t => {
+                return this.arc(i(t));
+            });
+        });
+        this.arcMouseOverTween = (/**
+         * @param {?} data
+         * @param {?} index
+         * @param {?} nodes
+         * @return {?}
+         */
+        (data, index, nodes) => {
+            /** @type {?} */
+            const i = interpolate(data.outerRadius, this.outerRadius + this.arcZoom);
+            return (/**
+             * @param {?} t
+             * @return {?}
+             */
+            t => {
+                data.outerRadius = i(t);
+                return this.arc(data);
+            });
+        });
+        this.arcMouseOutTween = (/**
+         * @param {?} data
+         * @param {?} index
+         * @param {?} nodes
+         * @return {?}
+         */
+        (data, index, nodes) => {
+            /** @type {?} */
+            const i = interpolate(data.outerRadius, this.outerRadius);
+            return (/**
+             * @param {?} t
+             * @return {?}
+             */
+            t => {
+                data.outerRadius = i(t);
+                return this.arc(data);
+            });
         });
         this.legendMouseOverFocus = (/**
          * @param {?} data
@@ -525,22 +660,7 @@ class PbdsDatavizPieComponent {
                 .transition()
                 .duration(300)
                 .delay(0)
-                .attrTween('d', (/**
-             * @param {?} d
-             * @return {?}
-             */
-            (d) => {
-                /** @type {?} */
-                const i = interpolate(d.outerRadius, this.outerRadius + this.arcZoom);
-                return (/**
-                 * @param {?} t
-                 * @return {?}
-                 */
-                t => {
-                    d.outerRadius = i(t);
-                    return this.arc(d);
-                });
-            }));
+                .attrTween('d', this.arcMouseOverTween);
             this.hovered.emit({
                 event: event,
                 data: data.data ? data.data : data // legend hover data is different than slice hover data
@@ -576,22 +696,7 @@ class PbdsDatavizPieComponent {
                 .transition()
                 .duration(300)
                 .delay(0)
-                .attrTween('d', (/**
-             * @param {?} d
-             * @return {?}
-             */
-            (d) => {
-                /** @type {?} */
-                const i = interpolate(d.outerRadius, this.outerRadius);
-                return (/**
-                 * @param {?} t
-                 * @return {?}
-                 */
-                t => {
-                    d.outerRadius = i(t);
-                    return this.arc(d);
-                });
-            }));
+                .attrTween('d', this.arcMouseOutTween);
         });
         this.pathClick = (/**
          * @param {?} event
@@ -670,22 +775,9 @@ class PbdsDatavizPieComponent {
         this.anglePad = 0.02;
         this.legendValueFormat = format(this.legendValueFormatString);
         this.tooltipValueFormat = format(this.tooltipValueFormatString);
-        switch (this.legendLabelFormatType) {
-            case 'time':
-                this.legendLabelFormat = timeFormat(this.legendLabelFormatString);
-                break;
-            default:
-                this.legendLabelFormat = null;
-                break;
-        }
-        switch (this.tooltipLabelFormatType) {
-            case 'time':
-                this.tooltipLabelFormat = timeFormat(this.tooltipLabelFormatString);
-                break;
-            default:
-                this.tooltipLabelFormat = null;
-                break;
-        }
+        // create formatters
+        this.legendLabelFormat = this._dataviz.d3Format(this.legendLabelFormatType, this.legendLabelFormatString);
+        this.tooltipLabelFormat = this._dataviz.d3Format(this.tooltipLabelFormatType, this.tooltipLabelFormatString);
         this.colorRange = scaleOrdinal()
             .range(this.colors)
             .domain(this.data.map((/**
@@ -718,7 +810,7 @@ class PbdsDatavizPieComponent {
             .attr('viewBox', `-${this.width / 2 + this.margin.left} -${this.height / 2 + this.margin.top} ${this.width +
             this.margin.left +
             this.margin.right} ${this.height + this.margin.top + this.margin.bottom}`);
-        this.legend = this.chart.append('ul').attr('class', 'legend legend-right');
+        this.chart.append('ul').attr('class', 'legend legend-right');
         this.tooltip = this.chart
             .append('div')
             .style('opacity', 0)
@@ -732,7 +824,7 @@ class PbdsDatavizPieComponent {
      */
     ngOnChanges(changes) {
         if (changes.data && !changes.data.firstChange) {
-            this.updateChart();
+            this.updateChart(false);
         }
     }
     /**
@@ -857,11 +949,6 @@ if (false) {
      * @type {?}
      * @private
      */
-    PbdsDatavizPieComponent.prototype.legend;
-    /**
-     * @type {?}
-     * @private
-     */
     PbdsDatavizPieComponent.prototype.legendLabelFormat;
     /**
      * @type {?}
@@ -904,7 +991,27 @@ if (false) {
      * @type {?}
      * @private
      */
+    PbdsDatavizPieComponent.prototype.arcEnterTween;
+    /**
+     * @type {?}
+     * @private
+     */
     PbdsDatavizPieComponent.prototype.arcTween;
+    /**
+     * @type {?}
+     * @private
+     */
+    PbdsDatavizPieComponent.prototype.arcExitTween;
+    /**
+     * @type {?}
+     * @private
+     */
+    PbdsDatavizPieComponent.prototype.arcMouseOverTween;
+    /**
+     * @type {?}
+     * @private
+     */
+    PbdsDatavizPieComponent.prototype.arcMouseOutTween;
     /**
      * @type {?}
      * @private
@@ -1021,10 +1128,6 @@ class PbdsDatavizBarComponent {
          * @return {?}
          */
         () => {
-            /** @type {?} */
-            let group;
-            /** @type {?} */
-            let groupEnter;
             // update the xScale
             this.xAxisScale.domain(this.data.map((/**
              * @param {?} d
@@ -1069,60 +1172,17 @@ class PbdsDatavizBarComponent {
                     .call(this.yGridCall);
             }
             if (!this.hideGrayBars) {
-                // rebind data to groups
-                group = this.svg.selectAll('.bar-group').data(this.data);
-                // remove bars
-                // add bars on enter
-                group
-                    .exit()
-                    .transition()
-                    .attr('pointer-events', 'none')
-                    .remove();
-                // update gray bars
-                group
-                    .select('.gray-bar')
-                    .transition()
-                    .duration(1000)
-                    .attr('x', (/**
-                 * @param {?} d
+                // gray bars
+                this.svg
+                    .selectAll('.gray-bar')
+                    .data(this.data)
+                    .join((/**
+                 * @param {?} enter
                  * @return {?}
                  */
-                d => this.xAxisScale(d.label)))
-                    .attr('width', this.xAxisScale.bandwidth());
-                // update the existing bars
-                group
-                    .select('.bar')
-                    .attr('pointer-events', 'none')
-                    .transition()
-                    .duration(1000)
-                    .attr('x', (/**
-                 * @param {?} d
-                 * @return {?}
-                 */
-                d => this.xAxisScale(d.label) + this.xAxisScale.bandwidth() / 4))
-                    .attr('width', this.xAxisScale.bandwidth() / 2)
-                    .attr('height', (/**
-                 * @param {?} d
-                 * @return {?}
-                 */
-                d => this.height - this.yAxisScale(d.value)))
-                    .attr('y', (/**
-                 * @param {?} d
-                 * @return {?}
-                 */
-                d => this.yAxisScale(d.value)))
-                    .transition()
-                    .attr('pointer-events', 'auto');
-                // add group on enter
-                groupEnter = group
-                    .enter()
-                    .append('g')
-                    .attr('class', 'bar-group');
-                // add gray bars on enter
-                groupEnter
+                enter => enter
                     .append('rect')
                     .attr('class', 'gray-bar')
-                    .attr('rx', 0)
                     .attr('height', 0)
                     .attr('x', (/**
                  * @param {?} d
@@ -1130,14 +1190,44 @@ class PbdsDatavizBarComponent {
                  */
                 d => this.xAxisScale(d.label)))
                     .attr('width', this.xAxisScale.bandwidth())
+                    .call((/**
+                 * @param {?} enter
+                 * @return {?}
+                 */
+                enter => enter
                     .transition()
-                    .attr('height', this.height)
-                    .attr('width', this.xAxisScale.bandwidth());
-                // add bars on enter
-                groupEnter
+                    .duration(500)
+                    .attr('height', this.height)))), (/**
+                 * @param {?} update
+                 * @return {?}
+                 */
+                update => update
+                    .transition()
+                    .duration(1000)
+                    .attr('x', (/**
+                 * @param {?} d
+                 * @return {?}
+                 */
+                d => this.xAxisScale(d.label)))
+                    .attr('width', this.xAxisScale.bandwidth())), (/**
+                 * @param {?} exit
+                 * @return {?}
+                 */
+                exit => exit
+                    .transition()
+                    .attr('pointer-events', 'none')
+                    .remove()));
+                // color bars
+                this.svg
+                    .selectAll('.bar')
+                    .data(this.data)
+                    .join((/**
+                 * @param {?} enter
+                 * @return {?}
+                 */
+                enter => enter
                     .append('rect')
                     .attr('class', 'bar')
-                    .attr('rx', 2)
                     .attr('fill', (/**
                  * @param {?} d
                  * @return {?}
@@ -1152,6 +1242,11 @@ class PbdsDatavizBarComponent {
                     .attr('y', this.height)
                     .attr('height', 0)
                     .attr('pointer-events', 'none')
+                    .call((/**
+                 * @param {?} enter
+                 * @return {?}
+                 */
+                enter => enter
                     .transition()
                     .duration(1000)
                     .attr('y', (/**
@@ -1170,9 +1265,39 @@ class PbdsDatavizBarComponent {
                  */
                 d => this.colorRange(d.label)))
                     .transition()
-                    .attr('pointer-events', 'auto');
-                groupEnter
-                    .select('.bar')
+                    .attr('pointer-events', 'auto')))), (/**
+                 * @param {?} update
+                 * @return {?}
+                 */
+                update => update
+                    .attr('pointer-events', 'none')
+                    .transition()
+                    .duration(1000)
+                    .attr('x', (/**
+                 * @param {?} d
+                 * @return {?}
+                 */
+                d => this.xAxisScale(d.label) + this.xAxisScale.bandwidth() / 4))
+                    .attr('width', this.xAxisScale.bandwidth() / 2)
+                    .attr('height', (/**
+                 * @param {?} d
+                 * @return {?}
+                 */
+                d => this.height - this.yAxisScale(d.value)))
+                    .attr('y', (/**
+                 * @param {?} d
+                 * @return {?}
+                 */
+                d => this.yAxisScale(d.value)))
+                    .transition()
+                    .attr('pointer-events', 'auto')), (/**
+                 * @param {?} exit
+                 * @return {?}
+                 */
+                exit => exit
+                    .transition()
+                    .attr('pointer-events', 'none')
+                    .remove()))
                     .on('mouseover', (/**
                  * @param {?} data
                  * @param {?} index
@@ -1196,53 +1321,22 @@ class PbdsDatavizBarComponent {
                 (data, index, nodes) => this.barMouseClick(event$1, data, index, nodes)));
             }
             else {
-                // rebind data to groups
-                group = this.svg.selectAll('.bar-group').data(this.data);
-                // remove bars
-                group
-                    .exit()
-                    .transition()
-                    .attr('pointer-events', 'none')
-                    .remove();
-                // update the existing bars
-                group
-                    .select('.bar')
-                    .attr('x', (/**
-                 * @param {?} d
+                // color bars
+                this.svg
+                    .selectAll('.bar')
+                    .data(this.data)
+                    .join((/**
+                 * @param {?} enter
                  * @return {?}
                  */
-                d => this.xAxisScale(d.label) + this.xAxisScale.bandwidth() / 5.5))
-                    .attr('width', this.xAxisScale.bandwidth() / 1.5)
-                    .attr('pointer-events', 'none')
-                    .transition()
-                    .duration(1000)
-                    .attr('y', (/**
-                 * @param {?} d
-                 * @return {?}
-                 */
-                d => this.yAxisScale(d.value)))
-                    .attr('height', (/**
-                 * @param {?} d
-                 * @return {?}
-                 */
-                d => this.height - this.yAxisScale(d.value)))
-                    .transition()
-                    .attr('pointer-events', 'auto');
-                // add group on enter
-                groupEnter = group
-                    .enter()
-                    .append('g')
-                    .attr('class', 'bar-group');
-                // add bars on enter
-                groupEnter
+                enter => enter
                     .append('rect')
                     .attr('class', 'bar')
-                    .attr('rx', 2)
                     .attr('fill', (/**
                  * @param {?} d
                  * @return {?}
                  */
-                d => `url(${this._location.path()}#gradient-${this.colorRange(d.label).substr(1)})`)) // removes hash to prevent safari bug;
+                d => `url(${this._location.path()}#gradient-${this.colorRange(d.label).substr(1)})`))
                     .attr('x', (/**
                  * @param {?} d
                  * @return {?}
@@ -1252,6 +1346,11 @@ class PbdsDatavizBarComponent {
                     .attr('y', this.height)
                     .attr('height', 0)
                     .attr('pointer-events', 'none')
+                    .call((/**
+                 * @param {?} enter
+                 * @return {?}
+                 */
+                enter => enter
                     .transition()
                     .duration(1000)
                     .attr('y', (/**
@@ -1270,9 +1369,39 @@ class PbdsDatavizBarComponent {
                  */
                 d => this.colorRange(d.label)))
                     .transition()
-                    .attr('pointer-events', 'auto');
-                groupEnter
-                    .select('.bar')
+                    .attr('pointer-events', 'auto')))), (/**
+                 * @param {?} update
+                 * @return {?}
+                 */
+                update => update
+                    .attr('pointer-events', 'none')
+                    .transition()
+                    .duration(1000)
+                    .attr('x', (/**
+                 * @param {?} d
+                 * @return {?}
+                 */
+                d => this.xAxisScale(d.label) + this.xAxisScale.bandwidth() / 5.5))
+                    .attr('width', this.xAxisScale.bandwidth() / 1.5)
+                    .attr('height', (/**
+                 * @param {?} d
+                 * @return {?}
+                 */
+                d => this.height - this.yAxisScale(d.value)))
+                    .attr('y', (/**
+                 * @param {?} d
+                 * @return {?}
+                 */
+                d => this.yAxisScale(d.value)))
+                    .transition()
+                    .attr('pointer-events', 'auto')), (/**
+                 * @param {?} exit
+                 * @return {?}
+                 */
+                exit => exit
+                    .transition()
+                    .attr('pointer-events', 'none')
+                    .remove()))
                     .on('mouseover', (/**
                  * @param {?} data
                  * @param {?} index
@@ -1281,9 +1410,12 @@ class PbdsDatavizBarComponent {
                  */
                 (data, index, nodes) => this.barMouseOver(event$1, data, index, nodes)))
                     .on('mouseout', (/**
+                 * @param {?} data
+                 * @param {?} index
+                 * @param {?} nodes
                  * @return {?}
                  */
-                () => this.barMouseOut()))
+                (data, index, nodes) => this.barMouseOut()))
                     .on('click', (/**
                  * @param {?} data
                  * @param {?} index
@@ -1293,19 +1425,52 @@ class PbdsDatavizBarComponent {
                 (data, index, nodes) => this.barMouseClick(event$1, data, index, nodes)));
             }
             if (!this.hideLegend) {
-                /** @type {?} */
-                const legendItem = this.chart
+                this.chart
                     .select('.legend')
                     .selectAll('.legend-item')
-                    .data(this.data);
-                legendItem.exit().remove();
-                // update existing items
-                legendItem.select('.legend-label').html((/**
+                    .data(this.data)
+                    .join((/**
+                 * @param {?} enter
+                 * @return {?}
+                 */
+                enter => {
+                    /** @type {?} */
+                    const li = enter.insert('li', 'li.legend-static').attr('class', 'legend-item');
+                    li.append('span')
+                        .attr('class', 'legend-key')
+                        .style('background-color', (/**
+                     * @param {?} d
+                     * @return {?}
+                     */
+                    d => this.colorRange(d.label)));
+                    li.append('span')
+                        .attr('class', 'legend-label')
+                        .html((/**
+                     * @param {?} d
+                     * @return {?}
+                     */
+                    d => {
+                        switch (this.legendLabelFormatType) {
+                            case 'number':
+                                return this.legendLabelFormat(d.label);
+                            case 'time':
+                                /** @type {?} */
+                                const parsedTime = isoParse(d.label);
+                                return this.legendLabelFormat(parsedTime);
+                            default:
+                                return d.label;
+                        }
+                    }));
+                    return li;
+                }), (/**
+                 * @param {?} update
+                 * @return {?}
+                 */
+                update => update.select('.legend-label').html((/**
                  * @param {?} d
                  * @return {?}
                  */
                 d => {
-                    // return this.legendLabelFormat === null ? d.label : this.legendLabelFormat(d.label);
                     switch (this.legendLabelFormatType) {
                         case 'number':
                             return this.legendLabelFormat(d.label);
@@ -1316,42 +1481,11 @@ class PbdsDatavizBarComponent {
                         default:
                             return d.label;
                     }
-                }));
-                // legend items on enter
-                /** @type {?} */
-                const enterLegendItem = legendItem
-                    .enter()
-                    .insert('li', 'li.legend-static')
-                    .attr('class', 'legend-item');
-                enterLegendItem
-                    .append('span')
-                    .attr('class', 'legend-key')
-                    .style('background-color', (/**
-                 * @param {?} d
+                }))), (/**
+                 * @param {?} exit
                  * @return {?}
                  */
-                d => this.colorRange(d.label)));
-                enterLegendItem
-                    .append('span')
-                    .attr('class', 'legend-label')
-                    .html((/**
-                 * @param {?} d
-                 * @return {?}
-                 */
-                d => {
-                    // return this.legendLabelFormat === null ? d.label : this.legendLabelFormat(d.label);
-                    switch (this.legendLabelFormatType) {
-                        case 'number':
-                            return this.legendLabelFormat(d.label);
-                        case 'time':
-                            /** @type {?} */
-                            const parsedTime = isoParse(d.label);
-                            return this.legendLabelFormat(parsedTime);
-                        default:
-                            return d.label;
-                    }
-                }));
-                enterLegendItem
+                exit => exit.remove()))
                     .on('mouseover', (/**
                  * @param {?} data
                  * @param {?} index
@@ -1395,7 +1529,7 @@ class PbdsDatavizBarComponent {
          */
         (event, data, index, nodes) => {
             this.chart
-                .selectAll('.bar-group')
+                .selectAll('.bar')
                 .filter((/**
              * @param {?} d
              * @param {?} i
@@ -1404,21 +1538,15 @@ class PbdsDatavizBarComponent {
             (d, i) => i !== index))
                 .classed('inactive', true);
             /** @type {?} */
-            const bar = this.chart
-                .selectAll('.bar-group')
-                .filter((/**
+            const bar = this.chart.selectAll('.bar').filter((/**
              * @param {?} d
              * @param {?} i
              * @return {?}
              */
-            (d, i) => i === index))
-                .select('.bar');
+            (d, i) => i === index));
             /** @type {?} */
             const barColor = bar.attr('data-color');
-            bar.style('fill', (/**
-             * @return {?}
-             */
-            () => barColor));
+            bar.style('fill', barColor);
             this.chart
                 .selectAll('.legend-item')
                 .filter((/**
@@ -1433,7 +1561,7 @@ class PbdsDatavizBarComponent {
              * @param {?} i
              * @return {?}
              */
-            (d, i) => i === index)));
+            (d, i) => i === index))[0]);
             this.hovered.emit({ event, data });
         });
         this.barMouseOut = (/**
@@ -1441,9 +1569,8 @@ class PbdsDatavizBarComponent {
          */
         () => {
             this.chart
-                .selectAll('.bar-group')
+                .selectAll('.bar')
                 .classed('inactive', false)
-                .select('.bar')
                 .style('fill', null);
             this.chart.selectAll('.legend-item').classed('inactive', false);
             this.tooltipHide();
@@ -1476,7 +1603,7 @@ class PbdsDatavizBarComponent {
             (d, i) => i !== index))
                 .classed('inactive', true);
             this.chart
-                .selectAll('.bar-group')
+                .selectAll('.bar')
                 .filter((/**
              * @param {?} d
              * @param {?} i
@@ -1485,27 +1612,24 @@ class PbdsDatavizBarComponent {
             (d, i) => i !== index))
                 .classed('inactive', true);
             /** @type {?} */
-            const bar = this.chart
-                .selectAll('.bar-group')
+            const bar = this.chart.selectAll('.bar').filter((/**
+             * @param {?} d
+             * @param {?} i
+             * @return {?}
+             */
+            (d, i) => i === index));
+            /** @type {?} */
+            const barColor = bar.attr('data-color');
+            bar.style('fill', barColor);
+            this.tooltipShow(data, this.chart
+                .selectAll('.bar')
                 .filter((/**
              * @param {?} d
              * @param {?} i
              * @return {?}
              */
             (d, i) => i === index))
-                .select('.bar');
-            /** @type {?} */
-            const barColor = bar.attr('data-color');
-            bar.style('fill', (/**
-             * @return {?}
-             */
-            () => barColor));
-            this.tooltipShow(data, this.chart.selectAll('.bar').filter((/**
-             * @param {?} d
-             * @param {?} i
-             * @return {?}
-             */
-            (d, i) => i === index))._groups[0]); // TODO: find better way than using _groups
+                .node());
             this.hovered.emit({ event, data });
         });
         this.legendMouseOut = (/**
@@ -1514,9 +1638,8 @@ class PbdsDatavizBarComponent {
         () => {
             this.chart.selectAll('.legend-item').classed('inactive', false);
             this.chart
-                .selectAll('.bar-group')
+                .selectAll('.bar')
                 .classed('inactive', false)
-                .select('.bar')
                 .style('fill', null);
             this.tooltipHide();
         });
@@ -1537,7 +1660,7 @@ class PbdsDatavizBarComponent {
          */
         (data, node) => {
             /** @type {?} */
-            const dimensions = node[0].getBoundingClientRect();
+            const dimensions = node.getBoundingClientRect();
             /** @type {?} */
             const scroll = this._scroll.getScrollPosition();
             /** @type {?} */
@@ -1619,54 +1742,12 @@ class PbdsDatavizBarComponent {
             bottom: +this.marginBottom,
             left: +this.marginLeft
         };
-        switch (this.xAxisFormatType) {
-            case 'number':
-                this.xAxisFormat = format(this.xAxisFormatString);
-                break;
-            case 'time':
-                this.xAxisFormat = timeFormat(this.xAxisFormatString);
-                break;
-        }
-        switch (this.yAxisFormatType) {
-            case 'number':
-                this.yAxisFormat = format(this.yAxisFormatString);
-                break;
-            case 'time':
-                this.yAxisFormat = timeFormat(this.yAxisFormatString);
-                break;
-        }
-        switch (this.legendLabelFormatType) {
-            case 'number':
-                this.legendLabelFormat = format(this.legendLabelFormatString);
-                break;
-            case 'time':
-                this.legendLabelFormat = timeFormat(this.legendLabelFormatString);
-                break;
-            default:
-                this.legendLabelFormat = null;
-                break;
-        }
-        switch (this.tooltipLabelFormatType) {
-            case 'number':
-                this.tooltipLabelFormat = format(this.tooltipLabelFormatString);
-                break;
-            case 'time':
-                this.tooltipLabelFormat = timeFormat(this.tooltipLabelFormatString);
-                break;
-            default:
-                this.tooltipLabelFormat = null;
-                break;
-        }
-        switch (this.tooltipValueFormatType) {
-            case 'number':
-                this.tooltipValueFormat = format(this.tooltipValueFormatString);
-                break;
-            case 'time':
-                this.tooltipValueFormat = timeFormat(this.tooltipValueFormatString);
-                break;
-            default:
-                this.tooltipValueFormat = null;
-        }
+        // create formatters
+        this.xAxisFormat = this._dataviz.d3Format(this.xAxisFormatType, this.xAxisFormatString);
+        this.yAxisFormat = this._dataviz.d3Format(this.yAxisFormatType, this.yAxisFormatString);
+        this.legendLabelFormat = this._dataviz.d3Format(this.legendLabelFormatType, this.legendLabelFormatString);
+        this.tooltipLabelFormat = this._dataviz.d3Format(this.tooltipLabelFormatType, this.tooltipLabelFormatString);
+        this.tooltipValueFormat = this._dataviz.d3Format(this.tooltipValueFormatType, this.tooltipValueFormatString);
         // defaults for all chart types
         this.hideGrayBars = false;
         this.hideXAxis = false;
@@ -2298,6 +2379,9 @@ if (false) {
  * @fileoverview added by tsickle
  * @suppress {checkTypes,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
  */
+// assign an ID for each component instance
+/** @type {?} */
+let nextId = 0;
 class PbdsDatavizLineComponent {
     /**
      * @param {?} _dataviz
@@ -2407,109 +2491,215 @@ class PbdsDatavizLineComponent {
                     .duration(1000)
                     .call(this.yGridCall);
             }
-            /** @type {?} */
-            const group = this.svg.selectAll('.line-group').data(this.data.series);
-            // remove lines
-            group.exit().remove();
-            // update existing
-            group
-                .select('path.line')
-                .transition()
-                .duration(1000)
-                .attr('d', (/**
-             * @param {?} d
+            // lines
+            this.svg
+                .selectAll('path.line')
+                .attr('filter', (/**
              * @return {?}
              */
-            d => this.d3line(d.values)));
-            if (this.area) {
-                group
-                    .select('path.area')
-                    .transition()
-                    .duration(1000)
-                    .attr('d', (/**
+            () => (this.type !== 'high' ? `url(${this._location.path()}#glow)` : null)))
+                .data(this.data.series)
+                .join((/**
+             * @param {?} enter
+             * @return {?}
+             */
+            enter => {
+                enter
+                    .append('path')
+                    .attr('clip-path', `url(${this._location.path()}#clip-path-${this.clipPathId})`)
+                    .attr('class', 'line')
+                    .style('stroke', (/**
                  * @param {?} d
                  * @return {?}
                  */
-                d => this.d3area(d.values)));
-            }
-            group
-                .selectAll('circle')
-                .data((/**
-             * @param {?} d
+                d => this.colorRange(d.label)))
+                    .style('stroke-width', this.lineWidth)
+                    .attr('d', (/**
+                 * @param {?} data
+                 * @return {?}
+                 */
+                data => {
+                    /** @type {?} */
+                    const array = new Array(data.values.length).fill(0);
+                    return this.d3line(array);
+                }))
+                    .call((/**
+                 * @param {?} enter
+                 * @return {?}
+                 */
+                enter => enter
+                    .transition()
+                    .duration(1000)
+                    .ease(easeQuadInOut)
+                    .attr('d', (/**
+                 * @param {?} data
+                 * @return {?}
+                 */
+                data => this.d3line(data.values)))));
+            }), (/**
+             * @param {?} update
              * @return {?}
              */
-            d => d.values))
+            update => update.call((/**
+             * @param {?} update
+             * @return {?}
+             */
+            update => update
                 .transition()
                 .duration(1000)
-                .attr('cx', (/**
-             * @param {?} d
-             * @param {?} i
-             * @return {?}
-             */
-            (d, i) => this.xAxisScale(isoParse(this.data.dates[i]))))
-                .attr('cy', (/**
-             * @param {?} d
-             * @return {?}
-             */
-            d => this.yAxisScale(d)));
-            // add group on enter
-            /** @type {?} */
-            const groupEnter = group
-                .enter()
-                .append('g')
-                .attr('class', 'line-group');
-            // add line on enter
-            /** @type {?} */
-            const line = groupEnter
-                .append('path')
-                .attr('class', 'line')
-                .style('color', (/**
-             * @param {?} d
-             * @return {?}
-             */
-            d => this.colorRange(d.label)))
-                .style('stroke-width', this.lineWidth)
-                .transition()
-                .duration(1000)
+                .ease(easeQuadInOut)
                 .attr('d', (/**
-             * @param {?} data
+             * @param {?} d
              * @return {?}
              */
-            data => this.d3line(data.values)));
+            d => this.d3line(d.values)))))), (/**
+             * @param {?} exit
+             * @return {?}
+             */
+            exit => exit.remove()));
+            // area
             if (this.area) {
-                groupEnter
+                this.svg
+                    .selectAll('path.area')
+                    .data(this.data.series)
+                    .join((/**
+                 * @param {?} enter
+                 * @return {?}
+                 */
+                enter => enter
                     .append('path')
+                    .attr('clip-path', `url(${this._location.path()}#clip-path-${this.clipPathId})`)
                     .attr('class', 'area')
                     .attr('d', (/**
                  * @param {?} data
                  * @return {?}
                  */
-                data => this.d3area(data.values)))
+                data => {
+                    /** @type {?} */
+                    const array = new Array(data.values.length).fill(0);
+                    return this.d3area(array);
+                }))
                     .style('color', (/**
                  * @param {?} d
                  * @return {?}
                  */
-                d => this.colorRange(d.label)));
+                d => this.colorRange(d.label)))
+                    .call((/**
+                 * @param {?} enter
+                 * @return {?}
+                 */
+                enter => enter
+                    .transition()
+                    .duration(1000)
+                    .ease(easeQuadInOut)
+                    .attr('d', (/**
+                 * @param {?} data
+                 * @return {?}
+                 */
+                data => this.d3area(data.values)))))), (/**
+                 * @param {?} update
+                 * @return {?}
+                 */
+                update => update.call((/**
+                 * @param {?} update
+                 * @return {?}
+                 */
+                update => {
+                    return update
+                        .transition()
+                        .duration(1000)
+                        .ease(easeQuadInOut)
+                        .attr('d', (/**
+                     * @param {?} d
+                     * @return {?}
+                     */
+                    d => this.d3area(d.values)));
+                }))), (/**
+                 * @param {?} exit
+                 * @return {?}
+                 */
+                exit => exit.remove()));
             }
-            // add points
+            // circles
             if (this.linePoints) {
-                /** @type {?} */
-                const points = groupEnter
+                // add points
+                this.svg
+                    .selectAll('g.points')
+                    .data(this.data.series)
+                    .join((/**
+                 * @param {?} enter
+                 * @return {?}
+                 */
+                enter => enter
                     .append('g')
                     .attr('class', 'points')
+                    .attr('clip-path', `url(${this._location.path()}#clip-path-points-${this.clipPathId})`)
                     .style('color', (/**
                  * @param {?} d
+                 * @param {?} i
                  * @return {?}
                  */
-                d => this.colorRange(d.label)));
-                /** @type {?} */
-                const circles = points.selectAll('circle').data((/**
+                (d, i) => this.colorRange(d.label)))
+                    .selectAll('circle')
+                    .data((/**
                  * @param {?} d
                  * @return {?}
                  */
-                d => d.values));
-                circles
-                    .enter()
+                d => d.values))
+                    .join((/**
+                 * @param {?} enter
+                 * @return {?}
+                 */
+                enter => enter
+                    .append('circle')
+                    .attr('cx', (/**
+                 * @param {?} d
+                 * @param {?} i
+                 * @return {?}
+                 */
+                (d, i) => this.xAxisScale(isoParse(this.data.dates[i]))))
+                    .attr('cy', (/**
+                 * @param {?} d
+                 * @return {?}
+                 */
+                d => this.yAxisScale(0)))
+                    .attr('r', this.lineWidth * 2)
+                    .style('stroke-width', this.lineWidth)
+                    .call((/**
+                 * @param {?} enter
+                 * @return {?}
+                 */
+                enter => enter
+                    .transition()
+                    .duration(1000)
+                    .ease(easeQuadInOut)
+                    .attr('cy', (/**
+                 * @param {?} d
+                 * @return {?}
+                 */
+                d => this.yAxisScale(d)))))), (/**
+                 * @return {?}
+                 */
+                () => { }), (/**
+                 * @param {?} exit
+                 * @return {?}
+                 */
+                exit => exit.remove()))), (/**
+                 * @param {?} update
+                 * @return {?}
+                 */
+                update => update
+                    .selectAll('circle')
+                    .data((/**
+                 * @param {?} d
+                 * @return {?}
+                 */
+                d => d.values))
+                    .join((/**
+                 * @param {?} enter
+                 * @return {?}
+                 */
+                enter => enter
                     .append('circle')
                     .attr('cx', (/**
                  * @param {?} d
@@ -2523,69 +2713,103 @@ class PbdsDatavizLineComponent {
                  */
                 d => this.yAxisScale(d)))
                     .attr('r', this.lineWidth * 2)
-                    .style('stroke-width', this.lineWidth);
-            }
-            if (this.type !== 'high') {
-                line.attr('filter', `url(${this._location.path()}#glow)`);
+                    .style('stroke-width', this.lineWidth)), (/**
+                 * @param {?} update
+                 * @return {?}
+                 */
+                update => update.call((/**
+                 * @param {?} update
+                 * @return {?}
+                 */
+                update => update
+                    .transition()
+                    .duration(1000)
+                    .ease(easeQuadInOut)
+                    .attr('cx', (/**
+                 * @param {?} d
+                 * @param {?} i
+                 * @return {?}
+                 */
+                (d, i) => this.xAxisScale(isoParse(this.data.dates[i]))))
+                    .attr('cy', (/**
+                 * @param {?} d
+                 * @return {?}
+                 */
+                d => this.yAxisScale(d)))))), (/**
+                 * @param {?} exit
+                 * @return {?}
+                 */
+                exit => exit.remove()))), (/**
+                 * @param {?} exit
+                 * @return {?}
+                 */
+                exit => exit.remove()));
             }
             if (!this.hideLegend) {
-                /** @type {?} */
-                const legendItem = this.chart
+                this.chart
                     .select('.legend')
                     .selectAll('.legend-item')
-                    .data(this.data.series);
-                legendItem.exit().remove();
-                // update existing items
-                legendItem.select('.legend-label').html((/**
-                 * @param {?} d
+                    .data(this.data.series)
+                    .join((/**
+                 * @param {?} enter
                  * @return {?}
                  */
-                d => {
-                    switch (this.legendLabelFormatType) {
-                        case 'number':
-                            return this.legendLabelFormat(d.label);
-                        case 'time':
-                            /** @type {?} */
-                            const parsedTime = isoParse(d.label);
-                            return this.legendLabelFormat(parsedTime);
-                        default:
-                            return d.label;
-                    }
-                }));
-                // legend items on enter
-                /** @type {?} */
-                const enterLegendItem = legendItem
-                    .enter()
-                    .append('li')
-                    .attr('class', 'legend-item');
-                enterLegendItem
-                    .append('span')
-                    .attr('class', 'legend-key')
-                    .style('background-color', (/**
-                 * @param {?} d
+                enter => {
+                    /** @type {?} */
+                    const li = enter.append('li').attr('class', 'legend-item');
+                    li.append('span')
+                        .attr('class', 'legend-key')
+                        .style('background-color', (/**
+                     * @param {?} d
+                     * @return {?}
+                     */
+                    d => this.colorRange(d.label)));
+                    li.append('span')
+                        .attr('class', 'legend-label')
+                        .html((/**
+                     * @param {?} d
+                     * @return {?}
+                     */
+                    d => {
+                        switch (this.legendLabelFormatType) {
+                            case 'number':
+                                return this.legendLabelFormat(d.label);
+                            case 'time':
+                                /** @type {?} */
+                                const parsedTime = isoParse(d.label);
+                                return this.legendLabelFormat(parsedTime);
+                            default:
+                                return d.label;
+                        }
+                    }));
+                    return li;
+                }), (/**
+                 * @param {?} update
                  * @return {?}
                  */
-                d => this.colorRange(d.label)));
-                enterLegendItem
-                    .append('span')
-                    .attr('class', 'legend-label')
-                    .html((/**
-                 * @param {?} d
+                update => {
+                    update.select('.legend-label').html((/**
+                     * @param {?} d
+                     * @return {?}
+                     */
+                    d => {
+                        switch (this.legendLabelFormatType) {
+                            case 'number':
+                                return this.legendLabelFormat(d.label);
+                            case 'time':
+                                /** @type {?} */
+                                const parsedTime = isoParse(d.label);
+                                return this.legendLabelFormat(parsedTime);
+                            default:
+                                return d.label;
+                        }
+                    }));
+                    return update;
+                }), (/**
+                 * @param {?} exit
                  * @return {?}
                  */
-                d => {
-                    switch (this.legendLabelFormatType) {
-                        case 'number':
-                            return this.legendLabelFormat(d.label);
-                        case 'time':
-                            /** @type {?} */
-                            const parsedTime = isoParse(d.label);
-                            return this.legendLabelFormat(parsedTime);
-                        default:
-                            return d.label;
-                    }
-                }));
-                enterLegendItem
+                exit => exit.remove()))
                     .on('mouseover', (/**
                  * @param {?} data
                  * @param {?} index
@@ -2606,54 +2830,55 @@ class PbdsDatavizLineComponent {
                 (data, index, nodes) => this.legendMouseClick(event$1, data, index, nodes)));
             }
             if (!this.hideTooltip) {
-                /** @type {?} */
-                const tooltipItem = this.tooltip
+                this.tooltip
                     .select('.tooltip-table')
                     .selectAll('tr')
-                    .data(this.data.series);
-                tooltipItem.exit().remove();
-                // update existing items
-                tooltipItem.select('.tooltip-label pr-2').html((/**
-                 * @param {?} d
+                    .data(this.data.series)
+                    .join((/**
+                 * @param {?} enter
                  * @return {?}
                  */
-                d => {
-                    return this.tooltipHeadingFormat(d.label);
-                }));
-                // items on enter
-                /** @type {?} */
-                const entertooltipItem = tooltipItem
-                    .enter()
-                    .append('tr')
-                    .attr('class', 'tooltip-item');
-                entertooltipItem
-                    .append('td')
-                    .style('color', (/**
-                 * @param {?} d
+                enter => {
+                    /** @type {?} */
+                    const tooltipItem = enter.append('tr').attr('class', 'tooltip-item');
+                    tooltipItem
+                        .append('td')
+                        .style('color', (/**
+                     * @param {?} d
+                     * @return {?}
+                     */
+                    d => this.colorRange(d.label)))
+                        .append('span')
+                        .attr('class', 'pbds-tooltip-key');
+                    tooltipItem
+                        .append('td')
+                        .attr('class', 'tooltip-label pr-2 text-nowrap')
+                        .html((/**
+                     * @param {?} d
+                     * @return {?}
+                     */
+                    d => {
+                        return this.tooltipLabelFormatType ? this.tooltipLabelFormat(d.label) : d.label;
+                    }));
+                    tooltipItem
+                        .append('td')
+                        .attr('class', 'tooltip-value text-right text-nowrap')
+                        .html((/**
+                     * @param {?} d
+                     * @return {?}
+                     */
+                    d => ''));
+                    return tooltipItem;
+                }), (/**
                  * @return {?}
                  */
-                d => this.colorRange(d.label)))
-                    .append('span')
-                    .attr('class', 'pbds-tooltip-key');
-                entertooltipItem
-                    .append('td')
-                    .attr('class', 'tooltip-label pr-2 text-nowrap')
-                    .html((/**
-                 * @param {?} d
+                () => { }), (/**
+                 * @param {?} exit
                  * @return {?}
                  */
-                d => {
-                    return this.tooltipLabelFormatType ? this.tooltipLabelFormat(d.label) : d.label;
-                }));
-                entertooltipItem
-                    .append('td')
-                    .attr('class', 'tooltip-value text-right text-nowrap')
-                    .html((/**
-                 * @param {?} d
-                 * @return {?}
-                 */
-                d => ''));
+                exit => exit.remove()));
             }
+            this.svg.selectAll('.points').raise();
             this.mouserect.raise();
         });
         this.legendMouseOver = (/**
@@ -2673,8 +2898,8 @@ class PbdsDatavizLineComponent {
              */
             (d, i) => i !== index))
                 .classed('inactive', true);
-            this.chart
-                .selectAll('.line-group')
+            this.svg
+                .selectAll('.line')
                 .filter((/**
              * @param {?} d
              * @param {?} i
@@ -2682,18 +2907,37 @@ class PbdsDatavizLineComponent {
              */
             (d, i) => i !== index))
                 .classed('inactive', true);
-            /** @type {?} */
-            const line = this.chart.selectAll('.line-group').filter((/**
+            this.svg
+                .selectAll('.line')
+                .filter((/**
              * @param {?} d
              * @param {?} i
              * @return {?}
              */
-            (d, i) => i === index));
-            line.classed('active', true);
+            (d, i) => i === index))
+                .classed('active', true);
+            if (this.area) {
+                this.svg
+                    .selectAll('.area')
+                    .filter((/**
+                 * @param {?} d
+                 * @param {?} i
+                 * @return {?}
+                 */
+                (d, i) => i !== index))
+                    .classed('inactive', true);
+            }
             if (this.linePoints) {
-                /** @type {?} */
-                const circles = line.selectAll('circle');
-                circles.classed('active', true);
+                this.svg
+                    .selectAll('.points')
+                    .filter((/**
+                 * @param {?} d
+                 * @param {?} i
+                 * @return {?}
+                 */
+                (d, i) => i !== index))
+                    .selectAll('circle')
+                    .classed('inactive', true);
             }
             this.hovered.emit({ event, data });
         });
@@ -2703,13 +2947,17 @@ class PbdsDatavizLineComponent {
         () => {
             this.chart.selectAll('.legend-item').classed('inactive', false);
             this.chart
-                .selectAll('.line-group')
+                .selectAll('.line')
                 .classed('inactive', false)
                 .classed('active', false);
             if (this.linePoints) {
-                /** @type {?} */
-                const circles = this.chart.selectAll('circle');
-                circles.classed('active', false);
+                this.svg
+                    .selectAll('circle')
+                    .classed('active', false)
+                    .classed('inactive', false);
+            }
+            if (this.area) {
+                this.svg.selectAll('.area').classed('inactive', false);
             }
         });
         this.legendMouseClick = (/**
@@ -2890,41 +3138,14 @@ class PbdsDatavizLineComponent {
             bottom: +this.marginBottom,
             left: +this.marginLeft
         };
+        this.clipPathId = nextId;
+        // create formatters
         this.xAxisFormat = timeFormat(this.xAxisFormatString);
         this.yAxisFormat = format(this.yAxisFormatString);
-        switch (this.legendLabelFormatType) {
-            case 'number':
-                this.legendLabelFormat = format(this.legendLabelFormatString);
-                break;
-            case 'time':
-                this.legendLabelFormat = timeFormat(this.legendLabelFormatString);
-                break;
-            default:
-                this.legendLabelFormat = null;
-                break;
-        }
+        this.legendLabelFormat = this._dataviz.d3Format(this.legendLabelFormatType, this.legendLabelFormatString);
         this.tooltipHeadingFormat = timeFormat(this.tooltipHeadingFormatString);
-        switch (this.tooltipLabelFormatType) {
-            case 'number':
-                this.tooltipLabelFormat = format(this.tooltipLabelFormatString);
-                break;
-            case 'time':
-                this.tooltipLabelFormat = timeFormat(this.tooltipLabelFormatString);
-                break;
-            default:
-                this.tooltipLabelFormat = null;
-                break;
-        }
-        switch (this.tooltipValueFormatType) {
-            case 'number':
-                this.tooltipValueFormat = format(this.tooltipValueFormatString);
-                break;
-            case 'time':
-                this.tooltipValueFormat = timeFormat(this.tooltipValueFormatString);
-                break;
-            default:
-                this.tooltipValueFormat = null;
-        }
+        this.tooltipLabelFormat = this._dataviz.d3Format(this.tooltipLabelFormatType, this.tooltipLabelFormatString);
+        this.tooltipValueFormat = this._dataviz.d3Format(this.tooltipValueFormatType, this.tooltipValueFormatString);
         // defaults for all chart types
         this.lineWidth = 3;
         this.lineCurved = true;
@@ -3154,15 +3375,34 @@ class PbdsDatavizLineComponent {
             tooltipTableTbody
                 .selectAll('tr')
                 .data(this.data)
-                .enter()
-                .append('tr');
+                .join((/**
+             * @param {?} enter
+             * @return {?}
+             */
+            enter => enter.append('tr')));
         }
         // add legend classes
         if (!this.hideLegend) {
             this.chart.classed('pbds-chart-legend-bottom', this.legendPosition === 'bottom' ? true : false);
             this.chart.append('ul').attr('class', `legend legend-${this.legendPosition}`);
         }
+        // add clip path for line animation
+        this.svg
+            .append('clipPath')
+            .attr('id', `clip-path-${this.clipPathId}`)
+            .append('rect')
+            .attr('width', +this.width - +this.margin.left - +this.margin.right)
+            .attr('height', +this.height);
+        // add clip path for points animation
+        this.svg
+            .append('clipPath')
+            .attr('id', `clip-path-points-${this.clipPathId}`)
+            .append('rect')
+            .attr('width', +this.width + +this.margin.left - +this.margin.right)
+            .attr('height', +this.height)
+            .attr('transform', `translate(-${this.margin.left}, 0)`);
         this.updateChart();
+        nextId++;
     }
     /**
      * @param {?} changes
@@ -3325,6 +3565,11 @@ if (false) {
      * @private
      */
     PbdsDatavizLineComponent.prototype.margin;
+    /**
+     * @type {?}
+     * @private
+     */
+    PbdsDatavizLineComponent.prototype.clipPathId;
     /**
      * @type {?}
      * @private
@@ -3720,14 +3965,14 @@ class PbdsDatavizGaugeComponent {
          * @return {?}
          */
         (transition, value) => {
-            value = format('.2f')(value); // TODO: check these .1f formats here, should they be inputs?
+            value = format('.4f')(value);
             value = value.replace(/,/g, '.');
             transition.tween('text', (/**
              * @return {?}
              */
             () => {
                 /** @type {?} */
-                const interpolate$1 = interpolate(format('.2f')(+this.oldValue), value);
+                const interpolate$1 = interpolate(format('.4f')(+this.oldValue), value);
                 return (/**
                  * @param {?} t
                  * @return {?}
@@ -3778,7 +4023,7 @@ class PbdsDatavizGaugeComponent {
             .append('svg')
             .attr('width', this.width)
             .attr('height', this.height)
-            .attr('class', 'img-fluid') // to resize chart
+            .attr('class', 'img-fluid')
             .attr('preserveAspectRatio', 'xMinYMin meet')
             .attr('viewBox', `-${this.width / 2} -${this.height / 2} ${this.width} ${this.height}`);
         this.drawChart();
@@ -3789,7 +4034,6 @@ class PbdsDatavizGaugeComponent {
      */
     ngOnChanges(changes) {
         if (changes.data && !changes.data.firstChange) {
-            // console.log(changes.data.previousValue.value, changes.data.currentValue.value);
             this.oldValue = changes.data.previousValue.value;
             this.updateChart();
         }
@@ -4053,7 +4297,7 @@ class PbdsDatavizSparklineComponent {
             this.svg
                 .selectAll('.sparkline')
                 .transition()
-                .duration(750)
+                .duration(1000)
                 .attr('d', (/**
              * @return {?}
              */
@@ -4063,7 +4307,7 @@ class PbdsDatavizSparklineComponent {
             this.svg
                 .selectAll('.sparkarea')
                 .transition()
-                .duration(750)
+                .duration(1000)
                 .attr('d', (/**
              * @return {?}
              */
@@ -4104,7 +4348,7 @@ class PbdsDatavizSparklineComponent {
             enter => {
                 enter
                     .transition()
-                    .duration(750)
+                    .duration(1000)
                     .attr('y', (/**
                  * @param {?} d
                  * @return {?}
@@ -4122,7 +4366,7 @@ class PbdsDatavizSparklineComponent {
              */
             update => update
                 .transition()
-                .duration(750)
+                .duration(1000)
                 .attr('x', (/**
              * @param {?} d
              * @param {?} i
@@ -4148,8 +4392,7 @@ class PbdsDatavizSparklineComponent {
              * @param {?} exit
              * @return {?}
              */
-            exit => exit.remove()))
-                .enter();
+            exit => exit.remove()));
         }
     }
 }
@@ -4274,9 +4517,10 @@ class PbdsDatavizBarStackedComponent {
         this.hovered = new EventEmitter();
         this.clicked = new EventEmitter();
         this.updateChart = (/**
+         * @param {?=} firstRun
          * @return {?}
          */
-        () => {
+        (firstRun = true) => {
             this.dataKeys = Object.keys(this.data[0]).filter((/**
              * @param {?} item
              * @return {?}
@@ -4356,7 +4600,13 @@ class PbdsDatavizBarStackedComponent {
                  */
                 update => update
                     .transition()
-                    .duration(0) // 1000
+                    .duration((/**
+                 * @param {?} d
+                 * @param {?} i
+                 * @param {?} n
+                 * @return {?}
+                 */
+                (d, i, n) => (firstRun ? 0 : 1000)))
                     .attr('x', (/**
                  * @param {?} d
                  * @return {?}
@@ -4434,14 +4684,12 @@ class PbdsDatavizBarStackedComponent {
              * @param {?} d
              * @return {?}
              */
-            d => this.yAxisScale(d[1])))
-                .attr('width', 0)
-                .attr('height', 0)
-                .call((/**
-             * @param {?} enter
+            d => this.yAxisScale(d[0])))
+                .attr('width', (/**
+             * @param {?} d
              * @return {?}
              */
-            enter => {
+            d => {
                 /** @type {?} */
                 let width;
                 if (this.type === 'medium') {
@@ -4450,15 +4698,42 @@ class PbdsDatavizBarStackedComponent {
                 else {
                     width = this.xAxisScale.bandwidth() / 2;
                 }
+                return width;
+            }))
+                .attr('height', 0)
+                .call((/**
+             * @param {?} enter
+             * @return {?}
+             */
+            enter => {
                 enter
                     .transition()
-                    .duration(0) // 1000
-                    .attr('width', width)
+                    .duration((/**
+                 * @param {?} d
+                 * @param {?} i
+                 * @param {?} n
+                 * @return {?}
+                 */
+                (d, i, n) => (firstRun ? 0 : 500)))
+                    .delay((/**
+                 * @param {?} d
+                 * @param {?} i
+                 * @param {?} n
+                 * @return {?}
+                 */
+                (d, i, n) => (firstRun ? 0 : 750)))
+                    .attr('y', (/**
+                 * @param {?} d
+                 * @return {?}
+                 */
+                d => this.yAxisScale(d[1])))
                     .attr('height', (/**
                  * @param {?} d
                  * @return {?}
                  */
-                d => this.yAxisScale(d[0]) - this.yAxisScale(d[1])));
+                d => {
+                    return this.yAxisScale(d[0]) - this.yAxisScale(d[1]);
+                }));
                 return enter;
             }))), (/**
              * @param {?} update
@@ -4469,17 +4744,15 @@ class PbdsDatavizBarStackedComponent {
              * @return {?}
              */
             update => {
-                /** @type {?} */
-                let width;
-                if (this.type === 'medium') {
-                    width = this.xAxisScale.bandwidth() / 4;
-                }
-                else {
-                    width = this.xAxisScale.bandwidth() / 2;
-                }
+                // let width;
+                // if (this.type === 'medium') {
+                //   width = this.xAxisScale.bandwidth() / 4;
+                // } else {
+                //   width = this.xAxisScale.bandwidth() / 2;
+                // }
                 update
                     .transition()
-                    .duration(0) // 1000
+                    .duration(1000)
                     .attr('width', this.xAxisScale.bandwidth() / 4)
                     .attr('x', (/**
                  * @param {?} d
@@ -4568,66 +4841,70 @@ class PbdsDatavizBarStackedComponent {
             this.xAxis.raise();
             this.mouseBars.raise();
             if (!this.hideLegend) {
-                // TODO: refactor to use .join() with enter, update, exit
-                /** @type {?} */
-                const legendItem = this.chart
+                this.chart
                     .select('.legend')
                     .selectAll('.legend-item')
-                    .data(this.dataStack);
-                legendItem.exit().remove();
-                // update existing items
-                legendItem.select('.legend-label').html((/**
-                 * @param {?} d
+                    .data(this.dataStack)
+                    .join((/**
+                 * @param {?} enter
                  * @return {?}
                  */
-                d => {
-                    // return this.legendLabelFormat === null ? d.label : this.legendLabelFormat(d.label);
-                    switch (this.legendLabelFormatType) {
-                        case 'number':
-                            return this.legendLabelFormat(d.key);
-                        case 'time':
-                            /** @type {?} */
-                            const parsedTime = isoParse(d.key);
-                            return this.legendLabelFormat(parsedTime);
-                        default:
-                            return d.key;
-                    }
-                }));
-                // legend items on enter
-                /** @type {?} */
-                const enterLegendItem = legendItem
-                    .enter()
-                    .append('li')
-                    .attr('class', 'legend-item');
-                enterLegendItem
-                    .append('span')
-                    .attr('class', 'legend-key')
-                    .style('background-color', (/**
-                 * @param {?} d
+                enter => {
+                    /** @type {?} */
+                    const li = enter.append('li').attr('class', 'legend-item');
+                    li.append('span')
+                        .attr('class', 'legend-key')
+                        .style('background-color', (/**
+                     * @param {?} d
+                     * @return {?}
+                     */
+                    d => this.colorRange(d.index)));
+                    li.append('span')
+                        .attr('class', 'legend-label')
+                        .html((/**
+                     * @param {?} d
+                     * @return {?}
+                     */
+                    d => {
+                        switch (this.legendLabelFormatType) {
+                            case 'number':
+                                return this.legendLabelFormat(d.key);
+                            case 'time':
+                                /** @type {?} */
+                                const parsedTime = isoParse(d.key);
+                                return this.legendLabelFormat(parsedTime);
+                            default:
+                                return d.key;
+                        }
+                    }));
+                    return li;
+                }), (/**
+                 * @param {?} update
                  * @return {?}
                  */
-                d => this.colorRange(d.index)));
-                enterLegendItem
-                    .append('span')
-                    .attr('class', 'legend-label')
-                    .html((/**
-                 * @param {?} d
+                update => {
+                    update.select('.legend-label').html((/**
+                     * @param {?} d
+                     * @return {?}
+                     */
+                    d => {
+                        switch (this.legendLabelFormatType) {
+                            case 'number':
+                                return this.legendLabelFormat(d.key);
+                            case 'time':
+                                /** @type {?} */
+                                const parsedTime = isoParse(d.key);
+                                return this.legendLabelFormat(parsedTime);
+                            default:
+                                return d.key;
+                        }
+                    }));
+                    return update;
+                }), (/**
+                 * @param {?} exit
                  * @return {?}
                  */
-                d => {
-                    // return this.legendLabelFormat === null ? d.label : this.legendLabelFormat(d.label);
-                    switch (this.legendLabelFormatType) {
-                        case 'number':
-                            return this.legendLabelFormat(d.key);
-                        case 'time':
-                            /** @type {?} */
-                            const parsedTime = isoParse(d.key);
-                            return this.legendLabelFormat(parsedTime);
-                        default:
-                            return d.key;
-                    }
-                }));
-                enterLegendItem
+                exit => exit.remove()))
                     .on('mouseover', (/**
                  * @param {?} data
                  * @param {?} index
@@ -4941,64 +5218,14 @@ class PbdsDatavizBarStackedComponent {
             bottom: +this.marginBottom,
             left: +this.marginLeft
         };
-        switch (this.xAxisFormatType) {
-            case 'number':
-                this.xAxisFormat = format(this.xAxisFormatString);
-                break;
-            case 'time':
-                this.xAxisFormat = timeFormat(this.xAxisFormatString);
-                break;
-        }
-        switch (this.yAxisFormatType) {
-            case 'number':
-                this.yAxisFormat = format(this.yAxisFormatString);
-                break;
-            case 'time':
-                this.yAxisFormat = timeFormat(this.yAxisFormatString);
-                break;
-        }
-        switch (this.legendLabelFormatType) {
-            case 'number':
-                this.legendLabelFormat = format(this.legendLabelFormatString);
-                break;
-            case 'time':
-                this.legendLabelFormat = timeFormat(this.legendLabelFormatString);
-                break;
-            default:
-                this.legendLabelFormat = null;
-                break;
-        }
-        switch (this.tooltipHeadingFormatType) {
-            case 'time':
-                this.tooltipHeadingFormat = timeFormat(this.tooltipHeadingFormatString);
-                break;
-            default:
-                this.tooltipHeadingFormat = null;
-                break;
-        }
-        switch (this.tooltipHeadingValueFormatType) {
-            case 'number':
-                this.tooltipHeadingValueFormat = format(this.tooltipHeadingValueFormatString);
-                break;
-            default:
-                this.tooltipHeadingValueFormat = null;
-                break;
-        }
-        switch (this.tooltipLabelFormatType) {
-            case 'time':
-                this.tooltipLabelFormat = timeFormat(this.tooltipLabelFormatString);
-                break;
-            default:
-                this.tooltipLabelFormat = null;
-                break;
-        }
-        switch (this.tooltipValueFormatType) {
-            case 'number':
-                this.tooltipValueFormat = format(this.tooltipValueFormatString);
-                break;
-            default:
-                this.tooltipValueFormat = null;
-        }
+        // create formatters
+        this.xAxisFormat = this._dataviz.d3Format(this.xAxisFormatType, this.xAxisFormatString);
+        this.yAxisFormat = this._dataviz.d3Format(this.yAxisFormatType, this.yAxisFormatString);
+        this.legendLabelFormat = this._dataviz.d3Format(this.legendLabelFormatType, this.legendLabelFormatString);
+        this.tooltipHeadingFormat = this._dataviz.d3Format(this.tooltipHeadingFormatType, this.tooltipHeadingFormatString);
+        this.tooltipHeadingValueFormat = this._dataviz.d3Format(this.tooltipHeadingValueFormatType, this.tooltipHeadingValueFormatString);
+        this.tooltipLabelFormat = this._dataviz.d3Format(this.tooltipLabelFormatType, this.tooltipLabelFormatString);
+        this.tooltipValueFormat = this._dataviz.d3Format(this.tooltipValueFormatType, this.tooltipValueFormatString);
         // defaults for all chart types
         this.hideGrayBars = false;
         this.hideYAxis = false;
@@ -5195,7 +5422,7 @@ class PbdsDatavizBarStackedComponent {
      */
     ngOnChanges(changes) {
         if (changes.data && !changes.data.firstChange) {
-            this.updateChart();
+            this.updateChart(false);
         }
     }
 }
@@ -5754,10 +5981,12 @@ class DatavizBubbleMapComponent {
     /**
      * @param {?} _element
      * @param {?} _scroll
+     * @param {?} _dataviz
      */
-    constructor(_element, _scroll) {
+    constructor(_element, _scroll, _dataviz) {
         this._element = _element;
         this._scroll = _scroll;
+        this._dataviz = _dataviz;
         this.chartClass = true;
         this.bubbleMapClass = true;
         this.feature = '';
@@ -6068,21 +6297,9 @@ class DatavizBubbleMapComponent {
             default:
                 break;
         }
-        switch (this.bubbleLabelFormatType) {
-            case 'number':
-                this.bubbleLabelFormat = format(this.bubbleLabelFormatString);
-                break;
-            default:
-                this.bubbleLabelFormat = null;
-                break;
-        }
-        switch (this.tooltipValueFormatType) {
-            case 'number':
-                this.tooltipValueFormat = format(this.tooltipValueFormatString);
-                break;
-            default:
-                this.tooltipValueFormat = null;
-        }
+        // dreate formatters
+        this.bubbleLabelFormat = this._dataviz.d3Format(this.bubbleLabelFormatType, this.bubbleLabelFormatString);
+        this.tooltipValueFormat = this._dataviz.d3Format(this.tooltipValueFormatType, this.tooltipValueFormatString);
         // console.log('TOPOJSON: ', this.topojson);
         this.topojsonFeature = feature(this.topojson, this.topojson.objects[this.feature]);
         this.projection.fitSize([+this.width, +this.height], this.topojsonFeature);
@@ -6154,10 +6371,14 @@ class DatavizBubbleMapComponent {
             .attr('class', 'map')
             .selectAll('path')
             .data(this.topojsonFeature.features)
-            .enter()
+            .join((/**
+         * @param {?} enter
+         * @return {?}
+         */
+        enter => enter
             .append('path')
             .attr('class', 'feature')
-            .attr('d', this.geoPath);
+            .attr('d', this.geoPath)));
         // borders
         this.svg
             .append('path')
@@ -6202,7 +6423,8 @@ DatavizBubbleMapComponent.decorators = [
 /** @nocollapse */
 DatavizBubbleMapComponent.ctorParameters = () => [
     { type: ElementRef },
-    { type: ViewportScroller }
+    { type: ViewportScroller },
+    { type: PbdsDatavizService }
 ];
 DatavizBubbleMapComponent.propDecorators = {
     chartClass: [{ type: HostBinding, args: ['class.pbds-chart',] }],
@@ -6382,6 +6604,11 @@ if (false) {
      * @private
      */
     DatavizBubbleMapComponent.prototype._scroll;
+    /**
+     * @type {?}
+     * @private
+     */
+    DatavizBubbleMapComponent.prototype._dataviz;
 }
 
 /**
@@ -6798,65 +7025,13 @@ class PbdsDatavizHeatmapComponent {
             bottom: +this.marginBottom,
             left: +this.marginLeft
         };
-        switch (this.yAxisFormatType) {
-            case 'number':
-                this.yAxisFormat = format(this.yAxisFormatString);
-                break;
-            case 'time':
-                this.yAxisFormat = timeFormat(this.yAxisFormatString);
-                break;
-            default:
-                this.yAxisFormat = null;
-                break;
-        }
-        switch (this.xAxisFormatType) {
-            case 'number':
-                this.xAxisFormat = format(this.xAxisFormatString);
-                break;
-            case 'time':
-                this.xAxisFormat = timeFormat(this.xAxisFormatString);
-                break;
-            default:
-                this.xAxisFormat = null;
-                break;
-        }
-        switch (this.legendLabelFormatType) {
-            case 'number':
-                this.legendLabelFormat = format(this.legendLabelFormatString);
-                break;
-            default:
-                this.legendLabelFormat = null;
-                break;
-        }
-        switch (this.tooltipYLabelFormatType) {
-            case 'number':
-                this.tooltipYLabelFormat = format(this.tooltipYLabelFormatString);
-                break;
-            case 'time':
-                this.tooltipYLabelFormat = timeFormat(this.tooltipYLabelFormatString);
-                break;
-            default:
-                this.tooltipYLabelFormat = null;
-                break;
-        }
-        switch (this.tooltipXLabelFormatType) {
-            case 'number':
-                this.tooltipXLabelFormat = format(this.tooltipXLabelFormatString);
-                break;
-            case 'time':
-                this.tooltipXLabelFormat = timeFormat(this.tooltipXLabelFormatString);
-                break;
-            default:
-                this.tooltipXLabelFormat = null;
-                break;
-        }
-        switch (this.tooltipValueFormatType) {
-            case 'number':
-                this.tooltipValueFormat = format(this.tooltipValueFormatString);
-                break;
-            default:
-                this.tooltipValueFormat = null;
-        }
+        // create formatters
+        this.yAxisFormat = this._dataviz.d3Format(this.yAxisFormatType, this.yAxisFormatString);
+        this.xAxisFormat = this._dataviz.d3Format(this.xAxisFormatType, this.xAxisFormatString);
+        this.legendLabelFormat = this._dataviz.d3Format(this.legendLabelFormatType, this.legendLabelFormatString);
+        this.tooltipYLabelFormat = this._dataviz.d3Format(this.tooltipYLabelFormatType, this.tooltipYLabelFormatString);
+        this.tooltipXLabelFormat = this._dataviz.d3Format(this.tooltipXLabelFormatType, this.tooltipXLabelFormatString);
+        this.tooltipValueFormat = this._dataviz.d3Format(this.tooltipValueFormatType, this.tooltipValueFormatString);
         // defaults for all chart types
         this.hideXAxis = false;
         this.hideXAxisZero = false;
@@ -7638,20 +7813,9 @@ class PbdsDatavizChoroplethMapComponent {
                 this.colorDomain = this.colorRange.thresholds();
                 break;
         }
-        switch (this.tooltipValueFormatType) {
-            case 'number':
-                this.tooltipValueFormat = format(this.tooltipValueFormatString);
-                break;
-            default:
-                this.tooltipValueFormat = null;
-        }
-        switch (this.legendValueFormatType) {
-            case 'number':
-                this.legendValueFormat = format(this.legendValueFormatString);
-                break;
-            default:
-                this.tooltipValueFormat = null;
-        }
+        // create formatters
+        this.tooltipValueFormat = this._dataviz.d3Format(this.tooltipValueFormatType, this.tooltipValueFormatString);
+        this.legendValueFormat = this._dataviz.d3Format(this.legendValueFormatType, this.legendValueFormatString);
         switch (this.projectionType) {
             case 'geoAlbers':
                 this.projection = geoAlbers();
@@ -7703,10 +7867,14 @@ class PbdsDatavizChoroplethMapComponent {
             .attr('class', 'map')
             .selectAll('path')
             .data(this.topojsonFeature.features)
-            .enter()
+            .join((/**
+         * @param {?} enter
+         * @return {?}
+         */
+        enter => enter
             .append('path')
             .attr('class', 'feature')
-            .attr('d', this.geoPath);
+            .attr('d', this.geoPath)));
         // borders
         this.svg
             .append('path')
@@ -7722,7 +7890,7 @@ class PbdsDatavizChoroplethMapComponent {
         if (!this.hideLegend) {
             this.svg
                 .append('g')
-                .attr('transform', `translate(${+this.legendLeft}, ${+this.legendTop})`) // TODO: this needs to be the top/right of the chart
+                .attr('transform', `translate(${+this.legendLeft}, ${+this.legendTop})`)
                 .call(this.legend);
         }
         this.updateChart();
@@ -8207,48 +8375,12 @@ class PbdsDatavizBarGroupedComponent {
             bottom: +this.marginBottom,
             left: +this.marginLeft
         };
-        switch (this.xAxisFormatType) {
-            case 'number':
-                this.xAxisFormat = format(this.xAxisFormatString);
-                break;
-            case 'time':
-                this.xAxisFormat = timeFormat(this.xAxisFormatString);
-                break;
-        }
-        switch (this.yAxisFormatType) {
-            case 'number':
-                this.yAxisFormat = format(this.yAxisFormatString);
-                break;
-            case 'time':
-                this.yAxisFormat = timeFormat(this.yAxisFormatString);
-                break;
-        }
-        switch (this.legendLabelFormatType) {
-            case 'number':
-                this.legendLabelFormat = format(this.legendLabelFormatString);
-                break;
-            case 'time':
-                this.legendLabelFormat = timeFormat(this.legendLabelFormatString);
-                break;
-            default:
-                this.legendLabelFormat = null;
-                break;
-        }
-        switch (this.tooltipLabelFormatType) {
-            case 'time':
-                this.tooltipLabelFormat = timeFormat(this.tooltipLabelFormatString);
-                break;
-            default:
-                this.tooltipLabelFormat = null;
-                break;
-        }
-        switch (this.tooltipValueFormatType) {
-            case 'number':
-                this.tooltipValueFormat = format(this.tooltipValueFormatString);
-                break;
-            default:
-                this.tooltipValueFormat = null;
-        }
+        // create formatters
+        this.xAxisFormat = this._dataviz.d3Format(this.xAxisFormatType, this.xAxisFormatString);
+        this.yAxisFormat = this._dataviz.d3Format(this.yAxisFormatType, this.yAxisFormatString);
+        this.legendLabelFormat = this._dataviz.d3Format(this.legendLabelFormatType, this.legendLabelFormatString);
+        this.tooltipLabelFormat = this._dataviz.d3Format(this.tooltipLabelFormatType, this.tooltipLabelFormatString);
+        this.tooltipValueFormat = this._dataviz.d3Format(this.tooltipValueFormatType, this.tooltipValueFormatString);
         // defaults for all chart types
         this.hideGrayBars = false;
         this.hideXAxisZero = false;
@@ -9792,29 +9924,10 @@ class PbdsDatavizBarSingleHorizontalComponent {
         };
         this.isSingleData = this.data.length === 1 ? true : false;
         this.isCompare = Object.keys(this.data[0]).includes('compareValue');
-        switch (this.xAxisFormatType) {
-            case 'number':
-                this.xAxisFormat = format(this.xAxisFormatString);
-                break;
-        }
-        switch (this.legendLabelFormatType) {
-            case 'number':
-                this.legendLabelFormat = format(this.legendLabelFormatString);
-                break;
-            case 'time':
-                this.legendLabelFormat = timeFormat(this.legendLabelFormatString);
-                break;
-            default:
-                this.legendLabelFormat = null;
-                break;
-        }
-        switch (this.tooltipValueFormatType) {
-            case 'number':
-                this.tooltipValueFormat = format(this.tooltipValueFormatString);
-                break;
-            default:
-                this.tooltipValueFormat = null;
-        }
+        // create formatters
+        this.xAxisFormat = this._dataviz.d3Format(this.xAxisFormatType, this.xAxisFormatString);
+        this.legendLabelFormat = this._dataviz.d3Format(this.legendLabelFormatType, this.legendLabelFormatString);
+        this.tooltipValueFormat = this._dataviz.d3Format(this.tooltipValueFormatType, this.tooltipValueFormatString);
         this.tooltipDateFormat = timeFormat(this.tooltipDateFormatString);
         this.tooltipPercentFormat = format(this.tooltipPercentFormatString);
         this.tooltipCompareChangeFormat = format(this.compareChangeFormatString);

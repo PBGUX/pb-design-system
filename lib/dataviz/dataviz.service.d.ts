@@ -4,4 +4,5 @@ export declare class PbdsDatavizService {
     getColors: (mono?: boolean, theme?: string) => any;
     createGradientDefs: (svg: any, mono?: boolean, theme?: string, vertical?: boolean) => any;
     createGlowFilter: (svg: any) => void;
+    d3Format(type: string, string: string): any;
 }

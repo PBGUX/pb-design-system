@@ -1,3 +1,9 @@
+# 6.0.7 - December 17, 2019
+
+- Slight change to Sunset tinted background color
+
+---
+
 #6.0.6 - November 19, 2019
 
 - Dataviz:
@@ -7,6 +13,8 @@
   - add threshold and average label inputs (for globalization)
   - tweak legend styling
   - update documentation
+
+---
 
 # 6.0.5 - November 14, 2019
 

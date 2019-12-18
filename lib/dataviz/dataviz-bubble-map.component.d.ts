@@ -1,9 +1,11 @@
 import { OnInit, OnChanges, EventEmitter, ElementRef, OnDestroy, SimpleChanges } from '@angular/core';
 import { ViewportScroller } from '@angular/common';
+import { PbdsDatavizService } from './dataviz.service';
 import { PbdsDatavizMapData } from './dataviz.interfaces';
 export declare class DatavizBubbleMapComponent implements OnInit, OnChanges, OnDestroy {
     private _element;
     private _scroll;
+    private _dataviz;
     chartClass: boolean;
     bubbleMapClass: boolean;
     data: Array<PbdsDatavizMapData>;
@@ -45,7 +47,7 @@ export declare class DatavizBubbleMapComponent implements OnInit, OnChanges, OnD
     private bubbleLabelFormat;
     private tooltip;
     private tooltipValueFormat;
-    constructor(_element: ElementRef, _scroll: ViewportScroller);
+    constructor(_element: ElementRef, _scroll: ViewportScroller, _dataviz: PbdsDatavizService);
     ngOnInit(): void;
     ngOnChanges(changes: SimpleChanges): void;
     ngOnDestroy(): void;

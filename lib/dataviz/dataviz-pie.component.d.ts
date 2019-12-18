@@ -29,7 +29,6 @@ export declare class PbdsDatavizPieComponent implements OnInit, OnChanges, OnDes
     private arcZoom;
     private svg;
     private pie;
-    private legend;
     private legendLabelFormat;
     private legendValueFormat;
     private innerRadius;
@@ -42,8 +41,12 @@ export declare class PbdsDatavizPieComponent implements OnInit, OnChanges, OnDes
     ngOnInit(): void;
     ngOnChanges(changes: SimpleChanges): void;
     ngOnDestroy(): void;
-    updateChart: () => void;
+    updateChart: (firstRun?: boolean) => void;
+    private arcEnterTween;
     private arcTween;
+    private arcExitTween;
+    private arcMouseOverTween;
+    private arcMouseOutTween;
     private legendMouseOverFocus;
     private legendMouseOutBlur;
     private pathMouseOver;
