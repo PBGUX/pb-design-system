@@ -20,3 +20,5 @@ export * from './lib/daterange-popover/daterange-popover.module';
 export * from './lib/daterange-popover/daterange-popover.interfaces';
 export * from './lib/daterange-popover/daterange-popover.service';
 export * from './lib/daterange-popover/daterange-popover.component';
+export * from './lib/progress-spinner/progress-spinner.module';
+export * from './lib/progress-spinner/progress-spinner.component';

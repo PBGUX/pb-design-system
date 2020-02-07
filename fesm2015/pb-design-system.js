@@ -11556,11 +11556,57 @@ if (false) {
  * @fileoverview added by tsickle
  * @suppress {checkTypes,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
  */
+class PbdsProgressSpinnerComponent {
+}
+PbdsProgressSpinnerComponent.decorators = [
+    { type: Component, args: [{
+                selector: 'pbds-progress-spinner',
+                template: `
+    <span role="alert" aria-live="assertive">
+      <span
+        class="sbl-circ"
+        [style.width.px]="size"
+        [style.height.px]="size"
+        [style.border-width.px]="size / 8"
+        aria-hidden="true"
+      ></span>
+      <span class="sr-only">Loading</span>
+    </span>
+  `,
+                styles: [".sbl-circ{height:48px;width:48px;color:var(--primary);position:relative;display:inline-block;border-width:6px;border-style:solid;border-radius:50%;border-top-color:transparent;-webkit-animation:1.5s linear infinite rotate;animation:1.5s linear infinite rotate}@-webkit-keyframes rotate{0%{-webkit-transform:rotate(0);transform:rotate(0)}100%{-webkit-transform:rotate(360deg);transform:rotate(360deg)}}@keyframes rotate{0%{-webkit-transform:rotate(0);transform:rotate(0)}100%{-webkit-transform:rotate(360deg);transform:rotate(360deg)}}"]
+            }] }
+];
+PbdsProgressSpinnerComponent.propDecorators = {
+    size: [{ type: Input }]
+};
+if (false) {
+    /** @type {?} */
+    PbdsProgressSpinnerComponent.prototype.size;
+}
+
+/**
+ * @fileoverview added by tsickle
+ * @suppress {checkTypes,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+ */
+class PbdsProgressSpinnerModule {
+}
+PbdsProgressSpinnerModule.decorators = [
+    { type: NgModule, args: [{
+                declarations: [PbdsProgressSpinnerComponent],
+                imports: [CommonModule],
+                exports: [PbdsProgressSpinnerComponent]
+            },] }
+];
 
 /**
  * @fileoverview added by tsickle
  * @suppress {checkTypes,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
  */
 
-export { CustomDatepickerI18n, DatavizBubbleMapComponent, PbdsDatavizBarComponent, PbdsDatavizBarGroupedComponent, PbdsDatavizBarSingleHorizontalComponent, PbdsDatavizBarStackedComponent, PbdsDatavizChoroplethMapComponent, PbdsDatavizGaugeComponent, PbdsDatavizHeatmapComponent, PbdsDatavizLineComponent, PbdsDatavizMetricBlockComponent, PbdsDatavizMetricIndicatorComponent, PbdsDatavizModule, PbdsDatavizPieComponent, PbdsDatavizService, PbdsDatavizSparklineComponent, PbdsDaterangePopoverComponent, PbdsDaterangePopoverModule, PbdsDaterangeService, PbdsHeaderShadowDirective, PbdsHeaderShadowModule };
+/**
+ * @fileoverview added by tsickle
+ * @suppress {checkTypes,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+ */
+
+export { CustomDatepickerI18n, DatavizBubbleMapComponent, PbdsDatavizBarComponent, PbdsDatavizBarGroupedComponent, PbdsDatavizBarSingleHorizontalComponent, PbdsDatavizBarStackedComponent, PbdsDatavizChoroplethMapComponent, PbdsDatavizGaugeComponent, PbdsDatavizHeatmapComponent, PbdsDatavizLineComponent, PbdsDatavizMetricBlockComponent, PbdsDatavizMetricIndicatorComponent, PbdsDatavizModule, PbdsDatavizPieComponent, PbdsDatavizService, PbdsDatavizSparklineComponent, PbdsDaterangePopoverComponent, PbdsDaterangePopoverModule, PbdsDaterangeService, PbdsHeaderShadowDirective, PbdsHeaderShadowModule, PbdsProgressSpinnerComponent, PbdsProgressSpinnerModule };
 //# sourceMappingURL=pb-design-system.js.map

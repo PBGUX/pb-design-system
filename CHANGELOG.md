@@ -1,3 +1,31 @@
+# 6.1 - February 7, 2020
+
+## Changes
+
+- Reverted Dashboard design to Card-based layout. See [Data Visualization > Dashboards](https://designsystem.pitneycloud.com/web/dataviz/dashboards) for examples and updated code. HTML change requires only to remove any `"border-*"` classes.
+- Restructured layout of Modals page to simplify content; no code changes
+- Removed PB Software content from website, removed brand category icons for LI, CES, CIM.
+
+## Additions
+
+- Progress Indicators:
+  - PBDS Spinner Component
+  - Angular Material sliding step-based "wizard"
+  - Angular Material selection list to Lists
+  - Angular Material progress button
+- Table header tooltip example
+- DS6 Sketch UI kit uploaded
+- Theme selector on DS web site persists your selection between visits
+- Added filter on Iconography page to facilitate searching for PBI icons
+
+## Fixes
+
+- Fixed sortable table header color
+- Fixed incorrect spacing on NG-Bootstrap and PrimeNG menu items
+- Fixed gradient in category widget SVG icons
+
+---
+
 # 6.0.7 - December 17, 2019
 
 - Slight change to Sunset tinted background color
@@ -92,7 +120,6 @@
 
 **Note:** PrimeNG 8.0.4 changed the implementation of table custom filters, use 8.0.2 if you are using filterConstraints. [See issue #8123](https://github.com/primefaces/primeng/issues/8123) for details.
 
-
 # 5.1.0 - May 1, 2019
 
 ## Changes (includes changes from beta)
@@ -110,10 +137,10 @@
 
 ## **Additions**
 
-- Added Pricing Plans 
+- Added Pricing Plans
 - Added Sliding Tabs (Angular Material)
 - Added Draggable table rows (PrimeNG)
-- Added table row "action menu" 
+- Added table row "action menu"
 - Added example of table with row headers
 - Added PrimeNG "Virtual Scroller" component
 - Added links to download fonts and icons
@@ -121,7 +148,6 @@
 - Added new glyphs to PBI icon fonts: headset, checkmark/x/- inside square, refresh, empty outline circle, outline circle with diagonal line
 - We now have approval from the PB Open Source Committee for all our open-source plugins, so teams will not need separate approval for these plugins. See the Tech Stack page for details.
 - Updated Geosearch API information
-
 
 ## Thank You
 
