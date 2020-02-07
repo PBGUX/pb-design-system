@@ -11,8 +11,8 @@
 - Progress Indicators:
   - PBDS Spinner Component
   - Angular Material sliding step-based "wizard"
-  - Angular Material selection list to Lists
   - Angular Material progress button
+- Angular Material selection list to Lists
 - Table header tooltip example
 - DS6 Sketch UI kit uploaded
 - Theme selector on DS web site persists your selection between visits
