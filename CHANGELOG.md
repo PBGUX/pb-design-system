@@ -1,3 +1,7 @@
+# 6.1.1 - February 11, 2020
+
+- Fix for error referring to the prism css file.
+
 # 6.1 - February 7, 2020
 
 ## Changes
