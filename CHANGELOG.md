@@ -1,3 +1,9 @@
+# 6.1.3 - February 13, 2020
+
+- Add `pbi-support` and `pbi-insights` icons to PBI Mini font
+
+---
+
 # 6.1.2 - February 11, 2020
 
 - Fix for missing css file errors.
@@ -36,7 +42,7 @@
 
 ---
 
-#6.0.6 - November 19, 2019
+# 6.0.6 - November 19, 2019
 
 - Dataviz:
   - add average and threshold keys to legend
@@ -97,7 +103,7 @@
 - Form input field labels are uppercase. The label and input must be wrapped in a `form-group` class, as shown on **Web > Components > Input Fields**. If you text in a label (such as "(required)" or "(optional)") that is in parentheses and should be upper/lowercase, wrap that in a `span` tag.
 - There is now only one style of Accordions. Gray and bordered accordions are no longer supported.
 - Tab content no longer has a bordered option. The style of the inactive tabs has changed.
-- Category widgets now use gradient icons. Gradient icons will be solid primary color on Safari <13 due to a Safari bug.
+- Category widgets now use gradient icons. Gradient icons will be solid primary color on Safari <13.1 due to a Safari bug.
 
 ## Additions
 
