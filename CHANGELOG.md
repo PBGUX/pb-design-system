@@ -1,3 +1,9 @@
+# 6.1.4 - February 25, 2020
+
+- Fixed page header component on compact ui
+
+---
+
 # 6.1.3 - February 13, 2020
 
 - Add `pbi-support` and `pbi-insights` icons to PBI Mini font
