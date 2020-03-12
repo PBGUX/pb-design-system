@@ -1,3 +1,10 @@
+# 6.1.5 - March 12, 2020
+
+- Fixed size of progress button to match other buttons, and added a "small" variant
+- Added a modifier class `container-fluid-limit` which, when added to a `container-fluid` will add more white space to the outside margins on large and extra-large screens.
+
+---
+
 # 6.1.4 - February 25, 2020
 
 - Fixed page header component on compact ui
