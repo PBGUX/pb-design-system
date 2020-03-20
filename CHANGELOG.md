@@ -1,3 +1,9 @@
+# 6.1.6 - March 20, 2020
+
+- adjust assignment of link color
+
+---
+
 # 6.1.5 - March 12, 2020
 
 - Fixed size of progress button to match other buttons, and added a "small" variant
