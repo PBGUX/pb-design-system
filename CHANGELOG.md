@@ -1,3 +1,12 @@
+# 6.1.7 - March 25, 2020
+
+- created class `.table-striped-on-white` for when you need a striped table in a white container on an otherwise tinted background page
+- fix font face inside sliding tabs
+- fix table header size on compact-ui tables
+- fix hover color of rows on striped tables
+
+---
+
 # 6.1.6 - March 20, 2020
 
 - adjust assignment of link color
