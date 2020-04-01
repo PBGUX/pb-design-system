@@ -1,3 +1,10 @@
+# 6.1.8 - April 1, 2020
+
+- added "pbi-rocket" icon to pbi-outline font
+- added padding to PrimeNG table row toggle to increase hit target
+
+---
+
 # 6.1.7 - March 25, 2020
 
 - created class `.table-striped-on-white` for when you need a striped table in a white container on an otherwise tinted background page
