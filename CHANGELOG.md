@@ -1,3 +1,12 @@
+# 6.1.9 - April 6, 2020
+
+- fix table header size on compact-ui primeNg tables
+- fix hover color of rows on striped tables
+- Removed class `.table-striped-on-white`, now striped tables will be colored correctly if place inside a card or other container with the Bootstrap `bg-white` class applied.
+- Fixed droparrow caret on disabled select menus to look disabled
+
+---
+
 # 6.1.8 - April 1, 2020
 
 - added "pbi-rocket" icon to pbi-outline font
