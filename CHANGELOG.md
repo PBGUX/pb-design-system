@@ -1,3 +1,9 @@
+# 6.1.10 - April 7, 2020
+
+- Fix styling of cards used within accordions
+
+---
+
 # 6.1.9 - April 6, 2020
 
 - fix table header size on compact-ui primeNg tables
