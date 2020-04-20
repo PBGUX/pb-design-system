@@ -1,3 +1,9 @@
+# 6.1.11 - April 20, 2020
+
+- Fix focus glow color on page-primary buttons (was using Bootstrap default focus glow)
+
+---
+
 # 6.1.10 - April 7, 2020
 
 - Fix styling of cards used within accordions
