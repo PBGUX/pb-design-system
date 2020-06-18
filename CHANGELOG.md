@@ -1,3 +1,18 @@
+# 6.1.12
+
+- Fix spacing between buttons
+- Fix header gradient issue on mobile screens
+- Fix code snippet for Empty State "list"
+- Fix missing checkbox background color in selection lists
+- Clean up code snippets
+- Form elements on white elements, when your app has the default tinted background. To ensure they work correctly, the containing
+- Fix error state of ng-select menus
+- Updated sort icons for PrimeNg 9
+
+---
+
+
+
 # 6.1.11 - April 20, 2020
 
 - Fix focus glow color on page-primary buttons (was using Bootstrap default focus glow)

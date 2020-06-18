@@ -1,8 +1,8 @@
 (function (global, factory) {
-    typeof exports === 'object' && typeof module !== 'undefined' ? factory(exports, require('@angular/core'), require('@angular/common'), require('@ng-bootstrap/ng-bootstrap'), require('d3'), require('topojson'), require('@angular/forms'), require('@angular/material/radio')) :
-    typeof define === 'function' && define.amd ? define('pb-design-system', ['exports', '@angular/core', '@angular/common', '@ng-bootstrap/ng-bootstrap', 'd3', 'topojson', '@angular/forms', '@angular/material/radio'], factory) :
-    (global = global || self, factory(global['pb-design-system'] = {}, global.ng.core, global.ng.common, global['^5']['1']['0'], global['^5']['9']['0'], global['^3']['0']['0'], global.ng.forms, global.ng.material.radio));
-}(this, (function (exports, core, common, ngBootstrap, d3, topojson, forms, radio) { 'use strict';
+    typeof exports === 'object' && typeof module !== 'undefined' ? factory(exports, require('@angular/core'), require('@angular/common'), require('@ng-bootstrap/ng-bootstrap'), require('d3-selection'), require('d3-scale'), require('d3-shape'), require('d3-interpolate'), require('d3-format'), require('d3-time-format'), require('d3'), require('d3-array'), require('d3-axis'), require('d3-ease'), require('d3-geo'), require('topojson'), require('d3-collection'), require('@angular/forms'), require('@angular/material/radio')) :
+    typeof define === 'function' && define.amd ? define('pb-design-system', ['exports', '@angular/core', '@angular/common', '@ng-bootstrap/ng-bootstrap', 'd3-selection', 'd3-scale', 'd3-shape', 'd3-interpolate', 'd3-format', 'd3-time-format', 'd3', 'd3-array', 'd3-axis', 'd3-ease', 'd3-geo', 'topojson', 'd3-collection', '@angular/forms', '@angular/material/radio'], factory) :
+    (global = global || self, factory(global['pb-design-system'] = {}, global.ng.core, global.ng.common, global['^5']['1']['0'], global['d3-selection'], global['d3-scale'], global['d3-shape'], global['d3-interpolate'], global['d3-format'], global['d3-time-format'], global['^5']['9']['0'], global['d3-array'], global['d3-axis'], global['d3-ease'], global['d3-geo'], global['^3']['0']['0'], global['d3-collection'], global.ng.forms, global.ng.material.radio));
+}(this, (function (exports, core, common, ngBootstrap, d3Selection, d3Scale, d3Shape, d3Interpolate, d3Format, d3TimeFormat, d3, d3Array, d3Axis, d3Ease, d3Geo, topojson, d3Collection, forms, radio) { 'use strict';
 
     /*! *****************************************************************************
     Copyright (c) Microsoft Corporation. All rights reserved.
@@ -573,7 +573,7 @@
                  * @return {?}
                  */
                 function (data, index, nodes) {
-                    _this.pathMouseOver(d3.event, data, index, nodes);
+                    _this.pathMouseOver(d3Selection.event, data, index, nodes);
                     // this.tooltipShow(this.chart.node(), data);
                 }))
                     .on('mousemove', (/**
@@ -603,7 +603,7 @@
                  * @return {?}
                  */
                 function (data, index, nodes) {
-                    _this.pathClick(d3.event, data, index, nodes);
+                    _this.pathClick(d3Selection.event, data, index, nodes);
                 }));
                 // legend
                 _this.chart
@@ -637,7 +637,7 @@
                         switch (_this.legendLabelFormatType) {
                             case 'time':
                                 /** @type {?} */
-                                var parsedTime = d3.isoParse(d.label);
+                                var parsedTime = d3TimeFormat.isoParse(d.label);
                                 return _this.legendLabelFormat(parsedTime);
                             default:
                                 return d.label;
@@ -670,7 +670,7 @@
                         switch (_this.legendLabelFormatType) {
                             case 'time':
                                 /** @type {?} */
-                                var parsedTime = d3.isoParse(d.label);
+                                var parsedTime = d3TimeFormat.isoParse(d.label);
                                 return _this.legendLabelFormat(parsedTime);
                             default:
                                 return d.label;
@@ -695,7 +695,7 @@
                  */
                 function (data, index, nodes) {
                     _this.legendMouseOverFocus(data, index, nodes);
-                    _this.pathMouseOver(d3.event, data, index, nodes);
+                    _this.pathMouseOver(d3Selection.event, data, index, nodes);
                 }))
                     .on('mouseout blur', (/**
                  * @param {?} data
@@ -714,7 +714,7 @@
                  * @return {?}
                  */
                 function (data, index, nodes) {
-                    _this.clicked.emit({ event: d3.event, data: data });
+                    _this.clicked.emit({ event: d3Selection.event, data: data });
                 }));
             });
             this.arcEnterTween = (/**
@@ -725,7 +725,7 @@
              */
             function (data, index, nodes) {
                 /** @type {?} */
-                var i = d3.interpolate(data.startAngle, data.endAngle);
+                var i = d3Interpolate.interpolate(data.startAngle, data.endAngle);
                 return (/**
                  * @param {?} t
                  * @return {?}
@@ -744,7 +744,7 @@
             function (data, index, nodes) {
                 // console.log('ARGS: ', data, index, nodes);
                 /** @type {?} */
-                var i = d3.interpolate(_this.currentData[index], data);
+                var i = d3Interpolate.interpolate(_this.currentData[index], data);
                 _this.currentData[index] = i(1);
                 return (/**
                  * @param {?} t
@@ -762,7 +762,7 @@
                 /** @type {?} */
                 var end = Object.assign({}, _this.currentData[index], { startAngle: _this.currentData[index].endAngle });
                 /** @type {?} */
-                var i = d3.interpolate(data, end);
+                var i = d3Interpolate.interpolate(data, end);
                 return (/**
                  * @param {?} t
                  * @return {?}
@@ -779,7 +779,7 @@
              */
             function (data, index, nodes) {
                 /** @type {?} */
-                var i = d3.interpolate(data.outerRadius, _this.outerRadius + _this.arcZoom);
+                var i = d3Interpolate.interpolate(data.outerRadius, _this.outerRadius + _this.arcZoom);
                 return (/**
                  * @param {?} t
                  * @return {?}
@@ -797,7 +797,7 @@
              */
             function (data, index, nodes) {
                 /** @type {?} */
-                var i = d3.interpolate(data.outerRadius, _this.outerRadius);
+                var i = d3Interpolate.interpolate(data.outerRadius, _this.outerRadius);
                 return (/**
                  * @param {?} t
                  * @return {?}
@@ -934,7 +934,7 @@
                 switch (_this.tooltipLabelFormatType) {
                     case 'time':
                         /** @type {?} */
-                        var parsedTime = d3.isoParse(data.data.label);
+                        var parsedTime = d3TimeFormat.isoParse(data.data.label);
                         label = _this.tooltipLabelFormat(parsedTime);
                         break;
                     default:
@@ -962,7 +962,7 @@
              */
             function (node) {
                 /** @type {?} */
-                var coordinates = d3.mouse(node);
+                var coordinates = d3Selection.mouse(node);
                 _this.tooltip.style('left', coordinates[0] + 16 + "px");
                 _this.tooltip.style('top', coordinates[1] + 16 + "px");
             });
@@ -982,12 +982,12 @@
             this.outerRadius = Math.min(this.width, this.height) / 2;
             this.arcZoom = 10;
             this.anglePad = 0.02;
-            this.legendValueFormat = d3.format(this.legendValueFormatString);
-            this.tooltipValueFormat = d3.format(this.tooltipValueFormatString);
+            this.legendValueFormat = d3Format.format(this.legendValueFormatString);
+            this.tooltipValueFormat = d3Format.format(this.tooltipValueFormatString);
             // create formatters
             this.legendLabelFormat = this._dataviz.d3Format(this.legendLabelFormatType, this.legendLabelFormatString);
             this.tooltipLabelFormat = this._dataviz.d3Format(this.tooltipLabelFormatType, this.tooltipLabelFormatString);
-            this.colorRange = d3.scaleOrdinal()
+            this.colorRange = d3Scale.scaleOrdinal()
                 .range(this.colors)
                 .domain(this.data.map((/**
              * @param {?} c
@@ -998,7 +998,7 @@
                 this.innerRadius = 0;
                 this.anglePad = 0;
             }
-            this.pie = d3.pie()
+            this.pie = d3Shape.pie()
                 .padAngle(this.anglePad)
                 .value((/**
              * @param {?} d
@@ -1006,10 +1006,10 @@
              */
             function (d) { return d.value; }))
                 .sort(null);
-            this.arc = d3.arc()
+            this.arc = d3Shape.arc()
                 .padRadius(this.outerRadius)
                 .innerRadius(this.innerRadius);
-            this.chart = d3.select(this._element.nativeElement).attr('aria-hidden', 'true');
+            this.chart = d3Selection.select(this._element.nativeElement).attr('aria-hidden', 'true');
             this.svg = this.chart
                 .append('svg')
                 .attr('width', this.width)
@@ -1349,12 +1349,12 @@
                 // update the yScale
                 _this.yAxisScale
                     .domain([
-                    d3.min(_this.data, (/**
+                    d3Array.min(_this.data, (/**
                      * @param {?} d
                      * @return {?}
                      */
                     function (d) { return d.value - d.value * +_this.yAxisMinBuffer; })),
-                    d3.max(_this.data, (/**
+                    d3Array.max(_this.data, (/**
                      * @param {?} d
                      * @return {?}
                      */
@@ -1532,7 +1532,7 @@
                      * @param {?} nodes
                      * @return {?}
                      */
-                    function (data, index, nodes) { return _this.barMouseOver(d3.event, data, index, nodes); }))
+                    function (data, index, nodes) { return _this.barMouseOver(d3Selection.event, data, index, nodes); }))
                         .on('mouseout', (/**
                      * @param {?} data
                      * @param {?} index
@@ -1546,7 +1546,7 @@
                      * @param {?} nodes
                      * @return {?}
                      */
-                    function (data, index, nodes) { return _this.barMouseClick(d3.event, data, index, nodes); }));
+                    function (data, index, nodes) { return _this.barMouseClick(d3Selection.event, data, index, nodes); }));
                 }
                 else {
                     // color bars
@@ -1644,7 +1644,7 @@
                      * @param {?} nodes
                      * @return {?}
                      */
-                    function (data, index, nodes) { return _this.barMouseOver(d3.event, data, index, nodes); }))
+                    function (data, index, nodes) { return _this.barMouseOver(d3Selection.event, data, index, nodes); }))
                         .on('mouseout', (/**
                      * @param {?} data
                      * @param {?} index
@@ -1658,7 +1658,7 @@
                      * @param {?} nodes
                      * @return {?}
                      */
-                    function (data, index, nodes) { return _this.barMouseClick(d3.event, data, index, nodes); }));
+                    function (data, index, nodes) { return _this.barMouseClick(d3Selection.event, data, index, nodes); }));
                 }
                 if (!_this.hideLegend) {
                     _this.chart
@@ -1691,7 +1691,7 @@
                                     return _this.legendLabelFormat(d.label);
                                 case 'time':
                                     /** @type {?} */
-                                    var parsedTime = d3.isoParse(d.label);
+                                    var parsedTime = d3TimeFormat.isoParse(d.label);
                                     return _this.legendLabelFormat(parsedTime);
                                 default:
                                     return d.label;
@@ -1713,7 +1713,7 @@
                                     return _this.legendLabelFormat(d.label);
                                 case 'time':
                                     /** @type {?} */
-                                    var parsedTime = d3.isoParse(d.label);
+                                    var parsedTime = d3TimeFormat.isoParse(d.label);
                                     return _this.legendLabelFormat(parsedTime);
                                 default:
                                     return d.label;
@@ -1730,7 +1730,7 @@
                      * @param {?} nodes
                      * @return {?}
                      */
-                    function (data, index, nodes) { return _this.legendMouseOver(d3.event, data, index, nodes); }))
+                    function (data, index, nodes) { return _this.legendMouseOver(d3Selection.event, data, index, nodes); }))
                         .on('mouseout', (/**
                      * @return {?}
                      */
@@ -1741,7 +1741,7 @@
                      * @param {?} nodes
                      * @return {?}
                      */
-                    function (data, index, nodes) { return _this.legendMouseClick(d3.event, data, index, nodes); }));
+                    function (data, index, nodes) { return _this.legendMouseClick(d3Selection.event, data, index, nodes); }));
                 }
                 if (_this.threshold) {
                     _this.yThreshold
@@ -1909,7 +1909,7 @@
                         break;
                     case 'time':
                         /** @type {?} */
-                        var parsedTime = d3.isoParse(data.label);
+                        var parsedTime = d3TimeFormat.isoParse(data.label);
                         label = _this.tooltipLabelFormat(parsedTime);
                         break;
                     default:
@@ -1944,7 +1944,7 @@
                         return _this.xAxisFormat(item);
                     case 'time':
                         /** @type {?} */
-                        var parseDate = d3.isoParse(item);
+                        var parseDate = d3TimeFormat.isoParse(item);
                         return _this.xAxisFormat(parseDate);
                     default:
                         return item;
@@ -1960,7 +1960,7 @@
                         return _this.yAxisFormat(item);
                     case 'time':
                         /** @type {?} */
-                        var parseDate = d3.isoParse(item);
+                        var parseDate = d3TimeFormat.isoParse(item);
                         return _this.yAxisFormat(parseDate);
                     default:
                         return item;
@@ -2055,7 +2055,7 @@
                 this.width = +this.width - +this.legendWidth;
             }
             // create the chart
-            this.chart = d3.select(this._element.nativeElement).attr('aria-hidden', 'true');
+            this.chart = d3Selection.select(this._element.nativeElement).attr('aria-hidden', 'true');
             // create chart svg
             this.svg = this.chart
                 .append('svg')
@@ -2068,9 +2068,9 @@
                 this.margin.bottom +
                 this.xAxisTitleMargin));
             // build color ranges
-            this.colorRange = d3.scaleOrdinal().range(this._dataviz.createGradientDefs(this.svg, this.singleSeries, this.theme));
+            this.colorRange = d3Scale.scaleOrdinal().range(this._dataviz.createGradientDefs(this.svg, this.singleSeries, this.theme));
             // X AXIS
-            this.xAxisScale = d3.scaleBand()
+            this.xAxisScale = d3Scale.scaleBand()
                 .domain(this.data.map((/**
              * @param {?} d
              * @return {?}
@@ -2082,7 +2082,7 @@
             !this.hideGrayBars
                 ? this.xAxisScale.paddingInner(0.1).paddingOuter(0)
                 : this.xAxisScale.paddingInner(0).paddingOuter(0);
-            this.xAxisCall = d3.axisBottom(this.xAxisScale)
+            this.xAxisCall = d3Axis.axisBottom(this.xAxisScale)
                 .tickSize(this.xAxisTickSize)
                 .tickSizeOuter(this.xAxisTickSizeOuter)
                 .tickFormat(this.xAxisFormatter);
@@ -2097,7 +2097,7 @@
                 .call(this.xAxisCall);
             // X GRIDLINES
             if (!this.hideXGrid) {
-                this.xGridCall = d3.axisBottom(this.xAxisScale).tickSize(-this.height);
+                this.xGridCall = d3Axis.axisBottom(this.xAxisScale).tickSize(-this.height);
                 this.xGrid = this.svg
                     .append('g')
                     .attr('class', 'grid grid-x')
@@ -2116,14 +2116,14 @@
                     .text(this.xAxisTitle);
             }
             // Y AXIS
-            this.yAxisScale = d3.scaleLinear()
+            this.yAxisScale = d3Scale.scaleLinear()
                 .domain([
-                d3.min(this.data, (/**
+                d3Array.min(this.data, (/**
                  * @param {?} d
                  * @return {?}
                  */
                 function (d) { return d.value - d.value * +_this.yAxisMinBuffer; })),
-                d3.max(this.data, (/**
+                d3Array.max(this.data, (/**
                  * @param {?} d
                  * @return {?}
                  */
@@ -2131,7 +2131,7 @@
             ])
                 .nice()
                 .rangeRound([this.height, 0]);
-            this.yAxisCall = d3.axisLeft(this.yAxisScale)
+            this.yAxisCall = d3Axis.axisLeft(this.yAxisScale)
                 .ticks(this.yAxisTicks)
                 .tickSize(this.yAxisTickSize)
                 .tickSizeOuter(this.yAxisTickSizeOuter)
@@ -2146,7 +2146,7 @@
                 .call(this.yAxisCall);
             // Y GRIDLINES
             if (!this.hideYGrid) {
-                this.yGridCall = d3.axisLeft(this.yAxisScale)
+                this.yGridCall = d3Axis.axisLeft(this.yAxisScale)
                     .ticks(this.yAxisTicks)
                     .tickSize(-this.width + this.margin.left + this.margin.right);
                 this.yGrid = this.svg
@@ -2174,7 +2174,7 @@
             }
             // TOOLTIP
             if (!this.hideTooltip) {
-                this.tooltip = d3.select('body')
+                this.tooltip = d3Selection.select('body')
                     .append('div')
                     .attr('class', 'pbds-tooltip south')
                     .style('opacity', 0)
@@ -2673,35 +2673,35 @@
             function () {
                 _this.mouserect.data(_this.data);
                 // update the xScale
-                _this.xAxisScale.domain(d3.extent(_this.data.dates, (/**
+                _this.xAxisScale.domain(d3Array.extent(_this.data.dates, (/**
                  * @param {?} d
                  * @param {?} i
                  * @return {?}
                  */
                 function (d, i) {
-                    return d3.isoParse(d);
+                    return d3TimeFormat.isoParse(d);
                 })));
                 // update the yScale
                 _this.yAxisScale
                     .domain([
-                    d3.min(_this.data.series, (/**
+                    d3Array.min(_this.data.series, (/**
                      * @param {?} d
                      * @param {?} i
                      * @return {?}
                      */
                     function (d, i) {
                         /** @type {?} */
-                        var minVal = +d3.min(d.values);
+                        var minVal = +d3Array.min(d.values);
                         return minVal - minVal * +_this.yAxisMinBuffer;
                     })),
-                    d3.max(_this.data.series, (/**
+                    d3Array.max(_this.data.series, (/**
                      * @param {?} d
                      * @param {?} i
                      * @return {?}
                      */
                     function (d, i) {
                         /** @type {?} */
-                        var maxVal = +d3.max(d.values);
+                        var maxVal = +d3Array.max(d.values);
                         return maxVal + maxVal * _this.yAxisMaxBuffer;
                     }))
                 ])
@@ -2767,7 +2767,7 @@
                         return enter
                             .transition()
                             .duration(1000)
-                            .ease(d3.easeQuadInOut)
+                            .ease(d3Ease.easeQuadInOut)
                             .attr('d', (/**
                          * @param {?} data
                          * @return {?}
@@ -2787,7 +2787,7 @@
                         return update
                             .transition()
                             .duration(1000)
-                            .ease(d3.easeQuadInOut)
+                            .ease(d3Ease.easeQuadInOut)
                             .attr('d', (/**
                          * @param {?} d
                          * @return {?}
@@ -2835,7 +2835,7 @@
                             return enter
                                 .transition()
                                 .duration(1000)
-                                .ease(d3.easeQuadInOut)
+                                .ease(d3Ease.easeQuadInOut)
                                 .attr('d', (/**
                              * @param {?} data
                              * @return {?}
@@ -2855,7 +2855,7 @@
                             return update
                                 .transition()
                                 .duration(1000)
-                                .ease(d3.easeQuadInOut)
+                                .ease(d3Ease.easeQuadInOut)
                                 .attr('d', (/**
                              * @param {?} d
                              * @return {?}
@@ -2907,7 +2907,7 @@
                              * @param {?} i
                              * @return {?}
                              */
-                            function (d, i) { return _this.xAxisScale(d3.isoParse(_this.data.dates[i])); }))
+                            function (d, i) { return _this.xAxisScale(d3TimeFormat.isoParse(_this.data.dates[i])); }))
                                 .attr('cy', (/**
                              * @param {?} d
                              * @return {?}
@@ -2923,7 +2923,7 @@
                                 return enter
                                     .transition()
                                     .duration(1000)
-                                    .ease(d3.easeQuadInOut)
+                                    .ease(d3Ease.easeQuadInOut)
                                     .attr('cy', (/**
                                  * @param {?} d
                                  * @return {?}
@@ -2962,7 +2962,7 @@
                              * @param {?} i
                              * @return {?}
                              */
-                            function (d, i) { return _this.xAxisScale(d3.isoParse(_this.data.dates[i])); }))
+                            function (d, i) { return _this.xAxisScale(d3TimeFormat.isoParse(_this.data.dates[i])); }))
                                 .attr('cy', (/**
                              * @param {?} d
                              * @return {?}
@@ -2983,13 +2983,13 @@
                                 return update
                                     .transition()
                                     .duration(1000)
-                                    .ease(d3.easeQuadInOut)
+                                    .ease(d3Ease.easeQuadInOut)
                                     .attr('cx', (/**
                                  * @param {?} d
                                  * @param {?} i
                                  * @return {?}
                                  */
-                                function (d, i) { return _this.xAxisScale(d3.isoParse(_this.data.dates[i])); }))
+                                function (d, i) { return _this.xAxisScale(d3TimeFormat.isoParse(_this.data.dates[i])); }))
                                     .attr('cy', (/**
                                  * @param {?} d
                                  * @return {?}
@@ -3038,7 +3038,7 @@
                                     return _this.legendLabelFormat(d.label);
                                 case 'time':
                                     /** @type {?} */
-                                    var parsedTime = d3.isoParse(d.label);
+                                    var parsedTime = d3TimeFormat.isoParse(d.label);
                                     return _this.legendLabelFormat(parsedTime);
                                 default:
                                     return d.label;
@@ -3060,7 +3060,7 @@
                                     return _this.legendLabelFormat(d.label);
                                 case 'time':
                                     /** @type {?} */
-                                    var parsedTime = d3.isoParse(d.label);
+                                    var parsedTime = d3TimeFormat.isoParse(d.label);
                                     return _this.legendLabelFormat(parsedTime);
                                 default:
                                     return d.label;
@@ -3078,7 +3078,7 @@
                      * @param {?} nodes
                      * @return {?}
                      */
-                    function (data, index, nodes) { return _this.legendMouseOver(d3.event, data, index, nodes); }))
+                    function (data, index, nodes) { return _this.legendMouseOver(d3Selection.event, data, index, nodes); }))
                         .on('mouseout', (/**
                      * @return {?}
                      */
@@ -3089,7 +3089,7 @@
                      * @param {?} nodes
                      * @return {?}
                      */
-                    function (data, index, nodes) { return _this.legendMouseClick(d3.event, data, index, nodes); }));
+                    function (data, index, nodes) { return _this.legendMouseClick(d3Selection.event, data, index, nodes); }));
                 }
                 if (!_this.hideTooltip) {
                     _this.tooltip
@@ -3240,10 +3240,10 @@
              */
             function (event, index, nodes) {
                 /** @type {?} */
-                var mouseXDate = _this.xAxisScale.invert(d3.mouse(nodes[0])[0]);
+                var mouseXDate = _this.xAxisScale.invert(d3Selection.mouse(nodes[0])[0]);
                 // return date at mouse x position
                 /** @type {?} */
-                var leftIndex = d3.bisectLeft(_this.data.dates, d3.isoFormat(mouseXDate));
+                var leftIndex = d3Array.bisectLeft(_this.data.dates, d3TimeFormat.isoFormat(mouseXDate));
                 // prevent error for 0 index
                 if (leftIndex === 0)
                     return false;
@@ -3255,7 +3255,7 @@
                 var closestDate = +mouseXDate - +dateLower > +dateUpper - mouseXDate ? dateUpper : dateLower;
                 // date mouse is closest to
                 /** @type {?} */
-                var closestIndex = _this.data.dates.indexOf(d3.isoFormat(closestDate));
+                var closestIndex = _this.data.dates.indexOf(d3TimeFormat.isoFormat(closestDate));
                 // which index the mouse is closest to
                 // console.log(+mouseXDate, leftIndex, +dateLower, +dateUpper, +closestDate, closestIndex);
                 /** @type {?} */
@@ -3337,7 +3337,7 @@
                  */
                 function (d) {
                     /** @type {?} */
-                    var parsedTime = d3.isoParse(_this.data.dates[closestIndex]);
+                    var parsedTime = d3TimeFormat.isoParse(_this.data.dates[closestIndex]);
                     return _this.tooltipHeadingFormat(parsedTime);
                 }));
                 _this.tooltip.selectAll('.tooltip-value').html((/**
@@ -3379,7 +3379,7 @@
              */
             function (item) {
                 /** @type {?} */
-                var parseDate = d3.isoParse(item);
+                var parseDate = d3TimeFormat.isoParse(item);
                 return _this.xAxisFormat(parseDate);
             });
             this.yAxisFormatter = (/**
@@ -3406,10 +3406,10 @@
             };
             this.clipPathId = nextId;
             // create formatters
-            this.xAxisFormat = d3.timeFormat(this.xAxisFormatString);
-            this.yAxisFormat = d3.format(this.yAxisFormatString);
+            this.xAxisFormat = d3TimeFormat.timeFormat(this.xAxisFormatString);
+            this.yAxisFormat = d3Format.format(this.yAxisFormatString);
             this.legendLabelFormat = this._dataviz.d3Format(this.legendLabelFormatType, this.legendLabelFormatString);
-            this.tooltipHeadingFormat = d3.timeFormat(this.tooltipHeadingFormatString);
+            this.tooltipHeadingFormat = d3TimeFormat.timeFormat(this.tooltipHeadingFormatString);
             this.tooltipLabelFormat = this._dataviz.d3Format(this.tooltipLabelFormatType, this.tooltipLabelFormatString);
             this.tooltipValueFormat = this._dataviz.d3Format(this.tooltipValueFormatType, this.tooltipValueFormatString);
             // defaults for all chart types
@@ -3454,13 +3454,13 @@
                 this.width = +this.width - +this.legendWidth;
             }
             // define line
-            this.d3line = d3.line()
+            this.d3line = d3Shape.line()
                 .x((/**
              * @param {?} d
              * @param {?} i
              * @return {?}
              */
-            function (d, i) { return _this.xAxisScale(d3.isoParse(_this.data.dates[i])); }))
+            function (d, i) { return _this.xAxisScale(d3TimeFormat.isoParse(_this.data.dates[i])); }))
                 .y((/**
              * @param {?} d
              * @return {?}
@@ -3468,17 +3468,17 @@
             function (d) { return _this.yAxisScale(d); }));
             // define line curve
             if (this.lineCurved) {
-                this.d3line.curve(d3.curveCatmullRom.alpha(0.5));
+                this.d3line.curve(d3Shape.curveCatmullRom.alpha(0.5));
             }
             // define area
             if (this.area) {
-                this.d3area = d3.area()
+                this.d3area = d3Shape.area()
                     .x((/**
                  * @param {?} d
                  * @param {?} i
                  * @return {?}
                  */
-                function (d, i) { return _this.xAxisScale(d3.isoParse(_this.data.dates[i])); }))
+                function (d, i) { return _this.xAxisScale(d3TimeFormat.isoParse(_this.data.dates[i])); }))
                     .y0(this.height)
                     .y1((/**
                  * @param {?} d
@@ -3487,11 +3487,11 @@
                  */
                 function (d, i) { return _this.yAxisScale(d); }));
                 if (this.lineCurved) {
-                    this.d3area.curve(d3.curveCatmullRom.alpha(0.5));
+                    this.d3area.curve(d3Shape.curveCatmullRom.alpha(0.5));
                 }
             }
             // create the chart
-            this.chart = d3.select(this._element.nativeElement).attr('aria-hidden', 'true');
+            this.chart = d3Selection.select(this._element.nativeElement).attr('aria-hidden', 'true');
             // create chart svg
             this.svg = this.chart
                 .append('svg')
@@ -3514,14 +3514,14 @@
              * @param {?} nodes
              * @return {?}
              */
-            function (data, index, nodes) { return _this.mouserectMouseMove(d3.event, index, nodes); }))
+            function (data, index, nodes) { return _this.mouserectMouseMove(d3Selection.event, index, nodes); }))
                 .on('mouseout', (/**
              * @param {?} data
              * @param {?} index
              * @param {?} nodes
              * @return {?}
              */
-            function (data, index, nodes) { return _this.mouserectMouseOut(d3.event, index, nodes); }))
+            function (data, index, nodes) { return _this.mouserectMouseOut(d3Selection.event, index, nodes); }))
                 .on('click', (/**
              * @param {?} data
              * @param {?} index
@@ -3535,21 +3535,21 @@
                 .attr('y2', this.height)
                 .attr('class', 'tooltip-line');
             // define color range
-            this.colorRange = d3.scaleOrdinal().range(this._dataviz.getColors(false, this.theme));
+            this.colorRange = d3Scale.scaleOrdinal().range(this._dataviz.getColors(false, this.theme));
             // add glow def
             this._dataviz.createGlowFilter(this.svg);
             // X AXIS
-            this.xAxisScale = d3.scaleTime()
-                .domain(d3.extent(this.data.dates, (/**
+            this.xAxisScale = d3Scale.scaleTime()
+                .domain(d3Array.extent(this.data.dates, (/**
              * @param {?} d
              * @param {?} i
              * @return {?}
              */
             function (d, i) {
-                return d3.isoParse(d);
+                return d3TimeFormat.isoParse(d);
             })))
                 .range([0, this.width - this.margin.left - this.margin.right]);
-            this.xAxisCall = d3.axisBottom(this.xAxisScale)
+            this.xAxisCall = d3Axis.axisBottom(this.xAxisScale)
                 .ticks(+this.xAxisTicks)
                 .tickSize(this.xAxisTickSize)
                 .tickSizeOuter(this.xAxisTickSizeOuter)
@@ -3565,7 +3565,7 @@
                 .call(this.xAxisCall);
             // X GRIDLINES
             if (!this.hideXGrid) {
-                this.xGridCall = d3.axisBottom(this.xAxisScale).tickSize(-this.height);
+                this.xGridCall = d3Axis.axisBottom(this.xAxisScale).tickSize(-this.height);
                 this.xGrid = this.svg
                     .append('g')
                     .attr('class', 'grid grid-x')
@@ -3574,32 +3574,32 @@
                     .call(this.xGridCall);
             }
             // Y AXIS
-            this.yAxisScale = d3.scaleLinear()
+            this.yAxisScale = d3Scale.scaleLinear()
                 .domain([
-                d3.min(this.data.series, (/**
+                d3Array.min(this.data.series, (/**
                  * @param {?} d
                  * @param {?} i
                  * @return {?}
                  */
                 function (d, i) {
                     /** @type {?} */
-                    var minVal = +d3.min(d.values);
+                    var minVal = +d3Array.min(d.values);
                     return minVal - minVal * +_this.yAxisMinBuffer;
                 })),
-                d3.max(this.data.series, (/**
+                d3Array.max(this.data.series, (/**
                  * @param {?} d
                  * @param {?} i
                  * @return {?}
                  */
                 function (d, i) {
                     /** @type {?} */
-                    var maxVal = +d3.max(d.values);
+                    var maxVal = +d3Array.max(d.values);
                     return maxVal + maxVal * _this.yAxisMaxBuffer;
                 }))
             ])
                 .nice()
                 .range([this.height, 0]);
-            this.yAxisCall = d3.axisLeft(this.yAxisScale)
+            this.yAxisCall = d3Axis.axisLeft(this.yAxisScale)
                 .ticks(this.yAxisTicks)
                 .tickSize(this.yAxisTickSize)
                 .tickSizeOuter(this.yAxisTickSizeOuter)
@@ -3614,7 +3614,7 @@
                 .call(this.yAxisCall);
             // Y GRIDLINES
             if (!this.hideYGrid) {
-                this.yGridCall = d3.axisLeft(this.yAxisScale)
+                this.yGridCall = d3Axis.axisLeft(this.yAxisScale)
                     .ticks(this.yAxisTicks)
                     .tickSize(-this.width + this.margin.left + this.margin.right);
                 this.yGrid = this.svg
@@ -3626,7 +3626,7 @@
             }
             // TOOLTIP
             if (!this.hideTooltip) {
-                this.tooltip = d3.select('body')
+                this.tooltip = d3Selection.select('body')
                     .append('div')
                     .attr('class', 'pbds-tooltip west')
                     .style('opacity', 0)
@@ -4214,7 +4214,7 @@
                  */
                 function (d) {
                     /** @type {?} */
-                    var interpolate$1 = d3.interpolate(d.endAngle, newAngle[0].endAngle);
+                    var interpolate$1 = d3Interpolate.interpolate(d.endAngle, newAngle[0].endAngle);
                     return (/**
                      * @param {?} t
                      * @return {?}
@@ -4236,14 +4236,14 @@
              * @return {?}
              */
             function (transition, value) {
-                value = d3.format('.4f')(value);
+                value = d3Format.format('.4f')(value);
                 value = value.replace(/,/g, '.');
                 transition.tween('text', (/**
                  * @return {?}
                  */
                 function () {
                     /** @type {?} */
-                    var interpolate$1 = d3.interpolate(d3.format('.4f')(+_this.oldValue), value);
+                    var interpolate$1 = d3Interpolate.interpolate(d3Format.format('.4f')(+_this.oldValue), value);
                     return (/**
                      * @param {?} t
                      * @return {?}
@@ -4272,7 +4272,7 @@
         function () {
             this.height = this.width;
             this.radius = Math.max(this.width, this.height) / 2;
-            this.labelFormat = d3.format(this.labelFormatString);
+            this.labelFormat = d3Format.format(this.labelFormatString);
             this.label = this.labelFormat(this.data.value);
             switch (this.type) {
                 case 'halfmoon':
@@ -4291,8 +4291,8 @@
                     this.rounded = false;
                     break;
             }
-            this.arc = d3.arc().cornerRadius(this.rounded ? this.gaugeWidth : 0);
-            this.chart = d3.select(this._element.nativeElement).attr('aria-hidden', 'true');
+            this.arc = d3Shape.arc().cornerRadius(this.rounded ? this.gaugeWidth : 0);
+            this.chart = d3Selection.select(this._element.nativeElement).attr('aria-hidden', 'true');
             this.svg = this.chart
                 .append('svg')
                 .attr('width', this.width)
@@ -4487,7 +4487,7 @@
             if (this.colorNegative === null) {
                 this.colorNegative = this.color;
             }
-            this.chart = d3.select(this._element.nativeElement).attr('aria-hidden', 'true');
+            this.chart = d3Selection.select(this._element.nativeElement).attr('aria-hidden', 'true');
             this.svg = this.chart
                 .append('svg')
                 .attr('width', this.width)
@@ -4536,15 +4536,15 @@
             /** @type {?} */
             var data = this.data;
             /** @type {?} */
-            var x = d3.scaleLinear()
+            var x = d3Scale.scaleLinear()
                 .domain([0, this.data.length])
                 .range([0, this.width - this.margin.left - this.margin.right]);
             /** @type {?} */
-            var y = d3.scaleLinear()
-                .domain([+d3.min(this.data) - this.yAxisMinBuffer, +d3.max(this.data) + this.yAxisMaxBuffer])
+            var y = d3Scale.scaleLinear()
+                .domain([+d3Array.min(this.data) - this.yAxisMinBuffer, +d3Array.max(this.data) + this.yAxisMaxBuffer])
                 .range([this.height - this.margin.top - this.margin.bottom, 0]);
             /** @type {?} */
-            var line$1 = d3.line()
+            var line$1 = d3Shape.line()
                 .x((/**
              * @param {?} d
              * @param {?} i
@@ -4557,7 +4557,7 @@
              */
             function (d) { return y(d); }));
             /** @type {?} */
-            var area$1 = d3.area()
+            var area$1 = d3Shape.area()
                 .x((/**
              * @param {?} d
              * @param {?} i
@@ -4806,9 +4806,9 @@
                  */
                 function (item) { return item !== 'key'; }));
                 // create the D3 stack data
-                _this.dataStack = d3.stack()
+                _this.dataStack = d3Shape.stack()
                     .keys(_this.dataKeys)
-                    .order(d3.stackOrderNone)(_this.data);
+                    .order(d3Shape.stackOrderNone)(_this.data);
                 // update the xScale
                 _this.xAxisScale.domain(_this.data.map((/**
                  * @param {?} d
@@ -4816,12 +4816,12 @@
                  */
                 function (d) { return d.key; })));
                 // update the yScale
-                _this.yAxisMax = d3.max(_this.dataStack, (/**
+                _this.yAxisMax = d3Array.max(_this.dataStack, (/**
                  * @param {?} data
                  * @return {?}
                  */
                 function (data) {
-                    return d3.max(data, (/**
+                    return d3Array.max(data, (/**
                      * @param {?} d
                      * @return {?}
                      */
@@ -5117,7 +5117,7 @@
                  * @param {?} nodes
                  * @return {?}
                  */
-                function (data, index, nodes) { return _this.barMouseOver(d3.event, data, index, nodes); }))
+                function (data, index, nodes) { return _this.barMouseOver(d3Selection.event, data, index, nodes); }))
                     .on('mouseout', (/**
                  * @param {?} data
                  * @param {?} index
@@ -5131,7 +5131,7 @@
                  * @param {?} nodes
                  * @return {?}
                  */
-                function (data, index, nodes) { return _this.barMouseClick(d3.event, data, index, nodes); }));
+                function (data, index, nodes) { return _this.barMouseClick(d3Selection.event, data, index, nodes); }));
                 _this.bars.raise();
                 _this.xAxis.raise();
                 _this.mouseBars.raise();
@@ -5166,7 +5166,7 @@
                                     return _this.legendLabelFormat(d.key);
                                 case 'time':
                                     /** @type {?} */
-                                    var parsedTime = d3.isoParse(d.key);
+                                    var parsedTime = d3TimeFormat.isoParse(d.key);
                                     return _this.legendLabelFormat(parsedTime);
                                 default:
                                     return d.key;
@@ -5188,7 +5188,7 @@
                                     return _this.legendLabelFormat(d.key);
                                 case 'time':
                                     /** @type {?} */
-                                    var parsedTime = d3.isoParse(d.key);
+                                    var parsedTime = d3TimeFormat.isoParse(d.key);
                                     return _this.legendLabelFormat(parsedTime);
                                 default:
                                     return d.key;
@@ -5206,7 +5206,7 @@
                      * @param {?} nodes
                      * @return {?}
                      */
-                    function (data, index, nodes) { return _this.legendMouseOver(d3.event, data, index, nodes); }))
+                    function (data, index, nodes) { return _this.legendMouseOver(d3Selection.event, data, index, nodes); }))
                         .on('mouseout', (/**
                      * @return {?}
                      */
@@ -5217,7 +5217,7 @@
                      * @param {?} nodes
                      * @return {?}
                      */
-                    function (data, index, nodes) { return _this.legendMouseClick(d3.event, data, index, nodes); }));
+                    function (data, index, nodes) { return _this.legendMouseClick(d3Selection.event, data, index, nodes); }));
                 }
             });
             this.barMouseOver = (/**
@@ -5314,7 +5314,7 @@
                         return _this.xAxisFormat(item);
                     case 'time':
                         /** @type {?} */
-                        var parseDate = d3.isoParse(item);
+                        var parseDate = d3TimeFormat.isoParse(item);
                         return _this.xAxisFormat(parseDate);
                     default:
                         return item;
@@ -5354,7 +5354,7 @@
                     switch (_this.tooltipHeadingFormatType) {
                         case 'time':
                             /** @type {?} */
-                            var parseDate = d3.isoParse(data.key);
+                            var parseDate = d3TimeFormat.isoParse(data.key);
                             return _this.tooltipHeadingFormat(parseDate);
                         default:
                             return data.key;
@@ -5401,7 +5401,7 @@
                         switch (_this.tooltipLabelFormatType) {
                             case 'time':
                                 /** @type {?} */
-                                var parseDate = d3.isoParse(key);
+                                var parseDate = d3TimeFormat.isoParse(key);
                                 label = _this.tooltipHeadingFormat(parseDate);
                                 break;
                             default:
@@ -5477,7 +5477,7 @@
                         return _this.yAxisFormat(item);
                     case 'time':
                         /** @type {?} */
-                        var parseDate = d3.isoParse(item);
+                        var parseDate = d3TimeFormat.isoParse(item);
                         return _this.yAxisFormat(parseDate);
                     default:
                         return item;
@@ -5498,9 +5498,9 @@
              */
             function (item) { return item !== 'key'; }));
             // create the D3 stack data
-            this.dataStack = d3.stack()
+            this.dataStack = d3Shape.stack()
                 .keys(this.dataKeys)
-                .order(d3.stackOrderNone)(this.data);
+                .order(d3Shape.stackOrderNone)(this.data);
             //////////////////////////////////////////
             this.margin = {
                 top: +this.marginTop,
@@ -5572,7 +5572,7 @@
                 this.width = +this.width - +this.legendWidth;
             }
             // create the chart
-            this.chart = d3.select(this._element.nativeElement).attr('aria-hidden', 'true');
+            this.chart = d3Selection.select(this._element.nativeElement).attr('aria-hidden', 'true');
             // create chart svg
             this.svg = this.chart
                 .append('svg')
@@ -5585,9 +5585,9 @@
             this.mouseBars = this.svg.append('g').attr('class', 'mouseover-bars');
             this.bars = this.svg.append('g').attr('class', 'bars');
             // build color ranges
-            this.colorRange = d3.scaleOrdinal().range(this._dataviz.getColors(false, this.theme));
+            this.colorRange = d3Scale.scaleOrdinal().range(this._dataviz.getColors(false, this.theme));
             // X AXIS
-            this.xAxisScale = d3.scaleBand()
+            this.xAxisScale = d3Scale.scaleBand()
                 .domain(this.data.map((/**
              * @param {?} d
              * @return {?}
@@ -5599,7 +5599,7 @@
             !this.hideGrayBars
                 ? this.xAxisScale.paddingInner(0.1).paddingOuter(0)
                 : this.xAxisScale.paddingInner(0).paddingOuter(0);
-            this.xAxisCall = d3.axisBottom(this.xAxisScale)
+            this.xAxisCall = d3Axis.axisBottom(this.xAxisScale)
                 .tickSize(this.xAxisTickSize)
                 .tickSizeOuter(this.xAxisTickSizeOuter)
                 .tickFormat(this.xAxisFormatter);
@@ -5614,7 +5614,7 @@
                 .call(this.xAxisCall);
             // X GRIDLINES
             if (!this.hideXGrid) {
-                this.xGridCall = d3.axisBottom(this.xAxisScale).tickSize(-this.height);
+                this.xGridCall = d3Axis.axisBottom(this.xAxisScale).tickSize(-this.height);
                 this.xGrid = this.svg
                     .append('g')
                     .attr('class', 'grid grid-x')
@@ -5633,12 +5633,12 @@
             //   })
             // );
             // Y AXIS
-            this.yAxisMax = d3.max(this.dataStack, (/**
+            this.yAxisMax = d3Array.max(this.dataStack, (/**
              * @param {?} data
              * @return {?}
              */
             function (data) {
-                return d3.max(data, (/**
+                return d3Array.max(data, (/**
                  * @param {?} d
                  * @return {?}
                  */
@@ -5647,11 +5647,11 @@
                 }));
             }));
             this.yAxisMax = this.yAxisMax + this.yAxisMax * this.yAxisMaxBuffer;
-            this.yAxisScale = d3.scaleLinear()
+            this.yAxisScale = d3Scale.scaleLinear()
                 .domain([0, this.yAxisMax])
                 .nice()
                 .rangeRound([this.height, 0]);
-            this.yAxisCall = d3.axisLeft(this.yAxisScale)
+            this.yAxisCall = d3Axis.axisLeft(this.yAxisScale)
                 .ticks(this.yAxisTicks)
                 .tickSize(this.yAxisTickSize)
                 .tickSizeOuter(this.yAxisTickSizeOuter)
@@ -5666,7 +5666,7 @@
                 .call(this.yAxisCall);
             // Y GRIDLINES
             if (!this.hideYGrid) {
-                this.yGridCall = d3.axisLeft(this.yAxisScale)
+                this.yGridCall = d3Axis.axisLeft(this.yAxisScale)
                     .ticks(this.yAxisTicks)
                     .tickSize(-this.width + this.margin.left + this.margin.right);
                 this.yGrid = this.svg
@@ -5678,7 +5678,7 @@
             }
             // TOOLTIP
             if (!this.hideTooltip) {
-                this.tooltip = d3.select('body')
+                this.tooltip = d3Selection.select('body')
                     .append('div')
                     .attr('class', 'pbds-tooltip west')
                     .style('opacity', 0)
@@ -6367,21 +6367,21 @@
                      * @param {?} nodes
                      * @return {?}
                      */
-                    function (data, index, nodes) { return _this.bubbleMouseOver(d3.event, data, index, nodes); }))
+                    function (data, index, nodes) { return _this.bubbleMouseOver(d3Selection.event, data, index, nodes); }))
                         .on('mouseout', (/**
                      * @param {?} data
                      * @param {?} index
                      * @param {?} nodes
                      * @return {?}
                      */
-                    function (data, index, nodes) { return _this.bubbleMouseOut(d3.event, data, index, nodes); }))
+                    function (data, index, nodes) { return _this.bubbleMouseOut(d3Selection.event, data, index, nodes); }))
                         .on('click', (/**
                      * @param {?} data
                      * @param {?} index
                      * @param {?} nodes
                      * @return {?}
                      */
-                    function (data, index, nodes) { return _this.bubbleMouseClick(d3.event, data, index, nodes); }));
+                    function (data, index, nodes) { return _this.bubbleMouseClick(d3Selection.event, data, index, nodes); }));
                     // bubble text
                     if (_this.type !== 'high' && !_this.dot) {
                         _this.bubbleContainer
@@ -6579,13 +6579,13 @@
             }
             switch (this.projectionType) {
                 case 'geoAlbers':
-                    this.projection = d3.geoAlbers();
+                    this.projection = d3Geo.geoAlbers();
                     break;
                 case 'geoAlbersUsa':
-                    this.projection = d3.geoAlbersUsa();
+                    this.projection = d3Geo.geoAlbersUsa();
                     break;
                 case 'geoMercator':
-                    this.projection = d3.geoMercator();
+                    this.projection = d3Geo.geoMercator();
                     break;
                 default:
                     break;
@@ -6605,28 +6605,28 @@
             if (this.center) {
                 this.projection.center(this.center);
             }
-            this.geoPath = d3.geoPath().projection(this.projection);
+            this.geoPath = d3Geo.geoPath().projection(this.projection);
             // bubble radius range
             if (this.data && !this.dot) {
-                this.bubbleRadius = d3.scaleLinear()
+                this.bubbleRadius = d3Scale.scaleLinear()
                     .range(this.bubbleSizeRange)
-                    .domain([d3.min(this.data, (/**
+                    .domain([d3Array.min(this.data, (/**
                      * @param {?} d
                      * @return {?}
                      */
-                    function (d) { return +d.value; })), d3.max(this.data, (/**
+                    function (d) { return +d.value; })), d3Array.max(this.data, (/**
                      * @param {?} d
                      * @return {?}
                      */
                     function (d) { return +d.value; }))]);
                 // font range
-                this.fontRange = d3.scaleLinear()
+                this.fontRange = d3Scale.scaleLinear()
                     .range(this.textSizeRange)
-                    .domain([d3.min(this.data, (/**
+                    .domain([d3Array.min(this.data, (/**
                      * @param {?} d
                      * @return {?}
                      */
-                    function (d) { return +d.value; })), d3.max(this.data, (/**
+                    function (d) { return +d.value; })), d3Array.max(this.data, (/**
                      * @param {?} d
                      * @return {?}
                      */
@@ -6634,7 +6634,7 @@
             }
             // TOOLTIP
             if (!this.hideTooltip) {
-                this.tooltip = d3.select('body')
+                this.tooltip = d3Selection.select('body')
                     .append('div')
                     .attr('class', 'pbds-tooltip south')
                     .style('opacity', 0)
@@ -6645,7 +6645,7 @@
                     this.tooltip.append('div').attr('class', 'tooltip-value');
             }
             // create the chart
-            this.chart = d3.select(this._element.nativeElement).attr('aria-hidden', 'true');
+            this.chart = d3Selection.select(this._element.nativeElement).attr('aria-hidden', 'true');
             // create chart svg
             this.svg = this.chart
                 .append('svg')
@@ -7048,7 +7048,7 @@
                  * @param {?} nodes
                  * @return {?}
                  */
-                function (data, index, nodes) { return _this.blockMouseOver(d3.event, data, index, nodes); }))
+                function (data, index, nodes) { return _this.blockMouseOver(d3Selection.event, data, index, nodes); }))
                     .on('mouseout', (/**
                  * @param {?} data
                  * @param {?} index
@@ -7062,7 +7062,7 @@
                  * @param {?} nodes
                  * @return {?}
                  */
-                function (data, index, nodes) { return _this.blockMouseClick(d3.event, data, index, nodes); }));
+                function (data, index, nodes) { return _this.blockMouseClick(d3Selection.event, data, index, nodes); }));
                 if (!_this.hideLegend) {
                     _this.chart
                         .select('.legend')
@@ -7129,7 +7129,7 @@
                      * @param {?} nodes
                      * @return {?}
                      */
-                    function (data, index, nodes) { return _this.legendMouseOver(d3.event, data, index, nodes); }))
+                    function (data, index, nodes) { return _this.legendMouseOver(d3Selection.event, data, index, nodes); }))
                         .on('mouseout', (/**
                      * @return {?}
                      */
@@ -7140,7 +7140,7 @@
                      * @param {?} nodes
                      * @return {?}
                      */
-                    function (data, index, nodes) { return _this.legendMouseClick(d3.event, data, index, nodes); }));
+                    function (data, index, nodes) { return _this.legendMouseClick(d3Selection.event, data, index, nodes); }));
                 }
             });
             this.blockMouseOver = (/**
@@ -7202,7 +7202,7 @@
                         return d.value < data;
                     }
                     else {
-                        return d.value < data || d.value >= +d3.select(nodes[index + 1]).data()[0];
+                        return d.value < data || d.value >= +d3Selection.select(nodes[index + 1]).data()[0];
                     }
                 }))
                     .classed('inactive', true);
@@ -7248,7 +7248,7 @@
                         break;
                     case 'time':
                         /** @type {?} */
-                        var parsedTime = d3.isoParse(data.yLabel);
+                        var parsedTime = d3TimeFormat.isoParse(data.yLabel);
                         yLabel = _this.tooltipYLabelFormat(parsedTime);
                         break;
                     default:
@@ -7260,7 +7260,7 @@
                         break;
                     case 'time':
                         /** @type {?} */
-                        var parsedTime = d3.isoParse(data.xLabel);
+                        var parsedTime = d3TimeFormat.isoParse(data.xLabel);
                         xLabel = _this.tooltipXLabelFormat(parsedTime);
                         break;
                     default:
@@ -7296,7 +7296,7 @@
                         return _this.xAxisFormat(item);
                     case 'time':
                         /** @type {?} */
-                        var parseDate = d3.isoParse(item);
+                        var parseDate = d3TimeFormat.isoParse(item);
                         return _this.xAxisFormat(parseDate);
                     default:
                         return item;
@@ -7312,7 +7312,7 @@
                         return _this.yAxisFormat(item);
                     case 'time':
                         /** @type {?} */
-                        var parseDate = d3.isoParse(item);
+                        var parseDate = d3TimeFormat.isoParse(item);
                         return _this.yAxisFormat(parseDate);
                     default:
                         return item;
@@ -7352,7 +7352,7 @@
             this.yAxisTickSize = 8;
             this.yAxisTickSizeOuter = 0;
             // create the chart
-            this.chart = d3.select(this._element.nativeElement).attr('aria-hidden', 'true');
+            this.chart = d3Selection.select(this._element.nativeElement).attr('aria-hidden', 'true');
             // create chart svg
             this.svg = this.chart
                 .append('svg')
@@ -7369,12 +7369,12 @@
                 .reverse();
             /** @type {?} */
             var colorDomain = [
-                +d3.min(this.data, (/**
+                +d3Array.min(this.data, (/**
                  * @param {?} d
                  * @return {?}
                  */
                 function (d) { return d.value; })),
-                +d3.max(this.data, (/**
+                +d3Array.max(this.data, (/**
                  * @param {?} d
                  * @return {?}
                  */
@@ -7388,19 +7388,19 @@
             function (d) { return d.value; }));
             switch (this.scale) {
                 case 'threshold':
-                    this.colorRange = d3.scaleThreshold()
+                    this.colorRange = d3Scale.scaleThreshold()
                         .domain(this.domain)
                         .range(colors);
                     this.colorDomain = this.colorRange.domain();
                     break;
                 case 'quantile':
-                    this.colorRange = d3.scaleQuantile()
+                    this.colorRange = d3Scale.scaleQuantile()
                         .domain(colorValues)
                         .range(colors);
                     this.colorDomain = this.colorRange.quantiles();
                     break;
                 case 'quantize':
-                    this.colorRange = d3.scaleQuantize()
+                    this.colorRange = d3Scale.scaleQuantize()
                         .domain(colorDomain)
                         .range(colors);
                     this.colorDomain = this.colorRange.thresholds();
@@ -7421,11 +7421,11 @@
              */
             function (d) { return d.yLabel; })))).reverse();
             // X axis
-            this.xAxisScale = d3.scaleBand()
+            this.xAxisScale = d3Scale.scaleBand()
                 .domain(xAxisLabels)
                 .rangeRound([0, this.width - this.margin.left])
                 .paddingInner(0.1);
-            this.xAxisCall = d3.axisBottom(this.xAxisScale)
+            this.xAxisCall = d3Axis.axisBottom(this.xAxisScale)
                 .tickSize(this.xAxisTickSize)
                 .tickSizeOuter(this.xAxisTickSizeOuter)
                 .tickFormat(this.xAxisFormatter);
@@ -7439,11 +7439,11 @@
                 .classed('axis-ticks-hidden', this.hideXAxisTicks)
                 .call(this.xAxisCall);
             // Y axis
-            this.yAxisScale = d3.scaleBand()
+            this.yAxisScale = d3Scale.scaleBand()
                 .domain(yAxisLabels)
                 .rangeRound([this.height, 0])
                 .paddingInner(0.1);
-            this.yAxisCall = d3.axisLeft(this.yAxisScale)
+            this.yAxisCall = d3Axis.axisLeft(this.yAxisScale)
                 .tickSize(this.yAxisTickSize)
                 .tickSizeOuter(this.yAxisTickSizeOuter)
                 .tickFormat(this.yAxisFormatter);
@@ -7457,7 +7457,7 @@
                 .call(this.yAxisCall);
             // TOOLTIP
             if (!this.hideTooltip) {
-                this.tooltip = d3.select('body')
+                this.tooltip = d3Selection.select('body')
                     .append('div')
                     .attr('class', 'pbds-tooltip south')
                     .style('opacity', 0)
@@ -7887,7 +7887,7 @@
                      * @return {?}
                      */
                     function (data, index, nodes) {
-                        return _this.featureMouseOver(d3.event, _this.data.find((/**
+                        return _this.featureMouseOver(d3Selection.event, _this.data.find((/**
                          * @param {?} obj
                          * @return {?}
                          */
@@ -7899,7 +7899,7 @@
                      * @param {?} nodes
                      * @return {?}
                      */
-                    function (data, index, nodes) { return _this.featureMouseOut(d3.event, _this.data, index, nodes); }))
+                    function (data, index, nodes) { return _this.featureMouseOut(d3Selection.event, _this.data, index, nodes); }))
                         .on('mousemove', (/**
                      * @param {?} data
                      * @param {?} index
@@ -7914,7 +7914,7 @@
                      * @return {?}
                      */
                     function (data, index, nodes) {
-                        return _this.featureMouseClick(d3.event, _this.data.find((/**
+                        return _this.featureMouseClick(d3Selection.event, _this.data.find((/**
                          * @param {?} obj
                          * @return {?}
                          */
@@ -8000,7 +8000,7 @@
              */
             function (node) {
                 /** @type {?} */
-                var mouse$1 = d3.mouse(node);
+                var mouse$1 = d3Selection.mouse(node);
                 /** @type {?} */
                 var mouseLeft = +mouse$1[0];
                 /** @type {?} */
@@ -8032,7 +8032,7 @@
                 var length = _this.colorRange.range().length;
                 // console.log(this.colorRange.range().length, this.colorDomain);
                 /** @type {?} */
-                var x = d3.scaleLinear()
+                var x = d3Scale.scaleLinear()
                     .domain([1, length - 1])
                     .rangeRound([+_this.legendWidth / length, (_this.legendWidth * (length - 1)) / length]);
                 g.attr('class', 'legend')
@@ -8064,9 +8064,9 @@
                         .attr('class', 'legend-label')
                         .text(_this.legendLabel);
                 }
-                g.call(d3.axisBottom(x)
+                g.call(d3Axis.axisBottom(x)
                     .tickSize(13)
-                    .tickValues(d3.range(1, length))
+                    .tickValues(d3Array.range(1, length))
                     .tickFormat((/**
                  * @param {?} i
                  * @return {?}
@@ -8099,11 +8099,11 @@
                 .slice()
                 .reverse();
             /** @type {?} */
-            var colorDomain = [+d3.min(this.data, (/**
+            var colorDomain = [+d3Array.min(this.data, (/**
                  * @param {?} d
                  * @return {?}
                  */
-                function (d) { return d.value; })), +d3.max(this.data, (/**
+                function (d) { return d.value; })), +d3Array.max(this.data, (/**
                  * @param {?} d
                  * @return {?}
                  */
@@ -8116,19 +8116,19 @@
             function (d) { return d.value; }));
             switch (this.colorScale) {
                 case 'threshold':
-                    this.colorRange = d3.scaleThreshold()
+                    this.colorRange = d3Scale.scaleThreshold()
                         .domain(this.domain)
                         .range(colors);
                     this.colorDomain = this.colorRange.domain();
                     break;
                 case 'quantile':
-                    this.colorRange = d3.scaleQuantile()
+                    this.colorRange = d3Scale.scaleQuantile()
                         .domain(colorValues)
                         .range(colors);
                     this.colorDomain = this.colorRange.quantiles();
                     break;
                 case 'quantize':
-                    this.colorRange = d3.scaleQuantize()
+                    this.colorRange = d3Scale.scaleQuantize()
                         .domain(colorDomain)
                         .range(colors);
                     this.colorDomain = this.colorRange.thresholds();
@@ -8139,13 +8139,13 @@
             this.legendValueFormat = this._dataviz.d3Format(this.legendValueFormatType, this.legendValueFormatString);
             switch (this.projectionType) {
                 case 'geoAlbers':
-                    this.projection = d3.geoAlbers();
+                    this.projection = d3Geo.geoAlbers();
                     break;
                 case 'geoAlbersUsa':
-                    this.projection = d3.geoAlbersUsa();
+                    this.projection = d3Geo.geoAlbersUsa();
                     break;
                 case 'geoMercator':
-                    this.projection = d3.geoMercator();
+                    this.projection = d3Geo.geoMercator();
                     break;
             }
             this.topojsonFeature = topojson.feature(this.topojson, this.topojson.objects[this.feature]);
@@ -8156,16 +8156,16 @@
             if (this.center) {
                 this.projection.center(this.center);
             }
-            this.geoPath = d3.geoPath().projection(this.projection);
+            this.geoPath = d3Geo.geoPath().projection(this.projection);
             // console.log('TOPOJSON: ', this.topojson);
             // console.log('TOPOJSON FEATURE: ', this.topojsonFeature);
             // console.log('MESH: ', topojson.mesh(this.topojson, this.topojson.objects[this.feature], (a, b) => a !== b));
             // console.log('DATA: ', this.data);
             // create the chart
-            this.chart = d3.select(this._element.nativeElement).attr('aria-hidden', 'true');
+            this.chart = d3Selection.select(this._element.nativeElement).attr('aria-hidden', 'true');
             // TOOLTIP
             if (!this.hideTooltip) {
-                this.tooltip = d3.select('body')
+                this.tooltip = d3Selection.select('body')
                     .append('div')
                     .attr('class', 'pbds-tooltip south')
                     .style('opacity', 0)
@@ -8508,7 +8508,7 @@
              */
             function (event, data, index, nodes) {
                 /** @type {?} */
-                var node = d3.select(nodes[index]);
+                var node = d3Selection.select(nodes[index]);
                 _this.chart
                     .selectAll('.bar-group')
                     .selectAll('.bar')
@@ -8622,7 +8622,7 @@
                         break;
                     case 'time':
                         /** @type {?} */
-                        var parsedTime = d3.isoParse(data.label);
+                        var parsedTime = d3TimeFormat.isoParse(data.label);
                         label = _this.tooltipLabelFormat(parsedTime);
                         break;
                     default:
@@ -8665,7 +8665,7 @@
                         return _this.xAxisFormat(item);
                     case 'time':
                         /** @type {?} */
-                        var parseDate = d3.isoParse(item);
+                        var parseDate = d3TimeFormat.isoParse(item);
                         return _this.xAxisFormat(parseDate);
                     default:
                         return item;
@@ -8681,7 +8681,7 @@
                         return _this.yAxisFormat(item);
                     case 'time':
                         /** @type {?} */
-                        var parseDate = d3.isoParse(item);
+                        var parseDate = d3TimeFormat.isoParse(item);
                         return _this.yAxisFormat(parseDate);
                     default:
                         return item;
@@ -8724,7 +8724,7 @@
                 this.width = +this.width - +this.legendWidth;
             }
             // create the chart
-            this.chart = d3.select(this._element.nativeElement).attr('aria-hidden', 'true');
+            this.chart = d3Selection.select(this._element.nativeElement).attr('aria-hidden', 'true');
             // create chart svg
             this.svg = this.chart
                 .append('svg')
@@ -8760,7 +8760,7 @@
             }));
             // TOOLTIP
             if (!this.hideTooltip) {
-                this.tooltip = d3.select('body')
+                this.tooltip = d3Selection.select('body')
                     .append('div')
                     .attr('class', (/**
                  * @return {?}
@@ -8777,10 +8777,10 @@
                 this.chart.append('ul').attr('class', "legend legend-" + this.legendPosition);
             }
             // build color ranges
-            this.colorRange = d3.scaleOrdinal().range(this._dataviz.createGradientDefs(this.svg, false, this.theme, this.vertical));
+            this.colorRange = d3Scale.scaleOrdinal().range(this._dataviz.createGradientDefs(this.svg, false, this.theme, this.vertical));
             if (this.vertical) {
                 // X AXIS
-                this.xAxisScale = d3.scaleBand()
+                this.xAxisScale = d3Scale.scaleBand()
                     .domain(this.data.map((/**
                  * @param {?} d
                  * @return {?}
@@ -8792,7 +8792,7 @@
                 !this.hideGrayBars
                     ? this.xAxisScale.paddingInner(0.1).paddingOuter(0)
                     : this.xAxisScale.paddingInner(0).paddingOuter(0);
-                this.xAxisCall = d3.axisBottom(this.xAxisScale)
+                this.xAxisCall = d3Axis.axisBottom(this.xAxisScale)
                     .tickSize(this.xAxisTickSize)
                     .tickSizeOuter(this.xAxisTickSizeOuter)
                     .tickFormat(this.xAxisFormatter);
@@ -8816,7 +8816,7 @@
                 //     .call(this.xGridCall);
                 // }
                 // Y AXIS
-                this.yAxisMax = d3.max(this.data, (/**
+                this.yAxisMax = d3Array.max(this.data, (/**
                  * @param {?} data
                  * @return {?}
                  */
@@ -8824,14 +8824,14 @@
                     /** @type {?} */
                     var clone = __assign({}, data);
                     delete clone.key;
-                    return d3.max(d3.values(clone));
+                    return d3Array.max(d3Collection.values(clone));
                 }));
                 this.yAxisMax = this.yAxisMax + this.yAxisMax * this.yAxisMaxBuffer;
-                this.yAxisScale = d3.scaleLinear()
+                this.yAxisScale = d3Scale.scaleLinear()
                     .domain([0, this.yAxisMax])
                     .nice()
                     .rangeRound([this.height, 0]);
-                this.yAxisCall = d3.axisLeft(this.yAxisScale)
+                this.yAxisCall = d3Axis.axisLeft(this.yAxisScale)
                     .ticks(this.yAxisTicks)
                     .tickSize(this.yAxisTickSize)
                     .tickSizeOuter(this.yAxisTickSizeOuter)
@@ -8846,7 +8846,7 @@
                     .call(this.yAxisCall);
                 // Y GRIDLINES
                 if (this.showGrid) {
-                    this.yGridCall = d3.axisLeft(this.yAxisScale)
+                    this.yGridCall = d3Axis.axisLeft(this.yAxisScale)
                         .ticks(this.yAxisTicks)
                         .tickSize(-this.width + this.margin.left + this.margin.right);
                     this.yGrid = this.svg
@@ -8857,7 +8857,7 @@
                         .call(this.yGridCall);
                 }
                 // color bar scale
-                this.barScale = d3.scaleBand()
+                this.barScale = d3Scale.scaleBand()
                     .domain(Object.keys(this.data[0]).slice(1))
                     .rangeRound([0, this.xAxisScale.bandwidth()])
                     .paddingInner(0.2)
@@ -8866,7 +8866,7 @@
             }
             else {
                 // X AXIS
-                this.xAxisMax = d3.max(this.data, (/**
+                this.xAxisMax = d3Array.max(this.data, (/**
                  * @param {?} data
                  * @return {?}
                  */
@@ -8874,14 +8874,14 @@
                     /** @type {?} */
                     var clone = __assign({}, data);
                     delete clone.key;
-                    return d3.max(d3.values(clone));
+                    return d3Array.max(d3Collection.values(clone));
                 }));
                 this.xAxisMax = this.xAxisMax + this.xAxisMax * this.xAxisMaxBuffer;
-                this.xAxisScale = d3.scaleLinear()
+                this.xAxisScale = d3Scale.scaleLinear()
                     .domain([0, this.xAxisMax])
                     .rangeRound([0, this.width])
                     .nice();
-                this.xAxisCall = d3.axisBottom(this.xAxisScale)
+                this.xAxisCall = d3Axis.axisBottom(this.xAxisScale)
                     .ticks(this.xAxisTicks)
                     .tickSize(this.xAxisTickSize)
                     .tickSizeOuter(this.xAxisTickSizeOuter)
@@ -8896,7 +8896,7 @@
                     .classed('axis-ticks-hidden', this.hideXAxisTicks)
                     .call(this.xAxisCall);
                 // Y AXIS
-                this.yAxisScale = d3.scaleBand()
+                this.yAxisScale = d3Scale.scaleBand()
                     .domain(this.data.map((/**
                  * @param {?} d
                  * @return {?}
@@ -8908,7 +8908,7 @@
                 !this.hideGrayBars
                     ? this.yAxisScale.paddingInner(0.1).paddingOuter(0)
                     : this.yAxisScale.paddingInner(0).paddingOuter(0);
-                this.yAxisCall = d3.axisLeft(this.yAxisScale)
+                this.yAxisCall = d3Axis.axisLeft(this.yAxisScale)
                     .tickSize(this.yAxisTickSize)
                     .tickSizeOuter(this.yAxisTickSizeOuter)
                     .tickFormat(this.yAxisFormatter);
@@ -8922,7 +8922,7 @@
                     .call(this.yAxisCall);
                 // X GRIDLINES
                 if (this.showGrid) {
-                    this.xGridCall = d3.axisBottom(this.xAxisScale).tickSize(-this.height);
+                    this.xGridCall = d3Axis.axisBottom(this.xAxisScale).tickSize(-this.height);
                     this.xGrid = this.svg
                         .append('g')
                         .attr('class', 'grid grid-x')
@@ -8943,7 +8943,7 @@
                 //     .call(this.yGridCall);
                 // }
                 // color bar scale
-                this.barScale = d3.scaleBand()
+                this.barScale = d3Scale.scaleBand()
                     .domain(Object.keys(this.data[0]).slice(1))
                     .rangeRound([this.yAxisScale.bandwidth(), 0])
                     .paddingInner(0.2)
@@ -8994,7 +8994,7 @@
              */
             function (d) { return d.key; })));
             // update the yScale
-            this.yAxisMax = d3.max(this.data, (/**
+            this.yAxisMax = d3Array.max(this.data, (/**
              * @param {?} data
              * @return {?}
              */
@@ -9002,7 +9002,7 @@
                 /** @type {?} */
                 var clone = __assign({}, data);
                 delete clone.key;
-                return d3.max(d3.values(clone));
+                return d3Array.max(d3Collection.values(clone));
             }));
             this.yAxisMax = this.yAxisMax + this.yAxisMax * this.yAxisMaxBuffer;
             this.yAxisScale
@@ -9234,7 +9234,7 @@
              * @param {?} nodes
              * @return {?}
              */
-            function (data, index, nodes) { return _this.barMouseOver(d3.event, data, index, nodes); }))
+            function (data, index, nodes) { return _this.barMouseOver(d3Selection.event, data, index, nodes); }))
                 .on('mouseout', (/**
              * @param {?} data
              * @param {?} index
@@ -9248,7 +9248,7 @@
              * @param {?} nodes
              * @return {?}
              */
-            function (data, index, nodes) { return _this.barMouseClick(d3.event, data, index, nodes); }));
+            function (data, index, nodes) { return _this.barMouseClick(d3Selection.event, data, index, nodes); }));
             this.updateLegend();
             this.svg.selectAll('.axis').raise();
         };
@@ -9261,7 +9261,7 @@
         function () {
             var _this = this;
             // update the xScale
-            this.xAxisMax = d3.max(this.data, (/**
+            this.xAxisMax = d3Array.max(this.data, (/**
              * @param {?} data
              * @return {?}
              */
@@ -9269,7 +9269,7 @@
                 /** @type {?} */
                 var clone = __assign({}, data);
                 delete clone.key;
-                return d3.max(d3.values(clone));
+                return d3Array.max(d3Collection.values(clone));
             }));
             this.xAxisMax = this.xAxisMax + this.xAxisMax * this.xAxisMaxBuffer;
             this.xAxisScale
@@ -9486,7 +9486,7 @@
              * @param {?} nodes
              * @return {?}
              */
-            function (data, index, nodes) { return _this.barMouseOver(d3.event, data, index, nodes); }))
+            function (data, index, nodes) { return _this.barMouseOver(d3Selection.event, data, index, nodes); }))
                 .on('mouseout', (/**
              * @param {?} data
              * @param {?} index
@@ -9500,7 +9500,7 @@
              * @param {?} nodes
              * @return {?}
              */
-            function (data, index, nodes) { return _this.barMouseClick(d3.event, data, index, nodes); }));
+            function (data, index, nodes) { return _this.barMouseClick(d3Selection.event, data, index, nodes); }));
             this.updateLegend();
             this.svg.selectAll('.axis').raise();
         };
@@ -9555,7 +9555,7 @@
                                 return _this.legendLabelFormat(d.label);
                             case 'time':
                                 /** @type {?} */
-                                var parsedTime = d3.isoParse(d.label);
+                                var parsedTime = d3TimeFormat.isoParse(d.label);
                                 return _this.legendLabelFormat(parsedTime);
                             default:
                                 return d.label;
@@ -9577,7 +9577,7 @@
                                 return _this.legendLabelFormat(d.label);
                             case 'time':
                                 /** @type {?} */
-                                var parsedTime = d3.isoParse(d.label);
+                                var parsedTime = d3TimeFormat.isoParse(d.label);
                                 return _this.legendLabelFormat(parsedTime);
                             default:
                                 return d.label;
@@ -9595,7 +9595,7 @@
                  * @param {?} nodes
                  * @return {?}
                  */
-                function (data, index, nodes) { return _this.legendMouseOver(d3.event, data, index, nodes); }))
+                function (data, index, nodes) { return _this.legendMouseOver(d3Selection.event, data, index, nodes); }))
                     .on('mouseout', (/**
                  * @return {?}
                  */
@@ -9606,7 +9606,7 @@
                  * @param {?} nodes
                  * @return {?}
                  */
-                function (data, index, nodes) { return _this.legendMouseClick(d3.event, data, index, nodes); }));
+                function (data, index, nodes) { return _this.legendMouseClick(d3Selection.event, data, index, nodes); }));
             }
         };
         PbdsDatavizBarGroupedComponent.decorators = [
@@ -10014,7 +10014,7 @@
              */
             function (event, data, index, nodes) {
                 /** @type {?} */
-                var node = d3.select(nodes[index]);
+                var node = d3Selection.select(nodes[index]);
                 _this.chart.selectAll('.bar').classed('inactive', true);
                 node.classed('inactive', false);
                 _this.chart
@@ -10064,13 +10064,13 @@
                 /** @type {?} */
                 var scroll = _this._scroll.getScrollPosition();
                 /** @type {?} */
-                var percentage = data.value / d3.sum(_this.data, (/**
+                var percentage = data.value / d3Array.sum(_this.data, (/**
                  * @param {?} d
                  * @return {?}
                  */
                 function (d) { return d.value; }));
                 /** @type {?} */
-                var comparePercentage = data.compareValue / d3.sum(_this.data, (/**
+                var comparePercentage = data.compareValue / d3Array.sum(_this.data, (/**
                  * @param {?} d
                  * @return {?}
                  */
@@ -10100,7 +10100,7 @@
                             break;
                         case 'time':
                             /** @type {?} */
-                            var parsedTime = d3.isoParse(data.label);
+                            var parsedTime = d3TimeFormat.isoParse(data.label);
                             tooltipLabel = _this.tooltipLabelFormat(parsedTime);
                             break;
                         default:
@@ -10111,7 +10111,7 @@
                 if (_this.isCompare && data.compareStartDate && data.compareEndDate) {
                     _this.tooltip.classed('pbds-tooltip-compare', _this.isCompare);
                     tooltipCompareDaterangeMargin = "mt-2";
-                    tooltipCompareDaterange = _this.tooltipDateFormat(d3.isoParse(data.compareStartDate)) + " - " + _this.tooltipDateFormat(d3.isoParse(data.compareEndDate));
+                    tooltipCompareDaterange = _this.tooltipDateFormat(d3TimeFormat.isoParse(data.compareStartDate)) + " - " + _this.tooltipDateFormat(d3TimeFormat.isoParse(data.compareEndDate));
                 }
                 // tooltip compare value
                 if (_this.percentage && _this.isCompare && data.compareValue) {
@@ -10131,7 +10131,7 @@
                 }
                 // tooltip daterange
                 if (data.startDate && data.endDate) {
-                    tooltipDaterange = _this.tooltipDateFormat(d3.isoParse(data.startDate)) + " - " + _this.tooltipDateFormat(d3.isoParse(data.endDate));
+                    tooltipDaterange = _this.tooltipDateFormat(d3TimeFormat.isoParse(data.startDate)) + " - " + _this.tooltipDateFormat(d3TimeFormat.isoParse(data.endDate));
                 }
                 //tooltip daterange margin
                 if (tooltipLabel !== '') {
@@ -10296,9 +10296,9 @@
             this.xAxisFormat = this._dataviz.d3Format(this.xAxisFormatType, this.xAxisFormatString);
             this.legendLabelFormat = this._dataviz.d3Format(this.legendLabelFormatType, this.legendLabelFormatString);
             this.tooltipValueFormat = this._dataviz.d3Format(this.tooltipValueFormatType, this.tooltipValueFormatString);
-            this.tooltipDateFormat = d3.timeFormat(this.tooltipDateFormatString);
-            this.tooltipPercentFormat = d3.format(this.tooltipPercentFormatString);
-            this.tooltipCompareChangeFormat = d3.format(this.compareChangeFormatString);
+            this.tooltipDateFormat = d3TimeFormat.timeFormat(this.tooltipDateFormatString);
+            this.tooltipPercentFormat = d3Format.format(this.tooltipPercentFormatString);
+            this.tooltipCompareChangeFormat = d3Format.format(this.compareChangeFormatString);
             // defaults for all chart types
             this.hideXAxisZero = false;
             this.hideXAxisDomain = true;
@@ -10310,7 +10310,7 @@
                 this.width = +this.width - +this.legendWidth;
             }
             // create the chart
-            this.chart = d3.select(this._element.nativeElement).attr('aria-hidden', 'true');
+            this.chart = d3Selection.select(this._element.nativeElement).attr('aria-hidden', 'true');
             // create chart svg
             this.svg = this.chart
                 .append('svg')
@@ -10335,7 +10335,7 @@
             }));
             // TOOLTIP
             if (!this.hideTooltip) {
-                this.tooltip = d3.select('body')
+                this.tooltip = d3Selection.select('body')
                     .append('div')
                     .attr('class', 'pbds-tooltip south')
                     .classed('pbds-tooltip-compare', this.isCompare)
@@ -10348,14 +10348,14 @@
                 this.chart.append('ul').attr('class', "legend legend-" + this.legendPosition);
             }
             // X AXIS
-            this.xAxisScale = d3.scaleLinear()
-                .domain([0, Math.ceil(d3.sum(this.data, (/**
+            this.xAxisScale = d3Scale.scaleLinear()
+                .domain([0, Math.ceil(d3Array.sum(this.data, (/**
                  * @param {?} d
                  * @return {?}
                  */
                 function (d) { return d.value; })))])
                 .range([0, +this.width]);
-            this.xAxisCall = d3.axisBottom(this.xAxisScale)
+            this.xAxisCall = d3Axis.axisBottom(this.xAxisScale)
                 // .tickValues([0, d3_sum(this.data, (d: any) => d.value)])
                 .ticks(this.xAxisTicks)
                 .tickSize(this.xAxisTickSize)
@@ -10372,7 +10372,7 @@
             // .call(this.xAxisCall);
             // X GRIDLINES
             if (!this.hideXGrid) {
-                this.xGridCall = d3.axisBottom(this.xAxisScale).tickSize(-this.height);
+                this.xGridCall = d3Axis.axisBottom(this.xAxisScale).tickSize(-this.height);
                 this.xGrid = this.svg
                     .append('g')
                     .attr('class', 'grid grid-x')
@@ -10401,7 +10401,7 @@
             else {
                 colors = this._dataviz.getColors(this.monochrome, this.theme);
             }
-            this.colorRange = d3.scaleOrdinal().range(colors);
+            this.colorRange = d3Scale.scaleOrdinal().range(colors);
             this.updateChart();
         };
         /**
@@ -10438,7 +10438,7 @@
             this.isSingleData = this.data.length === 1 ? true : false;
             this.isCompare = Object.keys(this.data[0]).includes('compareValue');
             /** @type {?} */
-            var sumValues = d3.sum(this.data, (/**
+            var sumValues = d3Array.sum(this.data, (/**
              * @param {?} d
              * @return {?}
              */
@@ -10481,8 +10481,8 @@
                  */
                 function (d, i) {
                     /** @type {?} */
-                    var format$1 = d3.format('.0%');
-                    return format$1(i * 0.25);
+                    var format = d3Format.format('.0%');
+                    return format(i * 0.25);
                 }));
             }
             else if (this.percentage && this.isSingleData) {
@@ -10501,8 +10501,8 @@
                  */
                 function (d, i) {
                     /** @type {?} */
-                    var format$1 = d3.format('.0%');
-                    return format$1(i * 0.25);
+                    var format = d3Format.format('.0%');
+                    return format(i * 0.25);
                 }));
             }
             else {
@@ -10591,7 +10591,7 @@
                      * @return {?}
                      */
                     function (d, i) { return i * 250; }))
-                        .ease(d3.easeLinear)
+                        .ease(d3Ease.easeLinear)
                         .attr('width', (/**
                      * @param {?} d
                      * @param {?} i
@@ -10674,7 +10674,7 @@
              * @param {?} nodes
              * @return {?}
              */
-            function (data, index, nodes) { return _this.barMouseOver(d3.event, data, index, nodes); }))
+            function (data, index, nodes) { return _this.barMouseOver(d3Selection.event, data, index, nodes); }))
                 .on('mouseout', (/**
              * @param {?} data
              * @param {?} index
@@ -10688,7 +10688,7 @@
              * @param {?} nodes
              * @return {?}
              */
-            function (data, index, nodes) { return _this.barMouseClick(d3.event, data, index, nodes); }));
+            function (data, index, nodes) { return _this.barMouseClick(d3Selection.event, data, index, nodes); }));
             if (!this.hideLegend) {
                 this.chart
                     .select('.legend')
@@ -10729,7 +10729,7 @@
                                 return _this.legendLabelFormat(d.label);
                             case 'time':
                                 /** @type {?} */
-                                var parsedTime = d3.isoParse(d.label);
+                                var parsedTime = d3TimeFormat.isoParse(d.label);
                                 return _this.legendLabelFormat(parsedTime);
                             default:
                                 return d.label;
@@ -10774,7 +10774,7 @@
                                 return _this.legendLabelFormat(d.label);
                             case 'time':
                                 /** @type {?} */
-                                var parsedTime = d3.isoParse(d.label);
+                                var parsedTime = d3TimeFormat.isoParse(d.label);
                                 return _this.legendLabelFormat(parsedTime);
                             default:
                                 return d.label;
@@ -10792,7 +10792,7 @@
                  * @param {?} nodes
                  * @return {?}
                  */
-                function (data, index, nodes) { return _this.legendMouseOver(d3.event, data, index, nodes); }))
+                function (data, index, nodes) { return _this.legendMouseOver(d3Selection.event, data, index, nodes); }))
                     .on('mouseout', (/**
                  * @return {?}
                  */
@@ -10803,7 +10803,7 @@
                  * @param {?} nodes
                  * @return {?}
                  */
-                function (data, index, nodes) { return _this.legendMouseClick(d3.event, data, index, nodes); }));
+                function (data, index, nodes) { return _this.legendMouseClick(d3Selection.event, data, index, nodes); }));
             }
         };
         PbdsDatavizBarSingleHorizontalComponent.decorators = [

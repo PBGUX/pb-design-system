@@ -1,9 +1,20 @@
 import { Injectable, ɵɵdefineInjectable, EventEmitter, Component, ChangeDetectionStrategy, ElementRef, HostBinding, Input, Output, ContentChild, NgModule, Directive, HostListener, Inject, LOCALE_ID, ɵɵinject, ViewChild } from '@angular/core';
 import { ViewportScroller, Location, CommonModule, registerLocaleData, getLocaleDayNames, FormStyle, TranslationWidth, getLocaleMonthNames, getLocaleFirstDayOfWeek, getLocaleDateFormat, FormatWidth, formatDate } from '@angular/common';
 import { NgbTooltipModule, NgbDatepickerI18n, NgbDate, NgbCalendar, NgbDatepickerModule, NgbPopoverModule, NgbDropdownModule } from '@ng-bootstrap/ng-bootstrap';
-import { timeFormat, format, event as event$1, isoParse, interpolate, mouse, scaleOrdinal, pie, arc, select, min, max, scaleBand, axisBottom, scaleLinear, axisLeft, extent, easeQuadInOut, bisectLeft, isoFormat, line, curveCatmullRom, area, scaleTime, stack, stackOrderNone, geoMercator, geoAlbersUsa, geoAlbers, geoPath, scaleQuantize, scaleQuantile, scaleThreshold, range, values, sum, easeLinear } from 'd3';
+import { event as event$1, mouse, select } from 'd3-selection';
+import { scaleOrdinal, scaleBand, scaleLinear, scaleTime, scaleQuantize, scaleQuantile, scaleThreshold } from 'd3-scale';
+import { pie, arc, line, curveCatmullRom, area, stack, stackOrderNone } from 'd3-shape';
+import { interpolate } from 'd3-interpolate';
+import { format as format$1 } from 'd3-format';
+import { isoParse, isoFormat, timeFormat as timeFormat$1 } from 'd3-time-format';
+import { timeFormat, format } from 'd3';
+import { min, max, extent, bisectLeft, range, sum } from 'd3-array';
+import { axisBottom, axisLeft } from 'd3-axis';
+import { easeQuadInOut, easeLinear } from 'd3-ease';
+import { geoMercator, geoAlbersUsa, geoAlbers, geoPath } from 'd3-geo';
 import { feature, mesh } from 'topojson';
 import { __spread, __assign, __extends } from 'tslib';
+import { values } from 'd3-collection';
 import { FormsModule } from '@angular/forms';
 import { MatRadioModule } from '@angular/material/radio';
 
@@ -788,8 +799,8 @@ var PbdsDatavizPieComponent = /** @class */ (function () {
         this.outerRadius = Math.min(this.width, this.height) / 2;
         this.arcZoom = 10;
         this.anglePad = 0.02;
-        this.legendValueFormat = format(this.legendValueFormatString);
-        this.tooltipValueFormat = format(this.tooltipValueFormatString);
+        this.legendValueFormat = format$1(this.legendValueFormatString);
+        this.tooltipValueFormat = format$1(this.tooltipValueFormatString);
         // create formatters
         this.legendLabelFormat = this._dataviz.d3Format(this.legendLabelFormatType, this.legendLabelFormatString);
         this.tooltipLabelFormat = this._dataviz.d3Format(this.tooltipLabelFormatType, this.tooltipLabelFormatString);
@@ -3212,10 +3223,10 @@ var PbdsDatavizLineComponent = /** @class */ (function () {
         };
         this.clipPathId = nextId;
         // create formatters
-        this.xAxisFormat = timeFormat(this.xAxisFormatString);
-        this.yAxisFormat = format(this.yAxisFormatString);
+        this.xAxisFormat = timeFormat$1(this.xAxisFormatString);
+        this.yAxisFormat = format$1(this.yAxisFormatString);
         this.legendLabelFormat = this._dataviz.d3Format(this.legendLabelFormatType, this.legendLabelFormatString);
-        this.tooltipHeadingFormat = timeFormat(this.tooltipHeadingFormatString);
+        this.tooltipHeadingFormat = timeFormat$1(this.tooltipHeadingFormatString);
         this.tooltipLabelFormat = this._dataviz.d3Format(this.tooltipLabelFormatType, this.tooltipLabelFormatString);
         this.tooltipValueFormat = this._dataviz.d3Format(this.tooltipValueFormatType, this.tooltipValueFormatString);
         // defaults for all chart types
@@ -4042,14 +4053,14 @@ var PbdsDatavizGaugeComponent = /** @class */ (function () {
          * @return {?}
          */
         function (transition, value) {
-            value = format('.4f')(value);
+            value = format$1('.4f')(value);
             value = value.replace(/,/g, '.');
             transition.tween('text', (/**
              * @return {?}
              */
             function () {
                 /** @type {?} */
-                var interpolate$1 = interpolate(format('.4f')(+_this.oldValue), value);
+                var interpolate$1 = interpolate(format$1('.4f')(+_this.oldValue), value);
                 return (/**
                  * @param {?} t
                  * @return {?}
@@ -4078,7 +4089,7 @@ var PbdsDatavizGaugeComponent = /** @class */ (function () {
     function () {
         this.height = this.width;
         this.radius = Math.max(this.width, this.height) / 2;
-        this.labelFormat = format(this.labelFormatString);
+        this.labelFormat = format$1(this.labelFormatString);
         this.label = this.labelFormat(this.data.value);
         switch (this.type) {
             case 'halfmoon':
@@ -10102,9 +10113,9 @@ var PbdsDatavizBarSingleHorizontalComponent = /** @class */ (function () {
         this.xAxisFormat = this._dataviz.d3Format(this.xAxisFormatType, this.xAxisFormatString);
         this.legendLabelFormat = this._dataviz.d3Format(this.legendLabelFormatType, this.legendLabelFormatString);
         this.tooltipValueFormat = this._dataviz.d3Format(this.tooltipValueFormatType, this.tooltipValueFormatString);
-        this.tooltipDateFormat = timeFormat(this.tooltipDateFormatString);
-        this.tooltipPercentFormat = format(this.tooltipPercentFormatString);
-        this.tooltipCompareChangeFormat = format(this.compareChangeFormatString);
+        this.tooltipDateFormat = timeFormat$1(this.tooltipDateFormatString);
+        this.tooltipPercentFormat = format$1(this.tooltipPercentFormatString);
+        this.tooltipCompareChangeFormat = format$1(this.compareChangeFormatString);
         // defaults for all chart types
         this.hideXAxisZero = false;
         this.hideXAxisDomain = true;
@@ -10287,8 +10298,8 @@ var PbdsDatavizBarSingleHorizontalComponent = /** @class */ (function () {
              */
             function (d, i) {
                 /** @type {?} */
-                var format$1 = format('.0%');
-                return format$1(i * 0.25);
+                var format = format$1('.0%');
+                return format(i * 0.25);
             }));
         }
         else if (this.percentage && this.isSingleData) {
@@ -10307,8 +10318,8 @@ var PbdsDatavizBarSingleHorizontalComponent = /** @class */ (function () {
              */
             function (d, i) {
                 /** @type {?} */
-                var format$1 = format('.0%');
-                return format$1(i * 0.25);
+                var format = format$1('.0%');
+                return format(i * 0.25);
             }));
         }
         else {
