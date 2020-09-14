@@ -1,3 +1,9 @@
+# 6.1.4
+
+- Add "delivery" icon to pbi-icon-outline
+
+---
+
 # 6.1.12
 
 - Fix spacing between buttons
@@ -10,8 +16,6 @@
 - Updated sort icons for PrimeNg 9
 
 ---
-
-
 
 # 6.1.11 - April 20, 2020
 
