@@ -1,6 +1,6 @@
 {
   "name": "pb-design-system",
-  "version": "6.1.14",
+  "version": "6.5.0-beta.1",
   "description": "Pitney Bowes Design System",
   "repository": {
     "type": "git",
@@ -13,28 +13,16 @@
   },
   "homepage": "https://github.com/PBGUX/pb-design-system",
   "peerDependencies": {
-    "@angular/common": "^8.0.0",
-    "@angular/core": "^8.0.0",
-    "d3": "^5.9.0",
-    "topojson": "^3.0.0",
-    "@angular/cdk": "^8.1.0",
-    "@angular/material": "^8.1.0",
-    "@angular/animations": "^8.2.0",
-    "@ng-bootstrap/ng-bootstrap": "^5.1.0"
+    "@angular/common": "^10.0.0",
+    "@angular/core": "^10.0.0"
   },
   "dependencies": {
-    "tslib": "^1.9.0"
-  },
-  "devDependencies": {
-    "@types/d3": "^5.7.0",
-    "@types/topojson": "^3.2.2"
+    "tslib": "^2.0.0"
   },
   "main": "bundles/pb-design-system.umd.js",
-  "module": "fesm5/pb-design-system.js",
+  "module": "fesm2015/pb-design-system.js",
   "es2015": "fesm2015/pb-design-system.js",
-  "esm5": "esm5/pb-design-system.js",
   "esm2015": "esm2015/pb-design-system.js",
-  "fesm5": "fesm5/pb-design-system.js",
   "fesm2015": "fesm2015/pb-design-system.js",
   "typings": "pb-design-system.d.ts",
   "metadata": "pb-design-system.metadata.json",

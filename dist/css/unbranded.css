@@ -59,7 +59,8 @@ footer {
   color: var(--color-footer-foreground);
 }
 
-a, .breadcrumb a {
+a,
+.breadcrumb a {
   color: var(--color-links);
 }
 
@@ -79,7 +80,9 @@ a, .breadcrumb a {
   background-repeat: no-repeat;
 }
 
-.navbar-expand-lg .navbar-nav .nav-link, header .navbar-light .navbar-brand, .navbar-brand {
+.navbar-expand-lg .navbar-nav .nav-link,
+header .navbar-light .navbar-brand,
+.navbar-brand {
   color: var(--color-header-foreground);
   font-family: var(--font-family-brand);
 }
@@ -146,13 +149,38 @@ h6 {
   color: var(--color-button-primary-foreground);
 }
 
-.btn-secondary, .btn-outline-secondary, .btn-outline-primary, .btn-group .btn-secondary, .btn-group .btn-outline-secondary, .btn-group-vertical .btn-secondary, .btn-group-vertical .btn-outline-secondary, .btn-secondary:not([disabled]):not(.disabled):active, .btn-secondary:not([disabled]):not(.disabled).active, .btn-outline-secondary:not([disabled]):not(.disabled):active, .btn-outline-secondary:not([disabled]):not(.disabled).active, .show > .btn-secondary.dropdown-toggle, .show > .btn-outline-secondary.dropdown-toggle {
+.btn-secondary,
+.btn-outline-secondary,
+.btn-outline-primary,
+.btn-group .btn-secondary,
+.btn-group .btn-outline-secondary,
+.btn-group-vertical .btn-secondary,
+.btn-group-vertical .btn-outline-secondary,
+.btn-secondary:not([disabled]):not(.disabled):active,
+.btn-secondary:not([disabled]):not(.disabled).active,
+.btn-outline-secondary:not([disabled]):not(.disabled):active,
+.btn-outline-secondary:not([disabled]):not(.disabled).active,
+.show > .btn-secondary.dropdown-toggle,
+.show > .btn-outline-secondary.dropdown-toggle {
   border-color: var(--color-button-secondary-foreground);
   background-color: var(--color-button-secondary-background);
   color: var(--color-button-secondary-foreground);
 }
 
-.btn-group .btn-secondary.active, .btn-group .btn-outline-secondary.active, .btn-group .btn-outline-primary.active, .btn-group .btn-cancel.active, .btn-group .btn-group .btn-secondary.active, .btn-group .btn-group .btn-outline-secondary.active, .btn-group .btn-group-vertical .btn-secondary.active, .btn-group .btn-group-vertical .btn-outline-secondary.active, .btn-group .btn-secondary:not([disabled]):not(.disabled):active.active, .btn-group .btn-secondary:not([disabled]):not(.disabled).active.active, .btn-group .btn-outline-secondary:not([disabled]):not(.disabled):active.active, .btn-group .btn-outline-secondary:not([disabled]):not(.disabled).active.active, .btn-group .show > .btn-secondary.dropdown-toggle.active, .btn-group .show > .btn-outline-secondary.dropdown-toggle.active {
+.btn-group .btn-secondary.active,
+.btn-group .btn-outline-secondary.active,
+.btn-group .btn-outline-primary.active,
+.btn-group .btn-cancel.active,
+.btn-group .btn-group .btn-secondary.active,
+.btn-group .btn-group .btn-outline-secondary.active,
+.btn-group .btn-group-vertical .btn-secondary.active,
+.btn-group .btn-group-vertical .btn-outline-secondary.active,
+.btn-group .btn-secondary:not([disabled]):not(.disabled):active.active,
+.btn-group .btn-secondary:not([disabled]):not(.disabled).active.active,
+.btn-group .btn-outline-secondary:not([disabled]):not(.disabled):active.active,
+.btn-group .btn-outline-secondary:not([disabled]):not(.disabled).active.active,
+.btn-group .show > .btn-secondary.dropdown-toggle.active,
+.btn-group .show > .btn-outline-secondary.dropdown-toggle.active {
   border-color: var(--color-button-secondary-foreground);
   background-color: var(--color-button-secondary-foreground);
   color: var(--color-button-secondary-background);
@@ -177,7 +205,8 @@ h6 {
   color: var(--color-text);
 }
 
-.form-control.focus, .form-control:focus {
+.form-control.focus,
+.form-control:focus {
   border-color: var(--color-button-primary-background);
 }
 
@@ -207,15 +236,18 @@ h6 {
   font-family: var(--font-family-body);
 }
 
-.accordion-group .card-header h5, ngb-accordion .card-header h5 {
+.accordion-group .card-header h5,
+ngb-accordion .card-header h5 {
   font-family: var(--font-family-brand);
 }
 
-.accordion-group .card-header a, ngb-accordion .card-header a {
+.accordion-group .card-header a,
+ngb-accordion .card-header a {
   color: var(--color-links);
 }
 
-.accordion-group .card-block, ngb-accordion .card-block {
+.accordion-group .card-block,
+ngb-accordion .card-block {
   font-family: var(--font-family-body);
 }
 
@@ -224,11 +256,13 @@ h6 {
   border-color: var(--color-borders);
 }
 
-.table th, .table td {
+.table th,
+.table td {
   border-top: 1px solid var(--color-borders);
 }
 
-.table .thead-light th, .table thead th {
+.table .thead-light th,
+.table thead th {
   border-color: var(--color-borders);
   color: var(--color-headers);
   font-family: var(--font-family-brand);
@@ -258,6 +292,7 @@ h6 {
 }
 
 /* general body text */
-p, li {
+p,
+li {
   font-family: var(--font-family-body);
 }

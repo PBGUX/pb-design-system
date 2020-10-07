@@ -311,8 +311,8 @@ $navbar-brand-height-responsive: 3.625rem;
 $card-border-color: $gray-200;
 $card-cap-bg: $white;
 $card-header-font: $font-family-brand-regular;
-$card-spacer-y: 0.75rem;
-$card-spacer-x: 1.25rem;
+$card-spacer-y: 0.5rem;
+$card-spacer-x: 1rem;
 $card-border-width: 1px;
 $card-border-radius: $border-radius;
 
@@ -328,9 +328,9 @@ $badge-pill-padding-x: 0.6em;
 // Modals
 
 // Padding applied to the modal body
-$modal-inner-padding: 15px;
-$modal-dialog-margin: 30px;
-$modal-dialog-margin-y-sm-up: 30px;
+$modal-inner-padding: 1rem;
+$modal-dialog-margin: 2rem;
+$modal-dialog-margin-y-sm-up: 2rem;
 $modal-content-border-color: $border-color;
 
 // Progress bars
@@ -354,7 +354,7 @@ $figure-caption-color: $blue-500;
 $breadcrumb-bg: transparent;
 $breadcrumb-divider-color: $gray-300;
 $breadcrumb-active-color: $teal;
-$breadcrumb-divider: url(data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSI5IiBoZWlnaHQ9IjE0Ij4KICAgIDxwYXRoIGZpbGw9InNpbHZlciIgZmlsbC1ydWxlPSJub256ZXJvIiBkPSJNNS41ODYgN0wuMjkzIDEuNzA3IDEuNzA3LjI5MyA4LjQxNCA3bC02LjcwNyA2LjcwNy0xLjQxNC0xLjQxNHoiLz4KPC9zdmc+Cg==);
+$breadcrumb-divider: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="9" height="14"> <path fill="silver" fill-rule="nonzero" d="M5.586 7L.293 1.707 1.707.293 8.414 7l-6.707 6.707-1.414-1.414z"/> </svg>');
 
 // Close
 $close-color: $gray-700;

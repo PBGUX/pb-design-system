@@ -12,7 +12,7 @@ export declare class PbdsDatavizMetricBlockComponent implements OnInit {
     hideValueMargin: boolean;
     isPercentUnit: boolean;
     isUnit: boolean;
-    readonly hostClasses: string;
+    get hostClasses(): string;
     indicatorRef: ElementRef;
     ngOnInit(): void;
 }

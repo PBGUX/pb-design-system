@@ -1,7 +1,3 @@
-/**
- * @fileoverview added by tsickle
- * @suppress {checkTypes,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
- */
 import { Component, Input } from '@angular/core';
 export class PbdsProgressSpinnerComponent {
 }
@@ -20,14 +16,10 @@ PbdsProgressSpinnerComponent.decorators = [
       <span class="sr-only">Loading</span>
     </span>
   `,
-                styles: [".sbl-circ{height:48px;width:48px;color:var(--primary);position:relative;display:inline-block;border-width:6px;border-style:solid;border-radius:50%;border-top-color:transparent;-webkit-animation:1.5s linear infinite rotate;animation:1.5s linear infinite rotate}@-webkit-keyframes rotate{0%{-webkit-transform:rotate(0);transform:rotate(0)}100%{-webkit-transform:rotate(360deg);transform:rotate(360deg)}}@keyframes rotate{0%{-webkit-transform:rotate(0);transform:rotate(0)}100%{-webkit-transform:rotate(360deg);transform:rotate(360deg)}}"]
-            }] }
+                styles: [".sbl-circ{animation:rotate 1.5s linear infinite;border-radius:50%;border-style:solid;border-top:solid rgba(0,0,0,0);border-width:6px;color:var(--primary);display:inline-block;height:48px;position:relative;width:48px}@keyframes rotate{0%{transform:rotate(0)}to{transform:rotate(1turn)}}"]
+            },] }
 ];
 PbdsProgressSpinnerComponent.propDecorators = {
     size: [{ type: Input }]
 };
-if (false) {
-    /** @type {?} */
-    PbdsProgressSpinnerComponent.prototype.size;
-}
-//# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoicHJvZ3Jlc3Mtc3Bpbm5lci5jb21wb25lbnQuanMiLCJzb3VyY2VSb290Ijoibmc6Ly9wYi1kZXNpZ24tc3lzdGVtLyIsInNvdXJjZXMiOlsibGliL3Byb2dyZXNzLXNwaW5uZXIvcHJvZ3Jlc3Mtc3Bpbm5lci5jb21wb25lbnQudHMiXSwibmFtZXMiOltdLCJtYXBwaW5ncyI6Ijs7OztBQUFBLE9BQU8sRUFBRSxTQUFTLEVBQUUsS0FBSyxFQUFFLE1BQU0sZUFBZSxDQUFDO0FBa0JqRCxNQUFNLE9BQU8sNEJBQTRCOzs7WUFoQnhDLFNBQVMsU0FBQztnQkFDVCxRQUFRLEVBQUUsdUJBQXVCO2dCQUNqQyxRQUFRLEVBQUU7Ozs7Ozs7Ozs7O0dBV1Q7O2FBRUY7OzttQkFFRSxLQUFLOzs7O0lBQU4sNENBQ2EiLCJzb3VyY2VzQ29udGVudCI6WyJpbXBvcnQgeyBDb21wb25lbnQsIElucHV0IH0gZnJvbSAnQGFuZ3VsYXIvY29yZSc7XG5cbkBDb21wb25lbnQoe1xuICBzZWxlY3RvcjogJ3BiZHMtcHJvZ3Jlc3Mtc3Bpbm5lcicsXG4gIHRlbXBsYXRlOiBgXG4gICAgPHNwYW4gcm9sZT1cImFsZXJ0XCIgYXJpYS1saXZlPVwiYXNzZXJ0aXZlXCI+XG4gICAgICA8c3BhblxuICAgICAgICBjbGFzcz1cInNibC1jaXJjXCJcbiAgICAgICAgW3N0eWxlLndpZHRoLnB4XT1cInNpemVcIlxuICAgICAgICBbc3R5bGUuaGVpZ2h0LnB4XT1cInNpemVcIlxuICAgICAgICBbc3R5bGUuYm9yZGVyLXdpZHRoLnB4XT1cInNpemUgLyA4XCJcbiAgICAgICAgYXJpYS1oaWRkZW49XCJ0cnVlXCJcbiAgICAgID48L3NwYW4+XG4gICAgICA8c3BhbiBjbGFzcz1cInNyLW9ubHlcIj5Mb2FkaW5nPC9zcGFuPlxuICAgIDwvc3Bhbj5cbiAgYCxcbiAgc3R5bGVVcmxzOiBbJy4vcHJvZ3Jlc3Mtc3Bpbm5lci5jb21wb25lbnQuc2NzcyddXG59KVxuZXhwb3J0IGNsYXNzIFBiZHNQcm9ncmVzc1NwaW5uZXJDb21wb25lbnQge1xuICBASW5wdXQoKVxuICBzaXplOiBudW1iZXI7XG59XG4iXX0=
+//# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoicHJvZ3Jlc3Mtc3Bpbm5lci5jb21wb25lbnQuanMiLCJzb3VyY2VSb290IjoiL1VzZXJzL3N0MDE2bG8vZ2l0aHViL25nLWRlc2lnbnN5c3RlbS9jbGllbnQvcHJvamVjdHMvcGItZGVzaWduLXN5c3RlbS9zcmMvIiwic291cmNlcyI6WyJsaWIvcHJvZ3Jlc3Mtc3Bpbm5lci9wcm9ncmVzcy1zcGlubmVyLmNvbXBvbmVudC50cyJdLCJuYW1lcyI6W10sIm1hcHBpbmdzIjoiQUFBQSxPQUFPLEVBQUUsU0FBUyxFQUFFLEtBQUssRUFBRSxNQUFNLGVBQWUsQ0FBQztBQWtCakQsTUFBTSxPQUFPLDRCQUE0Qjs7O1lBaEJ4QyxTQUFTLFNBQUM7Z0JBQ1QsUUFBUSxFQUFFLHVCQUF1QjtnQkFDakMsUUFBUSxFQUFFOzs7Ozs7Ozs7OztHQVdUOzthQUVGOzs7bUJBRUUsS0FBSyIsInNvdXJjZXNDb250ZW50IjpbImltcG9ydCB7IENvbXBvbmVudCwgSW5wdXQgfSBmcm9tICdAYW5ndWxhci9jb3JlJztcblxuQENvbXBvbmVudCh7XG4gIHNlbGVjdG9yOiAncGJkcy1wcm9ncmVzcy1zcGlubmVyJyxcbiAgdGVtcGxhdGU6IGBcbiAgICA8c3BhbiByb2xlPVwiYWxlcnRcIiBhcmlhLWxpdmU9XCJhc3NlcnRpdmVcIj5cbiAgICAgIDxzcGFuXG4gICAgICAgIGNsYXNzPVwic2JsLWNpcmNcIlxuICAgICAgICBbc3R5bGUud2lkdGgucHhdPVwic2l6ZVwiXG4gICAgICAgIFtzdHlsZS5oZWlnaHQucHhdPVwic2l6ZVwiXG4gICAgICAgIFtzdHlsZS5ib3JkZXItd2lkdGgucHhdPVwic2l6ZSAvIDhcIlxuICAgICAgICBhcmlhLWhpZGRlbj1cInRydWVcIlxuICAgICAgPjwvc3Bhbj5cbiAgICAgIDxzcGFuIGNsYXNzPVwic3Itb25seVwiPkxvYWRpbmc8L3NwYW4+XG4gICAgPC9zcGFuPlxuICBgLFxuICBzdHlsZVVybHM6IFsnLi9wcm9ncmVzcy1zcGlubmVyLmNvbXBvbmVudC5zY3NzJ11cbn0pXG5leHBvcnQgY2xhc3MgUGJkc1Byb2dyZXNzU3Bpbm5lckNvbXBvbmVudCB7XG4gIEBJbnB1dCgpXG4gIHNpemU6IG51bWJlcjtcbn1cbiJdfQ==
