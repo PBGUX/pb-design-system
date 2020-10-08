@@ -248,27 +248,27 @@ $table-cell-padding-lg: 1rem;
 
 $input-btn-padding-y: 0.5rem;
 
-$input-btn-focus-width: 0.2rem;
-$input-btn-focus-color: rgba(76, 211, 255, 0.77);
-$input-btn-focus-box-shadow: 0 0 0 $input-btn-focus-width $input-btn-focus-color;
-$input-border-color: $gray-300;
-$custom-control-indicator-border: 1px solid $input-border-color;
+// $input-btn-focus-width: 0.2rem;
+// $input-btn-focus-color: rgba(76, 211, 255, 0.77);
+// $input-btn-focus-box-shadow: 0 0 0 $input-btn-focus-width $input-btn-focus-color;
+// $input-border-color: $gray-300;
+// $custom-control-indicator-border: 1px solid $input-border-color;
 
 $btn-font-weight: normal;
-$btn-box-shadow: inset 0 1px 0 rgba($white, 0.15), 0 1px 1px rgba($black, 0.075);
-$btn-focus-box-shadow: 0 0 10px hsla(195, 100%, 65%, 0.77);
-$btn-focus-border-color: #189dbd;
-$btn-active-box-shadow: inset 0 3px 5px rgba($black, 0.125);
-$btn-disabled-color: $gray-300; // the text
-$btn-link-disabled-color: $btn-disabled-color;
-$btn-hover-background-color: lighten(theme-color('button'), 50%);
+// $btn-box-shadow: inset 0 1px 0 rgba($white, 0.15), 0 1px 1px rgba($black, 0.075);
+// $btn-focus-box-shadow: 0 0 10px hsla(195, 100%, 65%, 0.77);
+// $btn-focus-border-color: #189dbd;
+// $btn-active-box-shadow: inset 0 3px 5px rgba($black, 0.125);
+// $btn-disabled-color: $gray-300; // the text
+// $btn-link-disabled-color: $btn-disabled-color;
+// $btn-hover-background-color: lighten(theme-color('button'), 50%);
 $btn-block-spacing-y: 0.5rem;
 
 $btn-border-radius: $border-radius;
 $btn-border-radius-lg: $border-radius-lg;
 $btn-border-radius-sm: $border-radius-sm;
-$btn-border-disabled-color: $btn-disabled-color;
-$btn-transition: background-color 0.15s ease-in-out, border-color 0.15s ease-in-out, box-shadow 0.15s ease-in-out;
+// $btn-border-disabled-color: $btn-disabled-color;
+// $btn-transition: background-color 0.15s ease-in-out, border-color 0.15s ease-in-out, box-shadow 0.15s ease-in-out;
 
 // Form states and alerts
 //

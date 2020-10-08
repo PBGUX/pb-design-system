@@ -1,3 +1,25 @@
+# 6.5.0-beta.5
+
+- Further fixes to PrimeNG 10 CSS: treeemenu, dropdowns, date/time picker
+
+---
+
+# 6.5.0-beta.2 through 4
+
+- fixes related to compile issues with POI font. The POI font has been rebuilt in Icomoon and the CSS updated to match the other icon fonts.
+
+---
+
+# 6.5.0-beta.1
+
+- Support for Angular 10.1.x
+- Support for PrimeNG 10.0, NG-Bootstrap 7.0, Angular Material 10
+- Removed peer dependencies from install; you will still need to install D3 and topojson if you want to use any DataViz components
+- Added Page Title component
+- Removed outdated/unsupported "unbranded.css"
+
+---
+
 # 6.1.4
 
 - Add "delivery" icon to pbi-icon-outline

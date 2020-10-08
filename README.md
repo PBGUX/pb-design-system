@@ -1,6 +1,6 @@
 # PB Design System 6
 
-This repo is for distribution of the Design System on `npm` using Bootstrap 4 and Angular.
+This repo is for distribution of the Design System on `npm` using Bootstrap 4.5 and Angular 10.1.
 
 ## npm Install
 
@@ -27,7 +27,7 @@ Add your app's `styles.scss` after the Design System css file in the styles arra
 ],
 ```
 
-## Optional: 
+## Optional:
 
 To use Bootstrap 4's javascript components (dropdowns, tooltips, and/or popovers) you will also need to install Boostrap 4 `npm install bootstrap` and load its js files in the scripts array:
 
@@ -38,6 +38,5 @@ To use Bootstrap 4's javascript components (dropdowns, tooltips, and/or popovers
      "../node_modules/bootstrap/dist/js/bootstrap.js"
  ],
 ```
-
 
 **IMPORTANT: You do not need to load the Boostrap css files. They are compiled into the designsystem.css.**
