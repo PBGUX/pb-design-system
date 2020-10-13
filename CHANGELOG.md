@@ -1,3 +1,10 @@
+# 6.5.0-beta.6
+
+- Fix regression on PrimeNG tree table
+- Add styling for mat-toggle-button
+
+---
+
 # 6.5.0-beta.5
 
 - Further fixes to PrimeNG 10 CSS: treeemenu, dropdowns, date/time picker

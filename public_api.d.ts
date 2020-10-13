@@ -24,3 +24,6 @@ export * from './lib/progress-spinner/progress-spinner.module';
 export * from './lib/progress-spinner/progress-spinner.component';
 export * from './lib/page-title/page-title.module';
 export * from './lib/page-title/page-title.component';
+export * from './lib/column-toggle/column-toggle.module';
+export * from './lib/column-toggle/column-toggle.interfaces';
+export * from './lib/column-toggle/column-toggle.component';
