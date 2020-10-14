@@ -7,6 +7,7 @@
 # 6.5.0-beta.6
 
 - Fix regression on PrimeNG tree table
+- Add toggle-column component for hiding and showing table columns
 
 ---
 
