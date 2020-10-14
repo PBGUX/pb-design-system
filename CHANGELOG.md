@@ -1,7 +1,12 @@
+# 6.5.0-beta.7
+
+- Add styling and examples for mat-toggle-button
+
+--
+
 # 6.5.0-beta.6
 
 - Fix regression on PrimeNG tree table
-- Add styling for mat-toggle-button
 
 ---
 
