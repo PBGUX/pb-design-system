@@ -1,0 +1,11 @@
+{
+  "main": "../bundles/pb-design-system-dataviz.umd.js",
+  "module": "../fesm2015/pb-design-system-dataviz.js",
+  "es2015": "../fesm2015/pb-design-system-dataviz.js",
+  "esm2015": "../esm2015/dataviz/pb-design-system-dataviz.js",
+  "fesm2015": "../fesm2015/pb-design-system-dataviz.js",
+  "typings": "pb-design-system-dataviz.d.ts",
+  "metadata": "pb-design-system-dataviz.metadata.json",
+  "sideEffects": false,
+  "name": "pb-design-system/dataviz"
+}

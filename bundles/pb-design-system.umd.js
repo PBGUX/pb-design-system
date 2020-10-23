@@ -5768,35 +5768,6 @@
                 },] }
     ];
 
-    var PbdsProgressSpinnerComponent = /** @class */ (function () {
-        function PbdsProgressSpinnerComponent() {
-        }
-        return PbdsProgressSpinnerComponent;
-    }());
-    PbdsProgressSpinnerComponent.decorators = [
-        { type: i0.Component, args: [{
-                    selector: 'pbds-progress-spinner',
-                    template: "\n    <span role=\"alert\" aria-live=\"assertive\">\n      <span\n        class=\"sbl-circ\"\n        [style.width.px]=\"size\"\n        [style.height.px]=\"size\"\n        [style.border-width.px]=\"size / 8\"\n        aria-hidden=\"true\"\n      ></span>\n      <span class=\"sr-only\">Loading</span>\n    </span>\n  ",
-                    styles: [".sbl-circ{animation:rotate 1.5s linear infinite;border-radius:50%;border-style:solid;border-top:solid rgba(0,0,0,0);border-width:6px;color:var(--primary);display:inline-block;height:48px;position:relative;width:48px}@keyframes rotate{0%{transform:rotate(0)}to{transform:rotate(1turn)}}"]
-                },] }
-    ];
-    PbdsProgressSpinnerComponent.propDecorators = {
-        size: [{ type: i0.Input }]
-    };
-
-    var PbdsProgressSpinnerModule = /** @class */ (function () {
-        function PbdsProgressSpinnerModule() {
-        }
-        return PbdsProgressSpinnerModule;
-    }());
-    PbdsProgressSpinnerModule.decorators = [
-        { type: i0.NgModule, args: [{
-                    declarations: [PbdsProgressSpinnerComponent],
-                    imports: [common.CommonModule],
-                    exports: [PbdsProgressSpinnerComponent]
-                },] }
-    ];
-
     var PbdsPageTitleComponent = /** @class */ (function () {
         function PbdsPageTitleComponent() {
             this.layout = 'container';
@@ -5922,41 +5893,63 @@
                 },] }
     ];
 
-    /*
-     * Public API Surface of pbds-components
-     */
+    var PbdsComponentsModule = /** @class */ (function () {
+        function PbdsComponentsModule() {
+        }
+        return PbdsComponentsModule;
+    }());
+    PbdsComponentsModule.decorators = [
+        { type: i0.NgModule, args: [{
+                    declarations: [],
+                    imports: [
+                        PbdsDatavizModule,
+                        PbdsHeaderShadowModule,
+                        PbdsDaterangePopoverModule,
+                        PbdsPageTitleModule,
+                        PbdsColumnToggleModule
+                    ],
+                    exports: [
+                        PbdsDatavizModule,
+                        PbdsHeaderShadowModule,
+                        PbdsDaterangePopoverModule,
+                        PbdsPageTitleModule,
+                        PbdsColumnToggleModule
+                    ]
+                },] }
+    ];
+
+    var public_api = {};
 
     /**
      * Generated bundle index. Do not edit.
      */
 
-    exports.CustomDatepickerI18n = CustomDatepickerI18n;
-    exports.DatavizBubbleMapComponent = DatavizBubbleMapComponent;
-    exports.PbdsColumnToggleComponent = PbdsColumnToggleComponent;
-    exports.PbdsColumnToggleModule = PbdsColumnToggleModule;
-    exports.PbdsDatavizBarComponent = PbdsDatavizBarComponent;
-    exports.PbdsDatavizBarGroupedComponent = PbdsDatavizBarGroupedComponent;
-    exports.PbdsDatavizBarSingleHorizontalComponent = PbdsDatavizBarSingleHorizontalComponent;
-    exports.PbdsDatavizBarStackedComponent = PbdsDatavizBarStackedComponent;
-    exports.PbdsDatavizChoroplethMapComponent = PbdsDatavizChoroplethMapComponent;
-    exports.PbdsDatavizGaugeComponent = PbdsDatavizGaugeComponent;
-    exports.PbdsDatavizHeatmapComponent = PbdsDatavizHeatmapComponent;
-    exports.PbdsDatavizLineComponent = PbdsDatavizLineComponent;
-    exports.PbdsDatavizMetricBlockComponent = PbdsDatavizMetricBlockComponent;
-    exports.PbdsDatavizMetricIndicatorComponent = PbdsDatavizMetricIndicatorComponent;
-    exports.PbdsDatavizModule = PbdsDatavizModule;
-    exports.PbdsDatavizPieComponent = PbdsDatavizPieComponent;
-    exports.PbdsDatavizService = PbdsDatavizService;
-    exports.PbdsDatavizSparklineComponent = PbdsDatavizSparklineComponent;
-    exports.PbdsDaterangePopoverComponent = PbdsDaterangePopoverComponent;
-    exports.PbdsDaterangePopoverModule = PbdsDaterangePopoverModule;
-    exports.PbdsDaterangeService = PbdsDaterangeService;
-    exports.PbdsHeaderShadowDirective = PbdsHeaderShadowDirective;
-    exports.PbdsHeaderShadowModule = PbdsHeaderShadowModule;
-    exports.PbdsPageTitleComponent = PbdsPageTitleComponent;
-    exports.PbdsPageTitleModule = PbdsPageTitleModule;
-    exports.PbdsProgressSpinnerComponent = PbdsProgressSpinnerComponent;
-    exports.PbdsProgressSpinnerModule = PbdsProgressSpinnerModule;
+    exports.PbdsComponentsModule = PbdsComponentsModule;
+    exports.ɵa = PbdsDatavizModule;
+    exports.ɵb = PbdsDatavizPieComponent;
+    exports.ɵc = PbdsDatavizService;
+    exports.ɵd = PbdsDatavizBarComponent;
+    exports.ɵe = PbdsDatavizLineComponent;
+    exports.ɵf = PbdsDatavizGaugeComponent;
+    exports.ɵg = PbdsDatavizSparklineComponent;
+    exports.ɵh = PbdsDatavizBarStackedComponent;
+    exports.ɵi = PbdsDatavizMetricBlockComponent;
+    exports.ɵj = PbdsDatavizMetricIndicatorComponent;
+    exports.ɵk = DatavizBubbleMapComponent;
+    exports.ɵl = PbdsDatavizHeatmapComponent;
+    exports.ɵm = PbdsDatavizChoroplethMapComponent;
+    exports.ɵn = PbdsDatavizBarGroupedComponent;
+    exports.ɵo = PbdsDatavizBarSingleHorizontalComponent;
+    exports.ɵp = PbdsHeaderShadowModule;
+    exports.ɵq = PbdsHeaderShadowDirective;
+    exports.ɵr = PbdsDaterangePopoverModule;
+    exports.ɵs = CustomDatepickerI18n;
+    exports.ɵt = PbdsDaterangePopoverComponent;
+    exports.ɵu = PbdsDaterangeService;
+    exports.ɵv = PbdsPageTitleModule;
+    exports.ɵw = PbdsPageTitleComponent;
+    exports.ɵx = PbdsColumnToggleModule;
+    exports.ɵy = PbdsColumnToggleComponent;
 
     Object.defineProperty(exports, '__esModule', { value: true });
 

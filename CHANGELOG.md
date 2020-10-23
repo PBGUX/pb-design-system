@@ -1,8 +1,37 @@
+# 6.5.0-beta.9
+
+## Breaking change
+
+- Changed import structure on PBDS library modules. You no longer need to import the entire library. You can (and should) import only what your app will use, similar to PrimeNG imports, i.e.
+
+```
+//required
+import { PbdsHeaderShadowModule } from 'pb-design-system/header-shadow';
+import { PbdsPageTitleModule } from 'pb-design-system/page-title';
+// if you use charts:
+import { PbdsDatavizModule } from 'pb-design-system/dataviz';
+```
+
+## Other Changes
+
+- Add table row context menu example
+- Fix styling on TreeTable
+- Update all code snippets for dataviz
+
+---
+
+# 6.5.0-beta.8
+
+- refactor dependencies
+- Add icon for new column-toggle component
+
+---
+
 # 6.5.0-beta.7
 
 - Add styling and examples for mat-toggle-button
 
---
+---
 
 # 6.5.0-beta.6
 

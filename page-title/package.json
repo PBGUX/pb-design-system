@@ -1,0 +1,11 @@
+{
+  "main": "../bundles/pb-design-system-page-title.umd.js",
+  "module": "../fesm2015/pb-design-system-page-title.js",
+  "es2015": "../fesm2015/pb-design-system-page-title.js",
+  "esm2015": "../esm2015/page-title/pb-design-system-page-title.js",
+  "fesm2015": "../fesm2015/pb-design-system-page-title.js",
+  "typings": "pb-design-system-page-title.d.ts",
+  "metadata": "pb-design-system-page-title.metadata.json",
+  "sideEffects": false,
+  "name": "pb-design-system/page-title"
+}

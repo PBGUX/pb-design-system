@@ -1,0 +1,11 @@
+{
+  "main": "../bundles/pb-design-system-progress-spinner.umd.js",
+  "module": "../fesm2015/pb-design-system-progress-spinner.js",
+  "es2015": "../fesm2015/pb-design-system-progress-spinner.js",
+  "esm2015": "../esm2015/progress-spinner/pb-design-system-progress-spinner.js",
+  "fesm2015": "../fesm2015/pb-design-system-progress-spinner.js",
+  "typings": "pb-design-system-progress-spinner.d.ts",
+  "metadata": "pb-design-system-progress-spinner.metadata.json",
+  "sideEffects": false,
+  "name": "pb-design-system/progress-spinner"
+}

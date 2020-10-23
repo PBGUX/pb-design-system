@@ -1,0 +1,11 @@
+{
+  "main": "../bundles/pb-design-system-column-toggle.umd.js",
+  "module": "../fesm2015/pb-design-system-column-toggle.js",
+  "es2015": "../fesm2015/pb-design-system-column-toggle.js",
+  "esm2015": "../esm2015/column-toggle/pb-design-system-column-toggle.js",
+  "fesm2015": "../fesm2015/pb-design-system-column-toggle.js",
+  "typings": "pb-design-system-column-toggle.d.ts",
+  "metadata": "pb-design-system-column-toggle.metadata.json",
+  "sideEffects": false,
+  "name": "pb-design-system/column-toggle"
+}

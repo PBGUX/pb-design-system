@@ -1,0 +1,11 @@
+{
+  "main": "../bundles/pb-design-system-daterange-popover.umd.js",
+  "module": "../fesm2015/pb-design-system-daterange-popover.js",
+  "es2015": "../fesm2015/pb-design-system-daterange-popover.js",
+  "esm2015": "../esm2015/daterange-popover/pb-design-system-daterange-popover.js",
+  "fesm2015": "../fesm2015/pb-design-system-daterange-popover.js",
+  "typings": "pb-design-system-daterange-popover.d.ts",
+  "metadata": "pb-design-system-daterange-popover.metadata.json",
+  "sideEffects": false,
+  "name": "pb-design-system/daterange-popover"
+}

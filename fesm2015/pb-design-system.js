@@ -5483,40 +5483,6 @@ PbdsDaterangePopoverModule.decorators = [
             },] }
 ];
 
-class PbdsProgressSpinnerComponent {
-}
-PbdsProgressSpinnerComponent.decorators = [
-    { type: Component, args: [{
-                selector: 'pbds-progress-spinner',
-                template: `
-    <span role="alert" aria-live="assertive">
-      <span
-        class="sbl-circ"
-        [style.width.px]="size"
-        [style.height.px]="size"
-        [style.border-width.px]="size / 8"
-        aria-hidden="true"
-      ></span>
-      <span class="sr-only">Loading</span>
-    </span>
-  `,
-                styles: [".sbl-circ{animation:rotate 1.5s linear infinite;border-radius:50%;border-style:solid;border-top:solid rgba(0,0,0,0);border-width:6px;color:var(--primary);display:inline-block;height:48px;position:relative;width:48px}@keyframes rotate{0%{transform:rotate(0)}to{transform:rotate(1turn)}}"]
-            },] }
-];
-PbdsProgressSpinnerComponent.propDecorators = {
-    size: [{ type: Input }]
-};
-
-class PbdsProgressSpinnerModule {
-}
-PbdsProgressSpinnerModule.decorators = [
-    { type: NgModule, args: [{
-                declarations: [PbdsProgressSpinnerComponent],
-                imports: [CommonModule],
-                exports: [PbdsProgressSpinnerComponent]
-            },] }
-];
-
 class PbdsPageTitleComponent {
     constructor() {
         this.layout = 'container';
@@ -5633,13 +5599,33 @@ PbdsColumnToggleModule.decorators = [
             },] }
 ];
 
-/*
- * Public API Surface of pbds-components
- */
+class PbdsComponentsModule {
+}
+PbdsComponentsModule.decorators = [
+    { type: NgModule, args: [{
+                declarations: [],
+                imports: [
+                    PbdsDatavizModule,
+                    PbdsHeaderShadowModule,
+                    PbdsDaterangePopoverModule,
+                    PbdsPageTitleModule,
+                    PbdsColumnToggleModule
+                ],
+                exports: [
+                    PbdsDatavizModule,
+                    PbdsHeaderShadowModule,
+                    PbdsDaterangePopoverModule,
+                    PbdsPageTitleModule,
+                    PbdsColumnToggleModule
+                ]
+            },] }
+];
+
+var public_api = {};
 
 /**
  * Generated bundle index. Do not edit.
  */
 
-export { CustomDatepickerI18n, DatavizBubbleMapComponent, PbdsColumnToggleComponent, PbdsColumnToggleModule, PbdsDatavizBarComponent, PbdsDatavizBarGroupedComponent, PbdsDatavizBarSingleHorizontalComponent, PbdsDatavizBarStackedComponent, PbdsDatavizChoroplethMapComponent, PbdsDatavizGaugeComponent, PbdsDatavizHeatmapComponent, PbdsDatavizLineComponent, PbdsDatavizMetricBlockComponent, PbdsDatavizMetricIndicatorComponent, PbdsDatavizModule, PbdsDatavizPieComponent, PbdsDatavizService, PbdsDatavizSparklineComponent, PbdsDaterangePopoverComponent, PbdsDaterangePopoverModule, PbdsDaterangeService, PbdsHeaderShadowDirective, PbdsHeaderShadowModule, PbdsPageTitleComponent, PbdsPageTitleModule, PbdsProgressSpinnerComponent, PbdsProgressSpinnerModule };
+export { PbdsComponentsModule, PbdsDatavizModule as ɵa, PbdsDatavizPieComponent as ɵb, PbdsDatavizService as ɵc, PbdsDatavizBarComponent as ɵd, PbdsDatavizLineComponent as ɵe, PbdsDatavizGaugeComponent as ɵf, PbdsDatavizSparklineComponent as ɵg, PbdsDatavizBarStackedComponent as ɵh, PbdsDatavizMetricBlockComponent as ɵi, PbdsDatavizMetricIndicatorComponent as ɵj, DatavizBubbleMapComponent as ɵk, PbdsDatavizHeatmapComponent as ɵl, PbdsDatavizChoroplethMapComponent as ɵm, PbdsDatavizBarGroupedComponent as ɵn, PbdsDatavizBarSingleHorizontalComponent as ɵo, PbdsHeaderShadowModule as ɵp, PbdsHeaderShadowDirective as ɵq, PbdsDaterangePopoverModule as ɵr, CustomDatepickerI18n as ɵs, PbdsDaterangePopoverComponent as ɵt, PbdsDaterangeService as ɵu, PbdsPageTitleModule as ɵv, PbdsPageTitleComponent as ɵw, PbdsColumnToggleModule as ɵx, PbdsColumnToggleComponent as ɵy };
 //# sourceMappingURL=pb-design-system.js.map
