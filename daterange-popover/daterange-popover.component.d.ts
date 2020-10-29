@@ -1,8 +1,7 @@
 import { OnInit, EventEmitter, OnChanges, SimpleChanges } from '@angular/core';
 import { NgbDate, NgbCalendar, NgbDatepickerI18n, NgbDateStruct } from '@ng-bootstrap/ng-bootstrap';
-import { PbdsDaterangePreset, PbdsDaterangePresetValue, PbdsDaterangeFilter, PbdsDaterangeChange } from './daterange-popover.interfaces';
+import { PbdsDaterangePreset, PbdsDaterangePresetValue, PbdsDaterangeFilter, PbdsDaterangeChange, PbdsDaterangePlacement } from './daterange-popover.interfaces';
 import { PbdsDaterangeService } from './daterange-popover.service';
-import { PlacementArray } from '@ng-bootstrap/ng-bootstrap/util/positioning';
 export declare class CustomDatepickerI18n extends NgbDatepickerI18n {
     daterangeService: PbdsDaterangeService;
     constructor(daterangeService: PbdsDaterangeService);
@@ -27,7 +26,7 @@ export declare class PbdsDaterangePopoverComponent implements OnInit, OnChanges 
     displayInput: boolean;
     minDate: NgbDate;
     maxDate: NgbDate;
-    placement: PlacementArray;
+    placement: PbdsDaterangePlacement;
     fromDate: NgbDate | null;
     toDate: NgbDate | null;
     inputFormat: string;
