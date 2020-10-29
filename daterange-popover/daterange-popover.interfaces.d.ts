@@ -1,7 +1,8 @@
 import { NgbDate } from '@ng-bootstrap/ng-bootstrap';
+export declare type PbdsDaterangePresetValue = number | 'CUSTOM' | 'PREVIOUS_MONTH' | 'YEAR_TO_DATE';
 export interface PbdsDaterangePreset {
     label: string;
-    value: null | number;
+    value: null | PbdsDaterangePresetValue;
 }
 export interface PbdsDaterangeFilter {
     field: string;
@@ -12,7 +13,7 @@ export interface PbdsDaterangeChange {
     toDate: NgbDate;
     formattedDate: string;
     filter: string;
-    value: 'custom' | number;
+    value: PbdsDaterangePresetValue;
 }
 export interface PbdsDaterangeLocale {
     language: string;

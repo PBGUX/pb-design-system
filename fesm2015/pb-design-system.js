@@ -5270,40 +5270,37 @@ class PbdsDaterangePopoverComponent {
                 value: 30
             },
             {
+                label: 'Previous Month',
+                value: 'PREVIOUS_MONTH'
+            },
+            {
                 label: 'Year to Date',
-                value: 365
+                value: 'YEAR_TO_DATE'
             }
         ];
-        this.presetSelected = null;
         this.filterSelected = 0;
         this.showCustomPreset = true;
         this.applyText = 'Apply';
         this.cancelText = 'Cancel';
         this.customRangeText = 'Custom Range';
+        this.displayMonths = 2;
+        this.displayInput = true;
         this.minDate = this.calendar.getPrev(this.calendar.getToday(), 'y');
         this.maxDate = this.calendar.getToday();
+        this.placement = 'bottom-right auto';
         this.fromDate = null;
         this.toDate = null;
         this.inputFormat = '{fromDate} to {toDate}';
-        this.change = new EventEmitter();
+        this.dateChange = new EventEmitter();
         this.firstDayOfWeek = getLocaleFirstDayOfWeek(this.daterangeService.getCurrentLocale());
         this.dateRange = '';
         this.isDatepickerVisible = false;
-        this.presetSelect = $event => {
-            if ($event.value === 'custom') {
-                this.presetSelected = 'custom';
+        this.presetSelect = ($event) => {
+            if ($event.value === 'CUSTOM') {
+                this.presetSelected = 'CUSTOM';
                 return false;
             }
-            if ($event.value) {
-                this.toDate = this.calendar.getToday();
-                this.fromDate = this.calendar.getPrev(this.toDate, 'd', $event.value);
-                this.presetSelected = $event.value;
-            }
-            else {
-                this.fromDate = null;
-                this.toDate = null;
-                this.presetSelected = null;
-            }
+            this.setDateProperties($event.value);
             this.isDatepickerVisible = false;
         };
         this.isHovered = (date) => this.fromDate && !this.toDate && this.hoveredDate && date.after(this.fromDate) && date.before(this.hoveredDate);
@@ -5314,7 +5311,7 @@ class PbdsDaterangePopoverComponent {
         // china should start on a Monday, Angular locale returns incorrect 0
         this.firstDayOfWeek =
             this.daterangeService.getCurrentLocale() === 'zh-cn' ? this.firstDayOfWeek + 1 : this.firstDayOfWeek;
-        if (this.presetSelected === 'custom') {
+        if (this.presetSelected === 'CUSTOM') {
             this.showDatepicker();
         }
     }
@@ -5324,7 +5321,7 @@ class PbdsDaterangePopoverComponent {
         }
         if (changes.presets) {
             if (!this.filters && this.presetSelected) {
-                this.presetClick(this.presets.find(p => p.value === this.presetSelected));
+                this.presetClick(this.presets.find((p) => p.value === this.presetSelected));
             }
             else if (this.presetSelected) {
                 this.presetSelect({ value: this.presetSelected });
@@ -5338,7 +5335,7 @@ class PbdsDaterangePopoverComponent {
     }
     apply() {
         this.setInputLabel();
-        this.change.emit({
+        this.dateChange.emit({
             fromDate: this.fromDate,
             toDate: this.toDate,
             formattedDate: this.isDatepickerVisible ? this.dateFormat() : this.dateRange,
@@ -5366,19 +5363,10 @@ class PbdsDaterangePopoverComponent {
     presetClick(preset) {
         // console.log('PRESET CLICK: ', preset);
         if (preset) {
-            if (preset.value === 'custom') {
+            if (preset.value === 'CUSTOM') {
                 return false;
             }
-            if (preset.value) {
-                this.toDate = this.calendar.getToday();
-                this.fromDate = this.calendar.getPrev(this.toDate, 'd', preset.value);
-                this.presetSelected = preset.value;
-            }
-            else {
-                this.fromDate = null;
-                this.toDate = null;
-                this.presetSelected = null;
-            }
+            this.setDateProperties(preset.value);
             this.isDatepickerVisible = false;
             this.apply();
         }
@@ -5393,7 +5381,7 @@ class PbdsDaterangePopoverComponent {
     }
     showDatepicker() {
         this.isDatepickerVisible = true;
-        this.presetSelect({ value: 'custom' });
+        this.presetSelect({ value: 'CUSTOM' });
     }
     onFilterChange(filter, index) {
         this.selectedFilter = this.filters[index];
@@ -5411,29 +5399,29 @@ class PbdsDaterangePopoverComponent {
     setDateRange(value) {
         this.fromDate = new NgbDate(value.fromDate.year, value.fromDate.month, value.fromDate.day);
         this.toDate = new NgbDate(value.toDate.year, value.toDate.month, value.toDate.day);
-        this.isDatepickerVisible = value.value === 'custom';
+        this.isDatepickerVisible = value.value === 'CUSTOM';
         this.presetSelected = value.value;
         if (this.filters) {
-            this.filterSelected = this.filters.findIndex(f => f.field === value.filter);
+            this.filterSelected = this.filters.findIndex((f) => f.field === value.filter);
             this.selectedFilter = this.filters[this.filterSelected];
         }
         this.apply();
     }
     setInputLabel() {
         if (this.presets) {
-            const selected = this.presets.find(p => p.value === this.presetSelected);
+            const selected = this.presets.find((p) => p.value === this.presetSelected);
             if (selected) {
                 if (this.fromDate === null || this.toDate === null) {
                     this.dateRange = selected.label;
                 }
-                else if (this.presetSelected === null || (this.presetSelected !== null && this.presetSelected !== 'custom')) {
+                else if (this.presetSelected === null || (this.presetSelected !== null && this.presetSelected !== 'CUSTOM')) {
                     this.dateRange = selected.label;
                 }
                 else {
                     this.dateRange = this.dateFormat();
                 }
             }
-            else if (this.presetSelected === 'custom' && this.fromDate && this.toDate) {
+            else if (this.presetSelected === 'CUSTOM' && this.fromDate && this.toDate) {
                 this.dateRange = this.dateFormat();
             }
         }
@@ -5443,12 +5431,61 @@ class PbdsDaterangePopoverComponent {
             .replace('{fromDate}', this.getFormattedDate(this.fromDate))
             .replace('{toDate}', this.getFormattedDate(this.toDate));
     }
+    getDaysInMonth(year, month) {
+        return new Date(year, month, 0).getDate();
+    }
+    getFromAndToDates(value) {
+        const now = new Date();
+        const currentYear = now.getFullYear();
+        const currentMonth = now.getMonth();
+        const currentDay = now.getDate();
+        switch (value) {
+            case 'PREVIOUS_MONTH':
+                const year = currentMonth > 0 ? currentYear : currentYear - 1;
+                const month = currentMonth > 0 ? currentMonth : 12;
+                const day = 1;
+                const lastDay = this.getDaysInMonth(year, month);
+                return {
+                    from: { year, month, day },
+                    to: { year, month, day: lastDay }
+                };
+            case 'YEAR_TO_DATE':
+                return {
+                    from: { year: currentYear, month: 1, day: 1 },
+                    to: { year: currentYear, month: currentMonth + 1, day: currentDay }
+                };
+            default:
+                return { from: null, to: null };
+        }
+    }
+    setDateProperties(value) {
+        if (value === 'PREVIOUS_MONTH' || value === 'YEAR_TO_DATE') {
+            const { from, to } = this.getFromAndToDates(value);
+            this.fromDate = new NgbDate(from.year, from.month, from.day);
+            this.toDate = new NgbDate(to.year, to.month, to.day);
+            this.presetSelected = value;
+            this.startDate = this.fromDate;
+        }
+        else if (value) {
+            this.toDate = this.calendar.getToday();
+            this.fromDate = this.calendar.getPrev(this.toDate, 'd', Number(value));
+            this.presetSelected = value;
+            this.startDate = this.fromDate;
+        }
+        else {
+            this.fromDate = null;
+            this.toDate = null;
+            this.presetSelected = null;
+            this.startDate = null;
+        }
+    }
 }
 PbdsDaterangePopoverComponent.decorators = [
     { type: Component, args: [{
                 selector: 'pbds-daterange-popover',
-                template: "<div class=\"input-group pbds-daterange-popover\">\n  <input\n    type=\"text\"\n    class=\"form-control\"\n    aria-describedby=\"daterange-button\"\n    [value]=\"dateRange\"\n    readonly=\"readonly\"\n    tabindex=\"-1\"\n  />\n\n  <div class=\"input-group-append\">\n    <button\n      class=\"btn btn-secondary\"\n      type=\"button\"\n      id=\"daterange-button\"\n      #datepickerPopup=\"ngbPopover\"\n      [ngbPopover]=\"daterangeContent\"\n      popoverClass=\"daterange-popover\"\n      autoClose=\"outside\"\n      container=\"body\"\n      placement=\"bottom-right auto\"\n      aria-label=\"Open Daterange Picker\"\n    >\n      <i class=\"pbi-icon-mini pbi-calendar\" aria-hidden=\"true\"></i>\n    </button>\n  </div>\n\n  <ng-template #daterangeContent>\n    <div>\n      <div class=\"d-block d-md-flex\">\n        <div *ngIf=\"isDatepickerVisible\">\n          <ngb-datepicker\n            #datepicker\n            [displayMonths]=\"'2'\"\n            [minDate]=\"minDate\"\n            [maxDate]=\"maxDate\"\n            navigation=\"select\"\n            outsideDays=\"hidden\"\n            [firstDayOfWeek]=\"firstDayOfWeek\"\n            [showWeekdays]=\"true\"\n            [dayTemplate]=\"t\"\n            (select)=\"onDateSelection($event)\"\n          >\n          </ngb-datepicker>\n          <!--  -->\n\n          <ng-template #t let-date let-focused=\"focused\">\n            <span\n              class=\"custom-day\"\n              [class.focused]=\"focused\"\n              [class.range]=\"isRange(date)\"\n              [class.faded]=\"isHovered(date) || isInside(date)\"\n              (mouseenter)=\"hoveredDate = date\"\n              (mouseleave)=\"hoveredDate = null\"\n            >\n              {{ date.day }}\n            </span>\n          </ng-template>\n        </div>\n\n        <div\n          class=\"d-flex flex-column justify-content-lg-between mt-md-0\"\n          [ngClass]=\"{ 'ml-md-4': isDatepickerVisible }\"\n        >\n          <!-- filters -->\n          <div *ngIf=\"filters\" class=\"mb-3\" ngbDropdown>\n            <button class=\"btn btn-sm btn-secondary btn-block\" id=\"dateFilter\" ngbDropdownToggle>\n              {{ selectedFilter.label }}\n            </button>\n            <div ngbDropdownMenu aria-labelledby=\"dateFilter\">\n              <button\n                class=\"dropdown-item\"\n                type=\"button\"\n                *ngFor=\"let filter of filters; let index = index\"\n                (click)=\"onFilterChange(filter, index)\"\n              >\n                {{ filter.label }}\n              </button>\n            </div>\n          </div>\n\n          <!-- presets radio buttons-->\n          <div *ngIf=\"presets && filters\" class=\"flex-grow-1\">\n            <mat-radio-group\n              aria-label=\"Select an option\"\n              class=\"stacked-radio-group\"\n              name=\"presets\"\n              [(ngModel)]=\"presetSelected\"\n              (change)=\"presetSelect($event)\"\n            >\n              <mat-radio-button *ngFor=\"let preset of presets\" [value]=\"preset.value\">{{\n                preset.label\n              }}</mat-radio-button>\n\n              <mat-radio-button *ngIf=\"showCustomPreset\" [value]=\"'custom'\" (change)=\"showDatepicker()\">{{\n                customRangeText\n              }}</mat-radio-button>\n            </mat-radio-group>\n          </div>\n\n          <!-- presets buttons-->\n          <div *ngIf=\"presets && !filters\" class=\"flex-grow-1\">\n            <button\n              type=\"button\"\n              class=\"btn btn-secondary btn-block btn-sm text-nowrap\"\n              *ngFor=\"let preset of presets\"\n              (click)=\"presetClick(preset)\"\n            >\n              {{ preset.label }}\n            </button>\n\n            <button\n              type=\"button\"\n              class=\"btn btn-secondary btn-block btn-sm text-nowrap\"\n              *ngIf=\"showCustomPreset\"\n              (click)=\"showDatepicker()\"\n            >\n              {{ customRangeText }}\n            </button>\n          </div>\n\n          <!-- buttons -->\n          <div *ngIf=\"filters || isDatepickerVisible\" class=\"d-flex justify-content-between mt-3\">\n            <button class=\"btn btn-primary btn-sm mr-1\" type=\"button\" (click)=\"apply()\">{{ applyText }}</button>\n            <button class=\"btn btn-secondary btn-sm ml-1\" type=\"button\" (click)=\"cancel()\">\n              {{ cancelText }}\n            </button>\n          </div>\n        </div>\n      </div>\n    </div>\n  </ng-template>\n</div>\n",
-                providers: [{ provide: NgbDatepickerI18n, useClass: CustomDatepickerI18n }]
+                template: "<div class=\"input-group pbds-daterange-popover\" *ngIf=\"displayInput; else daterangeButton\">\n  <input\n    *ngIf=\"displayInput\"\n    class=\"form-control\"\n    aria-describedby=\"daterange-button\"\n    [value]=\"dateRange\"\n    readonly=\"readonly\"\n    tabindex=\"-1\"\n  />\n\n  <div class=\"input-group-append\">\n    <ng-container *ngTemplateOutlet=\"daterangeButton\"></ng-container>\n  </div>\n</div>\n\n<ng-template #daterangeButton>\n  <button\n    class=\"btn btn-secondary\"\n    type=\"button\"\n    id=\"daterange-button\"\n    #datepickerPopup=\"ngbPopover\"\n    [ngbPopover]=\"daterangeContent\"\n    popoverClass=\"daterange-popover\"\n    autoClose=\"outside\"\n    container=\"body\"\n    [placement]=\"placement\"\n    aria-label=\"Open Daterange Picker\"\n  >\n    <i class=\"pbi-icon-mini pbi-calendar\" aria-hidden=\"true\"></i>\n  </button>\n</ng-template>\n\n<ng-template #daterangeContent>\n  <div class=\"d-block d-md-flex\">\n    <div *ngIf=\"isDatepickerVisible\">\n      <ngb-datepicker\n        #datepicker\n        [displayMonths]=\"displayMonths\"\n        [minDate]=\"minDate\"\n        [maxDate]=\"maxDate\"\n        navigation=\"select\"\n        outsideDays=\"hidden\"\n        [firstDayOfWeek]=\"firstDayOfWeek\"\n        [showWeekdays]=\"true\"\n        [startDate]=\"startDate\"\n        [dayTemplate]=\"t\"\n        (select)=\"onDateSelection($event)\"\n      >\n      </ngb-datepicker>\n      <!--  -->\n\n      <ng-template #t let-date let-focused=\"focused\">\n        <span\n          class=\"custom-day\"\n          [class.focused]=\"focused\"\n          [class.range]=\"isRange(date)\"\n          [class.faded]=\"isHovered(date) || isInside(date)\"\n          (mouseenter)=\"hoveredDate = date\"\n          (mouseleave)=\"hoveredDate = null\"\n        >\n          {{ date.day }}\n        </span>\n      </ng-template>\n    </div>\n\n    <div class=\"d-flex flex-column justify-content-lg-between mt-md-0\" [ngClass]=\"{ 'ml-md-4': isDatepickerVisible }\">\n      <!-- filters -->\n      <div *ngIf=\"filters\" class=\"mb-3\" ngbDropdown>\n        <button class=\"btn btn-sm btn-secondary btn-block\" id=\"dateFilter\" ngbDropdownToggle>\n          {{ selectedFilter.label }}\n        </button>\n        <div ngbDropdownMenu aria-labelledby=\"dateFilter\">\n          <button\n            class=\"dropdown-item\"\n            type=\"button\"\n            *ngFor=\"let filter of filters; let index = index\"\n            (click)=\"onFilterChange(filter, index)\"\n          >\n            {{ filter.label }}\n          </button>\n        </div>\n      </div>\n\n      <!-- presets radio buttons-->\n      <div *ngIf=\"presets && filters\" class=\"flex-grow-1\">\n        <mat-radio-group\n          aria-label=\"Select an option\"\n          class=\"stacked-radio-group\"\n          name=\"presets\"\n          [(ngModel)]=\"presetSelected\"\n          (change)=\"presetSelect($event)\"\n        >\n          <mat-radio-button *ngFor=\"let preset of presets\" [value]=\"preset.value\">{{ preset.label }}</mat-radio-button>\n\n          <mat-radio-button *ngIf=\"showCustomPreset\" [value]=\"'CUSTOM'\" (change)=\"showDatepicker()\">{{\n            customRangeText\n          }}</mat-radio-button>\n        </mat-radio-group>\n      </div>\n\n      <!-- presets buttons-->\n      <div *ngIf=\"presets && !filters\" class=\"flex-grow-1\">\n        <button\n          type=\"button\"\n          class=\"btn btn-secondary btn-block btn-sm text-nowrap\"\n          *ngFor=\"let preset of presets\"\n          (click)=\"presetClick(preset)\"\n        >\n          {{ preset.label }}\n        </button>\n\n        <button\n          type=\"button\"\n          class=\"btn btn-secondary btn-block btn-sm text-nowrap\"\n          *ngIf=\"showCustomPreset\"\n          (click)=\"showDatepicker()\"\n        >\n          {{ customRangeText }}\n        </button>\n      </div>\n\n      <!-- buttons -->\n      <div *ngIf=\"filters || isDatepickerVisible\" class=\"d-flex justify-content-between mt-3\">\n        <button class=\"btn btn-primary btn-sm mr-1\" type=\"button\" (click)=\"apply()\">{{ applyText }}</button>\n        <button class=\"btn btn-secondary btn-sm ml-1\" type=\"button\" (click)=\"cancel()\">\n          {{ cancelText }}\n        </button>\n      </div>\n    </div>\n  </div>\n</ng-template>\n",
+                providers: [{ provide: NgbDatepickerI18n, useClass: CustomDatepickerI18n }],
+                changeDetection: ChangeDetectionStrategy.OnPush
             },] }
 ];
 PbdsDaterangePopoverComponent.ctorParameters = () => [
@@ -5456,7 +5493,7 @@ PbdsDaterangePopoverComponent.ctorParameters = () => [
     { type: PbdsDaterangeService }
 ];
 PbdsDaterangePopoverComponent.propDecorators = {
-    datepickerPopup: [{ type: ViewChild, args: ['datepickerPopup', { static: true },] }],
+    datepickerPopup: [{ type: ViewChild, args: ['datepickerPopup', { static: false },] }],
     presets: [{ type: Input }],
     presetSelected: [{ type: Input }],
     filters: [{ type: Input }],
@@ -5465,12 +5502,15 @@ PbdsDaterangePopoverComponent.propDecorators = {
     applyText: [{ type: Input }],
     cancelText: [{ type: Input }],
     customRangeText: [{ type: Input }],
+    displayMonths: [{ type: Input }],
+    displayInput: [{ type: Input }],
     minDate: [{ type: Input }],
     maxDate: [{ type: Input }],
+    placement: [{ type: Input }],
     fromDate: [{ type: Input }],
     toDate: [{ type: Input }],
     inputFormat: [{ type: Input }],
-    change: [{ type: Output }]
+    dateChange: [{ type: Output }]
 };
 
 class PbdsDaterangePopoverModule {
