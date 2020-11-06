@@ -21,6 +21,7 @@ export declare class PbdsDaterangePopoverComponent implements OnInit, OnChanges 
     showCustomPreset: boolean;
     applyText: string;
     cancelText: string;
+    container: null | 'body';
     customRangeText: string;
     displayMonths: number;
     displayInput: boolean;

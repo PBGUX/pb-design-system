@@ -1,3 +1,15 @@
+# 6.5.0-beta.12
+
+- PBDS Datepicker component: the date dropdown was using 'body' by default, but the ngb-datepicker was not. Added an input to component, with a default of 'body'.
+
+---
+
+# 6.5.0-beta.10 and 11
+
+- minor tweaks and bug fixes
+
+---
+
 # 6.5.0-beta.9
 
 ## Breaking change
