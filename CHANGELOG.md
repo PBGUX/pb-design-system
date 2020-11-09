@@ -1,3 +1,11 @@
+# 6.5.0-beta.13
+
+- PBDS Datepicker component
+  - added `(closed)` output
+  - internally updated the Ngb `(select)` event to `(dateSelect)`, select is deprecated
+
+---
+
 # 6.5.0-beta.12
 
 - PBDS Datepicker component: the date dropdown was using 'body' by default, but the ngb-datepicker was not. Added an input to component, with a default of 'body'.

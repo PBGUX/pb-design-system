@@ -32,6 +32,7 @@ export declare class PbdsDaterangePopoverComponent implements OnInit, OnChanges 
     toDate: NgbDate | null;
     inputFormat: string;
     dateChange: EventEmitter<PbdsDaterangeChange>;
+    cancel: EventEmitter<any>;
     firstDayOfWeek: import("@angular/common").WeekDay;
     hoveredDate: NgbDate;
     dateRange: string;
@@ -41,8 +42,8 @@ export declare class PbdsDaterangePopoverComponent implements OnInit, OnChanges 
     constructor(calendar: NgbCalendar, daterangeService: PbdsDaterangeService);
     ngOnInit(): void;
     ngOnChanges(changes: SimpleChanges): void;
-    apply(): void;
-    cancel(): void;
+    onApply(): void;
+    onCancel(): void;
     onDateSelection(date: NgbDate): void;
     presetSelect: ($event: Partial<PbdsDaterangePreset>) => boolean;
     presetClick(preset: PbdsDaterangePreset): boolean;
