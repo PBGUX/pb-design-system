@@ -6,6 +6,8 @@
 
     var PbdsColumnToggleComponent = /** @class */ (function () {
         function PbdsColumnToggleComponent() {
+            this.label = 'Columns';
+            this.showAllLabel = 'Show All';
             this.storagekey = false;
             this.minimum = 1;
             this.toggle = new core.EventEmitter();
@@ -74,10 +76,12 @@
     PbdsColumnToggleComponent.decorators = [
         { type: core.Component, args: [{
                     selector: 'pbds-column-toggle',
-                    template: "<div ngbDropdown #columnToggleDropdown=\"ngbDropdown\" [autoClose]=\"'outside'\" class=\"d-inline-block\">\n  <button class=\"btn btn-secondary\" id=\"toggle-column\" ngbDropdownToggle>\n    <i class=\"pbi-icon-mini pbi-column-toggle\"></i>\n    Show All\n  </button>\n\n  <div ngbDropdownMenu aria-labelledby=\"toggle-column\">\n    <ng-container *ngFor=\"let column of columns\">\n      <button *ngIf=\"column.toggle.visible\" class=\"dropdown-item\" (click)=\"toggleColumn(column)\">\n        <i class=\"pbi-icon-mini pbi-check small mr-1\" [ngClass]=\"showSelectedIcon(column)\"></i>\n        {{ column.header }}\n      </button>\n    </ng-container>\n\n    <div class=\"dropdown-divider\"></div>\n\n    <button class=\"dropdown-item\" (click)=\"showAllColumns(columnToggleDropdown)\">Show All</button>\n  </div>\n</div>\n"
+                    template: "<div ngbDropdown #columnToggleDropdown=\"ngbDropdown\" [autoClose]=\"'outside'\" class=\"d-inline-block\">\n  <button class=\"btn btn-secondary\" id=\"toggle-column\" ngbDropdownToggle>\n    <i class=\"pbi-icon-mini pbi-column-toggle\"></i>\n    {{ label }}\n  </button>\n\n  <div ngbDropdownMenu aria-labelledby=\"toggle-column\">\n    <ng-container *ngFor=\"let column of columns\">\n      <button *ngIf=\"column.toggle.visible\" class=\"dropdown-item\" (click)=\"toggleColumn(column)\">\n        <i class=\"pbi-icon-mini pbi-check small mr-1\" [ngClass]=\"showSelectedIcon(column)\"></i>\n        {{ column.header }}\n      </button>\n    </ng-container>\n\n    <div class=\"dropdown-divider\"></div>\n\n    <button class=\"dropdown-item\" (click)=\"showAllColumns(columnToggleDropdown)\">{{ showAllLabel }}</button>\n  </div>\n</div>\n"
                 },] }
     ];
     PbdsColumnToggleComponent.propDecorators = {
+        label: [{ type: core.Input }],
+        showAllLabel: [{ type: core.Input }],
         columns: [{ type: core.Input }],
         storagekey: [{ type: core.Input }],
         minimum: [{ type: core.Input }],

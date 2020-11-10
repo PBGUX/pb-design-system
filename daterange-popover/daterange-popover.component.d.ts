@@ -42,7 +42,7 @@ export declare class PbdsDaterangePopoverComponent implements OnInit, OnChanges 
     constructor(calendar: NgbCalendar, daterangeService: PbdsDaterangeService);
     ngOnInit(): void;
     ngOnChanges(changes: SimpleChanges): void;
-    onApply(): void;
+    onApply(shouldEmit?: boolean): void;
     onCancel(): void;
     onDateSelection(date: NgbDate): void;
     presetSelect: ($event: Partial<PbdsDaterangePreset>) => boolean;
