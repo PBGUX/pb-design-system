@@ -1,3 +1,14 @@
+# 6.5.0-beta.14
+
+- PBDS Datepicker component
+  - fixed preset selection
+  - fixed rendering issue if setting an empty filter array
+- PBDS Column Toggle
+  - added `[label]` input to change the text next to the icon, primarily used for globalization.
+  - added `[showAllLabel]` input to change the text in the dropdown menu, primarily used for globalization.
+
+---
+
 # 6.5.0-beta.13
 
 - PBDS Datepicker component
