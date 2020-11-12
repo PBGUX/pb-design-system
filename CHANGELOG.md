@@ -1,3 +1,12 @@
+# 6.5.0-beta.16
+
+- PBDS Component Library
+  - fix build
+  - top level imports
+  - add ng-bootstrap v8.0.0 support
+
+---
+
 # 6.5.0-beta.14
 
 - PBDS Datepicker component

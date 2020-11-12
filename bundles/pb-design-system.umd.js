@@ -2829,8 +2829,8 @@
         indicatorRef: [{ type: i0.ContentChild, args: [PbdsDatavizMetricIndicatorComponent, { static: true },] }]
     };
 
-    var DatavizBubbleMapComponent = /** @class */ (function () {
-        function DatavizBubbleMapComponent(_element, _scroll, _dataviz) {
+    var PbdsDatavizBubbleMapComponent = /** @class */ (function () {
+        function PbdsDatavizBubbleMapComponent(_element, _scroll, _dataviz) {
             var _this = this;
             this._element = _element;
             this._scroll = _scroll;
@@ -2951,7 +2951,7 @@
                 _this.tooltip.style('opacity', 0);
             };
         }
-        DatavizBubbleMapComponent.prototype.ngOnInit = function () {
+        PbdsDatavizBubbleMapComponent.prototype.ngOnInit = function () {
             var _this = this;
             this.margin = {
                 top: +this.marginTop,
@@ -3047,30 +3047,30 @@
             this.bubbleContainer = this.svg.append('g').attr('class', 'dots').style('color', this.color);
             this.updateChart();
         };
-        DatavizBubbleMapComponent.prototype.ngOnChanges = function (changes) {
+        PbdsDatavizBubbleMapComponent.prototype.ngOnChanges = function (changes) {
             if (changes.data && !changes.data.firstChange) {
                 this.updateChart();
             }
         };
-        DatavizBubbleMapComponent.prototype.ngOnDestroy = function () {
+        PbdsDatavizBubbleMapComponent.prototype.ngOnDestroy = function () {
             if (this.tooltip)
                 this.tooltip.remove();
         };
-        return DatavizBubbleMapComponent;
+        return PbdsDatavizBubbleMapComponent;
     }());
-    DatavizBubbleMapComponent.decorators = [
+    PbdsDatavizBubbleMapComponent.decorators = [
         { type: i0.Component, args: [{
                     selector: 'pbds-dataviz-bubble-map',
                     template: "",
                     changeDetection: i0.ChangeDetectionStrategy.OnPush
                 },] }
     ];
-    DatavizBubbleMapComponent.ctorParameters = function () { return [
+    PbdsDatavizBubbleMapComponent.ctorParameters = function () { return [
         { type: i0.ElementRef },
         { type: common.ViewportScroller },
         { type: PbdsDatavizService }
     ]; };
-    DatavizBubbleMapComponent.propDecorators = {
+    PbdsDatavizBubbleMapComponent.propDecorators = {
         chartClass: [{ type: i0.HostBinding, args: ['class.pbds-chart',] }],
         bubbleMapClass: [{ type: i0.HostBinding, args: ['class.pbds-chart-bubble-map',] }],
         data: [{ type: i0.Input }],
@@ -5407,7 +5407,7 @@
                         PbdsDatavizSparklineComponent,
                         PbdsDatavizBarStackedComponent,
                         PbdsDatavizMetricBlockComponent,
-                        DatavizBubbleMapComponent,
+                        PbdsDatavizBubbleMapComponent,
                         PbdsDatavizMetricIndicatorComponent,
                         PbdsDatavizHeatmapComponent,
                         PbdsDatavizChoroplethMapComponent,
@@ -5423,7 +5423,7 @@
                         PbdsDatavizSparklineComponent,
                         PbdsDatavizBarStackedComponent,
                         PbdsDatavizMetricBlockComponent,
-                        DatavizBubbleMapComponent,
+                        PbdsDatavizBubbleMapComponent,
                         PbdsDatavizMetricIndicatorComponent,
                         PbdsDatavizHeatmapComponent,
                         PbdsDatavizChoroplethMapComponent,
@@ -5960,6 +5960,8 @@
                 },] }
     ];
 
+    // dataviz
+
     var PbdsComponentsModule = /** @class */ (function () {
         function PbdsComponentsModule() {
         }
@@ -5991,32 +5993,32 @@
      * Generated bundle index. Do not edit.
      */
 
+    exports.PbdsColumnToggleComponent = PbdsColumnToggleComponent;
+    exports.PbdsColumnToggleModule = PbdsColumnToggleModule;
     exports.PbdsComponentsModule = PbdsComponentsModule;
-    exports.ɵa = PbdsDatavizModule;
-    exports.ɵb = PbdsDatavizPieComponent;
-    exports.ɵc = PbdsDatavizService;
-    exports.ɵd = PbdsDatavizBarComponent;
-    exports.ɵe = PbdsDatavizLineComponent;
-    exports.ɵf = PbdsDatavizGaugeComponent;
-    exports.ɵg = PbdsDatavizSparklineComponent;
-    exports.ɵh = PbdsDatavizBarStackedComponent;
-    exports.ɵi = PbdsDatavizMetricBlockComponent;
-    exports.ɵj = PbdsDatavizMetricIndicatorComponent;
-    exports.ɵk = DatavizBubbleMapComponent;
-    exports.ɵl = PbdsDatavizHeatmapComponent;
-    exports.ɵm = PbdsDatavizChoroplethMapComponent;
-    exports.ɵn = PbdsDatavizBarGroupedComponent;
-    exports.ɵo = PbdsDatavizBarSingleHorizontalComponent;
-    exports.ɵp = PbdsHeaderShadowModule;
-    exports.ɵq = PbdsHeaderShadowDirective;
-    exports.ɵr = PbdsDaterangePopoverModule;
-    exports.ɵs = CustomDatepickerI18n;
-    exports.ɵt = PbdsDaterangePopoverComponent;
-    exports.ɵu = PbdsDaterangeService;
-    exports.ɵv = PbdsPageTitleModule;
-    exports.ɵw = PbdsPageTitleComponent;
-    exports.ɵx = PbdsColumnToggleModule;
-    exports.ɵy = PbdsColumnToggleComponent;
+    exports.PbdsDatavizBarComponent = PbdsDatavizBarComponent;
+    exports.PbdsDatavizBarGroupedComponent = PbdsDatavizBarGroupedComponent;
+    exports.PbdsDatavizBarSingleHorizontalComponent = PbdsDatavizBarSingleHorizontalComponent;
+    exports.PbdsDatavizBarStackedComponent = PbdsDatavizBarStackedComponent;
+    exports.PbdsDatavizBubbleMapComponent = PbdsDatavizBubbleMapComponent;
+    exports.PbdsDatavizChoroplethMapComponent = PbdsDatavizChoroplethMapComponent;
+    exports.PbdsDatavizGaugeComponent = PbdsDatavizGaugeComponent;
+    exports.PbdsDatavizHeatmapComponent = PbdsDatavizHeatmapComponent;
+    exports.PbdsDatavizLineComponent = PbdsDatavizLineComponent;
+    exports.PbdsDatavizMetricBlockComponent = PbdsDatavizMetricBlockComponent;
+    exports.PbdsDatavizMetricIndicatorComponent = PbdsDatavizMetricIndicatorComponent;
+    exports.PbdsDatavizModule = PbdsDatavizModule;
+    exports.PbdsDatavizPieComponent = PbdsDatavizPieComponent;
+    exports.PbdsDatavizService = PbdsDatavizService;
+    exports.PbdsDatavizSparklineComponent = PbdsDatavizSparklineComponent;
+    exports.PbdsDaterangePopoverComponent = PbdsDaterangePopoverComponent;
+    exports.PbdsDaterangePopoverModule = PbdsDaterangePopoverModule;
+    exports.PbdsDaterangeService = PbdsDaterangeService;
+    exports.PbdsHeaderShadowDirective = PbdsHeaderShadowDirective;
+    exports.PbdsHeaderShadowModule = PbdsHeaderShadowModule;
+    exports.PbdsPageTitleComponent = PbdsPageTitleComponent;
+    exports.PbdsPageTitleModule = PbdsPageTitleModule;
+    exports.ɵa = CustomDatepickerI18n;
 
     Object.defineProperty(exports, '__esModule', { value: true });
 

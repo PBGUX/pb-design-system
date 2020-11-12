@@ -2,7 +2,7 @@ import { OnInit, OnChanges, EventEmitter, ElementRef, OnDestroy, SimpleChanges }
 import { ViewportScroller } from '@angular/common';
 import { PbdsDatavizService } from './dataviz.service';
 import { PbdsDatavizMapData } from './dataviz.interfaces';
-export declare class DatavizBubbleMapComponent implements OnInit, OnChanges, OnDestroy {
+export declare class PbdsDatavizBubbleMapComponent implements OnInit, OnChanges, OnDestroy {
     private _element;
     private _scroll;
     private _dataviz;

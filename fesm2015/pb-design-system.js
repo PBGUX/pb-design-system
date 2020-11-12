@@ -2869,7 +2869,7 @@ PbdsDatavizMetricBlockComponent.propDecorators = {
     indicatorRef: [{ type: ContentChild, args: [PbdsDatavizMetricIndicatorComponent, { static: true },] }]
 };
 
-class DatavizBubbleMapComponent {
+class PbdsDatavizBubbleMapComponent {
     constructor(_element, _scroll, _dataviz) {
         this._element = _element;
         this._scroll = _scroll;
@@ -3095,19 +3095,19 @@ class DatavizBubbleMapComponent {
             this.tooltip.remove();
     }
 }
-DatavizBubbleMapComponent.decorators = [
+PbdsDatavizBubbleMapComponent.decorators = [
     { type: Component, args: [{
                 selector: 'pbds-dataviz-bubble-map',
                 template: ``,
                 changeDetection: ChangeDetectionStrategy.OnPush
             },] }
 ];
-DatavizBubbleMapComponent.ctorParameters = () => [
+PbdsDatavizBubbleMapComponent.ctorParameters = () => [
     { type: ElementRef },
     { type: ViewportScroller },
     { type: PbdsDatavizService }
 ];
-DatavizBubbleMapComponent.propDecorators = {
+PbdsDatavizBubbleMapComponent.propDecorators = {
     chartClass: [{ type: HostBinding, args: ['class.pbds-chart',] }],
     bubbleMapClass: [{ type: HostBinding, args: ['class.pbds-chart-bubble-map',] }],
     data: [{ type: Input }],
@@ -5137,7 +5137,7 @@ PbdsDatavizModule.decorators = [
                     PbdsDatavizSparklineComponent,
                     PbdsDatavizBarStackedComponent,
                     PbdsDatavizMetricBlockComponent,
-                    DatavizBubbleMapComponent,
+                    PbdsDatavizBubbleMapComponent,
                     PbdsDatavizMetricIndicatorComponent,
                     PbdsDatavizHeatmapComponent,
                     PbdsDatavizChoroplethMapComponent,
@@ -5153,7 +5153,7 @@ PbdsDatavizModule.decorators = [
                     PbdsDatavizSparklineComponent,
                     PbdsDatavizBarStackedComponent,
                     PbdsDatavizMetricBlockComponent,
-                    DatavizBubbleMapComponent,
+                    PbdsDatavizBubbleMapComponent,
                     PbdsDatavizMetricIndicatorComponent,
                     PbdsDatavizHeatmapComponent,
                     PbdsDatavizChoroplethMapComponent,
@@ -5664,6 +5664,8 @@ PbdsColumnToggleModule.decorators = [
             },] }
 ];
 
+// dataviz
+
 class PbdsComponentsModule {
 }
 PbdsComponentsModule.decorators = [
@@ -5692,5 +5694,5 @@ var public_api = {};
  * Generated bundle index. Do not edit.
  */
 
-export { PbdsComponentsModule, PbdsDatavizModule as ɵa, PbdsDatavizPieComponent as ɵb, PbdsDatavizService as ɵc, PbdsDatavizBarComponent as ɵd, PbdsDatavizLineComponent as ɵe, PbdsDatavizGaugeComponent as ɵf, PbdsDatavizSparklineComponent as ɵg, PbdsDatavizBarStackedComponent as ɵh, PbdsDatavizMetricBlockComponent as ɵi, PbdsDatavizMetricIndicatorComponent as ɵj, DatavizBubbleMapComponent as ɵk, PbdsDatavizHeatmapComponent as ɵl, PbdsDatavizChoroplethMapComponent as ɵm, PbdsDatavizBarGroupedComponent as ɵn, PbdsDatavizBarSingleHorizontalComponent as ɵo, PbdsHeaderShadowModule as ɵp, PbdsHeaderShadowDirective as ɵq, PbdsDaterangePopoverModule as ɵr, CustomDatepickerI18n as ɵs, PbdsDaterangePopoverComponent as ɵt, PbdsDaterangeService as ɵu, PbdsPageTitleModule as ɵv, PbdsPageTitleComponent as ɵw, PbdsColumnToggleModule as ɵx, PbdsColumnToggleComponent as ɵy };
+export { PbdsColumnToggleComponent, PbdsColumnToggleModule, PbdsComponentsModule, PbdsDatavizBarComponent, PbdsDatavizBarGroupedComponent, PbdsDatavizBarSingleHorizontalComponent, PbdsDatavizBarStackedComponent, PbdsDatavizBubbleMapComponent, PbdsDatavizChoroplethMapComponent, PbdsDatavizGaugeComponent, PbdsDatavizHeatmapComponent, PbdsDatavizLineComponent, PbdsDatavizMetricBlockComponent, PbdsDatavizMetricIndicatorComponent, PbdsDatavizModule, PbdsDatavizPieComponent, PbdsDatavizService, PbdsDatavizSparklineComponent, PbdsDaterangePopoverComponent, PbdsDaterangePopoverModule, PbdsDaterangeService, PbdsHeaderShadowDirective, PbdsHeaderShadowModule, PbdsPageTitleComponent, PbdsPageTitleModule, CustomDatepickerI18n as ɵa };
 //# sourceMappingURL=pb-design-system.js.map
