@@ -1,11 +1,13 @@
 (function (global, factory) {
     typeof exports === 'object' && typeof module !== 'undefined' ? factory(exports, require('@angular/core'), require('@angular/common'), require('@ng-bootstrap/ng-bootstrap')) :
     typeof define === 'function' && define.amd ? define('pb-design-system/column-toggle', ['exports', '@angular/core', '@angular/common', '@ng-bootstrap/ng-bootstrap'], factory) :
-    (global = typeof globalThis !== 'undefined' ? globalThis : global || self, factory((global['pb-design-system'] = global['pb-design-system'] || {}, global['pb-design-system']['column-toggle'] = {}), global.ng.core, global.ng.common, global['^7']['0']['0']));
+    (global = typeof globalThis !== 'undefined' ? globalThis : global || self, factory((global['pb-design-system'] = global['pb-design-system'] || {}, global['pb-design-system']['column-toggle'] = {}), global.ng.core, global.ng.common, global['^7']['0']['0 || ^8']['0']['0']));
 }(this, (function (exports, core, common, ngBootstrap) { 'use strict';
 
     var PbdsColumnToggleComponent = /** @class */ (function () {
         function PbdsColumnToggleComponent() {
+            this.label = 'Columns';
+            this.showAllLabel = 'Show All';
             this.storagekey = false;
             this.minimum = 1;
             this.toggle = new core.EventEmitter();
@@ -74,10 +76,12 @@
     PbdsColumnToggleComponent.decorators = [
         { type: core.Component, args: [{
                     selector: 'pbds-column-toggle',
-                    template: "<div ngbDropdown #columnToggleDropdown=\"ngbDropdown\" [autoClose]=\"'outside'\" class=\"d-inline-block\">\n  <button class=\"btn btn-secondary\" id=\"toggle-column\" ngbDropdownToggle>\n    <i class=\"pbi-icon-mini pbi-column-toggle\"></i>\n    Show All\n  </button>\n\n  <div ngbDropdownMenu aria-labelledby=\"toggle-column\">\n    <ng-container *ngFor=\"let column of columns\">\n      <button *ngIf=\"column.toggle.visible\" class=\"dropdown-item\" (click)=\"toggleColumn(column)\">\n        <i class=\"pbi-icon-mini pbi-check small mr-1\" [ngClass]=\"showSelectedIcon(column)\"></i>\n        {{ column.header }}\n      </button>\n    </ng-container>\n\n    <div class=\"dropdown-divider\"></div>\n\n    <button class=\"dropdown-item\" (click)=\"showAllColumns(columnToggleDropdown)\">Show All</button>\n  </div>\n</div>\n"
+                    template: "<div ngbDropdown #columnToggleDropdown=\"ngbDropdown\" [autoClose]=\"'outside'\" class=\"d-inline-block\">\n  <button class=\"btn btn-secondary\" id=\"toggle-column\" ngbDropdownToggle>\n    <i class=\"pbi-icon-mini pbi-column-toggle\"></i>\n    {{ label }}\n  </button>\n\n  <div ngbDropdownMenu aria-labelledby=\"toggle-column\">\n    <ng-container *ngFor=\"let column of columns\">\n      <button *ngIf=\"column.toggle.visible\" class=\"dropdown-item\" (click)=\"toggleColumn(column)\">\n        <i class=\"pbi-icon-mini pbi-check small mr-1\" [ngClass]=\"showSelectedIcon(column)\"></i>\n        {{ column.header }}\n      </button>\n    </ng-container>\n\n    <div class=\"dropdown-divider\"></div>\n\n    <button class=\"dropdown-item\" (click)=\"showAllColumns(columnToggleDropdown)\">{{ showAllLabel }}</button>\n  </div>\n</div>\n"
                 },] }
     ];
     PbdsColumnToggleComponent.propDecorators = {
+        label: [{ type: core.Input }],
+        showAllLabel: [{ type: core.Input }],
         columns: [{ type: core.Input }],
         storagekey: [{ type: core.Input }],
         minimum: [{ type: core.Input }],

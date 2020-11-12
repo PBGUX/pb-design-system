@@ -2,6 +2,8 @@ import { EventEmitter } from '@angular/core';
 import { NgbDropdown } from '@ng-bootstrap/ng-bootstrap';
 import { PbdsColumnToggle } from './column-toggle.interfaces';
 export declare class PbdsColumnToggleComponent {
+    label: string;
+    showAllLabel: string;
     columns: any[];
     storagekey: string | false;
     minimum: number;
