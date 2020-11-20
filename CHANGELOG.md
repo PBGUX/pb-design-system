@@ -1,3 +1,60 @@
+# 6.5.0
+
+## Breaking Changes
+
+- PBDS Component Library
+
+  - Changed the import structure of the library modules, you no longer need to import the entire library and install all dependencies.
+  - You should import only what your app will use. Note that peer dependencies need to be installed as needed. If using the `PbdsDatavizModule` for example, `D3` and `topojson-client` need to be installed. See the `Web > Component Library` page for more information on peer dependencies for each module.
+
+  ```
+  import { PbdsHeaderShadowModule } from 'pb-design-system/header-shadow';
+  import { PbdsPageTitleModule } from 'pb-design-system/page-title';
+
+  // if you use dataviz charts
+  import { PbdsDatavizModule } from 'pb-design-system/dataviz';
+  ```
+
+- Updated Angular L10N to 10.1.2
+  - the plugin was rewritten for Angular 10 and the implementation has changed, [see the website for details](https://github.com/robisim74/angular-l10n) and the `Web > Language Selector` page. Also see the plugin [migration guide here](https://github.com/robisim74/angular-l10n/blob/master/MIGRATION_GUIDE.md).
+
+## Changes and Fixes
+
+- Added support for:
+  - Angular 10.2.x
+  - PrimeNG 10.0.x
+  - NG-Bootstrap 7.0.x/8.0.x
+  - Angular Material 10.x.x
+- Removed outdated/unsupported "unbranded.css"
+- Fixed compile issues with the POI font. The POI font has been rebuilt in Icomoon and the CSS updated to match the other icon fonts.
+- Fixed PB white logo in downloads
+- Added styling and examples for `mat-toggle-button`
+- PBDS Component Library
+  - Updated peer dependencies, you need to install peer dependencies depending on the components being imported. If using the `PbdsDatavizModule` for example, `D3` and `topojson-client` need to be installed. See the `Web > Component Library` page for more information on peer dependencies for each module.
+  - Added ng-bootstrap v8.0.0 support
+  - PBDS Dataviz
+    - Updated D3 imports internally to support tree-shaking
+  - PBDS Datepicker component
+    - added `(closed)` output which fires when the component menu is closed
+    - internally updated the Ngb `(select)` event to `(dateSelect)`, select is removed in Ngb v8.0.0
+    - fixed preset selections not being set on initialization
+    - fixed rendering issue if setting an empty `[filter]` array
+
+## Additions
+
+- PBDS Component Library
+  - Added Page Title component
+  - Added PBDS Column Toggle
+- Added animation pattern for adding items to lists
+- Updated mobile standards (fonts, screenshots, etc.)
+- Updated Globalization guidelines
+- Added guidelines for Account Access MFA (Multi-Factor Authentication)
+- Added illustrations page with downloadable package and carrier logo images
+- Added generic "something went wrong" error page
+- Added "pbi-delivery" icon to PBI Outline font
+
+---
+
 # 6.5.0-beta.17
 
 - PBDS Component Library
