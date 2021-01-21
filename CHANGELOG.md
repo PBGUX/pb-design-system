@@ -1,3 +1,8 @@
+# 6.5.1
+
+- fix for missing highlight on Tree Navigation nodes
+- removed unneccesary Material CSS import
+
 # 6.5.0
 
 ## Breaking Changes
