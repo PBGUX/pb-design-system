@@ -1,3 +1,8 @@
+# 6.5.2
+
+- fix keyboard focus colors on Material checkboxes and radio buttons
+- **NOTE** Please read breaking change in 6.5.1
+
 # 6.5.1
 
 # Breaking Change
