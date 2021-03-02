@@ -1,7 +1,7 @@
 import { ɵɵdefineInjectable, Injectable, EventEmitter, Component, ChangeDetectionStrategy, ElementRef, HostBinding, Input, Output, ContentChild, NgModule } from '@angular/core';
 import { ViewportScroller, Location, CommonModule } from '@angular/common';
 import { NgbTooltipModule } from '@ng-bootstrap/ng-bootstrap';
-import { event as event$1, mouse, select } from 'd3-selection';
+import { pointer, select } from 'd3-selection';
 import { scaleOrdinal, scaleBand, scaleLinear, scaleTime, scaleQuantize, scaleQuantile, scaleThreshold } from 'd3-scale';
 import { pie, arc, line, curveCatmullRom, area, stack, stackOrderNone } from 'd3-shape';
 import { interpolate } from 'd3-interpolate';
@@ -13,7 +13,6 @@ import { axisBottom, axisLeft } from 'd3-axis';
 import { easeQuadInOut, easeLinear } from 'd3-ease';
 import { geoMercator, geoAlbersUsa, geoAlbers, geoPath } from 'd3-geo';
 import { feature, mesh } from 'topojson-client';
-import { values } from 'd3-collection';
 
 class PbdsDatavizService {
     constructor() {
@@ -233,57 +232,55 @@ class PbdsDatavizPieComponent {
             this.svg
                 .selectAll('path')
                 .data(this.pie(this.data))
-                .join(enter => {
+                .join((enter) => {
                 const path = enter.append('path');
                 path
                     .each((d) => (d.outerRadius = this.outerRadius))
                     .attr('fill', (d) => this.colorRange(d.data.label))
                     .attr('class', 'slice')
                     .each((d, i, nodes) => {
+                    // save the current data to be used in arc update tween
                     this.currentData.splice(i, 1, d);
                 });
                 if (this.type === 'pie') {
-                    path
-                        .style('stroke', '#fff')
-                        .style('stroke-width', 2)
-                        .style('stroke-alignment', 'inner');
+                    path.style('stroke', '#fff').style('stroke-width', 2).style('stroke-alignment', 'inner');
                 }
-                path.call(path => path
+                path.call((path) => path
                     .transition()
+                    .delay(500)
                     .duration((d, i, n) => (firstRun ? 0 : 500))
                     .attrTween('d', this.arcEnterTween));
                 return path;
-            }, update => {
+            }, (update) => {
                 this.tooltipHide();
-                update
-                    .each((d) => (d.outerRadius = this.outerRadius))
-                    .call(update => update
-                    .transition()
-                    .duration(500)
-                    .attrTween('d', this.arcTween));
+                update.each((d) => {
+                    return (d.outerRadius = this.outerRadius);
+                });
+                update.transition().duration(500).attrTween('d', this.arcUpdateTween);
                 return update;
-            }, exit => exit.remove())
-                .on('mouseover', (data, index, nodes) => {
-                this.pathMouseOver(event$1, data, index, nodes);
-                // this.tooltipShow(this.chart.node(), data);
+            }, (exit) => exit.remove())
+                .on('mouseover', (event, data) => {
+                this.pathMouseOver(event, data);
+                this.tooltipShow(event, data);
             })
-                .on('mousemove', (data, index, nodes) => {
-                this.tooltipShow(this.chart.node(), data);
-                this.tooltipMove(this.chart.node());
+                .on('mousemove', (event, data) => {
+                this.tooltipShow(event, data);
+                // this.tooltipMove(event, data);
+                this.tooltipMove(event, this.chart.node());
             })
-                .on('mouseout', (data, index, nodes) => {
-                this.pathMouseOut(data, index, nodes);
+                .on('mouseout', (event, data) => {
+                this.pathMouseOut(event, data);
                 this.tooltipHide();
             })
-                .on('click', (data, index, nodes) => {
-                this.pathClick(event$1, data, index, nodes);
+                .on('click', (event, data) => {
+                this.pathClick(event, data);
             });
             // legend
             this.chart
                 .select('.legend')
                 .selectAll('.legend-item')
                 .data(this.data)
-                .join(enter => {
+                .join((enter) => {
                 const li = enter.append('li').attr('class', 'legend-item');
                 li.append('span')
                     .attr('class', 'legend-key')
@@ -306,7 +303,7 @@ class PbdsDatavizPieComponent {
                     .attr('class', 'legend-value')
                     .html((d) => this.legendValueFormat(d.value));
                 return li;
-            }, update => {
+            }, (update) => {
                 update.selectAll('.legend-key').style('background-color', (d) => this.colorRange(d.label));
                 update.select('.legend-label').html((d) => {
                     switch (this.legendLabelFormatType) {
@@ -319,102 +316,95 @@ class PbdsDatavizPieComponent {
                 });
                 update.select('.legend-value').html((d) => this.legendValueFormat(d.value));
                 return update;
-            }, exit => exit.remove())
-                .on('mouseover focus', (data, index, nodes) => {
-                this.legendMouseOverFocus(data, index, nodes);
-                this.pathMouseOver(event$1, data, index, nodes);
+            }, (exit) => exit.remove())
+                .datum((d, i) => {
+                return { data: d, index: i };
             })
-                .on('mouseout blur', (data, index, nodes) => {
-                this.legendMouseOutBlur(data, index, nodes);
-                this.pathMouseOut(data, index, nodes);
+                .on('mouseover focus', (event, data) => {
+                this.legendMouseOverFocus(event, data);
+                this.pathMouseOver(event, data);
             })
-                .on('click', (data, index, nodes) => {
-                this.clicked.emit({ event: event$1, data: data });
+                .on('mouseout blur', (event, data) => {
+                this.legendMouseOutBlur(event, data);
+                this.pathMouseOut(event, data);
+            })
+                .on('click', (event, data) => {
+                this.clicked.emit({ event: event, data: data.data });
             });
         };
-        this.arcEnterTween = (data, index, nodes) => {
+        this.arcEnterTween = (data) => {
             const i = interpolate(data.startAngle, data.endAngle);
-            return t => {
+            return (t) => {
                 data.endAngle = i(t);
                 return this.arc(data);
             };
         };
-        this.arcTween = (data, index, nodes) => {
-            // console.log('ARGS: ', data, index, nodes);
-            const i = interpolate(this.currentData[index], data);
-            this.currentData[index] = i(1);
-            return t => this.arc(i(t));
-        };
-        this.arcExitTween = (data, index, nodes) => {
-            const end = Object.assign({}, this.currentData[index], { startAngle: this.currentData[index].endAngle });
-            const i = interpolate(data, end);
-            return t => {
-                return this.arc(i(t));
+        // see https://bl.ocks.org/HarryStevens/e1acaf628b1693f1b32e5f2e1a7f73fb
+        this.arcUpdateTween = (data, index, n) => {
+            const interpolate$1 = interpolate(this.currentData[index], data);
+            // update the current data for this slice
+            this.currentData[index] = interpolate$1(0);
+            return (t) => {
+                return this.arc(interpolate$1(t));
             };
         };
-        this.arcMouseOverTween = (data, index, nodes) => {
+        this.arcMouseOverTween = (data) => {
             const i = interpolate(data.outerRadius, this.outerRadius + this.arcZoom);
-            return t => {
+            return (t) => {
                 data.outerRadius = i(t);
                 return this.arc(data);
             };
         };
-        this.arcMouseOutTween = (data, index, nodes) => {
+        this.arcMouseOutTween = (data) => {
+            // debugger;
             const i = interpolate(data.outerRadius, this.outerRadius);
-            return t => {
+            return (t) => {
                 data.outerRadius = i(t);
                 return this.arc(data);
             };
         };
-        this.legendMouseOverFocus = (data, index, nodes) => {
+        this.legendMouseOverFocus = (event, data) => {
             this.chart
                 .selectAll('.legend-item')
-                .filter((d, i) => i !== index)
+                .filter((d, i) => {
+                return `${d.label}` !== `${data.label}`;
+            })
                 .classed('inactive', true);
         };
-        this.legendMouseOutBlur = (data, index, nodes) => {
+        this.legendMouseOutBlur = (event, data) => {
             this.chart.selectAll('.legend-item').classed('inactive', false);
         };
-        this.pathMouseOver = (event, data, index, nodes) => {
+        this.pathMouseOver = (event, data) => {
+            // console.log(data);
             const slices = this.chart.selectAll('.slice');
-            const slice = slices.filter((d, i) => i === index);
+            const slice = slices.filter((d, i) => i === data.index);
             this.chart
                 .selectAll('.legend-item')
-                .filter((d, i) => i !== index)
+                .filter((d, i) => i !== data.index)
                 .classed('inactive', true);
-            slices.filter((d, i) => i !== index).classed('inactive', true);
-            slice
-                .transition()
-                .duration(300)
-                .delay(0)
-                .attrTween('d', this.arcMouseOverTween);
+            slices.filter((d, i) => i !== data.index).classed('inactive', true);
+            slice.transition().duration(300).delay(0).attrTween('d', this.arcMouseOverTween);
             this.hovered.emit({
                 event: event,
                 data: data.data ? data.data : data // legend hover data is different than slice hover data
             });
         };
-        this.pathMouseOut = (data, index, value) => {
+        this.pathMouseOut = (event, data) => {
             const slices = this.chart.selectAll('.slice');
-            const slice = slices.filter((d, i) => i === index);
-            this.chart
-                .selectAll('.legend-item')
-                .filter((d, i) => i !== index)
-                .classed('inactive', false);
+            const slice = slices.filter((d, i) => d.label === data.label);
+            this.chart.selectAll('.legend-item').classed('inactive', false);
             slices.classed('inactive', false);
-            slice
-                .transition()
-                .duration(300)
-                .delay(0)
-                .attrTween('d', this.arcMouseOutTween);
+            slice.transition().duration(300).delay(0).attrTween('d', this.arcMouseOutTween);
         };
-        this.pathClick = (event, data, index, nodes) => {
+        this.pathClick = (event, data) => {
             this.clicked.emit({
                 event: event,
                 data: data.data
             });
         };
-        this.tooltipShow = (node, data) => {
-            this.tooltipSetPosition(node);
+        this.tooltipShow = (event, data) => {
+            // debugger;
+            this.tooltipSetPosition(event);
             const percentage = (data.endAngle - data.startAngle) / (2 * Math.PI);
             let label;
             switch (this.tooltipLabelFormatType) {
@@ -431,14 +421,15 @@ class PbdsDatavizPieComponent {
       `);
             this.tooltip.style('opacity', 1);
         };
-        this.tooltipMove = node => {
-            this.tooltipSetPosition(node);
+        this.tooltipMove = (event, node) => {
+            this.tooltipSetPosition(event, node);
         };
         this.tooltipHide = () => {
             this.tooltip.style('opacity', 0);
         };
-        this.tooltipSetPosition = node => {
-            const coordinates = mouse(node);
+        this.tooltipSetPosition = (event, node) => {
+            // debugger;
+            const coordinates = pointer(event, node);
             this.tooltip.style('left', `${coordinates[0] + 16}px`);
             this.tooltip.style('top', `${coordinates[1] + 16}px`);
         };
@@ -459,7 +450,7 @@ class PbdsDatavizPieComponent {
         this.tooltipLabelFormat = this._dataviz.d3Format(this.tooltipLabelFormatType, this.tooltipLabelFormatString);
         this.colorRange = scaleOrdinal()
             .range(this.colors)
-            .domain(this.data.map(c => c.label));
+            .domain(this.data.map((c) => c.label));
         if (this.type === 'pie') {
             this.innerRadius = 0;
             this.anglePad = 0;
@@ -468,9 +459,7 @@ class PbdsDatavizPieComponent {
             .padAngle(this.anglePad)
             .value((d) => d.value)
             .sort(null);
-        this.arc = arc()
-            .padRadius(this.outerRadius)
-            .innerRadius(this.innerRadius);
+        this.arc = arc().padRadius(this.outerRadius).innerRadius(this.innerRadius);
         this.chart = select(this._element.nativeElement).attr('aria-hidden', 'true');
         this.svg = this.chart
             .append('svg')
@@ -478,9 +467,7 @@ class PbdsDatavizPieComponent {
             .attr('height', this.height)
             .attr('class', 'img-fluid')
             .attr('preserveAspectRatio', 'xMinYMin meet')
-            .attr('viewBox', `-${this.width / 2 + this.margin.left} -${this.height / 2 + this.margin.top} ${this.width +
-            this.margin.left +
-            this.margin.right} ${this.height + this.margin.top + this.margin.bottom}`);
+            .attr('viewBox', `-${this.width / 2 + this.margin.left} -${this.height / 2 + this.margin.top} ${this.width + this.margin.left + this.margin.right} ${this.height + this.margin.top + this.margin.bottom}`);
         this.chart.append('ul').attr('class', 'legend legend-right');
         this.tooltip = this.chart
             .append('div')
@@ -569,146 +556,125 @@ class PbdsDatavizBarComponent {
         this.clicked = new EventEmitter();
         this.updateChart = () => {
             // update the xScale
-            this.xAxisScale.domain(this.data.map(d => d.label));
+            this.xAxisScale.domain(this.data.map((d) => d.label));
             // update the yScale
             this.yAxisScale
                 .domain([
-                min(this.data, d => d.value - d.value * +this.yAxisMinBuffer),
-                max(this.data, d => d.value + d.value * +this.yAxisMaxBuffer)
+                min(this.data, (d) => d.value - d.value * +this.yAxisMinBuffer),
+                max(this.data, (d) => d.value + d.value * +this.yAxisMaxBuffer)
             ])
                 .rangeRound([this.height, 0])
                 .nice();
-            this.xAxis
-                .transition()
-                .duration(1000)
-                .call(this.xAxisCall);
-            this.yAxis
-                .transition()
-                .duration(1000)
-                .call(this.yAxisCall);
+            this.xAxis.transition().duration(1000).call(this.xAxisCall);
+            this.yAxis.transition().duration(1000).call(this.yAxisCall);
             // update the grids
             if (!this.hideXGrid) {
-                this.xGrid
-                    .transition()
-                    .duration(1000)
-                    .call(this.xGridCall);
+                this.xGrid.transition().duration(1000).call(this.xGridCall);
             }
             if (!this.hideYGrid) {
-                this.yGrid
-                    .transition()
-                    .duration(1000)
-                    .call(this.yGridCall);
+                this.yGrid.transition().duration(1000).call(this.yGridCall);
             }
             if (!this.hideGrayBars) {
                 // gray bars
                 this.svg
                     .selectAll('.gray-bar')
                     .data(this.data)
-                    .join(enter => enter
+                    .join((enter) => enter
                     .append('rect')
                     .attr('class', 'gray-bar')
                     .attr('height', 0)
-                    .attr('x', d => this.xAxisScale(d.label))
+                    .attr('x', (d) => this.xAxisScale(d.label))
                     .attr('width', this.xAxisScale.bandwidth())
-                    .call(enter => enter
-                    .transition()
-                    .duration(500)
-                    .attr('height', this.height)), update => update
+                    .call((enter) => enter.transition().duration(500).attr('height', this.height)), (update) => update
                     .transition()
                     .duration(1000)
-                    .attr('x', d => this.xAxisScale(d.label))
-                    .attr('width', this.xAxisScale.bandwidth()), exit => exit
-                    .transition()
-                    .attr('pointer-events', 'none')
-                    .remove());
+                    .attr('x', (d) => this.xAxisScale(d.label))
+                    .attr('width', this.xAxisScale.bandwidth())
+                    .selection(), (exit) => exit.transition().selection().attr('pointer-events', 'none').remove());
                 // color bars
                 this.svg
                     .selectAll('.bar')
                     .data(this.data)
-                    .join(enter => enter
+                    .join((enter) => enter
                     .append('rect')
                     .attr('class', 'bar')
-                    .attr('fill', d => `url(${this._location.path()}#gradient-${this.colorRange(d.label).substr(1)})`) // removes hash to prevent safari bug;
-                    .attr('x', d => this.xAxisScale(d.label) + this.xAxisScale.bandwidth() / 4)
+                    .attr('fill', (d) => `url(${this._location.path()}#gradient-${this.colorRange(d.label).substr(1)})`) // removes hash to prevent safari bug;
+                    .attr('x', (d) => this.xAxisScale(d.label) + this.xAxisScale.bandwidth() / 4)
                     .attr('width', this.xAxisScale.bandwidth() / 2)
                     .attr('y', this.height)
                     .attr('height', 0)
                     .attr('pointer-events', 'none')
-                    .call(enter => enter
+                    .call((enter) => enter
                     .transition()
                     .duration(1000)
-                    .attr('y', d => this.yAxisScale(d.value))
-                    .attr('height', d => this.height - this.yAxisScale(d.value))
-                    .attr('data-color', d => this.colorRange(d.label))
+                    .attr('y', (d) => this.yAxisScale(d.value))
+                    .attr('height', (d) => this.height - this.yAxisScale(d.value))
+                    .attr('data-color', (d) => this.colorRange(d.label))
                     .transition()
-                    .attr('pointer-events', 'auto')), update => update
+                    .attr('pointer-events', 'auto')), (update) => update
                     .attr('pointer-events', 'none')
                     .transition()
                     .duration(1000)
-                    .attr('x', d => this.xAxisScale(d.label) + this.xAxisScale.bandwidth() / 4)
+                    .attr('x', (d) => this.xAxisScale(d.label) + this.xAxisScale.bandwidth() / 4)
                     .attr('width', this.xAxisScale.bandwidth() / 2)
-                    .attr('height', d => this.height - this.yAxisScale(d.value))
-                    .attr('y', d => this.yAxisScale(d.value))
+                    .attr('height', (d) => this.height - this.yAxisScale(d.value))
+                    .attr('y', (d) => this.yAxisScale(d.value))
                     .transition()
-                    .attr('pointer-events', 'auto'), exit => exit
-                    .transition()
-                    .attr('pointer-events', 'none')
-                    .remove())
-                    .on('mouseover', (data, index, nodes) => this.barMouseOver(event$1, data, index, nodes))
-                    .on('mouseout', (data, index, nodes) => this.barMouseOut())
-                    .on('click', (data, index, nodes) => this.barMouseClick(event$1, data, index, nodes));
+                    .selection()
+                    .attr('pointer-events', 'auto'), (exit) => exit.transition().selection().attr('pointer-events', 'none').remove())
+                    .on('mouseover', (event, data) => this.barMouseOver(event, data))
+                    .on('mouseout', (event, data) => this.barMouseOut())
+                    .on('click', (event, data) => this.barMouseClick(event, data));
             }
             else {
                 // color bars
                 this.svg
                     .selectAll('.bar')
                     .data(this.data)
-                    .join(enter => enter
+                    .join((enter) => enter
                     .append('rect')
                     .attr('class', 'bar')
-                    .attr('fill', d => `url(${this._location.path()}#gradient-${this.colorRange(d.label).substr(1)})`)
-                    .attr('x', d => this.xAxisScale(d.label) + this.xAxisScale.bandwidth() / 5.5)
+                    .attr('fill', (d) => `url(${this._location.path()}#gradient-${this.colorRange(d.label).substr(1)})`)
+                    .attr('x', (d) => this.xAxisScale(d.label) + this.xAxisScale.bandwidth() / 5.5)
                     .attr('width', this.xAxisScale.bandwidth() / 1.5)
                     .attr('y', this.height)
                     .attr('height', 0)
                     .attr('pointer-events', 'none')
-                    .call(enter => enter
+                    .call((enter) => enter
                     .transition()
                     .duration(1000)
-                    .attr('y', d => this.yAxisScale(d.value))
-                    .attr('height', d => this.height - this.yAxisScale(d.value))
-                    .attr('data-color', d => this.colorRange(d.label))
+                    .attr('y', (d) => this.yAxisScale(d.value))
+                    .attr('height', (d) => this.height - this.yAxisScale(d.value))
+                    .attr('data-color', (d) => this.colorRange(d.label))
                     .transition()
-                    .attr('pointer-events', 'auto')), update => update
+                    .attr('pointer-events', 'auto')), (update) => update
                     .attr('pointer-events', 'none')
                     .transition()
                     .duration(1000)
-                    .attr('x', d => this.xAxisScale(d.label) + this.xAxisScale.bandwidth() / 5.5)
+                    .attr('x', (d) => this.xAxisScale(d.label) + this.xAxisScale.bandwidth() / 5.5)
                     .attr('width', this.xAxisScale.bandwidth() / 1.5)
-                    .attr('height', d => this.height - this.yAxisScale(d.value))
-                    .attr('y', d => this.yAxisScale(d.value))
+                    .attr('height', (d) => this.height - this.yAxisScale(d.value))
+                    .attr('y', (d) => this.yAxisScale(d.value))
                     .transition()
-                    .attr('pointer-events', 'auto'), exit => exit
-                    .transition()
-                    .attr('pointer-events', 'none')
-                    .remove())
-                    .on('mouseover', (data, index, nodes) => this.barMouseOver(event$1, data, index, nodes))
-                    .on('mouseout', (data, index, nodes) => this.barMouseOut())
-                    .on('click', (data, index, nodes) => this.barMouseClick(event$1, data, index, nodes));
+                    .selection()
+                    .attr('pointer-events', 'auto'), (exit) => exit.transition().attr('pointer-events', 'none').remove())
+                    .on('mouseover', (event, data) => this.barMouseOver(event, data))
+                    .on('mouseout', (event, data) => this.barMouseOut())
+                    .on('click', (event, data) => this.barMouseClick(event, data));
             }
             if (!this.hideLegend) {
                 this.chart
                     .select('.legend')
                     .selectAll('.legend-item')
                     .data(this.data)
-                    .join(enter => {
+                    .join((enter) => {
                     const li = enter.insert('li', 'li.legend-static').attr('class', 'legend-item');
                     li.append('span')
                         .attr('class', 'legend-key')
-                        .style('background-color', d => this.colorRange(d.label));
+                        .style('background-color', (d) => this.colorRange(d.label));
                     li.append('span')
                         .attr('class', 'legend-label')
-                        .html(d => {
+                        .html((d) => {
                         switch (this.legendLabelFormatType) {
                             case 'number':
                                 return this.legendLabelFormat(d.label);
@@ -720,7 +686,7 @@ class PbdsDatavizBarComponent {
                         }
                     });
                     return li;
-                }, update => update.select('.legend-label').html(d => {
+                }, (update) => update.select('.legend-label').html((d) => {
                     switch (this.legendLabelFormatType) {
                         case 'number':
                             return this.legendLabelFormat(d.label);
@@ -730,10 +696,10 @@ class PbdsDatavizBarComponent {
                         default:
                             return d.label;
                     }
-                }), exit => exit.remove())
-                    .on('mouseover', (data, index, nodes) => this.legendMouseOver(event$1, data, index, nodes))
+                }), (exit) => exit.remove())
+                    .on('mouseover', (event, data) => this.legendMouseOver(event, data))
                     .on('mouseout', () => this.legendMouseOut())
-                    .on('click', (data, index, nodes) => this.legendMouseClick(event$1, data, index, nodes));
+                    .on('click', (event, data) => this.legendMouseClick(event, data));
             }
             if (this.threshold) {
                 this.yThreshold
@@ -750,65 +716,66 @@ class PbdsDatavizBarComponent {
                     .attr('transform', `translate(0,  ${this.yAxisScale(+this.average)})`);
             }
         };
-        this.barMouseOver = (event, data, index, nodes) => {
+        this.barMouseOver = (event, data) => {
             this.chart
                 .selectAll('.bar')
-                .filter((d, i) => i !== index)
+                .filter((d, i) => d.label !== data.label)
                 .classed('inactive', true);
-            const bar = this.chart.selectAll('.bar').filter((d, i) => i === index);
+            const bar = this.chart.selectAll('.bar').filter((d, i) => d.label === data.label);
             const barColor = bar.attr('data-color');
             bar.style('fill', barColor);
             this.chart
                 .selectAll('.legend-item')
-                .filter((d, i) => i !== index)
+                .filter((d, i) => d.label !== data.label)
                 .classed('inactive', true);
-            this.tooltipShow(data, nodes.filter((d, i) => i === index)[0]);
+            this.tooltipShow(event, data);
             this.hovered.emit({ event, data });
         };
         this.barMouseOut = () => {
-            this.chart
-                .selectAll('.bar')
-                .classed('inactive', false)
-                .style('fill', null);
+            this.chart.selectAll('.bar').classed('inactive', false).style('fill', null);
             this.chart.selectAll('.legend-item').classed('inactive', false);
             this.tooltipHide();
         };
-        this.barMouseClick = (event, data, index, nodes) => {
+        this.barMouseClick = (event, data) => {
             this.clicked.emit({ event, data });
         };
-        this.legendMouseOver = (event, data, index, nodes) => {
+        this.legendMouseOver = (event, data) => {
             this.chart
                 .selectAll('.legend-item')
-                .filter((d, i) => i !== index)
+                .filter((d, i) => d.label !== data.label)
                 .classed('inactive', true);
             this.chart
                 .selectAll('.bar')
-                .filter((d, i) => i !== index)
+                .filter((d, i) => d.label !== data.label)
                 .classed('inactive', true);
-            const bar = this.chart.selectAll('.bar').filter((d, i) => i === index);
+            const bar = this.chart.selectAll('.bar').filter((d, i) => d.label === data.label);
             const barColor = bar.attr('data-color');
             bar.style('fill', barColor);
-            this.tooltipShow(data, this.chart
+            this.tooltipShow(event, data, this.chart
                 .selectAll('.bar')
-                .filter((d, i) => i === index)
+                .filter((d, i) => d.label === data.label)
                 .node());
             this.hovered.emit({ event, data });
         };
         this.legendMouseOut = () => {
             this.chart.selectAll('.legend-item').classed('inactive', false);
-            this.chart
-                .selectAll('.bar')
-                .classed('inactive', false)
-                .style('fill', null);
+            this.chart.selectAll('.bar').classed('inactive', false).style('fill', null);
             this.tooltipHide();
         };
-        this.legendMouseClick = (event, data, index, nodes) => {
+        this.legendMouseClick = (event, data) => {
             this.clicked.emit({ event, data });
         };
-        this.tooltipShow = (data, node) => {
-            const dimensions = node.getBoundingClientRect();
+        this.tooltipShow = (event, data, node) => {
             const scroll = this._scroll.getScrollPosition();
+            let dimensions = event.currentTarget.getBoundingClientRect();
             let label;
+            if (node) {
+                const target = this.chart
+                    .selectAll('.bar')
+                    .filter((d, i) => d.label === data.label)
+                    .node();
+                dimensions = target.getBoundingClientRect();
+            }
             switch (this.tooltipLabelFormatType) {
                 case 'number':
                     label = this.tooltipLabelFormat(data.label);
@@ -836,7 +803,7 @@ class PbdsDatavizBarComponent {
         this.tooltipHide = () => {
             this.tooltip.style('opacity', 0);
         };
-        this.xAxisFormatter = item => {
+        this.xAxisFormatter = (item) => {
             switch (this.xAxisFormatType) {
                 case 'number':
                     return this.xAxisFormat(item);
@@ -847,7 +814,7 @@ class PbdsDatavizBarComponent {
                     return item;
             }
         };
-        this.yAxisFormatter = item => {
+        this.yAxisFormatter = (item) => {
             switch (this.yAxisFormatType) {
                 case 'number':
                     return this.yAxisFormat(item);
@@ -948,15 +915,12 @@ class PbdsDatavizBarComponent {
             .attr('height', +this.height + this.margin.top + this.margin.bottom + this.xAxisTitleMargin)
             .attr('class', 'img-fluid')
             .attr('preserveAspectRatio', 'xMinYMin meet')
-            .attr('viewBox', `-${this.margin.left} -${this.margin.top} ${+this.width} ${+this.height +
-            this.margin.top +
-            this.margin.bottom +
-            this.xAxisTitleMargin}`);
+            .attr('viewBox', `-${this.margin.left} -${this.margin.top} ${+this.width} ${+this.height + this.margin.top + this.margin.bottom + this.xAxisTitleMargin}`);
         // build color ranges
         this.colorRange = scaleOrdinal().range(this._dataviz.createGradientDefs(this.svg, this.singleSeries, this.theme));
         // X AXIS
         this.xAxisScale = scaleBand()
-            .domain(this.data.map(d => d.label))
+            .domain(this.data.map((d) => d.label))
             .rangeRound([0, this.width - this.margin.left])
             .align(0);
         // add padding to the scale for gray bars
@@ -999,8 +963,8 @@ class PbdsDatavizBarComponent {
         // Y AXIS
         this.yAxisScale = scaleLinear()
             .domain([
-            min(this.data, d => d.value - d.value * +this.yAxisMinBuffer),
-            max(this.data, d => d.value + d.value * +this.yAxisMaxBuffer)
+            min(this.data, (d) => d.value - d.value * +this.yAxisMinBuffer),
+            max(this.data, (d) => d.value + d.value * +this.yAxisMaxBuffer)
         ])
             .nice()
             .rangeRound([this.height, 0]);
@@ -1206,78 +1170,66 @@ class PbdsDatavizLineComponent {
                 })
             ])
                 .nice();
-            this.xAxis
-                .transition()
-                .duration(1000)
-                .call(this.xAxisCall);
-            this.yAxis
-                .transition()
-                .duration(1000)
-                .call(this.yAxisCall);
+            this.xAxis.transition().duration(1000).call(this.xAxisCall);
+            this.yAxis.transition().duration(1000).call(this.yAxisCall);
             // update the grids
             if (!this.hideXGrid) {
-                this.xGrid
-                    .transition()
-                    .duration(1000)
-                    .call(this.xGridCall);
+                this.xGrid.transition().duration(1000).call(this.xGridCall);
             }
             if (!this.hideYGrid) {
-                this.yGrid
-                    .transition()
-                    .duration(1000)
-                    .call(this.yGridCall);
+                this.yGrid.transition().duration(1000).call(this.yGridCall);
             }
             // lines
             this.svg
                 .selectAll('path.line')
                 .attr('filter', () => (this.type !== 'high' ? `url(${this._location.path()}#glow)` : null))
                 .data(this.data.series)
-                .join(enter => {
+                .join((enter) => {
                 enter
                     .append('path')
                     .attr('clip-path', `url(${this._location.path()}#clip-path-${this.clipPathId})`)
                     .attr('class', 'line')
-                    .style('stroke', d => this.colorRange(d.label))
+                    .style('stroke', (d) => this.colorRange(d.label))
                     .style('stroke-width', this.lineWidth)
-                    .attr('d', data => {
+                    .attr('d', (data) => {
                     const array = new Array(data.values.length).fill(0);
                     return this.d3line(array);
                 })
-                    .call(enter => enter
+                    .call((enter) => enter
                     .transition()
                     .duration(1000)
                     .ease(easeQuadInOut)
-                    .attr('d', data => this.d3line(data.values)));
-            }, update => update.call(update => update
+                    .attr('d', (data) => this.d3line(data.values)));
+            }, (update) => update.call((update) => update
                 .transition()
                 .duration(1000)
                 .ease(easeQuadInOut)
-                .attr('d', d => this.d3line(d.values))), exit => exit.remove());
+                .attr('d', (d) => this.d3line(d.values))), (exit) => exit.remove());
             // area
             if (this.area) {
                 this.svg
                     .selectAll('path.area')
                     .data(this.data.series)
-                    .join(enter => enter
+                    .join((enter) => enter
                     .append('path')
                     .attr('clip-path', `url(${this._location.path()}#clip-path-${this.clipPathId})`)
                     .attr('class', 'area')
-                    .attr('d', data => {
+                    .attr('d', (data) => {
                     const array = new Array(data.values.length).fill(0);
                     return this.d3area(array);
                 })
-                    .style('color', d => this.colorRange(d.label))
-                    .call(enter => enter
+                    .style('color', (d) => this.colorRange(d.label))
+                    .call((enter) => enter
                     .transition()
                     .duration(1000)
                     .ease(easeQuadInOut)
-                    .attr('d', data => this.d3area(data.values))), update => update.call(update => {
+                    .attr('d', (data) => this.d3area(data.values))), (update) => update.call((update) => {
                     return update
                         .transition()
                         .duration(1000)
                         .ease(easeQuadInOut)
-                        .attr('d', d => this.d3area(d.values));
-                }), exit => exit.remove());
+                        .attr('d', (d) => this.d3area(d.values));
+                }), (exit) => exit.remove());
             }
             // circles
             if (this.linePoints) {
@@ -1285,51 +1237,51 @@ class PbdsDatavizLineComponent {
                 this.svg
                     .selectAll('g.points')
                     .data(this.data.series)
-                    .join(enter => enter
+                    .join((enter) => enter
                     .append('g')
                     .attr('class', 'points')
                     .attr('clip-path', `url(${this._location.path()}#clip-path-points-${this.clipPathId})`)
                     .style('color', (d, i) => this.colorRange(d.label))
                     .selectAll('circle')
-                    .data(d => d.values)
-                    .join(enter => enter
+                    .data((d) => d.values)
+                    .join((enter) => enter
                     .append('circle')
                     .attr('cx', (d, i) => this.xAxisScale(isoParse(this.data.dates[i])))
-                    .attr('cy', d => this.yAxisScale(0))
+                    .attr('cy', (d) => this.yAxisScale(0))
                     .attr('r', this.lineWidth * 2)
                     .style('stroke-width', this.lineWidth)
-                    .call(enter => enter
+                    .call((enter) => enter
                     .transition()
                     .duration(1000)
                     .ease(easeQuadInOut)
-                    .attr('cy', d => this.yAxisScale(d))), () => { }, exit => exit.remove()), update => update
+                    .attr('cy', (d) => this.yAxisScale(d))), () => { }, (exit) => exit.remove()), (update) => update
                     .selectAll('circle')
-                    .data(d => d.values)
-                    .join(enter => enter
+                    .data((d) => d.values)
+                    .join((enter) => enter
                     .append('circle')
                     .attr('cx', (d, i) => this.xAxisScale(isoParse(this.data.dates[i])))
-                    .attr('cy', d => this.yAxisScale(d))
+                    .attr('cy', (d) => this.yAxisScale(d))
                     .attr('r', this.lineWidth * 2)
-                    .style('stroke-width', this.lineWidth), update => update.call(update => update
+                    .style('stroke-width', this.lineWidth), (update) => update.call((update) => update
                     .transition()
                     .duration(1000)
                     .ease(easeQuadInOut)
                     .attr('cx', (d, i) => this.xAxisScale(isoParse(this.data.dates[i])))
-                    .attr('cy', d => this.yAxisScale(d))), exit => exit.remove()), exit => exit.remove());
+                    .attr('cy', (d) => this.yAxisScale(d))), (exit) => exit.remove()), (exit) => exit.remove());
             }
             if (!this.hideLegend) {
                 this.chart
                     .select('.legend')
                     .selectAll('.legend-item')
                     .data(this.data.series)
-                    .join(enter => {
+                    .join((enter) => {
                     const li = enter.append('li').attr('class', 'legend-item');
                     li.append('span')
                         .attr('class', 'legend-key')
-                        .style('background-color', d => this.colorRange(d.label));
+                        .style('background-color', (d) => this.colorRange(d.label));
                     li.append('span')
                         .attr('class', 'legend-label')
-                        .html(d => {
+                        .html((d) => {
                         switch (this.legendLabelFormatType) {
                             case 'number':
                                 return this.legendLabelFormat(d.label);
@@ -1341,8 +1293,8 @@ class PbdsDatavizLineComponent {
                         }
                     });
                     return li;
-                }, update => {
-                    update.select('.legend-label').html(d => {
+                }, (update) => {
+                    update.select('.legend-label').html((d) => {
                         switch (this.legendLabelFormatType) {
                             case 'number':
                                 return this.legendLabelFormat(d.label);
@@ -1354,62 +1306,73 @@ class PbdsDatavizLineComponent {
                         }
                     });
                     return update;
-                }, exit => exit.remove())
-                    .on('mouseover', (data, index, nodes) => this.legendMouseOver(event$1, data, index, nodes))
+                }, (exit) => exit.remove())
+                    .on('mouseover', (event, data) => this.legendMouseOver(event, data))
                     .on('mouseout', () => this.legendMouseOut())
-                    .on('click', (data, index, nodes) => this.legendMouseClick(event$1, data, index, nodes));
+                    .on('click', (event, data) => this.legendMouseClick(event, data));
             }
             if (!this.hideTooltip) {
                 this.tooltip
                     .select('.tooltip-table')
                     .selectAll('tr')
                     .data(this.data.series)
-                    .join(enter => {
+                    .join((enter) => {
                     const tooltipItem = enter.append('tr').attr('class', 'tooltip-item');
                     tooltipItem
                         .append('td')
-                        .style('color', d => this.colorRange(d.label))
+                        .style('color', (d) => this.colorRange(d.label))
                         .append('span')
                         .attr('class', 'pbds-tooltip-key');
                     tooltipItem
                         .append('td')
                         .attr('class', 'tooltip-label pr-2 text-nowrap')
-                        .html(d => {
+                        .html((d) => {
                         return this.tooltipLabelFormatType ? this.tooltipLabelFormat(d.label) : d.label;
                     });
                     tooltipItem
                         .append('td')
                         .attr('class', 'tooltip-value text-right text-nowrap')
-                        .html(d => '');
+                        .html((d) => '');
                     return tooltipItem;
-                }, () => { }, exit => exit.remove());
+                }, (update) => {
+                    // update the tooltip label text
+                    const tooltipLabel = update.select('.tooltip-label');
+                    tooltipLabel.html((d) => {
+                        return this.tooltipLabelFormatType ? this.tooltipLabelFormat(d.label) : d.label;
+                    });
+                }, (exit) => exit.remove());
             }
             this.svg.selectAll('.points').raise();
             this.mouserect.raise();
         };
-        this.legendMouseOver = (event, data, index, nodes) => {
+        this.legendMouseOver = (event, data) => {
+            // console.log(data, this.linePoints);
             this.chart
                 .selectAll('.legend-item')
-                .filter((d, i) => i !== index)
+                .filter((d, i) => {
+                return d.label !== data.label;
+            })
                 .classed('inactive', true);
             this.svg
                 .selectAll('.line')
-                .filter((d, i) => i !== index)
+                .filter((d, i) => {
+                return d.label !== data.label;
+            })
                 .classed('inactive', true);
-            this.svg
-                .selectAll('.line')
-                .filter((d, i) => i === index)
-                .classed('active', true);
             if (this.area) {
                 this.svg
                     .selectAll('.area')
-                    .filter((d, i) => i !== index)
+                    .filter((d, i) => {
+                    return d.label !== data.label;
+                })
                     .classed('inactive', true);
             }
             if (this.linePoints) {
                 this.svg
                     .selectAll('.points')
-                    .filter((d, i) => i !== index)
+                    .filter((d, i) => {
+                    return d.label !== data.label;
+                })
                     .selectAll('circle')
                     .classed('inactive', true);
             }
@@ -1417,25 +1380,19 @@ class PbdsDatavizLineComponent {
         };
         this.legendMouseOut = () => {
             this.chart.selectAll('.legend-item').classed('inactive', false);
-            this.chart
-                .selectAll('.line')
-                .classed('inactive', false)
-                .classed('active', false);
+            this.chart.selectAll('.line').classed('inactive', false).classed('active', false);
             if (this.linePoints) {
-                this.svg
-                    .selectAll('circle')
-                    .classed('active', false)
-                    .classed('inactive', false);
+                this.svg.selectAll('circle').classed('active', false).classed('inactive', false);
             }
             if (this.area) {
                 this.svg.selectAll('.area').classed('inactive', false);
             }
         };
-        this.legendMouseClick = (event, data, index, nodes) => {
+        this.legendMouseClick = (event, data) => {
             this.clicked.emit({ event, data });
         };
-        this.mouserectMouseMove = (event, index, nodes) => {
-            const mouseXDate = this.xAxisScale.invert(mouse(nodes[0])[0]); // return date at mouse x position
+        this.mouserectMouseMove = (event, data) => {
+            const mouseXDate = this.xAxisScale.invert(pointer(event)[0]); // return date at mouse x position
             const leftIndex = bisectLeft(this.data.dates, isoFormat(mouseXDate)); // index of left closest date
             // prevent error for 0 index
             if (leftIndex === 0)
@@ -1456,7 +1413,7 @@ class PbdsDatavizLineComponent {
             this.tooltipShow(this.tooltipLine.node(), closestIndex);
             this.mousedata = {
                 date: closestDate,
-                series: this.data.series.map(d => {
+                series: this.data.series.map((d) => {
                     return {
                         label: d.label,
                         value: d.values[closestIndex]
@@ -1465,7 +1422,7 @@ class PbdsDatavizLineComponent {
             };
             this.tooltipHovered.emit({ event, data: this.mousedata });
         };
-        this.mouserectMouseOut = (event, index, nodes) => {
+        this.mouserectMouseOut = (event, data) => {
             this.svg.selectAll('circle').classed('active', false);
             this.tooltipLine.classed('active', false);
             this.tooltipHide();
@@ -1482,7 +1439,7 @@ class PbdsDatavizLineComponent {
             const clientWidth = document.body.clientWidth - 10;
             let position;
             // console.log(scroll, mouserectDimensions, tooltipOffsetHeight, tooltipDimensions, dimensionCalculated, clientWidth);
-            this.tooltip.select('.tooltip-header').html(d => {
+            this.tooltip.select('.tooltip-header').html((d) => {
                 const parsedTime = isoParse(this.data.dates[closestIndex]);
                 return this.tooltipHeadingFormat(parsedTime);
             });
@@ -1511,11 +1468,11 @@ class PbdsDatavizLineComponent {
         this.tooltipHide = () => {
             this.tooltip.style('opacity', 0);
         };
-        this.xAxisFormatter = item => {
+        this.xAxisFormatter = (item) => {
             const parseDate = isoParse(item);
             return this.xAxisFormat(parseDate);
         };
-        this.yAxisFormatter = item => {
+        this.yAxisFormatter = (item) => {
             return this.yAxisFormat(item);
         };
     }
@@ -1602,23 +1559,17 @@ class PbdsDatavizLineComponent {
             .attr('height', +this.height + this.margin.top + this.margin.bottom)
             .attr('class', 'img-fluid')
             .attr('preserveAspectRatio', 'xMinYMin meet')
-            .attr('viewBox', `-${this.margin.left} -${this.margin.top} ${+this.width + this.margin.right} ${+this.height +
-            this.margin.top +
-            this.margin.bottom}`);
+            .attr('viewBox', `-${this.margin.left} -${this.margin.top} ${+this.width + this.margin.right} ${+this.height + this.margin.top + this.margin.bottom}`);
         // add rectangle to capture mouse
         this.mouserect = this.svg
             .append('rect')
             .attr('width', this.width - this.margin.left - this.margin.right)
             .attr('height', this.height)
             .attr('class', 'mouserect')
-            .on('mousemove', (data, index, nodes) => this.mouserectMouseMove(event$1, index, nodes))
-            .on('mouseout', (data, index, nodes) => this.mouserectMouseOut(event$1, index, nodes))
-            .on('click', (data, index, nodes) => this.mouserectMouseClick());
-        this.tooltipLine = this.svg
-            .append('line')
-            .attr('y1', 0)
-            .attr('y2', this.height)
-            .attr('class', 'tooltip-line');
+            .on('mousemove', (event, data) => this.mouserectMouseMove(event, data))
+            .on('mouseout', (event, data) => this.mouserectMouseOut(event, data))
+            .on('click', (event, data) => this.mouserectMouseClick());
+        this.tooltipLine = this.svg.append('line').attr('y1', 0).attr('y2', this.height).attr('class', 'tooltip-line');
         // define color range
         this.colorRange = scaleOrdinal().range(this._dataviz.getColors(false, this.theme));
         // add glow def
@@ -1707,7 +1658,7 @@ class PbdsDatavizLineComponent {
             tooltipTableTbody
                 .selectAll('tr')
                 .data(this.data)
-                .join(enter => enter.append('tr'));
+                .join((enter) => enter.append('tr'));
         }
         // add legend classes
         if (!this.hideLegend) {
@@ -1981,6 +1932,7 @@ class PbdsDatavizSparklineComponent {
         this._element = _element;
         this.chartClass = true;
         this.sparklineClass = true;
+        this.data = [];
         this.width = 160;
         this.height = 40;
         this.type = 'line';
@@ -2018,11 +1970,7 @@ class PbdsDatavizSparklineComponent {
                 .attr('stroke', this.color);
         }
         if (this.type === 'area' || this.type === 'area-high') {
-            this.svg
-                .append('path')
-                .attr('class', 'sparkarea')
-                .attr('fill', this.color)
-                .attr('fill-opacity', 0.3);
+            this.svg.append('path').attr('class', 'sparkarea').attr('fill', this.color).attr('fill-opacity', 0.3);
         }
         this.updateChart();
     }
@@ -2037,7 +1985,7 @@ class PbdsDatavizSparklineComponent {
             .domain([0, this.data.length])
             .range([0, this.width - this.margin.left - this.margin.right]);
         const y = scaleLinear()
-            .domain([+min(this.data) - this.yAxisMinBuffer, +max(this.data) + this.yAxisMaxBuffer])
+            .domain([+min(data) - this.yAxisMinBuffer, +max(data) + this.yAxisMaxBuffer])
             .range([this.height - this.margin.top - this.margin.bottom, 0]);
         const line$1 = line()
             .x((d, i) => x(i))
@@ -2066,29 +2014,30 @@ class PbdsDatavizSparklineComponent {
             this.svg
                 .selectAll('.sparkbar')
                 .data(this.data)
-                .join(enter => enter
+                .join((enter) => enter
                 .append('rect')
                 .attr('class', 'sparkbar')
                 .attr('x', (d, i) => x(i))
                 .attr('y', this.height)
                 .attr('width', barWidth)
-                .attr('fill', d => (d > 0 ? this.color : this.colorNegative)) // still uses undocumented negative color values
+                .attr('fill', (d) => (d > 0 ? this.color : this.colorNegative)) // still uses undocumented negative color values
                 .attr('height', 0)
-                .call(enter => {
+                .call((enter) => {
                 enter
                     .transition()
                     .duration(1000)
-                    .attr('y', d => (d > 0 ? y(d) : y(0)))
-                    .attr('height', d => Math.abs(y(d) - y(0)));
+                    .attr('y', (d) => (d > 0 ? y(d) : y(0)))
+                    .attr('height', (d) => Math.abs(y(d) - y(0)));
                 return enter;
-            }), update => update
+            }), (update) => update
                 .transition()
                 .duration(1000)
+                .selection()
                 .attr('x', (d, i) => x(i))
-                .attr('y', d => (d > 0 ? y(d) : y(0)))
+                .attr('y', (d) => (d > 0 ? y(d) : y(0)))
                 .attr('width', barWidth)
-                .attr('height', d => Math.abs(y(d) - y(0)))
-                .attr('fill', d => (d > 0 ? this.color : this.colorNegative)), exit => exit.remove());
+                .attr('height', (d) => Math.abs(y(d) - y(0)))
+                .attr('fill', (d) => (d > 0 ? this.color : this.colorNegative)), (exit) => exit.remove());
         }
     }
 }
@@ -2153,13 +2102,11 @@ class PbdsDatavizBarStackedComponent {
         this.hovered = new EventEmitter();
         this.clicked = new EventEmitter();
         this.updateChart = (firstRun = true) => {
-            this.dataKeys = Object.keys(this.data[0]).filter(item => item !== 'key');
+            this.dataKeys = Object.keys(this.data[0]).filter((item) => item !== 'key');
             // create the D3 stack data
-            this.dataStack = stack()
-                .keys(this.dataKeys)
-                .order(stackOrderNone)(this.data);
+            this.dataStack = stack().keys(this.dataKeys).order(stackOrderNone)(this.data);
             // update the xScale
-            this.xAxisScale.domain(this.data.map(d => d.key));
+            this.xAxisScale.domain(this.data.map((d) => d.key));
             // update the yScale
             this.yAxisMax = max(this.dataStack, (data) => {
                 return max(data, (d) => {
@@ -2167,10 +2114,7 @@ class PbdsDatavizBarStackedComponent {
                 });
             });
             this.yAxisMax = this.yAxisMax + this.yAxisMax * this.yAxisMaxBuffer;
-            this.yAxisScale
-                .domain([0, this.yAxisMax])
-                .rangeRound([this.height, 0])
-                .nice();
+            this.yAxisScale.domain([0, this.yAxisMax]).rangeRound([this.height, 0]).nice();
             this.xAxis
                 .transition()
                 .duration(0) // 1000
@@ -2197,30 +2141,31 @@ class PbdsDatavizBarStackedComponent {
                 this.grayBars
                     .selectAll('.gray-bar')
                     .data(this.data)
-                    .join(enter => enter
+                    .join((enter) => enter
                     .append('rect')
                     .attr('class', 'gray-bar')
-                    .attr('x', d => this.xAxisScale(d.key))
+                    .attr('x', (d) => this.xAxisScale(d.key))
                     .attr('width', this.xAxisScale.bandwidth())
-                    .attr('height', this.height), update => update
+                    .attr('height', this.height), (update) => update
                     .transition()
                     .duration((d, i, n) => (firstRun ? 0 : 1000))
-                    .attr('x', d => this.xAxisScale(d.key))
+                    .attr('x', (d) => this.xAxisScale(d.key))
                     .attr('width', this.xAxisScale.bandwidth())
-                    .attr('height', this.height), exit => exit.remove());
+                    .attr('height', this.height)
+                    .selection(), (exit) => exit.remove());
             }
             // add colored bars
             const barGroups = this.bars
                 .selectAll('.bar-group')
                 .data(this.dataStack)
-                .join(enter => enter
+                .join((enter) => enter
                 .append('g')
                 .attr('class', 'bar-group')
-                .attr('fill', d => this.colorRange(d.index)), update => update.attr('fill', d => this.colorRange(d.index)), exit => exit.remove());
+                .attr('fill', (d) => this.colorRange(d.index)), (update) => update.attr('fill', (d) => this.colorRange(d.index)), (exit) => exit.remove());
             barGroups
                 .selectAll('.bar')
-                .data(d => d)
-                .join(enter => enter
+                .data((d) => d)
+                .join((enter) => enter
                 .append('rect')
                 .attr('class', 'bar')
                 .classed('bar-divided', this.type !== 'high')
@@ -2235,8 +2180,8 @@ class PbdsDatavizBarStackedComponent {
                 }
                 return x;
             })
-                .attr('y', d => this.yAxisScale(d[0]))
-                .attr('width', d => {
+                .attr('y', (d) => this.yAxisScale(d[0]))
+                .attr('width', (d) => {
                 let width;
                 if (this.type === 'medium') {
                     width = this.xAxisScale.bandwidth() / 4;
@@ -2247,17 +2192,17 @@ class PbdsDatavizBarStackedComponent {
                 return width;
             })
                 .attr('height', 0)
-                .call(enter => {
+                .call((enter) => {
                 enter
                     .transition()
                     .duration((d, i, n) => (firstRun ? 0 : 500))
                     .delay((d, i, n) => (firstRun ? 0 : 750))
-                    .attr('y', d => this.yAxisScale(d[1]))
-                    .attr('height', d => {
+                    .attr('y', (d) => this.yAxisScale(d[1]))
+                    .attr('height', (d) => {
                     return this.yAxisScale(d[0]) - this.yAxisScale(d[1]);
                 });
                 return enter;
-            }), update => update.call(update => {
+            }), (update) => update.call((update) => {
                 // let width;
                 // if (this.type === 'medium') {
                 //   width = this.xAxisScale.bandwidth() / 4;
@@ -2269,33 +2214,35 @@ class PbdsDatavizBarStackedComponent {
                     .duration(1000)
                     .attr('width', this.xAxisScale.bandwidth() / 4)
                     .attr('x', (d, i) => this.xAxisScale(d.data.key) + (this.xAxisScale.bandwidth() / 8) * 3)
-                    .attr('y', d => this.yAxisScale(d[1]))
-                    .attr('height', d => this.yAxisScale(d[0]) - this.yAxisScale(d[1]));
+                    .attr('y', (d) => this.yAxisScale(d[1]))
+                    .attr('height', (d) => this.yAxisScale(d[0]) - this.yAxisScale(d[1]))
+                    .selection();
                 return update;
-            }), exit => exit.remove());
+            }), (exit) => exit.remove());
             // mouseover bars
             this.mouseBars
                 .selectAll('.mouseover-bar')
                 .data(this.data)
-                .join(enter => enter
+                .join((enter) => enter
                 .append('rect')
                 .attr('class', 'mouseover-bar')
                 .style('opacity', 0)
-                .attr('x', d => this.xAxisScale(d.key))
+                .attr('x', (d) => this.xAxisScale(d.key))
                 .attr('width', this.xAxisScale.bandwidth())
-                .attr('height', this.height), update => update
+                .attr('height', this.height), (update) => update
                 .attr('pointer-events', 'none')
-                .attr('x', d => this.xAxisScale(d.key))
+                .attr('x', (d) => this.xAxisScale(d.key))
                 .attr('width', this.xAxisScale.bandwidth())
                 .attr('height', this.height)
                 .transition()
-                .attr('pointer-events', 'auto'), exit => exit
-                .transition()
-                .attr('pointer-events', 'none')
-                .remove())
-                .on('mouseover', (data, index, nodes) => this.barMouseOver(event$1, data, index, nodes))
-                .on('mouseout', (data, index, nodes) => this.barMouseOut())
-                .on('click', (data, index, nodes) => this.barMouseClick(event$1, data, index, nodes));
+                .selection()
+                .attr('pointer-events', 'auto'), (exit) => exit.transition().selection().attr('pointer-events', 'none').remove())
+                .datum((d, i) => {
+                return { data: d, index: i };
+            })
+                .on('mouseover', (event, data) => this.barMouseOver(event, data))
+                .on('mouseout', (event, data) => this.barMouseOut())
+                .on('click', (event, data) => this.barMouseClick(event, data));
             this.bars.raise();
             this.xAxis.raise();
             this.mouseBars.raise();
@@ -2304,14 +2251,14 @@ class PbdsDatavizBarStackedComponent {
                     .select('.legend')
                     .selectAll('.legend-item')
                     .data(this.dataStack)
-                    .join(enter => {
+                    .join((enter) => {
                     const li = enter.append('li').attr('class', 'legend-item');
                     li.append('span')
                         .attr('class', 'legend-key')
-                        .style('background-color', d => this.colorRange(d.index));
+                        .style('background-color', (d) => this.colorRange(d.index));
                     li.append('span')
                         .attr('class', 'legend-label')
-                        .html(d => {
+                        .html((d) => {
                         switch (this.legendLabelFormatType) {
                             case 'number':
                                 return this.legendLabelFormat(d.key);
@@ -2323,8 +2270,8 @@ class PbdsDatavizBarStackedComponent {
                         }
                     });
                     return li;
-                }, update => {
-                    update.select('.legend-label').html(d => {
+                }, (update) => {
+                    update.select('.legend-label').html((d) => {
                         switch (this.legendLabelFormatType) {
                             case 'number':
                                 return this.legendLabelFormat(d.key);
@@ -2336,36 +2283,41 @@ class PbdsDatavizBarStackedComponent {
                         }
                     });
                     return update;
-                }, exit => exit.remove())
-                    .on('mouseover', (data, index, nodes) => this.legendMouseOver(event$1, data, index, nodes))
+                }, (exit) => exit.remove())
+                    .datum((d, i) => {
+                    return { data: this.data, index: i };
+                })
+                    .on('mouseover', (event, data) => this.legendMouseOver(event, data))
                     .on('mouseout', () => this.legendMouseOut())
-                    .on('click', (data, index, nodes) => this.legendMouseClick(event$1, data, index, nodes));
+                    .on('click', (event, data) => this.legendMouseClick(event, data));
             }
         };
-        this.barMouseOver = (event, data, index, nodes) => {
+        this.barMouseOver = (event, data) => {
             this.chart
                 .selectAll('.bar-group')
                 .selectAll('.bar')
-                .filter((d, i) => i !== index)
+                .filter((d, i) => {
+                return i !== data.index;
+            })
                 .classed('inactive', true);
-            this.tooltipShow(data, index, nodes[index]);
+            this.tooltipShow(event, data);
             this.hovered.emit({ event, data });
         };
         this.barMouseOut = () => {
             this.chart.selectAll('.bar').classed('inactive', false);
             this.tooltipHide();
         };
-        this.barMouseClick = (event, data, index, nodes) => {
+        this.barMouseClick = (event, data) => {
             this.clicked.emit({ event, data });
         };
-        this.legendMouseOver = (event, data, index, nodes) => {
+        this.legendMouseOver = (event, data) => {
             this.chart
                 .selectAll('.legend-item')
-                .filter((d, i) => i !== index)
+                .filter((d, i) => i !== data.index)
                 .classed('inactive', true);
             this.chart
                 .selectAll('.bar-group')
-                .filter((d, i) => i !== index)
+                .filter((d, i) => i !== data.index)
                 .classed('inactive', true);
             this.hovered.emit({ event, data });
         };
@@ -2374,10 +2326,10 @@ class PbdsDatavizBarStackedComponent {
             this.chart.selectAll('.bar-group').classed('inactive', false);
             this.tooltipHide();
         };
-        this.legendMouseClick = (event, data, index, nodes) => {
+        this.legendMouseClick = (event, data) => {
             this.clicked.emit({ event, data });
         };
-        this.xAxisFormatter = item => {
+        this.xAxisFormatter = (item) => {
             switch (this.xAxisFormatType) {
                 case 'number':
                     return this.xAxisFormat(item);
@@ -2388,31 +2340,31 @@ class PbdsDatavizBarStackedComponent {
                     return item;
             }
         };
-        this.tooltipShow = (data, index, node) => {
-            // console.log('TOOLTIP: ', data, index, node);
+        this.tooltipShow = (event, data) => {
             const scroll = this._scroll.getScrollPosition();
-            const mouserectDimensions = node.getBoundingClientRect();
+            const mouserectDimensions = event.currentTarget.getBoundingClientRect();
             const clientWidth = document.body.clientWidth - 10;
             let dimensionCalculated;
             let tooltipDimensions;
             let tooltipOffsetHeight;
+            // const yPosition = event.currentTarget.getBoundingClientRect();
             let yPosition;
             let xPosition;
             // console.log(scroll, mouserectDimensions, tooltipOffsetHeight, tooltipDimensions, dimensionCalculated, clientWidth);
-            this.tooltip.select('.tooltip-header').html(d => {
+            this.tooltip.select('.tooltip-header').html((d) => {
                 switch (this.tooltipHeadingFormatType) {
                     case 'time':
-                        const parseDate = isoParse(data.key);
+                        const parseDate = isoParse(data.data.key);
                         return this.tooltipHeadingFormat(parseDate);
                     default:
-                        return data.key;
+                        return data.data.key;
                 }
             });
-            this.tooltip.select('.tooltip-header-value').html(d => {
+            this.tooltip.select('.tooltip-header-value').html((d) => {
                 let total = 0;
-                Object.keys(data).map(e => {
+                Object.keys(data.data).map((e) => {
                     if (e !== 'key') {
-                        total = total + data[e];
+                        total = total + data.data[e];
                     }
                 });
                 return this.tooltipHeadingValueFormat(total);
@@ -2420,11 +2372,11 @@ class PbdsDatavizBarStackedComponent {
             this.tooltip
                 .select('.tooltip-table')
                 .select('tbody')
-                .html(d => {
+                .html((d) => {
                 let html = ``;
                 let label;
                 let value;
-                Object.keys(data).map((key, index) => {
+                Object.keys(data.data).map((key, index) => {
                     switch (this.tooltipLabelFormatType) {
                         case 'time':
                             const parseDate = isoParse(key);
@@ -2435,10 +2387,10 @@ class PbdsDatavizBarStackedComponent {
                     }
                     switch (this.tooltipValueFormatType) {
                         case 'number':
-                            value = this.tooltipValueFormat(data[key]);
+                            value = this.tooltipValueFormat(data.data[key]);
                             break;
                         default:
-                            value = data[key];
+                            value = data.data[key];
                     }
                     if (key !== 'key') {
                         html += `
@@ -2482,7 +2434,9 @@ class PbdsDatavizBarStackedComponent {
                 .selectAll('.bar-group')
                 .filter(':last-child')
                 .selectAll('.bar')
-                .filter((d, i) => i === index)
+                .filter((d, i) => {
+                return i === data.index;
+            })
                 .node()
                 .getBoundingClientRect();
             // set the tooltip styles
@@ -2493,7 +2447,7 @@ class PbdsDatavizBarStackedComponent {
         this.tooltipHide = () => {
             this.tooltip.style('opacity', 0);
         };
-        this.yAxisFormatter = item => {
+        this.yAxisFormatter = (item) => {
             switch (this.yAxisFormatType) {
                 case 'number':
                     return this.yAxisFormat(item);
@@ -2507,11 +2461,9 @@ class PbdsDatavizBarStackedComponent {
     }
     ngOnInit() {
         // extract keys for stack data
-        this.dataKeys = Object.keys(this.data[0]).filter(item => item !== 'key');
+        this.dataKeys = Object.keys(this.data[0]).filter((item) => item !== 'key');
         // create the D3 stack data
-        this.dataStack = stack()
-            .keys(this.dataKeys)
-            .order(stackOrderNone)(this.data);
+        this.dataStack = stack().keys(this.dataKeys).order(stackOrderNone)(this.data);
         //////////////////////////////////////////
         this.margin = {
             top: +this.marginTop,
@@ -2599,7 +2551,7 @@ class PbdsDatavizBarStackedComponent {
         this.colorRange = scaleOrdinal().range(this._dataviz.getColors(false, this.theme));
         // X AXIS
         this.xAxisScale = scaleBand()
-            .domain(this.data.map(d => d.key))
+            .domain(this.data.map((d) => d.key))
             .rangeRound([0, this.width - this.margin.left])
             .align(0);
         // add padding to the scale for gray bars
@@ -2646,10 +2598,7 @@ class PbdsDatavizBarStackedComponent {
             });
         });
         this.yAxisMax = this.yAxisMax + this.yAxisMax * this.yAxisMaxBuffer;
-        this.yAxisScale = scaleLinear()
-            .domain([0, this.yAxisMax])
-            .nice()
-            .rangeRound([this.height, 0]);
+        this.yAxisScale = scaleLinear().domain([0, this.yAxisMax]).nice().rangeRound([this.height, 0]);
         this.yAxisCall = axisLeft(this.yAxisScale)
             .ticks(this.yAxisTicks)
             .tickSize(this.yAxisTickSize)
@@ -2686,10 +2635,7 @@ class PbdsDatavizBarStackedComponent {
             this.tooltip.append('div').attr('class', 'tooltip-header');
             this.tooltip.append('div').attr('class', 'tooltip-header-value');
             // tooltip table
-            this.tooltip
-                .append('table')
-                .attr('class', 'tooltip-table text-left w-100')
-                .append('tbody');
+            this.tooltip.append('table').attr('class', 'tooltip-table text-left w-100').append('tbody');
         }
         // add legend classes
         if (!this.hideLegend) {
@@ -2916,13 +2862,14 @@ class PbdsDatavizBubbleMapComponent {
                 .attr('cy', (d) => this.projection([d.longitude, d.latitude])[1])
                 .attr('r', (d) => (!this.dot ? Math.sqrt(this.bubbleRadius(d.value)) : `${this.dotSize}px`))
                 .transition()
-                .attr('pointer-events', 'auto'), (exit) => exit.transition().attr('pointer-events', 'none').remove());
+                .selection()
+                .attr('pointer-events', 'auto'), (exit) => exit.transition().selection().attr('pointer-events', 'none').remove());
             if (!this.hideTooltip) {
                 this.bubbleContainer
                     .selectAll('circle')
-                    .on('mouseover', (data, index, nodes) => this.bubbleMouseOver(event$1, data, index, nodes))
-                    .on('mouseout', (data, index, nodes) => this.bubbleMouseOut(event$1, data, index, nodes))
-                    .on('click', (data, index, nodes) => this.bubbleMouseClick(event$1, data, index, nodes));
+                    .on('mouseover', (event, data) => this.bubbleMouseOver(event, data))
+                    .on('mouseout', (event, data) => this.bubbleMouseOut(event, data))
+                    .on('click', (event, data) => this.bubbleMouseClick(event, data));
                 // bubble text
                 if (this.type !== 'high' && !this.dot) {
                     this.bubbleContainer
@@ -2946,31 +2893,26 @@ class PbdsDatavizBubbleMapComponent {
                         .attr('y', (d) => this.projection([d.longitude, d.latitude])[1])
                         .attr('dy', '.4em')
                         .transition()
-                        .attr('pointer-events', 'auto'), (exit) => exit.transition().attr('pointer-events', 'none').remove());
+                        .selection()
+                        .attr('pointer-events', 'auto'), (exit) => exit.transition().selection().attr('pointer-events', 'none').remove());
                 }
             }
         };
-        this.bubbleMouseOver = (event, data, index, nodes) => {
-            this.chart
-                .selectAll('.dot-circle')
-                .filter((d, i) => i !== index)
-                .classed('inactive', true);
-            this.chart
-                .selectAll('.dot-circle')
-                .filter((d, i) => i === index)
-                .classed('active', true);
-            this.tooltipShow(data, nodes[index]);
+        this.bubbleMouseOver = (event, data) => {
+            this.chart.selectAll('.dot-circle').classed('inactive', true);
+            select(event.currentTarget).classed('active', true).classed('inactive', false);
+            this.tooltipShow(event, data);
             this.hovered.emit({ event, data });
         };
-        this.bubbleMouseOut = (event, data, index, nodes) => {
+        this.bubbleMouseOut = (event, data) => {
             this.chart.selectAll('.dot-circle').classed('active', false).classed('inactive', false);
             this.tooltipHide();
         };
-        this.bubbleMouseClick = (event, data, index, nodes) => {
+        this.bubbleMouseClick = (event, data) => {
             this.clicked.emit({ event, data });
         };
-        this.tooltipShow = (data, node) => {
-            const dimensions = node.getBoundingClientRect();
+        this.tooltipShow = (event, data) => {
+            const dimensions = event.currentTarget.getBoundingClientRect();
             const scroll = this._scroll.getScrollPosition();
             this.tooltip.select('.tooltip-header').html((d) => `${data.label}`);
             if (!this.hideTooltipValue) {
@@ -3173,48 +3115,51 @@ class PbdsDatavizHeatmapComponent {
             this.svg
                 .selectAll('rect')
                 .data(this.data)
-                .join(enter => enter
+                .join((enter) => enter
                 .append('rect')
                 .attr('class', 'block')
-                .classed('empty', d => d.value === undefined || d.value === null)
-                .attr('x', d => this.xAxisScale(d.xLabel))
-                .attr('y', d => this.yAxisScale(d.yLabel))
+                .classed('empty', (d) => d.value === undefined || d.value === null)
+                .attr('x', (d) => this.xAxisScale(d.xLabel))
+                .attr('y', (d) => this.yAxisScale(d.yLabel))
                 .attr('width', this.xAxisScale.bandwidth())
                 .attr('height', this.yAxisScale.bandwidth())
-                .style('fill', d => this.colorRange(d.value)), update => update.call(update => {
+                .style('fill', (d) => this.colorRange(d.value)), (update) => update.call((update) => {
                 update
-                    .classed('empty', d => d.value === undefined || d.value === null)
+                    .classed('empty', (d) => d.value === undefined || d.value === null)
                     .attr('pointer-events', 'none')
                     .transition()
                     .duration(1000)
-                    .attr('x', d => this.xAxisScale(d.xLabel))
-                    .attr('y', d => this.yAxisScale(d.yLabel))
+                    .attr('x', (d) => this.xAxisScale(d.xLabel))
+                    .attr('y', (d) => this.yAxisScale(d.yLabel))
                     .attr('width', this.xAxisScale.bandwidth())
                     .attr('height', this.yAxisScale.bandwidth())
-                    .style('fill', d => this.colorRange(d.value))
+                    .style('fill', (d) => this.colorRange(d.value))
                     .transition()
+                    .selection()
                     .attr('pointer-events', 'auto');
                 return update;
-            }), exit => exit
-                .transition()
-                .attr('pointer-events', 'none')
-                .remove())
-                .on('mouseover', (data, index, nodes) => this.blockMouseOver(event$1, data, index, nodes))
-                .on('mouseout', (data, index, nodes) => this.blockMouseOut())
-                .on('click', (data, index, nodes) => this.blockMouseClick(event$1, data, index, nodes));
+            }), (exit) => exit.transition().selection().attr('pointer-events', 'none').remove())
+                .on('mouseover', (event, data) => this.blockMouseOver(event, data))
+                .on('mouseout', (event, data) => this.blockMouseOut())
+                .on('click', (event, data) => this.blockMouseClick(event, data));
             if (!this.hideLegend) {
                 this.chart
                     .select('.legend')
                     .selectAll('.legend-item')
                     .data(this.colorDomain)
-                    .join(enter => {
-                    const li = enter.append('li').attr('class', 'legend-item');
+                    .join((enter) => {
+                    const li = enter
+                        .append('li')
+                        .attr('class', 'legend-item')
+                        .attr('data-index', (d, i) => {
+                        return i;
+                    });
                     li.append('span')
                         .attr('class', 'legend-key')
-                        .style('background-color', d => this.colorRange(d));
+                        .style('background-color', (d) => this.colorRange(d));
                     li.append('span')
                         .attr('class', 'legend-label')
-                        .html(d => {
+                        .html((d) => {
                         let label = d;
                         switch (this.legendLabelFormatType) {
                             case 'number':
@@ -3224,7 +3169,13 @@ class PbdsDatavizHeatmapComponent {
                         return `&ge; ${label}`;
                     });
                     return li;
-                }, update => update.select('.legend-label').html(d => {
+                }, (update) => update
+                    .select('.legend-label')
+                    .attr('data-index', (d, i) => {
+                    return i;
+                })
+                    .html((d) => {
+                    // console.log('HTML D: ', d);
                     let label = d;
                     switch (this.legendLabelFormatType) {
                         case 'number':
@@ -3232,53 +3183,56 @@ class PbdsDatavizHeatmapComponent {
                             break;
                     }
                     return `&ge; ${label}`;
-                }), exit => exit.remove())
-                    .on('mouseover', (data, index, nodes) => this.legendMouseOver(event$1, data, index, nodes))
+                }), (exit) => exit.remove())
+                    .on('mouseover', (event, data) => this.legendMouseOver(event, data))
                     .on('mouseout', () => this.legendMouseOut())
-                    .on('click', (data, index, nodes) => this.legendMouseClick(event$1, data, index, nodes));
+                    .on('click', (event, data) => this.legendMouseClick(event, data));
             }
         };
-        this.blockMouseOver = (event, data, index, nodes) => {
+        this.blockMouseOver = (event, data) => {
             // console.log(data.value, event, data, index, nodes);
             if (data.value !== null) {
-                this.tooltipShow(data, index, nodes[index]);
+                this.tooltipShow(event, data);
             }
             this.hovered.emit({ event, data });
         };
         this.blockMouseOut = () => {
             this.tooltipHide();
         };
-        this.blockMouseClick = (event, data, index, nodes) => {
+        this.blockMouseClick = (event, data) => {
             this.clicked.emit({ event, data });
         };
-        this.legendMouseOver = (event, data, index, nodes) => {
-            this.chart
-                .selectAll('.legend-item')
-                .filter((d, i) => i !== index)
-                .classed('inactive', true);
+        this.legendMouseOver = (event, data) => {
+            const legendItems = this.chart.selectAll('.legend-item');
+            const hovered = select(event.currentTarget);
+            const hoveredIndex = +hovered.attr('data-index');
+            legendItems.classed('inactive', true);
+            hovered.classed('inactive', false);
+            const nodes = legendItems.nodes();
             this.chart
                 .selectAll('.block')
                 .filter((d, i) => {
-                if (index + 1 === nodes.length) {
+                if (hoveredIndex + 1 === nodes.length) {
                     return d.value < data;
                 }
                 else {
-                    return d.value < data || d.value >= +select(nodes[index + 1]).data()[0];
+                    const nextNodeData = +select(nodes[+hoveredIndex + 1]).data();
+                    return d.value < data || d.value >= nextNodeData;
                 }
             })
                 .classed('inactive', true);
-            this.hovered.emit({ event, data });
+            this.hovered.emit({ event, data: data });
         };
         this.legendMouseOut = () => {
             this.chart.selectAll('.legend-item').classed('inactive', false);
             this.chart.selectAll('.block').classed('inactive', false);
         };
-        this.legendMouseClick = (event, data, index, nodes) => {
-            this.clicked.emit({ event, data });
+        this.legendMouseClick = (event, data) => {
+            this.clicked.emit({ event, data: data });
         };
-        this.tooltipShow = (data, index, node) => {
+        this.tooltipShow = (event, data) => {
             // console.log('TOOLTIP: ', data, index, node);
-            const dimensions = node.getBoundingClientRect();
+            const dimensions = event.currentTarget.getBoundingClientRect();
             const scroll = this._scroll.getScrollPosition();
             let yLabel;
             let xLabel;
@@ -3321,7 +3275,7 @@ class PbdsDatavizHeatmapComponent {
         this.tooltipHide = () => {
             this.tooltip.style('opacity', 0);
         };
-        this.xAxisFormatter = item => {
+        this.xAxisFormatter = (item) => {
             switch (this.xAxisFormatType) {
                 case 'number':
                     return this.xAxisFormat(item);
@@ -3332,7 +3286,7 @@ class PbdsDatavizHeatmapComponent {
                     return item;
             }
         };
-        this.yAxisFormatter = item => {
+        this.yAxisFormatter = (item) => {
             switch (this.yAxisFormatType) {
                 case 'number':
                     return this.yAxisFormat(item);
@@ -3381,39 +3335,30 @@ class PbdsDatavizHeatmapComponent {
             .attr('preserveAspectRatio', 'xMinYMin meet')
             .attr('viewBox', `-${this.margin.left} -${this.margin.top} ${+this.width} ${+this.height + this.margin.top + this.margin.bottom}`);
         // color range
-        const colors = this._dataviz
-            .getColors(true, this.theme)
-            .slice()
-            .reverse();
+        const colors = this._dataviz.getColors(true, this.theme).slice().reverse();
         const colorDomain = [
             +min(this.data, (d) => d.value),
             +max(this.data, (d) => d.value)
         ];
-        const colorValues = this.data.map(d => d.value);
+        const colorValues = this.data.map((d) => d.value);
         switch (this.scale) {
             case 'threshold':
-                this.colorRange = scaleThreshold()
-                    .domain(this.domain)
-                    .range(colors);
+                this.colorRange = scaleThreshold().domain(this.domain).range(colors);
                 this.colorDomain = this.colorRange.domain();
                 break;
             case 'quantile':
-                this.colorRange = scaleQuantile()
-                    .domain(colorValues)
-                    .range(colors);
+                this.colorRange = scaleQuantile().domain(colorValues).range(colors);
                 this.colorDomain = this.colorRange.quantiles();
                 break;
             case 'quantize':
-                this.colorRange = scaleQuantize()
-                    .domain(colorDomain)
-                    .range(colors);
+                this.colorRange = scaleQuantize().domain(colorDomain).range(colors);
                 this.colorDomain = this.colorRange.thresholds();
                 break;
         }
         // console.log(colors, colorDomain, colorValues, this.scale, this.colorRange, this.colorDomain);
         // define axis labels
-        const xAxisLabels = [...new Set(this.data.map(d => d.xLabel))];
-        const yAxisLabels = [...new Set(this.data.map(d => d.yLabel))].reverse();
+        const xAxisLabels = [...new Set(this.data.map((d) => d.xLabel))];
+        const yAxisLabels = [...new Set(this.data.map((d) => d.yLabel))].reverse();
         // X axis
         this.xAxisScale = scaleBand()
             .domain(xAxisLabels)
@@ -3433,10 +3378,7 @@ class PbdsDatavizHeatmapComponent {
             .classed('axis-ticks-hidden', this.hideXAxisTicks)
             .call(this.xAxisCall);
         // Y axis
-        this.yAxisScale = scaleBand()
-            .domain(yAxisLabels)
-            .rangeRound([this.height, 0])
-            .paddingInner(0.1);
+        this.yAxisScale = scaleBand().domain(yAxisLabels).rangeRound([this.height, 0]).paddingInner(0.1);
         this.yAxisCall = axisLeft(this.yAxisScale)
             .tickSize(this.yAxisTickSize)
             .tickSizeOuter(this.yAxisTickSizeOuter)
@@ -3567,29 +3509,29 @@ class PbdsDatavizChoroplethMapComponent {
                 this.svg
                     .select('.map')
                     .selectAll('path')
-                    .on('mouseover', (data, index, nodes) => this.featureMouseOver(event$1, this.data.find((obj) => obj[this.dataField] === data[this.dataField]), index, nodes))
-                    .on('mouseout', (data, index, nodes) => this.featureMouseOut(event$1, this.data, index, nodes))
-                    .on('mousemove', (data, index, nodes) => this.tooltipMove(this.chart.node()))
-                    .on('click', (data, index, nodes) => this.featureMouseClick(event$1, this.data.find((obj) => obj[this.dataField] === data[this.dataField]), index, nodes));
+                    .on('mouseover', (event, data) => this.featureMouseOver(event, this.data.find((obj) => obj[this.dataField] === data[this.dataField])))
+                    .on('mouseout', (event, data) => this.featureMouseOut(event, this.data))
+                    .on('mousemove', (event, data) => this.tooltipMove(event))
+                    .on('click', (event, data) => this.featureMouseClick(event, this.data.find((obj) => obj[this.dataField] === data[this.dataField])));
             }
         };
-        this.featureMouseOver = (event, data, index, nodes) => {
+        this.featureMouseOver = (event, data) => {
             if (data) {
-                this.tooltipShow(data, nodes[index]);
+                this.tooltipShow(event, data);
                 this.hovered.emit({ event, data });
             }
         };
-        this.featureMouseOut = (event, data, index, nodes) => {
+        this.featureMouseOut = (event, data) => {
             this.tooltipHide();
         };
-        this.featureMouseClick = (event, data, index, nodes) => {
+        this.featureMouseClick = (event, data) => {
             if (data) {
                 this.clicked.emit({ event, data });
             }
         };
-        this.tooltipShow = (data, node) => {
+        this.tooltipShow = (event, data) => {
             // console.log('TOOLTIP: ', data, node);
-            this.tooltipSetPosition(node);
+            this.tooltipSetPosition(event);
             if (data.label) {
                 this.tooltip.select('.tooltip-header').html((d) => `${data.label}`);
             }
@@ -3601,14 +3543,14 @@ class PbdsDatavizChoroplethMapComponent {
         this.tooltipHide = () => {
             this.tooltip.style('opacity', 0);
         };
-        this.tooltipMove = (node) => {
-            this.tooltipSetPosition(node);
+        this.tooltipMove = (event) => {
+            this.tooltipSetPosition(event);
         };
-        this.tooltipSetPosition = (node) => {
-            const mouse$1 = mouse(node);
-            const mouseLeft = +mouse$1[0];
-            const mouseTop = +mouse$1[1];
-            const geometry = node.getBoundingClientRect();
+        this.tooltipSetPosition = (event) => {
+            const mouse = pointer(event, this.chart.node());
+            const mouseLeft = +mouse[0];
+            const mouseTop = +mouse[1];
+            const geometry = this.chart.node().getBoundingClientRect();
             const geometryLeft = +geometry.left;
             const geometryTop = +geometry.top;
             const scroll = this._scroll.getScrollPosition();
@@ -3617,7 +3559,7 @@ class PbdsDatavizChoroplethMapComponent {
             const tooltipOffsetWidth = +this.tooltip.node().offsetWidth / 2;
             const tooltipOffsetHeight = +this.tooltip.node().offsetHeight;
             this.tooltip.style('top', `${scrollTop + mouseTop + geometryTop - tooltipOffsetHeight - 14}px`);
-            this.tooltip.style('left', `${mouseLeft + geometryLeft - tooltipOffsetWidth}px`);
+            this.tooltip.style('left', `${mouseLeft + geometryLeft - tooltipOffsetWidth}px`); //
         };
         this.legend = (g) => {
             const length = this.colorRange.range().length;
@@ -3834,40 +3776,34 @@ class PbdsDatavizBarGroupedComponent {
         this.theme = 'classic';
         this.hovered = new EventEmitter();
         this.clicked = new EventEmitter();
-        this.barMouseOver = (event, data, index, nodes) => {
-            const node = select(nodes[index]);
-            this.chart
-                .selectAll('.bar-group')
-                .selectAll('.bar')
-                .classed('inactive', true);
+        this.barMouseOver = (event, data) => {
+            const node = select(event.currentTarget);
+            this.chart.selectAll('.bar-group').selectAll('.bar').classed('inactive', true);
             node.classed('inactive', false).style('fill', node.attr('data-color'));
-            this.tooltipShow(data, nodes[index]);
+            this.tooltipShow(event, data);
             this.hovered.emit({ event, data });
         };
         this.barMouseOut = () => {
-            this.chart
-                .selectAll('.bar')
-                .classed('inactive', false)
-                .style('fill', null);
+            this.chart.selectAll('.bar').classed('inactive', false).style('fill', null);
             this.tooltipHide();
         };
-        this.barMouseClick = (event, data, index, nodes) => {
+        this.barMouseClick = (event, data) => {
             this.clicked.emit({ event, data });
         };
-        this.legendMouseOver = (event, data, index, nodes) => {
+        this.legendMouseOver = (event, data) => {
             this.chart
                 .selectAll('.legend-item')
-                .filter((d, i) => i !== index)
+                .filter((d, i) => d.label !== data.label)
                 .classed('inactive', true);
             this.chart
                 .selectAll('.bar-group')
                 .selectAll('.bar')
-                .filter((d, i) => i !== index)
+                .filter((d, i) => d.label !== data.label)
                 .classed('inactive', true);
             const bar = this.chart
                 .selectAll('.bar-group')
                 .selectAll('.bar')
-                .filter((d, i) => i === index)
+                .filter((d, i) => d.label === data.label)
                 .classed('inactive', null);
             const barColor = bar.attr('data-color');
             bar.style('fill', () => barColor);
@@ -3875,17 +3811,13 @@ class PbdsDatavizBarGroupedComponent {
         };
         this.legendMouseOut = () => {
             this.chart.selectAll('.legend-item').classed('inactive', false);
-            this.chart
-                .selectAll('.bar-group')
-                .selectAll('.bar')
-                .classed('inactive', false)
-                .style('fill', null);
+            this.chart.selectAll('.bar-group').selectAll('.bar').classed('inactive', false).style('fill', null);
         };
-        this.legendMouseClick = (event, data, index, nodes) => {
+        this.legendMouseClick = (event, data) => {
             this.clicked.emit({ event, data });
         };
-        this.tooltipShow = (data, node) => {
-            const dimensions = node.getBoundingClientRect();
+        this.tooltipShow = (event, data) => {
+            const dimensions = event.currentTarget.getBoundingClientRect();
             const scroll = this._scroll.getScrollPosition();
             let label;
             switch (this.tooltipLabelFormatType) {
@@ -3922,7 +3854,7 @@ class PbdsDatavizBarGroupedComponent {
         this.tooltipHide = () => {
             this.tooltip.style('opacity', 0);
         };
-        this.xAxisFormatter = item => {
+        this.xAxisFormatter = (item) => {
             switch (this.xAxisFormatType) {
                 case 'number':
                     return this.xAxisFormat(item);
@@ -3933,7 +3865,7 @@ class PbdsDatavizBarGroupedComponent {
                     return item;
             }
         };
-        this.yAxisFormatter = item => {
+        this.yAxisFormatter = (item) => {
             switch (this.yAxisFormatType) {
                 case 'number':
                     return this.yAxisFormat(item);
@@ -3991,15 +3923,10 @@ class PbdsDatavizBarGroupedComponent {
             .attr('preserveAspectRatio', 'xMinYMin meet')
             .attr('viewBox', () => {
             if (this.vertical) {
-                return `-${this.margin.left} -${this.margin.top} ${+this.width} ${+this.height +
-                    this.margin.top +
-                    this.margin.bottom}`;
+                return `-${this.margin.left} -${this.margin.top} ${+this.width} ${+this.height + this.margin.top + this.margin.bottom}`;
             }
             else {
-                return `-${this.margin.left} -${this.margin.top} ${+this.width + this.margin.left + this.margin.right} ${+this
-                    .height +
-                    this.margin.top +
-                    this.margin.bottom}`;
+                return `-${this.margin.left} -${this.margin.top} ${+this.width + this.margin.left + this.margin.right} ${+this.height + this.margin.top + this.margin.bottom}`;
             }
         });
         // TOOLTIP
@@ -4022,7 +3949,7 @@ class PbdsDatavizBarGroupedComponent {
         if (this.vertical) {
             // X AXIS
             this.xAxisScale = scaleBand()
-                .domain(this.data.map(d => d.key))
+                .domain(this.data.map((d) => d.key))
                 .rangeRound([0, this.width - this.margin.left])
                 .align(0);
             // add padding to the scale for gray bars
@@ -4056,13 +3983,10 @@ class PbdsDatavizBarGroupedComponent {
             this.yAxisMax = max(this.data, (data) => {
                 const clone = Object.assign({}, data);
                 delete clone.key;
-                return max(values(clone));
+                return max(Object.values(clone));
             });
             this.yAxisMax = this.yAxisMax + this.yAxisMax * this.yAxisMaxBuffer;
-            this.yAxisScale = scaleLinear()
-                .domain([0, this.yAxisMax])
-                .nice()
-                .rangeRound([this.height, 0]);
+            this.yAxisScale = scaleLinear().domain([0, this.yAxisMax]).nice().rangeRound([this.height, 0]);
             this.yAxisCall = axisLeft(this.yAxisScale)
                 .ticks(this.yAxisTicks)
                 .tickSize(this.yAxisTickSize)
@@ -4101,13 +4025,10 @@ class PbdsDatavizBarGroupedComponent {
             this.xAxisMax = max(this.data, (data) => {
                 const clone = Object.assign({}, data);
                 delete clone.key;
-                return max(values(clone));
+                return max(Object.values(clone));
             });
             this.xAxisMax = this.xAxisMax + this.xAxisMax * this.xAxisMaxBuffer;
-            this.xAxisScale = scaleLinear()
-                .domain([0, this.xAxisMax])
-                .rangeRound([0, this.width])
-                .nice();
+            this.xAxisScale = scaleLinear().domain([0, this.xAxisMax]).rangeRound([0, this.width]).nice();
             this.xAxisCall = axisBottom(this.xAxisScale)
                 .ticks(this.xAxisTicks)
                 .tickSize(this.xAxisTickSize)
@@ -4124,7 +4045,7 @@ class PbdsDatavizBarGroupedComponent {
                 .call(this.xAxisCall);
             // Y AXIS
             this.yAxisScale = scaleBand()
-                .domain(this.data.map(d => d.key))
+                .domain(this.data.map((d) => d.key))
                 .rangeRound([0, this.height])
                 .align(1);
             // add padding to the scale for gray bars
@@ -4190,26 +4111,17 @@ class PbdsDatavizBarGroupedComponent {
     }
     updateChartVertical() {
         // update the xScale
-        this.xAxisScale.domain(this.data.map(d => d.key));
+        this.xAxisScale.domain(this.data.map((d) => d.key));
         // update the yScale
         this.yAxisMax = max(this.data, (data) => {
             const clone = Object.assign({}, data);
             delete clone.key;
-            return max(values(clone));
+            return max(Object.values(clone));
         });
         this.yAxisMax = this.yAxisMax + this.yAxisMax * this.yAxisMaxBuffer;
-        this.yAxisScale
-            .domain([0, this.yAxisMax])
-            .rangeRound([this.height, 0])
-            .nice();
-        this.xAxis
-            .transition()
-            .duration(1000)
-            .call(this.xAxisCall);
-        this.yAxis
-            .transition()
-            .duration(1000)
-            .call(this.yAxisCall);
+        this.yAxisScale.domain([0, this.yAxisMax]).rangeRound([this.height, 0]).nice();
+        this.xAxis.transition().duration(1000).call(this.xAxisCall);
+        this.yAxis.transition().duration(1000).call(this.yAxisCall);
         // update the grids
         // if (!this.hideXGrid) {
         //   this.xGrid
@@ -4218,46 +4130,46 @@ class PbdsDatavizBarGroupedComponent {
         //     .call(this.xGridCall);
         // }
         if (this.showGrid) {
-            this.yGrid
-                .transition()
-                .duration(1000)
-                .call(this.yGridCall);
+            this.yGrid.transition().duration(1000).call(this.yGridCall);
         }
         // update the color bar scale
         this.barScale.domain(Object.keys(this.data[0]).slice(1)).rangeRound([0, this.xAxisScale.bandwidth()]);
         this.svg
             .selectAll('.gray-bar')
             .data(this.data)
-            .join(enter => enter
+            .join((enter) => enter
             .append('rect')
             .attr('class', 'gray-bar')
-            .attr('x', d => this.xAxisScale(d.key))
-            .attr('y', d => this.yAxisScale(d.value))
+            .attr('x', (d) => this.xAxisScale(d.key))
+            .attr('y', (d) => this.yAxisScale(d.value))
             .attr('width', this.xAxisScale.bandwidth())
-            .attr('height', this.height), update => update
+            .attr('height', this.height), (update) => update
             .transition()
             .duration(1000)
-            .attr('x', d => this.xAxisScale(d.key))
-            .attr('y', d => this.yAxisScale(d.value))
+            .attr('x', (d) => this.xAxisScale(d.key))
+            .attr('y', (d) => this.yAxisScale(d.value))
             .attr('width', this.xAxisScale.bandwidth())
-            .attr('height', this.height));
+            .attr('height', this.height)
+            .selection());
         this.svg
             .selectAll('.bar-group')
             .data(this.data)
-            .join(enter => enter
+            .join((enter) => enter
             .append('g')
             .attr('class', 'bar-group')
             .attr('transform', (d, i) => {
             return `translate(${this.xAxisScale(d.key)}, 0)`;
-        }), update => update
+        }), (update) => update
             .transition()
             .duration(1000)
             .attr('transform', (d, i) => {
             return `translate(${this.xAxisScale(d.key)}, 0)`;
-        }));
+        })
+            .selection());
         this.svg
             .selectAll('.bar-group')
-            .selectAll('.bar')
+            // .selectAll('.bar')
+            .selectChildren()
             .data((d, i) => {
             const clone = Object.assign({}, d);
             delete clone.key;
@@ -4267,43 +4179,45 @@ class PbdsDatavizBarGroupedComponent {
             });
             return keyData;
         })
-            .join(enter => enter
+            .join((enter) => enter
             .append('rect')
             .attr('class', 'bar')
-            .attr('fill', d => `url(${this._location.path()}#gradient-${this.colorRange(d.label).substr(1)})`)
-            .attr('data-color', d => this.colorRange(d.label))
-            .attr('data-parent-index', d => d.parentIndex)
-            .attr('x', d => this.barScale(d.label))
+            .attr('fill', (d) => `url(${this._location.path()}#gradient-${this.colorRange(d.label).substr(1)})`)
+            .attr('data-color', (d) => this.colorRange(d.label))
+            .attr('data-parent-index', (d) => d.parentIndex)
+            .attr('x', (d) => this.barScale(d.label))
             .attr('width', this.barScale.bandwidth())
             .attr('y', this.height)
             .attr('height', 0)
-            .call(enter => {
+            .call((enter) => {
             return enter
                 .attr('pointer-events', 'none')
                 .transition()
                 .duration(0) // 500
-                .attr('height', d => this.height - this.yAxisScale(d.value))
-                .attr('y', d => this.yAxisScale(d.value))
+                .attr('height', (d) => this.height - this.yAxisScale(d.value))
+                .attr('y', (d) => this.yAxisScale(d.value))
                 .transition()
                 .attr('pointer-events', 'auto');
-        }), update => update
+        }), (update) => update
             .attr('pointer-events', 'none')
             .transition()
             .duration(1000)
-            .attr('x', d => this.barScale(d.label))
+            .attr('x', (d) => this.barScale(d.label))
             .attr('width', this.barScale.bandwidth())
-            .attr('height', d => this.height - this.yAxisScale(d.value))
-            .attr('y', d => this.yAxisScale(d.value))
+            .attr('height', (d) => this.height - this.yAxisScale(d.value))
+            .attr('y', (d) => this.yAxisScale(d.value))
             .transition()
-            .attr('pointer-events', 'auto'), exit => exit
+            .selection()
+            .attr('pointer-events', 'auto'), (exit) => exit
             .transition()
             .duration(0) // 100
+            .selection()
             .attr('pointer-events', 'none')
             .attr('height', 0)
             .attr('y', this.height))
-            .on('mouseover', (data, index, nodes) => this.barMouseOver(event$1, data, index, nodes))
-            .on('mouseout', (data, index, nodes) => this.barMouseOut())
-            .on('click', (data, index, nodes) => this.barMouseClick(event$1, data, index, nodes));
+            .on('mouseover', (event, data) => this.barMouseOver(event, data))
+            .on('mouseout', (event, data) => this.barMouseOut())
+            .on('click', (event, data) => this.barMouseClick(event, data));
         this.updateLegend();
         this.svg.selectAll('.axis').raise();
     }
@@ -4312,29 +4226,17 @@ class PbdsDatavizBarGroupedComponent {
         this.xAxisMax = max(this.data, (data) => {
             const clone = Object.assign({}, data);
             delete clone.key;
-            return max(values(clone));
+            return max(Object.values(clone));
         });
         this.xAxisMax = this.xAxisMax + this.xAxisMax * this.xAxisMaxBuffer;
-        this.xAxisScale
-            .domain([0, this.xAxisMax])
-            .rangeRound([0, this.width])
-            .nice();
+        this.xAxisScale.domain([0, this.xAxisMax]).rangeRound([0, this.width]).nice();
         // update the yScale
-        this.yAxisScale.domain(this.data.map(d => d.key));
-        this.xAxis
-            .transition()
-            .duration(1000)
-            .call(this.xAxisCall);
-        this.yAxis
-            .transition()
-            .duration(1000)
-            .call(this.yAxisCall);
+        this.yAxisScale.domain(this.data.map((d) => d.key));
+        this.xAxis.transition().duration(1000).call(this.xAxisCall);
+        this.yAxis.transition().duration(1000).call(this.yAxisCall);
         // update the grids
         if (this.showGrid) {
-            this.xGrid
-                .transition()
-                .duration(1000)
-                .call(this.xGridCall);
+            this.xGrid.transition().duration(1000).call(this.xGridCall);
         }
         // if (!this.hideYGrid) {
         //   this.yGrid
@@ -4347,31 +4249,33 @@ class PbdsDatavizBarGroupedComponent {
         this.svg
             .selectAll('.gray-bar')
             .data(this.data)
-            .join(enter => enter
+            .join((enter) => enter
             .append('rect')
             .attr('class', 'gray-bar')
-            .attr('y', d => this.yAxisScale(d.key))
+            .attr('y', (d) => this.yAxisScale(d.key))
             .attr('width', this.width)
-            .attr('height', this.yAxisScale.bandwidth()), update => update
+            .attr('height', this.yAxisScale.bandwidth()), (update) => update
             .transition()
             .duration(1000)
-            .attr('y', d => this.yAxisScale(d.key))
+            .attr('y', (d) => this.yAxisScale(d.key))
             .attr('width', this.width)
-            .attr('height', this.yAxisScale.bandwidth()));
+            .attr('height', this.yAxisScale.bandwidth())
+            .selection());
         this.svg
             .selectAll('.bar-group')
             .data(this.data)
-            .join(enter => enter
+            .join((enter) => enter
             .append('g')
             .attr('class', 'bar-group')
             .attr('transform', (d, i) => {
             return `translate(0, ${this.yAxisScale(d.key)})`;
-        }), update => update
+        }), (update) => update
             .transition()
             .duration(1000)
             .attr('transform', (d, i) => {
             return `translate(0, ${this.yAxisScale(d.key)})`;
-        }));
+        })
+            .selection());
         this.svg
             .selectAll('.bar-group')
             .selectAll('.bar')
@@ -4384,40 +4288,42 @@ class PbdsDatavizBarGroupedComponent {
             });
             return keyData;
         })
-            .join(enter => enter
+            .join((enter) => enter
             .append('rect')
             .attr('class', 'bar')
-            .attr('fill', d => `url(${this._location.path()}#gradient-horizontal-${this.colorRange(d.label).substr(1)})`)
-            .attr('data-color', d => this.colorRange(d.label))
-            .attr('data-parent-index', d => d.parentIndex)
+            .attr('fill', (d) => `url(${this._location.path()}#gradient-horizontal-${this.colorRange(d.label).substr(1)})`)
+            .attr('data-color', (d) => this.colorRange(d.label))
+            .attr('data-parent-index', (d) => d.parentIndex)
             .attr('x', 0)
             .attr('width', 0)
-            .attr('y', d => this.barScale(d.label))
+            .attr('y', (d) => this.barScale(d.label))
             .attr('height', this.barScale.bandwidth())
-            .call(enter => {
+            .call((enter) => {
             return enter
                 .attr('pointer-events', 'none')
                 .transition()
                 .duration(0) // 500
-                .attr('width', d => this.xAxisScale(d.value))
+                .attr('width', (d) => this.xAxisScale(d.value))
                 .transition()
                 .attr('pointer-events', 'auto');
-        }), update => update
+        }), (update) => update
             .attr('pointer-events', 'none')
             .transition()
             .duration(1000)
-            .attr('width', d => this.xAxisScale(d.value))
+            .attr('width', (d) => this.xAxisScale(d.value))
             .attr('height', this.barScale.bandwidth())
-            .attr('y', d => this.barScale(d.label))
+            .attr('y', (d) => this.barScale(d.label))
             .transition()
-            .attr('pointer-events', 'auto'), exit => exit
+            .selection()
+            .attr('pointer-events', 'auto'), (exit) => exit
             .transition()
             .duration(0) // 100
+            .selection()
             .attr('pointer-events', 'none')
             .attr('width', 0))
-            .on('mouseover', (data, index, nodes) => this.barMouseOver(event$1, data, index, nodes))
-            .on('mouseout', (data, index, nodes) => this.barMouseOut())
-            .on('click', (data, index, nodes) => this.barMouseClick(event$1, data, index, nodes));
+            .on('mouseover', (event, data) => this.barMouseOver(event, data))
+            .on('mouseout', (event, data) => this.barMouseOut())
+            .on('click', (event, data) => this.barMouseClick(event, data));
         this.updateLegend();
         this.svg.selectAll('.axis').raise();
     }
@@ -4433,14 +4339,14 @@ class PbdsDatavizBarGroupedComponent {
                 .select('.legend')
                 .selectAll('.legend-item')
                 .data(legendKeys)
-                .join(enter => {
+                .join((enter) => {
                 const li = enter.append('li').attr('class', 'legend-item');
                 li.insert('span')
                     .attr('class', 'legend-key')
-                    .style('background-color', d => this.colorRange(d.label));
+                    .style('background-color', (d) => this.colorRange(d.label));
                 li.insert('span', '.legend-item')
                     .attr('class', 'legend-label')
-                    .html(d => {
+                    .html((d) => {
                     switch (this.legendLabelFormatType) {
                         case 'number':
                             return this.legendLabelFormat(d.label);
@@ -4452,8 +4358,8 @@ class PbdsDatavizBarGroupedComponent {
                     }
                 });
                 return li;
-            }, update => {
-                update.select('.legend-label').html(d => {
+            }, (update) => {
+                update.select('.legend-label').html((d) => {
                     switch (this.legendLabelFormatType) {
                         case 'number':
                             return this.legendLabelFormat(d.label);
@@ -4465,10 +4371,10 @@ class PbdsDatavizBarGroupedComponent {
                     }
                 });
                 return update;
-            }, exit => exit.remove())
-                .on('mouseover', (data, index, nodes) => this.legendMouseOver(event$1, data, index, nodes))
+            }, (exit) => exit.remove())
+                .on('mouseover', (event, data) => this.legendMouseOver(event, data))
                 .on('mouseout', () => this.legendMouseOut())
-                .on('click', (data, index, nodes) => this.legendMouseClick(event$1, data, index, nodes));
+                .on('click', (event, data) => this.legendMouseClick(event, data));
         }
     }
 }
@@ -4567,33 +4473,30 @@ class PbdsDatavizBarSingleHorizontalComponent {
         this.isSingleData = false;
         this.isCompare = false;
         this.barPadding = 40;
-        this.barMouseOver = (event, data, index, nodes) => {
-            const node = select(nodes[index]);
+        this.barMouseOver = (event, data) => {
+            const node = select(event.currentTarget);
             this.chart.selectAll('.bar').classed('inactive', true);
             node.classed('inactive', false);
             this.chart
                 .selectAll('.legend-item')
                 .filter((d, i) => {
                 // debugger;
-                return i !== index;
+                return i !== data.index;
             })
                 .classed('inactive', true);
-            this.tooltipShow(data, nodes[index]);
+            this.tooltipShow(event, data.data[data.index]);
             this.hovered.emit({ event, data });
         };
         this.barMouseOut = () => {
-            this.chart
-                .selectAll('.bar')
-                .classed('inactive', false)
-                .style('fill', null);
+            this.chart.selectAll('.bar').classed('inactive', false).style('fill', null);
             this.chart.selectAll('.legend-item').classed('inactive', false);
             this.tooltipHide();
         };
-        this.barMouseClick = (event, data, index, nodes) => {
+        this.barMouseClick = (event, data) => {
             this.clicked.emit({ event, data });
         };
-        this.tooltipShow = (data, node) => {
-            const dimensions = node.getBoundingClientRect();
+        this.tooltipShow = (event, data, node) => {
+            const dimensions = node ? node.getBoundingClientRect() : event.currentTarget.getBoundingClientRect();
             const scroll = this._scroll.getScrollPosition();
             const percentage = data.value / sum(this.data, (d) => d.value);
             const comparePercentage = data.compareValue / sum(this.data, (d) => d.compareValue);
@@ -4700,41 +4603,38 @@ class PbdsDatavizBarSingleHorizontalComponent {
         this.tooltipHide = () => {
             this.tooltip.style('opacity', 0);
         };
-        this.legendMouseOver = (event, data, index, nodes) => {
+        this.legendMouseOver = (event, data) => {
             if (!this.hideLegendTooltip) {
                 const barHover = this.svg
                     .selectAll('.bar')
-                    .filter((d, i) => i === index)
+                    .filter((d, i) => i === data.index)
                     .node();
-                this.tooltipShow(data, barHover);
+                this.tooltipShow(event, data.data[data.index], barHover);
             }
             this.chart
                 .selectAll('.legend-item')
-                .filter((d, i) => i !== index)
+                .filter((d, i) => i !== data.index)
                 .classed('inactive', true);
             this.chart
                 .selectAll('.bar')
-                .filter((d, i) => i !== index)
+                .filter((d, i) => i !== data.index)
                 .classed('inactive', true);
-            this.chart
-                .selectAll('.bar')
-                .filter((d, i) => i === index)
-                .classed('inactive', null);
+            // this.chart
+            //   .selectAll('.bar')
+            //   .filter((d, i) => i === data.index)
+            //   .classed('inactive', null);
             this.hovered.emit({ event, data });
         };
         this.legendMouseOut = () => {
             this.chart.selectAll('.legend-item').classed('inactive', false);
-            this.chart
-                .selectAll('.bar')
-                .classed('inactive', false)
-                .style('fill', null);
+            this.chart.selectAll('.bar').classed('inactive', false).style('fill', null);
             // hide tooltip for zero/null values
             this.tooltipHide();
         };
-        this.legendMouseClick = (event, data, index, nodes) => {
+        this.legendMouseClick = (event, data) => {
             this.clicked.emit({ event, data });
         };
-        this.xAxisFormatter = item => {
+        this.xAxisFormatter = (item) => {
             switch (this.xAxisFormatType) {
                 case 'number':
                     return `${this.xAxisFormat(item)}${this.xAxisTickLabelSuffix}`;
@@ -4782,11 +4682,7 @@ class PbdsDatavizBarSingleHorizontalComponent {
             .attr('class', 'img-fluid')
             .attr('preserveAspectRatio', 'xMinYMin meet')
             .attr('viewBox', () => {
-            return `-${this.margin.left} -${this.margin.top} ${+this.width + this.margin.left + this.margin.right} ${+this
-                .height +
-                this.margin.top +
-                this.margin.bottom +
-                this.xAxisTitleMargin}`;
+            return `-${this.margin.left} -${this.margin.top} ${+this.width + this.margin.left + this.margin.right} ${+this.height + this.margin.top + this.margin.bottom + this.xAxisTitleMargin}`;
         });
         // TOOLTIP
         if (!this.hideTooltip) {
@@ -4909,30 +4805,24 @@ class PbdsDatavizBarSingleHorizontalComponent {
         }
         else {
             this.xAxisScale.domain([0, Math.ceil(sumValues)]).range([0, +this.width]);
-            this.xGridCall.tickValues(this.xAxisScale.ticks().filter(n => Number.isInteger(n))); // remove decimal grid values
-            this.xAxis
-                .transition()
-                .duration(1000)
-                .call(this.xAxisCall);
+            this.xGridCall.tickValues(this.xAxisScale.ticks().filter((n) => Number.isInteger(n))); // remove decimal grid values
+            this.xAxis.transition().duration(1000).call(this.xAxisCall);
             // update the grids
             if (!this.hideXGrid) {
-                this.xGrid
-                    .transition()
-                    .duration(1000)
-                    .call(this.xGridCall);
+                this.xGrid.transition().duration(1000).call(this.xGridCall);
             }
         }
         this.svg
             .selectAll('.bar')
             .data(this.data)
-            .join(enter => enter
+            .join((enter) => enter
             .append('rect')
             .attr('class', 'bar')
             .attr('width', 0)
             .attr('height', () => {
             return this.height - this.barPadding;
         })
-            .attr('fill', d => {
+            .attr('fill', (d) => {
             if (this.isSingleData) {
                 return `url(${this._location.path()}#gradient-horizontal-${this.colorRange(d.label).substr(1)})`;
             }
@@ -4950,7 +4840,7 @@ class PbdsDatavizBarSingleHorizontalComponent {
             }, 1);
         })
             .attr('pointer-events', 'none')
-            .call(enter => {
+            .call((enter) => {
             return (enter
                 .transition()
                 // .duration(0)
@@ -4972,7 +4862,7 @@ class PbdsDatavizBarSingleHorizontalComponent {
             })
                 .transition()
                 .attr('pointer-events', 'auto'));
-        }), update => update
+        }), (update) => update
             .attr('pointer-events', 'none')
             .transition()
             .duration(1000)
@@ -4994,26 +4884,24 @@ class PbdsDatavizBarSingleHorizontalComponent {
             }, 0);
         })
             .transition()
-            .attr('pointer-events', 'auto'), exit => exit
-            .transition()
-            .attr('pointer-events', 'none')
-            .remove())
-            .on('mouseover', (data, index, nodes) => this.barMouseOver(event$1, data, index, nodes))
-            .on('mouseout', (data, index, nodes) => this.barMouseOut())
-            .on('click', (data, index, nodes) => this.barMouseClick(event$1, data, index, nodes));
+            .selection()
+            .attr('pointer-events', 'auto'), (exit) => exit.transition().selection().attr('pointer-events', 'none').remove())
+            .datum((d, i) => {
+            return { data: this.data, index: i };
+        })
+            .on('mouseover', (event, data) => this.barMouseOver(event, data))
+            .on('mouseout', (event, data) => this.barMouseOut())
+            .on('click', (event, data) => this.barMouseClick(event, data));
         if (!this.hideLegend) {
             this.chart
                 .select('.legend')
                 .selectAll('.legend-item')
                 .data(this.data)
-                .join(enter => {
-                const li = enter
-                    .append('li')
-                    .attr('class', 'legend-item')
-                    .classed('align-items-start', this.isCompare);
+                .join((enter) => {
+                const li = enter.append('li').attr('class', 'legend-item').classed('align-items-start', this.isCompare);
                 li.insert('span')
                     .attr('class', 'legend-key')
-                    .style('background-color', d => this.colorRange(d.label))
+                    .style('background-color', (d) => this.colorRange(d.label))
                     .classed('mt-1', this.isCompare);
                 li.insert('span')
                     .attr('class', 'legend-description')
@@ -5022,7 +4910,7 @@ class PbdsDatavizBarSingleHorizontalComponent {
                 li.select('.legend-description')
                     .insert('span')
                     .attr('class', 'legend-label')
-                    .html(d => {
+                    .html((d) => {
                     switch (this.legendLabelFormatType) {
                         case 'number':
                             return this.legendLabelFormat(d.label);
@@ -5037,20 +4925,20 @@ class PbdsDatavizBarSingleHorizontalComponent {
                     .insert('div')
                     .attr('class', 'legend-change')
                     .classed('d-none', !this.isCompare);
-                li.select('.legend-change').html(d => {
+                li.select('.legend-change').html((d) => {
                     return `<div class="metric-block-indicator ${d.compareChangeDirection} ${d.compareChangeInverse ? 'inverse' : ''} mt-1"><span>${this.tooltipCompareChangeFormat(d.compareChangeValue)}</span></div>`;
                 });
                 return li;
-            }, update => {
+            }, (update) => {
                 update.classed('align-items-start', this.isCompare);
                 update.select('.legend-key').classed('mt-1', this.isCompare);
                 update.select('.legend-change').classed('d-none', !this.isCompare);
                 if (this.isCompare) {
-                    update.select('.legend-change').html(d => {
+                    update.select('.legend-change').html((d) => {
                         return `<div class="metric-block-indicator ${d.compareChangeDirection} ${d.compareChangeInverse ? 'inverse' : ''} mt-1"><span>${this.tooltipCompareChangeFormat(d.compareChangeValue)}</span></div>`;
                     });
                 }
-                update.select('.legend-label').html(d => {
+                update.select('.legend-label').html((d) => {
                     switch (this.legendLabelFormatType) {
                         case 'number':
                             return this.legendLabelFormat(d.label);
@@ -5062,10 +4950,13 @@ class PbdsDatavizBarSingleHorizontalComponent {
                     }
                 });
                 return update;
-            }, exit => exit.remove())
-                .on('mouseover', (data, index, nodes) => this.legendMouseOver(event$1, data, index, nodes))
+            }, (exit) => exit.remove())
+                .datum((d, i) => {
+                return { data: this.data, index: i };
+            })
+                .on('mouseover', (event, data) => this.legendMouseOver(event, data))
                 .on('mouseout', () => this.legendMouseOut())
-                .on('click', (data, index, nodes) => this.legendMouseClick(event$1, data, index, nodes));
+                .on('click', (event, data) => this.legendMouseClick(event, data));
         }
     }
 }

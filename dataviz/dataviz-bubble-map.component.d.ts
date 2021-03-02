@@ -52,9 +52,9 @@ export declare class PbdsDatavizBubbleMapComponent implements OnInit, OnChanges,
     ngOnChanges(changes: SimpleChanges): void;
     ngOnDestroy(): void;
     updateChart: () => void;
-    bubbleMouseOver: (event: any, data: any, index: any, nodes: any) => void;
-    bubbleMouseOut: (event: any, data: any, index: any, nodes: any) => void;
-    bubbleMouseClick: (event: any, data: any, index: any, nodes: any) => void;
+    bubbleMouseOver: (event: any, data: any) => void;
+    bubbleMouseOut: (event: any, data: any) => void;
+    bubbleMouseClick: (event: any, data: any) => void;
     private tooltipShow;
     private tooltipHide;
 }

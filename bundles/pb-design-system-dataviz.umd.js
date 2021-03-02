@@ -1,8 +1,8 @@
 (function (global, factory) {
-    typeof exports === 'object' && typeof module !== 'undefined' ? factory(exports, require('@angular/core'), require('@angular/common'), require('@ng-bootstrap/ng-bootstrap'), require('d3-selection'), require('d3-scale'), require('d3-shape'), require('d3-interpolate'), require('d3-format'), require('d3-time-format'), require('d3'), require('d3-array'), require('d3-axis'), require('d3-ease'), require('d3-geo'), require('topojson-client'), require('d3-collection')) :
-    typeof define === 'function' && define.amd ? define('pb-design-system/dataviz', ['exports', '@angular/core', '@angular/common', '@ng-bootstrap/ng-bootstrap', 'd3-selection', 'd3-scale', 'd3-shape', 'd3-interpolate', 'd3-format', 'd3-time-format', 'd3', 'd3-array', 'd3-axis', 'd3-ease', 'd3-geo', 'topojson-client', 'd3-collection'], factory) :
-    (global = typeof globalThis !== 'undefined' ? globalThis : global || self, factory((global['pb-design-system'] = global['pb-design-system'] || {}, global['pb-design-system'].dataviz = {}), global.ng.core, global.ng.common, global['^7']['0']['0 || ^8']['0']['0'], global['d3-selection'], global['d3-scale'], global['d3-shape'], global['d3-interpolate'], global['d3-format'], global['d3-time-format'], global['^5']['16']['0'], global['d3-array'], global['d3-axis'], global['d3-ease'], global['d3-geo'], global['^3']['0']['0'], global['d3-collection']));
-}(this, (function (exports, i0, common, ngBootstrap, d3Selection, d3Scale, d3Shape, d3Interpolate, d3Format, d3TimeFormat, d3, d3Array, d3Axis, d3Ease, d3Geo, topojson, d3Collection) { 'use strict';
+    typeof exports === 'object' && typeof module !== 'undefined' ? factory(exports, require('@angular/core'), require('@angular/common'), require('@ng-bootstrap/ng-bootstrap'), require('d3-selection'), require('d3-scale'), require('d3-shape'), require('d3-interpolate'), require('d3-format'), require('d3-time-format'), require('d3'), require('d3-array'), require('d3-axis'), require('d3-ease'), require('d3-geo'), require('topojson-client')) :
+    typeof define === 'function' && define.amd ? define('pb-design-system/dataviz', ['exports', '@angular/core', '@angular/common', '@ng-bootstrap/ng-bootstrap', 'd3-selection', 'd3-scale', 'd3-shape', 'd3-interpolate', 'd3-format', 'd3-time-format', 'd3', 'd3-array', 'd3-axis', 'd3-ease', 'd3-geo', 'topojson-client'], factory) :
+    (global = typeof globalThis !== 'undefined' ? globalThis : global || self, factory((global['pb-design-system'] = global['pb-design-system'] || {}, global['pb-design-system'].dataviz = {}), global.ng.core, global.ng.common, global['^7']['0']['0 || ^8']['0']['0'], global['d3-selection'], global['d3-scale'], global['d3-shape'], global['d3-interpolate'], global['d3-format'], global['d3-time-format'], global['^6']['2']['0'], global['d3-array'], global['d3-axis'], global['d3-ease'], global['d3-geo'], global['^3']['0']['0']));
+}(this, (function (exports, i0, common, ngBootstrap, d3Selection, d3Scale, d3Shape, d3Interpolate, d3Format, d3TimeFormat, d3, d3Array, d3Axis, d3Ease, d3Geo, topojson) { 'use strict';
 
     var PbdsDatavizService = /** @class */ (function () {
         function PbdsDatavizService() {
@@ -238,43 +238,41 @@
                         .attr('fill', function (d) { return _this.colorRange(d.data.label); })
                         .attr('class', 'slice')
                         .each(function (d, i, nodes) {
+                        // save the current data to be used in arc update tween
                         _this.currentData.splice(i, 1, d);
                     });
                     if (_this.type === 'pie') {
-                        path
-                            .style('stroke', '#fff')
-                            .style('stroke-width', 2)
-                            .style('stroke-alignment', 'inner');
+                        path.style('stroke', '#fff').style('stroke-width', 2).style('stroke-alignment', 'inner');
                     }
                     path.call(function (path) { return path
                         .transition()
+                        .delay(500)
                         .duration(function (d, i, n) { return (firstRun ? 0 : 500); })
                         .attrTween('d', _this.arcEnterTween); });
                     return path;
                 }, function (update) {
                     _this.tooltipHide();
-                    update
-                        .each(function (d) { return (d.outerRadius = _this.outerRadius); })
-                        .call(function (update) { return update
-                        .transition()
-                        .duration(500)
-                        .attrTween('d', _this.arcTween); });
+                    update.each(function (d) {
+                        return (d.outerRadius = _this.outerRadius);
+                    });
+                    update.transition().duration(500).attrTween('d', _this.arcUpdateTween);
                     return update;
                 }, function (exit) { return exit.remove(); })
-                    .on('mouseover', function (data, index, nodes) {
-                    _this.pathMouseOver(d3Selection.event, data, index, nodes);
-                    // this.tooltipShow(this.chart.node(), data);
+                    .on('mouseover', function (event, data) {
+                    _this.pathMouseOver(event, data);
+                    _this.tooltipShow(event, data);
                 })
-                    .on('mousemove', function (data, index, nodes) {
-                    _this.tooltipShow(_this.chart.node(), data);
-                    _this.tooltipMove(_this.chart.node());
+                    .on('mousemove', function (event, data) {
+                    _this.tooltipShow(event, data);
+                    // this.tooltipMove(event, data);
+                    _this.tooltipMove(event, _this.chart.node());
                 })
-                    .on('mouseout', function (data, index, nodes) {
-                    _this.pathMouseOut(data, index, nodes);
+                    .on('mouseout', function (event, data) {
+                    _this.pathMouseOut(event, data);
                     _this.tooltipHide();
                 })
-                    .on('click', function (data, index, nodes) {
-                    _this.pathClick(d3Selection.event, data, index, nodes);
+                    .on('click', function (event, data) {
+                    _this.pathClick(event, data);
                 });
                 // legend
                 _this.chart
@@ -318,101 +316,94 @@
                     update.select('.legend-value').html(function (d) { return _this.legendValueFormat(d.value); });
                     return update;
                 }, function (exit) { return exit.remove(); })
-                    .on('mouseover focus', function (data, index, nodes) {
-                    _this.legendMouseOverFocus(data, index, nodes);
-                    _this.pathMouseOver(d3Selection.event, data, index, nodes);
+                    .datum(function (d, i) {
+                    return { data: d, index: i };
                 })
-                    .on('mouseout blur', function (data, index, nodes) {
-                    _this.legendMouseOutBlur(data, index, nodes);
-                    _this.pathMouseOut(data, index, nodes);
+                    .on('mouseover focus', function (event, data) {
+                    _this.legendMouseOverFocus(event, data);
+                    _this.pathMouseOver(event, data);
                 })
-                    .on('click', function (data, index, nodes) {
-                    _this.clicked.emit({ event: d3Selection.event, data: data });
+                    .on('mouseout blur', function (event, data) {
+                    _this.legendMouseOutBlur(event, data);
+                    _this.pathMouseOut(event, data);
+                })
+                    .on('click', function (event, data) {
+                    _this.clicked.emit({ event: event, data: data.data });
                 });
             };
-            this.arcEnterTween = function (data, index, nodes) {
+            this.arcEnterTween = function (data) {
                 var i = d3Interpolate.interpolate(data.startAngle, data.endAngle);
                 return function (t) {
                     data.endAngle = i(t);
                     return _this.arc(data);
                 };
             };
-            this.arcTween = function (data, index, nodes) {
-                // console.log('ARGS: ', data, index, nodes);
-                var i = d3Interpolate.interpolate(_this.currentData[index], data);
-                _this.currentData[index] = i(1);
-                return function (t) { return _this.arc(i(t)); };
-            };
-            this.arcExitTween = function (data, index, nodes) {
-                var end = Object.assign({}, _this.currentData[index], { startAngle: _this.currentData[index].endAngle });
-                var i = d3Interpolate.interpolate(data, end);
+            // see https://bl.ocks.org/HarryStevens/e1acaf628b1693f1b32e5f2e1a7f73fb
+            this.arcUpdateTween = function (data, index, n) {
+                var interpolate = d3Interpolate.interpolate(_this.currentData[index], data);
+                // update the current data for this slice
+                _this.currentData[index] = interpolate(0);
                 return function (t) {
-                    return _this.arc(i(t));
+                    return _this.arc(interpolate(t));
                 };
             };
-            this.arcMouseOverTween = function (data, index, nodes) {
+            this.arcMouseOverTween = function (data) {
                 var i = d3Interpolate.interpolate(data.outerRadius, _this.outerRadius + _this.arcZoom);
                 return function (t) {
                     data.outerRadius = i(t);
                     return _this.arc(data);
                 };
             };
-            this.arcMouseOutTween = function (data, index, nodes) {
+            this.arcMouseOutTween = function (data) {
+                // debugger;
                 var i = d3Interpolate.interpolate(data.outerRadius, _this.outerRadius);
                 return function (t) {
                     data.outerRadius = i(t);
                     return _this.arc(data);
                 };
             };
-            this.legendMouseOverFocus = function (data, index, nodes) {
+            this.legendMouseOverFocus = function (event, data) {
                 _this.chart
                     .selectAll('.legend-item')
-                    .filter(function (d, i) { return i !== index; })
+                    .filter(function (d, i) {
+                    return "" + d.label !== "" + data.label;
+                })
                     .classed('inactive', true);
             };
-            this.legendMouseOutBlur = function (data, index, nodes) {
+            this.legendMouseOutBlur = function (event, data) {
                 _this.chart.selectAll('.legend-item').classed('inactive', false);
             };
-            this.pathMouseOver = function (event, data, index, nodes) {
+            this.pathMouseOver = function (event, data) {
+                // console.log(data);
                 var slices = _this.chart.selectAll('.slice');
-                var slice = slices.filter(function (d, i) { return i === index; });
+                var slice = slices.filter(function (d, i) { return i === data.index; });
                 _this.chart
                     .selectAll('.legend-item')
-                    .filter(function (d, i) { return i !== index; })
+                    .filter(function (d, i) { return i !== data.index; })
                     .classed('inactive', true);
-                slices.filter(function (d, i) { return i !== index; }).classed('inactive', true);
-                slice
-                    .transition()
-                    .duration(300)
-                    .delay(0)
-                    .attrTween('d', _this.arcMouseOverTween);
+                slices.filter(function (d, i) { return i !== data.index; }).classed('inactive', true);
+                slice.transition().duration(300).delay(0).attrTween('d', _this.arcMouseOverTween);
                 _this.hovered.emit({
                     event: event,
                     data: data.data ? data.data : data // legend hover data is different than slice hover data
                 });
             };
-            this.pathMouseOut = function (data, index, value) {
+            this.pathMouseOut = function (event, data) {
                 var slices = _this.chart.selectAll('.slice');
-                var slice = slices.filter(function (d, i) { return i === index; });
-                _this.chart
-                    .selectAll('.legend-item')
-                    .filter(function (d, i) { return i !== index; })
-                    .classed('inactive', false);
+                var slice = slices.filter(function (d, i) { return d.label === data.label; });
+                _this.chart.selectAll('.legend-item').classed('inactive', false);
                 slices.classed('inactive', false);
-                slice
-                    .transition()
-                    .duration(300)
-                    .delay(0)
-                    .attrTween('d', _this.arcMouseOutTween);
+                slice.transition().duration(300).delay(0).attrTween('d', _this.arcMouseOutTween);
             };
-            this.pathClick = function (event, data, index, nodes) {
+            this.pathClick = function (event, data) {
                 _this.clicked.emit({
                     event: event,
                     data: data.data
                 });
             };
-            this.tooltipShow = function (node, data) {
-                _this.tooltipSetPosition(node);
+            this.tooltipShow = function (event, data) {
+                // debugger;
+                _this.tooltipSetPosition(event);
                 var percentage = (data.endAngle - data.startAngle) / (2 * Math.PI);
                 var label;
                 switch (_this.tooltipLabelFormatType) {
@@ -426,14 +417,15 @@
                 _this.tooltip.html("\n        <div class=\"tooltip-label\">" + label + "</div>\n        <div class=\"tooltip-value\">" + _this.tooltipValueFormat(percentage) + "</div>\n      ");
                 _this.tooltip.style('opacity', 1);
             };
-            this.tooltipMove = function (node) {
-                _this.tooltipSetPosition(node);
+            this.tooltipMove = function (event, node) {
+                _this.tooltipSetPosition(event, node);
             };
             this.tooltipHide = function () {
                 _this.tooltip.style('opacity', 0);
             };
-            this.tooltipSetPosition = function (node) {
-                var coordinates = d3Selection.mouse(node);
+            this.tooltipSetPosition = function (event, node) {
+                // debugger;
+                var coordinates = d3Selection.pointer(event, node);
                 _this.tooltip.style('left', coordinates[0] + 16 + "px");
                 _this.tooltip.style('top', coordinates[1] + 16 + "px");
             };
@@ -463,9 +455,7 @@
                 .padAngle(this.anglePad)
                 .value(function (d) { return d.value; })
                 .sort(null);
-            this.arc = d3Shape.arc()
-                .padRadius(this.outerRadius)
-                .innerRadius(this.innerRadius);
+            this.arc = d3Shape.arc().padRadius(this.outerRadius).innerRadius(this.innerRadius);
             this.chart = d3Selection.select(this._element.nativeElement).attr('aria-hidden', 'true');
             this.svg = this.chart
                 .append('svg')
@@ -473,9 +463,7 @@
                 .attr('height', this.height)
                 .attr('class', 'img-fluid')
                 .attr('preserveAspectRatio', 'xMinYMin meet')
-                .attr('viewBox', "-" + (this.width / 2 + this.margin.left) + " -" + (this.height / 2 + this.margin.top) + " " + (this.width +
-                this.margin.left +
-                this.margin.right) + " " + (this.height + this.margin.top + this.margin.bottom));
+                .attr('viewBox', "-" + (this.width / 2 + this.margin.left) + " -" + (this.height / 2 + this.margin.top) + " " + (this.width + this.margin.left + this.margin.right) + " " + (this.height + this.margin.top + this.margin.bottom));
             this.chart.append('ul').attr('class', 'legend legend-right');
             this.tooltip = this.chart
                 .append('div')
@@ -575,26 +563,14 @@
                 ])
                     .rangeRound([_this.height, 0])
                     .nice();
-                _this.xAxis
-                    .transition()
-                    .duration(1000)
-                    .call(_this.xAxisCall);
-                _this.yAxis
-                    .transition()
-                    .duration(1000)
-                    .call(_this.yAxisCall);
+                _this.xAxis.transition().duration(1000).call(_this.xAxisCall);
+                _this.yAxis.transition().duration(1000).call(_this.yAxisCall);
                 // update the grids
                 if (!_this.hideXGrid) {
-                    _this.xGrid
-                        .transition()
-                        .duration(1000)
-                        .call(_this.xGridCall);
+                    _this.xGrid.transition().duration(1000).call(_this.xGridCall);
                 }
                 if (!_this.hideYGrid) {
-                    _this.yGrid
-                        .transition()
-                        .duration(1000)
-                        .call(_this.yGridCall);
+                    _this.yGrid.transition().duration(1000).call(_this.yGridCall);
                 }
                 if (!_this.hideGrayBars) {
                     // gray bars
@@ -607,17 +583,12 @@
                         .attr('height', 0)
                         .attr('x', function (d) { return _this.xAxisScale(d.label); })
                         .attr('width', _this.xAxisScale.bandwidth())
-                        .call(function (enter) { return enter
-                        .transition()
-                        .duration(500)
-                        .attr('height', _this.height); }); }, function (update) { return update
+                        .call(function (enter) { return enter.transition().duration(500).attr('height', _this.height); }); }, function (update) { return update
                         .transition()
                         .duration(1000)
                         .attr('x', function (d) { return _this.xAxisScale(d.label); })
-                        .attr('width', _this.xAxisScale.bandwidth()); }, function (exit) { return exit
-                        .transition()
-                        .attr('pointer-events', 'none')
-                        .remove(); });
+                        .attr('width', _this.xAxisScale.bandwidth())
+                        .selection(); }, function (exit) { return exit.transition().selection().attr('pointer-events', 'none').remove(); });
                     // color bars
                     _this.svg
                         .selectAll('.bar')
@@ -647,13 +618,11 @@
                         .attr('height', function (d) { return _this.height - _this.yAxisScale(d.value); })
                         .attr('y', function (d) { return _this.yAxisScale(d.value); })
                         .transition()
-                        .attr('pointer-events', 'auto'); }, function (exit) { return exit
-                        .transition()
-                        .attr('pointer-events', 'none')
-                        .remove(); })
-                        .on('mouseover', function (data, index, nodes) { return _this.barMouseOver(d3Selection.event, data, index, nodes); })
-                        .on('mouseout', function (data, index, nodes) { return _this.barMouseOut(); })
-                        .on('click', function (data, index, nodes) { return _this.barMouseClick(d3Selection.event, data, index, nodes); });
+                        .selection()
+                        .attr('pointer-events', 'auto'); }, function (exit) { return exit.transition().selection().attr('pointer-events', 'none').remove(); })
+                        .on('mouseover', function (event, data) { return _this.barMouseOver(event, data); })
+                        .on('mouseout', function (event, data) { return _this.barMouseOut(); })
+                        .on('click', function (event, data) { return _this.barMouseClick(event, data); });
                 }
                 else {
                     // color bars
@@ -685,13 +654,11 @@
                         .attr('height', function (d) { return _this.height - _this.yAxisScale(d.value); })
                         .attr('y', function (d) { return _this.yAxisScale(d.value); })
                         .transition()
-                        .attr('pointer-events', 'auto'); }, function (exit) { return exit
-                        .transition()
-                        .attr('pointer-events', 'none')
-                        .remove(); })
-                        .on('mouseover', function (data, index, nodes) { return _this.barMouseOver(d3Selection.event, data, index, nodes); })
-                        .on('mouseout', function (data, index, nodes) { return _this.barMouseOut(); })
-                        .on('click', function (data, index, nodes) { return _this.barMouseClick(d3Selection.event, data, index, nodes); });
+                        .selection()
+                        .attr('pointer-events', 'auto'); }, function (exit) { return exit.transition().attr('pointer-events', 'none').remove(); })
+                        .on('mouseover', function (event, data) { return _this.barMouseOver(event, data); })
+                        .on('mouseout', function (event, data) { return _this.barMouseOut(); })
+                        .on('click', function (event, data) { return _this.barMouseClick(event, data); });
                 }
                 if (!_this.hideLegend) {
                     _this.chart
@@ -728,9 +695,9 @@
                                 return d.label;
                         }
                     }); }, function (exit) { return exit.remove(); })
-                        .on('mouseover', function (data, index, nodes) { return _this.legendMouseOver(d3Selection.event, data, index, nodes); })
+                        .on('mouseover', function (event, data) { return _this.legendMouseOver(event, data); })
                         .on('mouseout', function () { return _this.legendMouseOut(); })
-                        .on('click', function (data, index, nodes) { return _this.legendMouseClick(d3Selection.event, data, index, nodes); });
+                        .on('click', function (event, data) { return _this.legendMouseClick(event, data); });
                 }
                 if (_this.threshold) {
                     _this.yThreshold
@@ -747,65 +714,66 @@
                         .attr('transform', "translate(0,  " + _this.yAxisScale(+_this.average) + ")");
                 }
             };
-            this.barMouseOver = function (event, data, index, nodes) {
+            this.barMouseOver = function (event, data) {
                 _this.chart
                     .selectAll('.bar')
-                    .filter(function (d, i) { return i !== index; })
+                    .filter(function (d, i) { return d.label !== data.label; })
                     .classed('inactive', true);
-                var bar = _this.chart.selectAll('.bar').filter(function (d, i) { return i === index; });
+                var bar = _this.chart.selectAll('.bar').filter(function (d, i) { return d.label === data.label; });
                 var barColor = bar.attr('data-color');
                 bar.style('fill', barColor);
                 _this.chart
                     .selectAll('.legend-item')
-                    .filter(function (d, i) { return i !== index; })
+                    .filter(function (d, i) { return d.label !== data.label; })
                     .classed('inactive', true);
-                _this.tooltipShow(data, nodes.filter(function (d, i) { return i === index; })[0]);
+                _this.tooltipShow(event, data);
                 _this.hovered.emit({ event: event, data: data });
             };
             this.barMouseOut = function () {
-                _this.chart
-                    .selectAll('.bar')
-                    .classed('inactive', false)
-                    .style('fill', null);
+                _this.chart.selectAll('.bar').classed('inactive', false).style('fill', null);
                 _this.chart.selectAll('.legend-item').classed('inactive', false);
                 _this.tooltipHide();
             };
-            this.barMouseClick = function (event, data, index, nodes) {
+            this.barMouseClick = function (event, data) {
                 _this.clicked.emit({ event: event, data: data });
             };
-            this.legendMouseOver = function (event, data, index, nodes) {
+            this.legendMouseOver = function (event, data) {
                 _this.chart
                     .selectAll('.legend-item')
-                    .filter(function (d, i) { return i !== index; })
+                    .filter(function (d, i) { return d.label !== data.label; })
                     .classed('inactive', true);
                 _this.chart
                     .selectAll('.bar')
-                    .filter(function (d, i) { return i !== index; })
+                    .filter(function (d, i) { return d.label !== data.label; })
                     .classed('inactive', true);
-                var bar = _this.chart.selectAll('.bar').filter(function (d, i) { return i === index; });
+                var bar = _this.chart.selectAll('.bar').filter(function (d, i) { return d.label === data.label; });
                 var barColor = bar.attr('data-color');
                 bar.style('fill', barColor);
-                _this.tooltipShow(data, _this.chart
+                _this.tooltipShow(event, data, _this.chart
                     .selectAll('.bar')
-                    .filter(function (d, i) { return i === index; })
+                    .filter(function (d, i) { return d.label === data.label; })
                     .node());
                 _this.hovered.emit({ event: event, data: data });
             };
             this.legendMouseOut = function () {
                 _this.chart.selectAll('.legend-item').classed('inactive', false);
-                _this.chart
-                    .selectAll('.bar')
-                    .classed('inactive', false)
-                    .style('fill', null);
+                _this.chart.selectAll('.bar').classed('inactive', false).style('fill', null);
                 _this.tooltipHide();
             };
-            this.legendMouseClick = function (event, data, index, nodes) {
+            this.legendMouseClick = function (event, data) {
                 _this.clicked.emit({ event: event, data: data });
             };
-            this.tooltipShow = function (data, node) {
-                var dimensions = node.getBoundingClientRect();
+            this.tooltipShow = function (event, data, node) {
                 var scroll = _this._scroll.getScrollPosition();
+                var dimensions = event.currentTarget.getBoundingClientRect();
                 var label;
+                if (node) {
+                    var target = _this.chart
+                        .selectAll('.bar')
+                        .filter(function (d, i) { return d.label === data.label; })
+                        .node();
+                    dimensions = target.getBoundingClientRect();
+                }
                 switch (_this.tooltipLabelFormatType) {
                     case 'number':
                         label = _this.tooltipLabelFormat(data.label);
@@ -943,10 +911,7 @@
                 .attr('height', +this.height + this.margin.top + this.margin.bottom + this.xAxisTitleMargin)
                 .attr('class', 'img-fluid')
                 .attr('preserveAspectRatio', 'xMinYMin meet')
-                .attr('viewBox', "-" + this.margin.left + " -" + this.margin.top + " " + +this.width + " " + (+this.height +
-                this.margin.top +
-                this.margin.bottom +
-                this.xAxisTitleMargin));
+                .attr('viewBox', "-" + this.margin.left + " -" + this.margin.top + " " + +this.width + " " + (+this.height + this.margin.top + this.margin.bottom + this.xAxisTitleMargin));
             // build color ranges
             this.colorRange = d3Scale.scaleOrdinal().range(this._dataviz.createGradientDefs(this.svg, this.singleSeries, this.theme));
             // X AXIS
@@ -1197,26 +1162,14 @@
                     })
                 ])
                     .nice();
-                _this.xAxis
-                    .transition()
-                    .duration(1000)
-                    .call(_this.xAxisCall);
-                _this.yAxis
-                    .transition()
-                    .duration(1000)
-                    .call(_this.yAxisCall);
+                _this.xAxis.transition().duration(1000).call(_this.xAxisCall);
+                _this.yAxis.transition().duration(1000).call(_this.yAxisCall);
                 // update the grids
                 if (!_this.hideXGrid) {
-                    _this.xGrid
-                        .transition()
-                        .duration(1000)
-                        .call(_this.xGridCall);
+                    _this.xGrid.transition().duration(1000).call(_this.xGridCall);
                 }
                 if (!_this.hideYGrid) {
-                    _this.yGrid
-                        .transition()
-                        .duration(1000)
-                        .call(_this.yGridCall);
+                    _this.yGrid.transition().duration(1000).call(_this.yGridCall);
                 }
                 // lines
                 _this.svg
@@ -1346,9 +1299,9 @@
                         });
                         return update;
                     }, function (exit) { return exit.remove(); })
-                        .on('mouseover', function (data, index, nodes) { return _this.legendMouseOver(d3Selection.event, data, index, nodes); })
+                        .on('mouseover', function (event, data) { return _this.legendMouseOver(event, data); })
                         .on('mouseout', function () { return _this.legendMouseOut(); })
-                        .on('click', function (data, index, nodes) { return _this.legendMouseClick(d3Selection.event, data, index, nodes); });
+                        .on('click', function (event, data) { return _this.legendMouseClick(event, data); });
                 }
                 if (!_this.hideTooltip) {
                     _this.tooltip
@@ -1373,34 +1326,45 @@
                             .attr('class', 'tooltip-value text-right text-nowrap')
                             .html(function (d) { return ''; });
                         return tooltipItem;
-                    }, function () { }, function (exit) { return exit.remove(); });
+                    }, function (update) {
+                        // update the tooltip label text
+                        var tooltipLabel = update.select('.tooltip-label');
+                        tooltipLabel.html(function (d) {
+                            return _this.tooltipLabelFormatType ? _this.tooltipLabelFormat(d.label) : d.label;
+                        });
+                    }, function (exit) { return exit.remove(); });
                 }
                 _this.svg.selectAll('.points').raise();
                 _this.mouserect.raise();
             };
-            this.legendMouseOver = function (event, data, index, nodes) {
+            this.legendMouseOver = function (event, data) {
+                // console.log(data, this.linePoints);
                 _this.chart
                     .selectAll('.legend-item')
-                    .filter(function (d, i) { return i !== index; })
+                    .filter(function (d, i) {
+                    return d.label !== data.label;
+                })
                     .classed('inactive', true);
                 _this.svg
                     .selectAll('.line')
-                    .filter(function (d, i) { return i !== index; })
+                    .filter(function (d, i) {
+                    return d.label !== data.label;
+                })
                     .classed('inactive', true);
-                _this.svg
-                    .selectAll('.line')
-                    .filter(function (d, i) { return i === index; })
-                    .classed('active', true);
                 if (_this.area) {
                     _this.svg
                         .selectAll('.area')
-                        .filter(function (d, i) { return i !== index; })
+                        .filter(function (d, i) {
+                        return d.label !== data.label;
+                    })
                         .classed('inactive', true);
                 }
                 if (_this.linePoints) {
                     _this.svg
                         .selectAll('.points')
-                        .filter(function (d, i) { return i !== index; })
+                        .filter(function (d, i) {
+                        return d.label !== data.label;
+                    })
                         .selectAll('circle')
                         .classed('inactive', true);
                 }
@@ -1408,25 +1372,19 @@
             };
             this.legendMouseOut = function () {
                 _this.chart.selectAll('.legend-item').classed('inactive', false);
-                _this.chart
-                    .selectAll('.line')
-                    .classed('inactive', false)
-                    .classed('active', false);
+                _this.chart.selectAll('.line').classed('inactive', false).classed('active', false);
                 if (_this.linePoints) {
-                    _this.svg
-                        .selectAll('circle')
-                        .classed('active', false)
-                        .classed('inactive', false);
+                    _this.svg.selectAll('circle').classed('active', false).classed('inactive', false);
                 }
                 if (_this.area) {
                     _this.svg.selectAll('.area').classed('inactive', false);
                 }
             };
-            this.legendMouseClick = function (event, data, index, nodes) {
+            this.legendMouseClick = function (event, data) {
                 _this.clicked.emit({ event: event, data: data });
             };
-            this.mouserectMouseMove = function (event, index, nodes) {
-                var mouseXDate = _this.xAxisScale.invert(d3Selection.mouse(nodes[0])[0]); // return date at mouse x position
+            this.mouserectMouseMove = function (event, data) {
+                var mouseXDate = _this.xAxisScale.invert(d3Selection.pointer(event)[0]); // return date at mouse x position
                 var leftIndex = d3Array.bisectLeft(_this.data.dates, d3TimeFormat.isoFormat(mouseXDate)); // index of left closest date
                 // prevent error for 0 index
                 if (leftIndex === 0)
@@ -1456,7 +1414,7 @@
                 };
                 _this.tooltipHovered.emit({ event: event, data: _this.mousedata });
             };
-            this.mouserectMouseOut = function (event, index, nodes) {
+            this.mouserectMouseOut = function (event, data) {
                 _this.svg.selectAll('circle').classed('active', false);
                 _this.tooltipLine.classed('active', false);
                 _this.tooltipHide();
@@ -1594,23 +1552,17 @@
                 .attr('height', +this.height + this.margin.top + this.margin.bottom)
                 .attr('class', 'img-fluid')
                 .attr('preserveAspectRatio', 'xMinYMin meet')
-                .attr('viewBox', "-" + this.margin.left + " -" + this.margin.top + " " + (+this.width + this.margin.right) + " " + (+this.height +
-                this.margin.top +
-                this.margin.bottom));
+                .attr('viewBox', "-" + this.margin.left + " -" + this.margin.top + " " + (+this.width + this.margin.right) + " " + (+this.height + this.margin.top + this.margin.bottom));
             // add rectangle to capture mouse
             this.mouserect = this.svg
                 .append('rect')
                 .attr('width', this.width - this.margin.left - this.margin.right)
                 .attr('height', this.height)
                 .attr('class', 'mouserect')
-                .on('mousemove', function (data, index, nodes) { return _this.mouserectMouseMove(d3Selection.event, index, nodes); })
-                .on('mouseout', function (data, index, nodes) { return _this.mouserectMouseOut(d3Selection.event, index, nodes); })
-                .on('click', function (data, index, nodes) { return _this.mouserectMouseClick(); });
-            this.tooltipLine = this.svg
-                .append('line')
-                .attr('y1', 0)
-                .attr('y2', this.height)
-                .attr('class', 'tooltip-line');
+                .on('mousemove', function (event, data) { return _this.mouserectMouseMove(event, data); })
+                .on('mouseout', function (event, data) { return _this.mouserectMouseOut(event, data); })
+                .on('click', function (event, data) { return _this.mouserectMouseClick(); });
+            this.tooltipLine = this.svg.append('line').attr('y1', 0).attr('y2', this.height).attr('class', 'tooltip-line');
             // define color range
             this.colorRange = d3Scale.scaleOrdinal().range(this._dataviz.getColors(false, this.theme));
             // add glow def
@@ -1966,6 +1918,7 @@
             this._element = _element;
             this.chartClass = true;
             this.sparklineClass = true;
+            this.data = [];
             this.width = 160;
             this.height = 40;
             this.type = 'line';
@@ -2003,11 +1956,7 @@
                     .attr('stroke', this.color);
             }
             if (this.type === 'area' || this.type === 'area-high') {
-                this.svg
-                    .append('path')
-                    .attr('class', 'sparkarea')
-                    .attr('fill', this.color)
-                    .attr('fill-opacity', 0.3);
+                this.svg.append('path').attr('class', 'sparkarea').attr('fill', this.color).attr('fill-opacity', 0.3);
             }
             this.updateChart();
         };
@@ -2023,7 +1972,7 @@
                 .domain([0, this.data.length])
                 .range([0, this.width - this.margin.left - this.margin.right]);
             var y = d3Scale.scaleLinear()
-                .domain([+d3Array.min(this.data) - this.yAxisMinBuffer, +d3Array.max(this.data) + this.yAxisMaxBuffer])
+                .domain([+d3Array.min(data) - this.yAxisMinBuffer, +d3Array.max(data) + this.yAxisMaxBuffer])
                 .range([this.height - this.margin.top - this.margin.bottom, 0]);
             var line = d3Shape.line()
                 .x(function (d, i) { return x(i); })
@@ -2070,6 +2019,7 @@
                 }); }, function (update) { return update
                     .transition()
                     .duration(1000)
+                    .selection()
                     .attr('x', function (d, i) { return x(i); })
                     .attr('y', function (d) { return (d > 0 ? y(d) : y(0)); })
                     .attr('width', barWidth_1)
@@ -2144,9 +2094,7 @@
                 if (firstRun === void 0) { firstRun = true; }
                 _this.dataKeys = Object.keys(_this.data[0]).filter(function (item) { return item !== 'key'; });
                 // create the D3 stack data
-                _this.dataStack = d3Shape.stack()
-                    .keys(_this.dataKeys)
-                    .order(d3Shape.stackOrderNone)(_this.data);
+                _this.dataStack = d3Shape.stack().keys(_this.dataKeys).order(d3Shape.stackOrderNone)(_this.data);
                 // update the xScale
                 _this.xAxisScale.domain(_this.data.map(function (d) { return d.key; }));
                 // update the yScale
@@ -2156,10 +2104,7 @@
                     });
                 });
                 _this.yAxisMax = _this.yAxisMax + _this.yAxisMax * _this.yAxisMaxBuffer;
-                _this.yAxisScale
-                    .domain([0, _this.yAxisMax])
-                    .rangeRound([_this.height, 0])
-                    .nice();
+                _this.yAxisScale.domain([0, _this.yAxisMax]).rangeRound([_this.height, 0]).nice();
                 _this.xAxis
                     .transition()
                     .duration(0) // 1000
@@ -2196,7 +2141,8 @@
                         .duration(function (d, i, n) { return (firstRun ? 0 : 1000); })
                         .attr('x', function (d) { return _this.xAxisScale(d.key); })
                         .attr('width', _this.xAxisScale.bandwidth())
-                        .attr('height', _this.height); }, function (exit) { return exit.remove(); });
+                        .attr('height', _this.height)
+                        .selection(); }, function (exit) { return exit.remove(); });
                 }
                 // add colored bars
                 var barGroups = _this.bars
@@ -2259,7 +2205,8 @@
                         .attr('width', _this.xAxisScale.bandwidth() / 4)
                         .attr('x', function (d, i) { return _this.xAxisScale(d.data.key) + (_this.xAxisScale.bandwidth() / 8) * 3; })
                         .attr('y', function (d) { return _this.yAxisScale(d[1]); })
-                        .attr('height', function (d) { return _this.yAxisScale(d[0]) - _this.yAxisScale(d[1]); });
+                        .attr('height', function (d) { return _this.yAxisScale(d[0]) - _this.yAxisScale(d[1]); })
+                        .selection();
                     return update;
                 }); }, function (exit) { return exit.remove(); });
                 // mouseover bars
@@ -2278,13 +2225,14 @@
                     .attr('width', _this.xAxisScale.bandwidth())
                     .attr('height', _this.height)
                     .transition()
-                    .attr('pointer-events', 'auto'); }, function (exit) { return exit
-                    .transition()
-                    .attr('pointer-events', 'none')
-                    .remove(); })
-                    .on('mouseover', function (data, index, nodes) { return _this.barMouseOver(d3Selection.event, data, index, nodes); })
-                    .on('mouseout', function (data, index, nodes) { return _this.barMouseOut(); })
-                    .on('click', function (data, index, nodes) { return _this.barMouseClick(d3Selection.event, data, index, nodes); });
+                    .selection()
+                    .attr('pointer-events', 'auto'); }, function (exit) { return exit.transition().selection().attr('pointer-events', 'none').remove(); })
+                    .datum(function (d, i) {
+                    return { data: d, index: i };
+                })
+                    .on('mouseover', function (event, data) { return _this.barMouseOver(event, data); })
+                    .on('mouseout', function (event, data) { return _this.barMouseOut(); })
+                    .on('click', function (event, data) { return _this.barMouseClick(event, data); });
                 _this.bars.raise();
                 _this.xAxis.raise();
                 _this.mouseBars.raise();
@@ -2326,35 +2274,40 @@
                         });
                         return update;
                     }, function (exit) { return exit.remove(); })
-                        .on('mouseover', function (data, index, nodes) { return _this.legendMouseOver(d3Selection.event, data, index, nodes); })
+                        .datum(function (d, i) {
+                        return { data: _this.data, index: i };
+                    })
+                        .on('mouseover', function (event, data) { return _this.legendMouseOver(event, data); })
                         .on('mouseout', function () { return _this.legendMouseOut(); })
-                        .on('click', function (data, index, nodes) { return _this.legendMouseClick(d3Selection.event, data, index, nodes); });
+                        .on('click', function (event, data) { return _this.legendMouseClick(event, data); });
                 }
             };
-            this.barMouseOver = function (event, data, index, nodes) {
+            this.barMouseOver = function (event, data) {
                 _this.chart
                     .selectAll('.bar-group')
                     .selectAll('.bar')
-                    .filter(function (d, i) { return i !== index; })
+                    .filter(function (d, i) {
+                    return i !== data.index;
+                })
                     .classed('inactive', true);
-                _this.tooltipShow(data, index, nodes[index]);
+                _this.tooltipShow(event, data);
                 _this.hovered.emit({ event: event, data: data });
             };
             this.barMouseOut = function () {
                 _this.chart.selectAll('.bar').classed('inactive', false);
                 _this.tooltipHide();
             };
-            this.barMouseClick = function (event, data, index, nodes) {
+            this.barMouseClick = function (event, data) {
                 _this.clicked.emit({ event: event, data: data });
             };
-            this.legendMouseOver = function (event, data, index, nodes) {
+            this.legendMouseOver = function (event, data) {
                 _this.chart
                     .selectAll('.legend-item')
-                    .filter(function (d, i) { return i !== index; })
+                    .filter(function (d, i) { return i !== data.index; })
                     .classed('inactive', true);
                 _this.chart
                     .selectAll('.bar-group')
-                    .filter(function (d, i) { return i !== index; })
+                    .filter(function (d, i) { return i !== data.index; })
                     .classed('inactive', true);
                 _this.hovered.emit({ event: event, data: data });
             };
@@ -2363,7 +2316,7 @@
                 _this.chart.selectAll('.bar-group').classed('inactive', false);
                 _this.tooltipHide();
             };
-            this.legendMouseClick = function (event, data, index, nodes) {
+            this.legendMouseClick = function (event, data) {
                 _this.clicked.emit({ event: event, data: data });
             };
             this.xAxisFormatter = function (item) {
@@ -2377,31 +2330,31 @@
                         return item;
                 }
             };
-            this.tooltipShow = function (data, index, node) {
-                // console.log('TOOLTIP: ', data, index, node);
+            this.tooltipShow = function (event, data) {
                 var scroll = _this._scroll.getScrollPosition();
-                var mouserectDimensions = node.getBoundingClientRect();
+                var mouserectDimensions = event.currentTarget.getBoundingClientRect();
                 var clientWidth = document.body.clientWidth - 10;
                 var dimensionCalculated;
                 var tooltipDimensions;
                 var tooltipOffsetHeight;
+                // const yPosition = event.currentTarget.getBoundingClientRect();
                 var yPosition;
                 var xPosition;
                 // console.log(scroll, mouserectDimensions, tooltipOffsetHeight, tooltipDimensions, dimensionCalculated, clientWidth);
                 _this.tooltip.select('.tooltip-header').html(function (d) {
                     switch (_this.tooltipHeadingFormatType) {
                         case 'time':
-                            var parseDate = d3TimeFormat.isoParse(data.key);
+                            var parseDate = d3TimeFormat.isoParse(data.data.key);
                             return _this.tooltipHeadingFormat(parseDate);
                         default:
-                            return data.key;
+                            return data.data.key;
                     }
                 });
                 _this.tooltip.select('.tooltip-header-value').html(function (d) {
                     var total = 0;
-                    Object.keys(data).map(function (e) {
+                    Object.keys(data.data).map(function (e) {
                         if (e !== 'key') {
-                            total = total + data[e];
+                            total = total + data.data[e];
                         }
                     });
                     return _this.tooltipHeadingValueFormat(total);
@@ -2413,7 +2366,7 @@
                     var html = "";
                     var label;
                     var value;
-                    Object.keys(data).map(function (key, index) {
+                    Object.keys(data.data).map(function (key, index) {
                         switch (_this.tooltipLabelFormatType) {
                             case 'time':
                                 var parseDate = d3TimeFormat.isoParse(key);
@@ -2424,10 +2377,10 @@
                         }
                         switch (_this.tooltipValueFormatType) {
                             case 'number':
-                                value = _this.tooltipValueFormat(data[key]);
+                                value = _this.tooltipValueFormat(data.data[key]);
                                 break;
                             default:
-                                value = data[key];
+                                value = data.data[key];
                         }
                         if (key !== 'key') {
                             html += "\n              <tr class='tooltip-item'>\n                <td style=\"color: " + _this.colorRange(index - 1) + "\">\n                  <span class=\"pbds-tooltip-key\"></span>\n                </td>\n                <td class=\"tooltip-label pr-2 text-nowrap\">" + label + "</td>\n                <td class=\"tooltip-value text-right text-nowrap\">" + value + "</td>\n              </tr>\n            ";
@@ -2463,7 +2416,9 @@
                     .selectAll('.bar-group')
                     .filter(':last-child')
                     .selectAll('.bar')
-                    .filter(function (d, i) { return i === index; })
+                    .filter(function (d, i) {
+                    return i === data.index;
+                })
                     .node()
                     .getBoundingClientRect();
                 // set the tooltip styles
@@ -2490,9 +2445,7 @@
             // extract keys for stack data
             this.dataKeys = Object.keys(this.data[0]).filter(function (item) { return item !== 'key'; });
             // create the D3 stack data
-            this.dataStack = d3Shape.stack()
-                .keys(this.dataKeys)
-                .order(d3Shape.stackOrderNone)(this.data);
+            this.dataStack = d3Shape.stack().keys(this.dataKeys).order(d3Shape.stackOrderNone)(this.data);
             //////////////////////////////////////////
             this.margin = {
                 top: +this.marginTop,
@@ -2627,10 +2580,7 @@
                 });
             });
             this.yAxisMax = this.yAxisMax + this.yAxisMax * this.yAxisMaxBuffer;
-            this.yAxisScale = d3Scale.scaleLinear()
-                .domain([0, this.yAxisMax])
-                .nice()
-                .rangeRound([this.height, 0]);
+            this.yAxisScale = d3Scale.scaleLinear().domain([0, this.yAxisMax]).nice().rangeRound([this.height, 0]);
             this.yAxisCall = d3Axis.axisLeft(this.yAxisScale)
                 .ticks(this.yAxisTicks)
                 .tickSize(this.yAxisTickSize)
@@ -2667,10 +2617,7 @@
                 this.tooltip.append('div').attr('class', 'tooltip-header');
                 this.tooltip.append('div').attr('class', 'tooltip-header-value');
                 // tooltip table
-                this.tooltip
-                    .append('table')
-                    .attr('class', 'tooltip-table text-left w-100')
-                    .append('tbody');
+                this.tooltip.append('table').attr('class', 'tooltip-table text-left w-100').append('tbody');
             }
             // add legend classes
             if (!this.hideLegend) {
@@ -2879,13 +2826,14 @@
                     .attr('cy', function (d) { return _this.projection([d.longitude, d.latitude])[1]; })
                     .attr('r', function (d) { return (!_this.dot ? Math.sqrt(_this.bubbleRadius(d.value)) : _this.dotSize + "px"); })
                     .transition()
-                    .attr('pointer-events', 'auto'); }, function (exit) { return exit.transition().attr('pointer-events', 'none').remove(); });
+                    .selection()
+                    .attr('pointer-events', 'auto'); }, function (exit) { return exit.transition().selection().attr('pointer-events', 'none').remove(); });
                 if (!_this.hideTooltip) {
                     _this.bubbleContainer
                         .selectAll('circle')
-                        .on('mouseover', function (data, index, nodes) { return _this.bubbleMouseOver(d3Selection.event, data, index, nodes); })
-                        .on('mouseout', function (data, index, nodes) { return _this.bubbleMouseOut(d3Selection.event, data, index, nodes); })
-                        .on('click', function (data, index, nodes) { return _this.bubbleMouseClick(d3Selection.event, data, index, nodes); });
+                        .on('mouseover', function (event, data) { return _this.bubbleMouseOver(event, data); })
+                        .on('mouseout', function (event, data) { return _this.bubbleMouseOut(event, data); })
+                        .on('click', function (event, data) { return _this.bubbleMouseClick(event, data); });
                     // bubble text
                     if (_this.type !== 'high' && !_this.dot) {
                         _this.bubbleContainer
@@ -2909,31 +2857,26 @@
                             .attr('y', function (d) { return _this.projection([d.longitude, d.latitude])[1]; })
                             .attr('dy', '.4em')
                             .transition()
-                            .attr('pointer-events', 'auto'); }, function (exit) { return exit.transition().attr('pointer-events', 'none').remove(); });
+                            .selection()
+                            .attr('pointer-events', 'auto'); }, function (exit) { return exit.transition().selection().attr('pointer-events', 'none').remove(); });
                     }
                 }
             };
-            this.bubbleMouseOver = function (event, data, index, nodes) {
-                _this.chart
-                    .selectAll('.dot-circle')
-                    .filter(function (d, i) { return i !== index; })
-                    .classed('inactive', true);
-                _this.chart
-                    .selectAll('.dot-circle')
-                    .filter(function (d, i) { return i === index; })
-                    .classed('active', true);
-                _this.tooltipShow(data, nodes[index]);
+            this.bubbleMouseOver = function (event, data) {
+                _this.chart.selectAll('.dot-circle').classed('inactive', true);
+                d3Selection.select(event.currentTarget).classed('active', true).classed('inactive', false);
+                _this.tooltipShow(event, data);
                 _this.hovered.emit({ event: event, data: data });
             };
-            this.bubbleMouseOut = function (event, data, index, nodes) {
+            this.bubbleMouseOut = function (event, data) {
                 _this.chart.selectAll('.dot-circle').classed('active', false).classed('inactive', false);
                 _this.tooltipHide();
             };
-            this.bubbleMouseClick = function (event, data, index, nodes) {
+            this.bubbleMouseClick = function (event, data) {
                 _this.clicked.emit({ event: event, data: data });
             };
-            this.tooltipShow = function (data, node) {
-                var dimensions = node.getBoundingClientRect();
+            this.tooltipShow = function (event, data) {
+                var dimensions = event.currentTarget.getBoundingClientRect();
                 var scroll = _this._scroll.getScrollPosition();
                 _this.tooltip.select('.tooltip-header').html(function (d) { return "" + data.label; });
                 if (!_this.hideTooltipValue) {
@@ -3126,6 +3069,8 @@
         return extendStatics(d, b);
     };
     function __extends(d, b) {
+        if (typeof b !== "function" && b !== null)
+            throw new TypeError("Class extends value " + String(b) + " is not a constructor or null");
         extendStatics(d, b);
         function __() { this.constructor = d; }
         d.prototype = b === null ? Object.create(b) : (__.prototype = b.prototype, new __());
@@ -3311,11 +3256,13 @@
         }
         return ar;
     }
+    /** @deprecated */
     function __spread() {
         for (var ar = [], i = 0; i < arguments.length; i++)
             ar = ar.concat(__read(arguments[i]));
         return ar;
     }
+    /** @deprecated */
     function __spreadArrays() {
         for (var s = 0, i = 0, il = arguments.length; i < il; i++)
             s += arguments[i].length;
@@ -3324,7 +3271,11 @@
                 r[k] = a[j];
         return r;
     }
-    ;
+    function __spreadArray(to, from) {
+        for (var i = 0, il = from.length, j = to.length; i < il; i++, j++)
+            to[j] = from[i];
+        return to;
+    }
     function __await(v) {
         return this instanceof __await ? (this.v = v, this) : new __await(v);
     }
@@ -3460,22 +3411,25 @@
                         .attr('height', _this.yAxisScale.bandwidth())
                         .style('fill', function (d) { return _this.colorRange(d.value); })
                         .transition()
+                        .selection()
                         .attr('pointer-events', 'auto');
                     return update;
-                }); }, function (exit) { return exit
-                    .transition()
-                    .attr('pointer-events', 'none')
-                    .remove(); })
-                    .on('mouseover', function (data, index, nodes) { return _this.blockMouseOver(d3Selection.event, data, index, nodes); })
-                    .on('mouseout', function (data, index, nodes) { return _this.blockMouseOut(); })
-                    .on('click', function (data, index, nodes) { return _this.blockMouseClick(d3Selection.event, data, index, nodes); });
+                }); }, function (exit) { return exit.transition().selection().attr('pointer-events', 'none').remove(); })
+                    .on('mouseover', function (event, data) { return _this.blockMouseOver(event, data); })
+                    .on('mouseout', function (event, data) { return _this.blockMouseOut(); })
+                    .on('click', function (event, data) { return _this.blockMouseClick(event, data); });
                 if (!_this.hideLegend) {
                     _this.chart
                         .select('.legend')
                         .selectAll('.legend-item')
                         .data(_this.colorDomain)
                         .join(function (enter) {
-                        var li = enter.append('li').attr('class', 'legend-item');
+                        var li = enter
+                            .append('li')
+                            .attr('class', 'legend-item')
+                            .attr('data-index', function (d, i) {
+                            return i;
+                        });
                         li.append('span')
                             .attr('class', 'legend-key')
                             .style('background-color', function (d) { return _this.colorRange(d); });
@@ -3491,7 +3445,13 @@
                             return "&ge; " + label;
                         });
                         return li;
-                    }, function (update) { return update.select('.legend-label').html(function (d) {
+                    }, function (update) { return update
+                        .select('.legend-label')
+                        .attr('data-index', function (d, i) {
+                        return i;
+                    })
+                        .html(function (d) {
+                        // console.log('HTML D: ', d);
                         var label = d;
                         switch (_this.legendLabelFormatType) {
                             case 'number':
@@ -3500,37 +3460,40 @@
                         }
                         return "&ge; " + label;
                     }); }, function (exit) { return exit.remove(); })
-                        .on('mouseover', function (data, index, nodes) { return _this.legendMouseOver(d3Selection.event, data, index, nodes); })
+                        .on('mouseover', function (event, data) { return _this.legendMouseOver(event, data); })
                         .on('mouseout', function () { return _this.legendMouseOut(); })
-                        .on('click', function (data, index, nodes) { return _this.legendMouseClick(d3Selection.event, data, index, nodes); });
+                        .on('click', function (event, data) { return _this.legendMouseClick(event, data); });
                 }
             };
-            this.blockMouseOver = function (event, data, index, nodes) {
+            this.blockMouseOver = function (event, data) {
                 // console.log(data.value, event, data, index, nodes);
                 if (data.value !== null) {
-                    _this.tooltipShow(data, index, nodes[index]);
+                    _this.tooltipShow(event, data);
                 }
                 _this.hovered.emit({ event: event, data: data });
             };
             this.blockMouseOut = function () {
                 _this.tooltipHide();
             };
-            this.blockMouseClick = function (event, data, index, nodes) {
+            this.blockMouseClick = function (event, data) {
                 _this.clicked.emit({ event: event, data: data });
             };
-            this.legendMouseOver = function (event, data, index, nodes) {
-                _this.chart
-                    .selectAll('.legend-item')
-                    .filter(function (d, i) { return i !== index; })
-                    .classed('inactive', true);
+            this.legendMouseOver = function (event, data) {
+                var legendItems = _this.chart.selectAll('.legend-item');
+                var hovered = d3Selection.select(event.currentTarget);
+                var hoveredIndex = +hovered.attr('data-index');
+                legendItems.classed('inactive', true);
+                hovered.classed('inactive', false);
+                var nodes = legendItems.nodes();
                 _this.chart
                     .selectAll('.block')
                     .filter(function (d, i) {
-                    if (index + 1 === nodes.length) {
+                    if (hoveredIndex + 1 === nodes.length) {
                         return d.value < data;
                     }
                     else {
-                        return d.value < data || d.value >= +d3Selection.select(nodes[index + 1]).data()[0];
+                        var nextNodeData = +d3Selection.select(nodes[+hoveredIndex + 1]).data();
+                        return d.value < data || d.value >= nextNodeData;
                     }
                 })
                     .classed('inactive', true);
@@ -3540,12 +3503,12 @@
                 _this.chart.selectAll('.legend-item').classed('inactive', false);
                 _this.chart.selectAll('.block').classed('inactive', false);
             };
-            this.legendMouseClick = function (event, data, index, nodes) {
+            this.legendMouseClick = function (event, data) {
                 _this.clicked.emit({ event: event, data: data });
             };
-            this.tooltipShow = function (data, index, node) {
+            this.tooltipShow = function (event, data) {
                 // console.log('TOOLTIP: ', data, index, node);
-                var dimensions = node.getBoundingClientRect();
+                var dimensions = event.currentTarget.getBoundingClientRect();
                 var scroll = _this._scroll.getScrollPosition();
                 var yLabel;
                 var xLabel;
@@ -3645,10 +3608,7 @@
                 .attr('preserveAspectRatio', 'xMinYMin meet')
                 .attr('viewBox', "-" + this.margin.left + " -" + this.margin.top + " " + +this.width + " " + (+this.height + this.margin.top + this.margin.bottom));
             // color range
-            var colors = this._dataviz
-                .getColors(true, this.theme)
-                .slice()
-                .reverse();
+            var colors = this._dataviz.getColors(true, this.theme).slice().reverse();
             var colorDomain = [
                 +d3Array.min(this.data, function (d) { return d.value; }),
                 +d3Array.max(this.data, function (d) { return d.value; })
@@ -3656,21 +3616,15 @@
             var colorValues = this.data.map(function (d) { return d.value; });
             switch (this.scale) {
                 case 'threshold':
-                    this.colorRange = d3Scale.scaleThreshold()
-                        .domain(this.domain)
-                        .range(colors);
+                    this.colorRange = d3Scale.scaleThreshold().domain(this.domain).range(colors);
                     this.colorDomain = this.colorRange.domain();
                     break;
                 case 'quantile':
-                    this.colorRange = d3Scale.scaleQuantile()
-                        .domain(colorValues)
-                        .range(colors);
+                    this.colorRange = d3Scale.scaleQuantile().domain(colorValues).range(colors);
                     this.colorDomain = this.colorRange.quantiles();
                     break;
                 case 'quantize':
-                    this.colorRange = d3Scale.scaleQuantize()
-                        .domain(colorDomain)
-                        .range(colors);
+                    this.colorRange = d3Scale.scaleQuantize().domain(colorDomain).range(colors);
                     this.colorDomain = this.colorRange.thresholds();
                     break;
             }
@@ -3697,10 +3651,7 @@
                 .classed('axis-ticks-hidden', this.hideXAxisTicks)
                 .call(this.xAxisCall);
             // Y axis
-            this.yAxisScale = d3Scale.scaleBand()
-                .domain(yAxisLabels)
-                .rangeRound([this.height, 0])
-                .paddingInner(0.1);
+            this.yAxisScale = d3Scale.scaleBand().domain(yAxisLabels).rangeRound([this.height, 0]).paddingInner(0.1);
             this.yAxisCall = d3Axis.axisLeft(this.yAxisScale)
                 .tickSize(this.yAxisTickSize)
                 .tickSizeOuter(this.yAxisTickSizeOuter)
@@ -3833,29 +3784,29 @@
                     _this.svg
                         .select('.map')
                         .selectAll('path')
-                        .on('mouseover', function (data, index, nodes) { return _this.featureMouseOver(d3Selection.event, _this.data.find(function (obj) { return obj[_this.dataField] === data[_this.dataField]; }), index, nodes); })
-                        .on('mouseout', function (data, index, nodes) { return _this.featureMouseOut(d3Selection.event, _this.data, index, nodes); })
-                        .on('mousemove', function (data, index, nodes) { return _this.tooltipMove(_this.chart.node()); })
-                        .on('click', function (data, index, nodes) { return _this.featureMouseClick(d3Selection.event, _this.data.find(function (obj) { return obj[_this.dataField] === data[_this.dataField]; }), index, nodes); });
+                        .on('mouseover', function (event, data) { return _this.featureMouseOver(event, _this.data.find(function (obj) { return obj[_this.dataField] === data[_this.dataField]; })); })
+                        .on('mouseout', function (event, data) { return _this.featureMouseOut(event, _this.data); })
+                        .on('mousemove', function (event, data) { return _this.tooltipMove(event); })
+                        .on('click', function (event, data) { return _this.featureMouseClick(event, _this.data.find(function (obj) { return obj[_this.dataField] === data[_this.dataField]; })); });
                 }
             };
-            this.featureMouseOver = function (event, data, index, nodes) {
+            this.featureMouseOver = function (event, data) {
                 if (data) {
-                    _this.tooltipShow(data, nodes[index]);
+                    _this.tooltipShow(event, data);
                     _this.hovered.emit({ event: event, data: data });
                 }
             };
-            this.featureMouseOut = function (event, data, index, nodes) {
+            this.featureMouseOut = function (event, data) {
                 _this.tooltipHide();
             };
-            this.featureMouseClick = function (event, data, index, nodes) {
+            this.featureMouseClick = function (event, data) {
                 if (data) {
                     _this.clicked.emit({ event: event, data: data });
                 }
             };
-            this.tooltipShow = function (data, node) {
+            this.tooltipShow = function (event, data) {
                 // console.log('TOOLTIP: ', data, node);
-                _this.tooltipSetPosition(node);
+                _this.tooltipSetPosition(event);
                 if (data.label) {
                     _this.tooltip.select('.tooltip-header').html(function (d) { return "" + data.label; });
                 }
@@ -3867,14 +3818,14 @@
             this.tooltipHide = function () {
                 _this.tooltip.style('opacity', 0);
             };
-            this.tooltipMove = function (node) {
-                _this.tooltipSetPosition(node);
+            this.tooltipMove = function (event) {
+                _this.tooltipSetPosition(event);
             };
-            this.tooltipSetPosition = function (node) {
-                var mouse = d3Selection.mouse(node);
+            this.tooltipSetPosition = function (event) {
+                var mouse = d3Selection.pointer(event, _this.chart.node());
                 var mouseLeft = +mouse[0];
                 var mouseTop = +mouse[1];
-                var geometry = node.getBoundingClientRect();
+                var geometry = _this.chart.node().getBoundingClientRect();
                 var geometryLeft = +geometry.left;
                 var geometryTop = +geometry.top;
                 var scroll = _this._scroll.getScrollPosition();
@@ -3883,7 +3834,7 @@
                 var tooltipOffsetWidth = +_this.tooltip.node().offsetWidth / 2;
                 var tooltipOffsetHeight = +_this.tooltip.node().offsetHeight;
                 _this.tooltip.style('top', scrollTop + mouseTop + geometryTop - tooltipOffsetHeight - 14 + "px");
-                _this.tooltip.style('left', mouseLeft + geometryLeft - tooltipOffsetWidth + "px");
+                _this.tooltip.style('left', mouseLeft + geometryLeft - tooltipOffsetWidth + "px"); //
             };
             this.legend = function (g) {
                 var length = _this.colorRange.range().length;
@@ -4103,40 +4054,34 @@
             this.theme = 'classic';
             this.hovered = new i0.EventEmitter();
             this.clicked = new i0.EventEmitter();
-            this.barMouseOver = function (event, data, index, nodes) {
-                var node = d3Selection.select(nodes[index]);
-                _this.chart
-                    .selectAll('.bar-group')
-                    .selectAll('.bar')
-                    .classed('inactive', true);
+            this.barMouseOver = function (event, data) {
+                var node = d3Selection.select(event.currentTarget);
+                _this.chart.selectAll('.bar-group').selectAll('.bar').classed('inactive', true);
                 node.classed('inactive', false).style('fill', node.attr('data-color'));
-                _this.tooltipShow(data, nodes[index]);
+                _this.tooltipShow(event, data);
                 _this.hovered.emit({ event: event, data: data });
             };
             this.barMouseOut = function () {
-                _this.chart
-                    .selectAll('.bar')
-                    .classed('inactive', false)
-                    .style('fill', null);
+                _this.chart.selectAll('.bar').classed('inactive', false).style('fill', null);
                 _this.tooltipHide();
             };
-            this.barMouseClick = function (event, data, index, nodes) {
+            this.barMouseClick = function (event, data) {
                 _this.clicked.emit({ event: event, data: data });
             };
-            this.legendMouseOver = function (event, data, index, nodes) {
+            this.legendMouseOver = function (event, data) {
                 _this.chart
                     .selectAll('.legend-item')
-                    .filter(function (d, i) { return i !== index; })
+                    .filter(function (d, i) { return d.label !== data.label; })
                     .classed('inactive', true);
                 _this.chart
                     .selectAll('.bar-group')
                     .selectAll('.bar')
-                    .filter(function (d, i) { return i !== index; })
+                    .filter(function (d, i) { return d.label !== data.label; })
                     .classed('inactive', true);
                 var bar = _this.chart
                     .selectAll('.bar-group')
                     .selectAll('.bar')
-                    .filter(function (d, i) { return i === index; })
+                    .filter(function (d, i) { return d.label === data.label; })
                     .classed('inactive', null);
                 var barColor = bar.attr('data-color');
                 bar.style('fill', function () { return barColor; });
@@ -4144,17 +4089,13 @@
             };
             this.legendMouseOut = function () {
                 _this.chart.selectAll('.legend-item').classed('inactive', false);
-                _this.chart
-                    .selectAll('.bar-group')
-                    .selectAll('.bar')
-                    .classed('inactive', false)
-                    .style('fill', null);
+                _this.chart.selectAll('.bar-group').selectAll('.bar').classed('inactive', false).style('fill', null);
             };
-            this.legendMouseClick = function (event, data, index, nodes) {
+            this.legendMouseClick = function (event, data) {
                 _this.clicked.emit({ event: event, data: data });
             };
-            this.tooltipShow = function (data, node) {
-                var dimensions = node.getBoundingClientRect();
+            this.tooltipShow = function (event, data) {
+                var dimensions = event.currentTarget.getBoundingClientRect();
                 var scroll = _this._scroll.getScrollPosition();
                 var label;
                 switch (_this.tooltipLabelFormatType) {
@@ -4258,15 +4199,10 @@
                 .attr('preserveAspectRatio', 'xMinYMin meet')
                 .attr('viewBox', function () {
                 if (_this.vertical) {
-                    return "-" + _this.margin.left + " -" + _this.margin.top + " " + +_this.width + " " + (+_this.height +
-                        _this.margin.top +
-                        _this.margin.bottom);
+                    return "-" + _this.margin.left + " -" + _this.margin.top + " " + +_this.width + " " + (+_this.height + _this.margin.top + _this.margin.bottom);
                 }
                 else {
-                    return "-" + _this.margin.left + " -" + _this.margin.top + " " + (+_this.width + _this.margin.left + _this.margin.right) + " " + (+_this
-                        .height +
-                        _this.margin.top +
-                        _this.margin.bottom);
+                    return "-" + _this.margin.left + " -" + _this.margin.top + " " + (+_this.width + _this.margin.left + _this.margin.right) + " " + (+_this.height + _this.margin.top + _this.margin.bottom);
                 }
             });
             // TOOLTIP
@@ -4323,13 +4259,10 @@
                 this.yAxisMax = d3Array.max(this.data, function (data) {
                     var clone = Object.assign({}, data);
                     delete clone.key;
-                    return d3Array.max(d3Collection.values(clone));
+                    return d3Array.max(Object.values(clone));
                 });
                 this.yAxisMax = this.yAxisMax + this.yAxisMax * this.yAxisMaxBuffer;
-                this.yAxisScale = d3Scale.scaleLinear()
-                    .domain([0, this.yAxisMax])
-                    .nice()
-                    .rangeRound([this.height, 0]);
+                this.yAxisScale = d3Scale.scaleLinear().domain([0, this.yAxisMax]).nice().rangeRound([this.height, 0]);
                 this.yAxisCall = d3Axis.axisLeft(this.yAxisScale)
                     .ticks(this.yAxisTicks)
                     .tickSize(this.yAxisTickSize)
@@ -4368,13 +4301,10 @@
                 this.xAxisMax = d3Array.max(this.data, function (data) {
                     var clone = Object.assign({}, data);
                     delete clone.key;
-                    return d3Array.max(d3Collection.values(clone));
+                    return d3Array.max(Object.values(clone));
                 });
                 this.xAxisMax = this.xAxisMax + this.xAxisMax * this.xAxisMaxBuffer;
-                this.xAxisScale = d3Scale.scaleLinear()
-                    .domain([0, this.xAxisMax])
-                    .rangeRound([0, this.width])
-                    .nice();
+                this.xAxisScale = d3Scale.scaleLinear().domain([0, this.xAxisMax]).rangeRound([0, this.width]).nice();
                 this.xAxisCall = d3Axis.axisBottom(this.xAxisScale)
                     .ticks(this.xAxisTicks)
                     .tickSize(this.xAxisTickSize)
@@ -4463,21 +4393,12 @@
             this.yAxisMax = d3Array.max(this.data, function (data) {
                 var clone = Object.assign({}, data);
                 delete clone.key;
-                return d3Array.max(d3Collection.values(clone));
+                return d3Array.max(Object.values(clone));
             });
             this.yAxisMax = this.yAxisMax + this.yAxisMax * this.yAxisMaxBuffer;
-            this.yAxisScale
-                .domain([0, this.yAxisMax])
-                .rangeRound([this.height, 0])
-                .nice();
-            this.xAxis
-                .transition()
-                .duration(1000)
-                .call(this.xAxisCall);
-            this.yAxis
-                .transition()
-                .duration(1000)
-                .call(this.yAxisCall);
+            this.yAxisScale.domain([0, this.yAxisMax]).rangeRound([this.height, 0]).nice();
+            this.xAxis.transition().duration(1000).call(this.xAxisCall);
+            this.yAxis.transition().duration(1000).call(this.yAxisCall);
             // update the grids
             // if (!this.hideXGrid) {
             //   this.xGrid
@@ -4486,10 +4407,7 @@
             //     .call(this.xGridCall);
             // }
             if (this.showGrid) {
-                this.yGrid
-                    .transition()
-                    .duration(1000)
-                    .call(this.yGridCall);
+                this.yGrid.transition().duration(1000).call(this.yGridCall);
             }
             // update the color bar scale
             this.barScale.domain(Object.keys(this.data[0]).slice(1)).rangeRound([0, this.xAxisScale.bandwidth()]);
@@ -4508,7 +4426,8 @@
                 .attr('x', function (d) { return _this.xAxisScale(d.key); })
                 .attr('y', function (d) { return _this.yAxisScale(d.value); })
                 .attr('width', _this.xAxisScale.bandwidth())
-                .attr('height', _this.height); });
+                .attr('height', _this.height)
+                .selection(); });
             this.svg
                 .selectAll('.bar-group')
                 .data(this.data)
@@ -4522,10 +4441,12 @@
                 .duration(1000)
                 .attr('transform', function (d, i) {
                 return "translate(" + _this.xAxisScale(d.key) + ", 0)";
-            }); });
+            })
+                .selection(); });
             this.svg
                 .selectAll('.bar-group')
-                .selectAll('.bar')
+                // .selectAll('.bar')
+                .selectChildren()
                 .data(function (d, i) {
                 var clone = Object.assign({}, d);
                 delete clone.key;
@@ -4563,15 +4484,17 @@
                 .attr('height', function (d) { return _this.height - _this.yAxisScale(d.value); })
                 .attr('y', function (d) { return _this.yAxisScale(d.value); })
                 .transition()
+                .selection()
                 .attr('pointer-events', 'auto'); }, function (exit) { return exit
                 .transition()
                 .duration(0) // 100
+                .selection()
                 .attr('pointer-events', 'none')
                 .attr('height', 0)
                 .attr('y', _this.height); })
-                .on('mouseover', function (data, index, nodes) { return _this.barMouseOver(d3Selection.event, data, index, nodes); })
-                .on('mouseout', function (data, index, nodes) { return _this.barMouseOut(); })
-                .on('click', function (data, index, nodes) { return _this.barMouseClick(d3Selection.event, data, index, nodes); });
+                .on('mouseover', function (event, data) { return _this.barMouseOver(event, data); })
+                .on('mouseout', function (event, data) { return _this.barMouseOut(); })
+                .on('click', function (event, data) { return _this.barMouseClick(event, data); });
             this.updateLegend();
             this.svg.selectAll('.axis').raise();
         };
@@ -4581,29 +4504,17 @@
             this.xAxisMax = d3Array.max(this.data, function (data) {
                 var clone = Object.assign({}, data);
                 delete clone.key;
-                return d3Array.max(d3Collection.values(clone));
+                return d3Array.max(Object.values(clone));
             });
             this.xAxisMax = this.xAxisMax + this.xAxisMax * this.xAxisMaxBuffer;
-            this.xAxisScale
-                .domain([0, this.xAxisMax])
-                .rangeRound([0, this.width])
-                .nice();
+            this.xAxisScale.domain([0, this.xAxisMax]).rangeRound([0, this.width]).nice();
             // update the yScale
             this.yAxisScale.domain(this.data.map(function (d) { return d.key; }));
-            this.xAxis
-                .transition()
-                .duration(1000)
-                .call(this.xAxisCall);
-            this.yAxis
-                .transition()
-                .duration(1000)
-                .call(this.yAxisCall);
+            this.xAxis.transition().duration(1000).call(this.xAxisCall);
+            this.yAxis.transition().duration(1000).call(this.yAxisCall);
             // update the grids
             if (this.showGrid) {
-                this.xGrid
-                    .transition()
-                    .duration(1000)
-                    .call(this.xGridCall);
+                this.xGrid.transition().duration(1000).call(this.xGridCall);
             }
             // if (!this.hideYGrid) {
             //   this.yGrid
@@ -4626,7 +4537,8 @@
                 .duration(1000)
                 .attr('y', function (d) { return _this.yAxisScale(d.key); })
                 .attr('width', _this.width)
-                .attr('height', _this.yAxisScale.bandwidth()); });
+                .attr('height', _this.yAxisScale.bandwidth())
+                .selection(); });
             this.svg
                 .selectAll('.bar-group')
                 .data(this.data)
@@ -4640,7 +4552,8 @@
                 .duration(1000)
                 .attr('transform', function (d, i) {
                 return "translate(0, " + _this.yAxisScale(d.key) + ")";
-            }); });
+            })
+                .selection(); });
             this.svg
                 .selectAll('.bar-group')
                 .selectAll('.bar')
@@ -4679,14 +4592,16 @@
                 .attr('height', _this.barScale.bandwidth())
                 .attr('y', function (d) { return _this.barScale(d.label); })
                 .transition()
+                .selection()
                 .attr('pointer-events', 'auto'); }, function (exit) { return exit
                 .transition()
                 .duration(0) // 100
+                .selection()
                 .attr('pointer-events', 'none')
                 .attr('width', 0); })
-                .on('mouseover', function (data, index, nodes) { return _this.barMouseOver(d3Selection.event, data, index, nodes); })
-                .on('mouseout', function (data, index, nodes) { return _this.barMouseOut(); })
-                .on('click', function (data, index, nodes) { return _this.barMouseClick(d3Selection.event, data, index, nodes); });
+                .on('mouseover', function (event, data) { return _this.barMouseOver(event, data); })
+                .on('mouseout', function (event, data) { return _this.barMouseOut(); })
+                .on('click', function (event, data) { return _this.barMouseClick(event, data); });
             this.updateLegend();
             this.svg.selectAll('.axis').raise();
         };
@@ -4736,9 +4651,9 @@
                     });
                     return update;
                 }, function (exit) { return exit.remove(); })
-                    .on('mouseover', function (data, index, nodes) { return _this.legendMouseOver(d3Selection.event, data, index, nodes); })
+                    .on('mouseover', function (event, data) { return _this.legendMouseOver(event, data); })
                     .on('mouseout', function () { return _this.legendMouseOut(); })
-                    .on('click', function (data, index, nodes) { return _this.legendMouseClick(d3Selection.event, data, index, nodes); });
+                    .on('click', function (event, data) { return _this.legendMouseClick(event, data); });
             }
         };
         return PbdsDatavizBarGroupedComponent;
@@ -4839,33 +4754,30 @@
             this.isSingleData = false;
             this.isCompare = false;
             this.barPadding = 40;
-            this.barMouseOver = function (event, data, index, nodes) {
-                var node = d3Selection.select(nodes[index]);
+            this.barMouseOver = function (event, data) {
+                var node = d3Selection.select(event.currentTarget);
                 _this.chart.selectAll('.bar').classed('inactive', true);
                 node.classed('inactive', false);
                 _this.chart
                     .selectAll('.legend-item')
                     .filter(function (d, i) {
                     // debugger;
-                    return i !== index;
+                    return i !== data.index;
                 })
                     .classed('inactive', true);
-                _this.tooltipShow(data, nodes[index]);
+                _this.tooltipShow(event, data.data[data.index]);
                 _this.hovered.emit({ event: event, data: data });
             };
             this.barMouseOut = function () {
-                _this.chart
-                    .selectAll('.bar')
-                    .classed('inactive', false)
-                    .style('fill', null);
+                _this.chart.selectAll('.bar').classed('inactive', false).style('fill', null);
                 _this.chart.selectAll('.legend-item').classed('inactive', false);
                 _this.tooltipHide();
             };
-            this.barMouseClick = function (event, data, index, nodes) {
+            this.barMouseClick = function (event, data) {
                 _this.clicked.emit({ event: event, data: data });
             };
-            this.tooltipShow = function (data, node) {
-                var dimensions = node.getBoundingClientRect();
+            this.tooltipShow = function (event, data, node) {
+                var dimensions = node ? node.getBoundingClientRect() : event.currentTarget.getBoundingClientRect();
                 var scroll = _this._scroll.getScrollPosition();
                 var percentage = data.value / d3Array.sum(_this.data, function (d) { return d.value; });
                 var comparePercentage = data.compareValue / d3Array.sum(_this.data, function (d) { return d.compareValue; });
@@ -4966,38 +4878,35 @@
             this.tooltipHide = function () {
                 _this.tooltip.style('opacity', 0);
             };
-            this.legendMouseOver = function (event, data, index, nodes) {
+            this.legendMouseOver = function (event, data) {
                 if (!_this.hideLegendTooltip) {
                     var barHover = _this.svg
                         .selectAll('.bar')
-                        .filter(function (d, i) { return i === index; })
+                        .filter(function (d, i) { return i === data.index; })
                         .node();
-                    _this.tooltipShow(data, barHover);
+                    _this.tooltipShow(event, data.data[data.index], barHover);
                 }
                 _this.chart
                     .selectAll('.legend-item')
-                    .filter(function (d, i) { return i !== index; })
+                    .filter(function (d, i) { return i !== data.index; })
                     .classed('inactive', true);
                 _this.chart
                     .selectAll('.bar')
-                    .filter(function (d, i) { return i !== index; })
+                    .filter(function (d, i) { return i !== data.index; })
                     .classed('inactive', true);
-                _this.chart
-                    .selectAll('.bar')
-                    .filter(function (d, i) { return i === index; })
-                    .classed('inactive', null);
+                // this.chart
+                //   .selectAll('.bar')
+                //   .filter((d, i) => i === data.index)
+                //   .classed('inactive', null);
                 _this.hovered.emit({ event: event, data: data });
             };
             this.legendMouseOut = function () {
                 _this.chart.selectAll('.legend-item').classed('inactive', false);
-                _this.chart
-                    .selectAll('.bar')
-                    .classed('inactive', false)
-                    .style('fill', null);
+                _this.chart.selectAll('.bar').classed('inactive', false).style('fill', null);
                 // hide tooltip for zero/null values
                 _this.tooltipHide();
             };
-            this.legendMouseClick = function (event, data, index, nodes) {
+            this.legendMouseClick = function (event, data) {
                 _this.clicked.emit({ event: event, data: data });
             };
             this.xAxisFormatter = function (item) {
@@ -5049,11 +4958,7 @@
                 .attr('class', 'img-fluid')
                 .attr('preserveAspectRatio', 'xMinYMin meet')
                 .attr('viewBox', function () {
-                return "-" + _this.margin.left + " -" + _this.margin.top + " " + (+_this.width + _this.margin.left + _this.margin.right) + " " + (+_this
-                    .height +
-                    _this.margin.top +
-                    _this.margin.bottom +
-                    _this.xAxisTitleMargin);
+                return "-" + _this.margin.left + " -" + _this.margin.top + " " + (+_this.width + _this.margin.left + _this.margin.right) + " " + (+_this.height + _this.margin.top + _this.margin.bottom + _this.xAxisTitleMargin);
             });
             // TOOLTIP
             if (!this.hideTooltip) {
@@ -5178,16 +5083,10 @@
             else {
                 this.xAxisScale.domain([0, Math.ceil(sumValues)]).range([0, +this.width]);
                 this.xGridCall.tickValues(this.xAxisScale.ticks().filter(function (n) { return Number.isInteger(n); })); // remove decimal grid values
-                this.xAxis
-                    .transition()
-                    .duration(1000)
-                    .call(this.xAxisCall);
+                this.xAxis.transition().duration(1000).call(this.xAxisCall);
                 // update the grids
                 if (!this.hideXGrid) {
-                    this.xGrid
-                        .transition()
-                        .duration(1000)
-                        .call(this.xGridCall);
+                    this.xGrid.transition().duration(1000).call(this.xGridCall);
                 }
             }
             this.svg
@@ -5262,23 +5161,21 @@
                 }, 0);
             })
                 .transition()
-                .attr('pointer-events', 'auto'); }, function (exit) { return exit
-                .transition()
-                .attr('pointer-events', 'none')
-                .remove(); })
-                .on('mouseover', function (data, index, nodes) { return _this.barMouseOver(d3Selection.event, data, index, nodes); })
-                .on('mouseout', function (data, index, nodes) { return _this.barMouseOut(); })
-                .on('click', function (data, index, nodes) { return _this.barMouseClick(d3Selection.event, data, index, nodes); });
+                .selection()
+                .attr('pointer-events', 'auto'); }, function (exit) { return exit.transition().selection().attr('pointer-events', 'none').remove(); })
+                .datum(function (d, i) {
+                return { data: _this.data, index: i };
+            })
+                .on('mouseover', function (event, data) { return _this.barMouseOver(event, data); })
+                .on('mouseout', function (event, data) { return _this.barMouseOut(); })
+                .on('click', function (event, data) { return _this.barMouseClick(event, data); });
             if (!this.hideLegend) {
                 this.chart
                     .select('.legend')
                     .selectAll('.legend-item')
                     .data(this.data)
                     .join(function (enter) {
-                    var li = enter
-                        .append('li')
-                        .attr('class', 'legend-item')
-                        .classed('align-items-start', _this.isCompare);
+                    var li = enter.append('li').attr('class', 'legend-item').classed('align-items-start', _this.isCompare);
                     li.insert('span')
                         .attr('class', 'legend-key')
                         .style('background-color', function (d) { return _this.colorRange(d.label); })
@@ -5331,9 +5228,12 @@
                     });
                     return update;
                 }, function (exit) { return exit.remove(); })
-                    .on('mouseover', function (data, index, nodes) { return _this.legendMouseOver(d3Selection.event, data, index, nodes); })
+                    .datum(function (d, i) {
+                    return { data: _this.data, index: i };
+                })
+                    .on('mouseover', function (event, data) { return _this.legendMouseOver(event, data); })
                     .on('mouseout', function () { return _this.legendMouseOut(); })
-                    .on('click', function (data, index, nodes) { return _this.legendMouseClick(d3Selection.event, data, index, nodes); });
+                    .on('click', function (event, data) { return _this.legendMouseClick(event, data); });
             }
         };
         return PbdsDatavizBarSingleHorizontalComponent;

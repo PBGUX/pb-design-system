@@ -89,11 +89,11 @@ export declare class PbdsDatavizLineComponent implements OnInit, OnDestroy, OnCh
     ngOnChanges(changes: SimpleChanges): void;
     ngOnDestroy(): void;
     updateChart: () => void;
-    legendMouseOver: (event: any, data: any, index: any, nodes: any) => void;
+    legendMouseOver: (event: any, data: any) => void;
     legendMouseOut: () => void;
-    legendMouseClick: (event: any, data: any, index: any, nodes: any) => void;
-    mouserectMouseMove: (event: any, index: any, nodes: any) => boolean;
-    mouserectMouseOut: (event: any, index: any, nodes: any) => void;
+    legendMouseClick: (event: any, data: any) => void;
+    mouserectMouseMove: (event: any, data: any) => boolean;
+    mouserectMouseOut: (event: any, data: any) => void;
     mouserectMouseClick: () => void;
     private tooltipShow;
     private tooltipHide;

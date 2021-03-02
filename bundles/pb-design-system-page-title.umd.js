@@ -14,7 +14,7 @@
         { type: core.Component, args: [{
                     selector: 'pbds-page-title',
                     template: "<div class=\"page-header\">\n  <div class=\"page-title\" [ngClass]=\"layout\">\n    <div class=\"row\">\n      <div class=\"col\">\n        <h1 [ngClass]=\"{ 'mb-0': sub, 'has-sub': sub }\">{{ ttl }}</h1>\n        <h2>{{ sub }}</h2>\n      </div>\n    </div>\n  </div>\n</div>\n",
-                    styles: [".page-header h1.has-sub{margin-bottom:0;margin-top:85px}.page-title h1.mb-0+h2{font-size:16px;line-height:1.4;margin-bottom:25px}"]
+                    styles: [".page-header h1.has-sub{margin-top:85px;margin-bottom:0}.page-title h1.mb-0+h2{font-size:16px;margin-bottom:25px;line-height:1.4}"]
                 },] }
     ];
     PbdsPageTitleComponent.propDecorators = {

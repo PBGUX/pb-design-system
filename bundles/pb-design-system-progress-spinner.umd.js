@@ -13,7 +13,7 @@
       { type: core.Component, args: [{
                   selector: 'pbds-progress-spinner',
                   template: "\n    <span role=\"alert\" aria-live=\"assertive\">\n      <span\n        class=\"sbl-circ\"\n        [style.width.px]=\"size\"\n        [style.height.px]=\"size\"\n        [style.border-width.px]=\"size / 8\"\n        aria-hidden=\"true\"\n      ></span>\n      <span class=\"sr-only\">Loading</span>\n    </span>\n  ",
-                  styles: [".sbl-circ{animation:rotate 1.5s linear infinite;border-radius:50%;border-style:solid;border-top:solid rgba(0,0,0,0);border-width:6px;color:var(--primary);display:inline-block;height:48px;position:relative;width:48px}@keyframes rotate{0%{transform:rotate(0)}to{transform:rotate(1turn)}}"]
+                  styles: [".sbl-circ{height:48px;width:48px;color:var(--primary);position:relative;display:inline-block;border-style:solid;border-radius:50%;border-top:solid transparent;border-width:6px;animation:rotate 1.5s linear infinite}@keyframes rotate{0%{transform:rotate(0)}to{transform:rotate(1turn)}}"]
               },] }
   ];
   PbdsProgressSpinnerComponent.propDecorators = {
