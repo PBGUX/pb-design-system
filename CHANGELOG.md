@@ -10,7 +10,7 @@
 
 ## Deprecation Notice
 
-- The use of PrimeNG < 10.0 is deprecated and CSS support for it will be removed in the next point release. Please update to PrimeNG 10 or higher (11). DS 6.6 will still support the versions supported by DS 6.0-6.5.
+- The use of PrimeNG < 10.0 is deprecated and CSS support for it will be removed in the next point release. Please update to PrimeNG 10 or higher (11). DS 6.6 still supports the same versions supported by DS 6.0-6.5.
 
 ## Non-Breaking Changes
 

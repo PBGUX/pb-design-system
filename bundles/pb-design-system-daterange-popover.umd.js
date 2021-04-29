@@ -477,6 +477,10 @@
         };
         PbdsDaterangePopoverComponent.prototype.onApply = function (shouldEmit) {
             if (shouldEmit === void 0) { shouldEmit = true; }
+            // if only a CUSTOM start date is selected, set the end date to the start date (i.e select a single day)
+            if (!this.toDate) {
+                this.toDate = this.fromDate;
+            }
             this.setInputLabel();
             if (shouldEmit) {
                 this.dateChange.emit({
