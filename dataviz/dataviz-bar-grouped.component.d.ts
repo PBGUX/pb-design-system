@@ -82,12 +82,12 @@ export declare class PbdsDatavizBarGroupedComponent implements OnInit, OnDestroy
     updateChartVertical(): void;
     updateChartHorizontal(): void;
     updateLegend(): void;
-    barMouseOver: (event: any, data: any, index: any, nodes: any) => void;
+    barMouseOver: (event: any, data: PbdsDatavizBarGrouped[]) => void;
     barMouseOut: () => void;
-    barMouseClick: (event: any, data: any, index: any, nodes: any) => void;
-    legendMouseOver: (event: any, data: any, index: any, nodes: any) => void;
+    barMouseClick: (event: any, data: any) => void;
+    legendMouseOver: (event: any, data: any) => void;
     legendMouseOut: () => void;
-    legendMouseClick: (event: any, data: any, index: any, nodes: any) => void;
+    legendMouseClick: (event: any, data: any) => void;
     private tooltipShow;
     private tooltipHide;
     private xAxisFormatter;

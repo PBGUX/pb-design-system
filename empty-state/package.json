@@ -1,0 +1,11 @@
+{
+  "main": "../bundles/pb-design-system-empty-state.umd.js",
+  "module": "../fesm2015/pb-design-system-empty-state.js",
+  "es2015": "../fesm2015/pb-design-system-empty-state.js",
+  "esm2015": "../esm2015/empty-state/pb-design-system-empty-state.js",
+  "fesm2015": "../fesm2015/pb-design-system-empty-state.js",
+  "typings": "pb-design-system-empty-state.d.ts",
+  "metadata": "pb-design-system-empty-state.metadata.json",
+  "sideEffects": false,
+  "name": "pb-design-system/empty-state"
+}

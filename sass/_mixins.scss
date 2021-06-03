@@ -6,7 +6,7 @@
   outline: 0;
 }
 
-@mixin data-widget($bgcolor: $blue, $color: $white) {
+@mixin data-widget($bgcolor: var(--primary), $color: var(--white)) {
   &.data-widget {
     background-color: $bgcolor;
     .data-widget-icon,
@@ -28,7 +28,7 @@
 
 @mixin table-headers {
   color: var(--text);
-  font-family: $font-family-base;
+  font-family: var(--font_family_base);
   background-color: transparent;
   text-transform: uppercase;
   font-weight: bold;
@@ -85,7 +85,7 @@
   }
 }
 
-@mixin arrow-outside($color: $blue, $left: 65px) {
+@mixin arrow-outside($color: var(--primary), $left: 65px) {
   &::before {
     position: absolute;
     bottom: -15px;
@@ -99,7 +99,7 @@
 
 @mixin focus-ring {
   border-color: var(--focus);
-  box-shadow: $btn-focus-box-shadow;
+  box-shadow: 0 0 10px HSLA(195, 100%, 65%, 0.77);
   // outline-width: 6px;
   // outline-style: solid;
   // outline-color: hsla(190, 58%, 79%, .6);

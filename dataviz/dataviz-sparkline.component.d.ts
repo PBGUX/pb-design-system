@@ -4,7 +4,7 @@ export declare class PbdsDatavizSparklineComponent implements OnInit, OnChanges 
     private _element;
     chartClass: boolean;
     sparklineClass: boolean;
-    data: PbdsDatavizSparkline;
+    data: PbdsDatavizSparkline[];
     width: number;
     height: number;
     type: 'line' | 'line-high' | 'area' | 'area-high' | 'bar';

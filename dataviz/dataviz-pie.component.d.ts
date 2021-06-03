@@ -17,8 +17,8 @@ export declare class PbdsDatavizPieComponent implements OnInit, OnChanges, OnDes
     tooltipLabelFormatString: string;
     tooltipValueFormatString: string;
     theme: any;
-    hovered: EventEmitter<object>;
-    clicked: EventEmitter<object>;
+    hovered: EventEmitter<any>;
+    clicked: EventEmitter<any>;
     private currentData;
     private height;
     private chart;
@@ -43,8 +43,7 @@ export declare class PbdsDatavizPieComponent implements OnInit, OnChanges, OnDes
     ngOnDestroy(): void;
     updateChart: (firstRun?: boolean) => void;
     private arcEnterTween;
-    private arcTween;
-    private arcExitTween;
+    private arcUpdateTween;
     private arcMouseOverTween;
     private arcMouseOutTween;
     private legendMouseOverFocus;

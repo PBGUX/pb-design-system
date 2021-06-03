@@ -71,12 +71,12 @@ export declare class PbdsDatavizHeatmapComponent implements OnInit, OnChanges, O
     ngOnDestroy(): void;
     ngOnChanges(changes: SimpleChanges): void;
     updateChart: () => void;
-    blockMouseOver: (event: any, data: any, index: any, nodes: any) => void;
+    blockMouseOver: (event: any, data: any) => void;
     blockMouseOut: () => void;
-    blockMouseClick: (event: any, data: any, index: any, nodes: any) => void;
-    legendMouseOver: (event: any, data: any, index: any, nodes: any) => void;
+    blockMouseClick: (event: any, data: any) => void;
+    legendMouseOver: (event: any, data: any) => void;
     legendMouseOut: () => void;
-    legendMouseClick: (event: any, data: any, index: any, nodes: any) => void;
+    legendMouseClick: (event: any, data: any) => void;
     private tooltipShow;
     private tooltipHide;
     private xAxisFormatter;

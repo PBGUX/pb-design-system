@@ -76,13 +76,13 @@ export declare class PbdsDatavizBarSingleHorizontalComponent implements OnInit, 
     ngOnChanges(changes: SimpleChanges): void;
     ngOnDestroy(): void;
     updateChart(): void;
-    barMouseOver: (event: any, data: any, index: any, nodes: any) => void;
+    barMouseOver: (event: any, data: any) => void;
     barMouseOut: () => void;
-    barMouseClick: (event: any, data: any, index: any, nodes: any) => void;
+    barMouseClick: (event: any, data: any) => void;
     private tooltipShow;
     private tooltipHide;
-    legendMouseOver: (event: any, data: any, index: any, nodes: any) => void;
+    legendMouseOver: (event: any, data: any) => void;
     legendMouseOut: () => void;
-    legendMouseClick: (event: any, data: any, index: any, nodes: any) => void;
+    legendMouseClick: (event: any, data: any) => void;
     private xAxisFormatter;
 }

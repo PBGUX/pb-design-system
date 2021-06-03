@@ -1,3 +1,77 @@
+# 6.7.0
+
+## Breaking Changes
+
+- Bootstrap SCSS in no longer compiled with the Design System SCSS. Therefore you need to import the Bootstrap CSS file in your `angular.json` "styles" array, like this:
+
+```
+    "styles": [
+              "node_modules/@angular/material/prebuilt-themes/indigo-pink.css",
+              "node_modules/bootstrap/dist/css/bootstrap.min.css",
+
+              ...
+
+              "src/sass/designsystem/designsystem.scss",
+              "src/styles.scss"
+            ],
+```
+
+- Support for PrimeNG < 10.0.0 has been removed. It was deprecated in 6.6. Please update to PrimeNG 10 or higher (11 recommended).
+
+---
+
+# 6.6.0
+
+## Breaking Changes
+
+- (Added in 6.5.1)To properly support teams not using Angular, we had to remove the sass import for the base Angular Material theme. You will need to import it in the `styles` array in your `angular.json`. Add the following path, ensuring it is before the `designsystem.css` in the styles array.
+
+```
+"node_modules/@angular/material/prebuilt-themes/indigo-pink.css",
+```
+
+## Deprecation Notice
+
+- The use of PrimeNG < 10.0 is deprecated and CSS support for it will be removed in the next point release. Please update to PrimeNG 10 or higher (11). DS 6.6 still supports the same versions supported by DS 6.0-6.5.
+
+## Non-Breaking Changes
+
+- Updated to support Angular 11.2, NG-Bootstrap 9.0, PrimeNG 11.2.2
+- Improvements to Table Toolbar buttons
+  - Added toggle button styling and example
+  - Added date picker example
+  - Updated CSS so you can use normal-sized controls in toolbar
+- Added new Empty State component to PBDS component library
+- Added styling and example for `input type=file`.
+- Add "batch" icon
+
+## Bug Fixes
+
+- Angular Material checkboxes and radio button keyboard focus state
+- Active tabs lose borders when hovered
+
+# 6.5.2
+
+- fix keyboard focus colors on Material checkboxes and radio buttons
+
+---
+
+# 6.5.1
+
+## Breaking Change
+
+- to properly support teams not using Angular, we had to remove the sass import for the base Angular Material theme. You will need to import it in the `styles` array in your `angular.json`, ensure it is before the `designsystem.css`, with this path:
+
+```
+"node_modules/@angular/material/prebuilt-themes/indigo-pink.css",
+```
+
+## Non-breaking Changes
+
+- fix for missing highlight on Tree Navigation nodes
+
+---
+
 # 6.5.0
 
 ## Breaking Changes

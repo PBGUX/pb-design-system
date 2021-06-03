@@ -53,9 +53,9 @@ export declare class PbdsDatavizChoroplethMapComponent implements OnInit, OnDest
     ngOnChanges(changes: SimpleChanges): void;
     ngOnDestroy(): void;
     updateChart: () => void;
-    featureMouseOver: (event: any, data: any, index: any, nodes: any) => void;
-    featureMouseOut: (event: any, data: any, index: any, nodes: any) => void;
-    featureMouseClick: (event: any, data: any, index: any, nodes: any) => void;
+    featureMouseOver: (event: any, data: any) => void;
+    featureMouseOut: (event: any, data: any) => void;
+    featureMouseClick: (event: any, data: any) => void;
     private tooltipShow;
     private tooltipHide;
     private tooltipMove;

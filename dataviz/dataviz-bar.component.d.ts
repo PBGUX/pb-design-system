@@ -87,12 +87,12 @@ export declare class PbdsDatavizBarComponent implements OnInit, OnDestroy, OnCha
     ngOnChanges(changes: SimpleChanges): void;
     ngOnDestroy(): void;
     updateChart: () => void;
-    barMouseOver: (event: any, data: any, index: any, nodes: any) => void;
+    barMouseOver: (event: any, data: any) => void;
     barMouseOut: () => void;
-    barMouseClick: (event: any, data: any, index: any, nodes: any) => void;
-    legendMouseOver: (event: any, data: any, index: any, nodes: any) => void;
+    barMouseClick: (event: any, data: any) => void;
+    legendMouseOver: (event: any, data: any) => void;
     legendMouseOut: () => void;
-    legendMouseClick: (event: any, data: any, index: any, nodes: any) => void;
+    legendMouseClick: (event: any, data: any) => void;
     private tooltipShow;
     private tooltipHide;
     private xAxisFormatter;
