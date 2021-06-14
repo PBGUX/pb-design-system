@@ -16,6 +16,7 @@
             ],
 ```
 
+- the SCSS files (mixins and variables) are no longer included as everyting is a CSS variable and can be overriden with a `:root` definition in your CSS (or SCSS) file.
 - Support for PrimeNG < 10.0.0 has been removed. It was deprecated in 6.6. Please update to PrimeNG 10 or higher (11 recommended).
 
 ---
