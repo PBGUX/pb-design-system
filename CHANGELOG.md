@@ -16,8 +16,26 @@
             ],
 ```
 
-- the SCSS files (mixins and variables) are no longer included as everyting is a CSS variable and can be overriden with a `:root` definition in your CSS (or SCSS) file.
+- the SCSS files (mixins and variables) are no longer included as everyting is a CSS variable and can be overriden with a `:root` definition in your CSS (or SCSS) file. **This means all imports of DS mixins and variables need to be removed from any component scss files, and the $ variables replaced with the css variable equivalent.**
 - Support for PrimeNG < 10.0.0 has been removed. It was deprecated in 6.6. Please update to PrimeNG 10 or higher (11 recommended).
+- For D3 `PbdsDatavizLine` charts, the `date` key is changed to `labels`.
+
+## Bug Fixes
+
+- The PBDS Date Range picker is now accessible; the popup list of date ranges can be navigated by keyboard.
+- Fixed styling of P-Chips component chips to match chips/tokens used elsewhere
+- Fixes to Table examples:
+  - Filter menus actually filter the sample data
+  - Pagination control now shows number of records
+- Date picker calendars start week on Sunday
+- Update column toggle menu styling
+- Accesibility fixes to Address Blocks
+
+## Additions
+
+- Added PrimeNG Skeleton loaders.
+- Added a Header variation with carets next to drop-down menus
+- Added a "Back" version of Breadcrumbs
 
 ---
 
@@ -525,13 +543,23 @@ Andrew Dimola, Beth Jennings, Bhalchandra Bhosale, Gaston Hummel, Joan Doutney, 
 - added classes to hide the header search on mobile (added `d-none` and `d-sm-block` classes)
 
 ```html
-<div class="header-search d-none d-sm-block" [ngClass]="{'search-active': searchActive}"></div>
+<div
+  class="header-search d-none d-sm-block"
+  [ngClass]="{'search-active': searchActive}"
+></div>
 ```
 
 - changed classes on the search reset button (removed btn and btn-link classes, added border-0 class)
 
 ```html
-<button class="search-clear border-0" type="reset" (click)="toggleSearch($event)" aria-label="clear search">...</button>
+<button
+  class="search-clear border-0"
+  type="reset"
+  (click)="toggleSearch($event)"
+  aria-label="clear search"
+>
+  ...
+</button>
 ```
 
 - fixed search icon focus (see component TypeScript code snippet)
@@ -539,7 +567,15 @@ Andrew Dimola, Beth Jennings, Bhalchandra Bhosale, Gaston Hummel, Joan Doutney, 
   - add template variable to add focus when search is closed (`#searchLink`)
 
 ```html
-<a #searchLink class="nav-link d-none d-sm-block" aria-label="Search" href="" (click)="toggleSearch($event)"> ... </a>
+<a
+  #searchLink
+  class="nav-link d-none d-sm-block"
+  aria-label="Search"
+  href=""
+  (click)="toggleSearch($event)"
+>
+  ...
+</a>
 ```
 
 ### Promotional Heros
@@ -866,13 +902,13 @@ As you use the site, you will see some placeholder "TODO" boxes for missing comp
 - To use the DS Sass files, you will need to import the "functions" sass file from Bootstrap 4's npm package at the top of your sass file, in this order:
 
   ```scss
-  @import '../../../node_modules/bootstrap/scss/functions';
-  @import 'fonts';
-  @import 'variables';
-  @import '../../../node_modules/bootstrap/scss/bootstrap';
-  @import 'nucleo_mini/nucleo-mini';
-  @import 'nucleo_outline/nucleo-outline';
-  @import 'mixins';
+  @import "../../../node_modules/bootstrap/scss/functions";
+  @import "fonts";
+  @import "variables";
+  @import "../../../node_modules/bootstrap/scss/bootstrap";
+  @import "nucleo_mini/nucleo-mini";
+  @import "nucleo_outline/nucleo-outline";
+  @import "mixins";
   // and then your sass partials, if any
   ```
 
@@ -899,9 +935,9 @@ As you use the site, you will see some placeholder "TODO" boxes for missing comp
 - _Optional_: to use the DS variables and mixins in your scss file, you will need to install Bootstrap 4 and include the following at the top of your main scss file:
 
 ```scss
-@import '../../../node_modules/bootstrap/scss/functions';
-@import '../../../node_modules/pb-design-system/dist/sass/variables';
-@import '../../../node_modules/pb-design-system/dist/sass/mixins';
+@import "../../../node_modules/bootstrap/scss/functions";
+@import "../../../node_modules/pb-design-system/dist/sass/variables";
+@import "../../../node_modules/pb-design-system/dist/sass/mixins";
 ```
 
 - All DS breakpoint mixins have been removed in favor of using the Boostrap 4 mixins and utilities.
