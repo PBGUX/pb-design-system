@@ -16,7 +16,7 @@ PbdsProgressSpinnerComponent.decorators = [
       <span class="sr-only">Loading</span>
     </span>
   `,
-                styles: [".sbl-circ{height:48px;width:48px;color:var(--primary);position:relative;display:inline-block;border-style:solid;border-radius:50%;border-top:solid transparent;border-width:6px;-webkit-animation:rotate 1.5s linear infinite;animation:rotate 1.5s linear infinite}@-webkit-keyframes rotate{0%{-webkit-transform:rotate(0);transform:rotate(0)}to{-webkit-transform:rotate(1turn);transform:rotate(1turn)}}@keyframes rotate{0%{-webkit-transform:rotate(0);transform:rotate(0)}to{-webkit-transform:rotate(1turn);transform:rotate(1turn)}}"]
+                styles: [".sbl-circ{height:48px;width:48px;color:var(--primary);position:relative;display:inline-block;border-style:solid;border-radius:50%;border-top:solid transparent;border-width:6px;animation:rotate 1.5s linear infinite}@keyframes rotate{0%{transform:rotate(0)}to{transform:rotate(1turn)}}"]
             },] }
 ];
 PbdsProgressSpinnerComponent.propDecorators = {

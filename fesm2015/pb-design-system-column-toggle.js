@@ -1,7 +1,9 @@
 import { EventEmitter, Component, Input, Output, NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
+import { FormsModule } from '@angular/forms';
 import { NgbDropdownModule } from '@ng-bootstrap/ng-bootstrap';
 
+let COUNT = 0;
 class PbdsColumnToggleComponent {
     constructor() {
         this.label = 'Columns';
@@ -9,6 +11,7 @@ class PbdsColumnToggleComponent {
         this.storagekey = false;
         this.minimum = 1;
         this.toggle = new EventEmitter();
+        this.isShowAll = false;
     }
     ngOnInit() {
         if (this.storagekey) {
@@ -22,43 +25,48 @@ class PbdsColumnToggleComponent {
             }
             this.setLocalStorage();
         }
+        this.setShowAllChecked();
         this.updateTotalSelected();
+        this.index = COUNT++;
     }
-    toggleColumn(column) {
+    toggleColumn($event, column) {
+        const target = $event.target;
+        column.toggle.selected = target.checked;
+        this.updateTotalSelected();
         // prevent unchecking all columns
-        if (this.totalSelected === this.minimum && column.toggle.selected) {
+        if (this.totalSelected < this.minimum) {
+            target.checked = true;
+            column.toggle.selected = true;
+            this.updateTotalSelected();
             return;
         }
-        column.toggle.selected = !column.toggle.selected;
-        if (this.storagekey) {
-            this.setLocalStorage();
-        }
+        this.setLocalStorage();
         this.toggle.emit({
             showAll: false,
-            column,
+            column: column,
             columns: this.columns
         });
         this.updateTotalSelected();
+        this.setShowAllChecked();
     }
-    showAllColumns(columnToggleDropdown) {
-        this.columns.map((column) => {
-            if (column.toggle.visible) {
-                column.toggle.selected = true;
-            }
-        });
-        if (this.storagekey) {
-            this.setLocalStorage();
+    showAllColumns($event) {
+        const target = $event.target;
+        const checked = target.checked;
+        this.isShowAll = checked;
+        if (checked) {
+            this.columns.map((column) => {
+                if (column.toggle.visible) {
+                    column.toggle.selected = true;
+                }
+            });
         }
+        this.setLocalStorage();
         this.toggle.emit({
             showAll: true,
             column: null,
             columns: this.columns
         });
         this.updateTotalSelected();
-        columnToggleDropdown.close();
-    }
-    showSelectedIcon(column) {
-        return column.toggle.selected ? '' : 'invisible';
     }
     setLocalStorage() {
         if (this.storagekey) {
@@ -68,11 +76,23 @@ class PbdsColumnToggleComponent {
     updateTotalSelected() {
         this.totalSelected = this.columns.filter((value) => value.toggle.selected && value.toggle.visible).length;
     }
+    setShowAllChecked() {
+        const columnsSelected = this.columns.filter((value) => value.toggle.selected && value.toggle.visible).length;
+        const columnsVisible = this.columns.filter((value) => value.toggle.visible).length;
+        this.isShowAll = columnsSelected === columnsVisible;
+    }
 }
 PbdsColumnToggleComponent.decorators = [
     { type: Component, args: [{
                 selector: 'pbds-column-toggle',
-                template: "<div ngbDropdown #columnToggleDropdown=\"ngbDropdown\" [autoClose]=\"'outside'\" class=\"d-inline-block\">\n  <button class=\"btn btn-secondary\" id=\"toggle-column\" ngbDropdownToggle>\n    <i class=\"pbi-icon-mini pbi-column-toggle\"></i>\n    {{ label }}\n  </button>\n\n  <div ngbDropdownMenu aria-labelledby=\"toggle-column\">\n    <ng-container *ngFor=\"let column of columns\">\n      <button *ngIf=\"column.toggle.visible\" class=\"dropdown-item\" (click)=\"toggleColumn(column)\">\n        <i class=\"pbi-icon-mini pbi-check small mr-1\" [ngClass]=\"showSelectedIcon(column)\"></i>\n        {{ column.header }}\n      </button>\n    </ng-container>\n\n    <div class=\"dropdown-divider\"></div>\n\n    <button class=\"dropdown-item\" (click)=\"showAllColumns(columnToggleDropdown)\">{{ showAllLabel }}</button>\n  </div>\n</div>\n"
+                template: "<div ngbDropdown #columnToggleDropdown=\"ngbDropdown\" [autoClose]=\"'outside'\" class=\"d-inline-block\">\n  <button class=\"btn btn-secondary\" id=\"toggle-column\" ngbDropdownToggle>\n    <i class=\"pbi-icon-mini pbi-column-toggle\" aria-hidden=\"true\"></i>\n    {{ label }}\n  </button>\n\n  <div ngbDropdownMenu aria-labelledby=\"toggle-column\">\n    <label class=\"mb-0 dropdown-item\" for=\"pbds-show-all-{{ index }}\">\n      <input\n        id=\"pbds-show-all-{{ index }}\"\n        type=\"checkbox\"\n        [checked]=\"isShowAll\"\n        (change)=\"showAllColumns($event)\"\n        [attr.disabled]=\"isShowAll ? '' : null\"\n      />\n      {{ showAllLabel }}\n    </label>\n\n    <div class=\"dropdown-divider\"></div>\n\n    <ng-container *ngFor=\"let column of columns\">\n      <ng-container *ngIf=\"column.toggle.visible\">\n        <label class=\"mb-0 dropdown-item\" for=\"{{ column.field }}-{{ index }}\">\n          <input\n            id=\"{{ column.field }}-{{ index }}\"\n            name=\"{{ column.field }}-{{ index }}\"\n            type=\"checkbox\"\n            [checked]=\"column.toggle.selected\"\n            (change)=\"toggleColumn($event, column)\"\n          />\n          {{ column.header }}</label\n        >\n      </ng-container>\n    </ng-container>\n  </div>\n</div>\n",
+                styles: [`
+      input[type='checkbox'] {
+        width: 1rem;
+        height: 1rem;
+        vertical-align: middle;
+      }
+    `]
             },] }
 ];
 PbdsColumnToggleComponent.propDecorators = {
@@ -89,7 +109,7 @@ class PbdsColumnToggleModule {
 PbdsColumnToggleModule.decorators = [
     { type: NgModule, args: [{
                 declarations: [PbdsColumnToggleComponent],
-                imports: [CommonModule, NgbDropdownModule],
+                imports: [CommonModule, NgbDropdownModule, FormsModule],
                 exports: [PbdsColumnToggleComponent]
             },] }
 ];

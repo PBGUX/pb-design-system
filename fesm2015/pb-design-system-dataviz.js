@@ -2,13 +2,13 @@ import { ɵɵdefineInjectable, Injectable, EventEmitter, Component, ChangeDetect
 import { ViewportScroller, Location, CommonModule } from '@angular/common';
 import { NgbTooltipModule } from '@ng-bootstrap/ng-bootstrap';
 import { pointer, select } from 'd3-selection';
-import { scaleOrdinal, scaleBand, scaleLinear, scaleTime, scaleQuantize, scaleQuantile, scaleThreshold } from 'd3-scale';
+import { scaleOrdinal, scaleBand, scaleLinear, scaleTime, scalePoint, scaleQuantize, scaleQuantile, scaleThreshold } from 'd3-scale';
 import { pie, arc, line, curveCatmullRom, area, stack, stackOrderNone } from 'd3-shape';
 import { interpolate } from 'd3-interpolate';
 import { format as format$1 } from 'd3-format';
 import { isoParse, isoFormat, timeFormat as timeFormat$1 } from 'd3-time-format';
 import { timeFormat, format } from 'd3';
-import { min, max, extent, bisectLeft, range, sum } from 'd3-array';
+import { min, max, extent, bisectLeft, range, bisect, sum } from 'd3-array';
 import { axisBottom, axisLeft } from 'd3-axis';
 import { easeQuadInOut, easeLinear } from 'd3-ease';
 import { geoMercator, geoAlbersUsa, geoAlbers, geoPath } from 'd3-geo';
@@ -1125,6 +1125,7 @@ class PbdsDatavizLineComponent {
         this.height = 400;
         this.type = 'medium'; // debug to show all chart options
         this.area = false;
+        this.xAxisType = 'date';
         this.xAxisFormatString = '';
         this.xAxisTicks = 6;
         this.yAxisFormatString = '';
@@ -1154,9 +1155,25 @@ class PbdsDatavizLineComponent {
         this.updateChart = () => {
             this.mouserect.data(this.data);
             // update the xScale
-            this.xAxisScale.domain(extent(this.data.dates, (d, i) => {
-                return isoParse(d);
-            }));
+            if (this.xAxisType === 'date') {
+                this.xAxisScale = scaleTime()
+                    .domain(extent(this.data.labels, (d) => {
+                    return isoParse(d);
+                }))
+                    .range([0, this.width - this.margin.left - this.margin.right]);
+            }
+            else if (this.xAxisType === 'number') {
+                this.xAxisScale = scaleLinear()
+                    .domain(extent(this.data.labels, (d) => {
+                    return d;
+                }))
+                    .range([0, this.width - this.margin.left - this.margin.right]);
+            }
+            else {
+                this.xAxisScale = scalePoint()
+                    .domain(this.data.labels)
+                    .range([0, this.width - this.margin.left - this.margin.right]);
+            }
             // update the yScale
             this.yAxisScale
                 .domain([
@@ -1246,7 +1263,14 @@ class PbdsDatavizLineComponent {
                     .data((d) => d.values)
                     .join((enter) => enter
                     .append('circle')
-                    .attr('cx', (d, i) => this.xAxisScale(isoParse(this.data.dates[i])))
+                    .attr('cx', (d, i) => {
+                    if (this.xAxisType === 'date') {
+                        return this.xAxisScale(isoParse(this.data.labels[i]));
+                    }
+                    else {
+                        return this.xAxisScale(this.data.labels[i]);
+                    }
+                })
                     .attr('cy', (d) => this.yAxisScale(0))
                     .attr('r', this.lineWidth * 2)
                     .style('stroke-width', this.lineWidth)
@@ -1259,14 +1283,28 @@ class PbdsDatavizLineComponent {
                     .data((d) => d.values)
                     .join((enter) => enter
                     .append('circle')
-                    .attr('cx', (d, i) => this.xAxisScale(isoParse(this.data.dates[i])))
+                    .attr('cx', (d, i) => {
+                    if (this.xAxisType === 'date') {
+                        return this.xAxisScale(isoParse(this.data.labels[i]));
+                    }
+                    else {
+                        return this.xAxisScale(this.data.labels[i]);
+                    }
+                })
                     .attr('cy', (d) => this.yAxisScale(d))
                     .attr('r', this.lineWidth * 2)
                     .style('stroke-width', this.lineWidth), (update) => update.call((update) => update
                     .transition()
                     .duration(1000)
                     .ease(easeQuadInOut)
-                    .attr('cx', (d, i) => this.xAxisScale(isoParse(this.data.dates[i])))
+                    .attr('cx', (d, i) => {
+                    if (this.xAxisType === 'date') {
+                        return this.xAxisScale(isoParse(this.data.labels[i]));
+                    }
+                    else {
+                        return this.xAxisScale(this.data.labels[i]);
+                    }
+                })
                     .attr('cy', (d) => this.yAxisScale(d))), (exit) => exit.remove()), (exit) => exit.remove());
             }
             if (!this.hideLegend) {
@@ -1392,27 +1430,65 @@ class PbdsDatavizLineComponent {
             this.clicked.emit({ event, data });
         };
         this.mouserectMouseMove = (event, data) => {
-            const mouseXDate = this.xAxisScale.invert(pointer(event)[0]); // return date at mouse x position
-            const leftIndex = bisectLeft(this.data.dates, isoFormat(mouseXDate)); // index of left closest date
-            // prevent error for 0 index
-            if (leftIndex === 0)
-                return false;
-            const dateLower = new Date(this.data.dates[leftIndex - 1]);
-            const dateUpper = new Date(this.data.dates[leftIndex]);
-            const closestDate = +mouseXDate - +dateLower > +dateUpper - mouseXDate ? dateUpper : dateLower; // date mouse is closest to
-            const closestIndex = this.data.dates.indexOf(isoFormat(closestDate)); // which index the mouse is closest to
-            // console.log(+mouseXDate, leftIndex, +dateLower, +dateUpper, +closestDate, closestIndex);
+            let mouseX; // mouse x position
+            let lower;
+            let upper;
+            let closest;
+            let closestIndex;
+            let leftIndex = 0;
+            // handle string type, no invert function on scalePoint
+            if (this.xAxisType === 'string') {
+                mouseX = pointer(event)[0];
+            }
+            else {
+                mouseX = this.xAxisScale.invert(pointer(event)[0]);
+            }
+            // console.log(mouseX);
+            if (this.xAxisType === 'date') {
+                leftIndex = bisectLeft(this.data.labels, isoFormat(mouseX));
+                // prevent error for 0 index
+                if (leftIndex === 0)
+                    return false;
+                lower = new Date(this.data.labels[leftIndex - 1]);
+                upper = new Date(this.data.labels[leftIndex]);
+                closest = +mouseX - +lower > +upper - mouseX ? upper : lower; // date mouse is closest to
+                closestIndex = this.data.labels.indexOf(isoFormat(closest)); // which index the mouse is closest to
+                // console.log(+mouseXDate, leftIndex, +dateLower, +dateUpper, +closestDate, closestIndex);
+            }
+            else if (this.xAxisType === 'number') {
+                leftIndex = bisectLeft(this.data.labels, mouseX);
+                // prevent error for 0 index
+                if (leftIndex === 0)
+                    return false;
+                lower = this.data.labels[leftIndex - 1];
+                upper = this.data.labels[leftIndex];
+                closest = +mouseX - +lower > +upper - mouseX ? upper : lower; // date mouse is closest to
+                closestIndex = this.data.labels.indexOf(closest); // which index the mouse is closest to
+                // console.log(+mouseXDate, leftIndex, +lower, +upper, +closest, closestIndex);
+            }
+            else {
+                const domain = this.xAxisScale.domain();
+                const range$1 = this.xAxisScale.range();
+                const rangePoints = range(range$1[0], range$1[1], this.xAxisScale.step());
+                rangePoints.push(range$1[1]);
+                leftIndex = bisect(rangePoints, mouseX);
+                if (leftIndex === 0)
+                    return false;
+                lower = rangePoints[leftIndex - 1];
+                upper = rangePoints[leftIndex];
+                closest = +mouseX - +lower > +upper - mouseX ? +upper : +lower;
+                const rangeIndex = rangePoints.indexOf(closest);
+                closest = domain[rangeIndex];
+                closestIndex = this.data.labels.indexOf(domain[rangeIndex]);
+            }
             const circles = this.svg.selectAll('.line-group').selectAll('circle');
             circles.filter((d, i) => i === closestIndex).classed('active', true);
             circles.filter((d, i) => i !== closestIndex).classed('active', false);
-            this.tooltipLine
-                .attr('x1', this.xAxisScale(closestDate))
-                .attr('x2', this.xAxisScale(closestDate))
-                .classed('active', true);
+            this.tooltipLine.attr('x1', this.xAxisScale(closest)).attr('x2', this.xAxisScale(closest)).classed('active', true);
             // console.log(this.tooltipLine.node().getBoundingClientRect(), this._scroll.getScrollPosition());
             this.tooltipShow(this.tooltipLine.node(), closestIndex);
             this.mousedata = {
-                date: closestDate,
+                label: closest,
                 series: this.data.series.map((d) => {
                     return {
                         label: d.label,
@@ -1420,14 +1496,14 @@ class PbdsDatavizLineComponent {
                     };
                 })
             };
-            this.tooltipHovered.emit({ event, data: this.mousedata });
+            this.tooltipHovered.emit({ event, data: this.mousedata }); // index of left closest date
         };
         this.mouserectMouseOut = (event, data) => {
             this.svg.selectAll('circle').classed('active', false);
             this.tooltipLine.classed('active', false);
             this.tooltipHide();
         };
-        this.mouserectMouseClick = () => {
+        this.mouserectMouseClick = (event) => {
             this.tooltipClicked.emit({ event, data: this.mousedata });
         };
         this.tooltipShow = (node, closestIndex) => {
@@ -1440,8 +1516,17 @@ class PbdsDatavizLineComponent {
             let position;
             // console.log(scroll, mouserectDimensions, tooltipOffsetHeight, tooltipDimensions, dimensionCalculated, clientWidth);
             this.tooltip.select('.tooltip-header').html((d) => {
-                const parsedTime = isoParse(this.data.dates[closestIndex]);
-                return this.tooltipHeadingFormat(parsedTime);
+                if (this.xAxisType === 'date') {
+                    const parsedTime = isoParse(this.data.labels[closestIndex]);
+                    return this.tooltipHeadingFormat(parsedTime);
+                }
+                else if (this.xAxisType === 'number') {
+                    const heading = this.data.labels[closestIndex];
+                    return this.tooltipHeadingFormat(heading);
+                }
+                else {
+                    return this.data.labels[closestIndex];
+                }
             });
             this.tooltip.selectAll('.tooltip-value').html((d, i) => {
                 return this.tooltipValueFormatType
@@ -1469,8 +1554,17 @@ class PbdsDatavizLineComponent {
             this.tooltip.style('opacity', 0);
         };
         this.xAxisFormatter = (item) => {
-            const parseDate = isoParse(item);
-            return this.xAxisFormat(parseDate);
+            if (this.xAxisType === 'date') {
+                const parseDate = isoParse(item);
+                return this.xAxisFormat(parseDate);
+            }
+            else if (this.xAxisType === 'number') {
+                return this.xAxisFormat(item);
+            }
+            else {
+                return item;
+                // return this.xAxisFormat(item);
+            }
         };
         this.yAxisFormatter = (item) => {
             return this.yAxisFormat(item);
@@ -1485,10 +1579,14 @@ class PbdsDatavizLineComponent {
         };
         this.clipPathId = nextId;
         // create formatters
-        this.xAxisFormat = timeFormat$1(this.xAxisFormatString);
+        this.xAxisFormat =
+            this.xAxisType === 'date' ? timeFormat$1(this.xAxisFormatString) : format$1(this.xAxisFormatString);
         this.yAxisFormat = format$1(this.yAxisFormatString);
         this.legendLabelFormat = this._dataviz.d3Format(this.legendLabelFormatType, this.legendLabelFormatString);
-        this.tooltipHeadingFormat = timeFormat$1(this.tooltipHeadingFormatString);
+        this.tooltipHeadingFormat =
+            this.xAxisType === 'date'
+                ? timeFormat$1(this.tooltipHeadingFormatString)
+                : format$1(this.tooltipHeadingFormatString);
         this.tooltipLabelFormat = this._dataviz.d3Format(this.tooltipLabelFormatType, this.tooltipLabelFormatString);
         this.tooltipValueFormat = this._dataviz.d3Format(this.tooltipValueFormatType, this.tooltipValueFormatString);
         // defaults for all chart types
@@ -1534,7 +1632,17 @@ class PbdsDatavizLineComponent {
         }
         // define line
         this.d3line = line()
-            .x((d, i) => this.xAxisScale(isoParse(this.data.dates[i])))
+            .x((d, i) => {
+            if (this.xAxisType === 'date') {
+                return this.xAxisScale(isoParse(this.data.labels[i]));
+            }
+            else if (this.xAxisType === 'number') {
+                return this.xAxisScale(this.data.labels[i]);
+            }
+            else {
+                return this.xAxisScale(this.data.labels[i]);
+            }
+        })
             .y((d) => this.yAxisScale(d));
         // define line curve
         if (this.lineCurved) {
@@ -1543,7 +1651,17 @@ class PbdsDatavizLineComponent {
         // define area
         if (this.area) {
             this.d3area = area()
-                .x((d, i) => this.xAxisScale(isoParse(this.data.dates[i])))
+                .x((d, i) => {
+                if (this.xAxisType === 'date') {
+                    return this.xAxisScale(isoParse(this.data.labels[i]));
+                }
+                else if (this.xAxisType === 'number') {
+                    return this.xAxisScale(this.data.labels[i]);
+                }
+                else {
+                    return this.xAxisScale(this.data.labels[i]);
+                }
+            })
                 .y0(this.height)
                 .y1((d, i) => this.yAxisScale(d));
             if (this.lineCurved) {
@@ -1568,23 +1686,51 @@ class PbdsDatavizLineComponent {
             .attr('class', 'mouserect')
             .on('mousemove', (event, data) => this.mouserectMouseMove(event, data))
             .on('mouseout', (event, data) => this.mouserectMouseOut(event, data))
-            .on('click', (event, data) => this.mouserectMouseClick());
+            .on('click', (event, data) => this.mouserectMouseClick(event));
         this.tooltipLine = this.svg.append('line').attr('y1', 0).attr('y2', this.height).attr('class', 'tooltip-line');
         // define color range
         this.colorRange = scaleOrdinal().range(this._dataviz.getColors(false, this.theme));
         // add glow def
         this._dataviz.createGlowFilter(this.svg);
         // X AXIS
-        this.xAxisScale = scaleTime()
-            .domain(extent(this.data.dates, (d, i) => {
-            return isoParse(d);
-        }))
-            .range([0, this.width - this.margin.left - this.margin.right]);
-        this.xAxisCall = axisBottom(this.xAxisScale)
-            .ticks(+this.xAxisTicks)
-            .tickSize(this.xAxisTickSize)
-            .tickSizeOuter(this.xAxisTickSizeOuter)
-            .tickFormat(this.xAxisFormatter);
+        if (this.xAxisType === 'date') {
+            this.xAxisScale = scaleTime()
+                .domain(extent(this.data.labels, (d) => {
+                return isoParse(d);
+            }))
+                .range([0, this.width - this.margin.left - this.margin.right]);
+        }
+        else if (this.xAxisType === 'number') {
+            this.xAxisScale = scaleLinear()
+                .domain(extent(this.data.labels, (d) => {
+                return d;
+            }))
+                .range([0, this.width - this.margin.left - this.margin.right]);
+        }
+        else {
+            this.xAxisScale = scalePoint()
+                .domain(this.data.labels)
+                .range([0, this.width - this.margin.left - this.margin.right]);
+        }
+        if (this.xAxisType === 'string') {
+            this.xAxisCall = axisBottom(this.xAxisScale)
+                // .ticks(+this.xAxisTicks)
+                .tickSize(this.xAxisTickSize)
+                .tickSizeOuter(this.xAxisTickSizeOuter)
+                .tickFormat(this.xAxisFormatter)
+                .tickValues(this.xAxisScale.domain().filter((d, i) => {
+                // see https://github.com/d3/d3-scale/issues/182
+                // d3 cannot determine number of strings to show on xaxis with scalePoint()
+                return i % this.xAxisTicks === 0;
+            }));
+        }
+        else {
+            this.xAxisCall = axisBottom(this.xAxisScale)
+                .ticks(+this.xAxisTicks)
+                .tickSize(this.xAxisTickSize)
+                .tickSizeOuter(this.xAxisTickSizeOuter)
+                .tickFormat(this.xAxisFormatter);
+        }
         this.xAxis = this.svg
             .append('g')
             .attr('class', 'axis axis-x')
@@ -1596,7 +1742,18 @@ class PbdsDatavizLineComponent {
             .call(this.xAxisCall);
         // X GRIDLINES
         if (!this.hideXGrid) {
-            this.xGridCall = axisBottom(this.xAxisScale).tickSize(-this.height);
+            if (this.xAxisType === 'string') {
+                this.xGridCall = axisBottom(this.xAxisScale)
+                    .tickSize(-this.height)
+                    .tickValues(this.xAxisScale.domain().filter((d, i) => {
+                    // see https://github.com/d3/d3-scale/issues/182
+                    // d3 cannot determine number of strings to show on xaxis with scalePoint()
+                    return i % this.xAxisTicks === 0;
+                }));
+            }
+            else {
+                this.xGridCall = axisBottom(this.xAxisScale).tickSize(-this.height);
+            }
             this.xGrid = this.svg
                 .append('g')
                 .attr('class', 'grid grid-x')
@@ -1714,6 +1871,7 @@ PbdsDatavizLineComponent.propDecorators = {
     height: [{ type: Input }],
     type: [{ type: Input }],
     area: [{ type: Input }],
+    xAxisType: [{ type: Input }],
     xAxisFormatString: [{ type: Input }],
     xAxisTicks: [{ type: Input }],
     yAxisFormatString: [{ type: Input }],

@@ -14,6 +14,7 @@ export declare class PbdsDatavizLineComponent implements OnInit, OnDestroy, OnCh
     height: number;
     type: 'medium' | 'high' | 'debug';
     area: boolean;
+    xAxisType: 'date' | 'number' | 'string';
     xAxisFormatString: string;
     xAxisTicks: number;
     yAxisFormatString: string;
@@ -94,7 +95,7 @@ export declare class PbdsDatavizLineComponent implements OnInit, OnDestroy, OnCh
     legendMouseClick: (event: any, data: any) => void;
     mouserectMouseMove: (event: any, data: any) => boolean;
     mouserectMouseOut: (event: any, data: any) => void;
-    mouserectMouseClick: () => void;
+    mouserectMouseClick: (event: any) => void;
     private tooltipShow;
     private tooltipHide;
     private xAxisFormatter;
