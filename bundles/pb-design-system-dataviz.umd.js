@@ -1117,6 +1117,7 @@
             this.height = 400;
             this.type = 'medium'; // debug to show all chart options
             this.area = false;
+            this.xAxisType = 'date';
             this.xAxisFormatString = '';
             this.xAxisTicks = 6;
             this.yAxisFormatString = '';
@@ -1146,9 +1147,25 @@
             this.updateChart = function () {
                 _this.mouserect.data(_this.data);
                 // update the xScale
-                _this.xAxisScale.domain(d3Array.extent(_this.data.dates, function (d, i) {
-                    return d3TimeFormat.isoParse(d);
-                }));
+                if (_this.xAxisType === 'date') {
+                    _this.xAxisScale = d3Scale.scaleTime()
+                        .domain(d3Array.extent(_this.data.labels, function (d) {
+                        return d3TimeFormat.isoParse(d);
+                    }))
+                        .range([0, _this.width - _this.margin.left - _this.margin.right]);
+                }
+                else if (_this.xAxisType === 'number') {
+                    _this.xAxisScale = d3Scale.scaleLinear()
+                        .domain(d3Array.extent(_this.data.labels, function (d) {
+                        return d;
+                    }))
+                        .range([0, _this.width - _this.margin.left - _this.margin.right]);
+                }
+                else {
+                    _this.xAxisScale = d3Scale.scalePoint()
+                        .domain(_this.data.labels)
+                        .range([0, _this.width - _this.margin.left - _this.margin.right]);
+                }
                 // update the yScale
                 _this.yAxisScale
                     .domain([
@@ -1238,7 +1255,14 @@
                         .data(function (d) { return d.values; })
                         .join(function (enter) { return enter
                         .append('circle')
-                        .attr('cx', function (d, i) { return _this.xAxisScale(d3TimeFormat.isoParse(_this.data.dates[i])); })
+                        .attr('cx', function (d, i) {
+                        if (_this.xAxisType === 'date') {
+                            return _this.xAxisScale(d3TimeFormat.isoParse(_this.data.labels[i]));
+                        }
+                        else {
+                            return _this.xAxisScale(_this.data.labels[i]);
+                        }
+                    })
                         .attr('cy', function (d) { return _this.yAxisScale(0); })
                         .attr('r', _this.lineWidth * 2)
                         .style('stroke-width', _this.lineWidth)
@@ -1251,14 +1275,28 @@
                         .data(function (d) { return d.values; })
                         .join(function (enter) { return enter
                         .append('circle')
-                        .attr('cx', function (d, i) { return _this.xAxisScale(d3TimeFormat.isoParse(_this.data.dates[i])); })
+                        .attr('cx', function (d, i) {
+                        if (_this.xAxisType === 'date') {
+                            return _this.xAxisScale(d3TimeFormat.isoParse(_this.data.labels[i]));
+                        }
+                        else {
+                            return _this.xAxisScale(_this.data.labels[i]);
+                        }
+                    })
                         .attr('cy', function (d) { return _this.yAxisScale(d); })
                         .attr('r', _this.lineWidth * 2)
                         .style('stroke-width', _this.lineWidth); }, function (update) { return update.call(function (update) { return update
                         .transition()
                         .duration(1000)
                         .ease(d3Ease.easeQuadInOut)
-                        .attr('cx', function (d, i) { return _this.xAxisScale(d3TimeFormat.isoParse(_this.data.dates[i])); })
+                        .attr('cx', function (d, i) {
+                        if (_this.xAxisType === 'date') {
+                            return _this.xAxisScale(d3TimeFormat.isoParse(_this.data.labels[i]));
+                        }
+                        else {
+                            return _this.xAxisScale(_this.data.labels[i]);
+                        }
+                    })
                         .attr('cy', function (d) { return _this.yAxisScale(d); }); }); }, function (exit) { return exit.remove(); }); }, function (exit) { return exit.remove(); });
                 }
                 if (!_this.hideLegend) {
@@ -1384,27 +1422,65 @@
                 _this.clicked.emit({ event: event, data: data });
             };
             this.mouserectMouseMove = function (event, data) {
-                var mouseXDate = _this.xAxisScale.invert(d3Selection.pointer(event)[0]); // return date at mouse x position
-                var leftIndex = d3Array.bisectLeft(_this.data.dates, d3TimeFormat.isoFormat(mouseXDate)); // index of left closest date
-                // prevent error for 0 index
-                if (leftIndex === 0)
-                    return false;
-                var dateLower = new Date(_this.data.dates[leftIndex - 1]);
-                var dateUpper = new Date(_this.data.dates[leftIndex]);
-                var closestDate = +mouseXDate - +dateLower > +dateUpper - mouseXDate ? dateUpper : dateLower; // date mouse is closest to
-                var closestIndex = _this.data.dates.indexOf(d3TimeFormat.isoFormat(closestDate)); // which index the mouse is closest to
-                // console.log(+mouseXDate, leftIndex, +dateLower, +dateUpper, +closestDate, closestIndex);
+                var mouseX; // mouse x position
+                var lower;
+                var upper;
+                var closest;
+                var closestIndex;
+                var leftIndex = 0;
+                // handle string type, no invert function on scalePoint
+                if (_this.xAxisType === 'string') {
+                    mouseX = d3Selection.pointer(event)[0];
+                }
+                else {
+                    mouseX = _this.xAxisScale.invert(d3Selection.pointer(event)[0]);
+                }
+                // console.log(mouseX);
+                if (_this.xAxisType === 'date') {
+                    leftIndex = d3Array.bisectLeft(_this.data.labels, d3TimeFormat.isoFormat(mouseX));
+                    // prevent error for 0 index
+                    if (leftIndex === 0)
+                        return false;
+                    lower = new Date(_this.data.labels[leftIndex - 1]);
+                    upper = new Date(_this.data.labels[leftIndex]);
+                    closest = +mouseX - +lower > +upper - mouseX ? upper : lower; // date mouse is closest to
+                    closestIndex = _this.data.labels.indexOf(d3TimeFormat.isoFormat(closest)); // which index the mouse is closest to
+                    // console.log(+mouseXDate, leftIndex, +dateLower, +dateUpper, +closestDate, closestIndex);
+                }
+                else if (_this.xAxisType === 'number') {
+                    leftIndex = d3Array.bisectLeft(_this.data.labels, mouseX);
+                    // prevent error for 0 index
+                    if (leftIndex === 0)
+                        return false;
+                    lower = _this.data.labels[leftIndex - 1];
+                    upper = _this.data.labels[leftIndex];
+                    closest = +mouseX - +lower > +upper - mouseX ? upper : lower; // date mouse is closest to
+                    closestIndex = _this.data.labels.indexOf(closest); // which index the mouse is closest to
+                    // console.log(+mouseXDate, leftIndex, +lower, +upper, +closest, closestIndex);
+                }
+                else {
+                    var domain = _this.xAxisScale.domain();
+                    var range = _this.xAxisScale.range();
+                    var rangePoints = d3Array.range(range[0], range[1], _this.xAxisScale.step());
+                    rangePoints.push(range[1]);
+                    leftIndex = d3Array.bisect(rangePoints, mouseX);
+                    if (leftIndex === 0)
+                        return false;
+                    lower = rangePoints[leftIndex - 1];
+                    upper = rangePoints[leftIndex];
+                    closest = +mouseX - +lower > +upper - mouseX ? +upper : +lower;
+                    var rangeIndex = rangePoints.indexOf(closest);
+                    closest = domain[rangeIndex];
+                    closestIndex = _this.data.labels.indexOf(domain[rangeIndex]);
+                }
                 var circles = _this.svg.selectAll('.line-group').selectAll('circle');
                 circles.filter(function (d, i) { return i === closestIndex; }).classed('active', true);
                 circles.filter(function (d, i) { return i !== closestIndex; }).classed('active', false);
-                _this.tooltipLine
-                    .attr('x1', _this.xAxisScale(closestDate))
-                    .attr('x2', _this.xAxisScale(closestDate))
-                    .classed('active', true);
+                _this.tooltipLine.attr('x1', _this.xAxisScale(closest)).attr('x2', _this.xAxisScale(closest)).classed('active', true);
                 // console.log(this.tooltipLine.node().getBoundingClientRect(), this._scroll.getScrollPosition());
                 _this.tooltipShow(_this.tooltipLine.node(), closestIndex);
                 _this.mousedata = {
-                    date: closestDate,
+                    label: closest,
                     series: _this.data.series.map(function (d) {
                         return {
                             label: d.label,
@@ -1412,14 +1488,14 @@
                         };
                     })
                 };
-                _this.tooltipHovered.emit({ event: event, data: _this.mousedata });
+                _this.tooltipHovered.emit({ event: event, data: _this.mousedata }); // index of left closest date
             };
             this.mouserectMouseOut = function (event, data) {
                 _this.svg.selectAll('circle').classed('active', false);
                 _this.tooltipLine.classed('active', false);
                 _this.tooltipHide();
             };
-            this.mouserectMouseClick = function () {
+            this.mouserectMouseClick = function (event) {
                 _this.tooltipClicked.emit({ event: event, data: _this.mousedata });
             };
             this.tooltipShow = function (node, closestIndex) {
@@ -1432,8 +1508,17 @@
                 var position;
                 // console.log(scroll, mouserectDimensions, tooltipOffsetHeight, tooltipDimensions, dimensionCalculated, clientWidth);
                 _this.tooltip.select('.tooltip-header').html(function (d) {
-                    var parsedTime = d3TimeFormat.isoParse(_this.data.dates[closestIndex]);
-                    return _this.tooltipHeadingFormat(parsedTime);
+                    if (_this.xAxisType === 'date') {
+                        var parsedTime = d3TimeFormat.isoParse(_this.data.labels[closestIndex]);
+                        return _this.tooltipHeadingFormat(parsedTime);
+                    }
+                    else if (_this.xAxisType === 'number') {
+                        var heading = _this.data.labels[closestIndex];
+                        return _this.tooltipHeadingFormat(heading);
+                    }
+                    else {
+                        return _this.data.labels[closestIndex];
+                    }
                 });
                 _this.tooltip.selectAll('.tooltip-value').html(function (d, i) {
                     return _this.tooltipValueFormatType
@@ -1461,8 +1546,17 @@
                 _this.tooltip.style('opacity', 0);
             };
             this.xAxisFormatter = function (item) {
-                var parseDate = d3TimeFormat.isoParse(item);
-                return _this.xAxisFormat(parseDate);
+                if (_this.xAxisType === 'date') {
+                    var parseDate = d3TimeFormat.isoParse(item);
+                    return _this.xAxisFormat(parseDate);
+                }
+                else if (_this.xAxisType === 'number') {
+                    return _this.xAxisFormat(item);
+                }
+                else {
+                    return item;
+                    // return this.xAxisFormat(item);
+                }
             };
             this.yAxisFormatter = function (item) {
                 return _this.yAxisFormat(item);
@@ -1478,10 +1572,14 @@
             };
             this.clipPathId = nextId;
             // create formatters
-            this.xAxisFormat = d3TimeFormat.timeFormat(this.xAxisFormatString);
+            this.xAxisFormat =
+                this.xAxisType === 'date' ? d3TimeFormat.timeFormat(this.xAxisFormatString) : d3Format.format(this.xAxisFormatString);
             this.yAxisFormat = d3Format.format(this.yAxisFormatString);
             this.legendLabelFormat = this._dataviz.d3Format(this.legendLabelFormatType, this.legendLabelFormatString);
-            this.tooltipHeadingFormat = d3TimeFormat.timeFormat(this.tooltipHeadingFormatString);
+            this.tooltipHeadingFormat =
+                this.xAxisType === 'date'
+                    ? d3TimeFormat.timeFormat(this.tooltipHeadingFormatString)
+                    : d3Format.format(this.tooltipHeadingFormatString);
             this.tooltipLabelFormat = this._dataviz.d3Format(this.tooltipLabelFormatType, this.tooltipLabelFormatString);
             this.tooltipValueFormat = this._dataviz.d3Format(this.tooltipValueFormatType, this.tooltipValueFormatString);
             // defaults for all chart types
@@ -1527,7 +1625,17 @@
             }
             // define line
             this.d3line = d3Shape.line()
-                .x(function (d, i) { return _this.xAxisScale(d3TimeFormat.isoParse(_this.data.dates[i])); })
+                .x(function (d, i) {
+                if (_this.xAxisType === 'date') {
+                    return _this.xAxisScale(d3TimeFormat.isoParse(_this.data.labels[i]));
+                }
+                else if (_this.xAxisType === 'number') {
+                    return _this.xAxisScale(_this.data.labels[i]);
+                }
+                else {
+                    return _this.xAxisScale(_this.data.labels[i]);
+                }
+            })
                 .y(function (d) { return _this.yAxisScale(d); });
             // define line curve
             if (this.lineCurved) {
@@ -1536,7 +1644,17 @@
             // define area
             if (this.area) {
                 this.d3area = d3Shape.area()
-                    .x(function (d, i) { return _this.xAxisScale(d3TimeFormat.isoParse(_this.data.dates[i])); })
+                    .x(function (d, i) {
+                    if (_this.xAxisType === 'date') {
+                        return _this.xAxisScale(d3TimeFormat.isoParse(_this.data.labels[i]));
+                    }
+                    else if (_this.xAxisType === 'number') {
+                        return _this.xAxisScale(_this.data.labels[i]);
+                    }
+                    else {
+                        return _this.xAxisScale(_this.data.labels[i]);
+                    }
+                })
                     .y0(this.height)
                     .y1(function (d, i) { return _this.yAxisScale(d); });
                 if (this.lineCurved) {
@@ -1561,23 +1679,51 @@
                 .attr('class', 'mouserect')
                 .on('mousemove', function (event, data) { return _this.mouserectMouseMove(event, data); })
                 .on('mouseout', function (event, data) { return _this.mouserectMouseOut(event, data); })
-                .on('click', function (event, data) { return _this.mouserectMouseClick(); });
+                .on('click', function (event, data) { return _this.mouserectMouseClick(event); });
             this.tooltipLine = this.svg.append('line').attr('y1', 0).attr('y2', this.height).attr('class', 'tooltip-line');
             // define color range
             this.colorRange = d3Scale.scaleOrdinal().range(this._dataviz.getColors(false, this.theme));
             // add glow def
             this._dataviz.createGlowFilter(this.svg);
             // X AXIS
-            this.xAxisScale = d3Scale.scaleTime()
-                .domain(d3Array.extent(this.data.dates, function (d, i) {
-                return d3TimeFormat.isoParse(d);
-            }))
-                .range([0, this.width - this.margin.left - this.margin.right]);
-            this.xAxisCall = d3Axis.axisBottom(this.xAxisScale)
-                .ticks(+this.xAxisTicks)
-                .tickSize(this.xAxisTickSize)
-                .tickSizeOuter(this.xAxisTickSizeOuter)
-                .tickFormat(this.xAxisFormatter);
+            if (this.xAxisType === 'date') {
+                this.xAxisScale = d3Scale.scaleTime()
+                    .domain(d3Array.extent(this.data.labels, function (d) {
+                    return d3TimeFormat.isoParse(d);
+                }))
+                    .range([0, this.width - this.margin.left - this.margin.right]);
+            }
+            else if (this.xAxisType === 'number') {
+                this.xAxisScale = d3Scale.scaleLinear()
+                    .domain(d3Array.extent(this.data.labels, function (d) {
+                    return d;
+                }))
+                    .range([0, this.width - this.margin.left - this.margin.right]);
+            }
+            else {
+                this.xAxisScale = d3Scale.scalePoint()
+                    .domain(this.data.labels)
+                    .range([0, this.width - this.margin.left - this.margin.right]);
+            }
+            if (this.xAxisType === 'string') {
+                this.xAxisCall = d3Axis.axisBottom(this.xAxisScale)
+                    // .ticks(+this.xAxisTicks)
+                    .tickSize(this.xAxisTickSize)
+                    .tickSizeOuter(this.xAxisTickSizeOuter)
+                    .tickFormat(this.xAxisFormatter)
+                    .tickValues(this.xAxisScale.domain().filter(function (d, i) {
+                    // see https://github.com/d3/d3-scale/issues/182
+                    // d3 cannot determine number of strings to show on xaxis with scalePoint()
+                    return i % _this.xAxisTicks === 0;
+                }));
+            }
+            else {
+                this.xAxisCall = d3Axis.axisBottom(this.xAxisScale)
+                    .ticks(+this.xAxisTicks)
+                    .tickSize(this.xAxisTickSize)
+                    .tickSizeOuter(this.xAxisTickSizeOuter)
+                    .tickFormat(this.xAxisFormatter);
+            }
             this.xAxis = this.svg
                 .append('g')
                 .attr('class', 'axis axis-x')
@@ -1589,7 +1735,18 @@
                 .call(this.xAxisCall);
             // X GRIDLINES
             if (!this.hideXGrid) {
-                this.xGridCall = d3Axis.axisBottom(this.xAxisScale).tickSize(-this.height);
+                if (this.xAxisType === 'string') {
+                    this.xGridCall = d3Axis.axisBottom(this.xAxisScale)
+                        .tickSize(-this.height)
+                        .tickValues(this.xAxisScale.domain().filter(function (d, i) {
+                        // see https://github.com/d3/d3-scale/issues/182
+                        // d3 cannot determine number of strings to show on xaxis with scalePoint()
+                        return i % _this.xAxisTicks === 0;
+                    }));
+                }
+                else {
+                    this.xGridCall = d3Axis.axisBottom(this.xAxisScale).tickSize(-this.height);
+                }
                 this.xGrid = this.svg
                     .append('g')
                     .attr('class', 'grid grid-x')
@@ -1708,6 +1865,7 @@
         height: [{ type: i0.Input }],
         type: [{ type: i0.Input }],
         area: [{ type: i0.Input }],
+        xAxisType: [{ type: i0.Input }],
         xAxisFormatString: [{ type: i0.Input }],
         xAxisTicks: [{ type: i0.Input }],
         yAxisFormatString: [{ type: i0.Input }],
@@ -3271,10 +3429,16 @@
                 r[k] = a[j];
         return r;
     }
-    function __spreadArray(to, from) {
-        for (var i = 0, il = from.length, j = to.length; i < il; i++, j++)
-            to[j] = from[i];
-        return to;
+    function __spreadArray(to, from, pack) {
+        if (pack || arguments.length === 2)
+            for (var i = 0, l = from.length, ar; i < l; i++) {
+                if (ar || !(i in from)) {
+                    if (!ar)
+                        ar = Array.prototype.slice.call(from, 0, i);
+                    ar[i] = from[i];
+                }
+            }
+        return to.concat(ar || from);
     }
     function __await(v) {
         return this instanceof __await ? (this.v = v, this) : new __await(v);
@@ -3340,18 +3504,21 @@
     function __importDefault(mod) {
         return (mod && mod.__esModule) ? mod : { default: mod };
     }
-    function __classPrivateFieldGet(receiver, privateMap) {
-        if (!privateMap.has(receiver)) {
-            throw new TypeError("attempted to get private field on non-instance");
-        }
-        return privateMap.get(receiver);
+    function __classPrivateFieldGet(receiver, state, kind, f) {
+        if (kind === "a" && !f)
+            throw new TypeError("Private accessor was defined without a getter");
+        if (typeof state === "function" ? receiver !== state || !f : !state.has(receiver))
+            throw new TypeError("Cannot read private member from an object whose class did not declare it");
+        return kind === "m" ? f : kind === "a" ? f.call(receiver) : f ? f.value : state.get(receiver);
     }
-    function __classPrivateFieldSet(receiver, privateMap, value) {
-        if (!privateMap.has(receiver)) {
-            throw new TypeError("attempted to set private field on non-instance");
-        }
-        privateMap.set(receiver, value);
-        return value;
+    function __classPrivateFieldSet(receiver, state, value, kind, f) {
+        if (kind === "m")
+            throw new TypeError("Private method is not writable");
+        if (kind === "a" && !f)
+            throw new TypeError("Private accessor was defined without a setter");
+        if (typeof state === "function" ? receiver !== state || !f : !state.has(receiver))
+            throw new TypeError("Cannot write private member to an object whose class did not declare it");
+        return (kind === "a" ? f.call(receiver, value) : f ? f.value = value : state.set(receiver, value)), value;
     }
 
     var PbdsDatavizHeatmapComponent = /** @class */ (function () {

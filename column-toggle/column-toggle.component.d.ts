@@ -1,5 +1,4 @@
 import { EventEmitter } from '@angular/core';
-import { NgbDropdown } from '@ng-bootstrap/ng-bootstrap';
 import { PbdsColumnToggle } from './column-toggle.interfaces';
 export declare class PbdsColumnToggleComponent {
     label: string;
@@ -8,12 +7,14 @@ export declare class PbdsColumnToggleComponent {
     storagekey: string | false;
     minimum: number;
     toggle: EventEmitter<PbdsColumnToggle>;
+    isShowAll: boolean;
     columnStorage: any;
+    index: number;
     private totalSelected;
     ngOnInit(): void;
-    toggleColumn(column: any): void;
-    showAllColumns(columnToggleDropdown: NgbDropdown): void;
-    showSelectedIcon(column: any): "" | "invisible";
+    toggleColumn($event: any, column: any): void;
+    showAllColumns($event: Event): void;
     private setLocalStorage;
     private updateTotalSelected;
+    setShowAllChecked(): void;
 }

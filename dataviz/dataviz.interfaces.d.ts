@@ -16,7 +16,7 @@ export interface PbdsDatavizSparkline {
     length: number;
 }
 export interface PbdsDatavizLine {
-    dates: Array<string>;
+    labels: any[];
     series: Array<PbdsDatavizLineSeries>;
 }
 export interface PbdsDatavizLineSeries {

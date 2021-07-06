@@ -1,42 +1,44 @@
 # PB Design System 6
 
-This repo is for distribution of the Design System on `npm` using Bootstrap 4.5 and Angular 10.1.
+This repo is for distribution of the Design System on `npm` using Bootstrap 4.6.0 and Angular 11.2.14
 
-## npm Install
+## Installation
 
-You can install this package with `npm`:
+Install this package with `npm`:
 
 ```shell
 npm install pb-design-system --save
 ```
 
-or install a specific version:
+Also you will need to install Boostrap 4.6.0 and Angular Material 11:
 
 ```shell
-npm install pb-design-system@5.0.0 --save
+npm install bootstrap@4.6.0 @angular/material@11.2.11 --save
 ```
 
-## angular.json
+You will see warnings about peer dependencies (such as D3); those only need to be installed if you need them.
 
-Add your app's `styles.scss` after the Design System css file in the styles array
+## Configuring angular.json
+
+Add your app's `styles.scss` after the Design System css file in the styles array, as follows:
 
 ```json
 "styles": [
-  "../node_modules/pb-design-system/dist/css/designsystem.css",
+  "node_modules/@angular/material/prebuilt-themes/indigo-pink.css",
+  "node_modules/bootstrap/dist/css/bootstrap.min.css",
+  "node_modules/pb-design-system/dist/css/designsystem.css",
   "styles.scss"
 ],
 ```
 
-## Optional:
+## Optional Installs:
 
-To use Bootstrap 4's javascript components (dropdowns, tooltips, and/or popovers) you will also need to install Boostrap 4 `npm install bootstrap` and load its js files in the scripts array:
+To use Bootstrap 4's javascript components (header, dropdowns, tooltips, and/or popovers) you will also need to load its js files in the scripts array:
 
 ```json
  "scripts": [
-     "../node_modules/jquery/dist/jquery.slim.js",
-     "../node_modules/popper.js/dist/umd//popper.min.js",
-     "../node_modules/bootstrap/dist/js/bootstrap.js"
+     "node_modules/jquery/dist/jquery.slim.js",
+     "node_modules/popper.js/dist/umd/popper.min.js",
+     "node_modules/bootstrap/dist/js/bootstrap.js"
  ],
 ```
-
-**IMPORTANT: You do not need to load the Boostrap css files. They are compiled into the designsystem.css.**

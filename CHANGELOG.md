@@ -1,3 +1,55 @@
+# 6.7.0
+
+## Breaking Changes
+
+- Bootstrap SCSS in no longer compiled with the Design System SCSS. Therefore you need to **import the Bootstrap CSS file** in your `angular.json` "styles" array, like this:
+
+  ```
+      "styles": [
+                "node_modules/@angular/material/prebuilt-themes/indigo-pink.css",
+                "node_modules/bootstrap/dist/css/bootstrap.min.css",
+
+                ...
+
+                "src/sass/designsystem/designsystem.scss",
+                "src/styles.scss"
+              ],
+  ```
+
+- The SCSS files (\_mixins.scss and \_variables.scss) are no longer included as everyting is a CSS variable.
+  - If you used any imports like this in your components' scss files they need to be removed:
+    ```
+    @import '~pb-design-system/sass/mixins';
+    @import '~pb-design-system/sass/variables';
+    ```
+  - Convert any `$` variables to their css variable equivalent. For example:
+    `$font-family-brand-regular` would need to change to `var(--font_family_brand_regular)`. Note the names are the same but the new variables are snake-cased (`_`).
+- Support for PrimeNG < 10.0.0 has been removed. It was deprecated in 6.6. Please update to PrimeNG 10 or higher (11 recommended).
+- For D3 `PbdsDatavizLine` and `PbdsDatavizArea` charts:
+  - the `date` key is changed to `labels`.
+  - This allows x-axis labels to be dates, numbers, or strings, instead of only dates
+
+## Bug Fixes
+
+- The PBDS Date Range picker is now accessible; the popup list of date ranges can be navigated by keyboard.
+- Fixed styling of P-Chips component chips to match chips/tokens used elsewhere
+- Fixes to Table examples:
+  - Filter menus actually filter the sample data
+  - Pagination control now shows number of records
+- Date picker calendars start week on Sunday
+- Update column toggle menu styling
+- Accesibility fixes to Address Blocks
+- Fixed sizing of `btn-lg` class
+
+## Additions
+
+- You can now create an "unbranded" white-labelled theme of your own by using the included CSS template and instructions on the [Color Sets page](https://designsystem.pitneycloud.com/web/themes/colorsets).
+- Added PrimeNG Skeleton loaders.
+- Added a Header variation with carets next to drop-down menus
+- Added a "Back" version of Breadcrumbs
+
+---
+
 # 6.6.0
 
 ## Breaking Changes
