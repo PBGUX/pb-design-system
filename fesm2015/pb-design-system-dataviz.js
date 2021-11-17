@@ -1,4 +1,5 @@
-import { ɵɵdefineInjectable, Injectable, EventEmitter, Component, ChangeDetectionStrategy, ElementRef, HostBinding, Input, Output, ContentChild, NgModule } from '@angular/core';
+import * as i0 from '@angular/core';
+import { Injectable, EventEmitter, Component, ChangeDetectionStrategy, ElementRef, HostBinding, Input, Output, ContentChild, NgModule } from '@angular/core';
 import { ViewportScroller, Location, CommonModule } from '@angular/common';
 import { NgbTooltipModule } from '@ng-bootstrap/ng-bootstrap';
 import { pointer, select } from 'd3-selection';
@@ -12,7 +13,7 @@ import { min, max, extent, bisectLeft, range, bisect, sum } from 'd3-array';
 import { axisBottom, axisLeft } from 'd3-axis';
 import { easeQuadInOut, easeLinear } from 'd3-ease';
 import { geoMercator, geoAlbersUsa, geoAlbers, geoPath } from 'd3-geo';
-import { feature, mesh } from 'topojson-client';
+import * as topojson from 'topojson-client';
 
 class PbdsDatavizService {
     constructor() {
@@ -201,7 +202,7 @@ class PbdsDatavizService {
         return format$1;
     }
 }
-PbdsDatavizService.ɵprov = ɵɵdefineInjectable({ factory: function PbdsDatavizService_Factory() { return new PbdsDatavizService(); }, token: PbdsDatavizService, providedIn: "root" });
+PbdsDatavizService.ɵprov = i0.ɵɵdefineInjectable({ factory: function PbdsDatavizService_Factory() { return new PbdsDatavizService(); }, token: PbdsDatavizService, providedIn: "root" });
 PbdsDatavizService.decorators = [
     { type: Injectable, args: [{
                 providedIn: 'root'
@@ -3121,7 +3122,7 @@ class PbdsDatavizBubbleMapComponent {
         this.bubbleLabelFormat = this._dataviz.d3Format(this.bubbleLabelFormatType, this.bubbleLabelFormatString);
         this.tooltipValueFormat = this._dataviz.d3Format(this.tooltipValueFormatType, this.tooltipValueFormatString);
         // console.log('TOPOJSON: ', this.topojson);
-        this.topojsonFeature = feature(this.topojson, this.topojson.objects[this.feature]);
+        this.topojsonFeature = topojson.feature(this.topojson, this.topojson.objects[this.feature]);
         this.projection.fitSize([+this.width, +this.height], this.topojsonFeature);
         // console.log('TOPOJSON FEATURE: ', this.topojsonFeature);
         // console.log('MESH: ', topojson.mesh(this.topojson, this.topojson.objects[this.feature], (a, b) => a !== b));
@@ -3178,7 +3179,7 @@ class PbdsDatavizBubbleMapComponent {
         this.svg
             .append('path')
             .attr('class', 'mesh')
-            .datum(mesh(this.topojson, this.topojson.objects[this.feature], (a, b) => a !== b))
+            .datum(topojson.mesh(this.topojson, this.topojson.objects[this.feature], (a, b) => a !== b))
             .attr('d', this.geoPath);
         this.bubbleContainer = this.svg.append('g').attr('class', 'dots').style('color', this.color);
         this.updateChart();
@@ -3783,7 +3784,7 @@ class PbdsDatavizChoroplethMapComponent {
                 this.projection = geoMercator();
                 break;
         }
-        this.topojsonFeature = feature(this.topojson, this.topojson.objects[this.feature]);
+        this.topojsonFeature = topojson.feature(this.topojson, this.topojson.objects[this.feature]);
         this.projection.fitSize([+this.width, +this.height], this.topojsonFeature);
         if (this.scale) {
             this.projection.scale(+this.scale);
@@ -3828,7 +3829,7 @@ class PbdsDatavizChoroplethMapComponent {
         this.svg
             .append('path')
             .attr('class', 'mesh')
-            .datum(mesh(this.topojson, this.topojson.objects[this.mesh || this.feature], (a, b) => a !== b))
+            .datum(topojson.mesh(this.topojson, this.topojson.objects[this.mesh || this.feature], (a, b) => a !== b))
             .attr('d', this.geoPath);
         // legend
         if (!this.hideLegend) {

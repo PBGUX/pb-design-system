@@ -1,6 +1,7 @@
-import { ɵɵdefineInjectable, ɵɵinject, LOCALE_ID, Injectable, Inject, EventEmitter, Component, ChangeDetectionStrategy, ViewChild, Input, Output, NgModule } from '@angular/core';
+import * as i0 from '@angular/core';
+import { Injectable, Inject, LOCALE_ID, EventEmitter, Component, forwardRef, ChangeDetectionStrategy, ViewChild, Input, Output, NgModule } from '@angular/core';
 import { registerLocaleData, getLocaleDayNames, FormStyle, TranslationWidth, getLocaleMonthNames, getLocaleFirstDayOfWeek, getLocaleDateFormat, FormatWidth, formatDate, CommonModule } from '@angular/common';
-import { FormsModule } from '@angular/forms';
+import { NG_VALUE_ACCESSOR, FormsModule } from '@angular/forms';
 import { NgbDatepickerI18n, NgbDate, NgbCalendar, NgbDatepickerModule, NgbPopoverModule, NgbDropdownModule } from '@ng-bootstrap/ng-bootstrap';
 import { MatRadioModule } from '@angular/material/radio';
 import { A11yModule } from '@angular/cdk/a11y';
@@ -19,7 +20,7 @@ class PbdsDaterangeService {
         return this.locale;
     }
 }
-PbdsDaterangeService.ɵprov = ɵɵdefineInjectable({ factory: function PbdsDaterangeService_Factory() { return new PbdsDaterangeService(ɵɵinject(LOCALE_ID)); }, token: PbdsDaterangeService, providedIn: "root" });
+PbdsDaterangeService.ɵprov = i0.ɵɵdefineInjectable({ factory: function PbdsDaterangeService_Factory() { return new PbdsDaterangeService(i0.ɵɵinject(i0.LOCALE_ID)); }, token: PbdsDaterangeService, providedIn: "root" });
 PbdsDaterangeService.decorators = [
     { type: Injectable, args: [{
                 providedIn: 'root'
@@ -35,7 +36,7 @@ class CustomDatepickerI18n extends NgbDatepickerI18n {
         super();
         this.daterangeService = daterangeService;
     }
-    getWeekdayShortName(weekday) {
+    getWeekdayLabel(weekday) {
         // for ng-bootstrap, sunday number of 7 converted to 0
         weekday = weekday === 7 ? 0 : weekday;
         // console.log(
@@ -110,6 +111,8 @@ class PbdsDaterangePopoverComponent {
         this.firstDayOfWeek = getLocaleFirstDayOfWeek(this.daterangeService.getCurrentLocale());
         this.dateRange = '';
         this.isDatepickerVisible = false;
+        this.onTouched = () => { };
+        this.onChange = (obj) => { };
         this.presetSelect = ($event) => {
             if ($event.value === 'CUSTOM') {
                 this.presetSelected = 'CUSTOM';
@@ -121,6 +124,7 @@ class PbdsDaterangePopoverComponent {
         this.isHovered = (date) => this.fromDate && !this.toDate && this.hoveredDate && date.after(this.fromDate) && date.before(this.hoveredDate);
         this.isInside = (date) => date.after(this.fromDate) && date.before(this.toDate);
         this.isRange = (date) => date.equals(this.fromDate) || date.equals(this.toDate) || this.isInside(date) || this.isHovered(date);
+        this.writeValue(this.emitValue);
     }
     ngOnInit() {
         // china should start on a Monday, Angular locale returns incorrect 0
@@ -140,7 +144,32 @@ class PbdsDaterangePopoverComponent {
                 this.onApply(false);
             }
         }
-        this.setInputLabel();
+        this.onApply(false);
+    }
+    // programmatically writing the value
+    writeValue(value) {
+        if (value) {
+            // console.log('WRITE VALUE: ', value);
+            const filterIndex = this.filters.findIndex((filter) => {
+                return filter.field === value.filter;
+            });
+            this.fromDate = value.fromDate;
+            this.toDate = value.toDate;
+            this.formattedDate = value.formattedDate;
+            this.presetSelected = value.value;
+            this.selectedFilter = this.filters[filterIndex];
+            this.isDatepickerVisible = this.presetSelected === 'CUSTOM' ? true : false;
+            this.onApply();
+        }
+    }
+    // method to be triggered on UI change
+    registerOnChange(onChange) {
+        // console.log('ONCHANGE: ', this.emitValue);
+        this.onChange = onChange;
+    }
+    // method to be triggered on component touch
+    registerOnTouched(onTouched) {
+        this.onTouched = onTouched;
     }
     ngOnChanges(changes) {
         if (changes.filters && this.filters) {
@@ -169,17 +198,20 @@ class PbdsDaterangePopoverComponent {
             this.toDate = this.fromDate;
         }
         this.setInputLabel();
+        this.emitValue = {
+            fromDate: this.fromDate,
+            toDate: this.toDate,
+            formattedDate: this.formattedDate,
+            filter: this.filters && this.filters.length > 0 ? this.selectedFilter.field : null,
+            value: this.presetSelected
+        };
+        this.startDate = this.fromDate;
         if (shouldEmit) {
-            this.dateChange.emit({
-                fromDate: this.fromDate,
-                toDate: this.toDate,
-                formattedDate: this.formattedDate,
-                filter: this.filters && this.filters.length > 0 ? this.selectedFilter.field : null,
-                value: this.presetSelected
-            });
+            this.dateChange.emit(this.emitValue);
             (_a = this.datepickerPopup) === null || _a === void 0 ? void 0 : _a.close();
             this.ariaLabel = this.ariaLabelFormat();
         }
+        setTimeout(() => this.onChange(this.emitValue), 0);
     }
     onCancel() {
         this.datepickerPopup.close();
@@ -328,7 +360,14 @@ PbdsDaterangePopoverComponent.decorators = [
     { type: Component, args: [{
                 selector: 'pbds-daterange-popover',
                 template: "<div class=\"input-group pbds-daterange-popover\" *ngIf=\"displayInput; else daterangeButton\">\n  <input\n    *ngIf=\"displayInput\"\n    class=\"form-control\"\n    aria-label=\"Date\"\n    aria-readonly=\"true\"\n    [value]=\"dateRange\"\n    readonly=\"readonly\"\n    tabindex=\"-1\"\n  />\n\n  <div class=\"input-group-append\">\n    <ng-container *ngTemplateOutlet=\"daterangeButton\"></ng-container>\n  </div>\n</div>\n\n<ng-template #daterangeButton>\n  <button\n    class=\"btn btn-secondary\"\n    type=\"button\"\n    id=\"daterange-button\"\n    #datepickerPopup=\"ngbPopover\"\n    [ngbPopover]=\"daterangeContent\"\n    popoverClass=\"daterange-popover\"\n    autoClose=\"outside\"\n    [container]=\"container\"\n    [placement]=\"placement\"\n    [attr.aria-label]=\"ariaLabel\"\n  >\n    <i class=\"pbi-icon-mini pbi-calendar\" aria-hidden=\"true\"></i>\n  </button>\n</ng-template>\n\n<ng-template #daterangeContent>\n  <div class=\"d-block d-md-flex\" cdkTrapFocus cdkTrapFocusAutoCapture>\n    <div [hidden]=\"!isDatepickerVisible\">\n      <ngb-datepicker\n        #datepicker=\"ngbDatepicker\"\n        [displayMonths]=\"displayMonths\"\n        [minDate]=\"minDate\"\n        [maxDate]=\"maxDate\"\n        navigation=\"select\"\n        outsideDays=\"hidden\"\n        [firstDayOfWeek]=\"firstDayOfWeek\"\n        [showWeekdays]=\"true\"\n        [startDate]=\"startDate\"\n        [dayTemplate]=\"t\"\n        (dateSelect)=\"onDateSelection($event)\"\n      >\n      </ngb-datepicker>\n      <!--  -->\n\n      <ng-template #t let-date let-focused=\"focused\">\n        <span\n          class=\"custom-day\"\n          [class.focused]=\"focused\"\n          [class.range]=\"isRange(date)\"\n          [class.faded]=\"isHovered(date) || isInside(date)\"\n          (mouseenter)=\"hoveredDate = date\"\n          (mouseleave)=\"hoveredDate = null\"\n        >\n          {{ date.day }}\n        </span>\n      </ng-template>\n    </div>\n\n    <div class=\"d-flex flex-column justify-content-lg-between mt-md-0\" [ngClass]=\"{ 'ml-md-4': isDatepickerVisible }\">\n      <!-- filters -->\n      <div *ngIf=\"filters && filters.length > 0\" class=\"mb-3\" ngbDropdown>\n        <button class=\"btn btn-sm btn-secondary btn-block\" id=\"dateFilter\" ngbDropdownToggle>\n          {{ selectedFilter.label }}\n        </button>\n        <div ngbDropdownMenu aria-labelledby=\"dateFilter\">\n          <button\n            class=\"dropdown-item\"\n            type=\"button\"\n            *ngFor=\"let filter of filters; let index = index\"\n            (click)=\"onFilterChange(filter, index)\"\n          >\n            {{ filter.label }}\n          </button>\n        </div>\n      </div>\n\n      <!-- presets radio buttons-->\n      <div *ngIf=\"presets && filters\" class=\"flex-grow-1\">\n        <mat-radio-group\n          aria-label=\"Select an option\"\n          class=\"stacked-radio-group\"\n          name=\"presets\"\n          [(ngModel)]=\"presetSelected\"\n          (change)=\"presetSelect($event)\"\n        >\n          <mat-radio-button *ngFor=\"let preset of presets\" [value]=\"preset.value\">{{ preset.label }}</mat-radio-button>\n\n          <mat-radio-button *ngIf=\"showCustomPreset\" [value]=\"'CUSTOM'\" (change)=\"showDatepicker()\">{{\n            customRangeText\n          }}</mat-radio-button>\n        </mat-radio-group>\n      </div>\n\n      <!-- presets buttons-->\n      <div *ngIf=\"presets && !filters\" class=\"flex-grow-1\">\n        <button\n          type=\"button\"\n          class=\"btn btn-secondary btn-block btn-sm text-nowrap\"\n          *ngFor=\"let preset of presets\"\n          (click)=\"presetClick(preset)\"\n        >\n          {{ preset.label }}\n        </button>\n\n        <button\n          type=\"button\"\n          class=\"btn btn-secondary btn-block btn-sm text-nowrap\"\n          *ngIf=\"showCustomPreset\"\n          (click)=\"showDatepicker()\"\n        >\n          {{ customRangeText }}\n        </button>\n      </div>\n\n      <!-- buttons -->\n      <div *ngIf=\"filters || isDatepickerVisible\" class=\"d-flex justify-content-between mt-3\">\n        <button class=\"btn btn-primary btn-sm mr-1\" type=\"button\" (click)=\"onApply()\">\n          {{ applyText }}\n        </button>\n        <button class=\"btn btn-secondary btn-sm ml-1\" type=\"button\" (click)=\"onCancel()\">\n          {{ cancelText }}\n        </button>\n      </div>\n    </div>\n  </div>\n</ng-template>\n",
-                providers: [{ provide: NgbDatepickerI18n, useClass: CustomDatepickerI18n }],
+                providers: [
+                    { provide: NgbDatepickerI18n, useClass: CustomDatepickerI18n },
+                    {
+                        provide: NG_VALUE_ACCESSOR,
+                        useExisting: forwardRef(() => PbdsDaterangePopoverComponent),
+                        multi: true
+                    }
+                ],
                 changeDetection: ChangeDetectionStrategy.OnPush
             },] }
 ];

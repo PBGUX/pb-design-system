@@ -4,6 +4,29 @@
     (global = typeof globalThis !== 'undefined' ? globalThis : global || self, factory((global['pb-design-system'] = global['pb-design-system'] || {}, global['pb-design-system'].dataviz = {}), global.ng.core, global.ng.common, global['^7']['0']['0 || ^8']['0']['0'], global['d3-selection'], global['d3-scale'], global['d3-shape'], global['d3-interpolate'], global['d3-format'], global['d3-time-format'], global['^6']['2']['0'], global['d3-array'], global['d3-axis'], global['d3-ease'], global['d3-geo'], global['^3']['0']['0']));
 }(this, (function (exports, i0, common, ngBootstrap, d3Selection, d3Scale, d3Shape, d3Interpolate, d3Format, d3TimeFormat, d3, d3Array, d3Axis, d3Ease, d3Geo, topojson) { 'use strict';
 
+    function _interopNamespace(e) {
+        if (e && e.__esModule) return e;
+        var n = Object.create(null);
+        if (e) {
+            Object.keys(e).forEach(function (k) {
+                if (k !== 'default') {
+                    var d = Object.getOwnPropertyDescriptor(e, k);
+                    Object.defineProperty(n, k, d.get ? d : {
+                        enumerable: true,
+                        get: function () {
+                            return e[k];
+                        }
+                    });
+                }
+            });
+        }
+        n['default'] = e;
+        return Object.freeze(n);
+    }
+
+    var i0__namespace = /*#__PURE__*/_interopNamespace(i0);
+    var topojson__namespace = /*#__PURE__*/_interopNamespace(topojson);
+
     var PbdsDatavizService = /** @class */ (function () {
         function PbdsDatavizService() {
             var _this = this;
@@ -198,7 +221,7 @@
         };
         return PbdsDatavizService;
     }());
-    PbdsDatavizService.ɵprov = i0.ɵɵdefineInjectable({ factory: function PbdsDatavizService_Factory() { return new PbdsDatavizService(); }, token: PbdsDatavizService, providedIn: "root" });
+    PbdsDatavizService.ɵprov = i0__namespace.ɵɵdefineInjectable({ factory: function PbdsDatavizService_Factory() { return new PbdsDatavizService(); }, token: PbdsDatavizService, providedIn: "root" });
     PbdsDatavizService.decorators = [
         { type: i0.Injectable, args: [{
                     providedIn: 'root'
@@ -3086,7 +3109,7 @@
             this.bubbleLabelFormat = this._dataviz.d3Format(this.bubbleLabelFormatType, this.bubbleLabelFormatString);
             this.tooltipValueFormat = this._dataviz.d3Format(this.tooltipValueFormatType, this.tooltipValueFormatString);
             // console.log('TOPOJSON: ', this.topojson);
-            this.topojsonFeature = topojson.feature(this.topojson, this.topojson.objects[this.feature]);
+            this.topojsonFeature = topojson__namespace.feature(this.topojson, this.topojson.objects[this.feature]);
             this.projection.fitSize([+this.width, +this.height], this.topojsonFeature);
             // console.log('TOPOJSON FEATURE: ', this.topojsonFeature);
             // console.log('MESH: ', topojson.mesh(this.topojson, this.topojson.objects[this.feature], (a, b) => a !== b));
@@ -3143,7 +3166,7 @@
             this.svg
                 .append('path')
                 .attr('class', 'mesh')
-                .datum(topojson.mesh(this.topojson, this.topojson.objects[this.feature], function (a, b) { return a !== b; }))
+                .datum(topojson__namespace.mesh(this.topojson, this.topojson.objects[this.feature], function (a, b) { return a !== b; }))
                 .attr('d', this.geoPath);
             this.bubbleContainer = this.svg.append('g').attr('class', 'dots').style('color', this.color);
             this.updateChart();
@@ -3438,7 +3461,7 @@
                     ar[i] = from[i];
                 }
             }
-        return to.concat(ar || from);
+        return to.concat(ar || Array.prototype.slice.call(from));
     }
     function __await(v) {
         return this instanceof __await ? (this.v = v, this) : new __await(v);
@@ -3797,8 +3820,8 @@
             }
             // console.log(colors, colorDomain, colorValues, this.scale, this.colorRange, this.colorDomain);
             // define axis labels
-            var xAxisLabels = __spread(new Set(this.data.map(function (d) { return d.xLabel; })));
-            var yAxisLabels = __spread(new Set(this.data.map(function (d) { return d.yLabel; }))).reverse();
+            var xAxisLabels = __spreadArray([], __read(new Set(this.data.map(function (d) { return d.xLabel; }))));
+            var yAxisLabels = __spreadArray([], __read(new Set(this.data.map(function (d) { return d.yLabel; })))).reverse();
             // X axis
             this.xAxisScale = d3Scale.scaleBand()
                 .domain(xAxisLabels)
@@ -4068,7 +4091,7 @@
                     this.projection = d3Geo.geoMercator();
                     break;
             }
-            this.topojsonFeature = topojson.feature(this.topojson, this.topojson.objects[this.feature]);
+            this.topojsonFeature = topojson__namespace.feature(this.topojson, this.topojson.objects[this.feature]);
             this.projection.fitSize([+this.width, +this.height], this.topojsonFeature);
             if (this.scale) {
                 this.projection.scale(+this.scale);
@@ -4113,7 +4136,7 @@
             this.svg
                 .append('path')
                 .attr('class', 'mesh')
-                .datum(topojson.mesh(this.topojson, this.topojson.objects[this.mesh || this.feature], function (a, b) { return a !== b; }))
+                .datum(topojson__namespace.mesh(this.topojson, this.topojson.objects[this.mesh || this.feature], function (a, b) { return a !== b; }))
                 .attr('d', this.geoPath);
             // legend
             if (!this.hideLegend) {
@@ -5209,7 +5232,7 @@
             var sumValues = d3Array.sum(this.data, function (d) { return d.value; });
             var isLastBarZero = this.data[this.data.length - 1].value === 0 || this.data[this.data.length - 1].value === null ? true : false;
             var lastBarZeroCount = 0;
-            var cloneData = __spread(this.data);
+            var cloneData = __spreadArray([], __read(this.data));
             var isLast = false;
             cloneData.reverse().forEach(function (value, index, array) {
                 if ((value.value === 0 || value.value === null) && !isLast) {

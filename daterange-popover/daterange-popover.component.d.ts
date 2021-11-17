@@ -1,16 +1,17 @@
-import { OnInit, EventEmitter, OnChanges, SimpleChanges } from '@angular/core';
-import { NgbDate, NgbCalendar, NgbDatepickerI18n, NgbDateStruct } from '@ng-bootstrap/ng-bootstrap';
-import { PbdsDaterangePreset, PbdsDaterangePresetValue, PbdsDaterangeFilter, PbdsDaterangeChange, PbdsDaterangePlacement } from './daterange-popover.interfaces';
+import { EventEmitter, OnChanges, OnInit, SimpleChanges } from '@angular/core';
+import { ControlValueAccessor } from '@angular/forms';
+import { NgbCalendar, NgbDate, NgbDatepickerI18n, NgbDateStruct } from '@ng-bootstrap/ng-bootstrap';
+import { PbdsDaterangeChange, PbdsDaterangeFilter, PbdsDaterangePlacement, PbdsDaterangePreset, PbdsDaterangePresetValue } from './daterange-popover.interfaces';
 import { PbdsDaterangeService } from './daterange-popover.service';
 export declare class CustomDatepickerI18n extends NgbDatepickerI18n {
     daterangeService: PbdsDaterangeService;
     constructor(daterangeService: PbdsDaterangeService);
-    getWeekdayShortName(weekday: number): string;
+    getWeekdayLabel(weekday: number): string;
     getMonthShortName(month: number): string;
     getMonthFullName(month: number): string;
     getDayAriaLabel(date: NgbDateStruct): string;
 }
-export declare class PbdsDaterangePopoverComponent implements OnInit, OnChanges {
+export declare class PbdsDaterangePopoverComponent implements OnInit, OnChanges, ControlValueAccessor {
     private calendar;
     private daterangeService;
     private datepickerPopup;
@@ -42,8 +43,14 @@ export declare class PbdsDaterangePopoverComponent implements OnInit, OnChanges 
     selectedFilter: any;
     startDate: NgbDate;
     formattedDate: any;
+    emitValue: PbdsDaterangeChange;
+    private onTouched;
+    private onChange;
     constructor(calendar: NgbCalendar, daterangeService: PbdsDaterangeService);
     ngOnInit(): void;
+    writeValue(value: any): void;
+    registerOnChange(onChange: any): void;
+    registerOnTouched(onTouched: () => void): void;
     ngOnChanges(changes: SimpleChanges): void;
     onApply(shouldEmit?: boolean): void;
     onCancel(): void;

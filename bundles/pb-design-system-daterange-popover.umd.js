@@ -4,6 +4,28 @@
     (global = typeof globalThis !== 'undefined' ? globalThis : global || self, factory((global['pb-design-system'] = global['pb-design-system'] || {}, global['pb-design-system']['daterange-popover'] = {}), global.ng.core, global.ng.common, global.ng.forms, global['^7']['0']['0 || ^8']['0']['0'], global.ng.material.radio, global.ng.cdk.a11y));
 }(this, (function (exports, i0, common, forms, ngBootstrap, radio, a11y) { 'use strict';
 
+    function _interopNamespace(e) {
+        if (e && e.__esModule) return e;
+        var n = Object.create(null);
+        if (e) {
+            Object.keys(e).forEach(function (k) {
+                if (k !== 'default') {
+                    var d = Object.getOwnPropertyDescriptor(e, k);
+                    Object.defineProperty(n, k, d.get ? d : {
+                        enumerable: true,
+                        get: function () {
+                            return e[k];
+                        }
+                    });
+                }
+            });
+        }
+        n['default'] = e;
+        return Object.freeze(n);
+    }
+
+    var i0__namespace = /*#__PURE__*/_interopNamespace(i0);
+
     /*! *****************************************************************************
     Copyright (c) Microsoft Corporation.
 
@@ -239,7 +261,7 @@
                     ar[i] = from[i];
                 }
             }
-        return to.concat(ar || from);
+        return to.concat(ar || Array.prototype.slice.call(from));
     }
     function __await(v) {
         return this instanceof __await ? (this.v = v, this) : new __await(v);
@@ -337,7 +359,7 @@
         };
         return PbdsDaterangeService;
     }());
-    PbdsDaterangeService.ɵprov = i0.ɵɵdefineInjectable({ factory: function PbdsDaterangeService_Factory() { return new PbdsDaterangeService(i0.ɵɵinject(i0.LOCALE_ID)); }, token: PbdsDaterangeService, providedIn: "root" });
+    PbdsDaterangeService.ɵprov = i0__namespace.ɵɵdefineInjectable({ factory: function PbdsDaterangeService_Factory() { return new PbdsDaterangeService(i0__namespace.ɵɵinject(i0__namespace.LOCALE_ID)); }, token: PbdsDaterangeService, providedIn: "root" });
     PbdsDaterangeService.decorators = [
         { type: i0.Injectable, args: [{
                     providedIn: 'root'
@@ -355,7 +377,7 @@
             _this.daterangeService = daterangeService;
             return _this;
         }
-        CustomDatepickerI18n.prototype.getWeekdayShortName = function (weekday) {
+        CustomDatepickerI18n.prototype.getWeekdayLabel = function (weekday) {
             // for ng-bootstrap, sunday number of 7 converted to 0
             weekday = weekday === 7 ? 0 : weekday;
             // console.log(
@@ -432,6 +454,8 @@
             this.firstDayOfWeek = common.getLocaleFirstDayOfWeek(this.daterangeService.getCurrentLocale());
             this.dateRange = '';
             this.isDatepickerVisible = false;
+            this.onTouched = function () { };
+            this.onChange = function (obj) { };
             this.presetSelect = function ($event) {
                 if ($event.value === 'CUSTOM') {
                     _this.presetSelected = 'CUSTOM';
@@ -443,6 +467,7 @@
             this.isHovered = function (date) { return _this.fromDate && !_this.toDate && _this.hoveredDate && date.after(_this.fromDate) && date.before(_this.hoveredDate); };
             this.isInside = function (date) { return date.after(_this.fromDate) && date.before(_this.toDate); };
             this.isRange = function (date) { return date.equals(_this.fromDate) || date.equals(_this.toDate) || _this.isInside(date) || _this.isHovered(date); };
+            this.writeValue(this.emitValue);
         }
         PbdsDaterangePopoverComponent.prototype.ngOnInit = function () {
             var _this = this;
@@ -463,7 +488,32 @@
                     this.onApply(false);
                 }
             }
-            this.setInputLabel();
+            this.onApply(false);
+        };
+        // programmatically writing the value
+        PbdsDaterangePopoverComponent.prototype.writeValue = function (value) {
+            if (value) {
+                // console.log('WRITE VALUE: ', value);
+                var filterIndex = this.filters.findIndex(function (filter) {
+                    return filter.field === value.filter;
+                });
+                this.fromDate = value.fromDate;
+                this.toDate = value.toDate;
+                this.formattedDate = value.formattedDate;
+                this.presetSelected = value.value;
+                this.selectedFilter = this.filters[filterIndex];
+                this.isDatepickerVisible = this.presetSelected === 'CUSTOM' ? true : false;
+                this.onApply();
+            }
+        };
+        // method to be triggered on UI change
+        PbdsDaterangePopoverComponent.prototype.registerOnChange = function (onChange) {
+            // console.log('ONCHANGE: ', this.emitValue);
+            this.onChange = onChange;
+        };
+        // method to be triggered on component touch
+        PbdsDaterangePopoverComponent.prototype.registerOnTouched = function (onTouched) {
+            this.onTouched = onTouched;
         };
         PbdsDaterangePopoverComponent.prototype.ngOnChanges = function (changes) {
             var _this = this;
@@ -487,6 +537,7 @@
             this.setInputLabel();
         };
         PbdsDaterangePopoverComponent.prototype.onApply = function (shouldEmit) {
+            var _this = this;
             if (shouldEmit === void 0) { shouldEmit = true; }
             var _a;
             // if only a CUSTOM start date is selected, set the end date to the start date (i.e select a single day)
@@ -494,17 +545,20 @@
                 this.toDate = this.fromDate;
             }
             this.setInputLabel();
+            this.emitValue = {
+                fromDate: this.fromDate,
+                toDate: this.toDate,
+                formattedDate: this.formattedDate,
+                filter: this.filters && this.filters.length > 0 ? this.selectedFilter.field : null,
+                value: this.presetSelected
+            };
+            this.startDate = this.fromDate;
             if (shouldEmit) {
-                this.dateChange.emit({
-                    fromDate: this.fromDate,
-                    toDate: this.toDate,
-                    formattedDate: this.formattedDate,
-                    filter: this.filters && this.filters.length > 0 ? this.selectedFilter.field : null,
-                    value: this.presetSelected
-                });
+                this.dateChange.emit(this.emitValue);
                 (_a = this.datepickerPopup) === null || _a === void 0 ? void 0 : _a.close();
                 this.ariaLabel = this.ariaLabelFormat();
             }
+            setTimeout(function () { return _this.onChange(_this.emitValue); }, 0);
         };
         PbdsDaterangePopoverComponent.prototype.onCancel = function () {
             this.datepickerPopup.close();
@@ -655,7 +709,14 @@
         { type: i0.Component, args: [{
                     selector: 'pbds-daterange-popover',
                     template: "<div class=\"input-group pbds-daterange-popover\" *ngIf=\"displayInput; else daterangeButton\">\n  <input\n    *ngIf=\"displayInput\"\n    class=\"form-control\"\n    aria-label=\"Date\"\n    aria-readonly=\"true\"\n    [value]=\"dateRange\"\n    readonly=\"readonly\"\n    tabindex=\"-1\"\n  />\n\n  <div class=\"input-group-append\">\n    <ng-container *ngTemplateOutlet=\"daterangeButton\"></ng-container>\n  </div>\n</div>\n\n<ng-template #daterangeButton>\n  <button\n    class=\"btn btn-secondary\"\n    type=\"button\"\n    id=\"daterange-button\"\n    #datepickerPopup=\"ngbPopover\"\n    [ngbPopover]=\"daterangeContent\"\n    popoverClass=\"daterange-popover\"\n    autoClose=\"outside\"\n    [container]=\"container\"\n    [placement]=\"placement\"\n    [attr.aria-label]=\"ariaLabel\"\n  >\n    <i class=\"pbi-icon-mini pbi-calendar\" aria-hidden=\"true\"></i>\n  </button>\n</ng-template>\n\n<ng-template #daterangeContent>\n  <div class=\"d-block d-md-flex\" cdkTrapFocus cdkTrapFocusAutoCapture>\n    <div [hidden]=\"!isDatepickerVisible\">\n      <ngb-datepicker\n        #datepicker=\"ngbDatepicker\"\n        [displayMonths]=\"displayMonths\"\n        [minDate]=\"minDate\"\n        [maxDate]=\"maxDate\"\n        navigation=\"select\"\n        outsideDays=\"hidden\"\n        [firstDayOfWeek]=\"firstDayOfWeek\"\n        [showWeekdays]=\"true\"\n        [startDate]=\"startDate\"\n        [dayTemplate]=\"t\"\n        (dateSelect)=\"onDateSelection($event)\"\n      >\n      </ngb-datepicker>\n      <!--  -->\n\n      <ng-template #t let-date let-focused=\"focused\">\n        <span\n          class=\"custom-day\"\n          [class.focused]=\"focused\"\n          [class.range]=\"isRange(date)\"\n          [class.faded]=\"isHovered(date) || isInside(date)\"\n          (mouseenter)=\"hoveredDate = date\"\n          (mouseleave)=\"hoveredDate = null\"\n        >\n          {{ date.day }}\n        </span>\n      </ng-template>\n    </div>\n\n    <div class=\"d-flex flex-column justify-content-lg-between mt-md-0\" [ngClass]=\"{ 'ml-md-4': isDatepickerVisible }\">\n      <!-- filters -->\n      <div *ngIf=\"filters && filters.length > 0\" class=\"mb-3\" ngbDropdown>\n        <button class=\"btn btn-sm btn-secondary btn-block\" id=\"dateFilter\" ngbDropdownToggle>\n          {{ selectedFilter.label }}\n        </button>\n        <div ngbDropdownMenu aria-labelledby=\"dateFilter\">\n          <button\n            class=\"dropdown-item\"\n            type=\"button\"\n            *ngFor=\"let filter of filters; let index = index\"\n            (click)=\"onFilterChange(filter, index)\"\n          >\n            {{ filter.label }}\n          </button>\n        </div>\n      </div>\n\n      <!-- presets radio buttons-->\n      <div *ngIf=\"presets && filters\" class=\"flex-grow-1\">\n        <mat-radio-group\n          aria-label=\"Select an option\"\n          class=\"stacked-radio-group\"\n          name=\"presets\"\n          [(ngModel)]=\"presetSelected\"\n          (change)=\"presetSelect($event)\"\n        >\n          <mat-radio-button *ngFor=\"let preset of presets\" [value]=\"preset.value\">{{ preset.label }}</mat-radio-button>\n\n          <mat-radio-button *ngIf=\"showCustomPreset\" [value]=\"'CUSTOM'\" (change)=\"showDatepicker()\">{{\n            customRangeText\n          }}</mat-radio-button>\n        </mat-radio-group>\n      </div>\n\n      <!-- presets buttons-->\n      <div *ngIf=\"presets && !filters\" class=\"flex-grow-1\">\n        <button\n          type=\"button\"\n          class=\"btn btn-secondary btn-block btn-sm text-nowrap\"\n          *ngFor=\"let preset of presets\"\n          (click)=\"presetClick(preset)\"\n        >\n          {{ preset.label }}\n        </button>\n\n        <button\n          type=\"button\"\n          class=\"btn btn-secondary btn-block btn-sm text-nowrap\"\n          *ngIf=\"showCustomPreset\"\n          (click)=\"showDatepicker()\"\n        >\n          {{ customRangeText }}\n        </button>\n      </div>\n\n      <!-- buttons -->\n      <div *ngIf=\"filters || isDatepickerVisible\" class=\"d-flex justify-content-between mt-3\">\n        <button class=\"btn btn-primary btn-sm mr-1\" type=\"button\" (click)=\"onApply()\">\n          {{ applyText }}\n        </button>\n        <button class=\"btn btn-secondary btn-sm ml-1\" type=\"button\" (click)=\"onCancel()\">\n          {{ cancelText }}\n        </button>\n      </div>\n    </div>\n  </div>\n</ng-template>\n",
-                    providers: [{ provide: ngBootstrap.NgbDatepickerI18n, useClass: CustomDatepickerI18n }],
+                    providers: [
+                        { provide: ngBootstrap.NgbDatepickerI18n, useClass: CustomDatepickerI18n },
+                        {
+                            provide: forms.NG_VALUE_ACCESSOR,
+                            useExisting: i0.forwardRef(function () { return PbdsDaterangePopoverComponent; }),
+                            multi: true
+                        }
+                    ],
                     changeDetection: i0.ChangeDetectionStrategy.OnPush
                 },] }
     ];

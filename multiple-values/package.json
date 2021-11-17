@@ -1,0 +1,11 @@
+{
+  "main": "../bundles/pb-design-system-multiple-values.umd.js",
+  "module": "../fesm2015/pb-design-system-multiple-values.js",
+  "es2015": "../fesm2015/pb-design-system-multiple-values.js",
+  "esm2015": "../esm2015/multiple-values/pb-design-system-multiple-values.js",
+  "fesm2015": "../fesm2015/pb-design-system-multiple-values.js",
+  "typings": "pb-design-system-multiple-values.d.ts",
+  "metadata": "pb-design-system-multiple-values.metadata.json",
+  "sideEffects": false,
+  "name": "pb-design-system/multiple-values"
+}
