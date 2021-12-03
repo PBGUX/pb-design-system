@@ -1,11 +1,10 @@
 {
-  "main": "../bundles/pb-design-system-header-shadow.umd.js",
-  "module": "../fesm2015/pb-design-system-header-shadow.js",
-  "es2015": "../fesm2015/pb-design-system-header-shadow.js",
-  "esm2015": "../esm2015/header-shadow/pb-design-system-header-shadow.js",
-  "fesm2015": "../fesm2015/pb-design-system-header-shadow.js",
+  "module": "../fesm2015/pb-design-system-header-shadow.mjs",
+  "es2020": "../fesm2020/pb-design-system-header-shadow.mjs",
+  "esm2020": "../esm2020/header-shadow/pb-design-system-header-shadow.mjs",
+  "fesm2020": "../fesm2020/pb-design-system-header-shadow.mjs",
+  "fesm2015": "../fesm2015/pb-design-system-header-shadow.mjs",
   "typings": "pb-design-system-header-shadow.d.ts",
-  "metadata": "pb-design-system-header-shadow.metadata.json",
   "sideEffects": false,
   "name": "pb-design-system/header-shadow"
 }

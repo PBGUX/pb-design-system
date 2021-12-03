@@ -1,5 +1,6 @@
 import { ElementRef, EventEmitter, OnInit } from '@angular/core';
 import { ControlValueAccessor } from '@angular/forms';
+import * as i0 from "@angular/core";
 export interface PbdsMultipleValuesSubmit {
     event: Event;
     value: string[];
@@ -68,4 +69,6 @@ export declare class PbdsMultipleValuesDirective implements ControlValueAccessor
      * @returns {string} String with the following removed: divs, commas, spaces, tabs, empty lines, non-breaking spaces
      */
     private clean;
+    static ɵfac: i0.ɵɵFactoryDeclaration<PbdsMultipleValuesDirective, never>;
+    static ɵdir: i0.ɵɵDirectiveDeclaration<PbdsMultipleValuesDirective, "[pbdsMultipleValues]", ["PbdsMultipleValues"], { "delimiters": "delimiters"; "delimetersSwitches": "delimetersSwitches"; "replacements": "replacements"; "replacementsSwtiches": "replacementsSwtiches"; "placeholder": "placeholder"; "submitOnEnter": "submitOnEnter"; "maximumHeight": "maximumHeight"; }, { "submit": "submit"; }, never>;
 }

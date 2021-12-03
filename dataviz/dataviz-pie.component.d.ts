@@ -1,6 +1,7 @@
 import { OnInit, ElementRef, OnChanges, SimpleChanges, EventEmitter, OnDestroy } from '@angular/core';
 import { PbdsDatavizService } from './dataviz.service';
 import { PbdsDatavizPie } from './dataviz.interfaces';
+import * as i0 from "@angular/core";
 export declare class PbdsDatavizPieComponent implements OnInit, OnChanges, OnDestroy {
     private _dataviz;
     private _element;
@@ -55,4 +56,6 @@ export declare class PbdsDatavizPieComponent implements OnInit, OnChanges, OnDes
     private tooltipMove;
     private tooltipHide;
     private tooltipSetPosition;
+    static ɵfac: i0.ɵɵFactoryDeclaration<PbdsDatavizPieComponent, never>;
+    static ɵcmp: i0.ɵɵComponentDeclaration<PbdsDatavizPieComponent, "pbds-dataviz-pie", never, { "data": "data"; "width": "width"; "type": "type"; "monochrome": "monochrome"; "legendLabelFormatType": "legendLabelFormatType"; "legendLabelFormatString": "legendLabelFormatString"; "legendValueFormatString": "legendValueFormatString"; "tooltipLabelFormatType": "tooltipLabelFormatType"; "tooltipLabelFormatString": "tooltipLabelFormatString"; "tooltipValueFormatString": "tooltipValueFormatString"; "theme": "theme"; }, { "hovered": "hovered"; "clicked": "clicked"; }, never, never>;
 }

@@ -1,3 +1,11 @@
+# 6.8.1
+
+## Changes
+
+- Make p-table sort icons inline to improve line break behavior
+
+---
+
 # 6.8.0
 
 ## Changes

@@ -1,5 +1,6 @@
 import { EventEmitter } from '@angular/core';
 import { PbdsColumnToggle } from './column-toggle.interfaces';
+import * as i0 from "@angular/core";
 export declare class PbdsColumnToggleComponent {
     label: string;
     showAllLabel: string;
@@ -17,4 +18,6 @@ export declare class PbdsColumnToggleComponent {
     private setLocalStorage;
     private updateTotalSelected;
     setShowAllChecked(): void;
+    static ɵfac: i0.ɵɵFactoryDeclaration<PbdsColumnToggleComponent, never>;
+    static ɵcmp: i0.ɵɵComponentDeclaration<PbdsColumnToggleComponent, "pbds-column-toggle", never, { "label": "label"; "showAllLabel": "showAllLabel"; "columns": "columns"; "storagekey": "storagekey"; "minimum": "minimum"; }, { "toggle": "toggle"; }, never, never>;
 }

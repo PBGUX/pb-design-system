@@ -1,6 +1,6 @@
 {
   "name": "pb-design-system",
-  "version": "6.8.0",
+  "version": "6.8.1",
   "description": "Pitney Bowes Design System",
   "repository": {
     "type": "git",
@@ -12,24 +12,100 @@
     "url": "https://github.com/PBGUX/pb-design-system/issues"
   },
   "homepage": "https://github.com/PBGUX/pb-design-system",
-  "module": "fesm2015/pb-design-system.js",
+  "module": "fesm2015/pb-design-system.mjs",
   "typings": "pb-design-system.d.ts",
   "peerDependencies": {
-    "@angular/common": "^10.0.0 || ^11.0.0 ||^12.0.0",
-    "@angular/core": "^10.0.0 || ^11.0.0 ||^12.0.0",
-    "@angular/cdk": "^10.0.0 || ^11.0.0 ||^12.0.0",
-    "@angular/material": "^11.0.0 ||^12.0.0",
+    "@angular/common": "^10.0.0 || ^11.0.0 ||^12.0.0 || ^13.0.0",
+    "@angular/core": "^10.0.0 || ^11.0.0 ||^12.0.0 || ^13.0.0",
+    "@angular/cdk": "^10.0.0 || ^11.0.0 ||^12.0.0 || ^13.0.0",
+    "@angular/material": "^11.0.0 ||^12.0.0 || ^13.0.0",
     "@ng-bootstrap/ng-bootstrap": "^10.0.0",
     "d3": "^6.2.0 || ^7.0.0",
     "topojson-client": "^3.0.0"
   },
   "dependencies": {
-    "tslib": "^2.2.0"
+    "tslib": "^2.3.0"
   },
-  "main": "bundles/pb-design-system.umd.js",
-  "es2015": "fesm2015/pb-design-system.js",
-  "esm2015": "esm2015/pb-design-system.js",
-  "fesm2015": "fesm2015/pb-design-system.js",
-  "metadata": "pb-design-system.metadata.json",
+  "es2020": "fesm2020/pb-design-system.mjs",
+  "esm2020": "esm2020/pb-design-system.mjs",
+  "fesm2020": "fesm2020/pb-design-system.mjs",
+  "fesm2015": "fesm2015/pb-design-system.mjs",
+  "exports": {
+    "./package.json": {
+      "default": "./package.json"
+    },
+    ".": {
+      "types": "./pb-design-system.d.ts",
+      "esm2020": "./esm2020/pb-design-system.mjs",
+      "es2020": "./fesm2020/pb-design-system.mjs",
+      "es2015": "./fesm2015/pb-design-system.mjs",
+      "node": "./fesm2015/pb-design-system.mjs",
+      "default": "./fesm2020/pb-design-system.mjs"
+    },
+    "./column-toggle": {
+      "types": "./column-toggle/pb-design-system-column-toggle.d.ts",
+      "esm2020": "./esm2020/column-toggle/pb-design-system-column-toggle.mjs",
+      "es2020": "./fesm2020/pb-design-system-column-toggle.mjs",
+      "es2015": "./fesm2015/pb-design-system-column-toggle.mjs",
+      "node": "./fesm2015/pb-design-system-column-toggle.mjs",
+      "default": "./fesm2020/pb-design-system-column-toggle.mjs"
+    },
+    "./dataviz": {
+      "types": "./dataviz/pb-design-system-dataviz.d.ts",
+      "esm2020": "./esm2020/dataviz/pb-design-system-dataviz.mjs",
+      "es2020": "./fesm2020/pb-design-system-dataviz.mjs",
+      "es2015": "./fesm2015/pb-design-system-dataviz.mjs",
+      "node": "./fesm2015/pb-design-system-dataviz.mjs",
+      "default": "./fesm2020/pb-design-system-dataviz.mjs"
+    },
+    "./daterange-popover": {
+      "types": "./daterange-popover/pb-design-system-daterange-popover.d.ts",
+      "esm2020": "./esm2020/daterange-popover/pb-design-system-daterange-popover.mjs",
+      "es2020": "./fesm2020/pb-design-system-daterange-popover.mjs",
+      "es2015": "./fesm2015/pb-design-system-daterange-popover.mjs",
+      "node": "./fesm2015/pb-design-system-daterange-popover.mjs",
+      "default": "./fesm2020/pb-design-system-daterange-popover.mjs"
+    },
+    "./empty-state": {
+      "types": "./empty-state/pb-design-system-empty-state.d.ts",
+      "esm2020": "./esm2020/empty-state/pb-design-system-empty-state.mjs",
+      "es2020": "./fesm2020/pb-design-system-empty-state.mjs",
+      "es2015": "./fesm2015/pb-design-system-empty-state.mjs",
+      "node": "./fesm2015/pb-design-system-empty-state.mjs",
+      "default": "./fesm2020/pb-design-system-empty-state.mjs"
+    },
+    "./header-shadow": {
+      "types": "./header-shadow/pb-design-system-header-shadow.d.ts",
+      "esm2020": "./esm2020/header-shadow/pb-design-system-header-shadow.mjs",
+      "es2020": "./fesm2020/pb-design-system-header-shadow.mjs",
+      "es2015": "./fesm2015/pb-design-system-header-shadow.mjs",
+      "node": "./fesm2015/pb-design-system-header-shadow.mjs",
+      "default": "./fesm2020/pb-design-system-header-shadow.mjs"
+    },
+    "./multiple-values": {
+      "types": "./multiple-values/pb-design-system-multiple-values.d.ts",
+      "esm2020": "./esm2020/multiple-values/pb-design-system-multiple-values.mjs",
+      "es2020": "./fesm2020/pb-design-system-multiple-values.mjs",
+      "es2015": "./fesm2015/pb-design-system-multiple-values.mjs",
+      "node": "./fesm2015/pb-design-system-multiple-values.mjs",
+      "default": "./fesm2020/pb-design-system-multiple-values.mjs"
+    },
+    "./page-title": {
+      "types": "./page-title/pb-design-system-page-title.d.ts",
+      "esm2020": "./esm2020/page-title/pb-design-system-page-title.mjs",
+      "es2020": "./fesm2020/pb-design-system-page-title.mjs",
+      "es2015": "./fesm2015/pb-design-system-page-title.mjs",
+      "node": "./fesm2015/pb-design-system-page-title.mjs",
+      "default": "./fesm2020/pb-design-system-page-title.mjs"
+    },
+    "./progress-spinner": {
+      "types": "./progress-spinner/pb-design-system-progress-spinner.d.ts",
+      "esm2020": "./esm2020/progress-spinner/pb-design-system-progress-spinner.mjs",
+      "es2020": "./fesm2020/pb-design-system-progress-spinner.mjs",
+      "es2015": "./fesm2015/pb-design-system-progress-spinner.mjs",
+      "node": "./fesm2015/pb-design-system-progress-spinner.mjs",
+      "default": "./fesm2020/pb-design-system-progress-spinner.mjs"
+    }
+  },
   "sideEffects": false
 }

@@ -2,6 +2,7 @@ import { OnInit, ElementRef, OnChanges, SimpleChanges, EventEmitter, OnDestroy }
 import { ViewportScroller, Location } from '@angular/common';
 import { PbdsDatavizService } from './dataviz.service';
 import { PbdsDatavizBarSingleHorizontal, PbdsDatavizBarSingleHorizontalCompare } from './dataviz.interfaces';
+import * as i0 from "@angular/core";
 export declare class PbdsDatavizBarSingleHorizontalComponent implements OnInit, OnDestroy, OnChanges {
     private _dataviz;
     private _element;
@@ -85,4 +86,6 @@ export declare class PbdsDatavizBarSingleHorizontalComponent implements OnInit, 
     legendMouseOut: () => void;
     legendMouseClick: (event: any, data: any) => void;
     private xAxisFormatter;
+    static ɵfac: i0.ɵɵFactoryDeclaration<PbdsDatavizBarSingleHorizontalComponent, never>;
+    static ɵcmp: i0.ɵɵComponentDeclaration<PbdsDatavizBarSingleHorizontalComponent, "pbds-dataviz-bar-single-horizontal", never, { "data": "data"; "width": "width"; "height": "height"; "nullValueText": "nullValueText"; "percentage": "percentage"; "marginTop": "marginTop"; "marginRight": "marginRight"; "marginBottom": "marginBottom"; "marginLeft": "marginLeft"; "barMargin": "barMargin"; "hideXAxis": "hideXAxis"; "xAxisTicks": "xAxisTicks"; "xAxisTitle": "xAxisTitle"; "xAxisFormatType": "xAxisFormatType"; "xAxisFormatString": "xAxisFormatString"; "xAxisTickLabelSuffix": "xAxisTickLabelSuffix"; "hideXGrid": "hideXGrid"; "hideLegend": "hideLegend"; "hideLegendTooltip": "hideLegendTooltip"; "legendWidth": "legendWidth"; "legendPosition": "legendPosition"; "legendLabelFormatType": "legendLabelFormatType"; "legendLabelFormatString": "legendLabelFormatString"; "hideTooltip": "hideTooltip"; "tooltipLabelFormatType": "tooltipLabelFormatType"; "tooltipLabelFormatString": "tooltipLabelFormatString"; "tooltipDateFormatString": "tooltipDateFormatString"; "tooltipValueFormatType": "tooltipValueFormatType"; "tooltipValueFormatString": "tooltipValueFormatString"; "tooltipValueSuffix": "tooltipValueSuffix"; "tooltipPercentFormatString": "tooltipPercentFormatString"; "compareChangeFormatString": "compareChangeFormatString"; "monochrome": "monochrome"; "theme": "theme"; }, { "hovered": "hovered"; "clicked": "clicked"; }, never, never>;
 }

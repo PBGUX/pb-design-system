@@ -2,6 +2,7 @@ import { OnInit, OnChanges, EventEmitter, ElementRef, OnDestroy, SimpleChanges }
 import { ViewportScroller } from '@angular/common';
 import { PbdsDatavizService } from './dataviz.service';
 import { PbdsDatavizChoroplethMapData } from './dataviz.interfaces';
+import * as i0 from "@angular/core";
 export declare class PbdsDatavizChoroplethMapComponent implements OnInit, OnDestroy, OnChanges {
     private _dataviz;
     private _element;
@@ -61,4 +62,6 @@ export declare class PbdsDatavizChoroplethMapComponent implements OnInit, OnDest
     private tooltipMove;
     private tooltipSetPosition;
     legend: (g: any) => void;
+    static ɵfac: i0.ɵɵFactoryDeclaration<PbdsDatavizChoroplethMapComponent, never>;
+    static ɵcmp: i0.ɵɵComponentDeclaration<PbdsDatavizChoroplethMapComponent, "pbds-dataviz-choropleth-map", never, { "data": "data"; "topojson": "topojson"; "feature": "feature"; "projectionType": "projectionType"; "dataField": "dataField"; "mesh": "mesh"; "scale": "scale"; "center": "center"; "width": "width"; "height": "height"; "marginTop": "marginTop"; "marginRight": "marginRight"; "marginBottom": "marginBottom"; "marginLeft": "marginLeft"; "theme": "theme"; "colorScale": "colorScale"; "domain": "domain"; "hideTooltip": "hideTooltip"; "tooltipValueFormatType": "tooltipValueFormatType"; "tooltipValueFormatString": "tooltipValueFormatString"; "hideLegend": "hideLegend"; "legendWidth": "legendWidth"; "legendLabel": "legendLabel"; "legendValueFormatType": "legendValueFormatType"; "legendValueFormatString": "legendValueFormatString"; "legendLeft": "legendLeft"; "legendTop": "legendTop"; }, { "hovered": "hovered"; "clicked": "clicked"; }, never, never>;
 }

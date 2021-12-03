@@ -2,6 +2,7 @@ import { OnInit, OnChanges, EventEmitter, ElementRef, OnDestroy, SimpleChanges }
 import { ViewportScroller } from '@angular/common';
 import { PbdsDatavizService } from './dataviz.service';
 import { PbdsDatavizBarStacked } from './dataviz.interfaces';
+import * as i0 from "@angular/core";
 export declare class PbdsDatavizBarStackedComponent implements OnInit, OnDestroy, OnChanges {
     private _dataviz;
     private _element;
@@ -97,4 +98,6 @@ export declare class PbdsDatavizBarStackedComponent implements OnInit, OnDestroy
     private tooltipShow;
     private tooltipHide;
     private yAxisFormatter;
+    static ɵfac: i0.ɵɵFactoryDeclaration<PbdsDatavizBarStackedComponent, never>;
+    static ɵcmp: i0.ɵɵComponentDeclaration<PbdsDatavizBarStackedComponent, "pbds-dataviz-bar-stacked", never, { "data": "data"; "width": "width"; "height": "height"; "type": "type"; "marginTop": "marginTop"; "marginRight": "marginRight"; "marginBottom": "marginBottom"; "marginLeft": "marginLeft"; "hideXAxis": "hideXAxis"; "xAxisFormatType": "xAxisFormatType"; "xAxisFormatString": "xAxisFormatString"; "yAxisFormatType": "yAxisFormatType"; "yAxisFormatString": "yAxisFormatString"; "yAxisTicks": "yAxisTicks"; "yAxisMaxBuffer": "yAxisMaxBuffer"; "hideLegend": "hideLegend"; "legendWidth": "legendWidth"; "legendPosition": "legendPosition"; "legendLabelFormatType": "legendLabelFormatType"; "legendLabelFormatString": "legendLabelFormatString"; "tooltipHeadingFormatType": "tooltipHeadingFormatType"; "tooltipHeadingFormatString": "tooltipHeadingFormatString"; "tooltipHeadingValueFormatType": "tooltipHeadingValueFormatType"; "tooltipHeadingValueFormatString": "tooltipHeadingValueFormatString"; "tooltipLabelFormatType": "tooltipLabelFormatType"; "tooltipLabelFormatString": "tooltipLabelFormatString"; "tooltipValueFormatType": "tooltipValueFormatType"; "tooltipValueFormatString": "tooltipValueFormatString"; "theme": "theme"; }, { "hovered": "hovered"; "clicked": "clicked"; }, never, never>;
 }

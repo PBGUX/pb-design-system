@@ -3,6 +3,7 @@ import { ControlValueAccessor } from '@angular/forms';
 import { NgbCalendar, NgbDate, NgbDatepickerI18n, NgbDateStruct } from '@ng-bootstrap/ng-bootstrap';
 import { PbdsDaterangeChange, PbdsDaterangeFilter, PbdsDaterangePlacement, PbdsDaterangePreset, PbdsDaterangePresetValue } from './daterange-popover.interfaces';
 import { PbdsDaterangeService } from './daterange-popover.service';
+import * as i0 from "@angular/core";
 export declare class CustomDatepickerI18n extends NgbDatepickerI18n {
     daterangeService: PbdsDaterangeService;
     constructor(daterangeService: PbdsDaterangeService);
@@ -10,6 +11,8 @@ export declare class CustomDatepickerI18n extends NgbDatepickerI18n {
     getMonthShortName(month: number): string;
     getMonthFullName(month: number): string;
     getDayAriaLabel(date: NgbDateStruct): string;
+    static ɵfac: i0.ɵɵFactoryDeclaration<CustomDatepickerI18n, never>;
+    static ɵprov: i0.ɵɵInjectableDeclaration<CustomDatepickerI18n>;
 }
 export declare class PbdsDaterangePopoverComponent implements OnInit, OnChanges, ControlValueAccessor {
     private calendar;
@@ -72,4 +75,6 @@ export declare class PbdsDaterangePopoverComponent implements OnInit, OnChanges,
     private getDaysInMonth;
     private getFromAndToDates;
     private setDateProperties;
+    static ɵfac: i0.ɵɵFactoryDeclaration<PbdsDaterangePopoverComponent, never>;
+    static ɵcmp: i0.ɵɵComponentDeclaration<PbdsDaterangePopoverComponent, "pbds-daterange-popover", never, { "presets": "presets"; "presetSelected": "presetSelected"; "filters": "filters"; "filterSelected": "filterSelected"; "showCustomPreset": "showCustomPreset"; "applyText": "applyText"; "cancelText": "cancelText"; "container": "container"; "customRangeText": "customRangeText"; "displayMonths": "displayMonths"; "displayInput": "displayInput"; "minDate": "minDate"; "maxDate": "maxDate"; "placement": "placement"; "fromDate": "fromDate"; "toDate": "toDate"; "inputFormat": "inputFormat"; "ariaLabel": "ariaLabel"; "ariaLabelSelected": "ariaLabelSelected"; }, { "dateChange": "dateChange"; "cancel": "cancel"; }, never, never>;
 }
