@@ -1,3 +1,9 @@
+# 6.8.3
+
+## Bug Fixes
+
+- Fix font family for large number in widgets
+
 # 6.8.2
 
 ## Bug Fixes
