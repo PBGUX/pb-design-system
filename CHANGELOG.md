@@ -1,3 +1,9 @@
+# 6.8.2
+
+## Bug Fixes
+
+- Fixed Multiline Input in Firefox, the multiple lines are no longer combine into a single line
+
 # 6.8.1
 
 ## Changes

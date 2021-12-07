@@ -21,9 +21,11 @@ export declare class PbdsMultipleValuesDirective implements ControlValueAccessor
     readonly submit: EventEmitter<PbdsMultipleValuesSubmit>;
     private value;
     private document;
+    private window;
+    private isFirefox;
     private onTouched;
     private onChange;
-    constructor(document: any, el: ElementRef<HTMLDivElement>);
+    constructor(document: any, window: Window, el: ElementRef<HTMLDivElement>);
     ngOnInit(): void;
     private onInput;
     private onFocus;

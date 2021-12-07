@@ -4,7 +4,7 @@ import { DOCUMENT, CommonModule } from '@angular/common';
 import { NG_VALUE_ACCESSOR } from '@angular/forms';
 
 class PbdsMultipleValuesDirective {
-    constructor(document, el) {
+    constructor(document, window, el) {
         this.el = el;
         this.multipleValuesClass = true;
         this.isPlaceholder = true;
@@ -27,10 +27,15 @@ class PbdsMultipleValuesDirective {
         this.submitOnEnter = false;
         this.maximumHeight = 150;
         this.submit = new EventEmitter();
+        this.isFirefox = false;
         this.onTouched = () => { };
         this.onChange = () => { };
         // fix for using document in a publishable library see https://stackoverflow.com/questions/65222602/how-to-export-angular-10-guard-using-document-for-public-api
         this.document = document;
+        this.window = window;
+        // check if browser is firefox
+        const agent = this.window.navigator.userAgent.toLowerCase();
+        this.isFirefox = agent.indexOf('firefox') > -1;
         // handle ngModel and FormCntrolName
         this.writeValue(this.value);
     }
@@ -176,7 +181,7 @@ class PbdsMultipleValuesDirective {
      * @returns {string} String with the following removed: divs, commas, spaces, tabs, empty lines, non-breaking spaces
      */
     clean(value) {
-        console.log('INITIAL VALUE: ', value);
+        // console.log('INITIAL VALUE: ', value);
         // delimeters
         for (let index = 0; index < this.delimiters.length; index++) {
             const regex = new RegExp(this.delimiters[index], this.delimetersSwitches);
@@ -187,19 +192,29 @@ class PbdsMultipleValuesDirective {
         // replacements
         for (let index = 0; index < this.replacements.length; index++) {
             const regex = new RegExp(this.replacements[index], this.replacementsSwtiches);
-            value = value.replace(regex, '');
+            if (this.isFirefox) {
+                value = value.replace(regex, '\n');
+            }
+            else {
+                value = value.replace(regex, '');
+            }
         }
-        console.log('CLEANED VALUE: ', value);
+        // replace empty newlines
+        if (this.isFirefox) {
+            value = value.replace(/^\n/gm, '');
+        }
+        // console.log('CLEANED VALUE: ', value);
         return value;
     }
 }
-PbdsMultipleValuesDirective.ɵfac = i0.ɵɵngDeclareFactory({ minVersion: "12.0.0", version: "13.0.2", ngImport: i0, type: PbdsMultipleValuesDirective, deps: [{ token: DOCUMENT }, { token: i0.ElementRef }], target: i0.ɵɵFactoryTarget.Directive });
+PbdsMultipleValuesDirective.ɵfac = i0.ɵɵngDeclareFactory({ minVersion: "12.0.0", version: "13.0.2", ngImport: i0, type: PbdsMultipleValuesDirective, deps: [{ token: DOCUMENT }, { token: Window }, { token: i0.ElementRef }], target: i0.ɵɵFactoryTarget.Directive });
 PbdsMultipleValuesDirective.ɵdir = i0.ɵɵngDeclareDirective({ minVersion: "12.0.0", version: "13.0.2", type: PbdsMultipleValuesDirective, selector: "[pbdsMultipleValues]", inputs: { delimiters: "delimiters", delimetersSwitches: "delimetersSwitches", replacements: "replacements", replacementsSwtiches: "replacementsSwtiches", placeholder: "placeholder", submitOnEnter: "submitOnEnter", maximumHeight: "maximumHeight" }, outputs: { submit: "submit" }, host: { listeners: { "input": "onInput()", "focus": "onFocus()", "blur": "onBlur()", "keydown": "onKeydown($event)", "keyup": "onKeyup($event)", "paste": "onPaste($event)" }, properties: { "class.pbds-multiple-values": "this.multipleValuesClass", "class.placeholder": "this.isPlaceholder", "attr.contenteditable": "this.contentEditable", "attr.role": "this.role" } }, providers: [
         {
             provide: NG_VALUE_ACCESSOR,
             useExisting: forwardRef(() => PbdsMultipleValuesDirective),
             multi: true
-        }
+        },
+        { provide: Window, useValue: window }
     ], exportAs: ["PbdsMultipleValues"], ngImport: i0 });
 i0.ɵɵngDeclareClassMetadata({ minVersion: "12.0.0", version: "13.0.2", ngImport: i0, type: PbdsMultipleValuesDirective, decorators: [{
             type: Directive,
@@ -211,13 +226,17 @@ i0.ɵɵngDeclareClassMetadata({ minVersion: "12.0.0", version: "13.0.2", ngImpor
                             provide: NG_VALUE_ACCESSOR,
                             useExisting: forwardRef(() => PbdsMultipleValuesDirective),
                             multi: true
-                        }
+                        },
+                        { provide: Window, useValue: window }
                     ]
                 }]
         }], ctorParameters: function () {
         return [{ type: undefined, decorators: [{
                         type: Inject,
                         args: [DOCUMENT]
+                    }] }, { type: Window, decorators: [{
+                        type: Inject,
+                        args: [Window]
                     }] }, { type: i0.ElementRef }];
     }, propDecorators: { multipleValuesClass: [{
                 type: HostBinding,
