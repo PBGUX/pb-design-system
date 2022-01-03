@@ -1,16 +1,20 @@
-import { OnInit, EventEmitter, OnChanges, SimpleChanges } from '@angular/core';
-import { NgbDate, NgbCalendar, NgbDatepickerI18n, NgbDateStruct } from '@ng-bootstrap/ng-bootstrap';
-import { PbdsDaterangePreset, PbdsDaterangePresetValue, PbdsDaterangeFilter, PbdsDaterangeChange, PbdsDaterangePlacement } from './daterange-popover.interfaces';
+import { EventEmitter, OnChanges, OnInit, SimpleChanges } from '@angular/core';
+import { ControlValueAccessor } from '@angular/forms';
+import { NgbCalendar, NgbDate, NgbDatepickerI18n, NgbDateStruct } from '@ng-bootstrap/ng-bootstrap';
+import { PbdsDaterangeChange, PbdsDaterangeFilter, PbdsDaterangePlacement, PbdsDaterangePreset, PbdsDaterangePresetValue } from './daterange-popover.interfaces';
 import { PbdsDaterangeService } from './daterange-popover.service';
+import * as i0 from "@angular/core";
 export declare class CustomDatepickerI18n extends NgbDatepickerI18n {
     daterangeService: PbdsDaterangeService;
     constructor(daterangeService: PbdsDaterangeService);
-    getWeekdayShortName(weekday: number): string;
+    getWeekdayLabel(weekday: number): string;
     getMonthShortName(month: number): string;
     getMonthFullName(month: number): string;
     getDayAriaLabel(date: NgbDateStruct): string;
+    static ɵfac: i0.ɵɵFactoryDeclaration<CustomDatepickerI18n, never>;
+    static ɵprov: i0.ɵɵInjectableDeclaration<CustomDatepickerI18n>;
 }
-export declare class PbdsDaterangePopoverComponent implements OnInit, OnChanges {
+export declare class PbdsDaterangePopoverComponent implements OnInit, OnChanges, ControlValueAccessor {
     private calendar;
     private daterangeService;
     private datepickerPopup;
@@ -42,8 +46,14 @@ export declare class PbdsDaterangePopoverComponent implements OnInit, OnChanges 
     selectedFilter: any;
     startDate: NgbDate;
     formattedDate: any;
+    emitValue: PbdsDaterangeChange;
+    private onTouched;
+    private onChange;
     constructor(calendar: NgbCalendar, daterangeService: PbdsDaterangeService);
     ngOnInit(): void;
+    writeValue(value: any): void;
+    registerOnChange(onChange: any): void;
+    registerOnTouched(onTouched: () => void): void;
     ngOnChanges(changes: SimpleChanges): void;
     onApply(shouldEmit?: boolean): void;
     onCancel(): void;
@@ -65,4 +75,6 @@ export declare class PbdsDaterangePopoverComponent implements OnInit, OnChanges 
     private getDaysInMonth;
     private getFromAndToDates;
     private setDateProperties;
+    static ɵfac: i0.ɵɵFactoryDeclaration<PbdsDaterangePopoverComponent, never>;
+    static ɵcmp: i0.ɵɵComponentDeclaration<PbdsDaterangePopoverComponent, "pbds-daterange-popover", never, { "presets": "presets"; "presetSelected": "presetSelected"; "filters": "filters"; "filterSelected": "filterSelected"; "showCustomPreset": "showCustomPreset"; "applyText": "applyText"; "cancelText": "cancelText"; "container": "container"; "customRangeText": "customRangeText"; "displayMonths": "displayMonths"; "displayInput": "displayInput"; "minDate": "minDate"; "maxDate": "maxDate"; "placement": "placement"; "fromDate": "fromDate"; "toDate": "toDate"; "inputFormat": "inputFormat"; "ariaLabel": "ariaLabel"; "ariaLabelSelected": "ariaLabelSelected"; }, { "dateChange": "dateChange"; "cancel": "cancel"; }, never, never>;
 }

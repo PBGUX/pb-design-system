@@ -1,3 +1,49 @@
+# 6.8.3
+
+## Bug Fixes
+
+- Fix font family for large number in widgets
+
+# 6.8.2
+
+## Bug Fixes
+
+- Fixed Multiline Input in Firefox, the multiple lines are no longer combine into a single line
+
+# 6.8.1
+
+## Changes
+
+- Make p-table sort icons inline to improve line break behavior
+
+---
+
+# 6.8.0
+
+## Changes
+
+- There are no breaking changes in this release
+- Updated to support Angular 12.2.12, NG-Boostrap 10, PrimeNg 12.2.2. Updating from Angular 11 is not required.
+- Normalize form field focus to match brower's style
+
+## Bug Fixes
+
+- The PBDS Date Picker is now accessible
+- Spacing fix in date/time picker
+- Updated input field "validation" code snippet for better accessibility support
+
+## Additions
+
+- 6 new patterns have been added, in a new pattern section. Code snippets and CSS have been added to support these patterns.
+- Added alternate for switches to support internationalization, with the switch state on the right
+- Added PrimeNG sticky header table
+- Added PrimeNG pick list
+- Added multiple-file upload component
+- Added PBDS input component that supports multiple values
+- Added header variation with carets on drop-down menus
+
+---
+
 # 6.7.0
 
 ## Breaking Changes

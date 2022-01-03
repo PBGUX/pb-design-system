@@ -1,6 +1,7 @@
 import { OnInit, ElementRef, OnChanges, SimpleChanges } from '@angular/core';
 import { PbdsDatavizService } from './dataviz.service';
 import { PbdsDatavizGauge } from './dataviz.interfaces';
+import * as i0 from "@angular/core";
 export declare class PbdsDatavizGaugeComponent implements OnInit, OnChanges {
     private _dataviz;
     private _element;
@@ -40,4 +41,6 @@ export declare class PbdsDatavizGaugeComponent implements OnInit, OnChanges {
     updateChart: () => void;
     arcTween: (transition: any, value: any) => void;
     textTween: (transition: any, value: any) => void;
+    static ɵfac: i0.ɵɵFactoryDeclaration<PbdsDatavizGaugeComponent, never>;
+    static ɵcmp: i0.ɵɵComponentDeclaration<PbdsDatavizGaugeComponent, "pbds-dataviz-gauge", never, { "data": "data"; "width": "width"; "type": "type"; "color": "color"; "hideLabel": "hideLabel"; "labelFormatString": "labelFormatString"; "description": "description"; "gaugeWidth": "gaugeWidth"; }, {}, never, never>;
 }

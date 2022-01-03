@@ -1,11 +1,10 @@
 {
-  "main": "../bundles/pb-design-system-progress-spinner.umd.js",
-  "module": "../fesm2015/pb-design-system-progress-spinner.js",
-  "es2015": "../fesm2015/pb-design-system-progress-spinner.js",
-  "esm2015": "../esm2015/progress-spinner/pb-design-system-progress-spinner.js",
-  "fesm2015": "../fesm2015/pb-design-system-progress-spinner.js",
+  "module": "../fesm2015/pb-design-system-progress-spinner.mjs",
+  "es2020": "../fesm2020/pb-design-system-progress-spinner.mjs",
+  "esm2020": "../esm2020/progress-spinner/pb-design-system-progress-spinner.mjs",
+  "fesm2020": "../fesm2020/pb-design-system-progress-spinner.mjs",
+  "fesm2015": "../fesm2015/pb-design-system-progress-spinner.mjs",
   "typings": "pb-design-system-progress-spinner.d.ts",
-  "metadata": "pb-design-system-progress-spinner.metadata.json",
   "sideEffects": false,
   "name": "pb-design-system/progress-spinner"
 }

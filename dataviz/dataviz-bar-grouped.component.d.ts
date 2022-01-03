@@ -2,6 +2,7 @@ import { OnInit, OnChanges, EventEmitter, ElementRef, OnDestroy, SimpleChanges }
 import { ViewportScroller, Location } from '@angular/common';
 import { PbdsDatavizService } from './dataviz.service';
 import { PbdsDatavizBarGrouped } from './dataviz.interfaces';
+import * as i0 from "@angular/core";
 export declare class PbdsDatavizBarGroupedComponent implements OnInit, OnDestroy, OnChanges {
     private _dataviz;
     private _element;
@@ -92,4 +93,6 @@ export declare class PbdsDatavizBarGroupedComponent implements OnInit, OnDestroy
     private tooltipHide;
     private xAxisFormatter;
     private yAxisFormatter;
+    static ɵfac: i0.ɵɵFactoryDeclaration<PbdsDatavizBarGroupedComponent, never>;
+    static ɵcmp: i0.ɵɵComponentDeclaration<PbdsDatavizBarGroupedComponent, "pbds-dataviz-bar-grouped", never, { "data": "data"; "width": "width"; "height": "height"; "vertical": "vertical"; "hideXAxis": "hideXAxis"; "xAxisMaxBuffer": "xAxisMaxBuffer"; "xAxisFormatType": "xAxisFormatType"; "xAxisFormatString": "xAxisFormatString"; "xAxisTicks": "xAxisTicks"; "hideYAxis": "hideYAxis"; "yAxisMaxBuffer": "yAxisMaxBuffer"; "yAxisFormatType": "yAxisFormatType"; "yAxisFormatString": "yAxisFormatString"; "yAxisTicks": "yAxisTicks"; "marginTop": "marginTop"; "marginRight": "marginRight"; "marginBottom": "marginBottom"; "marginLeft": "marginLeft"; "hideLegend": "hideLegend"; "legendWidth": "legendWidth"; "legendPosition": "legendPosition"; "legendLabelFormatType": "legendLabelFormatType"; "legendLabelFormatString": "legendLabelFormatString"; "hideTooltip": "hideTooltip"; "tooltipLabelFormatType": "tooltipLabelFormatType"; "tooltipLabelFormatString": "tooltipLabelFormatString"; "tooltipValueFormatType": "tooltipValueFormatType"; "tooltipValueFormatString": "tooltipValueFormatString"; "showGrid": "showGrid"; "theme": "theme"; }, { "hovered": "hovered"; "clicked": "clicked"; }, never, never>;
 }

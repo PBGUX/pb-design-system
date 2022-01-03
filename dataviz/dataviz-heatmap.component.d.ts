@@ -2,6 +2,7 @@ import { OnInit, OnChanges, OnDestroy, ElementRef, SimpleChanges, EventEmitter }
 import { ViewportScroller } from '@angular/common';
 import { PbdsDatavizHeatmap } from './dataviz.interfaces';
 import { PbdsDatavizService } from './dataviz.service';
+import * as i0 from "@angular/core";
 export declare class PbdsDatavizHeatmapComponent implements OnInit, OnChanges, OnDestroy {
     private _dataviz;
     private _element;
@@ -81,4 +82,6 @@ export declare class PbdsDatavizHeatmapComponent implements OnInit, OnChanges, O
     private tooltipHide;
     private xAxisFormatter;
     private yAxisFormatter;
+    static ɵfac: i0.ɵɵFactoryDeclaration<PbdsDatavizHeatmapComponent, never>;
+    static ɵcmp: i0.ɵɵComponentDeclaration<PbdsDatavizHeatmapComponent, "pbds-dataviz-heatmap", never, { "data": "data"; "width": "width"; "height": "height"; "marginTop": "marginTop"; "marginRight": "marginRight"; "marginBottom": "marginBottom"; "marginLeft": "marginLeft"; "scale": "scale"; "domain": "domain"; "xAxisFormatType": "xAxisFormatType"; "xAxisFormatString": "xAxisFormatString"; "yAxisFormatType": "yAxisFormatType"; "yAxisFormatString": "yAxisFormatString"; "hideLegend": "hideLegend"; "legendWidth": "legendWidth"; "legendPosition": "legendPosition"; "legendLabelFormatType": "legendLabelFormatType"; "legendLabelFormatString": "legendLabelFormatString"; "tooltipXLabelFormatType": "tooltipXLabelFormatType"; "tooltipXLabelFormatString": "tooltipXLabelFormatString"; "tooltipYLabelFormatType": "tooltipYLabelFormatType"; "tooltipYLabelFormatString": "tooltipYLabelFormatString"; "tooltipValueFormatType": "tooltipValueFormatType"; "tooltipValueFormatString": "tooltipValueFormatString"; "theme": "theme"; }, { "hovered": "hovered"; "clicked": "clicked"; }, never, never>;
 }

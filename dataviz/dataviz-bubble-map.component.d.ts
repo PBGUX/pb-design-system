@@ -2,6 +2,7 @@ import { OnInit, OnChanges, EventEmitter, ElementRef, OnDestroy, SimpleChanges }
 import { ViewportScroller } from '@angular/common';
 import { PbdsDatavizService } from './dataviz.service';
 import { PbdsDatavizMapData } from './dataviz.interfaces';
+import * as i0 from "@angular/core";
 export declare class PbdsDatavizBubbleMapComponent implements OnInit, OnChanges, OnDestroy {
     private _element;
     private _scroll;
@@ -57,4 +58,6 @@ export declare class PbdsDatavizBubbleMapComponent implements OnInit, OnChanges,
     bubbleMouseClick: (event: any, data: any) => void;
     private tooltipShow;
     private tooltipHide;
+    static ɵfac: i0.ɵɵFactoryDeclaration<PbdsDatavizBubbleMapComponent, never>;
+    static ɵcmp: i0.ɵɵComponentDeclaration<PbdsDatavizBubbleMapComponent, "pbds-dataviz-bubble-map", never, { "data": "data"; "topojson": "topojson"; "feature": "feature"; "projectionType": "projectionType"; "scale": "scale"; "center": "center"; "width": "width"; "height": "height"; "type": "type"; "dot": "dot"; "marginTop": "marginTop"; "marginRight": "marginRight"; "marginBottom": "marginBottom"; "marginLeft": "marginLeft"; "color": "color"; "textColor": "textColor"; "textSizeRange": "textSizeRange"; "dotSize": "dotSize"; "bubbleSizeRange": "bubbleSizeRange"; "bubbleLabelFormatType": "bubbleLabelFormatType"; "bubbleLabelFormatString": "bubbleLabelFormatString"; "hideTooltip": "hideTooltip"; "hideTooltipValue": "hideTooltipValue"; "tooltipValueFormatType": "tooltipValueFormatType"; "tooltipValueFormatString": "tooltipValueFormatString"; }, { "hovered": "hovered"; "clicked": "clicked"; }, never, never>;
 }
