@@ -1,3 +1,11 @@
+# 6.8.4
+
+## Changes
+
+- Added classes to use new "sticky footer" for layout. To use this, the structure of your `app.component.html` needs to be changed as decribed in [Web > Layout](https://designsystem.pitneycloud.com/web/grid).
+
+  This is an _optional enhancement_; the older "fixed" footer will continue to function correctly.
+
 # 6.8.3
 
 ## Bug Fixes
