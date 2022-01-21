@@ -4,10 +4,10 @@ import { PbdsProgressSpinnerComponent } from './progress-spinner.component';
 import * as i0 from "@angular/core";
 export class PbdsProgressSpinnerModule {
 }
-PbdsProgressSpinnerModule.ɵfac = i0.ɵɵngDeclareFactory({ minVersion: "12.0.0", version: "13.0.2", ngImport: i0, type: PbdsProgressSpinnerModule, deps: [], target: i0.ɵɵFactoryTarget.NgModule });
-PbdsProgressSpinnerModule.ɵmod = i0.ɵɵngDeclareNgModule({ minVersion: "12.0.0", version: "13.0.2", ngImport: i0, type: PbdsProgressSpinnerModule, declarations: [PbdsProgressSpinnerComponent], imports: [CommonModule], exports: [PbdsProgressSpinnerComponent] });
-PbdsProgressSpinnerModule.ɵinj = i0.ɵɵngDeclareInjector({ minVersion: "12.0.0", version: "13.0.2", ngImport: i0, type: PbdsProgressSpinnerModule, imports: [[CommonModule]] });
-i0.ɵɵngDeclareClassMetadata({ minVersion: "12.0.0", version: "13.0.2", ngImport: i0, type: PbdsProgressSpinnerModule, decorators: [{
+PbdsProgressSpinnerModule.ɵfac = i0.ɵɵngDeclareFactory({ minVersion: "12.0.0", version: "13.1.2", ngImport: i0, type: PbdsProgressSpinnerModule, deps: [], target: i0.ɵɵFactoryTarget.NgModule });
+PbdsProgressSpinnerModule.ɵmod = i0.ɵɵngDeclareNgModule({ minVersion: "12.0.0", version: "13.1.2", ngImport: i0, type: PbdsProgressSpinnerModule, declarations: [PbdsProgressSpinnerComponent], imports: [CommonModule], exports: [PbdsProgressSpinnerComponent] });
+PbdsProgressSpinnerModule.ɵinj = i0.ɵɵngDeclareInjector({ minVersion: "12.0.0", version: "13.1.2", ngImport: i0, type: PbdsProgressSpinnerModule, imports: [[CommonModule]] });
+i0.ɵɵngDeclareClassMetadata({ minVersion: "12.0.0", version: "13.1.2", ngImport: i0, type: PbdsProgressSpinnerModule, decorators: [{
             type: NgModule,
             args: [{
                     declarations: [PbdsProgressSpinnerComponent],

@@ -1,8 +1,20 @@
+# 6.8.9
+
+## Additions
+
+- Added pbds-avatar component
+- Added rating stars component
+- Added `line-clamp` typographic utility css class to limit number of lines shown. See [Typography > Utilities](https://designsystem.pitneycloud.com/web/typography).
+
+## Bug Fixes
+
+- Fixed font on radio button labels
+
 # 6.8.4
 
 ## Changes
 
-- Added classes to use new "sticky footer" for layout. To use this, the structure of your `app.component.html` needs to be changed as decribed in [Web > Layout](https://designsystem.pitneycloud.com/web/grid).
+- Added classes to use new "sticky footer" for layout. To use this, the structure of your `app.component.html` needs to be changed as described in [Web > Layout](https://designsystem.pitneycloud.com/web/grid).
 
   This is an _optional enhancement_; the older "fixed" footer will continue to function correctly.
 
