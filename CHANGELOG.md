@@ -1,4 +1,10 @@
-# 6.8.9
+# 6.9.1
+
+## Changes
+
+- Vertically centered sign-in boxes on account access screens
+
+# 6.9.0
 
 ## Additions
 

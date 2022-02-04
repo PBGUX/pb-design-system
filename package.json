@@ -1,6 +1,6 @@
 {
   "name": "pb-design-system",
-  "version": "6.9.0",
+  "version": "6.9.1",
   "description": "Pitney Bowes Design System",
   "repository": {
     "type": "git",
@@ -19,7 +19,7 @@
     "@angular/core": "^10.0.0 || ^11.0.0 ||^12.0.0 || ^13.0.0",
     "@angular/cdk": "^10.0.0 || ^11.0.0 ||^12.0.0 || ^13.0.0",
     "@angular/material": "^11.0.0 ||^12.0.0 || ^13.0.0",
-    "@ng-bootstrap/ng-bootstrap": "^10.0.0",
+    "@ng-bootstrap/ng-bootstrap": "^10.0.0 || ^11.0.0",
     "d3": "^6.2.0 || ^7.0.0",
     "topojson-client": "^3.0.0"
   },
