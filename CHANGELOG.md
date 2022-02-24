@@ -1,8 +1,48 @@
+# 6.10.0
+
+## Additions
+
+- Added an error screen for unsupported browsers
+- Added a "process completed" widget to progress indicators
+- Added new mobile screens to Onboarding
+- Added code snippet for Horizontal Tracking Timeline to Tracking Pattern
+- Expanded Header examples with additional examples including mega-menu
+
+## Changes
+
+- Sunset theme orange is now PB Brand Dark Orange
+- Split "Terminology & Style" into 2 pages and added a glossary of terms
+
+## Bug Fixes
+
+- Fixed "undefined values" in line chart tooltips
+- Fixed components that did not display correctly in Windows High Contrast Mode: dropdowns, radios, and tabs
+- Fixed accessibility for Account Access form fields
+- Fixed code snippet for faceted search example
+
+# 6.9.1
+
+## Changes
+
+- Vertically centered sign-in boxes on account access screens
+
+# 6.9.0
+
+## Additions
+
+- Added pbds-avatar component
+- Added rating stars component
+- Added `line-clamp` typographic utility css class to limit number of lines shown. See [Typography > Utilities](https://designsystem.pitneycloud.com/web/typography).
+
+## Bug Fixes
+
+- Fixed font on radio button labels
+
 # 6.8.4
 
 ## Changes
 
-- Added classes to use new "sticky footer" for layout. To use this, the structure of your `app.component.html` needs to be changed as decribed in [Web > Layout](https://designsystem.pitneycloud.com/web/grid).
+- Added classes to use new "sticky footer" for layout. To use this, the structure of your `app.component.html` needs to be changed as described in [Web > Layout](https://designsystem.pitneycloud.com/web/grid).
 
   This is an _optional enhancement_; the older "fixed" footer will continue to function correctly.
 

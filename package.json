@@ -1,6 +1,6 @@
 {
   "name": "pb-design-system",
-  "version": "6.8.4",
+  "version": "6.10.0-beta.1",
   "description": "Pitney Bowes Design System",
   "repository": {
     "type": "git",
@@ -19,7 +19,7 @@
     "@angular/core": "^10.0.0 || ^11.0.0 ||^12.0.0 || ^13.0.0",
     "@angular/cdk": "^10.0.0 || ^11.0.0 ||^12.0.0 || ^13.0.0",
     "@angular/material": "^11.0.0 ||^12.0.0 || ^13.0.0",
-    "@ng-bootstrap/ng-bootstrap": "^10.0.0",
+    "@ng-bootstrap/ng-bootstrap": "^10.0.0 || ^11.0.0",
     "d3": "^6.2.0 || ^7.0.0",
     "topojson-client": "^3.0.0"
   },
@@ -41,6 +41,14 @@
       "es2015": "./fesm2015/pb-design-system.mjs",
       "node": "./fesm2015/pb-design-system.mjs",
       "default": "./fesm2020/pb-design-system.mjs"
+    },
+    "./avatar": {
+      "types": "./avatar/pb-design-system-avatar.d.ts",
+      "esm2020": "./esm2020/avatar/pb-design-system-avatar.mjs",
+      "es2020": "./fesm2020/pb-design-system-avatar.mjs",
+      "es2015": "./fesm2015/pb-design-system-avatar.mjs",
+      "node": "./fesm2015/pb-design-system-avatar.mjs",
+      "default": "./fesm2020/pb-design-system-avatar.mjs"
     },
     "./column-toggle": {
       "types": "./column-toggle/pb-design-system-column-toggle.d.ts",
