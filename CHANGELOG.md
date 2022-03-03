@@ -1,3 +1,28 @@
+# 6.10.0
+
+## Additions
+
+- Added an error screen for unsupported browsers
+- Added a "process completed" widget to progress indicators
+- Added new mobile screens to Onboarding
+- Added code snippet for Horizontal Tracking Timeline to Tracking Pattern
+- Additional Header examples including mega-menu, account switcher, carets, and postage button
+- Color picker with WCAG contrast checker
+- Added accessibility statement component
+
+## Changes
+
+- Sunset theme orange (in gradient) is now PB Brand Dark Orange
+- Split "Terminology & Style" into 2 pages and added a glossary of terms
+
+## Bug Fixes
+
+- Fixed "undefined values" in line chart tooltips
+- Fixed components that did not display correctly in Windows High Contrast Mode: dropdowns, radios, and tabs
+- Fixed accessibility for Account Access form fields
+- Fixed code snippet for faceted search example
+- Fixed missing file upload component warning box
+
 # 6.9.1
 
 ## Changes

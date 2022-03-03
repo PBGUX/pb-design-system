@@ -39,8 +39,8 @@ export class PbdsDatavizMetricBlockComponent {
         }
     }
 }
-PbdsDatavizMetricBlockComponent.ɵfac = i0.ɵɵngDeclareFactory({ minVersion: "12.0.0", version: "13.1.2", ngImport: i0, type: PbdsDatavizMetricBlockComponent, deps: [], target: i0.ɵɵFactoryTarget.Component });
-PbdsDatavizMetricBlockComponent.ɵcmp = i0.ɵɵngDeclareComponent({ minVersion: "12.0.0", version: "13.1.2", type: PbdsDatavizMetricBlockComponent, selector: "pbds-dataviz-metric-block", inputs: { class: "class", heading: "heading", value: "value", unit: "unit", description: "description", centered: "centered", centeredText: "centeredText", vertical: "vertical", infoMessage: "infoMessage" }, host: { properties: { "class": "this.hostClasses" } }, queries: [{ propertyName: "indicatorRef", first: true, predicate: PbdsDatavizMetricIndicatorComponent, descendants: true, static: true }], ngImport: i0, template: `
+PbdsDatavizMetricBlockComponent.ɵfac = i0.ɵɵngDeclareFactory({ minVersion: "12.0.0", version: "13.2.4", ngImport: i0, type: PbdsDatavizMetricBlockComponent, deps: [], target: i0.ɵɵFactoryTarget.Component });
+PbdsDatavizMetricBlockComponent.ɵcmp = i0.ɵɵngDeclareComponent({ minVersion: "12.0.0", version: "13.2.4", type: PbdsDatavizMetricBlockComponent, selector: "pbds-dataviz-metric-block", inputs: { class: "class", heading: "heading", value: "value", unit: "unit", description: "description", centered: "centered", centeredText: "centeredText", vertical: "vertical", infoMessage: "infoMessage" }, host: { properties: { "class": "this.hostClasses" } }, queries: [{ propertyName: "indicatorRef", first: true, predicate: PbdsDatavizMetricIndicatorComponent, descendants: true, static: true }], ngImport: i0, template: `
     <div class="metric-block-inner">
       <div *ngIf="heading" class="metric-block-heading">
         {{ heading }}
@@ -69,7 +69,7 @@ PbdsDatavizMetricBlockComponent.ɵcmp = i0.ɵɵngDeclareComponent({ minVersion: 
       </div>
     </div>
   `, isInline: true, directives: [{ type: i1.NgIf, selector: "[ngIf]", inputs: ["ngIf", "ngIfThen", "ngIfElse"] }, { type: i2.NgbTooltip, selector: "[ngbTooltip]", inputs: ["animation", "autoClose", "placement", "triggers", "container", "disableTooltip", "tooltipClass", "openDelay", "closeDelay", "ngbTooltip"], outputs: ["shown", "hidden"], exportAs: ["ngbTooltip"] }, { type: i1.NgClass, selector: "[ngClass]", inputs: ["class", "ngClass"] }] });
-i0.ɵɵngDeclareClassMetadata({ minVersion: "12.0.0", version: "13.1.2", ngImport: i0, type: PbdsDatavizMetricBlockComponent, decorators: [{
+i0.ɵɵngDeclareClassMetadata({ minVersion: "12.0.0", version: "13.2.4", ngImport: i0, type: PbdsDatavizMetricBlockComponent, decorators: [{
             type: Component,
             args: [{
                     selector: 'pbds-dataviz-metric-block',

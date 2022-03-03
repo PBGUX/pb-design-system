@@ -39,6 +39,7 @@ export declare class PbdsDatavizLineComponent implements OnInit, OnDestroy, OnCh
     marginBottom: number;
     marginLeft: number;
     theme: any;
+    lineCurved: boolean;
     hovered: EventEmitter<object>;
     clicked: EventEmitter<object>;
     tooltipHovered: EventEmitter<object>;
@@ -52,7 +53,6 @@ export declare class PbdsDatavizLineComponent implements OnInit, OnDestroy, OnCh
     private d3line;
     private d3area;
     private lineWidth;
-    private lineCurved;
     private linePoints;
     private colorRange;
     private xAxisScale;
@@ -102,5 +102,5 @@ export declare class PbdsDatavizLineComponent implements OnInit, OnDestroy, OnCh
     private xAxisFormatter;
     private yAxisFormatter;
     static ɵfac: i0.ɵɵFactoryDeclaration<PbdsDatavizLineComponent, never>;
-    static ɵcmp: i0.ɵɵComponentDeclaration<PbdsDatavizLineComponent, "pbds-dataviz-line", never, { "data": "data"; "width": "width"; "height": "height"; "type": "type"; "area": "area"; "xAxisType": "xAxisType"; "xAxisFormatString": "xAxisFormatString"; "xAxisTicks": "xAxisTicks"; "yAxisFormatString": "yAxisFormatString"; "yAxisTicks": "yAxisTicks"; "yAxisMinBuffer": "yAxisMinBuffer"; "yAxisMaxBuffer": "yAxisMaxBuffer"; "hideXGrid": "hideXGrid"; "hideYGrid": "hideYGrid"; "hideLegend": "hideLegend"; "legendWidth": "legendWidth"; "legendPosition": "legendPosition"; "legendLabelFormatType": "legendLabelFormatType"; "legendLabelFormatString": "legendLabelFormatString"; "tooltipHeadingFormatString": "tooltipHeadingFormatString"; "tooltipLabelFormatType": "tooltipLabelFormatType"; "tooltipLabelFormatString": "tooltipLabelFormatString"; "tooltipValueFormatType": "tooltipValueFormatType"; "tooltipValueFormatString": "tooltipValueFormatString"; "marginTop": "marginTop"; "marginRight": "marginRight"; "marginBottom": "marginBottom"; "marginLeft": "marginLeft"; "theme": "theme"; }, { "hovered": "hovered"; "clicked": "clicked"; "tooltipHovered": "tooltipHovered"; "tooltipClicked": "tooltipClicked"; }, never, never>;
+    static ɵcmp: i0.ɵɵComponentDeclaration<PbdsDatavizLineComponent, "pbds-dataviz-line", never, { "data": "data"; "width": "width"; "height": "height"; "type": "type"; "area": "area"; "xAxisType": "xAxisType"; "xAxisFormatString": "xAxisFormatString"; "xAxisTicks": "xAxisTicks"; "yAxisFormatString": "yAxisFormatString"; "yAxisTicks": "yAxisTicks"; "yAxisMinBuffer": "yAxisMinBuffer"; "yAxisMaxBuffer": "yAxisMaxBuffer"; "hideXGrid": "hideXGrid"; "hideYGrid": "hideYGrid"; "hideLegend": "hideLegend"; "legendWidth": "legendWidth"; "legendPosition": "legendPosition"; "legendLabelFormatType": "legendLabelFormatType"; "legendLabelFormatString": "legendLabelFormatString"; "tooltipHeadingFormatString": "tooltipHeadingFormatString"; "tooltipLabelFormatType": "tooltipLabelFormatType"; "tooltipLabelFormatString": "tooltipLabelFormatString"; "tooltipValueFormatType": "tooltipValueFormatType"; "tooltipValueFormatString": "tooltipValueFormatString"; "marginTop": "marginTop"; "marginRight": "marginRight"; "marginBottom": "marginBottom"; "marginLeft": "marginLeft"; "theme": "theme"; "lineCurved": "lineCurved"; }, { "hovered": "hovered"; "clicked": "clicked"; "tooltipHovered": "tooltipHovered"; "tooltipClicked": "tooltipClicked"; }, never, never>;
 }

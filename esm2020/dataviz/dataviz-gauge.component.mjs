@@ -157,8 +157,8 @@ export class PbdsDatavizGaugeComponent {
         }
     }
 }
-PbdsDatavizGaugeComponent.ɵfac = i0.ɵɵngDeclareFactory({ minVersion: "12.0.0", version: "13.1.2", ngImport: i0, type: PbdsDatavizGaugeComponent, deps: [{ token: i1.PbdsDatavizService }, { token: i0.ElementRef }], target: i0.ɵɵFactoryTarget.Component });
-PbdsDatavizGaugeComponent.ɵcmp = i0.ɵɵngDeclareComponent({ minVersion: "12.0.0", version: "13.1.2", type: PbdsDatavizGaugeComponent, selector: "pbds-dataviz-gauge", inputs: { data: "data", width: "width", type: "type", color: "color", hideLabel: "hideLabel", labelFormatString: "labelFormatString", description: "description", gaugeWidth: "gaugeWidth" }, host: { properties: { "class.pbds-chart": "this.chartClass", "class.pbds-chart-gauge": "this.gaugeClass" } }, usesOnChanges: true, ngImport: i0, template: `
+PbdsDatavizGaugeComponent.ɵfac = i0.ɵɵngDeclareFactory({ minVersion: "12.0.0", version: "13.2.4", ngImport: i0, type: PbdsDatavizGaugeComponent, deps: [{ token: i1.PbdsDatavizService }, { token: i0.ElementRef }], target: i0.ɵɵFactoryTarget.Component });
+PbdsDatavizGaugeComponent.ɵcmp = i0.ɵɵngDeclareComponent({ minVersion: "12.0.0", version: "13.2.4", type: PbdsDatavizGaugeComponent, selector: "pbds-dataviz-gauge", inputs: { data: "data", width: "width", type: "type", color: "color", hideLabel: "hideLabel", labelFormatString: "labelFormatString", description: "description", gaugeWidth: "gaugeWidth" }, host: { properties: { "class.pbds-chart": "this.chartClass", "class.pbds-chart-gauge": "this.gaugeClass" } }, usesOnChanges: true, ngImport: i0, template: `
     <div
       *ngIf="!hideLabel"
       class="gauge-details"
@@ -169,7 +169,7 @@ PbdsDatavizGaugeComponent.ɵcmp = i0.ɵɵngDeclareComponent({ minVersion: "12.0.
       <div *ngIf="description" class="gauge-description text-center">{{ description }}</div>
     </div>
   `, isInline: true, directives: [{ type: i2.NgIf, selector: "[ngIf]", inputs: ["ngIf", "ngIfThen", "ngIfElse"] }, { type: i2.NgClass, selector: "[ngClass]", inputs: ["class", "ngClass"] }, { type: i2.NgStyle, selector: "[ngStyle]", inputs: ["ngStyle"] }] });
-i0.ɵɵngDeclareClassMetadata({ minVersion: "12.0.0", version: "13.1.2", ngImport: i0, type: PbdsDatavizGaugeComponent, decorators: [{
+i0.ɵɵngDeclareClassMetadata({ minVersion: "12.0.0", version: "13.2.4", ngImport: i0, type: PbdsDatavizGaugeComponent, decorators: [{
             type: Component,
             args: [{
                     selector: 'pbds-dataviz-gauge',

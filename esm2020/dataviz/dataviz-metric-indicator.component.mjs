@@ -11,11 +11,11 @@ export class PbdsDatavizMetricIndicatorComponent {
         return ['metric-block-indicator', this.indicator, this.inverse ? 'inverse' : '', this.class].join(' ');
     }
 }
-PbdsDatavizMetricIndicatorComponent.ɵfac = i0.ɵɵngDeclareFactory({ minVersion: "12.0.0", version: "13.1.2", ngImport: i0, type: PbdsDatavizMetricIndicatorComponent, deps: [], target: i0.ɵɵFactoryTarget.Component });
-PbdsDatavizMetricIndicatorComponent.ɵcmp = i0.ɵɵngDeclareComponent({ minVersion: "12.0.0", version: "13.1.2", type: PbdsDatavizMetricIndicatorComponent, selector: "pbds-dataviz-metric-indicator", inputs: { value: "value", class: "class", indicator: "indicator", inverse: "inverse" }, host: { properties: { "class": "this.hostClasses" } }, ngImport: i0, template: `
+PbdsDatavizMetricIndicatorComponent.ɵfac = i0.ɵɵngDeclareFactory({ minVersion: "12.0.0", version: "13.2.4", ngImport: i0, type: PbdsDatavizMetricIndicatorComponent, deps: [], target: i0.ɵɵFactoryTarget.Component });
+PbdsDatavizMetricIndicatorComponent.ɵcmp = i0.ɵɵngDeclareComponent({ minVersion: "12.0.0", version: "13.2.4", type: PbdsDatavizMetricIndicatorComponent, selector: "pbds-dataviz-metric-indicator", inputs: { value: "value", class: "class", indicator: "indicator", inverse: "inverse" }, host: { properties: { "class": "this.hostClasses" } }, ngImport: i0, template: `
     <span>{{ value }}</span>
   `, isInline: true });
-i0.ɵɵngDeclareClassMetadata({ minVersion: "12.0.0", version: "13.1.2", ngImport: i0, type: PbdsDatavizMetricIndicatorComponent, decorators: [{
+i0.ɵɵngDeclareClassMetadata({ minVersion: "12.0.0", version: "13.2.4", ngImport: i0, type: PbdsDatavizMetricIndicatorComponent, decorators: [{
             type: Component,
             args: [{
                     selector: 'pbds-dataviz-metric-indicator',
