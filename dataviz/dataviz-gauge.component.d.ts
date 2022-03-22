@@ -15,11 +15,11 @@ export declare class PbdsDatavizGaugeComponent implements OnInit, OnChanges {
     labelFormatString: string;
     description: any;
     gaugeWidth: number;
+    label: any;
     private chart;
     private svg;
     private gauge;
     private labelTween;
-    label: any;
     private startAngle;
     private endAngle;
     private radius;
@@ -28,6 +28,7 @@ export declare class PbdsDatavizGaugeComponent implements OnInit, OnChanges {
     private oldValue;
     private height;
     private rounded;
+    private detailsPaddingTop;
     constructor(_dataviz: PbdsDatavizService, _element: ElementRef);
     ngOnInit(): void;
     ngOnChanges(changes: SimpleChanges): void;

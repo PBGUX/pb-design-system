@@ -1218,23 +1218,19 @@ class PbdsDatavizLineComponent {
             this.mouserect.data(this.data);
             // update the xScale
             if (this.xAxisType === 'date') {
-                this.xAxisScale = scaleTime()
+                this.xAxisScale
                     .domain(extent(this.data.labels, (d) => {
                     return isoParse(d);
                 }))
                     .range([0, this.width - this.margin.left - this.margin.right]);
             }
             else if (this.xAxisType === 'number') {
-                this.xAxisScale = scaleLinear()
-                    .domain(extent(this.data.labels, (d) => {
+                this.xAxisScale.domain(extent(this.data.labels, (d) => {
                     return d;
-                }))
-                    .range([0, this.width - this.margin.left - this.margin.right]);
+                }));
             }
             else {
-                this.xAxisScale = scalePoint()
-                    .domain(this.data.labels)
-                    .range([0, this.width - this.margin.left - this.margin.right]);
+                this.xAxisScale.domain(this.data.labels);
             }
             // update the yScale
             this.yAxisScale
@@ -1334,7 +1330,13 @@ class PbdsDatavizLineComponent {
                     }
                 })
                     .attr('cy', (d) => this.yAxisScale(0))
-                    .attr('r', this.lineWidth * 2)
+                    .attr('r', (d, i) => {
+                    // hide circles if there is no data
+                    if (d === null) {
+                        return 0;
+                    }
+                    return this.lineWidth * 2;
+                })
                     .style('stroke-width', this.lineWidth)
                     .call((enter) => enter
                     .transition()
@@ -1354,7 +1356,13 @@ class PbdsDatavizLineComponent {
                     }
                 })
                     .attr('cy', (d) => this.yAxisScale(d))
-                    .attr('r', this.lineWidth * 2)
+                    .attr('r', (d, i) => {
+                    // hide circles if there is no data
+                    if (d === null) {
+                        return 0;
+                    }
+                    return this.lineWidth * 2;
+                })
                     .style('stroke-width', this.lineWidth), (update) => update.call((update) => update
                     .transition()
                     .duration(1000)
@@ -1367,7 +1375,19 @@ class PbdsDatavizLineComponent {
                         return this.xAxisScale(this.data.labels[i]);
                     }
                 })
-                    .attr('cy', (d) => this.yAxisScale(d))), (exit) => exit.remove()), (exit) => exit.remove());
+                    .attr('cy', (d) => {
+                    if (d === null) {
+                        return this.yAxisScale(0);
+                    }
+                    return this.yAxisScale(d);
+                })
+                    .attr('r', (d, i) => {
+                    // hide circles if there is no data
+                    if (d === null) {
+                        return 0;
+                    }
+                    return this.lineWidth * 2;
+                })), (exit) => exit.remove()), (exit) => exit.remove());
             }
             if (!this.hideLegend) {
                 this.chart
@@ -1706,7 +1726,11 @@ class PbdsDatavizLineComponent {
                 return this.xAxisScale(this.data.labels[i]);
             }
         })
-            .y((d) => this.yAxisScale(d));
+            .y((d) => this.yAxisScale(d))
+            .defined((d, i) => {
+            // console.log(d);
+            return d !== null; // only draw line if data is not null
+        });
         // define line curve
         if (this.lineCurved) {
             this.d3line.curve(curveCatmullRom.alpha(0.5));
@@ -1726,7 +1750,11 @@ class PbdsDatavizLineComponent {
                 }
             })
                 .y0(this.height)
-                .y1((d, i) => this.yAxisScale(d));
+                .y1((d, i) => this.yAxisScale(d))
+                .defined((d, i) => {
+                // console.log(d);
+                return d !== null; // only draw line if data is not null
+            });
             if (this.lineCurved) {
                 this.d3area.curve(curveCatmullRom.alpha(0.5));
             }
@@ -2011,14 +2039,15 @@ class PbdsDatavizGaugeComponent {
         this.hideLabel = false;
         this.labelFormatString = '';
         this.gaugeWidth = 20;
-        this.degreesToRadians = degree => {
+        this.detailsPaddingTop = 0;
+        this.degreesToRadians = (degree) => {
             return (degree * Math.PI) / 180;
         };
         this.calculateMinMax = () => {
             const percentage = this.data.minvalue / (this.data.maxvalue - this.data.minvalue);
             return percentage * (this.data.value - this.data.minvalue) + (this.data.value - this.data.minvalue);
         };
-        this.calculateCurve = data => {
+        this.calculateCurve = (data) => {
             const start = this.degreesToRadians(this.startAngle);
             const end = start + (data * (this.degreesToRadians(this.endAngle) - start)) / this.data.maxvalue;
             return [
@@ -2035,7 +2064,7 @@ class PbdsDatavizGaugeComponent {
                 .append('path')
                 .data(this.calculateCurve(this.data.maxvalue))
                 .attr('class', 'gauge-background')
-                .attr('d', d => {
+                .attr('d', (d) => {
                 return this.arc({
                     innerRadius: this.radius - this.gaugeWidth,
                     outerRadius: this.radius,
@@ -2049,7 +2078,7 @@ class PbdsDatavizGaugeComponent {
                 .data(this.calculateCurve(this.calculateMinMax()))
                 .attr('class', 'gauge-value')
                 .attr('fill', this.color)
-                .attr('d', d => {
+                .attr('d', (d) => {
                 return this.arc({
                     innerRadius: this.radius - this.gaugeWidth,
                     outerRadius: this.radius,
@@ -2059,7 +2088,16 @@ class PbdsDatavizGaugeComponent {
             });
             switch (this.type) {
                 case 'horseshoe':
-                    this.svg.attr('height', 230).attr('viewBox', `-${this.width / 2} -${this.height / 2} ${this.height} 230`);
+                    const svgClone = this.svg.node().cloneNode(true);
+                    const fakeSvg = document.body.appendChild(svgClone);
+                    fakeSvg.setAttribute('style', 'position: absolute; left: -10000px;'); // position the cloned element offscreen
+                    const fakeGroup = fakeSvg.getElementsByClassName('gauge-group')[0];
+                    const fakeBox = fakeGroup.getBBox();
+                    this.svg
+                        .attr('height', fakeBox.height)
+                        .attr('viewBox', `-${this.width / 2} -${this.width / 2} ${this.width} ${fakeBox.height}`);
+                    this.detailsPaddingTop = this.gaugeWidth;
+                    fakeSvg.remove(); // remove the cloned element from the DOM
                     break;
                 case 'halfmoon':
                     this.svg.attr('height', this.width / 2);
@@ -2069,22 +2107,15 @@ class PbdsDatavizGaugeComponent {
         };
         this.updateChart = () => {
             const group = this.svg.select('.gauge-group');
-            group
-                .select('.gauge-value')
-                .transition()
-                .duration(750)
-                .call(this.arcTween, this.calculateMinMax());
+            group.select('.gauge-value').transition().duration(750).call(this.arcTween, this.calculateMinMax());
             this.labelTween = this.chart.select('.gauge-number');
-            this.labelTween
-                .transition()
-                .duration(750)
-                .call(this.textTween, this.data.value);
+            this.labelTween.transition().duration(750).call(this.textTween, this.data.value);
         };
         this.arcTween = (transition, value) => {
             const newAngle = this.calculateCurve(value);
-            transition.attrTween('d', d => {
+            transition.attrTween('d', (d) => {
                 const interpolate$1 = interpolate(d.endAngle, newAngle[0].endAngle);
-                return t => {
+                return (t) => {
                     d.endAngle = interpolate$1(t);
                     return this.arc({
                         innerRadius: this.radius - this.gaugeWidth,
@@ -2100,8 +2131,8 @@ class PbdsDatavizGaugeComponent {
             value = value.replace(/,/g, '.');
             transition.tween('text', () => {
                 const interpolate$1 = interpolate(format$1('.4f')(+this.oldValue), value);
-                return t => {
-                    this.labelTween.text(d => {
+                return (t) => {
+                    this.labelTween.text((d) => {
                         const updatedNumber = this.labelFormat(interpolate$1(t));
                         this.label = updatedNumber;
                         return updatedNumber;
@@ -2156,7 +2187,7 @@ PbdsDatavizGaugeComponent.ɵcmp = i0.ɵɵngDeclareComponent({ minVersion: "12.0.
       *ngIf="!hideLabel"
       class="gauge-details"
       [ngClass]="{ halfmoon: type === 'halfmoon', 'gauge-details-small': type === 'halfmoon' }"
-      [ngStyle]="{ 'max-width.px': width - 3 * gaugeWidth }"
+      [ngStyle]="{ 'max-width.px': width - 3 * gaugeWidth, 'padding-top.px': detailsPaddingTop }"
     >
       <div class="gauge-number">{{ label }}</div>
       <div *ngIf="description" class="gauge-description text-center">{{ description }}</div>
@@ -2171,7 +2202,7 @@ i0.ɵɵngDeclareClassMetadata({ minVersion: "12.0.0", version: "13.2.4", ngImpor
       *ngIf="!hideLabel"
       class="gauge-details"
       [ngClass]="{ halfmoon: type === 'halfmoon', 'gauge-details-small': type === 'halfmoon' }"
-      [ngStyle]="{ 'max-width.px': width - 3 * gaugeWidth }"
+      [ngStyle]="{ 'max-width.px': width - 3 * gaugeWidth, 'padding-top.px': detailsPaddingTop }"
     >
       <div class="gauge-number">{{ label }}</div>
       <div *ngIf="description" class="gauge-description text-center">{{ description }}</div>

@@ -1,3 +1,18 @@
+# 6.10.1
+
+## Additions
+
+- Added code example for Parcel Tracking Map
+- Added example of multiple simultaneous global alerts, and added classes to support "info" and "warning" alert types
+- Added table example to expand/collapse all table rows
+
+## Bug Fixes
+
+- Fixed several instances for proper visibility in Windows High Contrast Mode
+- Fixed Horeshoe Gauge had extra space below chart
+- Fixed regression with "danger" icon on alerts and toasters
+- Fixed width of toasters
+
 # 6.10.0
 
 ## Additions

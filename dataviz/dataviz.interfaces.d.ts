@@ -21,7 +21,7 @@ export interface PbdsDatavizLine {
 }
 export interface PbdsDatavizLineSeries {
     label: string;
-    values: Array<number>;
+    values: Array<number | null>;
 }
 export interface PbdsDatavizBarStacked {
     key: string;
