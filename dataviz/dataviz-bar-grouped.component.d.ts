@@ -19,6 +19,7 @@ export declare class PbdsDatavizBarGroupedComponent implements OnInit, OnDestroy
     xAxisFormatType: 'number' | 'time';
     xAxisFormatString: string;
     xAxisTicks: number;
+    xAxisTitle: string | null;
     hideYAxis: boolean;
     yAxisMaxBuffer: number;
     yAxisFormatType: 'number' | 'time';
@@ -55,6 +56,7 @@ export declare class PbdsDatavizBarGroupedComponent implements OnInit, OnDestroy
     private xAxisTickSize;
     private xAxisTickSizeOuter;
     private xAxisFormat;
+    private xAxisTitleMargin;
     private hideXAxisDomain;
     private hideXAxisZero;
     private hideXAxisTicks;
@@ -96,5 +98,5 @@ export declare class PbdsDatavizBarGroupedComponent implements OnInit, OnDestroy
     private yAxisFormatter;
     private barFill;
     static ɵfac: i0.ɵɵFactoryDeclaration<PbdsDatavizBarGroupedComponent, never>;
-    static ɵcmp: i0.ɵɵComponentDeclaration<PbdsDatavizBarGroupedComponent, "pbds-dataviz-bar-grouped", never, { "data": "data"; "width": "width"; "height": "height"; "vertical": "vertical"; "hideXAxis": "hideXAxis"; "xAxisMaxBuffer": "xAxisMaxBuffer"; "xAxisFormatType": "xAxisFormatType"; "xAxisFormatString": "xAxisFormatString"; "xAxisTicks": "xAxisTicks"; "hideYAxis": "hideYAxis"; "yAxisMaxBuffer": "yAxisMaxBuffer"; "yAxisFormatType": "yAxisFormatType"; "yAxisFormatString": "yAxisFormatString"; "yAxisTicks": "yAxisTicks"; "marginTop": "marginTop"; "marginRight": "marginRight"; "marginBottom": "marginBottom"; "marginLeft": "marginLeft"; "hideLegend": "hideLegend"; "legendWidth": "legendWidth"; "legendPosition": "legendPosition"; "legendLabelFormatType": "legendLabelFormatType"; "legendLabelFormatString": "legendLabelFormatString"; "hideTooltip": "hideTooltip"; "tooltipLabelFormatType": "tooltipLabelFormatType"; "tooltipLabelFormatString": "tooltipLabelFormatString"; "tooltipValueFormatType": "tooltipValueFormatType"; "tooltipValueFormatString": "tooltipValueFormatString"; "showGrid": "showGrid"; "theme": "theme"; "gradient": "gradient"; }, { "hovered": "hovered"; "clicked": "clicked"; }, never, never>;
+    static ɵcmp: i0.ɵɵComponentDeclaration<PbdsDatavizBarGroupedComponent, "pbds-dataviz-bar-grouped", never, { "data": "data"; "width": "width"; "height": "height"; "vertical": "vertical"; "hideXAxis": "hideXAxis"; "xAxisMaxBuffer": "xAxisMaxBuffer"; "xAxisFormatType": "xAxisFormatType"; "xAxisFormatString": "xAxisFormatString"; "xAxisTicks": "xAxisTicks"; "xAxisTitle": "xAxisTitle"; "hideYAxis": "hideYAxis"; "yAxisMaxBuffer": "yAxisMaxBuffer"; "yAxisFormatType": "yAxisFormatType"; "yAxisFormatString": "yAxisFormatString"; "yAxisTicks": "yAxisTicks"; "marginTop": "marginTop"; "marginRight": "marginRight"; "marginBottom": "marginBottom"; "marginLeft": "marginLeft"; "hideLegend": "hideLegend"; "legendWidth": "legendWidth"; "legendPosition": "legendPosition"; "legendLabelFormatType": "legendLabelFormatType"; "legendLabelFormatString": "legendLabelFormatString"; "hideTooltip": "hideTooltip"; "tooltipLabelFormatType": "tooltipLabelFormatType"; "tooltipLabelFormatString": "tooltipLabelFormatString"; "tooltipValueFormatType": "tooltipValueFormatType"; "tooltipValueFormatString": "tooltipValueFormatString"; "showGrid": "showGrid"; "theme": "theme"; "gradient": "gradient"; }, { "hovered": "hovered"; "clicked": "clicked"; }, never, never>;
 }

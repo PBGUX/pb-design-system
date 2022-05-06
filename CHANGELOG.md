@@ -1,3 +1,18 @@
+# 6.10.2
+
+## Additions
+
+- Replace "hamburger menu" code with Angular Material "sidenav" due to old plugin being abandoned
+- Theme switcher header menu item
+- Ability to open the PBDS Date Range calendar from another element, such as a button elsewhere on screen
+- Updated list of VPATs
+- Ability to add an X-axis label to vertical bar, line, and area charts
+
+## Bug Fixes
+
+- Updated customer email sample image to match the actual code in the template
+- Stacked bar tooltip position in Firefox
+
 # 6.10.1
 
 ## Additions

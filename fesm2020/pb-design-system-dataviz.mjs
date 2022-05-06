@@ -869,7 +869,6 @@ class PbdsDatavizBarComponent {
         this.hideYAxisTicks = false;
         this.xAxisTickSize = 8;
         this.xAxisTickSizeOuter = 0;
-        this.xAxisTitleMargin = this.xAxisTitle ? 20 : 0;
         this.yAxisTickSize = 8;
         this.yAxisTickSizeOuter = 0;
         this.hideTooltipLabel = false;
@@ -914,6 +913,7 @@ class PbdsDatavizBarComponent {
                 this.hideXGrid = true;
                 this.hideTooltipLabel = false;
             }
+            this.xAxisTitleMargin = this.xAxisTitle ? 30 : 0;
         }
         // adjust margin if xAxis hidden
         if (this.hideXAxis)
@@ -970,9 +970,8 @@ class PbdsDatavizBarComponent {
             this.svg
                 .append('text')
                 .attr('class', 'axis-title')
-                .attr('text-anchor', 'center')
-                .attr('x', this.width / 2 - this.margin.left)
-                .attr('y', this.height + this.margin.top + (this.hideXAxis ? 15 : 0))
+                .attr('text-anchor', 'middle')
+                .attr('transform', `translate(${this.svg.attr('width') / 2 - this.margin.left / 2 - this.margin.right / 2}, ${this.height + this.margin.top + (this.hideXAxis ? 20 : 40)})`)
                 .text(this.xAxisTitle);
         }
         // Y AXIS
@@ -1189,6 +1188,7 @@ class PbdsDatavizLineComponent {
         this.xAxisType = 'date';
         this.xAxisFormatString = '';
         this.xAxisTicks = 6;
+        this.xAxisTitle = null;
         this.yAxisFormatString = '';
         this.yAxisTicks = 5;
         this.yAxisMinBuffer = 0.01;
@@ -1707,6 +1707,7 @@ class PbdsDatavizLineComponent {
                     break;
             }
         }
+        this.xAxisTitleMargin = this.xAxisTitle ? 30 : 0;
         // adjust margin if xAxis hidden
         if (this.hideXAxis)
             this.margin.bottom = 10; // need small margin for yAxis with 0 tick label
@@ -1765,10 +1766,10 @@ class PbdsDatavizLineComponent {
         this.svg = this.chart
             .append('svg')
             .attr('width', +this.width + this.margin.right)
-            .attr('height', +this.height + this.margin.top + this.margin.bottom)
+            .attr('height', +this.height + this.margin.top + this.margin.bottom + this.xAxisTitleMargin)
             .attr('class', 'img-fluid')
             .attr('preserveAspectRatio', 'xMinYMin meet')
-            .attr('viewBox', `-${this.margin.left} -${this.margin.top} ${+this.width + this.margin.right} ${+this.height + this.margin.top + this.margin.bottom}`);
+            .attr('viewBox', `-${this.margin.left} -${this.margin.top} ${+this.width + this.margin.right} ${+this.height + this.margin.top + this.margin.bottom + this.xAxisTitleMargin}`);
         // add rectangle to capture mouse
         this.mouserect = this.svg
             .append('rect')
@@ -1851,6 +1852,17 @@ class PbdsDatavizLineComponent {
                 .classed('grid-zero-hidden', this.hideXAxisZero)
                 .attr('transform', `translate(0, ${this.height})`) //${-this.margin.right / 2}
                 .call(this.xGridCall);
+        }
+        // X AXIS TITLE
+        if (this.xAxisTitle) {
+            this.svg
+                .append('text')
+                .attr('class', 'axis-title')
+                .attr('text-anchor', 'middle')
+                .attr('transform', `translate(${this.svg.attr('width') / 2 - this.margin.left / 2 - this.margin.right / 2}, ${this.height + this.margin.top + (this.hideXAxis ? 20 : 40)})`)
+                // .attr('x', this.width / 2 - this.margin.left - this.margin.right)
+                // .attr('y', this.height + this.margin.top + (this.hideXAxis ? 25 : 50))
+                .text(this.xAxisTitle);
         }
         // Y AXIS
         this.yAxisScale = scaleLinear()
@@ -1942,7 +1954,7 @@ class PbdsDatavizLineComponent {
     }
 }
 PbdsDatavizLineComponent.ɵfac = i0.ɵɵngDeclareFactory({ minVersion: "12.0.0", version: "13.2.4", ngImport: i0, type: PbdsDatavizLineComponent, deps: [{ token: PbdsDatavizService }, { token: i0.ElementRef }, { token: i2.ViewportScroller }, { token: i2.Location }], target: i0.ɵɵFactoryTarget.Component });
-PbdsDatavizLineComponent.ɵcmp = i0.ɵɵngDeclareComponent({ minVersion: "12.0.0", version: "13.2.4", type: PbdsDatavizLineComponent, selector: "pbds-dataviz-line", inputs: { data: "data", width: "width", height: "height", type: "type", area: "area", xAxisType: "xAxisType", xAxisFormatString: "xAxisFormatString", xAxisTicks: "xAxisTicks", yAxisFormatString: "yAxisFormatString", yAxisTicks: "yAxisTicks", yAxisMinBuffer: "yAxisMinBuffer", yAxisMaxBuffer: "yAxisMaxBuffer", hideXGrid: "hideXGrid", hideYGrid: "hideYGrid", hideLegend: "hideLegend", legendWidth: "legendWidth", legendPosition: "legendPosition", legendLabelFormatType: "legendLabelFormatType", legendLabelFormatString: "legendLabelFormatString", tooltipHeadingFormatString: "tooltipHeadingFormatString", tooltipLabelFormatType: "tooltipLabelFormatType", tooltipLabelFormatString: "tooltipLabelFormatString", tooltipValueFormatType: "tooltipValueFormatType", tooltipValueFormatString: "tooltipValueFormatString", marginTop: "marginTop", marginRight: "marginRight", marginBottom: "marginBottom", marginLeft: "marginLeft", theme: "theme", lineCurved: "lineCurved" }, outputs: { hovered: "hovered", clicked: "clicked", tooltipHovered: "tooltipHovered", tooltipClicked: "tooltipClicked" }, host: { properties: { "class.pbds-chart": "this.chartClass", "class.pbds-chart-line": "this.lineClass" } }, usesOnChanges: true, ngImport: i0, template: ``, isInline: true, changeDetection: i0.ChangeDetectionStrategy.OnPush });
+PbdsDatavizLineComponent.ɵcmp = i0.ɵɵngDeclareComponent({ minVersion: "12.0.0", version: "13.2.4", type: PbdsDatavizLineComponent, selector: "pbds-dataviz-line", inputs: { data: "data", width: "width", height: "height", type: "type", area: "area", xAxisType: "xAxisType", xAxisFormatString: "xAxisFormatString", xAxisTicks: "xAxisTicks", xAxisTitle: "xAxisTitle", yAxisFormatString: "yAxisFormatString", yAxisTicks: "yAxisTicks", yAxisMinBuffer: "yAxisMinBuffer", yAxisMaxBuffer: "yAxisMaxBuffer", hideXGrid: "hideXGrid", hideYGrid: "hideYGrid", hideLegend: "hideLegend", legendWidth: "legendWidth", legendPosition: "legendPosition", legendLabelFormatType: "legendLabelFormatType", legendLabelFormatString: "legendLabelFormatString", tooltipHeadingFormatString: "tooltipHeadingFormatString", tooltipLabelFormatType: "tooltipLabelFormatType", tooltipLabelFormatString: "tooltipLabelFormatString", tooltipValueFormatType: "tooltipValueFormatType", tooltipValueFormatString: "tooltipValueFormatString", marginTop: "marginTop", marginRight: "marginRight", marginBottom: "marginBottom", marginLeft: "marginLeft", theme: "theme", lineCurved: "lineCurved" }, outputs: { hovered: "hovered", clicked: "clicked", tooltipHovered: "tooltipHovered", tooltipClicked: "tooltipClicked" }, host: { properties: { "class.pbds-chart": "this.chartClass", "class.pbds-chart-line": "this.lineClass" } }, usesOnChanges: true, ngImport: i0, template: ``, isInline: true, changeDetection: i0.ChangeDetectionStrategy.OnPush });
 i0.ɵɵngDeclareClassMetadata({ minVersion: "12.0.0", version: "13.2.4", ngImport: i0, type: PbdsDatavizLineComponent, decorators: [{
             type: Component,
             args: [{
@@ -1972,6 +1984,8 @@ i0.ɵɵngDeclareClassMetadata({ minVersion: "12.0.0", version: "13.2.4", ngImpor
             }], xAxisFormatString: [{
                 type: Input
             }], xAxisTicks: [{
+                type: Input
+            }], xAxisTitle: [{
                 type: Input
             }], yAxisFormatString: [{
                 type: Input
@@ -2401,6 +2415,7 @@ class PbdsDatavizBarStackedComponent {
         this.hideXAxis = false;
         this.xAxisFormatType = null;
         this.xAxisFormatString = '';
+        this.xAxisTitle = null;
         this.yAxisFormatType = null;
         this.yAxisFormatString = '';
         this.yAxisTicks = 5;
@@ -2693,9 +2708,9 @@ class PbdsDatavizBarStackedComponent {
                 .select('tbody')
                 .html((d) => {
                 let html = ``;
-                let label;
-                let value;
                 Object.keys(data.data).map((key, index) => {
+                    let label;
+                    let value = data.data[key];
                     switch (this.tooltipLabelFormatType) {
                         case 'time':
                             const parseDate = isoParse(key);
@@ -2706,7 +2721,12 @@ class PbdsDatavizBarStackedComponent {
                     }
                     switch (this.tooltipValueFormatType) {
                         case 'number':
-                            value = this.tooltipValueFormat(data.data[key]);
+                            if (value === null || value === undefined) {
+                                value = '';
+                            }
+                            else {
+                                value = this.tooltipValueFormat(data.data[key]);
+                            }
                             break;
                         default:
                             value = data.data[key];
@@ -2847,6 +2867,7 @@ class PbdsDatavizBarStackedComponent {
                     break;
             }
         }
+        this.xAxisTitleMargin = this.xAxisTitle ? 30 : 0;
         // adjust margin if xAxis hidden
         if (this.hideXAxis)
             this.margin.bottom = 10; // need small margin for yAxis with 0 tick label
@@ -2859,10 +2880,10 @@ class PbdsDatavizBarStackedComponent {
         this.svg = this.chart
             .append('svg')
             .attr('width', +this.width)
-            .attr('height', +this.height + this.margin.top + this.margin.bottom)
+            .attr('height', +this.height + this.margin.top + this.margin.bottom + this.xAxisTitleMargin)
             .attr('class', 'img-fluid')
             .attr('preserveAspectRatio', 'xMinYMin meet')
-            .attr('viewBox', `-${this.margin.left} -${this.margin.top} ${+this.width} ${+this.height + this.margin.top + this.margin.bottom}`);
+            .attr('viewBox', `-${this.margin.left} -${this.margin.top} ${+this.width} ${+this.height + this.margin.top + this.margin.bottom + this.xAxisTitleMargin}`);
         this.grayBars = this.svg.append('g').attr('class', 'gray-bars');
         this.mouseBars = this.svg.append('g').attr('class', 'mouseover-bars');
         this.bars = this.svg.append('g').attr('class', 'bars');
@@ -2899,6 +2920,15 @@ class PbdsDatavizBarStackedComponent {
                 .classed('grid-zero-hidden', this.hideXAxisZero)
                 .attr('transform', `translate(0, ${this.height})`)
                 .call(this.xGridCall);
+        }
+        // X AXIS TITLE
+        if (this.xAxisTitle) {
+            this.svg
+                .append('text')
+                .attr('class', 'axis-title')
+                .attr('text-anchor', 'middle')
+                .attr('transform', `translate(${this.svg.attr('width') / 2 - this.margin.left / 2 - this.margin.right / 2}, ${+this.height + +this.margin.top + (this.hideXAxis ? 20 : 40)})`)
+                .text(this.xAxisTitle);
         }
         // KEEP: use this block to debug yAxisMax
         // console.log(
@@ -2974,7 +3004,7 @@ class PbdsDatavizBarStackedComponent {
     }
 }
 PbdsDatavizBarStackedComponent.ɵfac = i0.ɵɵngDeclareFactory({ minVersion: "12.0.0", version: "13.2.4", ngImport: i0, type: PbdsDatavizBarStackedComponent, deps: [{ token: PbdsDatavizService }, { token: i0.ElementRef }, { token: i2.ViewportScroller }], target: i0.ɵɵFactoryTarget.Component });
-PbdsDatavizBarStackedComponent.ɵcmp = i0.ɵɵngDeclareComponent({ minVersion: "12.0.0", version: "13.2.4", type: PbdsDatavizBarStackedComponent, selector: "pbds-dataviz-bar-stacked", inputs: { data: "data", width: "width", height: "height", type: "type", marginTop: "marginTop", marginRight: "marginRight", marginBottom: "marginBottom", marginLeft: "marginLeft", hideXAxis: "hideXAxis", xAxisFormatType: "xAxisFormatType", xAxisFormatString: "xAxisFormatString", yAxisFormatType: "yAxisFormatType", yAxisFormatString: "yAxisFormatString", yAxisTicks: "yAxisTicks", yAxisMaxBuffer: "yAxisMaxBuffer", hideLegend: "hideLegend", legendWidth: "legendWidth", legendPosition: "legendPosition", legendLabelFormatType: "legendLabelFormatType", legendLabelFormatString: "legendLabelFormatString", tooltipHeadingFormatType: "tooltipHeadingFormatType", tooltipHeadingFormatString: "tooltipHeadingFormatString", tooltipHeadingValueFormatType: "tooltipHeadingValueFormatType", tooltipHeadingValueFormatString: "tooltipHeadingValueFormatString", tooltipLabelFormatType: "tooltipLabelFormatType", tooltipLabelFormatString: "tooltipLabelFormatString", tooltipValueFormatType: "tooltipValueFormatType", tooltipValueFormatString: "tooltipValueFormatString", theme: "theme" }, outputs: { hovered: "hovered", clicked: "clicked" }, host: { properties: { "class.pbds-chart": "this.chartClass", "class.pbds-chart-stacked-bar": "this.stackedBarClass" } }, usesOnChanges: true, ngImport: i0, template: ``, isInline: true, changeDetection: i0.ChangeDetectionStrategy.OnPush });
+PbdsDatavizBarStackedComponent.ɵcmp = i0.ɵɵngDeclareComponent({ minVersion: "12.0.0", version: "13.2.4", type: PbdsDatavizBarStackedComponent, selector: "pbds-dataviz-bar-stacked", inputs: { data: "data", width: "width", height: "height", type: "type", marginTop: "marginTop", marginRight: "marginRight", marginBottom: "marginBottom", marginLeft: "marginLeft", hideXAxis: "hideXAxis", xAxisFormatType: "xAxisFormatType", xAxisFormatString: "xAxisFormatString", xAxisTitle: "xAxisTitle", yAxisFormatType: "yAxisFormatType", yAxisFormatString: "yAxisFormatString", yAxisTicks: "yAxisTicks", yAxisMaxBuffer: "yAxisMaxBuffer", hideLegend: "hideLegend", legendWidth: "legendWidth", legendPosition: "legendPosition", legendLabelFormatType: "legendLabelFormatType", legendLabelFormatString: "legendLabelFormatString", tooltipHeadingFormatType: "tooltipHeadingFormatType", tooltipHeadingFormatString: "tooltipHeadingFormatString", tooltipHeadingValueFormatType: "tooltipHeadingValueFormatType", tooltipHeadingValueFormatString: "tooltipHeadingValueFormatString", tooltipLabelFormatType: "tooltipLabelFormatType", tooltipLabelFormatString: "tooltipLabelFormatString", tooltipValueFormatType: "tooltipValueFormatType", tooltipValueFormatString: "tooltipValueFormatString", theme: "theme" }, outputs: { hovered: "hovered", clicked: "clicked" }, host: { properties: { "class.pbds-chart": "this.chartClass", "class.pbds-chart-stacked-bar": "this.stackedBarClass" } }, usesOnChanges: true, ngImport: i0, template: ``, isInline: true, changeDetection: i0.ChangeDetectionStrategy.OnPush });
 i0.ɵɵngDeclareClassMetadata({ minVersion: "12.0.0", version: "13.2.4", ngImport: i0, type: PbdsDatavizBarStackedComponent, decorators: [{
             type: Component,
             args: [{
@@ -3010,6 +3040,8 @@ i0.ɵɵngDeclareClassMetadata({ minVersion: "12.0.0", version: "13.2.4", ngImpor
             }], xAxisFormatType: [{
                 type: Input
             }], xAxisFormatString: [{
+                type: Input
+            }], xAxisTitle: [{
                 type: Input
             }], yAxisFormatType: [{
                 type: Input
@@ -4243,6 +4275,7 @@ class PbdsDatavizBarGroupedComponent {
         this.xAxisFormatType = null;
         this.xAxisFormatString = '';
         this.xAxisTicks = 5;
+        this.xAxisTitle = null;
         this.hideYAxis = false;
         this.yAxisMaxBuffer = 0.01;
         this.yAxisFormatType = null;
@@ -4388,6 +4421,7 @@ class PbdsDatavizBarGroupedComponent {
         this.hideXAxisTicks = true;
         this.xAxisTickSize = 8;
         this.xAxisTickSizeOuter = 0;
+        this.xAxisTitleMargin = this.xAxisTitle ? 30 : 0;
         this.hideYAxisZero = false;
         this.hideYAxisDomain = false;
         this.hideYAxisTicks = true;
@@ -4409,15 +4443,15 @@ class PbdsDatavizBarGroupedComponent {
                 return +this.width + this.margin.left + this.margin.right;
             }
         })
-            .attr('height', +this.height + this.margin.top + this.margin.bottom)
+            .attr('height', +this.height + this.margin.top + this.margin.bottom + this.xAxisTitleMargin)
             .attr('class', 'img-fluid')
             .attr('preserveAspectRatio', 'xMinYMin meet')
             .attr('viewBox', () => {
             if (this.vertical) {
-                return `-${this.margin.left} -${this.margin.top} ${+this.width} ${+this.height + this.margin.top + this.margin.bottom}`;
+                return `-${this.margin.left} -${this.margin.top} ${+this.width} ${+this.height + this.margin.top + this.margin.bottom + this.xAxisTitleMargin}`;
             }
             else {
-                return `-${this.margin.left} -${this.margin.top} ${+this.width + this.margin.left + this.margin.right} ${+this.height + this.margin.top + this.margin.bottom}`;
+                return `-${this.margin.left} -${this.margin.top} ${+this.width + this.margin.left + this.margin.right} ${+this.height + this.margin.top + this.margin.bottom + this.xAxisTitleMargin}`;
             }
         });
         // TOOLTIP
@@ -4584,6 +4618,15 @@ class PbdsDatavizBarGroupedComponent {
                 .paddingInner(0.2)
                 .paddingOuter(0.5);
             this.updateChartHorizontal();
+        }
+        // X AXIS TITLE
+        if (this.xAxisTitle) {
+            this.svg
+                .append('text')
+                .attr('class', 'axis-title')
+                .attr('text-anchor', 'middle')
+                .attr('transform', `translate(${this.svg.attr('width') / 2 - this.margin.left / 2 - this.margin.right / 2}, ${this.height + this.margin.top + (this.hideXAxis ? 20 : 40)})`)
+                .text(this.xAxisTitle);
         }
     }
     ngOnDestroy() {
@@ -4882,7 +4925,7 @@ class PbdsDatavizBarGroupedComponent {
     }
 }
 PbdsDatavizBarGroupedComponent.ɵfac = i0.ɵɵngDeclareFactory({ minVersion: "12.0.0", version: "13.2.4", ngImport: i0, type: PbdsDatavizBarGroupedComponent, deps: [{ token: PbdsDatavizService }, { token: i0.ElementRef }, { token: i2.ViewportScroller }, { token: i2.Location }], target: i0.ɵɵFactoryTarget.Component });
-PbdsDatavizBarGroupedComponent.ɵcmp = i0.ɵɵngDeclareComponent({ minVersion: "12.0.0", version: "13.2.4", type: PbdsDatavizBarGroupedComponent, selector: "pbds-dataviz-bar-grouped", inputs: { data: "data", width: "width", height: "height", vertical: "vertical", hideXAxis: "hideXAxis", xAxisMaxBuffer: "xAxisMaxBuffer", xAxisFormatType: "xAxisFormatType", xAxisFormatString: "xAxisFormatString", xAxisTicks: "xAxisTicks", hideYAxis: "hideYAxis", yAxisMaxBuffer: "yAxisMaxBuffer", yAxisFormatType: "yAxisFormatType", yAxisFormatString: "yAxisFormatString", yAxisTicks: "yAxisTicks", marginTop: "marginTop", marginRight: "marginRight", marginBottom: "marginBottom", marginLeft: "marginLeft", hideLegend: "hideLegend", legendWidth: "legendWidth", legendPosition: "legendPosition", legendLabelFormatType: "legendLabelFormatType", legendLabelFormatString: "legendLabelFormatString", hideTooltip: "hideTooltip", tooltipLabelFormatType: "tooltipLabelFormatType", tooltipLabelFormatString: "tooltipLabelFormatString", tooltipValueFormatType: "tooltipValueFormatType", tooltipValueFormatString: "tooltipValueFormatString", showGrid: "showGrid", theme: "theme", gradient: "gradient" }, outputs: { hovered: "hovered", clicked: "clicked" }, host: { properties: { "class.pbds-chart": "this.chartClass", "class.pbds-chart-bar-grouped": "this.groupedBarClass" } }, usesOnChanges: true, ngImport: i0, template: ``, isInline: true, changeDetection: i0.ChangeDetectionStrategy.OnPush });
+PbdsDatavizBarGroupedComponent.ɵcmp = i0.ɵɵngDeclareComponent({ minVersion: "12.0.0", version: "13.2.4", type: PbdsDatavizBarGroupedComponent, selector: "pbds-dataviz-bar-grouped", inputs: { data: "data", width: "width", height: "height", vertical: "vertical", hideXAxis: "hideXAxis", xAxisMaxBuffer: "xAxisMaxBuffer", xAxisFormatType: "xAxisFormatType", xAxisFormatString: "xAxisFormatString", xAxisTicks: "xAxisTicks", xAxisTitle: "xAxisTitle", hideYAxis: "hideYAxis", yAxisMaxBuffer: "yAxisMaxBuffer", yAxisFormatType: "yAxisFormatType", yAxisFormatString: "yAxisFormatString", yAxisTicks: "yAxisTicks", marginTop: "marginTop", marginRight: "marginRight", marginBottom: "marginBottom", marginLeft: "marginLeft", hideLegend: "hideLegend", legendWidth: "legendWidth", legendPosition: "legendPosition", legendLabelFormatType: "legendLabelFormatType", legendLabelFormatString: "legendLabelFormatString", hideTooltip: "hideTooltip", tooltipLabelFormatType: "tooltipLabelFormatType", tooltipLabelFormatString: "tooltipLabelFormatString", tooltipValueFormatType: "tooltipValueFormatType", tooltipValueFormatString: "tooltipValueFormatString", showGrid: "showGrid", theme: "theme", gradient: "gradient" }, outputs: { hovered: "hovered", clicked: "clicked" }, host: { properties: { "class.pbds-chart": "this.chartClass", "class.pbds-chart-bar-grouped": "this.groupedBarClass" } }, usesOnChanges: true, ngImport: i0, template: ``, isInline: true, changeDetection: i0.ChangeDetectionStrategy.OnPush });
 i0.ɵɵngDeclareClassMetadata({ minVersion: "12.0.0", version: "13.2.4", ngImport: i0, type: PbdsDatavizBarGroupedComponent, decorators: [{
             type: Component,
             args: [{
@@ -4914,6 +4957,8 @@ i0.ɵɵngDeclareClassMetadata({ minVersion: "12.0.0", version: "13.2.4", ngImpor
             }], xAxisFormatString: [{
                 type: Input
             }], xAxisTicks: [{
+                type: Input
+            }], xAxisTitle: [{
                 type: Input
             }], hideYAxis: [{
                 type: Input
@@ -5204,7 +5249,7 @@ class PbdsDatavizBarSingleHorizontalComponent {
         this.hideXAxisTicks = true;
         this.xAxisTickSize = 8;
         this.xAxisTickSizeOuter = 0;
-        this.xAxisTitleMargin = this.xAxisTitle ? 20 : 0;
+        this.xAxisTitleMargin = this.xAxisTitle ? 30 : 0;
         if (!this.hideLegend && this.legendPosition === 'right') {
             this.width = +this.width - +this.legendWidth;
         }
@@ -5269,9 +5314,10 @@ class PbdsDatavizBarSingleHorizontalComponent {
             this.svg
                 .append('text')
                 .attr('class', 'axis-title')
-                .attr('text-anchor', 'center')
-                .attr('x', this.width / 2 - this.margin.left)
-                .attr('y', this.height + this.margin.top + (!this.hideXAxis ? 40 : 0))
+                .attr('text-anchor', 'middle')
+                .attr('transform', `translate(${this.svg.attr('width') / 2 - this.margin.left / 2 - this.margin.right / 2}, ${this.height + this.margin.top + (this.hideXAxis ? 20 : 40)})`)
+                // .attr('x', this.width / 2 - this.margin.left)
+                // .attr('y', this.height + this.margin.top + (!this.hideXAxis ? 40 : 0))
                 .text(this.xAxisTitle);
         }
         // build color ranges
