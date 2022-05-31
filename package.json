@@ -106,6 +106,14 @@
       "node": "./fesm2015/pb-design-system-page-title.mjs",
       "default": "./fesm2020/pb-design-system-page-title.mjs"
     },
+    "./progress-button": {
+      "types": "./progress-button/pb-design-system-progress-button.d.ts",
+      "esm2020": "./esm2020/progress-button/pb-design-system-progress-button.mjs",
+      "es2020": "./fesm2020/pb-design-system-progress-button.mjs",
+      "es2015": "./fesm2015/pb-design-system-progress-button.mjs",
+      "node": "./fesm2015/pb-design-system-progress-button.mjs",
+      "default": "./fesm2020/pb-design-system-progress-button.mjs"
+    },
     "./progress-spinner": {
       "types": "./progress-spinner/pb-design-system-progress-spinner.d.ts",
       "esm2020": "./esm2020/progress-spinner/pb-design-system-progress-spinner.mjs",

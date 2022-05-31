@@ -17,9 +17,9 @@ export class PbdsDaterangeService {
     openPopover() {
     }
 }
-PbdsDaterangeService.ɵfac = i0.ɵɵngDeclareFactory({ minVersion: "12.0.0", version: "13.2.4", ngImport: i0, type: PbdsDaterangeService, deps: [{ token: LOCALE_ID }], target: i0.ɵɵFactoryTarget.Injectable });
-PbdsDaterangeService.ɵprov = i0.ɵɵngDeclareInjectable({ minVersion: "12.0.0", version: "13.2.4", ngImport: i0, type: PbdsDaterangeService, providedIn: 'root' });
-i0.ɵɵngDeclareClassMetadata({ minVersion: "12.0.0", version: "13.2.4", ngImport: i0, type: PbdsDaterangeService, decorators: [{
+PbdsDaterangeService.ɵfac = i0.ɵɵngDeclareFactory({ minVersion: "12.0.0", version: "13.3.6", ngImport: i0, type: PbdsDaterangeService, deps: [{ token: LOCALE_ID }], target: i0.ɵɵFactoryTarget.Injectable });
+PbdsDaterangeService.ɵprov = i0.ɵɵngDeclareInjectable({ minVersion: "12.0.0", version: "13.3.6", ngImport: i0, type: PbdsDaterangeService, providedIn: 'root' });
+i0.ɵɵngDeclareClassMetadata({ minVersion: "12.0.0", version: "13.3.6", ngImport: i0, type: PbdsDaterangeService, decorators: [{
             type: Injectable,
             args: [{
                     providedIn: 'root'
