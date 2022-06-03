@@ -4,10 +4,10 @@ import { PbdsEmptyStateComponent } from './empty-state.component';
 import * as i0 from "@angular/core";
 export class PbdsEmptyStateModule {
 }
-PbdsEmptyStateModule.ɵfac = i0.ɵɵngDeclareFactory({ minVersion: "12.0.0", version: "13.2.4", ngImport: i0, type: PbdsEmptyStateModule, deps: [], target: i0.ɵɵFactoryTarget.NgModule });
-PbdsEmptyStateModule.ɵmod = i0.ɵɵngDeclareNgModule({ minVersion: "12.0.0", version: "13.2.4", ngImport: i0, type: PbdsEmptyStateModule, declarations: [PbdsEmptyStateComponent], imports: [CommonModule], exports: [PbdsEmptyStateComponent] });
-PbdsEmptyStateModule.ɵinj = i0.ɵɵngDeclareInjector({ minVersion: "12.0.0", version: "13.2.4", ngImport: i0, type: PbdsEmptyStateModule, imports: [[CommonModule]] });
-i0.ɵɵngDeclareClassMetadata({ minVersion: "12.0.0", version: "13.2.4", ngImport: i0, type: PbdsEmptyStateModule, decorators: [{
+PbdsEmptyStateModule.ɵfac = i0.ɵɵngDeclareFactory({ minVersion: "12.0.0", version: "13.3.6", ngImport: i0, type: PbdsEmptyStateModule, deps: [], target: i0.ɵɵFactoryTarget.NgModule });
+PbdsEmptyStateModule.ɵmod = i0.ɵɵngDeclareNgModule({ minVersion: "12.0.0", version: "13.3.6", ngImport: i0, type: PbdsEmptyStateModule, declarations: [PbdsEmptyStateComponent], imports: [CommonModule], exports: [PbdsEmptyStateComponent] });
+PbdsEmptyStateModule.ɵinj = i0.ɵɵngDeclareInjector({ minVersion: "12.0.0", version: "13.3.6", ngImport: i0, type: PbdsEmptyStateModule, imports: [[CommonModule]] });
+i0.ɵɵngDeclareClassMetadata({ minVersion: "12.0.0", version: "13.3.6", ngImport: i0, type: PbdsEmptyStateModule, decorators: [{
             type: NgModule,
             args: [{
                     declarations: [PbdsEmptyStateComponent],

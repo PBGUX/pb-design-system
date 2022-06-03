@@ -4,10 +4,10 @@ import { PbdsMultipleValuesDirective } from './multiple-values.directive';
 import * as i0 from "@angular/core";
 export class PbdsMultipleValuesModule {
 }
-PbdsMultipleValuesModule.ɵfac = i0.ɵɵngDeclareFactory({ minVersion: "12.0.0", version: "13.2.4", ngImport: i0, type: PbdsMultipleValuesModule, deps: [], target: i0.ɵɵFactoryTarget.NgModule });
-PbdsMultipleValuesModule.ɵmod = i0.ɵɵngDeclareNgModule({ minVersion: "12.0.0", version: "13.2.4", ngImport: i0, type: PbdsMultipleValuesModule, declarations: [PbdsMultipleValuesDirective], imports: [CommonModule], exports: [PbdsMultipleValuesDirective] });
-PbdsMultipleValuesModule.ɵinj = i0.ɵɵngDeclareInjector({ minVersion: "12.0.0", version: "13.2.4", ngImport: i0, type: PbdsMultipleValuesModule, imports: [[CommonModule]] });
-i0.ɵɵngDeclareClassMetadata({ minVersion: "12.0.0", version: "13.2.4", ngImport: i0, type: PbdsMultipleValuesModule, decorators: [{
+PbdsMultipleValuesModule.ɵfac = i0.ɵɵngDeclareFactory({ minVersion: "12.0.0", version: "13.3.6", ngImport: i0, type: PbdsMultipleValuesModule, deps: [], target: i0.ɵɵFactoryTarget.NgModule });
+PbdsMultipleValuesModule.ɵmod = i0.ɵɵngDeclareNgModule({ minVersion: "12.0.0", version: "13.3.6", ngImport: i0, type: PbdsMultipleValuesModule, declarations: [PbdsMultipleValuesDirective], imports: [CommonModule], exports: [PbdsMultipleValuesDirective] });
+PbdsMultipleValuesModule.ɵinj = i0.ɵɵngDeclareInjector({ minVersion: "12.0.0", version: "13.3.6", ngImport: i0, type: PbdsMultipleValuesModule, imports: [[CommonModule]] });
+i0.ɵɵngDeclareClassMetadata({ minVersion: "12.0.0", version: "13.3.6", ngImport: i0, type: PbdsMultipleValuesModule, decorators: [{
             type: NgModule,
             args: [{
                     declarations: [PbdsMultipleValuesDirective],

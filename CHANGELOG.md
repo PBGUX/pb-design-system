@@ -1,3 +1,24 @@
+# 6.11
+
+## Additions
+
+- Add PBDS Progress Button component
+- Add Sticky Table Column component
+- Add Tree Menu components, single select and multiple select
+- Added examples from User Messaging to Modals, Notifications, and Input fields pages
+- Added example of search input type
+
+## Changes
+
+- Updated Stepper component to use new PrimeNG InputNumber component. Older component was discontinued, but we have kept its CSS to maintain backward compatibility.
+
+## Bug Fixes
+
+- Fixed color of NGBootstrap Accordion headers
+- DataViz: fix tooltips that are not showing a value when it is 0
+
+---
+
 # 6.10.2
 
 ## Additions
