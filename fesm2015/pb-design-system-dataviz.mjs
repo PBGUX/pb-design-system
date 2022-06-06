@@ -5643,6 +5643,8 @@ i0.ɵɵngDeclareClassMetadata({ minVersion: "12.0.0", version: "13.3.6", ngImpor
 const ANNOTATION_MARGIN_TOP$1 = 62;
 const ANNOTATION_OFFSET$1 = -22;
 const ANNOTATION_COMMENT_OFFSET$1 = -47;
+const TRANSITION_DURATION = 1000;
+const TRANSITION_DELAY = 500;
 class PbdsBarStackedAnnotationsDirective {
     constructor(component) {
         this.component = component;
@@ -5670,17 +5672,17 @@ class PbdsBarStackedAnnotationsDirective {
                 .data(this.annotations.incidents)
                 .join((enter) => {
                 const g = enter.append('g').attr('class', 'incident');
-                g.attr('transform', (d) => {
-                    const x = this.component.xAxisScale(d.label) + bandwidth / 2;
+                g.attr('transform', (d, i) => {
+                    const x = this.component.xAxisScale(d.key) + bandwidth / 2;
                     const y = ANNOTATION_OFFSET$1;
                     return `translate(${x}, ${y})`;
-                });
+                }).attr('index', (d, i) => i);
                 g.append('circle')
                     .attr('r', 0)
                     .attr('cx', 0)
                     .attr('cy', 0)
                     .transition()
-                    .duration(1000)
+                    .duration(TRANSITION_DURATION)
                     .ease(easeQuadInOut)
                     .attr('r', 15);
                 g.append('text')
@@ -5694,25 +5696,25 @@ class PbdsBarStackedAnnotationsDirective {
                 })
                     .attr('style', 'font-size: 0')
                     .transition()
-                    .duration(1000)
+                    .duration(TRANSITION_DURATION)
                     .ease(easeQuadInOut)
                     .attr('style', 'font-size: 17px');
                 return g;
             }, (update) => {
                 update
                     .transition()
-                    .duration(1000)
+                    .duration(TRANSITION_DURATION)
                     .ease(easeQuadInOut)
                     .attr('transform', (d) => {
-                    const x = this.component.xAxisScale(d.label) + bandwidth / 2;
+                    const x = this.component.xAxisScale(d.key) + bandwidth / 2;
                     const y = ANNOTATION_OFFSET$1;
                     return `translate(${x}, ${y})`;
                 });
                 return update;
             }, (exit) => {
-                exit.select('circle').transition().duration(1000).attr('r', 0);
-                exit.select('text').transition().duration(1000).attr('style', 'font-size: 0');
-                return exit.transition().delay(500).remove();
+                exit.select('circle').transition().duration(TRANSITION_DURATION).attr('r', 0);
+                exit.select('text').transition().duration(TRANSITION_DURATION).attr('style', 'font-size: 0');
+                return exit.transition().delay(TRANSITION_DELAY).remove();
             })
                 .on('mouseover', (event, data) => {
                 select(event.currentTarget).classed('hovered', true);
@@ -5721,7 +5723,8 @@ class PbdsBarStackedAnnotationsDirective {
                 select(event.currentTarget).classed('hovered', false);
             })
                 .on('click', (event, data) => {
-                this.annotationClicked.emit({ event, data });
+                // console.log('incident clicked', this.index.get(event.currentTarget.node));
+                this.annotationClicked.emit({ event, data, index: +select(event.currentTarget).attr('index') });
             });
         }
         if (isAnotations && isComments) {
@@ -5733,20 +5736,20 @@ class PbdsBarStackedAnnotationsDirective {
                 const g = enter.append('g').attr('class', 'comment');
                 g.attr('transform', (d) => {
                     var _a;
-                    const x = this.component.xAxisScale(d.label) + bandwidth / 2;
+                    const x = this.component.xAxisScale(d.key) + bandwidth / 2;
                     let y = ANNOTATION_OFFSET$1;
-                    const isIncidents = (_a = this.annotations) === null || _a === void 0 ? void 0 : _a.incidents.some((incident) => incident.label === d.label);
+                    const isIncidents = (_a = this.annotations) === null || _a === void 0 ? void 0 : _a.incidents.some((incident) => incident.key === d.key);
                     if (isIncidents) {
                         y = ANNOTATION_COMMENT_OFFSET$1;
                     }
                     return `translate(${x}, ${y})`;
-                });
+                }).attr('index', (d, i) => i);
                 g.append('circle')
                     .attr('r', 0)
                     .attr('cx', 0)
                     .attr('cy', 0)
                     .transition()
-                    .duration(1000)
+                    .duration(TRANSITION_DURATION)
                     .ease(easeQuadInOut)
                     .attr('r', 15);
                 g.append('text')
@@ -5758,20 +5761,20 @@ class PbdsBarStackedAnnotationsDirective {
                     .text('')
                     .attr('style', 'font-size: 0')
                     .transition()
-                    .duration(1000)
+                    .duration(TRANSITION_DURATION)
                     .ease(easeQuadInOut)
                     .attr('style', 'font-size: 17px');
                 return g;
             }, (update) => {
                 update
                     .transition()
-                    .duration(1000)
+                    .duration(TRANSITION_DURATION)
                     .ease(easeQuadInOut)
                     .attr('transform', (d) => {
                     var _a;
-                    const x = this.component.xAxisScale(d.label) + bandwidth / 2;
+                    const x = this.component.xAxisScale(d.key) + bandwidth / 2;
                     let y = ANNOTATION_OFFSET$1;
-                    const isIncidents = (_a = this.annotations) === null || _a === void 0 ? void 0 : _a.incidents.some((incident) => incident.label === d.label);
+                    const isIncidents = (_a = this.annotations) === null || _a === void 0 ? void 0 : _a.incidents.some((incident) => incident.key === d.key);
                     if (isIncidents) {
                         y = ANNOTATION_COMMENT_OFFSET$1;
                     }
@@ -5779,18 +5782,18 @@ class PbdsBarStackedAnnotationsDirective {
                 });
                 return update;
             }, (exit) => {
-                exit.select('circle').transition().duration(1000).attr('r', 0);
-                exit.select('text').transition().duration(1000).attr('style', 'font-size: 0');
-                return exit.transition().delay(500).remove();
+                exit.select('circle').transition().duration(TRANSITION_DURATION).attr('r', 0);
+                exit.select('text').transition().duration(TRANSITION_DURATION).attr('style', 'font-size: 0');
+                return exit.transition().delay(TRANSITION_DELAY).remove();
             })
-                .on('mouseover', (event, data) => {
+                .on('mouseover', (event) => {
                 select(event.currentTarget).classed('hovered', true);
             })
-                .on('mouseout', (event, data) => {
+                .on('mouseout', (event) => {
                 select(event.currentTarget).classed('hovered', false);
             })
                 .on('click', (event, data) => {
-                this.annotationClicked.emit({ event, data });
+                this.annotationClicked.emit({ event, data, index: +select(event.currentTarget).attr('index') });
             });
         }
         this.component.svg.selectAll('.mouseover-bar').classed('pbds-annotation-add', true);
