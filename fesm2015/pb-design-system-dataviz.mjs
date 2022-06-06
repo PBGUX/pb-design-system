@@ -5672,7 +5672,7 @@ class PbdsBarStackedAnnotationsDirective {
                 .data(this.annotations.incidents)
                 .join((enter) => {
                 const g = enter.append('g').attr('class', 'incident');
-                g.attr('transform', (d, i) => {
+                g.style('transform', (d, i) => {
                     const x = this.component.xAxisScale(d.key) + bandwidth / 2;
                     const y = ANNOTATION_OFFSET$1;
                     return `translate(${x}, ${y})`;
@@ -5705,7 +5705,7 @@ class PbdsBarStackedAnnotationsDirective {
                     .transition()
                     .duration(TRANSITION_DURATION)
                     .ease(easeQuadInOut)
-                    .attr('transform', (d) => {
+                    .style('transform', (d) => {
                     const x = this.component.xAxisScale(d.key) + bandwidth / 2;
                     const y = ANNOTATION_OFFSET$1;
                     return `translate(${x}, ${y})`;
@@ -5734,7 +5734,7 @@ class PbdsBarStackedAnnotationsDirective {
                 .data(this.annotations.comments)
                 .join((enter) => {
                 const g = enter.append('g').attr('class', 'comment');
-                g.attr('transform', (d) => {
+                g.style('transform', (d) => {
                     var _a;
                     const x = this.component.xAxisScale(d.key) + bandwidth / 2;
                     let y = ANNOTATION_OFFSET$1;
@@ -5770,7 +5770,7 @@ class PbdsBarStackedAnnotationsDirective {
                     .transition()
                     .duration(TRANSITION_DURATION)
                     .ease(easeQuadInOut)
-                    .attr('transform', (d) => {
+                    .style('transform', (d) => {
                     var _a;
                     const x = this.component.xAxisScale(d.key) + bandwidth / 2;
                     let y = ANNOTATION_OFFSET$1;
