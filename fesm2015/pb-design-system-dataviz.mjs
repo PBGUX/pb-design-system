@@ -1586,7 +1586,7 @@ class PbdsDatavizLineComponent {
             this.tooltipHide();
         };
         this.mouserectMouseClick = (event) => {
-            this.tooltipClicked.emit({ event, data: this.mousedata });
+            this.clicked.emit({ event, data: this.mousedata });
         };
         this.tooltipShow = (node, closestIndex) => {
             const scroll = this._scroll.getScrollPosition();
