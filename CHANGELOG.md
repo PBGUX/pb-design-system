@@ -1,4 +1,4 @@
-# 6.10.3
+# 6.11
 
 ## Additions
 
@@ -6,6 +6,7 @@
 - Add Sticky Table Column component
 - Add Tree Menu components, single select and multiple select
 - Added examples from User Messaging to Modals, Notifications, and Input fields pages
+- Added example of search input type
 
 ## Changes
 
