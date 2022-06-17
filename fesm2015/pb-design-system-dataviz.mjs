@@ -1570,7 +1570,7 @@ class PbdsDatavizLineComponent {
             // console.log(this.tooltipLine.node().getBoundingClientRect(), this._scroll.getScrollPosition());
             this.tooltipShow(this.tooltipLine.node(), closestIndex);
             this.mousedata = {
-                label: closest,
+                label: new Date(closest).toISOString(),
                 series: this.data.series.map((d) => {
                     return {
                         label: d.label,
