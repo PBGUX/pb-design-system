@@ -1,3 +1,16 @@
+# 6.12
+
+## Additions
+
+- Add PrimeNG InputNumber component
+- Add PrimeNG Rich Text Editor component
+
+## Bug Fixes
+
+- Fixed Mega Menu section headers to match existing menu header design
+
+---
+
 # 6.11
 
 ## Additions
