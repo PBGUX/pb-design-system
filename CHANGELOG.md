@@ -1,3 +1,11 @@
+# 6.12.1
+
+## Additions
+
+- Add Accessibility icons to PBI Outline font, `pbi-a11y-outline` and `pbi-a11y-solid`
+
+---
+
 # 6.12
 
 ## Additions
