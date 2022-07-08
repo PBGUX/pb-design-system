@@ -1,3 +1,24 @@
+# 6.12.1
+
+## Additions
+
+- Add Accessibility icons to PBI Outline font, `pbi-a11y-outline` and `pbi-a11y-solid`
+
+---
+
+# 6.12
+
+## Additions
+
+- Add PrimeNG InputNumber component
+- Add PrimeNG Rich Text Editor component
+
+## Bug Fixes
+
+- Fixed Mega Menu section headers to match existing menu header design
+
+---
+
 # 6.11
 
 ## Additions
@@ -850,7 +871,7 @@ Abhinav Shrivastav, Adam Czarnik, Ajay Manas, Andrezej Krzystof Gdula, Ania Mast
 - "Select language" menus for users should be changed to use the names of the languages in the actual languages. See the updated sample on the Globalization page.
 - Updated "Invalid email or password" error on Account Access screen to be displayed in a notification, instead of under each field.
 - If you are using PrimeNG components in your app:
-  - As of version 6 they added their own icon font which needs to be installed and added to your css paths. See [their setup docs](https://www.primefaces.org/primeng/#/setup) for details.
+  - As of version 6 they added their own icon font which needs to be installed and added to your css paths. See [their setup docs](https://www.primefaces.org/primeng/setup) for details.
   - However **do not** add the PrimeNG css to your paths. Our CSS assumes no CSS has been added. If you notice something is not styled yet, please file a bug with us.
 
 ## Non-Breaking Changes
