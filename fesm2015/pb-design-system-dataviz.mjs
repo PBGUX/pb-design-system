@@ -5860,19 +5860,36 @@ i0.ɵɵngDeclareClassMetadata({ minVersion: "12.0.0", version: "13.3.6", ngImpor
 const ANNOTATION_MARGIN_TOP$2 = 62;
 const ANNOTATION_OFFSET$2 = -22;
 const ANNOTATION_COMMENT_OFFSET$2 = -47;
+const ANNOTATION_WIDTH = 20;
 const TRANSITION_DURATION$2 = 1000;
 const TRANSITION_DELAY$2 = 500;
 class PbdsLineAnnotationsDirective {
     constructor(component) {
         this.component = component;
+        this.annotationsHilight = null;
         this.annotationClicked = new EventEmitter();
         component.marginTop = ANNOTATION_MARGIN_TOP$2;
     }
     ngOnInit() {
         this.annotationsGroup = this.component.svg.append('g').attr('class', 'annotations');
+        this.hilightBox = this.annotationsGroup
+            .append('rect')
+            .classed('annotations-hilight', true)
+            .attr('opacity', 0)
+            .attr('width', ANNOTATION_WIDTH)
+            .attr('height', this.component.height)
+            .attr('transform', `translate(${ANNOTATION_WIDTH / 2}, ${0})`);
         this.update();
     }
     ngOnChanges(changes) {
+        if (changes && changes.annotationsHilight && !changes.annotationsHilight.firstChange) {
+            if (changes.annotationsHilight.currentValue) {
+                this.updateHilight();
+            }
+            else {
+                this.hilightBox.transition().duration(200).attr('opacity', 0);
+            }
+        }
         if (changes.annotations && !changes.annotations.firstChange) {
             this.update();
         }
@@ -5883,8 +5900,6 @@ class PbdsLineAnnotationsDirective {
         const isIncidents = ((_a = this.annotations) === null || _a === void 0 ? void 0 : _a.incidents.length) > 0;
         const isComments = ((_b = this.annotations) === null || _b === void 0 ? void 0 : _b.comments.length) > 0;
         if (isAnotations && isIncidents) {
-            const xScale = this.component.xAxisScale;
-            //   const bandwidth = this.component.xAxisScale.bandwidth();
             this.annotationsGroup
                 .selectAll('g.incident')
                 .data(this.annotations.incidents)
@@ -6037,11 +6052,38 @@ class PbdsLineAnnotationsDirective {
                 this.annotationClicked.emit({ event, data, index: +select(event.currentTarget).attr('index') });
             });
         }
+        // hilight
+        if (this.annotationsHilight) {
+            this.updateHilight();
+        }
         this.component.svg.selectAll('.mouserect').classed('pbds-annotation-add', true);
+    }
+    updateHilight() {
+        const opacity = this.hilightBox.attr('opacity');
+        const duration = opacity === 0 ? 0 : 300;
+        const xAxisType = this.component.xAxisType;
+        this.hilightBox
+            .transition()
+            .duration(duration)
+            .ease(easeQuadInOut)
+            .attr('transform', () => {
+            let x = 0;
+            const y = 0;
+            if (xAxisType === 'date') {
+                x = this.component.xAxisScale(isoParse(this.annotationsHilight));
+            }
+            else {
+                x = this.component.xAxisScale(this.annotationsHilight);
+            }
+            return `translate(${x - ANNOTATION_WIDTH / 2}, ${y})`;
+        })
+            .transition()
+            .duration(200)
+            .attr('opacity', 1);
     }
 }
 PbdsLineAnnotationsDirective.ɵfac = i0.ɵɵngDeclareFactory({ minVersion: "12.0.0", version: "13.3.6", ngImport: i0, type: PbdsLineAnnotationsDirective, deps: [{ token: forwardRef(() => PbdsDatavizLineComponent) }], target: i0.ɵɵFactoryTarget.Directive });
-PbdsLineAnnotationsDirective.ɵdir = i0.ɵɵngDeclareDirective({ minVersion: "12.0.0", version: "13.3.6", type: PbdsLineAnnotationsDirective, selector: "pbds-dataviz-line[annotations]", inputs: { annotations: "annotations" }, outputs: { annotationClicked: "annotationClicked" }, usesOnChanges: true, ngImport: i0 });
+PbdsLineAnnotationsDirective.ɵdir = i0.ɵɵngDeclareDirective({ minVersion: "12.0.0", version: "13.3.6", type: PbdsLineAnnotationsDirective, selector: "pbds-dataviz-line[annotations]", inputs: { annotations: "annotations", annotationsHilight: "annotationsHilight" }, outputs: { annotationClicked: "annotationClicked" }, usesOnChanges: true, ngImport: i0 });
 i0.ɵɵngDeclareClassMetadata({ minVersion: "12.0.0", version: "13.3.6", ngImport: i0, type: PbdsLineAnnotationsDirective, decorators: [{
             type: Directive,
             args: [{
@@ -6055,6 +6097,9 @@ i0.ɵɵngDeclareClassMetadata({ minVersion: "12.0.0", version: "13.3.6", ngImpor
     }, propDecorators: { annotations: [{
                 type: Input,
                 args: ['annotations']
+            }], annotationsHilight: [{
+                type: Input,
+                args: ['annotationsHilight']
             }], annotationClicked: [{
                 type: Output
             }] } });
