@@ -5648,14 +5648,30 @@ const TRANSITION_DELAY$3 = 500;
 class PbdsBarStackedAnnotationsDirective {
     constructor(component) {
         this.component = component;
+        this.annotationsHilight = null;
         this.annotationClicked = new EventEmitter();
         component.marginTop = ANNOTATION_MARGIN_TOP$3;
     }
     ngOnInit() {
         this.annotationsGroup = this.component.svg.append('g').attr('class', 'annotations');
+        this.hilightBox = this.annotationsGroup
+            .append('rect')
+            .classed('annotations-hilight', true)
+            .attr('opacity', 0)
+            .attr('width', this.component.xAxisScale.bandwidth())
+            .attr('height', this.component.height)
+            .attr('transform', `translate(${0}, ${0})`);
         this.update();
     }
     ngOnChanges(changes) {
+        if (changes && changes.annotationsHilight && !changes.annotationsHilight.firstChange) {
+            if (changes.annotationsHilight.currentValue) {
+                this.updateHilight();
+            }
+            else {
+                this.hilightBox.transition().duration(200).attr('opacity', 0);
+            }
+        }
         if (changes.annotations && !changes.annotations.firstChange) {
             this.update();
         }
@@ -5796,11 +5812,31 @@ class PbdsBarStackedAnnotationsDirective {
                 this.annotationClicked.emit({ event, data, index: +select(event.currentTarget).attr('index') });
             });
         }
+        // hilight
+        if (this.annotationsHilight) {
+            this.updateHilight();
+        }
         this.component.svg.selectAll('.mouseover-bar').classed('pbds-annotation-add', true);
+    }
+    updateHilight() {
+        const opacity = this.hilightBox.attr('opacity');
+        const duration = opacity === 0 ? 0 : 300;
+        this.hilightBox
+            .transition()
+            .duration(duration)
+            .ease(easeQuadInOut)
+            .attr('transform', () => {
+            const x = this.component.xAxisScale(this.annotationsHilight);
+            const y = 0;
+            return `translate(${x}, ${y})`;
+        })
+            .transition()
+            .duration(200)
+            .attr('opacity', 1);
     }
 }
 PbdsBarStackedAnnotationsDirective.ɵfac = i0.ɵɵngDeclareFactory({ minVersion: "12.0.0", version: "13.3.6", ngImport: i0, type: PbdsBarStackedAnnotationsDirective, deps: [{ token: forwardRef(() => PbdsDatavizBarStackedComponent) }], target: i0.ɵɵFactoryTarget.Directive });
-PbdsBarStackedAnnotationsDirective.ɵdir = i0.ɵɵngDeclareDirective({ minVersion: "12.0.0", version: "13.3.6", type: PbdsBarStackedAnnotationsDirective, selector: "pbds-dataviz-bar-stacked[annotations]", inputs: { annotations: "annotations" }, outputs: { annotationClicked: "annotationClicked" }, usesOnChanges: true, ngImport: i0 });
+PbdsBarStackedAnnotationsDirective.ɵdir = i0.ɵɵngDeclareDirective({ minVersion: "12.0.0", version: "13.3.6", type: PbdsBarStackedAnnotationsDirective, selector: "pbds-dataviz-bar-stacked[annotations]", inputs: { annotations: "annotations", annotationsHilight: "annotationsHilight" }, outputs: { annotationClicked: "annotationClicked" }, usesOnChanges: true, ngImport: i0 });
 i0.ɵɵngDeclareClassMetadata({ minVersion: "12.0.0", version: "13.3.6", ngImport: i0, type: PbdsBarStackedAnnotationsDirective, decorators: [{
             type: Directive,
             args: [{
@@ -5814,6 +5850,9 @@ i0.ɵɵngDeclareClassMetadata({ minVersion: "12.0.0", version: "13.3.6", ngImpor
     }, propDecorators: { annotations: [{
                 type: Input,
                 args: ['annotations']
+            }], annotationsHilight: [{
+                type: Input,
+                args: ['annotationsHilight']
             }], annotationClicked: [{
                 type: Output
             }] } });
@@ -6028,14 +6067,30 @@ const TRANSITION_DELAY$1 = 500;
 class PbdsBarGroupedAnnotationsDirective {
     constructor(component) {
         this.component = component;
+        this.annotationsHilight = null;
         this.annotationClicked = new EventEmitter();
         component.marginTop = ANNOTATION_MARGIN_TOP$1;
     }
     ngOnInit() {
         this.annotationsGroup = this.component.svg.append('g').attr('class', 'annotations');
+        this.hilightBox = this.annotationsGroup
+            .append('rect')
+            .classed('annotations-hilight', true)
+            .attr('opacity', 0)
+            .attr('width', this.component.xAxisScale.bandwidth())
+            .attr('height', this.component.height)
+            .attr('transform', `translate(${0}, ${0})`);
         this.update();
     }
     ngOnChanges(changes) {
+        if (changes && changes.annotationsHilight && !changes.annotationsHilight.firstChange) {
+            if (changes.annotationsHilight.currentValue) {
+                this.updateHilight();
+            }
+            else {
+                this.hilightBox.transition().duration(200).attr('opacity', 0);
+            }
+        }
         if (changes.annotations && !changes.annotations.firstChange) {
             this.update();
         }
@@ -6176,11 +6231,31 @@ class PbdsBarGroupedAnnotationsDirective {
                 this.annotationClicked.emit({ event, data, index: +select(event.currentTarget).attr('index') });
             });
         }
+        // hilight
+        if (this.annotationsHilight) {
+            this.updateHilight();
+        }
         this.component.svg.selectAll('.bar').classed('pbds-annotation-add', true);
+    }
+    updateHilight() {
+        const opacity = this.hilightBox.attr('opacity');
+        const duration = opacity === 0 ? 0 : 300;
+        this.hilightBox
+            .transition()
+            .duration(duration)
+            .ease(easeQuadInOut)
+            .attr('transform', () => {
+            const x = this.component.xAxisScale(this.annotationsHilight);
+            const y = 0;
+            return `translate(${x}, ${y})`;
+        })
+            .transition()
+            .duration(200)
+            .attr('opacity', 1);
     }
 }
 PbdsBarGroupedAnnotationsDirective.ɵfac = i0.ɵɵngDeclareFactory({ minVersion: "12.0.0", version: "13.3.6", ngImport: i0, type: PbdsBarGroupedAnnotationsDirective, deps: [{ token: forwardRef(() => PbdsDatavizBarGroupedComponent) }], target: i0.ɵɵFactoryTarget.Directive });
-PbdsBarGroupedAnnotationsDirective.ɵdir = i0.ɵɵngDeclareDirective({ minVersion: "12.0.0", version: "13.3.6", type: PbdsBarGroupedAnnotationsDirective, selector: "pbds-dataviz-bar-grouped[annotations]", inputs: { annotations: "annotations" }, outputs: { annotationClicked: "annotationClicked" }, usesOnChanges: true, ngImport: i0 });
+PbdsBarGroupedAnnotationsDirective.ɵdir = i0.ɵɵngDeclareDirective({ minVersion: "12.0.0", version: "13.3.6", type: PbdsBarGroupedAnnotationsDirective, selector: "pbds-dataviz-bar-grouped[annotations]", inputs: { annotations: "annotations", annotationsHilight: "annotationsHilight" }, outputs: { annotationClicked: "annotationClicked" }, usesOnChanges: true, ngImport: i0 });
 i0.ɵɵngDeclareClassMetadata({ minVersion: "12.0.0", version: "13.3.6", ngImport: i0, type: PbdsBarGroupedAnnotationsDirective, decorators: [{
             type: Directive,
             args: [{
@@ -6194,6 +6269,9 @@ i0.ɵɵngDeclareClassMetadata({ minVersion: "12.0.0", version: "13.3.6", ngImpor
     }, propDecorators: { annotations: [{
                 type: Input,
                 args: ['annotations']
+            }], annotationsHilight: [{
+                type: Input,
+                args: ['annotationsHilight']
             }], annotationClicked: [{
                 type: Output
             }] } });
@@ -6203,13 +6281,10 @@ const ANNOTATION_OFFSET = -22;
 const ANNOTATION_COMMENT_OFFSET = -47;
 const TRANSITION_DURATION = 1000;
 const TRANSITION_DELAY = 500;
-/*
-BAR CHART
-*/
 class PbdsBarAnnotationsDirective {
     constructor(component) {
         this.component = component;
-        this.hilight = null;
+        this.annotationsHilight = null;
         this.annotationClicked = new EventEmitter();
         component.marginTop = ANNOTATION_MARGIN_TOP;
     }
@@ -6225,8 +6300,8 @@ class PbdsBarAnnotationsDirective {
         this.update();
     }
     ngOnChanges(changes) {
-        if (changes && changes.hilight && !changes.hilight.firstChange) {
-            if (changes.hilight.currentValue) {
+        if (changes && changes.annotationsHilight && !changes.annotationsHilight.firstChange) {
+            if (changes.annotationsHilight.currentValue) {
                 this.updateHilight();
             }
             else {
@@ -6370,7 +6445,7 @@ class PbdsBarAnnotationsDirective {
             });
         }
         // hilight
-        if (this.hilight) {
+        if (this.annotationsHilight) {
             this.updateHilight();
         }
         this.component.svg.selectAll('.bar').classed('pbds-annotation-add', true);
@@ -6383,7 +6458,7 @@ class PbdsBarAnnotationsDirective {
             .duration(duration)
             .ease(easeQuadInOut)
             .attr('transform', () => {
-            const x = this.component.xAxisScale(this.hilight);
+            const x = this.component.xAxisScale(this.annotationsHilight);
             const y = 0;
             return `translate(${x}, ${y})`;
         })
@@ -6393,7 +6468,7 @@ class PbdsBarAnnotationsDirective {
     }
 }
 PbdsBarAnnotationsDirective.ɵfac = i0.ɵɵngDeclareFactory({ minVersion: "12.0.0", version: "13.3.6", ngImport: i0, type: PbdsBarAnnotationsDirective, deps: [{ token: forwardRef(() => PbdsDatavizBarComponent) }], target: i0.ɵɵFactoryTarget.Directive });
-PbdsBarAnnotationsDirective.ɵdir = i0.ɵɵngDeclareDirective({ minVersion: "12.0.0", version: "13.3.6", type: PbdsBarAnnotationsDirective, selector: "pbds-dataviz-bar[annotations]", inputs: { annotations: "annotations", hilight: "hilight" }, outputs: { annotationClicked: "annotationClicked" }, usesOnChanges: true, ngImport: i0 });
+PbdsBarAnnotationsDirective.ɵdir = i0.ɵɵngDeclareDirective({ minVersion: "12.0.0", version: "13.3.6", type: PbdsBarAnnotationsDirective, selector: "pbds-dataviz-bar[annotations]", inputs: { annotations: "annotations", annotationsHilight: "annotationsHilight" }, outputs: { annotationClicked: "annotationClicked" }, usesOnChanges: true, ngImport: i0 });
 i0.ɵɵngDeclareClassMetadata({ minVersion: "12.0.0", version: "13.3.6", ngImport: i0, type: PbdsBarAnnotationsDirective, decorators: [{
             type: Directive,
             args: [{
@@ -6407,9 +6482,9 @@ i0.ɵɵngDeclareClassMetadata({ minVersion: "12.0.0", version: "13.3.6", ngImpor
     }, propDecorators: { annotations: [{
                 type: Input,
                 args: ['annotations']
-            }], hilight: [{
+            }], annotationsHilight: [{
                 type: Input,
-                args: ['hilight']
+                args: ['annotationsHilight']
             }], annotationClicked: [{
                 type: Output,
                 args: ['annotationClicked']
