@@ -5658,9 +5658,9 @@ class PbdsBarStackedAnnotationsDirective {
             .append('rect')
             .classed('annotations-hilight', true)
             .attr('opacity', 0)
-            .attr('width', this.component.xAxisScale.bandwidth() - 4)
+            .attr('width', this.component.xAxisScale.bandwidth())
             .attr('height', this.component.height)
-            .attr('transform', `translate(${0 + 2}, ${0})`);
+            .attr('transform', `translate(${0}, ${0})`);
         this.update();
     }
     ngOnChanges(changes) {
@@ -5825,7 +5825,7 @@ class PbdsBarStackedAnnotationsDirective {
             .attr('transform', () => {
             const x = this.component.xAxisScale(this.annotationsHilight);
             const y = 0;
-            return `translate(${x + 2}, ${y})`;
+            return `translate(${x}, ${y})`;
         })
             .transition()
             .duration(200)
@@ -6112,9 +6112,9 @@ class PbdsBarGroupedAnnotationsDirective {
             .append('rect')
             .classed('annotations-hilight', true)
             .attr('opacity', 0)
-            .attr('width', this.component.xAxisScale.bandwidth() - 4)
+            .attr('width', this.component.xAxisScale.bandwidth())
             .attr('height', this.component.height)
-            .attr('transform', `translate(${0 + 2}, ${0})`);
+            .attr('transform', `translate(${0}, ${0})`);
         this.update();
     }
     ngOnChanges(changes) {
@@ -6279,7 +6279,7 @@ class PbdsBarGroupedAnnotationsDirective {
             .attr('transform', () => {
             const x = this.component.xAxisScale(this.annotationsHilight);
             const y = 0;
-            return `translate(${x + 2}, ${y})`;
+            return `translate(${x}, ${y})`;
         })
             .transition()
             .duration(200)
@@ -6324,9 +6324,9 @@ class PbdsBarAnnotationsDirective {
             .append('rect')
             .classed('annotations-hilight', true)
             .attr('opacity', 0)
-            .attr('width', this.component.xAxisScale.bandwidth() - 4)
+            .attr('width', this.component.xAxisScale.bandwidth())
             .attr('height', this.component.height)
-            .attr('transform', `translate(${0 + 2}, ${0})`);
+            .attr('transform', `translate(${0}, ${0})`);
         this.update();
     }
     ngOnChanges(changes) {
@@ -6487,7 +6487,7 @@ class PbdsBarAnnotationsDirective {
             .attr('transform', () => {
             const x = this.component.xAxisScale(this.annotationsHilight);
             const y = 0;
-            return `translate(${x + 2}, ${y})`;
+            return `translate(${x}, ${y})`;
         })
             .transition()
             .duration(200)
