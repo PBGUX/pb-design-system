@@ -6054,7 +6054,6 @@ class PbdsLineAnnotationsDirective {
         const opacity = this.hilightBox.attr('opacity');
         const duration = opacity === 0 ? 0 : 300;
         const xAxisType = this.component.xAxisType;
-        console.log(this.component.xAxisCall.ticks());
         this.hilightBox
             .transition()
             .duration(duration)
