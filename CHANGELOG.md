@@ -1,3 +1,26 @@
+# 6.13
+
+## Additions
+
+- Added a "Create a Case" pattern and code
+- Added css class `label-allcaps` to style text to look like a standard form field label
+- Update UPS package images in Package Library with new UPS branding
+- Added a Simple Time Form Field
+
+## Changes
+
+- Icons Multi-line alerts and toasts now align with the first line of text, instead of vertically centered
+
+## Bug Fixes
+
+- Fix label color for disabled OS checkboxes
+- Fix multiple nested button groups overlapping
+- Fix Tree menu code snippet
+- Fix tabs were not working on Modals page
+- Fix card headers and body text were misaligned
+
+---
+
 # 6.12.1
 
 ## Additions
@@ -871,7 +894,7 @@ Abhinav Shrivastav, Adam Czarnik, Ajay Manas, Andrezej Krzystof Gdula, Ania Mast
 - "Select language" menus for users should be changed to use the names of the languages in the actual languages. See the updated sample on the Globalization page.
 - Updated "Invalid email or password" error on Account Access screen to be displayed in a notification, instead of under each field.
 - If you are using PrimeNG components in your app:
-  - As of version 6 they added their own icon font which needs to be installed and added to your css paths. See [their setup docs](https://www.primefaces.org/primeng/#/setup) for details.
+  - As of version 6 they added their own icon font which needs to be installed and added to your css paths. See [their setup docs](https://www.primefaces.org/primeng/setup) for details.
   - However **do not** add the PrimeNG css to your paths. Our CSS assumes no CSS has been added. If you notice something is not styled yet, please file a bug with us.
 
 ## Non-Breaking Changes
