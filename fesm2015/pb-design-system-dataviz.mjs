@@ -5751,10 +5751,10 @@ class PbdsBarStackedAnnotationsDirective {
                 .join((enter) => {
                 const g = enter.append('g').attr('class', 'comment');
                 g.attr('transform', (d) => {
-                    var _a;
+                    var _a, _b;
                     const x = this.component.xAxisScale(d.key) + bandwidth / 2;
                     let y = ANNOTATION_OFFSET$3;
-                    const isIncidents = (_a = this.annotations) === null || _a === void 0 ? void 0 : _a.incidents.some((incident) => incident.key === d.key);
+                    const isIncidents = (_b = (_a = this.annotations) === null || _a === void 0 ? void 0 : _a.incidents) === null || _b === void 0 ? void 0 : _b.some((incident) => incident.key === d.key);
                     if (isIncidents) {
                         y = ANNOTATION_COMMENT_OFFSET$3;
                     }
@@ -5787,10 +5787,10 @@ class PbdsBarStackedAnnotationsDirective {
                     .duration(TRANSITION_DURATION$3)
                     .ease(easeQuadInOut)
                     .attr('transform', (d) => {
-                    var _a;
+                    var _a, _b;
                     const x = this.component.xAxisScale(d.key) + bandwidth / 2;
                     let y = ANNOTATION_OFFSET$3;
-                    const isIncidents = (_a = this.annotations) === null || _a === void 0 ? void 0 : _a.incidents.some((incident) => incident.key === d.key);
+                    const isIncidents = (_b = (_a = this.annotations) === null || _a === void 0 ? void 0 : _a.incidents) === null || _b === void 0 ? void 0 : _b.some((incident) => incident.key === d.key);
                     if (isIncidents) {
                         y = ANNOTATION_COMMENT_OFFSET$3;
                     }
@@ -5979,10 +5979,10 @@ class PbdsLineAnnotationsDirective {
                 .join((enter) => {
                 const g = enter.append('g').attr('class', 'comment');
                 g.attr('transform', (d) => {
-                    var _a;
+                    var _a, _b;
                     let x;
                     let y = ANNOTATION_OFFSET$2;
-                    const isIncidents = (_a = this.annotations) === null || _a === void 0 ? void 0 : _a.incidents.some((incident) => incident.key === d.key);
+                    const isIncidents = (_b = (_a = this.annotations) === null || _a === void 0 ? void 0 : _a.incidents) === null || _b === void 0 ? void 0 : _b.some((incident) => incident.key === d.key);
                     if (this.component.xAxisType === 'date') {
                         x = this.component.xAxisScale(isoParse(d.key));
                     }
@@ -6021,10 +6021,10 @@ class PbdsLineAnnotationsDirective {
                     .duration(TRANSITION_DURATION$2)
                     .ease(easeQuadInOut)
                     .attr('transform', (d) => {
-                    var _a;
+                    var _a, _b;
                     let x;
                     let y = ANNOTATION_OFFSET$2;
-                    const isIncidents = (_a = this.annotations) === null || _a === void 0 ? void 0 : _a.incidents.some((incident) => incident.key === d.key);
+                    const isIncidents = (_b = (_a = this.annotations) === null || _a === void 0 ? void 0 : _a.incidents) === null || _b === void 0 ? void 0 : _b.some((incident) => incident.key === d.key);
                     if (this.component.xAxisType === 'date') {
                         x = this.component.xAxisScale(isoParse(d.key));
                     }
@@ -6215,10 +6215,10 @@ class PbdsBarGroupedAnnotationsDirective {
                 .join((enter) => {
                 const g = enter.append('g').attr('class', 'comment');
                 g.attr('transform', (d) => {
-                    var _a;
+                    var _a, _b;
                     const x = this.component.xAxisScale(d.key) + bandwidth / 2;
                     let y = ANNOTATION_OFFSET$1;
-                    const isIncidents = (_a = this.annotations) === null || _a === void 0 ? void 0 : _a.incidents.some((incident) => incident.key === d.key);
+                    const isIncidents = (_b = (_a = this.annotations) === null || _a === void 0 ? void 0 : _a.incidents) === null || _b === void 0 ? void 0 : _b.some((incident) => incident.key === d.key);
                     if (isIncidents) {
                         y = ANNOTATION_COMMENT_OFFSET$1;
                     }
@@ -6251,10 +6251,10 @@ class PbdsBarGroupedAnnotationsDirective {
                     .duration(TRANSITION_DURATION$1)
                     .ease(easeQuadInOut)
                     .attr('transform', (d) => {
-                    var _a;
+                    var _a, _b;
                     const x = this.component.xAxisScale(d.key) + bandwidth / 2;
                     let y = ANNOTATION_OFFSET$1;
-                    const isIncidents = (_a = this.annotations) === null || _a === void 0 ? void 0 : _a.incidents.some((incident) => incident.key === d.key);
+                    const isIncidents = (_b = (_a = this.annotations) === null || _a === void 0 ? void 0 : _a.incidents) === null || _b === void 0 ? void 0 : _b.some((incident) => incident.key === d.key);
                     if (isIncidents) {
                         y = ANNOTATION_COMMENT_OFFSET$1;
                     }
@@ -6428,10 +6428,10 @@ class PbdsBarAnnotationsDirective {
                 .join((enter) => {
                 const g = enter.append('g').attr('class', 'comment');
                 g.attr('transform', (d) => {
-                    var _a;
+                    var _a, _b;
                     const x = this.component.xAxisScale(d.key) + bandwidth / 2;
                     let y = ANNOTATION_OFFSET;
-                    const isIncidents = (_a = this.annotations) === null || _a === void 0 ? void 0 : _a.incidents.some((incident) => incident.key === d.key);
+                    const isIncidents = (_b = (_a = this.annotations) === null || _a === void 0 ? void 0 : _a.incidents) === null || _b === void 0 ? void 0 : _b.some((incident) => incident.key === d.key);
                     if (isIncidents) {
                         y = ANNOTATION_COMMENT_OFFSET;
                     }
@@ -6464,10 +6464,10 @@ class PbdsBarAnnotationsDirective {
                     .duration(TRANSITION_DURATION)
                     .ease(easeQuadInOut)
                     .attr('transform', (d) => {
-                    var _a;
+                    var _a, _b;
                     const x = this.component.xAxisScale(d.key) + bandwidth / 2;
                     let y = ANNOTATION_OFFSET;
-                    const isIncidents = (_a = this.annotations) === null || _a === void 0 ? void 0 : _a.incidents.some((incident) => incident.key === d.key);
+                    const isIncidents = (_b = (_a = this.annotations) === null || _a === void 0 ? void 0 : _a.incidents) === null || _b === void 0 ? void 0 : _b.some((incident) => incident.key === d.key);
                     if (isIncidents) {
                         y = ANNOTATION_COMMENT_OFFSET;
                     }

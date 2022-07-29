@@ -5752,7 +5752,7 @@ class PbdsBarStackedAnnotationsDirective {
                 g.attr('transform', (d) => {
                     const x = this.component.xAxisScale(d.key) + bandwidth / 2;
                     let y = ANNOTATION_OFFSET$3;
-                    const isIncidents = this.annotations?.incidents.some((incident) => incident.key === d.key);
+                    const isIncidents = this.annotations?.incidents?.some((incident) => incident.key === d.key);
                     if (isIncidents) {
                         y = ANNOTATION_COMMENT_OFFSET$3;
                     }
@@ -5787,7 +5787,7 @@ class PbdsBarStackedAnnotationsDirective {
                     .attr('transform', (d) => {
                     const x = this.component.xAxisScale(d.key) + bandwidth / 2;
                     let y = ANNOTATION_OFFSET$3;
-                    const isIncidents = this.annotations?.incidents.some((incident) => incident.key === d.key);
+                    const isIncidents = this.annotations?.incidents?.some((incident) => incident.key === d.key);
                     if (isIncidents) {
                         y = ANNOTATION_COMMENT_OFFSET$3;
                     }
@@ -5975,7 +5975,7 @@ class PbdsLineAnnotationsDirective {
                 g.attr('transform', (d) => {
                     let x;
                     let y = ANNOTATION_OFFSET$2;
-                    const isIncidents = this.annotations?.incidents.some((incident) => incident.key === d.key);
+                    const isIncidents = this.annotations?.incidents?.some((incident) => incident.key === d.key);
                     if (this.component.xAxisType === 'date') {
                         x = this.component.xAxisScale(isoParse(d.key));
                     }
@@ -6016,7 +6016,7 @@ class PbdsLineAnnotationsDirective {
                     .attr('transform', (d) => {
                     let x;
                     let y = ANNOTATION_OFFSET$2;
-                    const isIncidents = this.annotations?.incidents.some((incident) => incident.key === d.key);
+                    const isIncidents = this.annotations?.incidents?.some((incident) => incident.key === d.key);
                     if (this.component.xAxisType === 'date') {
                         x = this.component.xAxisScale(isoParse(d.key));
                     }
@@ -6206,7 +6206,7 @@ class PbdsBarGroupedAnnotationsDirective {
                 g.attr('transform', (d) => {
                     const x = this.component.xAxisScale(d.key) + bandwidth / 2;
                     let y = ANNOTATION_OFFSET$1;
-                    const isIncidents = this.annotations?.incidents.some((incident) => incident.key === d.key);
+                    const isIncidents = this.annotations?.incidents?.some((incident) => incident.key === d.key);
                     if (isIncidents) {
                         y = ANNOTATION_COMMENT_OFFSET$1;
                     }
@@ -6241,7 +6241,7 @@ class PbdsBarGroupedAnnotationsDirective {
                     .attr('transform', (d) => {
                     const x = this.component.xAxisScale(d.key) + bandwidth / 2;
                     let y = ANNOTATION_OFFSET$1;
-                    const isIncidents = this.annotations?.incidents.some((incident) => incident.key === d.key);
+                    const isIncidents = this.annotations?.incidents?.some((incident) => incident.key === d.key);
                     if (isIncidents) {
                         y = ANNOTATION_COMMENT_OFFSET$1;
                     }
@@ -6414,7 +6414,7 @@ class PbdsBarAnnotationsDirective {
                 g.attr('transform', (d) => {
                     const x = this.component.xAxisScale(d.key) + bandwidth / 2;
                     let y = ANNOTATION_OFFSET;
-                    const isIncidents = this.annotations?.incidents.some((incident) => incident.key === d.key);
+                    const isIncidents = this.annotations?.incidents?.some((incident) => incident.key === d.key);
                     if (isIncidents) {
                         y = ANNOTATION_COMMENT_OFFSET;
                     }
@@ -6449,7 +6449,7 @@ class PbdsBarAnnotationsDirective {
                     .attr('transform', (d) => {
                     const x = this.component.xAxisScale(d.key) + bandwidth / 2;
                     let y = ANNOTATION_OFFSET;
-                    const isIncidents = this.annotations?.incidents.some((incident) => incident.key === d.key);
+                    const isIncidents = this.annotations?.incidents?.some((incident) => incident.key === d.key);
                     if (isIncidents) {
                         y = ANNOTATION_COMMENT_OFFSET;
                     }
