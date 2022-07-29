@@ -5678,8 +5678,8 @@ class PbdsBarStackedAnnotationsDirective {
     }
     update() {
         const isAnotations = this.annotations;
-        const isIncidents = this.annotations?.incidents.length > 0;
-        const isComments = this.annotations?.comments.length > 0;
+        const isIncidents = this.annotations?.incidents?.length > 0;
+        const isComments = this.annotations?.comments?.length > 0;
         if (isAnotations && isIncidents) {
             const bandwidth = this.component.xAxisScale.bandwidth();
             this.annotationsGroup
@@ -5891,8 +5891,8 @@ class PbdsLineAnnotationsDirective {
     }
     update() {
         const isAnotations = this.annotations;
-        const isIncidents = this.annotations?.incidents.length > 0;
-        const isComments = this.annotations?.comments.length > 0;
+        const isIncidents = this.annotations?.incidents?.length > 0;
+        const isComments = this.annotations?.comments?.length > 0;
         if (isAnotations && isIncidents) {
             this.annotationsGroup
                 .selectAll('g.incident')
@@ -6132,8 +6132,8 @@ class PbdsBarGroupedAnnotationsDirective {
     }
     update() {
         const isAnotations = this.annotations;
-        const isIncidents = this.annotations?.incidents.length > 0;
-        const isComments = this.annotations?.comments.length > 0;
+        const isIncidents = this.annotations?.incidents?.length > 0;
+        const isComments = this.annotations?.comments?.length > 0;
         if (isAnotations && isIncidents) {
             const bandwidth = this.component.xAxisScale.bandwidth();
             this.annotationsGroup
@@ -6341,8 +6341,8 @@ class PbdsBarAnnotationsDirective {
     }
     update() {
         const isAnotations = this.annotations;
-        const isIncidents = this.annotations?.incidents.length > 0;
-        const isComments = this.annotations?.comments.length > 0;
+        const isIncidents = this.annotations?.incidents?.length > 0;
+        const isComments = this.annotations?.comments?.length > 0;
         const bandwidth = this.component.xAxisScale.bandwidth();
         if (isAnotations && isIncidents) {
             this.annotationsGroup

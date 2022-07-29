@@ -5677,10 +5677,10 @@ class PbdsBarStackedAnnotationsDirective {
         }
     }
     update() {
-        var _a, _b;
+        var _a, _b, _c, _d;
         const isAnotations = this.annotations;
-        const isIncidents = ((_a = this.annotations) === null || _a === void 0 ? void 0 : _a.incidents.length) > 0;
-        const isComments = ((_b = this.annotations) === null || _b === void 0 ? void 0 : _b.comments.length) > 0;
+        const isIncidents = ((_b = (_a = this.annotations) === null || _a === void 0 ? void 0 : _a.incidents) === null || _b === void 0 ? void 0 : _b.length) > 0;
+        const isComments = ((_d = (_c = this.annotations) === null || _c === void 0 ? void 0 : _c.comments) === null || _d === void 0 ? void 0 : _d.length) > 0;
         if (isAnotations && isIncidents) {
             const bandwidth = this.component.xAxisScale.bandwidth();
             this.annotationsGroup
@@ -5895,10 +5895,10 @@ class PbdsLineAnnotationsDirective {
         }
     }
     update() {
-        var _a, _b;
+        var _a, _b, _c, _d;
         const isAnotations = this.annotations;
-        const isIncidents = ((_a = this.annotations) === null || _a === void 0 ? void 0 : _a.incidents.length) > 0;
-        const isComments = ((_b = this.annotations) === null || _b === void 0 ? void 0 : _b.comments.length) > 0;
+        const isIncidents = ((_b = (_a = this.annotations) === null || _a === void 0 ? void 0 : _a.incidents) === null || _b === void 0 ? void 0 : _b.length) > 0;
+        const isComments = ((_d = (_c = this.annotations) === null || _c === void 0 ? void 0 : _c.comments) === null || _d === void 0 ? void 0 : _d.length) > 0;
         if (isAnotations && isIncidents) {
             this.annotationsGroup
                 .selectAll('g.incident')
@@ -6141,10 +6141,10 @@ class PbdsBarGroupedAnnotationsDirective {
         }
     }
     update() {
-        var _a, _b;
+        var _a, _b, _c, _d;
         const isAnotations = this.annotations;
-        const isIncidents = ((_a = this.annotations) === null || _a === void 0 ? void 0 : _a.incidents.length) > 0;
-        const isComments = ((_b = this.annotations) === null || _b === void 0 ? void 0 : _b.comments.length) > 0;
+        const isIncidents = ((_b = (_a = this.annotations) === null || _a === void 0 ? void 0 : _a.incidents) === null || _b === void 0 ? void 0 : _b.length) > 0;
+        const isComments = ((_d = (_c = this.annotations) === null || _c === void 0 ? void 0 : _c.comments) === null || _d === void 0 ? void 0 : _d.length) > 0;
         if (isAnotations && isIncidents) {
             const bandwidth = this.component.xAxisScale.bandwidth();
             this.annotationsGroup
@@ -6355,10 +6355,10 @@ class PbdsBarAnnotationsDirective {
         }
     }
     update() {
-        var _a, _b;
+        var _a, _b, _c, _d;
         const isAnotations = this.annotations;
-        const isIncidents = ((_a = this.annotations) === null || _a === void 0 ? void 0 : _a.incidents.length) > 0;
-        const isComments = ((_b = this.annotations) === null || _b === void 0 ? void 0 : _b.comments.length) > 0;
+        const isIncidents = ((_b = (_a = this.annotations) === null || _a === void 0 ? void 0 : _a.incidents) === null || _b === void 0 ? void 0 : _b.length) > 0;
+        const isComments = ((_d = (_c = this.annotations) === null || _c === void 0 ? void 0 : _c.comments) === null || _d === void 0 ? void 0 : _d.length) > 0;
         const bandwidth = this.component.xAxisScale.bandwidth();
         if (isAnotations && isIncidents) {
             this.annotationsGroup
