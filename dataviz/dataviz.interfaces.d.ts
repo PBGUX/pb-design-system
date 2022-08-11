@@ -67,3 +67,9 @@ export interface PbdsDatavizBarSingleHorizontalCompare {
     compareChangeDirection: 'increase' | 'decrease' | '';
     compareChangeInverse: boolean;
 }
+export interface PbdsDatavizScatterplot {
+    x: string | number;
+    y: string | number;
+    key: string;
+    value?: number;
+}

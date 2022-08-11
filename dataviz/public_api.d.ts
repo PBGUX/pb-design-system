@@ -14,3 +14,8 @@ export * from './dataviz-metric-indicator.component';
 export * from './dataviz-metric-block.component';
 export * from './dataviz-pie.component';
 export * from './dataviz-sparkline.component';
+export * from './dataviz-scatterplot.component';
+export * from './dataviz-bar-stacked-annotations.directive';
+export * from './dataviz-line-annotations.directive';
+export * from './dataviz-bar-grouped-annotations.directive';
+export * from './dataviz-bar-annotations.directive';
