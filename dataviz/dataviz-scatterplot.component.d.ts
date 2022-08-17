@@ -12,6 +12,8 @@ export declare class PbdsDatavizScatterplotComponent implements OnInit, OnDestro
     data: PbdsDatavizScatterplot[];
     width: number;
     height: number;
+    jitterX: number;
+    jitterY: number;
     xAxisType: 'date' | 'number' | 'string';
     xAxisFormatString: string;
     xAxisTicks: number;
@@ -93,6 +95,7 @@ export declare class PbdsDatavizScatterplotComponent implements OnInit, OnDestro
     private tooltipXValueFormatter;
     private tooltipYValueFormatter;
     private tooltipValueFormatter;
+    private jitter;
     static ɵfac: i0.ɵɵFactoryDeclaration<PbdsDatavizScatterplotComponent, never>;
-    static ɵcmp: i0.ɵɵComponentDeclaration<PbdsDatavizScatterplotComponent, "pbds-dataviz-scatterplot", never, { "data": "data"; "width": "width"; "height": "height"; "xAxisType": "xAxisType"; "xAxisFormatString": "xAxisFormatString"; "xAxisTicks": "xAxisTicks"; "yAxisFormatString": "yAxisFormatString"; "yAxisTicks": "yAxisTicks"; "yAxisMinBuffer": "yAxisMinBuffer"; "yAxisMaxBuffer": "yAxisMaxBuffer"; "hideXGrid": "hideXGrid"; "hideYGrid": "hideYGrid"; "hideLegend": "hideLegend"; "legendWidth": "legendWidth"; "legendPosition": "legendPosition"; "legendLabelFormatType": "legendLabelFormatType"; "tooltipXLabel": "tooltipXLabel"; "tooltipXValueFormatType": "tooltipXValueFormatType"; "tooltipXValueFormatString": "tooltipXValueFormatString"; "tooltipYLabel": "tooltipYLabel"; "tooltipYValueFormatType": "tooltipYValueFormatType"; "tooltipYValueFormatString": "tooltipYValueFormatString"; "tooltipValueLabel": "tooltipValueLabel"; "tooltipValueFormatType": "tooltipValueFormatType"; "tooltipValueFormatString": "tooltipValueFormatString"; "marginTop": "marginTop"; "marginRight": "marginRight"; "marginBottom": "marginBottom"; "marginLeft": "marginLeft"; "theme": "theme"; }, { "hovered": "hovered"; "clicked": "clicked"; "tooltipHovered": "tooltipHovered"; "tooltipClicked": "tooltipClicked"; }, never, never>;
+    static ɵcmp: i0.ɵɵComponentDeclaration<PbdsDatavizScatterplotComponent, "pbds-dataviz-scatterplot", never, { "data": "data"; "width": "width"; "height": "height"; "jitterX": "jitterX"; "jitterY": "jitterY"; "xAxisType": "xAxisType"; "xAxisFormatString": "xAxisFormatString"; "xAxisTicks": "xAxisTicks"; "yAxisFormatString": "yAxisFormatString"; "yAxisTicks": "yAxisTicks"; "yAxisMinBuffer": "yAxisMinBuffer"; "yAxisMaxBuffer": "yAxisMaxBuffer"; "hideXGrid": "hideXGrid"; "hideYGrid": "hideYGrid"; "hideLegend": "hideLegend"; "legendWidth": "legendWidth"; "legendPosition": "legendPosition"; "legendLabelFormatType": "legendLabelFormatType"; "tooltipXLabel": "tooltipXLabel"; "tooltipXValueFormatType": "tooltipXValueFormatType"; "tooltipXValueFormatString": "tooltipXValueFormatString"; "tooltipYLabel": "tooltipYLabel"; "tooltipYValueFormatType": "tooltipYValueFormatType"; "tooltipYValueFormatString": "tooltipYValueFormatString"; "tooltipValueLabel": "tooltipValueLabel"; "tooltipValueFormatType": "tooltipValueFormatType"; "tooltipValueFormatString": "tooltipValueFormatString"; "marginTop": "marginTop"; "marginRight": "marginRight"; "marginBottom": "marginBottom"; "marginLeft": "marginLeft"; "theme": "theme"; }, { "hovered": "hovered"; "clicked": "clicked"; "tooltipHovered": "tooltipHovered"; "tooltipClicked": "tooltipClicked"; }, never, never>;
 }

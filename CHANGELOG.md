@@ -1,3 +1,14 @@
+# 6.14
+
+## Additions
+
+- New DataViz Scatter Plot component and documentation
+- New "rate your experience" pattern and code
+
+## Bug Fixes
+
+- Fixed regression on H1-H6 font sizes
+
 # 6.13
 
 ## Additions
@@ -760,7 +771,7 @@ Andrew Dimola, Beth Jennings, Bhalchandra Bhosale, Gaston Hummel, Joan Doutney, 
   - add template variable to add focus when search is closed (`#searchLink`)
 
 ```html
-<a #searchLink class="nav-link d-none d-sm-block" aria-label="Search" href="" (click)="toggleSearch($event)"> ... </a>
+<a class="nav-link d-none d-sm-block" #searchLink aria-label="Search" href="" (click)="toggleSearch($event)"> ... </a>
 ```
 
 ### Promotional Heros

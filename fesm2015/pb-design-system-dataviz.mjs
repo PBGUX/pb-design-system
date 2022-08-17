@@ -5649,6 +5649,8 @@ class PbdsDatavizScatterplotComponent {
         this.scatterplotClass = true;
         this.width = 306;
         this.height = 400;
+        this.jitterX = 4;
+        this.jitterY = 4;
         this.xAxisType = 'date';
         this.xAxisFormatString = '';
         this.xAxisTicks = 6;
@@ -5727,9 +5729,9 @@ class PbdsDatavizScatterplotComponent {
                     .append('circle')
                     .attr('cx', (d) => {
                     if (this.xAxisType === 'date') {
-                        return this.xAxisScale(isoParse(d.x));
+                        return this.xAxisScale(isoParse(d.x)) - this.jitter(this.jitterX);
                     }
-                    return this.xAxisScale(d.x);
+                    return this.xAxisScale(d.x) - this.jitter(this.jitterX);
                 })
                     .attr('cy', (d) => this.yAxisScale(0))
                     .attr('r', (d) => {
@@ -5741,30 +5743,24 @@ class PbdsDatavizScatterplotComponent {
                     .attr('fill', (d) => this.colorRange(d.key))
                     .attr('stroke', (d) => this.colorRange(d.key))
                     .call((enter) => {
-                    enter
-                        // .transition()
-                        // .duration(1000)
-                        // .delay((d, i) => {
-                        //   return i * 300;
-                        // })
-                        .attr('cy', (d) => this.yAxisScale(d.y));
+                    enter.attr('cy', (d) => this.yAxisScale(d.y) - this.jitter(this.jitterY));
                 });
             }, (update) => {
                 update
-                    // .transition()
-                    // .duration(1000)
-                    .attr('cx', (d) => this.xAxisScale(d.x))
-                    .attr('cy', (d) => this.yAxisScale(d.y));
+                    .transition()
+                    .duration(1000)
+                    .attr('cx', (d) => this.xAxisScale(d.x) - this.jitter(this.jitterX))
+                    .attr('cy', (d) => this.yAxisScale(d.y) - this.jitter(this.jitterY));
                 return update;
             }, (exit) => {
                 exit
-                    // .transition()
-                    .attr('cy', (d) => this.yAxisScale(0))
+                    .attr('cy', (d) => this.yAxisScale(0) - this.jitter(this.jitterY))
                     .attr('r', 0)
                     .remove();
             })
                 .on('mouseover', (event, data) => this.tooltipShow(event, data))
-                .on('mouseout', (event, data) => this.tooltipHide());
+                .on('mouseout', (event, data) => this.tooltipHide())
+                .on('click', (event, data) => this.tooltipClicked.emit({ event, data: data }));
             if (!this.hideLegend) {
                 const uniqueKeys = new Set();
                 this.data.forEach((d) => {
@@ -5877,6 +5873,7 @@ class PbdsDatavizScatterplotComponent {
             this.tooltip.style('top', `${boundRect.top + boundRect.height / 2 - tooltipOffsetHeight / 2 + scroll[1]}px`);
             this.tooltip.style('left', position);
             this.tooltip.style('opacity', 1);
+            this.tooltipHovered.emit({ event, data: data });
         };
         this.tooltipHide = () => {
             this.svg.selectAll('circle').classed('inactive', false).classed('active', false);
@@ -6095,9 +6092,12 @@ class PbdsDatavizScatterplotComponent {
         if (this.tooltip)
             this.tooltip.remove();
     }
+    jitter(jitter) {
+        return Math.random() * jitter;
+    }
 }
 PbdsDatavizScatterplotComponent.ɵfac = i0.ɵɵngDeclareFactory({ minVersion: "12.0.0", version: "13.3.6", ngImport: i0, type: PbdsDatavizScatterplotComponent, deps: [{ token: PbdsDatavizService }, { token: i0.ElementRef }, { token: i2.ViewportScroller }], target: i0.ɵɵFactoryTarget.Component });
-PbdsDatavizScatterplotComponent.ɵcmp = i0.ɵɵngDeclareComponent({ minVersion: "12.0.0", version: "13.3.6", type: PbdsDatavizScatterplotComponent, selector: "pbds-dataviz-scatterplot", inputs: { data: "data", width: "width", height: "height", xAxisType: "xAxisType", xAxisFormatString: "xAxisFormatString", xAxisTicks: "xAxisTicks", yAxisFormatString: "yAxisFormatString", yAxisTicks: "yAxisTicks", yAxisMinBuffer: "yAxisMinBuffer", yAxisMaxBuffer: "yAxisMaxBuffer", hideXGrid: "hideXGrid", hideYGrid: "hideYGrid", hideLegend: "hideLegend", legendWidth: "legendWidth", legendPosition: "legendPosition", legendLabelFormatType: "legendLabelFormatType", tooltipXLabel: "tooltipXLabel", tooltipXValueFormatType: "tooltipXValueFormatType", tooltipXValueFormatString: "tooltipXValueFormatString", tooltipYLabel: "tooltipYLabel", tooltipYValueFormatType: "tooltipYValueFormatType", tooltipYValueFormatString: "tooltipYValueFormatString", tooltipValueLabel: "tooltipValueLabel", tooltipValueFormatType: "tooltipValueFormatType", tooltipValueFormatString: "tooltipValueFormatString", marginTop: "marginTop", marginRight: "marginRight", marginBottom: "marginBottom", marginLeft: "marginLeft", theme: "theme" }, outputs: { hovered: "hovered", clicked: "clicked", tooltipHovered: "tooltipHovered", tooltipClicked: "tooltipClicked" }, host: { properties: { "class.pbds-chart": "this.chartClass", "class.pbds-chart-scatterplot": "this.scatterplotClass" } }, usesOnChanges: true, ngImport: i0, template: ``, isInline: true, changeDetection: i0.ChangeDetectionStrategy.OnPush });
+PbdsDatavizScatterplotComponent.ɵcmp = i0.ɵɵngDeclareComponent({ minVersion: "12.0.0", version: "13.3.6", type: PbdsDatavizScatterplotComponent, selector: "pbds-dataviz-scatterplot", inputs: { data: "data", width: "width", height: "height", jitterX: "jitterX", jitterY: "jitterY", xAxisType: "xAxisType", xAxisFormatString: "xAxisFormatString", xAxisTicks: "xAxisTicks", yAxisFormatString: "yAxisFormatString", yAxisTicks: "yAxisTicks", yAxisMinBuffer: "yAxisMinBuffer", yAxisMaxBuffer: "yAxisMaxBuffer", hideXGrid: "hideXGrid", hideYGrid: "hideYGrid", hideLegend: "hideLegend", legendWidth: "legendWidth", legendPosition: "legendPosition", legendLabelFormatType: "legendLabelFormatType", tooltipXLabel: "tooltipXLabel", tooltipXValueFormatType: "tooltipXValueFormatType", tooltipXValueFormatString: "tooltipXValueFormatString", tooltipYLabel: "tooltipYLabel", tooltipYValueFormatType: "tooltipYValueFormatType", tooltipYValueFormatString: "tooltipYValueFormatString", tooltipValueLabel: "tooltipValueLabel", tooltipValueFormatType: "tooltipValueFormatType", tooltipValueFormatString: "tooltipValueFormatString", marginTop: "marginTop", marginRight: "marginRight", marginBottom: "marginBottom", marginLeft: "marginLeft", theme: "theme" }, outputs: { hovered: "hovered", clicked: "clicked", tooltipHovered: "tooltipHovered", tooltipClicked: "tooltipClicked" }, host: { properties: { "class.pbds-chart": "this.chartClass", "class.pbds-chart-scatterplot": "this.scatterplotClass" } }, usesOnChanges: true, ngImport: i0, template: ``, isInline: true, changeDetection: i0.ChangeDetectionStrategy.OnPush });
 i0.ɵɵngDeclareClassMetadata({ minVersion: "12.0.0", version: "13.3.6", ngImport: i0, type: PbdsDatavizScatterplotComponent, decorators: [{
             type: Component,
             args: [{
@@ -6117,6 +6117,10 @@ i0.ɵɵngDeclareClassMetadata({ minVersion: "12.0.0", version: "13.3.6", ngImpor
             }], width: [{
                 type: Input
             }], height: [{
+                type: Input
+            }], jitterX: [{
+                type: Input
+            }], jitterY: [{
                 type: Input
             }], xAxisType: [{
                 type: Input
