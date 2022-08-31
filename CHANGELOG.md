@@ -1,3 +1,109 @@
+# 6.14
+
+## Additions
+
+- New DataViz Scatter Plot component and documentation
+- New "rate your experience" pattern and code
+
+## Bug Fixes
+
+- Fixed regression on H1-H6 font sizes
+
+# 6.13
+
+## Additions
+
+- Added a "Create a Case" pattern and code
+- Added css class `label-allcaps` to style text to look like a standard form field label
+- Update UPS package images in Package Library with new UPS branding
+- Added a Simple Time Form Field
+
+## Changes
+
+- Icons Multi-line alerts and toasts now align with the first line of text, instead of vertically centered
+
+## Bug Fixes
+
+- Fix label color for disabled OS checkboxes
+- Fix multiple nested button groups overlapping
+- Fix Tree menu code snippet
+- Fix tabs were not working on Modals page
+- Fix card headers and body text were misaligned
+
+---
+
+# 6.12.1
+
+## Additions
+
+- Add Accessibility icons to PBI Outline font, `pbi-a11y-outline` and `pbi-a11y-solid`
+
+---
+
+# 6.12
+
+## Additions
+
+- Add PrimeNG InputNumber component
+- Add PrimeNG Rich Text Editor component
+
+## Bug Fixes
+
+- Fixed Mega Menu section headers to match existing menu header design
+
+---
+
+# 6.11
+
+## Additions
+
+- Add PBDS Progress Button component
+- Add Sticky Table Column component
+- Add Tree Menu components, single select and multiple select
+- Added examples from User Messaging to Modals, Notifications, and Input fields pages
+- Added example of search input type
+
+## Changes
+
+- Updated Stepper component to use new PrimeNG InputNumber component. Older component was discontinued, but we have kept its CSS to maintain backward compatibility.
+
+## Bug Fixes
+
+- Fixed color of NGBootstrap Accordion headers
+- DataViz: fix tooltips that are not showing a value when it is 0
+
+---
+
+# 6.10.2
+
+## Additions
+
+- Replace "hamburger menu" code with Angular Material "sidenav" due to old plugin being abandoned
+- Theme switcher header menu item
+- Ability to open the PBDS Date Range calendar from another element, such as a button elsewhere on screen
+- Updated list of VPATs
+- Ability to add an X-axis label to vertical bar, line, and area charts
+
+## Bug Fixes
+
+- Updated customer email sample image to match the actual code in the template
+- Stacked bar tooltip position in Firefox
+
+# 6.10.1
+
+## Additions
+
+- Added code example for Parcel Tracking Map
+- Added example of multiple simultaneous global alerts, and added classes to support "info" and "warning" alert types
+- Added table example to expand/collapse all table rows
+
+## Bug Fixes
+
+- Fixed several instances for proper visibility in Windows High Contrast Mode
+- Fixed Horeshoe Gauge had extra space below chart
+- Fixed regression with "danger" icon on alerts and toasters
+- Fixed width of toasters
+
 # 6.10.0
 
 ## Additions
@@ -6,11 +112,13 @@
 - Added a "process completed" widget to progress indicators
 - Added new mobile screens to Onboarding
 - Added code snippet for Horizontal Tracking Timeline to Tracking Pattern
-- Expanded Header examples with additional examples including mega-menu
+- Additional Header examples including mega-menu, account switcher, carets, and postage button
+- Color picker with WCAG contrast checker
+- Added accessibility statement component
 
 ## Changes
 
-- Sunset theme orange is now PB Brand Dark Orange
+- Sunset theme orange (in gradient) is now PB Brand Dark Orange
 - Split "Terminology & Style" into 2 pages and added a glossary of terms
 
 ## Bug Fixes
@@ -19,6 +127,7 @@
 - Fixed components that did not display correctly in Windows High Contrast Mode: dropdowns, radios, and tabs
 - Fixed accessibility for Account Access form fields
 - Fixed code snippet for faceted search example
+- Fixed missing file upload component warning box
 
 # 6.9.1
 
@@ -662,7 +771,7 @@ Andrew Dimola, Beth Jennings, Bhalchandra Bhosale, Gaston Hummel, Joan Doutney, 
   - add template variable to add focus when search is closed (`#searchLink`)
 
 ```html
-<a #searchLink class="nav-link d-none d-sm-block" aria-label="Search" href="" (click)="toggleSearch($event)"> ... </a>
+<a class="nav-link d-none d-sm-block" #searchLink aria-label="Search" href="" (click)="toggleSearch($event)"> ... </a>
 ```
 
 ### Promotional Heros
@@ -796,7 +905,7 @@ Abhinav Shrivastav, Adam Czarnik, Ajay Manas, Andrezej Krzystof Gdula, Ania Mast
 - "Select language" menus for users should be changed to use the names of the languages in the actual languages. See the updated sample on the Globalization page.
 - Updated "Invalid email or password" error on Account Access screen to be displayed in a notification, instead of under each field.
 - If you are using PrimeNG components in your app:
-  - As of version 6 they added their own icon font which needs to be installed and added to your css paths. See [their setup docs](https://www.primefaces.org/primeng/#/setup) for details.
+  - As of version 6 they added their own icon font which needs to be installed and added to your css paths. See [their setup docs](https://www.primefaces.org/primeng/setup) for details.
   - However **do not** add the PrimeNG css to your paths. Our CSS assumes no CSS has been added. If you notice something is not styled yet, please file a bug with us.
 
 ## Non-Breaking Changes

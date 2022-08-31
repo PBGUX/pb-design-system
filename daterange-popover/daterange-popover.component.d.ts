@@ -51,6 +51,7 @@ export declare class PbdsDaterangePopoverComponent implements OnInit, OnChanges,
     private onChange;
     constructor(calendar: NgbCalendar, daterangeService: PbdsDaterangeService);
     ngOnInit(): void;
+    openPbdsDateRangePopup(): void;
     writeValue(value: any): void;
     registerOnChange(onChange: any): void;
     registerOnTouched(onTouched: () => void): void;

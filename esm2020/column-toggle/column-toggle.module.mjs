@@ -6,10 +6,10 @@ import { PbdsColumnToggleComponent } from './column-toggle.component';
 import * as i0 from "@angular/core";
 export class PbdsColumnToggleModule {
 }
-PbdsColumnToggleModule.ɵfac = i0.ɵɵngDeclareFactory({ minVersion: "12.0.0", version: "13.1.2", ngImport: i0, type: PbdsColumnToggleModule, deps: [], target: i0.ɵɵFactoryTarget.NgModule });
-PbdsColumnToggleModule.ɵmod = i0.ɵɵngDeclareNgModule({ minVersion: "12.0.0", version: "13.1.2", ngImport: i0, type: PbdsColumnToggleModule, declarations: [PbdsColumnToggleComponent], imports: [CommonModule, NgbDropdownModule, FormsModule], exports: [PbdsColumnToggleComponent] });
-PbdsColumnToggleModule.ɵinj = i0.ɵɵngDeclareInjector({ minVersion: "12.0.0", version: "13.1.2", ngImport: i0, type: PbdsColumnToggleModule, imports: [[CommonModule, NgbDropdownModule, FormsModule]] });
-i0.ɵɵngDeclareClassMetadata({ minVersion: "12.0.0", version: "13.1.2", ngImport: i0, type: PbdsColumnToggleModule, decorators: [{
+PbdsColumnToggleModule.ɵfac = i0.ɵɵngDeclareFactory({ minVersion: "12.0.0", version: "13.3.6", ngImport: i0, type: PbdsColumnToggleModule, deps: [], target: i0.ɵɵFactoryTarget.NgModule });
+PbdsColumnToggleModule.ɵmod = i0.ɵɵngDeclareNgModule({ minVersion: "12.0.0", version: "13.3.6", ngImport: i0, type: PbdsColumnToggleModule, declarations: [PbdsColumnToggleComponent], imports: [CommonModule, NgbDropdownModule, FormsModule], exports: [PbdsColumnToggleComponent] });
+PbdsColumnToggleModule.ɵinj = i0.ɵɵngDeclareInjector({ minVersion: "12.0.0", version: "13.3.6", ngImport: i0, type: PbdsColumnToggleModule, imports: [[CommonModule, NgbDropdownModule, FormsModule]] });
+i0.ɵɵngDeclareClassMetadata({ minVersion: "12.0.0", version: "13.3.6", ngImport: i0, type: PbdsColumnToggleModule, decorators: [{
             type: NgModule,
             args: [{
                     declarations: [PbdsColumnToggleComponent],

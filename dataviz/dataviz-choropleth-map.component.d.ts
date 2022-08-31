@@ -27,6 +27,7 @@ export declare class PbdsDatavizChoroplethMapComponent implements OnInit, OnDest
     colorScale: 'threshold' | 'quantile' | 'quantize';
     domain: Array<number>;
     hideTooltip: boolean;
+    tooltipHeaderSuffix: string;
     tooltipValueFormatType: 'number';
     tooltipValueFormatString: string;
     hideLegend: boolean;
@@ -63,5 +64,5 @@ export declare class PbdsDatavizChoroplethMapComponent implements OnInit, OnDest
     private tooltipSetPosition;
     legend: (g: any) => void;
     static ɵfac: i0.ɵɵFactoryDeclaration<PbdsDatavizChoroplethMapComponent, never>;
-    static ɵcmp: i0.ɵɵComponentDeclaration<PbdsDatavizChoroplethMapComponent, "pbds-dataviz-choropleth-map", never, { "data": "data"; "topojson": "topojson"; "feature": "feature"; "projectionType": "projectionType"; "dataField": "dataField"; "mesh": "mesh"; "scale": "scale"; "center": "center"; "width": "width"; "height": "height"; "marginTop": "marginTop"; "marginRight": "marginRight"; "marginBottom": "marginBottom"; "marginLeft": "marginLeft"; "theme": "theme"; "colorScale": "colorScale"; "domain": "domain"; "hideTooltip": "hideTooltip"; "tooltipValueFormatType": "tooltipValueFormatType"; "tooltipValueFormatString": "tooltipValueFormatString"; "hideLegend": "hideLegend"; "legendWidth": "legendWidth"; "legendLabel": "legendLabel"; "legendValueFormatType": "legendValueFormatType"; "legendValueFormatString": "legendValueFormatString"; "legendLeft": "legendLeft"; "legendTop": "legendTop"; }, { "hovered": "hovered"; "clicked": "clicked"; }, never, never>;
+    static ɵcmp: i0.ɵɵComponentDeclaration<PbdsDatavizChoroplethMapComponent, "pbds-dataviz-choropleth-map", never, { "data": "data"; "topojson": "topojson"; "feature": "feature"; "projectionType": "projectionType"; "dataField": "dataField"; "mesh": "mesh"; "scale": "scale"; "center": "center"; "width": "width"; "height": "height"; "marginTop": "marginTop"; "marginRight": "marginRight"; "marginBottom": "marginBottom"; "marginLeft": "marginLeft"; "theme": "theme"; "colorScale": "colorScale"; "domain": "domain"; "hideTooltip": "hideTooltip"; "tooltipHeaderSuffix": "tooltipHeaderSuffix"; "tooltipValueFormatType": "tooltipValueFormatType"; "tooltipValueFormatString": "tooltipValueFormatString"; "hideLegend": "hideLegend"; "legendWidth": "legendWidth"; "legendLabel": "legendLabel"; "legendValueFormatType": "legendValueFormatType"; "legendValueFormatString": "legendValueFormatString"; "legendLeft": "legendLeft"; "legendTop": "legendTop"; }, { "hovered": "hovered"; "clicked": "clicked"; }, never, never>;
 }

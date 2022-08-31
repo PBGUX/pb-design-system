@@ -16,6 +16,7 @@ export declare class PbdsDatavizPieComponent implements OnInit, OnChanges, OnDes
     legendValueFormatString: string;
     tooltipLabelFormatType: 'time';
     tooltipLabelFormatString: string;
+    tooltipLabelSuffix: string;
     tooltipValueFormatString: string;
     theme: any;
     hovered: EventEmitter<any>;
@@ -57,5 +58,5 @@ export declare class PbdsDatavizPieComponent implements OnInit, OnChanges, OnDes
     private tooltipHide;
     private tooltipSetPosition;
     static ɵfac: i0.ɵɵFactoryDeclaration<PbdsDatavizPieComponent, never>;
-    static ɵcmp: i0.ɵɵComponentDeclaration<PbdsDatavizPieComponent, "pbds-dataviz-pie", never, { "data": "data"; "width": "width"; "type": "type"; "monochrome": "monochrome"; "legendLabelFormatType": "legendLabelFormatType"; "legendLabelFormatString": "legendLabelFormatString"; "legendValueFormatString": "legendValueFormatString"; "tooltipLabelFormatType": "tooltipLabelFormatType"; "tooltipLabelFormatString": "tooltipLabelFormatString"; "tooltipValueFormatString": "tooltipValueFormatString"; "theme": "theme"; }, { "hovered": "hovered"; "clicked": "clicked"; }, never, never>;
+    static ɵcmp: i0.ɵɵComponentDeclaration<PbdsDatavizPieComponent, "pbds-dataviz-pie", never, { "data": "data"; "width": "width"; "type": "type"; "monochrome": "monochrome"; "legendLabelFormatType": "legendLabelFormatType"; "legendLabelFormatString": "legendLabelFormatString"; "legendValueFormatString": "legendValueFormatString"; "tooltipLabelFormatType": "tooltipLabelFormatType"; "tooltipLabelFormatString": "tooltipLabelFormatString"; "tooltipLabelSuffix": "tooltipLabelSuffix"; "tooltipValueFormatString": "tooltipValueFormatString"; "theme": "theme"; }, { "hovered": "hovered"; "clicked": "clicked"; }, never, never>;
 }

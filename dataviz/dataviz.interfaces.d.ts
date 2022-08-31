@@ -21,7 +21,7 @@ export interface PbdsDatavizLine {
 }
 export interface PbdsDatavizLineSeries {
     label: string;
-    values: Array<number>;
+    values: Array<number | null>;
 }
 export interface PbdsDatavizBarStacked {
     key: string;
@@ -66,4 +66,10 @@ export interface PbdsDatavizBarSingleHorizontalCompare {
     compareChangeValue: number;
     compareChangeDirection: 'increase' | 'decrease' | '';
     compareChangeInverse: boolean;
+}
+export interface PbdsDatavizScatterplot {
+    x: string | number;
+    y: string | number;
+    key: string;
+    value?: number;
 }

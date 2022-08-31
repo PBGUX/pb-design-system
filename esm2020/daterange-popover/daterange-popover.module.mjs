@@ -8,15 +8,15 @@ import { PbdsDaterangePopoverComponent } from './daterange-popover.component';
 import * as i0 from "@angular/core";
 export class PbdsDaterangePopoverModule {
 }
-PbdsDaterangePopoverModule.ɵfac = i0.ɵɵngDeclareFactory({ minVersion: "12.0.0", version: "13.1.2", ngImport: i0, type: PbdsDaterangePopoverModule, deps: [], target: i0.ɵɵFactoryTarget.NgModule });
-PbdsDaterangePopoverModule.ɵmod = i0.ɵɵngDeclareNgModule({ minVersion: "12.0.0", version: "13.1.2", ngImport: i0, type: PbdsDaterangePopoverModule, declarations: [PbdsDaterangePopoverComponent], imports: [CommonModule,
+PbdsDaterangePopoverModule.ɵfac = i0.ɵɵngDeclareFactory({ minVersion: "12.0.0", version: "13.3.6", ngImport: i0, type: PbdsDaterangePopoverModule, deps: [], target: i0.ɵɵFactoryTarget.NgModule });
+PbdsDaterangePopoverModule.ɵmod = i0.ɵɵngDeclareNgModule({ minVersion: "12.0.0", version: "13.3.6", ngImport: i0, type: PbdsDaterangePopoverModule, declarations: [PbdsDaterangePopoverComponent], imports: [CommonModule,
         FormsModule,
         A11yModule,
         MatRadioModule,
         NgbDatepickerModule,
         NgbPopoverModule,
         NgbDropdownModule], exports: [PbdsDaterangePopoverComponent] });
-PbdsDaterangePopoverModule.ɵinj = i0.ɵɵngDeclareInjector({ minVersion: "12.0.0", version: "13.1.2", ngImport: i0, type: PbdsDaterangePopoverModule, imports: [[
+PbdsDaterangePopoverModule.ɵinj = i0.ɵɵngDeclareInjector({ minVersion: "12.0.0", version: "13.3.6", ngImport: i0, type: PbdsDaterangePopoverModule, imports: [[
             CommonModule,
             FormsModule,
             A11yModule,
@@ -25,7 +25,7 @@ PbdsDaterangePopoverModule.ɵinj = i0.ɵɵngDeclareInjector({ minVersion: "12.0.
             NgbPopoverModule,
             NgbDropdownModule
         ]] });
-i0.ɵɵngDeclareClassMetadata({ minVersion: "12.0.0", version: "13.1.2", ngImport: i0, type: PbdsDaterangePopoverModule, decorators: [{
+i0.ɵɵngDeclareClassMetadata({ minVersion: "12.0.0", version: "13.3.6", ngImport: i0, type: PbdsDaterangePopoverModule, decorators: [{
             type: NgModule,
             args: [{
                     declarations: [PbdsDaterangePopoverComponent],

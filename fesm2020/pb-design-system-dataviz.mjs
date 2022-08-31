@@ -1,5 +1,5 @@
 import * as i0 from '@angular/core';
-import { Injectable, EventEmitter, Component, ChangeDetectionStrategy, HostBinding, Input, Output, ContentChild, NgModule } from '@angular/core';
+import { Injectable, EventEmitter, Component, ChangeDetectionStrategy, HostBinding, Input, Output, ContentChild, forwardRef, Directive, Inject, NgModule } from '@angular/core';
 import * as i2 from '@angular/common';
 import { CommonModule } from '@angular/common';
 import * as i2$1 from '@ng-bootstrap/ng-bootstrap';
@@ -204,9 +204,9 @@ class PbdsDatavizService {
         return format$1;
     }
 }
-PbdsDatavizService.ɵfac = i0.ɵɵngDeclareFactory({ minVersion: "12.0.0", version: "13.1.2", ngImport: i0, type: PbdsDatavizService, deps: [], target: i0.ɵɵFactoryTarget.Injectable });
-PbdsDatavizService.ɵprov = i0.ɵɵngDeclareInjectable({ minVersion: "12.0.0", version: "13.1.2", ngImport: i0, type: PbdsDatavizService, providedIn: 'root' });
-i0.ɵɵngDeclareClassMetadata({ minVersion: "12.0.0", version: "13.1.2", ngImport: i0, type: PbdsDatavizService, decorators: [{
+PbdsDatavizService.ɵfac = i0.ɵɵngDeclareFactory({ minVersion: "12.0.0", version: "13.3.6", ngImport: i0, type: PbdsDatavizService, deps: [], target: i0.ɵɵFactoryTarget.Injectable });
+PbdsDatavizService.ɵprov = i0.ɵɵngDeclareInjectable({ minVersion: "12.0.0", version: "13.3.6", ngImport: i0, type: PbdsDatavizService, providedIn: 'root' });
+i0.ɵɵngDeclareClassMetadata({ minVersion: "12.0.0", version: "13.3.6", ngImport: i0, type: PbdsDatavizService, decorators: [{
             type: Injectable,
             args: [{
                     providedIn: 'root'
@@ -227,6 +227,7 @@ class PbdsDatavizPieComponent {
         this.legendValueFormatString = '';
         this.tooltipLabelFormatType = null;
         this.tooltipLabelFormatString = '';
+        this.tooltipLabelSuffix = '';
         this.tooltipValueFormatString = '';
         this.hovered = new EventEmitter();
         this.clicked = new EventEmitter();
@@ -414,10 +415,10 @@ class PbdsDatavizPieComponent {
             switch (this.tooltipLabelFormatType) {
                 case 'time':
                     const parsedTime = isoParse(data.data.label);
-                    label = this.tooltipLabelFormat(parsedTime);
+                    label = `${this.tooltipLabelFormat(parsedTime)}${this.tooltipLabelSuffix}`;
                     break;
                 default:
-                    label = data.data.label;
+                    label = `${data.data.label}${this.tooltipLabelSuffix}`;
             }
             this.tooltip.html(`
         <div class="tooltip-label">${label}</div>
@@ -490,9 +491,9 @@ class PbdsDatavizPieComponent {
             this.tooltip.remove();
     }
 }
-PbdsDatavizPieComponent.ɵfac = i0.ɵɵngDeclareFactory({ minVersion: "12.0.0", version: "13.1.2", ngImport: i0, type: PbdsDatavizPieComponent, deps: [{ token: PbdsDatavizService }, { token: i0.ElementRef }], target: i0.ɵɵFactoryTarget.Component });
-PbdsDatavizPieComponent.ɵcmp = i0.ɵɵngDeclareComponent({ minVersion: "12.0.0", version: "13.1.2", type: PbdsDatavizPieComponent, selector: "pbds-dataviz-pie", inputs: { data: "data", width: "width", type: "type", monochrome: "monochrome", legendLabelFormatType: "legendLabelFormatType", legendLabelFormatString: "legendLabelFormatString", legendValueFormatString: "legendValueFormatString", tooltipLabelFormatType: "tooltipLabelFormatType", tooltipLabelFormatString: "tooltipLabelFormatString", tooltipValueFormatString: "tooltipValueFormatString", theme: "theme" }, outputs: { hovered: "hovered", clicked: "clicked" }, host: { properties: { "class.pbds-chart": "this.chartClass", "class.pbds-chart-pie": "this.pieClass" } }, usesOnChanges: true, ngImport: i0, template: ``, isInline: true, changeDetection: i0.ChangeDetectionStrategy.OnPush });
-i0.ɵɵngDeclareClassMetadata({ minVersion: "12.0.0", version: "13.1.2", ngImport: i0, type: PbdsDatavizPieComponent, decorators: [{
+PbdsDatavizPieComponent.ɵfac = i0.ɵɵngDeclareFactory({ minVersion: "12.0.0", version: "13.3.6", ngImport: i0, type: PbdsDatavizPieComponent, deps: [{ token: PbdsDatavizService }, { token: i0.ElementRef }], target: i0.ɵɵFactoryTarget.Component });
+PbdsDatavizPieComponent.ɵcmp = i0.ɵɵngDeclareComponent({ minVersion: "12.0.0", version: "13.3.6", type: PbdsDatavizPieComponent, selector: "pbds-dataviz-pie", inputs: { data: "data", width: "width", type: "type", monochrome: "monochrome", legendLabelFormatType: "legendLabelFormatType", legendLabelFormatString: "legendLabelFormatString", legendValueFormatString: "legendValueFormatString", tooltipLabelFormatType: "tooltipLabelFormatType", tooltipLabelFormatString: "tooltipLabelFormatString", tooltipLabelSuffix: "tooltipLabelSuffix", tooltipValueFormatString: "tooltipValueFormatString", theme: "theme" }, outputs: { hovered: "hovered", clicked: "clicked" }, host: { properties: { "class.pbds-chart": "this.chartClass", "class.pbds-chart-pie": "this.pieClass" } }, usesOnChanges: true, ngImport: i0, template: ``, isInline: true, changeDetection: i0.ChangeDetectionStrategy.OnPush });
+i0.ɵɵngDeclareClassMetadata({ minVersion: "12.0.0", version: "13.3.6", ngImport: i0, type: PbdsDatavizPieComponent, decorators: [{
             type: Component,
             args: [{ selector: 'pbds-dataviz-pie', template: ``, changeDetection: ChangeDetectionStrategy.OnPush, styles: [] }]
         }], ctorParameters: function () { return [{ type: PbdsDatavizService }, { type: i0.ElementRef }]; }, propDecorators: { chartClass: [{
@@ -518,6 +519,8 @@ i0.ɵɵngDeclareClassMetadata({ minVersion: "12.0.0", version: "13.1.2", ngImpor
             }], tooltipLabelFormatType: [{
                 type: Input
             }], tooltipLabelFormatString: [{
+                type: Input
+            }], tooltipLabelSuffix: [{
                 type: Input
             }], tooltipValueFormatString: [{
                 type: Input
@@ -556,6 +559,8 @@ class PbdsDatavizBarComponent {
         this.legendLabelFormatString = '';
         this.tooltipLabelFormatType = null;
         this.tooltipLabelFormatString = '';
+        this.tooltipLabelSuffix = '';
+        this.hideTooltipLabel = true;
         this.tooltipValueFormatType = null;
         this.tooltipValueFormatString = '';
         this.marginTop = 10; // hardcoded on purpose, do not document until feedback
@@ -566,6 +571,7 @@ class PbdsDatavizBarComponent {
         this.thresholdLabel = 'Threshold';
         this.average = null;
         this.averageLabel = 'Average';
+        this.gradient = true;
         this.hovered = new EventEmitter();
         this.clicked = new EventEmitter();
         this.updateChart = () => {
@@ -612,7 +618,7 @@ class PbdsDatavizBarComponent {
                     .join((enter) => enter
                     .append('rect')
                     .attr('class', 'bar')
-                    .attr('fill', (d) => `url(${this._location.prepareExternalUrl(this._location.path())}#gradient-${this.colorRange(d.label).substr(1)})`) // removes hash to prevent safari bug;
+                    .attr('fill', (d) => this.barFill(d)) // removes hash to prevent safari bug;
                     .attr('x', (d) => this.xAxisScale(d.label) + this.xAxisScale.bandwidth() / 4)
                     .attr('width', this.xAxisScale.bandwidth() / 2)
                     .attr('y', this.height)
@@ -648,7 +654,7 @@ class PbdsDatavizBarComponent {
                     .join((enter) => enter
                     .append('rect')
                     .attr('class', 'bar')
-                    .attr('fill', (d) => `url(${this._location.prepareExternalUrl(this._location.path())}#gradient-${this.colorRange(d.label).substr(1)})`)
+                    .attr('fill', (d) => this.barFill(d))
                     .attr('x', (d) => this.xAxisScale(d.label) + this.xAxisScale.bandwidth() / 5.5)
                     .attr('width', this.xAxisScale.bandwidth() / 1.5)
                     .attr('y', this.height)
@@ -792,14 +798,14 @@ class PbdsDatavizBarComponent {
             }
             switch (this.tooltipLabelFormatType) {
                 case 'number':
-                    label = this.tooltipLabelFormat(data.label);
+                    label = `${this.tooltipLabelFormat(data.label)}${this.tooltipLabelSuffix}`;
                     break;
                 case 'time':
                     const parsedTime = isoParse(data.label);
-                    label = this.tooltipLabelFormat(parsedTime);
+                    label = `${this.tooltipLabelFormat(parsedTime)}${this.tooltipLabelSuffix}`;
                     break;
                 default:
-                    label = data.label;
+                    label = `${data.label}${this.tooltipLabelSuffix}`;
             }
             const value = this.tooltipValueFormat === null
                 ? `<div class="tooltip-value">${data.value}</div>`
@@ -868,10 +874,8 @@ class PbdsDatavizBarComponent {
         this.hideYAxisTicks = false;
         this.xAxisTickSize = 8;
         this.xAxisTickSizeOuter = 0;
-        this.xAxisTitleMargin = this.xAxisTitle ? 20 : 0;
         this.yAxisTickSize = 8;
         this.yAxisTickSizeOuter = 0;
-        this.hideTooltipLabel = false;
         if (this.type !== 'debug') {
             // set type defaults
             switch (this.type) {
@@ -883,7 +887,6 @@ class PbdsDatavizBarComponent {
                     this.hideYAxisDomain = false;
                     this.hideYAxisTicks = true;
                     this.legendPosition = 'bottom';
-                    this.hideTooltipLabel = true;
                     break;
                 case 'medium':
                     this.hideXAxisDomain = true;
@@ -893,7 +896,6 @@ class PbdsDatavizBarComponent {
                     this.hideYAxisDomain = true;
                     this.hideYAxisTicks = true;
                     this.hideYGrid = true;
-                    this.hideTooltipLabel = true;
                     break;
                 case 'high':
                     this.hideXAxis = true;
@@ -913,6 +915,7 @@ class PbdsDatavizBarComponent {
                 this.hideXGrid = true;
                 this.hideTooltipLabel = false;
             }
+            this.xAxisTitleMargin = this.xAxisTitle ? 30 : 0;
         }
         // adjust margin if xAxis hidden
         if (this.hideXAxis)
@@ -969,9 +972,8 @@ class PbdsDatavizBarComponent {
             this.svg
                 .append('text')
                 .attr('class', 'axis-title')
-                .attr('text-anchor', 'center')
-                .attr('x', this.width / 2 - this.margin.left)
-                .attr('y', this.height + this.margin.top + (this.hideXAxis ? 15 : 0))
+                .attr('text-anchor', 'middle')
+                .attr('transform', `translate(${this.svg.attr('width') / 2 - this.margin.left / 2 - this.margin.right / 2}, ${this.height + this.margin.top + (this.hideXAxis ? 20 : 40)})`)
                 .text(this.xAxisTitle);
         }
         // Y AXIS
@@ -1073,10 +1075,21 @@ class PbdsDatavizBarComponent {
         if (this.tooltip)
             this.tooltip.remove();
     }
+    barFill(d) {
+        const path = this._location.path();
+        const url = this._location.prepareExternalUrl(path);
+        const colorRange = this.colorRange(d.label);
+        if (this.gradient) {
+            return `url(${url}#gradient-${colorRange.substr(1)})`;
+        }
+        else {
+            return colorRange;
+        }
+    }
 }
-PbdsDatavizBarComponent.ɵfac = i0.ɵɵngDeclareFactory({ minVersion: "12.0.0", version: "13.1.2", ngImport: i0, type: PbdsDatavizBarComponent, deps: [{ token: PbdsDatavizService }, { token: i0.ElementRef }, { token: i2.ViewportScroller }, { token: i2.Location }], target: i0.ɵɵFactoryTarget.Component });
-PbdsDatavizBarComponent.ɵcmp = i0.ɵɵngDeclareComponent({ minVersion: "12.0.0", version: "13.1.2", type: PbdsDatavizBarComponent, selector: "pbds-dataviz-bar", inputs: { data: "data", width: "width", height: "height", type: "type", singleSeries: "singleSeries", xAxisFormatType: "xAxisFormatType", xAxisFormatString: "xAxisFormatString", xAxisTitle: "xAxisTitle", yAxisFormatType: "yAxisFormatType", yAxisFormatString: "yAxisFormatString", yAxisTicks: "yAxisTicks", yAxisMinBuffer: "yAxisMinBuffer", yAxisMaxBuffer: "yAxisMaxBuffer", hideLegend: "hideLegend", legendWidth: "legendWidth", legendPosition: "legendPosition", legendLabelFormatType: "legendLabelFormatType", legendLabelFormatString: "legendLabelFormatString", tooltipLabelFormatType: "tooltipLabelFormatType", tooltipLabelFormatString: "tooltipLabelFormatString", tooltipValueFormatType: "tooltipValueFormatType", tooltipValueFormatString: "tooltipValueFormatString", marginTop: "marginTop", marginRight: "marginRight", marginBottom: "marginBottom", marginLeft: "marginLeft", threshold: "threshold", thresholdLabel: "thresholdLabel", average: "average", averageLabel: "averageLabel", theme: "theme" }, outputs: { hovered: "hovered", clicked: "clicked" }, host: { properties: { "class.pbds-chart": "this.chartClass", "class.pbds-chart-bar": "this.barClass" } }, usesOnChanges: true, ngImport: i0, template: ``, isInline: true, changeDetection: i0.ChangeDetectionStrategy.OnPush });
-i0.ɵɵngDeclareClassMetadata({ minVersion: "12.0.0", version: "13.1.2", ngImport: i0, type: PbdsDatavizBarComponent, decorators: [{
+PbdsDatavizBarComponent.ɵfac = i0.ɵɵngDeclareFactory({ minVersion: "12.0.0", version: "13.3.6", ngImport: i0, type: PbdsDatavizBarComponent, deps: [{ token: PbdsDatavizService }, { token: i0.ElementRef }, { token: i2.ViewportScroller }, { token: i2.Location }], target: i0.ɵɵFactoryTarget.Component });
+PbdsDatavizBarComponent.ɵcmp = i0.ɵɵngDeclareComponent({ minVersion: "12.0.0", version: "13.3.6", type: PbdsDatavizBarComponent, selector: "pbds-dataviz-bar", inputs: { data: "data", width: "width", height: "height", type: "type", singleSeries: "singleSeries", xAxisFormatType: "xAxisFormatType", xAxisFormatString: "xAxisFormatString", xAxisTitle: "xAxisTitle", yAxisFormatType: "yAxisFormatType", yAxisFormatString: "yAxisFormatString", yAxisTicks: "yAxisTicks", yAxisMinBuffer: "yAxisMinBuffer", yAxisMaxBuffer: "yAxisMaxBuffer", hideLegend: "hideLegend", legendWidth: "legendWidth", legendPosition: "legendPosition", legendLabelFormatType: "legendLabelFormatType", legendLabelFormatString: "legendLabelFormatString", tooltipLabelFormatType: "tooltipLabelFormatType", tooltipLabelFormatString: "tooltipLabelFormatString", tooltipLabelSuffix: "tooltipLabelSuffix", hideTooltipLabel: "hideTooltipLabel", tooltipValueFormatType: "tooltipValueFormatType", tooltipValueFormatString: "tooltipValueFormatString", marginTop: "marginTop", marginRight: "marginRight", marginBottom: "marginBottom", marginLeft: "marginLeft", threshold: "threshold", thresholdLabel: "thresholdLabel", average: "average", averageLabel: "averageLabel", theme: "theme", gradient: "gradient" }, outputs: { hovered: "hovered", clicked: "clicked" }, host: { properties: { "class.pbds-chart": "this.chartClass", "class.pbds-chart-bar": "this.barClass" } }, usesOnChanges: true, ngImport: i0, template: ``, isInline: true, changeDetection: i0.ChangeDetectionStrategy.OnPush });
+i0.ɵɵngDeclareClassMetadata({ minVersion: "12.0.0", version: "13.3.6", ngImport: i0, type: PbdsDatavizBarComponent, decorators: [{
             type: Component,
             args: [{
                     selector: 'pbds-dataviz-bar',
@@ -1130,6 +1143,10 @@ i0.ɵɵngDeclareClassMetadata({ minVersion: "12.0.0", version: "13.1.2", ngImpor
                 type: Input
             }], tooltipLabelFormatString: [{
                 type: Input
+            }], tooltipLabelSuffix: [{
+                type: Input
+            }], hideTooltipLabel: [{
+                type: Input
             }], tooltipValueFormatType: [{
                 type: Input
             }], tooltipValueFormatString: [{
@@ -1151,6 +1168,8 @@ i0.ɵɵngDeclareClassMetadata({ minVersion: "12.0.0", version: "13.1.2", ngImpor
             }], averageLabel: [{
                 type: Input
             }], theme: [{
+                type: Input
+            }], gradient: [{
                 type: Input
             }], hovered: [{
                 type: Output
@@ -1175,6 +1194,7 @@ class PbdsDatavizLineComponent {
         this.xAxisType = 'date';
         this.xAxisFormatString = '';
         this.xAxisTicks = 6;
+        this.xAxisTitle = null;
         this.yAxisFormatString = '';
         this.yAxisTicks = 5;
         this.yAxisMinBuffer = 0.01;
@@ -1187,6 +1207,7 @@ class PbdsDatavizLineComponent {
         this.legendLabelFormatType = null;
         this.legendLabelFormatString = '';
         this.tooltipHeadingFormatString = '';
+        this.tooltipHeadingSuffix = '';
         this.tooltipLabelFormatType = null;
         this.tooltipLabelFormatString = '';
         this.tooltipValueFormatType = null;
@@ -1195,6 +1216,7 @@ class PbdsDatavizLineComponent {
         this.marginRight = 20; // hardcoded on purpose, do not document until feedback
         this.marginBottom = 30; // hardcoded on purpose, do not document until feedback
         this.marginLeft = 55; // hardcoded on purpose, do not document until feedback
+        this.lineCurved = true;
         this.hovered = new EventEmitter();
         this.clicked = new EventEmitter();
         this.tooltipHovered = new EventEmitter();
@@ -1203,23 +1225,19 @@ class PbdsDatavizLineComponent {
             this.mouserect.data(this.data);
             // update the xScale
             if (this.xAxisType === 'date') {
-                this.xAxisScale = scaleTime()
+                this.xAxisScale
                     .domain(extent(this.data.labels, (d) => {
                     return isoParse(d);
                 }))
                     .range([0, this.width - this.margin.left - this.margin.right]);
             }
             else if (this.xAxisType === 'number') {
-                this.xAxisScale = scaleLinear()
-                    .domain(extent(this.data.labels, (d) => {
+                this.xAxisScale.domain(extent(this.data.labels, (d) => {
                     return d;
-                }))
-                    .range([0, this.width - this.margin.left - this.margin.right]);
+                }));
             }
             else {
-                this.xAxisScale = scalePoint()
-                    .domain(this.data.labels)
-                    .range([0, this.width - this.margin.left - this.margin.right]);
+                this.xAxisScale.domain(this.data.labels);
             }
             // update the yScale
             this.yAxisScale
@@ -1319,7 +1337,13 @@ class PbdsDatavizLineComponent {
                     }
                 })
                     .attr('cy', (d) => this.yAxisScale(0))
-                    .attr('r', this.lineWidth * 2)
+                    .attr('r', (d, i) => {
+                    // hide circles if there is no data
+                    if (d === null) {
+                        return 0;
+                    }
+                    return this.lineWidth * 2;
+                })
                     .style('stroke-width', this.lineWidth)
                     .call((enter) => enter
                     .transition()
@@ -1339,7 +1363,13 @@ class PbdsDatavizLineComponent {
                     }
                 })
                     .attr('cy', (d) => this.yAxisScale(d))
-                    .attr('r', this.lineWidth * 2)
+                    .attr('r', (d, i) => {
+                    // hide circles if there is no data
+                    if (d === null) {
+                        return 0;
+                    }
+                    return this.lineWidth * 2;
+                })
                     .style('stroke-width', this.lineWidth), (update) => update.call((update) => update
                     .transition()
                     .duration(1000)
@@ -1352,7 +1382,19 @@ class PbdsDatavizLineComponent {
                         return this.xAxisScale(this.data.labels[i]);
                     }
                 })
-                    .attr('cy', (d) => this.yAxisScale(d))), (exit) => exit.remove()), (exit) => exit.remove());
+                    .attr('cy', (d) => {
+                    if (d === null) {
+                        return this.yAxisScale(0);
+                    }
+                    return this.yAxisScale(d);
+                })
+                    .attr('r', (d, i) => {
+                    // hide circles if there is no data
+                    if (d === null) {
+                        return 0;
+                    }
+                    return this.lineWidth * 2;
+                })), (exit) => exit.remove()), (exit) => exit.remove());
             }
             if (!this.hideLegend) {
                 this.chart
@@ -1535,7 +1577,7 @@ class PbdsDatavizLineComponent {
             // console.log(this.tooltipLine.node().getBoundingClientRect(), this._scroll.getScrollPosition());
             this.tooltipShow(this.tooltipLine.node(), closestIndex);
             this.mousedata = {
-                label: closest,
+                label: new Date(closest).toISOString(),
                 series: this.data.series.map((d) => {
                     return {
                         label: d.label,
@@ -1551,7 +1593,7 @@ class PbdsDatavizLineComponent {
             this.tooltipHide();
         };
         this.mouserectMouseClick = (event) => {
-            this.tooltipClicked.emit({ event, data: this.mousedata });
+            this.clicked.emit({ event, data: this.mousedata });
         };
         this.tooltipShow = (node, closestIndex) => {
             const scroll = this._scroll.getScrollPosition();
@@ -1565,22 +1607,22 @@ class PbdsDatavizLineComponent {
             this.tooltip.select('.tooltip-header').html((d) => {
                 if (this.xAxisType === 'date') {
                     const parsedTime = isoParse(this.data.labels[closestIndex]);
-                    return this.tooltipHeadingFormat(parsedTime);
+                    return `${this.tooltipHeadingFormat(parsedTime)}${this.tooltipHeadingSuffix}`;
                 }
                 else if (this.xAxisType === 'number') {
                     const heading = this.data.labels[closestIndex];
-                    return this.tooltipHeadingFormat(heading);
+                    return `${this.tooltipHeadingFormat(heading)}${this.tooltipHeadingSuffix}`;
                 }
                 else {
-                    return this.data.labels[closestIndex];
+                    return `${this.data.labels[closestIndex]}${this.tooltipHeadingSuffix}`;
                 }
             });
             this.tooltip.selectAll('.tooltip-value').html((d, i) => {
                 const value = this.data.series[i].values[closestIndex];
-                if (value) {
-                    return this.tooltipValueFormatType ? this.tooltipValueFormat(value) : value;
+                if (value === null || value === undefined) {
+                    return '';
                 }
-                return '';
+                return this.tooltipValueFormatType ? this.tooltipValueFormat(value) : value;
             });
             // flip the tooltip positions if near the right edge of the screen
             if (dimensionCalculated > clientWidth) {
@@ -1640,7 +1682,6 @@ class PbdsDatavizLineComponent {
         this.tooltipValueFormat = this._dataviz.d3Format(this.tooltipValueFormatType, this.tooltipValueFormatString);
         // defaults for all chart types
         this.lineWidth = 3;
-        this.lineCurved = true;
         this.linePoints = true;
         this.hideXAxis = false;
         this.hideYAxis = false;
@@ -1673,6 +1714,7 @@ class PbdsDatavizLineComponent {
                     break;
             }
         }
+        this.xAxisTitleMargin = this.xAxisTitle ? 30 : 0;
         // adjust margin if xAxis hidden
         if (this.hideXAxis)
             this.margin.bottom = 10; // need small margin for yAxis with 0 tick label
@@ -1692,7 +1734,11 @@ class PbdsDatavizLineComponent {
                 return this.xAxisScale(this.data.labels[i]);
             }
         })
-            .y((d) => this.yAxisScale(d));
+            .y((d) => this.yAxisScale(d))
+            .defined((d, i) => {
+            // console.log(d);
+            return d !== null; // only draw line if data is not null
+        });
         // define line curve
         if (this.lineCurved) {
             this.d3line.curve(curveCatmullRom.alpha(0.5));
@@ -1712,7 +1758,11 @@ class PbdsDatavizLineComponent {
                 }
             })
                 .y0(this.height)
-                .y1((d, i) => this.yAxisScale(d));
+                .y1((d, i) => this.yAxisScale(d))
+                .defined((d, i) => {
+                // console.log(d);
+                return d !== null; // only draw line if data is not null
+            });
             if (this.lineCurved) {
                 this.d3area.curve(curveCatmullRom.alpha(0.5));
             }
@@ -1723,10 +1773,10 @@ class PbdsDatavizLineComponent {
         this.svg = this.chart
             .append('svg')
             .attr('width', +this.width + this.margin.right)
-            .attr('height', +this.height + this.margin.top + this.margin.bottom)
+            .attr('height', +this.height + this.margin.top + this.margin.bottom + this.xAxisTitleMargin)
             .attr('class', 'img-fluid')
             .attr('preserveAspectRatio', 'xMinYMin meet')
-            .attr('viewBox', `-${this.margin.left} -${this.margin.top} ${+this.width + this.margin.right} ${+this.height + this.margin.top + this.margin.bottom}`);
+            .attr('viewBox', `-${this.margin.left} -${this.margin.top} ${+this.width + this.margin.right} ${+this.height + this.margin.top + this.margin.bottom + this.xAxisTitleMargin}`);
         // add rectangle to capture mouse
         this.mouserect = this.svg
             .append('rect')
@@ -1809,6 +1859,17 @@ class PbdsDatavizLineComponent {
                 .classed('grid-zero-hidden', this.hideXAxisZero)
                 .attr('transform', `translate(0, ${this.height})`) //${-this.margin.right / 2}
                 .call(this.xGridCall);
+        }
+        // X AXIS TITLE
+        if (this.xAxisTitle) {
+            this.svg
+                .append('text')
+                .attr('class', 'axis-title')
+                .attr('text-anchor', 'middle')
+                .attr('transform', `translate(${this.svg.attr('width') / 2 - this.margin.left / 2 - this.margin.right / 2}, ${this.height + this.margin.top + (this.hideXAxis ? 20 : 40)})`)
+                // .attr('x', this.width / 2 - this.margin.left - this.margin.right)
+                // .attr('y', this.height + this.margin.top + (this.hideXAxis ? 25 : 50))
+                .text(this.xAxisTitle);
         }
         // Y AXIS
         this.yAxisScale = scaleLinear()
@@ -1899,9 +1960,9 @@ class PbdsDatavizLineComponent {
             this.tooltip.remove();
     }
 }
-PbdsDatavizLineComponent.ɵfac = i0.ɵɵngDeclareFactory({ minVersion: "12.0.0", version: "13.1.2", ngImport: i0, type: PbdsDatavizLineComponent, deps: [{ token: PbdsDatavizService }, { token: i0.ElementRef }, { token: i2.ViewportScroller }, { token: i2.Location }], target: i0.ɵɵFactoryTarget.Component });
-PbdsDatavizLineComponent.ɵcmp = i0.ɵɵngDeclareComponent({ minVersion: "12.0.0", version: "13.1.2", type: PbdsDatavizLineComponent, selector: "pbds-dataviz-line", inputs: { data: "data", width: "width", height: "height", type: "type", area: "area", xAxisType: "xAxisType", xAxisFormatString: "xAxisFormatString", xAxisTicks: "xAxisTicks", yAxisFormatString: "yAxisFormatString", yAxisTicks: "yAxisTicks", yAxisMinBuffer: "yAxisMinBuffer", yAxisMaxBuffer: "yAxisMaxBuffer", hideXGrid: "hideXGrid", hideYGrid: "hideYGrid", hideLegend: "hideLegend", legendWidth: "legendWidth", legendPosition: "legendPosition", legendLabelFormatType: "legendLabelFormatType", legendLabelFormatString: "legendLabelFormatString", tooltipHeadingFormatString: "tooltipHeadingFormatString", tooltipLabelFormatType: "tooltipLabelFormatType", tooltipLabelFormatString: "tooltipLabelFormatString", tooltipValueFormatType: "tooltipValueFormatType", tooltipValueFormatString: "tooltipValueFormatString", marginTop: "marginTop", marginRight: "marginRight", marginBottom: "marginBottom", marginLeft: "marginLeft", theme: "theme" }, outputs: { hovered: "hovered", clicked: "clicked", tooltipHovered: "tooltipHovered", tooltipClicked: "tooltipClicked" }, host: { properties: { "class.pbds-chart": "this.chartClass", "class.pbds-chart-line": "this.lineClass" } }, usesOnChanges: true, ngImport: i0, template: ``, isInline: true, changeDetection: i0.ChangeDetectionStrategy.OnPush });
-i0.ɵɵngDeclareClassMetadata({ minVersion: "12.0.0", version: "13.1.2", ngImport: i0, type: PbdsDatavizLineComponent, decorators: [{
+PbdsDatavizLineComponent.ɵfac = i0.ɵɵngDeclareFactory({ minVersion: "12.0.0", version: "13.3.6", ngImport: i0, type: PbdsDatavizLineComponent, deps: [{ token: PbdsDatavizService }, { token: i0.ElementRef }, { token: i2.ViewportScroller }, { token: i2.Location }], target: i0.ɵɵFactoryTarget.Component });
+PbdsDatavizLineComponent.ɵcmp = i0.ɵɵngDeclareComponent({ minVersion: "12.0.0", version: "13.3.6", type: PbdsDatavizLineComponent, selector: "pbds-dataviz-line", inputs: { data: "data", width: "width", height: "height", type: "type", area: "area", xAxisType: "xAxisType", xAxisFormatString: "xAxisFormatString", xAxisTicks: "xAxisTicks", xAxisTitle: "xAxisTitle", yAxisFormatString: "yAxisFormatString", yAxisTicks: "yAxisTicks", yAxisMinBuffer: "yAxisMinBuffer", yAxisMaxBuffer: "yAxisMaxBuffer", hideXGrid: "hideXGrid", hideYGrid: "hideYGrid", hideLegend: "hideLegend", legendWidth: "legendWidth", legendPosition: "legendPosition", legendLabelFormatType: "legendLabelFormatType", legendLabelFormatString: "legendLabelFormatString", tooltipHeadingFormatString: "tooltipHeadingFormatString", tooltipHeadingSuffix: "tooltipHeadingSuffix", tooltipLabelFormatType: "tooltipLabelFormatType", tooltipLabelFormatString: "tooltipLabelFormatString", tooltipValueFormatType: "tooltipValueFormatType", tooltipValueFormatString: "tooltipValueFormatString", marginTop: "marginTop", marginRight: "marginRight", marginBottom: "marginBottom", marginLeft: "marginLeft", theme: "theme", lineCurved: "lineCurved" }, outputs: { hovered: "hovered", clicked: "clicked", tooltipHovered: "tooltipHovered", tooltipClicked: "tooltipClicked" }, host: { properties: { "class.pbds-chart": "this.chartClass", "class.pbds-chart-line": "this.lineClass" } }, usesOnChanges: true, ngImport: i0, template: ``, isInline: true, changeDetection: i0.ChangeDetectionStrategy.OnPush });
+i0.ɵɵngDeclareClassMetadata({ minVersion: "12.0.0", version: "13.3.6", ngImport: i0, type: PbdsDatavizLineComponent, decorators: [{
             type: Component,
             args: [{
                     selector: 'pbds-dataviz-line',
@@ -1931,6 +1992,8 @@ i0.ɵɵngDeclareClassMetadata({ minVersion: "12.0.0", version: "13.1.2", ngImpor
                 type: Input
             }], xAxisTicks: [{
                 type: Input
+            }], xAxisTitle: [{
+                type: Input
             }], yAxisFormatString: [{
                 type: Input
             }], yAxisTicks: [{
@@ -1955,6 +2018,8 @@ i0.ɵɵngDeclareClassMetadata({ minVersion: "12.0.0", version: "13.1.2", ngImpor
                 type: Input
             }], tooltipHeadingFormatString: [{
                 type: Input
+            }], tooltipHeadingSuffix: [{
+                type: Input
             }], tooltipLabelFormatType: [{
                 type: Input
             }], tooltipLabelFormatString: [{
@@ -1972,6 +2037,8 @@ i0.ɵɵngDeclareClassMetadata({ minVersion: "12.0.0", version: "13.1.2", ngImpor
             }], marginLeft: [{
                 type: Input
             }], theme: [{
+                type: Input
+            }], lineCurved: [{
                 type: Input
             }], hovered: [{
                 type: Output
@@ -1995,14 +2062,15 @@ class PbdsDatavizGaugeComponent {
         this.hideLabel = false;
         this.labelFormatString = '';
         this.gaugeWidth = 20;
-        this.degreesToRadians = degree => {
+        this.detailsPaddingTop = 0;
+        this.degreesToRadians = (degree) => {
             return (degree * Math.PI) / 180;
         };
         this.calculateMinMax = () => {
             const percentage = this.data.minvalue / (this.data.maxvalue - this.data.minvalue);
             return percentage * (this.data.value - this.data.minvalue) + (this.data.value - this.data.minvalue);
         };
-        this.calculateCurve = data => {
+        this.calculateCurve = (data) => {
             const start = this.degreesToRadians(this.startAngle);
             const end = start + (data * (this.degreesToRadians(this.endAngle) - start)) / this.data.maxvalue;
             return [
@@ -2019,7 +2087,7 @@ class PbdsDatavizGaugeComponent {
                 .append('path')
                 .data(this.calculateCurve(this.data.maxvalue))
                 .attr('class', 'gauge-background')
-                .attr('d', d => {
+                .attr('d', (d) => {
                 return this.arc({
                     innerRadius: this.radius - this.gaugeWidth,
                     outerRadius: this.radius,
@@ -2033,7 +2101,7 @@ class PbdsDatavizGaugeComponent {
                 .data(this.calculateCurve(this.calculateMinMax()))
                 .attr('class', 'gauge-value')
                 .attr('fill', this.color)
-                .attr('d', d => {
+                .attr('d', (d) => {
                 return this.arc({
                     innerRadius: this.radius - this.gaugeWidth,
                     outerRadius: this.radius,
@@ -2043,7 +2111,16 @@ class PbdsDatavizGaugeComponent {
             });
             switch (this.type) {
                 case 'horseshoe':
-                    this.svg.attr('height', 230).attr('viewBox', `-${this.width / 2} -${this.height / 2} ${this.height} 230`);
+                    const svgClone = this.svg.node().cloneNode(true);
+                    const fakeSvg = document.body.appendChild(svgClone);
+                    fakeSvg.setAttribute('style', 'position: absolute; left: -10000px;'); // position the cloned element offscreen
+                    const fakeGroup = fakeSvg.getElementsByClassName('gauge-group')[0];
+                    const fakeBox = fakeGroup.getBBox();
+                    this.svg
+                        .attr('height', fakeBox.height)
+                        .attr('viewBox', `-${this.width / 2} -${this.width / 2} ${this.width} ${fakeBox.height}`);
+                    this.detailsPaddingTop = this.gaugeWidth;
+                    fakeSvg.remove(); // remove the cloned element from the DOM
                     break;
                 case 'halfmoon':
                     this.svg.attr('height', this.width / 2);
@@ -2053,22 +2130,15 @@ class PbdsDatavizGaugeComponent {
         };
         this.updateChart = () => {
             const group = this.svg.select('.gauge-group');
-            group
-                .select('.gauge-value')
-                .transition()
-                .duration(750)
-                .call(this.arcTween, this.calculateMinMax());
+            group.select('.gauge-value').transition().duration(750).call(this.arcTween, this.calculateMinMax());
             this.labelTween = this.chart.select('.gauge-number');
-            this.labelTween
-                .transition()
-                .duration(750)
-                .call(this.textTween, this.data.value);
+            this.labelTween.transition().duration(750).call(this.textTween, this.data.value);
         };
         this.arcTween = (transition, value) => {
             const newAngle = this.calculateCurve(value);
-            transition.attrTween('d', d => {
+            transition.attrTween('d', (d) => {
                 const interpolate$1 = interpolate(d.endAngle, newAngle[0].endAngle);
-                return t => {
+                return (t) => {
                     d.endAngle = interpolate$1(t);
                     return this.arc({
                         innerRadius: this.radius - this.gaugeWidth,
@@ -2084,8 +2154,8 @@ class PbdsDatavizGaugeComponent {
             value = value.replace(/,/g, '.');
             transition.tween('text', () => {
                 const interpolate$1 = interpolate(format$1('.4f')(+this.oldValue), value);
-                return t => {
-                    this.labelTween.text(d => {
+                return (t) => {
+                    this.labelTween.text((d) => {
                         const updatedNumber = this.labelFormat(interpolate$1(t));
                         this.label = updatedNumber;
                         return updatedNumber;
@@ -2134,19 +2204,19 @@ class PbdsDatavizGaugeComponent {
         }
     }
 }
-PbdsDatavizGaugeComponent.ɵfac = i0.ɵɵngDeclareFactory({ minVersion: "12.0.0", version: "13.1.2", ngImport: i0, type: PbdsDatavizGaugeComponent, deps: [{ token: PbdsDatavizService }, { token: i0.ElementRef }], target: i0.ɵɵFactoryTarget.Component });
-PbdsDatavizGaugeComponent.ɵcmp = i0.ɵɵngDeclareComponent({ minVersion: "12.0.0", version: "13.1.2", type: PbdsDatavizGaugeComponent, selector: "pbds-dataviz-gauge", inputs: { data: "data", width: "width", type: "type", color: "color", hideLabel: "hideLabel", labelFormatString: "labelFormatString", description: "description", gaugeWidth: "gaugeWidth" }, host: { properties: { "class.pbds-chart": "this.chartClass", "class.pbds-chart-gauge": "this.gaugeClass" } }, usesOnChanges: true, ngImport: i0, template: `
+PbdsDatavizGaugeComponent.ɵfac = i0.ɵɵngDeclareFactory({ minVersion: "12.0.0", version: "13.3.6", ngImport: i0, type: PbdsDatavizGaugeComponent, deps: [{ token: PbdsDatavizService }, { token: i0.ElementRef }], target: i0.ɵɵFactoryTarget.Component });
+PbdsDatavizGaugeComponent.ɵcmp = i0.ɵɵngDeclareComponent({ minVersion: "12.0.0", version: "13.3.6", type: PbdsDatavizGaugeComponent, selector: "pbds-dataviz-gauge", inputs: { data: "data", width: "width", type: "type", color: "color", hideLabel: "hideLabel", labelFormatString: "labelFormatString", description: "description", gaugeWidth: "gaugeWidth" }, host: { properties: { "class.pbds-chart": "this.chartClass", "class.pbds-chart-gauge": "this.gaugeClass" } }, usesOnChanges: true, ngImport: i0, template: `
     <div
       *ngIf="!hideLabel"
       class="gauge-details"
       [ngClass]="{ halfmoon: type === 'halfmoon', 'gauge-details-small': type === 'halfmoon' }"
-      [ngStyle]="{ 'max-width.px': width - 3 * gaugeWidth }"
+      [ngStyle]="{ 'max-width.px': width - 3 * gaugeWidth, 'padding-top.px': detailsPaddingTop }"
     >
       <div class="gauge-number">{{ label }}</div>
       <div *ngIf="description" class="gauge-description text-center">{{ description }}</div>
     </div>
   `, isInline: true, directives: [{ type: i2.NgIf, selector: "[ngIf]", inputs: ["ngIf", "ngIfThen", "ngIfElse"] }, { type: i2.NgClass, selector: "[ngClass]", inputs: ["class", "ngClass"] }, { type: i2.NgStyle, selector: "[ngStyle]", inputs: ["ngStyle"] }] });
-i0.ɵɵngDeclareClassMetadata({ minVersion: "12.0.0", version: "13.1.2", ngImport: i0, type: PbdsDatavizGaugeComponent, decorators: [{
+i0.ɵɵngDeclareClassMetadata({ minVersion: "12.0.0", version: "13.3.6", ngImport: i0, type: PbdsDatavizGaugeComponent, decorators: [{
             type: Component,
             args: [{
                     selector: 'pbds-dataviz-gauge',
@@ -2155,7 +2225,7 @@ i0.ɵɵngDeclareClassMetadata({ minVersion: "12.0.0", version: "13.1.2", ngImpor
       *ngIf="!hideLabel"
       class="gauge-details"
       [ngClass]="{ halfmoon: type === 'halfmoon', 'gauge-details-small': type === 'halfmoon' }"
-      [ngStyle]="{ 'max-width.px': width - 3 * gaugeWidth }"
+      [ngStyle]="{ 'max-width.px': width - 3 * gaugeWidth, 'padding-top.px': detailsPaddingTop }"
     >
       <div class="gauge-number">{{ label }}</div>
       <div *ngIf="description" class="gauge-description text-center">{{ description }}</div>
@@ -2301,9 +2371,9 @@ class PbdsDatavizSparklineComponent {
         }
     }
 }
-PbdsDatavizSparklineComponent.ɵfac = i0.ɵɵngDeclareFactory({ minVersion: "12.0.0", version: "13.1.2", ngImport: i0, type: PbdsDatavizSparklineComponent, deps: [{ token: i0.ElementRef }], target: i0.ɵɵFactoryTarget.Component });
-PbdsDatavizSparklineComponent.ɵcmp = i0.ɵɵngDeclareComponent({ minVersion: "12.0.0", version: "13.1.2", type: PbdsDatavizSparklineComponent, selector: "pbds-dataviz-sparkline", inputs: { data: "data", width: "width", height: "height", type: "type", color: "color", colorNegative: "colorNegative", strokeWidth: "strokeWidth", yAxisMinBuffer: "yAxisMinBuffer", yAxisMaxBuffer: "yAxisMaxBuffer" }, host: { properties: { "class.pbds-chart": "this.chartClass", "class.pbds-chart-sparkline": "this.sparklineClass" } }, usesOnChanges: true, ngImport: i0, template: ``, isInline: true, changeDetection: i0.ChangeDetectionStrategy.OnPush });
-i0.ɵɵngDeclareClassMetadata({ minVersion: "12.0.0", version: "13.1.2", ngImport: i0, type: PbdsDatavizSparklineComponent, decorators: [{
+PbdsDatavizSparklineComponent.ɵfac = i0.ɵɵngDeclareFactory({ minVersion: "12.0.0", version: "13.3.6", ngImport: i0, type: PbdsDatavizSparklineComponent, deps: [{ token: i0.ElementRef }], target: i0.ɵɵFactoryTarget.Component });
+PbdsDatavizSparklineComponent.ɵcmp = i0.ɵɵngDeclareComponent({ minVersion: "12.0.0", version: "13.3.6", type: PbdsDatavizSparklineComponent, selector: "pbds-dataviz-sparkline", inputs: { data: "data", width: "width", height: "height", type: "type", color: "color", colorNegative: "colorNegative", strokeWidth: "strokeWidth", yAxisMinBuffer: "yAxisMinBuffer", yAxisMaxBuffer: "yAxisMaxBuffer" }, host: { properties: { "class.pbds-chart": "this.chartClass", "class.pbds-chart-sparkline": "this.sparklineClass" } }, usesOnChanges: true, ngImport: i0, template: ``, isInline: true, changeDetection: i0.ChangeDetectionStrategy.OnPush });
+i0.ɵɵngDeclareClassMetadata({ minVersion: "12.0.0", version: "13.3.6", ngImport: i0, type: PbdsDatavizSparklineComponent, decorators: [{
             type: Component,
             args: [{
                     selector: 'pbds-dataviz-sparkline',
@@ -2354,6 +2424,7 @@ class PbdsDatavizBarStackedComponent {
         this.hideXAxis = false;
         this.xAxisFormatType = null;
         this.xAxisFormatString = '';
+        this.xAxisTitle = null;
         this.yAxisFormatType = null;
         this.yAxisFormatString = '';
         this.yAxisTicks = 5;
@@ -2365,6 +2436,7 @@ class PbdsDatavizBarStackedComponent {
         this.legendLabelFormatString = '';
         this.tooltipHeadingFormatType = null;
         this.tooltipHeadingFormatString = '';
+        this.tooltipHeadingSuffix = '';
         this.tooltipHeadingValueFormatType = null;
         this.tooltipHeadingValueFormatString = '';
         this.tooltipLabelFormatType = null;
@@ -2627,9 +2699,9 @@ class PbdsDatavizBarStackedComponent {
                 switch (this.tooltipHeadingFormatType) {
                     case 'time':
                         const parseDate = isoParse(data.data.key);
-                        return this.tooltipHeadingFormat(parseDate);
+                        return `${this.tooltipHeadingFormat(parseDate)}${this.tooltipHeadingSuffix}`;
                     default:
-                        return data.data.key;
+                        return `${data.data.key}${this.tooltipHeadingSuffix}`;
                 }
             });
             this.tooltip.select('.tooltip-header-value').html((d) => {
@@ -2646,9 +2718,9 @@ class PbdsDatavizBarStackedComponent {
                 .select('tbody')
                 .html((d) => {
                 let html = ``;
-                let label;
-                let value;
                 Object.keys(data.data).map((key, index) => {
+                    let label;
+                    let value = data.data[key];
                     switch (this.tooltipLabelFormatType) {
                         case 'time':
                             const parseDate = isoParse(key);
@@ -2659,7 +2731,12 @@ class PbdsDatavizBarStackedComponent {
                     }
                     switch (this.tooltipValueFormatType) {
                         case 'number':
-                            value = this.tooltipValueFormat(data.data[key]);
+                            if (value === null || value === undefined) {
+                                value = '';
+                            }
+                            else {
+                                value = this.tooltipValueFormat(data.data[key]);
+                            }
                             break;
                         default:
                             value = data.data[key];
@@ -2800,6 +2877,7 @@ class PbdsDatavizBarStackedComponent {
                     break;
             }
         }
+        this.xAxisTitleMargin = this.xAxisTitle ? 30 : 0;
         // adjust margin if xAxis hidden
         if (this.hideXAxis)
             this.margin.bottom = 10; // need small margin for yAxis with 0 tick label
@@ -2812,10 +2890,10 @@ class PbdsDatavizBarStackedComponent {
         this.svg = this.chart
             .append('svg')
             .attr('width', +this.width)
-            .attr('height', +this.height + this.margin.top + this.margin.bottom)
+            .attr('height', +this.height + this.margin.top + this.margin.bottom + this.xAxisTitleMargin)
             .attr('class', 'img-fluid')
             .attr('preserveAspectRatio', 'xMinYMin meet')
-            .attr('viewBox', `-${this.margin.left} -${this.margin.top} ${+this.width} ${+this.height + this.margin.top + this.margin.bottom}`);
+            .attr('viewBox', `-${this.margin.left} -${this.margin.top} ${+this.width} ${+this.height + this.margin.top + this.margin.bottom + this.xAxisTitleMargin}`);
         this.grayBars = this.svg.append('g').attr('class', 'gray-bars');
         this.mouseBars = this.svg.append('g').attr('class', 'mouseover-bars');
         this.bars = this.svg.append('g').attr('class', 'bars');
@@ -2852,6 +2930,15 @@ class PbdsDatavizBarStackedComponent {
                 .classed('grid-zero-hidden', this.hideXAxisZero)
                 .attr('transform', `translate(0, ${this.height})`)
                 .call(this.xGridCall);
+        }
+        // X AXIS TITLE
+        if (this.xAxisTitle) {
+            this.svg
+                .append('text')
+                .attr('class', 'axis-title')
+                .attr('text-anchor', 'middle')
+                .attr('transform', `translate(${this.svg.attr('width') / 2 - this.margin.left / 2 - this.margin.right / 2}, ${+this.height + +this.margin.top + (this.hideXAxis ? 20 : 40)})`)
+                .text(this.xAxisTitle);
         }
         // KEEP: use this block to debug yAxisMax
         // console.log(
@@ -2926,9 +3013,9 @@ class PbdsDatavizBarStackedComponent {
         }
     }
 }
-PbdsDatavizBarStackedComponent.ɵfac = i0.ɵɵngDeclareFactory({ minVersion: "12.0.0", version: "13.1.2", ngImport: i0, type: PbdsDatavizBarStackedComponent, deps: [{ token: PbdsDatavizService }, { token: i0.ElementRef }, { token: i2.ViewportScroller }], target: i0.ɵɵFactoryTarget.Component });
-PbdsDatavizBarStackedComponent.ɵcmp = i0.ɵɵngDeclareComponent({ minVersion: "12.0.0", version: "13.1.2", type: PbdsDatavizBarStackedComponent, selector: "pbds-dataviz-bar-stacked", inputs: { data: "data", width: "width", height: "height", type: "type", marginTop: "marginTop", marginRight: "marginRight", marginBottom: "marginBottom", marginLeft: "marginLeft", hideXAxis: "hideXAxis", xAxisFormatType: "xAxisFormatType", xAxisFormatString: "xAxisFormatString", yAxisFormatType: "yAxisFormatType", yAxisFormatString: "yAxisFormatString", yAxisTicks: "yAxisTicks", yAxisMaxBuffer: "yAxisMaxBuffer", hideLegend: "hideLegend", legendWidth: "legendWidth", legendPosition: "legendPosition", legendLabelFormatType: "legendLabelFormatType", legendLabelFormatString: "legendLabelFormatString", tooltipHeadingFormatType: "tooltipHeadingFormatType", tooltipHeadingFormatString: "tooltipHeadingFormatString", tooltipHeadingValueFormatType: "tooltipHeadingValueFormatType", tooltipHeadingValueFormatString: "tooltipHeadingValueFormatString", tooltipLabelFormatType: "tooltipLabelFormatType", tooltipLabelFormatString: "tooltipLabelFormatString", tooltipValueFormatType: "tooltipValueFormatType", tooltipValueFormatString: "tooltipValueFormatString", theme: "theme" }, outputs: { hovered: "hovered", clicked: "clicked" }, host: { properties: { "class.pbds-chart": "this.chartClass", "class.pbds-chart-stacked-bar": "this.stackedBarClass" } }, usesOnChanges: true, ngImport: i0, template: ``, isInline: true, changeDetection: i0.ChangeDetectionStrategy.OnPush });
-i0.ɵɵngDeclareClassMetadata({ minVersion: "12.0.0", version: "13.1.2", ngImport: i0, type: PbdsDatavizBarStackedComponent, decorators: [{
+PbdsDatavizBarStackedComponent.ɵfac = i0.ɵɵngDeclareFactory({ minVersion: "12.0.0", version: "13.3.6", ngImport: i0, type: PbdsDatavizBarStackedComponent, deps: [{ token: PbdsDatavizService }, { token: i0.ElementRef }, { token: i2.ViewportScroller }], target: i0.ɵɵFactoryTarget.Component });
+PbdsDatavizBarStackedComponent.ɵcmp = i0.ɵɵngDeclareComponent({ minVersion: "12.0.0", version: "13.3.6", type: PbdsDatavizBarStackedComponent, selector: "pbds-dataviz-bar-stacked", inputs: { data: "data", width: "width", height: "height", type: "type", marginTop: "marginTop", marginRight: "marginRight", marginBottom: "marginBottom", marginLeft: "marginLeft", hideXAxis: "hideXAxis", xAxisFormatType: "xAxisFormatType", xAxisFormatString: "xAxisFormatString", xAxisTitle: "xAxisTitle", yAxisFormatType: "yAxisFormatType", yAxisFormatString: "yAxisFormatString", yAxisTicks: "yAxisTicks", yAxisMaxBuffer: "yAxisMaxBuffer", hideLegend: "hideLegend", legendWidth: "legendWidth", legendPosition: "legendPosition", legendLabelFormatType: "legendLabelFormatType", legendLabelFormatString: "legendLabelFormatString", tooltipHeadingFormatType: "tooltipHeadingFormatType", tooltipHeadingFormatString: "tooltipHeadingFormatString", tooltipHeadingSuffix: "tooltipHeadingSuffix", tooltipHeadingValueFormatType: "tooltipHeadingValueFormatType", tooltipHeadingValueFormatString: "tooltipHeadingValueFormatString", tooltipLabelFormatType: "tooltipLabelFormatType", tooltipLabelFormatString: "tooltipLabelFormatString", tooltipValueFormatType: "tooltipValueFormatType", tooltipValueFormatString: "tooltipValueFormatString", theme: "theme" }, outputs: { hovered: "hovered", clicked: "clicked" }, host: { properties: { "class.pbds-chart": "this.chartClass", "class.pbds-chart-stacked-bar": "this.stackedBarClass" } }, usesOnChanges: true, ngImport: i0, template: ``, isInline: true, changeDetection: i0.ChangeDetectionStrategy.OnPush });
+i0.ɵɵngDeclareClassMetadata({ minVersion: "12.0.0", version: "13.3.6", ngImport: i0, type: PbdsDatavizBarStackedComponent, decorators: [{
             type: Component,
             args: [{
                     selector: 'pbds-dataviz-bar-stacked',
@@ -2964,6 +3051,8 @@ i0.ɵɵngDeclareClassMetadata({ minVersion: "12.0.0", version: "13.1.2", ngImpor
                 type: Input
             }], xAxisFormatString: [{
                 type: Input
+            }], xAxisTitle: [{
+                type: Input
             }], yAxisFormatType: [{
                 type: Input
             }], yAxisFormatString: [{
@@ -2985,6 +3074,8 @@ i0.ɵɵngDeclareClassMetadata({ minVersion: "12.0.0", version: "13.1.2", ngImpor
             }], tooltipHeadingFormatType: [{
                 type: Input
             }], tooltipHeadingFormatString: [{
+                type: Input
+            }], tooltipHeadingSuffix: [{
                 type: Input
             }], tooltipHeadingValueFormatType: [{
                 type: Input
@@ -3017,11 +3108,11 @@ class PbdsDatavizMetricIndicatorComponent {
         return ['metric-block-indicator', this.indicator, this.inverse ? 'inverse' : '', this.class].join(' ');
     }
 }
-PbdsDatavizMetricIndicatorComponent.ɵfac = i0.ɵɵngDeclareFactory({ minVersion: "12.0.0", version: "13.1.2", ngImport: i0, type: PbdsDatavizMetricIndicatorComponent, deps: [], target: i0.ɵɵFactoryTarget.Component });
-PbdsDatavizMetricIndicatorComponent.ɵcmp = i0.ɵɵngDeclareComponent({ minVersion: "12.0.0", version: "13.1.2", type: PbdsDatavizMetricIndicatorComponent, selector: "pbds-dataviz-metric-indicator", inputs: { value: "value", class: "class", indicator: "indicator", inverse: "inverse" }, host: { properties: { "class": "this.hostClasses" } }, ngImport: i0, template: `
+PbdsDatavizMetricIndicatorComponent.ɵfac = i0.ɵɵngDeclareFactory({ minVersion: "12.0.0", version: "13.3.6", ngImport: i0, type: PbdsDatavizMetricIndicatorComponent, deps: [], target: i0.ɵɵFactoryTarget.Component });
+PbdsDatavizMetricIndicatorComponent.ɵcmp = i0.ɵɵngDeclareComponent({ minVersion: "12.0.0", version: "13.3.6", type: PbdsDatavizMetricIndicatorComponent, selector: "pbds-dataviz-metric-indicator", inputs: { value: "value", class: "class", indicator: "indicator", inverse: "inverse" }, host: { properties: { "class": "this.hostClasses" } }, ngImport: i0, template: `
     <span>{{ value }}</span>
   `, isInline: true });
-i0.ɵɵngDeclareClassMetadata({ minVersion: "12.0.0", version: "13.1.2", ngImport: i0, type: PbdsDatavizMetricIndicatorComponent, decorators: [{
+i0.ɵɵngDeclareClassMetadata({ minVersion: "12.0.0", version: "13.3.6", ngImport: i0, type: PbdsDatavizMetricIndicatorComponent, decorators: [{
             type: Component,
             args: [{
                     selector: 'pbds-dataviz-metric-indicator',
@@ -3079,8 +3170,8 @@ class PbdsDatavizMetricBlockComponent {
         }
     }
 }
-PbdsDatavizMetricBlockComponent.ɵfac = i0.ɵɵngDeclareFactory({ minVersion: "12.0.0", version: "13.1.2", ngImport: i0, type: PbdsDatavizMetricBlockComponent, deps: [], target: i0.ɵɵFactoryTarget.Component });
-PbdsDatavizMetricBlockComponent.ɵcmp = i0.ɵɵngDeclareComponent({ minVersion: "12.0.0", version: "13.1.2", type: PbdsDatavizMetricBlockComponent, selector: "pbds-dataviz-metric-block", inputs: { class: "class", heading: "heading", value: "value", unit: "unit", description: "description", centered: "centered", centeredText: "centeredText", vertical: "vertical", infoMessage: "infoMessage" }, host: { properties: { "class": "this.hostClasses" } }, queries: [{ propertyName: "indicatorRef", first: true, predicate: PbdsDatavizMetricIndicatorComponent, descendants: true, static: true }], ngImport: i0, template: `
+PbdsDatavizMetricBlockComponent.ɵfac = i0.ɵɵngDeclareFactory({ minVersion: "12.0.0", version: "13.3.6", ngImport: i0, type: PbdsDatavizMetricBlockComponent, deps: [], target: i0.ɵɵFactoryTarget.Component });
+PbdsDatavizMetricBlockComponent.ɵcmp = i0.ɵɵngDeclareComponent({ minVersion: "12.0.0", version: "13.3.6", type: PbdsDatavizMetricBlockComponent, selector: "pbds-dataviz-metric-block", inputs: { class: "class", heading: "heading", value: "value", unit: "unit", description: "description", centered: "centered", centeredText: "centeredText", vertical: "vertical", infoMessage: "infoMessage" }, host: { properties: { "class": "this.hostClasses" } }, queries: [{ propertyName: "indicatorRef", first: true, predicate: PbdsDatavizMetricIndicatorComponent, descendants: true, static: true }], ngImport: i0, template: `
     <div class="metric-block-inner">
       <div *ngIf="heading" class="metric-block-heading">
         {{ heading }}
@@ -3109,7 +3200,7 @@ PbdsDatavizMetricBlockComponent.ɵcmp = i0.ɵɵngDeclareComponent({ minVersion: 
       </div>
     </div>
   `, isInline: true, directives: [{ type: i2.NgIf, selector: "[ngIf]", inputs: ["ngIf", "ngIfThen", "ngIfElse"] }, { type: i2$1.NgbTooltip, selector: "[ngbTooltip]", inputs: ["animation", "autoClose", "placement", "triggers", "container", "disableTooltip", "tooltipClass", "openDelay", "closeDelay", "ngbTooltip"], outputs: ["shown", "hidden"], exportAs: ["ngbTooltip"] }, { type: i2.NgClass, selector: "[ngClass]", inputs: ["class", "ngClass"] }] });
-i0.ɵɵngDeclareClassMetadata({ minVersion: "12.0.0", version: "13.1.2", ngImport: i0, type: PbdsDatavizMetricBlockComponent, decorators: [{
+i0.ɵɵngDeclareClassMetadata({ minVersion: "12.0.0", version: "13.3.6", ngImport: i0, type: PbdsDatavizMetricBlockComponent, decorators: [{
             type: Component,
             args: [{
                     selector: 'pbds-dataviz-metric-block',
@@ -3197,6 +3288,7 @@ class PbdsDatavizBubbleMapComponent {
         this.bubbleLabelFormatString = '';
         this.hideTooltip = false;
         this.hideTooltipValue = false;
+        this.tooltipHeaderSuffix = '';
         this.tooltipValueFormatType = null;
         this.tooltipValueFormatString = '';
         this.hovered = new EventEmitter();
@@ -3271,7 +3363,7 @@ class PbdsDatavizBubbleMapComponent {
         this.tooltipShow = (event, data) => {
             const dimensions = event.currentTarget.getBoundingClientRect();
             const scroll = this._scroll.getScrollPosition();
-            this.tooltip.select('.tooltip-header').html((d) => `${data.label}`);
+            this.tooltip.select('.tooltip-header').html((d) => `${data.label}${this.tooltipHeaderSuffix}`);
             if (!this.hideTooltipValue) {
                 this.tooltip
                     .select('.tooltip-value')
@@ -3392,9 +3484,9 @@ class PbdsDatavizBubbleMapComponent {
             this.tooltip.remove();
     }
 }
-PbdsDatavizBubbleMapComponent.ɵfac = i0.ɵɵngDeclareFactory({ minVersion: "12.0.0", version: "13.1.2", ngImport: i0, type: PbdsDatavizBubbleMapComponent, deps: [{ token: i0.ElementRef }, { token: i2.ViewportScroller }, { token: PbdsDatavizService }], target: i0.ɵɵFactoryTarget.Component });
-PbdsDatavizBubbleMapComponent.ɵcmp = i0.ɵɵngDeclareComponent({ minVersion: "12.0.0", version: "13.1.2", type: PbdsDatavizBubbleMapComponent, selector: "pbds-dataviz-bubble-map", inputs: { data: "data", topojson: "topojson", feature: "feature", projectionType: "projectionType", scale: "scale", center: "center", width: "width", height: "height", type: "type", dot: "dot", marginTop: "marginTop", marginRight: "marginRight", marginBottom: "marginBottom", marginLeft: "marginLeft", color: "color", textColor: "textColor", textSizeRange: "textSizeRange", dotSize: "dotSize", bubbleSizeRange: "bubbleSizeRange", bubbleLabelFormatType: "bubbleLabelFormatType", bubbleLabelFormatString: "bubbleLabelFormatString", hideTooltip: "hideTooltip", hideTooltipValue: "hideTooltipValue", tooltipValueFormatType: "tooltipValueFormatType", tooltipValueFormatString: "tooltipValueFormatString" }, outputs: { hovered: "hovered", clicked: "clicked" }, host: { properties: { "class.pbds-chart": "this.chartClass", "class.pbds-chart-bubble-map": "this.bubbleMapClass" } }, usesOnChanges: true, ngImport: i0, template: ``, isInline: true, changeDetection: i0.ChangeDetectionStrategy.OnPush });
-i0.ɵɵngDeclareClassMetadata({ minVersion: "12.0.0", version: "13.1.2", ngImport: i0, type: PbdsDatavizBubbleMapComponent, decorators: [{
+PbdsDatavizBubbleMapComponent.ɵfac = i0.ɵɵngDeclareFactory({ minVersion: "12.0.0", version: "13.3.6", ngImport: i0, type: PbdsDatavizBubbleMapComponent, deps: [{ token: i0.ElementRef }, { token: i2.ViewportScroller }, { token: PbdsDatavizService }], target: i0.ɵɵFactoryTarget.Component });
+PbdsDatavizBubbleMapComponent.ɵcmp = i0.ɵɵngDeclareComponent({ minVersion: "12.0.0", version: "13.3.6", type: PbdsDatavizBubbleMapComponent, selector: "pbds-dataviz-bubble-map", inputs: { data: "data", topojson: "topojson", feature: "feature", projectionType: "projectionType", scale: "scale", center: "center", width: "width", height: "height", type: "type", dot: "dot", marginTop: "marginTop", marginRight: "marginRight", marginBottom: "marginBottom", marginLeft: "marginLeft", color: "color", textColor: "textColor", textSizeRange: "textSizeRange", dotSize: "dotSize", bubbleSizeRange: "bubbleSizeRange", bubbleLabelFormatType: "bubbleLabelFormatType", bubbleLabelFormatString: "bubbleLabelFormatString", hideTooltip: "hideTooltip", hideTooltipValue: "hideTooltipValue", tooltipHeaderSuffix: "tooltipHeaderSuffix", tooltipValueFormatType: "tooltipValueFormatType", tooltipValueFormatString: "tooltipValueFormatString" }, outputs: { hovered: "hovered", clicked: "clicked" }, host: { properties: { "class.pbds-chart": "this.chartClass", "class.pbds-chart-bubble-map": "this.bubbleMapClass" } }, usesOnChanges: true, ngImport: i0, template: ``, isInline: true, changeDetection: i0.ChangeDetectionStrategy.OnPush });
+i0.ɵɵngDeclareClassMetadata({ minVersion: "12.0.0", version: "13.3.6", ngImport: i0, type: PbdsDatavizBubbleMapComponent, decorators: [{
             type: Component,
             args: [{
                     selector: 'pbds-dataviz-bubble-map',
@@ -3453,6 +3545,8 @@ i0.ɵɵngDeclareClassMetadata({ minVersion: "12.0.0", version: "13.1.2", ngImpor
             }], hideTooltip: [{
                 type: Input
             }], hideTooltipValue: [{
+                type: Input
+            }], tooltipHeaderSuffix: [{
                 type: Input
             }], tooltipValueFormatType: [{
                 type: Input
@@ -3801,9 +3895,9 @@ class PbdsDatavizHeatmapComponent {
         }
     }
 }
-PbdsDatavizHeatmapComponent.ɵfac = i0.ɵɵngDeclareFactory({ minVersion: "12.0.0", version: "13.1.2", ngImport: i0, type: PbdsDatavizHeatmapComponent, deps: [{ token: PbdsDatavizService }, { token: i0.ElementRef }, { token: i2.ViewportScroller }], target: i0.ɵɵFactoryTarget.Component });
-PbdsDatavizHeatmapComponent.ɵcmp = i0.ɵɵngDeclareComponent({ minVersion: "12.0.0", version: "13.1.2", type: PbdsDatavizHeatmapComponent, selector: "pbds-dataviz-heatmap", inputs: { data: "data", width: "width", height: "height", marginTop: "marginTop", marginRight: "marginRight", marginBottom: "marginBottom", marginLeft: "marginLeft", scale: "scale", domain: "domain", xAxisFormatType: "xAxisFormatType", xAxisFormatString: "xAxisFormatString", yAxisFormatType: "yAxisFormatType", yAxisFormatString: "yAxisFormatString", hideLegend: "hideLegend", legendWidth: "legendWidth", legendPosition: "legendPosition", legendLabelFormatType: "legendLabelFormatType", legendLabelFormatString: "legendLabelFormatString", tooltipXLabelFormatType: "tooltipXLabelFormatType", tooltipXLabelFormatString: "tooltipXLabelFormatString", tooltipYLabelFormatType: "tooltipYLabelFormatType", tooltipYLabelFormatString: "tooltipYLabelFormatString", tooltipValueFormatType: "tooltipValueFormatType", tooltipValueFormatString: "tooltipValueFormatString", theme: "theme" }, outputs: { hovered: "hovered", clicked: "clicked" }, host: { properties: { "class.pbds-chart": "this.chartClass", "class.pbds-chart-heatmap": "this.heatmapClass" } }, usesOnChanges: true, ngImport: i0, template: ``, isInline: true, changeDetection: i0.ChangeDetectionStrategy.OnPush });
-i0.ɵɵngDeclareClassMetadata({ minVersion: "12.0.0", version: "13.1.2", ngImport: i0, type: PbdsDatavizHeatmapComponent, decorators: [{
+PbdsDatavizHeatmapComponent.ɵfac = i0.ɵɵngDeclareFactory({ minVersion: "12.0.0", version: "13.3.6", ngImport: i0, type: PbdsDatavizHeatmapComponent, deps: [{ token: PbdsDatavizService }, { token: i0.ElementRef }, { token: i2.ViewportScroller }], target: i0.ɵɵFactoryTarget.Component });
+PbdsDatavizHeatmapComponent.ɵcmp = i0.ɵɵngDeclareComponent({ minVersion: "12.0.0", version: "13.3.6", type: PbdsDatavizHeatmapComponent, selector: "pbds-dataviz-heatmap", inputs: { data: "data", width: "width", height: "height", marginTop: "marginTop", marginRight: "marginRight", marginBottom: "marginBottom", marginLeft: "marginLeft", scale: "scale", domain: "domain", xAxisFormatType: "xAxisFormatType", xAxisFormatString: "xAxisFormatString", yAxisFormatType: "yAxisFormatType", yAxisFormatString: "yAxisFormatString", hideLegend: "hideLegend", legendWidth: "legendWidth", legendPosition: "legendPosition", legendLabelFormatType: "legendLabelFormatType", legendLabelFormatString: "legendLabelFormatString", tooltipXLabelFormatType: "tooltipXLabelFormatType", tooltipXLabelFormatString: "tooltipXLabelFormatString", tooltipYLabelFormatType: "tooltipYLabelFormatType", tooltipYLabelFormatString: "tooltipYLabelFormatString", tooltipValueFormatType: "tooltipValueFormatType", tooltipValueFormatString: "tooltipValueFormatString", theme: "theme" }, outputs: { hovered: "hovered", clicked: "clicked" }, host: { properties: { "class.pbds-chart": "this.chartClass", "class.pbds-chart-heatmap": "this.heatmapClass" } }, usesOnChanges: true, ngImport: i0, template: ``, isInline: true, changeDetection: i0.ChangeDetectionStrategy.OnPush });
+i0.ɵɵngDeclareClassMetadata({ minVersion: "12.0.0", version: "13.3.6", ngImport: i0, type: PbdsDatavizHeatmapComponent, decorators: [{
             type: Component,
             args: [{
                     selector: 'pbds-dataviz-heatmap',
@@ -3894,6 +3988,7 @@ class PbdsDatavizChoroplethMapComponent {
         this.theme = 'classic';
         this.colorScale = 'quantile';
         this.hideTooltip = false;
+        this.tooltipHeaderSuffix = '';
         this.tooltipValueFormatType = null;
         this.tooltipValueFormatString = '';
         this.hideLegend = false;
@@ -3946,7 +4041,7 @@ class PbdsDatavizChoroplethMapComponent {
             // console.log('TOOLTIP: ', data, node);
             this.tooltipSetPosition(event);
             if (data.label) {
-                this.tooltip.select('.tooltip-header').html((d) => `${data.label}`);
+                this.tooltip.select('.tooltip-header').html((d) => `${data.label}${this.tooltipHeaderSuffix}`);
             }
             this.tooltip
                 .select('.tooltip-value')
@@ -4104,9 +4199,9 @@ class PbdsDatavizChoroplethMapComponent {
             this.tooltip.remove();
     }
 }
-PbdsDatavizChoroplethMapComponent.ɵfac = i0.ɵɵngDeclareFactory({ minVersion: "12.0.0", version: "13.1.2", ngImport: i0, type: PbdsDatavizChoroplethMapComponent, deps: [{ token: PbdsDatavizService }, { token: i0.ElementRef }, { token: i2.ViewportScroller }], target: i0.ɵɵFactoryTarget.Component });
-PbdsDatavizChoroplethMapComponent.ɵcmp = i0.ɵɵngDeclareComponent({ minVersion: "12.0.0", version: "13.1.2", type: PbdsDatavizChoroplethMapComponent, selector: "pbds-dataviz-choropleth-map", inputs: { data: "data", topojson: "topojson", feature: "feature", projectionType: "projectionType", dataField: "dataField", mesh: "mesh", scale: "scale", center: "center", width: "width", height: "height", marginTop: "marginTop", marginRight: "marginRight", marginBottom: "marginBottom", marginLeft: "marginLeft", theme: "theme", colorScale: "colorScale", domain: "domain", hideTooltip: "hideTooltip", tooltipValueFormatType: "tooltipValueFormatType", tooltipValueFormatString: "tooltipValueFormatString", hideLegend: "hideLegend", legendWidth: "legendWidth", legendLabel: "legendLabel", legendValueFormatType: "legendValueFormatType", legendValueFormatString: "legendValueFormatString", legendLeft: "legendLeft", legendTop: "legendTop" }, outputs: { hovered: "hovered", clicked: "clicked" }, host: { properties: { "class.pbds-chart": "this.chartClass", "class.pbds-chart-choropleth-map": "this.choroplethMapClass" } }, usesOnChanges: true, ngImport: i0, template: ``, isInline: true, changeDetection: i0.ChangeDetectionStrategy.OnPush });
-i0.ɵɵngDeclareClassMetadata({ minVersion: "12.0.0", version: "13.1.2", ngImport: i0, type: PbdsDatavizChoroplethMapComponent, decorators: [{
+PbdsDatavizChoroplethMapComponent.ɵfac = i0.ɵɵngDeclareFactory({ minVersion: "12.0.0", version: "13.3.6", ngImport: i0, type: PbdsDatavizChoroplethMapComponent, deps: [{ token: PbdsDatavizService }, { token: i0.ElementRef }, { token: i2.ViewportScroller }], target: i0.ɵɵFactoryTarget.Component });
+PbdsDatavizChoroplethMapComponent.ɵcmp = i0.ɵɵngDeclareComponent({ minVersion: "12.0.0", version: "13.3.6", type: PbdsDatavizChoroplethMapComponent, selector: "pbds-dataviz-choropleth-map", inputs: { data: "data", topojson: "topojson", feature: "feature", projectionType: "projectionType", dataField: "dataField", mesh: "mesh", scale: "scale", center: "center", width: "width", height: "height", marginTop: "marginTop", marginRight: "marginRight", marginBottom: "marginBottom", marginLeft: "marginLeft", theme: "theme", colorScale: "colorScale", domain: "domain", hideTooltip: "hideTooltip", tooltipHeaderSuffix: "tooltipHeaderSuffix", tooltipValueFormatType: "tooltipValueFormatType", tooltipValueFormatString: "tooltipValueFormatString", hideLegend: "hideLegend", legendWidth: "legendWidth", legendLabel: "legendLabel", legendValueFormatType: "legendValueFormatType", legendValueFormatString: "legendValueFormatString", legendLeft: "legendLeft", legendTop: "legendTop" }, outputs: { hovered: "hovered", clicked: "clicked" }, host: { properties: { "class.pbds-chart": "this.chartClass", "class.pbds-chart-choropleth-map": "this.choroplethMapClass" } }, usesOnChanges: true, ngImport: i0, template: ``, isInline: true, changeDetection: i0.ChangeDetectionStrategy.OnPush });
+i0.ɵɵngDeclareClassMetadata({ minVersion: "12.0.0", version: "13.3.6", ngImport: i0, type: PbdsDatavizChoroplethMapComponent, decorators: [{
             type: Component,
             args: [{
                     selector: 'pbds-dataviz-choropleth-map',
@@ -4156,6 +4251,8 @@ i0.ɵɵngDeclareClassMetadata({ minVersion: "12.0.0", version: "13.1.2", ngImpor
                 type: Input
             }], hideTooltip: [{
                 type: Input
+            }], tooltipHeaderSuffix: [{
+                type: Input
             }], tooltipValueFormatType: [{
                 type: Input
             }], tooltipValueFormatString: [{
@@ -4196,6 +4293,7 @@ class PbdsDatavizBarGroupedComponent {
         this.xAxisFormatType = null;
         this.xAxisFormatString = '';
         this.xAxisTicks = 5;
+        this.xAxisTitle = null;
         this.hideYAxis = false;
         this.yAxisMaxBuffer = 0.01;
         this.yAxisFormatType = null;
@@ -4217,6 +4315,7 @@ class PbdsDatavizBarGroupedComponent {
         this.tooltipValueFormatString = '';
         this.showGrid = false;
         this.theme = 'classic';
+        this.gradient = true;
         this.hovered = new EventEmitter();
         this.clicked = new EventEmitter();
         this.barMouseOver = (event, data) => {
@@ -4340,6 +4439,7 @@ class PbdsDatavizBarGroupedComponent {
         this.hideXAxisTicks = true;
         this.xAxisTickSize = 8;
         this.xAxisTickSizeOuter = 0;
+        this.xAxisTitleMargin = this.xAxisTitle ? 30 : 0;
         this.hideYAxisZero = false;
         this.hideYAxisDomain = false;
         this.hideYAxisTicks = true;
@@ -4361,15 +4461,15 @@ class PbdsDatavizBarGroupedComponent {
                 return +this.width + this.margin.left + this.margin.right;
             }
         })
-            .attr('height', +this.height + this.margin.top + this.margin.bottom)
+            .attr('height', +this.height + this.margin.top + this.margin.bottom + this.xAxisTitleMargin)
             .attr('class', 'img-fluid')
             .attr('preserveAspectRatio', 'xMinYMin meet')
             .attr('viewBox', () => {
             if (this.vertical) {
-                return `-${this.margin.left} -${this.margin.top} ${+this.width} ${+this.height + this.margin.top + this.margin.bottom}`;
+                return `-${this.margin.left} -${this.margin.top} ${+this.width} ${+this.height + this.margin.top + this.margin.bottom + this.xAxisTitleMargin}`;
             }
             else {
-                return `-${this.margin.left} -${this.margin.top} ${+this.width + this.margin.left + this.margin.right} ${+this.height + this.margin.top + this.margin.bottom}`;
+                return `-${this.margin.left} -${this.margin.top} ${+this.width + this.margin.left + this.margin.right} ${+this.height + this.margin.top + this.margin.bottom + this.xAxisTitleMargin}`;
             }
         });
         // TOOLTIP
@@ -4537,6 +4637,15 @@ class PbdsDatavizBarGroupedComponent {
                 .paddingOuter(0.5);
             this.updateChartHorizontal();
         }
+        // X AXIS TITLE
+        if (this.xAxisTitle) {
+            this.svg
+                .append('text')
+                .attr('class', 'axis-title')
+                .attr('text-anchor', 'middle')
+                .attr('transform', `translate(${this.svg.attr('width') / 2 - this.margin.left / 2 - this.margin.right / 2}, ${this.height + this.margin.top + (this.hideXAxis ? 20 : 40)})`)
+                .text(this.xAxisTitle);
+        }
     }
     ngOnDestroy() {
         if (this.tooltip)
@@ -4625,7 +4734,7 @@ class PbdsDatavizBarGroupedComponent {
             .join((enter) => enter
             .append('rect')
             .attr('class', 'bar')
-            .attr('fill', (d) => `url(${this._location.prepareExternalUrl(this._location.path())}#gradient-${this.colorRange(d.label).substr(1)})`)
+            .attr('fill', (d) => this.barFill(d))
             .attr('data-color', (d) => this.colorRange(d.label))
             .attr('data-parent-index', (d) => d.parentIndex)
             .attr('x', (d) => this.barScale(d.label))
@@ -4734,7 +4843,7 @@ class PbdsDatavizBarGroupedComponent {
             .join((enter) => enter
             .append('rect')
             .attr('class', 'bar')
-            .attr('fill', (d) => `url(${this._location.prepareExternalUrl(this._location.path())}#gradient-horizontal-${this.colorRange(d.label).substr(1)})`)
+            .attr('fill', (d) => this.barFill(d, true))
             .attr('data-color', (d) => this.colorRange(d.label))
             .attr('data-parent-index', (d) => d.parentIndex)
             .attr('x', 0)
@@ -4820,10 +4929,22 @@ class PbdsDatavizBarGroupedComponent {
                 .on('click', (event, data) => this.legendMouseClick(event, data));
         }
     }
+    barFill(d, isHorizontal = false) {
+        const horizontal = isHorizontal ? '-horizontal' : '';
+        const path = this._location.path();
+        const url = this._location.prepareExternalUrl(path);
+        const colorRange = this.colorRange(d.label);
+        if (this.gradient) {
+            return `url(${url}#gradient${horizontal}-${colorRange.substr(1)})`;
+        }
+        else {
+            return colorRange;
+        }
+    }
 }
-PbdsDatavizBarGroupedComponent.ɵfac = i0.ɵɵngDeclareFactory({ minVersion: "12.0.0", version: "13.1.2", ngImport: i0, type: PbdsDatavizBarGroupedComponent, deps: [{ token: PbdsDatavizService }, { token: i0.ElementRef }, { token: i2.ViewportScroller }, { token: i2.Location }], target: i0.ɵɵFactoryTarget.Component });
-PbdsDatavizBarGroupedComponent.ɵcmp = i0.ɵɵngDeclareComponent({ minVersion: "12.0.0", version: "13.1.2", type: PbdsDatavizBarGroupedComponent, selector: "pbds-dataviz-bar-grouped", inputs: { data: "data", width: "width", height: "height", vertical: "vertical", hideXAxis: "hideXAxis", xAxisMaxBuffer: "xAxisMaxBuffer", xAxisFormatType: "xAxisFormatType", xAxisFormatString: "xAxisFormatString", xAxisTicks: "xAxisTicks", hideYAxis: "hideYAxis", yAxisMaxBuffer: "yAxisMaxBuffer", yAxisFormatType: "yAxisFormatType", yAxisFormatString: "yAxisFormatString", yAxisTicks: "yAxisTicks", marginTop: "marginTop", marginRight: "marginRight", marginBottom: "marginBottom", marginLeft: "marginLeft", hideLegend: "hideLegend", legendWidth: "legendWidth", legendPosition: "legendPosition", legendLabelFormatType: "legendLabelFormatType", legendLabelFormatString: "legendLabelFormatString", hideTooltip: "hideTooltip", tooltipLabelFormatType: "tooltipLabelFormatType", tooltipLabelFormatString: "tooltipLabelFormatString", tooltipValueFormatType: "tooltipValueFormatType", tooltipValueFormatString: "tooltipValueFormatString", showGrid: "showGrid", theme: "theme" }, outputs: { hovered: "hovered", clicked: "clicked" }, host: { properties: { "class.pbds-chart": "this.chartClass", "class.pbds-chart-bar-grouped": "this.groupedBarClass" } }, usesOnChanges: true, ngImport: i0, template: ``, isInline: true, changeDetection: i0.ChangeDetectionStrategy.OnPush });
-i0.ɵɵngDeclareClassMetadata({ minVersion: "12.0.0", version: "13.1.2", ngImport: i0, type: PbdsDatavizBarGroupedComponent, decorators: [{
+PbdsDatavizBarGroupedComponent.ɵfac = i0.ɵɵngDeclareFactory({ minVersion: "12.0.0", version: "13.3.6", ngImport: i0, type: PbdsDatavizBarGroupedComponent, deps: [{ token: PbdsDatavizService }, { token: i0.ElementRef }, { token: i2.ViewportScroller }, { token: i2.Location }], target: i0.ɵɵFactoryTarget.Component });
+PbdsDatavizBarGroupedComponent.ɵcmp = i0.ɵɵngDeclareComponent({ minVersion: "12.0.0", version: "13.3.6", type: PbdsDatavizBarGroupedComponent, selector: "pbds-dataviz-bar-grouped", inputs: { data: "data", width: "width", height: "height", vertical: "vertical", hideXAxis: "hideXAxis", xAxisMaxBuffer: "xAxisMaxBuffer", xAxisFormatType: "xAxisFormatType", xAxisFormatString: "xAxisFormatString", xAxisTicks: "xAxisTicks", xAxisTitle: "xAxisTitle", hideYAxis: "hideYAxis", yAxisMaxBuffer: "yAxisMaxBuffer", yAxisFormatType: "yAxisFormatType", yAxisFormatString: "yAxisFormatString", yAxisTicks: "yAxisTicks", marginTop: "marginTop", marginRight: "marginRight", marginBottom: "marginBottom", marginLeft: "marginLeft", hideLegend: "hideLegend", legendWidth: "legendWidth", legendPosition: "legendPosition", legendLabelFormatType: "legendLabelFormatType", legendLabelFormatString: "legendLabelFormatString", hideTooltip: "hideTooltip", tooltipLabelFormatType: "tooltipLabelFormatType", tooltipLabelFormatString: "tooltipLabelFormatString", tooltipValueFormatType: "tooltipValueFormatType", tooltipValueFormatString: "tooltipValueFormatString", showGrid: "showGrid", theme: "theme", gradient: "gradient" }, outputs: { hovered: "hovered", clicked: "clicked" }, host: { properties: { "class.pbds-chart": "this.chartClass", "class.pbds-chart-bar-grouped": "this.groupedBarClass" } }, usesOnChanges: true, ngImport: i0, template: ``, isInline: true, changeDetection: i0.ChangeDetectionStrategy.OnPush });
+i0.ɵɵngDeclareClassMetadata({ minVersion: "12.0.0", version: "13.3.6", ngImport: i0, type: PbdsDatavizBarGroupedComponent, decorators: [{
             type: Component,
             args: [{
                     selector: 'pbds-dataviz-bar-grouped',
@@ -4854,6 +4975,8 @@ i0.ɵɵngDeclareClassMetadata({ minVersion: "12.0.0", version: "13.1.2", ngImpor
             }], xAxisFormatString: [{
                 type: Input
             }], xAxisTicks: [{
+                type: Input
+            }], xAxisTitle: [{
                 type: Input
             }], hideYAxis: [{
                 type: Input
@@ -4896,6 +5019,8 @@ i0.ɵɵngDeclareClassMetadata({ minVersion: "12.0.0", version: "13.1.2", ngImpor
             }], showGrid: [{
                 type: Input
             }], theme: [{
+                type: Input
+            }], gradient: [{
                 type: Input
             }], hovered: [{
                 type: Output
@@ -4943,6 +5068,7 @@ class PbdsDatavizBarSingleHorizontalComponent {
         this.tooltipPercentFormatString = '.2%';
         this.compareChangeFormatString = '.2%';
         this.monochrome = false;
+        this.gradient = true;
         this.hovered = new EventEmitter();
         this.clicked = new EventEmitter();
         this.isSingleData = false;
@@ -5141,7 +5267,7 @@ class PbdsDatavizBarSingleHorizontalComponent {
         this.hideXAxisTicks = true;
         this.xAxisTickSize = 8;
         this.xAxisTickSizeOuter = 0;
-        this.xAxisTitleMargin = this.xAxisTitle ? 20 : 0;
+        this.xAxisTitleMargin = this.xAxisTitle ? 30 : 0;
         if (!this.hideLegend && this.legendPosition === 'right') {
             this.width = +this.width - +this.legendWidth;
         }
@@ -5206,9 +5332,10 @@ class PbdsDatavizBarSingleHorizontalComponent {
             this.svg
                 .append('text')
                 .attr('class', 'axis-title')
-                .attr('text-anchor', 'center')
-                .attr('x', this.width / 2 - this.margin.left)
-                .attr('y', this.height + this.margin.top + (!this.hideXAxis ? 40 : 0))
+                .attr('text-anchor', 'middle')
+                .attr('transform', `translate(${this.svg.attr('width') / 2 - this.margin.left / 2 - this.margin.right / 2}, ${this.height + this.margin.top + (this.hideXAxis ? 20 : 40)})`)
+                // .attr('x', this.width / 2 - this.margin.left)
+                // .attr('y', this.height + this.margin.top + (!this.hideXAxis ? 40 : 0))
                 .text(this.xAxisTitle);
         }
         // build color ranges
@@ -5297,14 +5424,7 @@ class PbdsDatavizBarSingleHorizontalComponent {
             .attr('height', () => {
             return this.height - this.barPadding;
         })
-            .attr('fill', (d) => {
-            if (this.isSingleData) {
-                return `url(${this._location.prepareExternalUrl(this._location.path())}#gradient-horizontal-${this.colorRange(d.label).substr(1)})`;
-            }
-            else {
-                return this.colorRange(d.label);
-            }
-        })
+            .attr('fill', (d) => this.barFill(d))
             .attr('y', () => {
             return this.barPadding / 2;
         })
@@ -5434,10 +5554,21 @@ class PbdsDatavizBarSingleHorizontalComponent {
                 .on('click', (event, data) => this.legendMouseClick(event, data));
         }
     }
+    barFill(d) {
+        const path = this._location.path();
+        const url = this._location.prepareExternalUrl(path);
+        const colorRange = this.colorRange(d.label);
+        if (this.gradient && this.isSingleData) {
+            return `url(${url}#gradient-horizontal-${colorRange.substr(1)})`;
+        }
+        else {
+            return colorRange;
+        }
+    }
 }
-PbdsDatavizBarSingleHorizontalComponent.ɵfac = i0.ɵɵngDeclareFactory({ minVersion: "12.0.0", version: "13.1.2", ngImport: i0, type: PbdsDatavizBarSingleHorizontalComponent, deps: [{ token: PbdsDatavizService }, { token: i0.ElementRef }, { token: i2.ViewportScroller }, { token: i2.Location }], target: i0.ɵɵFactoryTarget.Component });
-PbdsDatavizBarSingleHorizontalComponent.ɵcmp = i0.ɵɵngDeclareComponent({ minVersion: "12.0.0", version: "13.1.2", type: PbdsDatavizBarSingleHorizontalComponent, selector: "pbds-dataviz-bar-single-horizontal", inputs: { data: "data", width: "width", height: "height", nullValueText: "nullValueText", percentage: "percentage", marginTop: "marginTop", marginRight: "marginRight", marginBottom: "marginBottom", marginLeft: "marginLeft", barMargin: "barMargin", hideXAxis: "hideXAxis", xAxisTicks: "xAxisTicks", xAxisTitle: "xAxisTitle", xAxisFormatType: "xAxisFormatType", xAxisFormatString: "xAxisFormatString", xAxisTickLabelSuffix: "xAxisTickLabelSuffix", hideXGrid: "hideXGrid", hideLegend: "hideLegend", hideLegendTooltip: "hideLegendTooltip", legendWidth: "legendWidth", legendPosition: "legendPosition", legendLabelFormatType: "legendLabelFormatType", legendLabelFormatString: "legendLabelFormatString", hideTooltip: "hideTooltip", tooltipLabelFormatType: "tooltipLabelFormatType", tooltipLabelFormatString: "tooltipLabelFormatString", tooltipDateFormatString: "tooltipDateFormatString", tooltipValueFormatType: "tooltipValueFormatType", tooltipValueFormatString: "tooltipValueFormatString", tooltipValueSuffix: "tooltipValueSuffix", tooltipPercentFormatString: "tooltipPercentFormatString", compareChangeFormatString: "compareChangeFormatString", monochrome: "monochrome", theme: "theme" }, outputs: { hovered: "hovered", clicked: "clicked" }, host: { properties: { "class.pbds-chart": "this.chartClass", "class.pbds-chart-bar-single-horizontal": "this.singleStackedBarClass" } }, usesOnChanges: true, ngImport: i0, template: ``, isInline: true, changeDetection: i0.ChangeDetectionStrategy.OnPush });
-i0.ɵɵngDeclareClassMetadata({ minVersion: "12.0.0", version: "13.1.2", ngImport: i0, type: PbdsDatavizBarSingleHorizontalComponent, decorators: [{
+PbdsDatavizBarSingleHorizontalComponent.ɵfac = i0.ɵɵngDeclareFactory({ minVersion: "12.0.0", version: "13.3.6", ngImport: i0, type: PbdsDatavizBarSingleHorizontalComponent, deps: [{ token: PbdsDatavizService }, { token: i0.ElementRef }, { token: i2.ViewportScroller }, { token: i2.Location }], target: i0.ɵɵFactoryTarget.Component });
+PbdsDatavizBarSingleHorizontalComponent.ɵcmp = i0.ɵɵngDeclareComponent({ minVersion: "12.0.0", version: "13.3.6", type: PbdsDatavizBarSingleHorizontalComponent, selector: "pbds-dataviz-bar-single-horizontal", inputs: { data: "data", width: "width", height: "height", nullValueText: "nullValueText", percentage: "percentage", marginTop: "marginTop", marginRight: "marginRight", marginBottom: "marginBottom", marginLeft: "marginLeft", barMargin: "barMargin", hideXAxis: "hideXAxis", xAxisTicks: "xAxisTicks", xAxisTitle: "xAxisTitle", xAxisFormatType: "xAxisFormatType", xAxisFormatString: "xAxisFormatString", xAxisTickLabelSuffix: "xAxisTickLabelSuffix", hideXGrid: "hideXGrid", hideLegend: "hideLegend", hideLegendTooltip: "hideLegendTooltip", legendWidth: "legendWidth", legendPosition: "legendPosition", legendLabelFormatType: "legendLabelFormatType", legendLabelFormatString: "legendLabelFormatString", hideTooltip: "hideTooltip", tooltipLabelFormatType: "tooltipLabelFormatType", tooltipLabelFormatString: "tooltipLabelFormatString", tooltipDateFormatString: "tooltipDateFormatString", tooltipValueFormatType: "tooltipValueFormatType", tooltipValueFormatString: "tooltipValueFormatString", tooltipValueSuffix: "tooltipValueSuffix", tooltipPercentFormatString: "tooltipPercentFormatString", compareChangeFormatString: "compareChangeFormatString", monochrome: "monochrome", theme: "theme", gradient: "gradient" }, outputs: { hovered: "hovered", clicked: "clicked" }, host: { properties: { "class.pbds-chart": "this.chartClass", "class.pbds-chart-bar-single-horizontal": "this.singleStackedBarClass" } }, usesOnChanges: true, ngImport: i0, template: ``, isInline: true, changeDetection: i0.ChangeDetectionStrategy.OnPush });
+i0.ɵɵngDeclareClassMetadata({ minVersion: "12.0.0", version: "13.3.6", ngImport: i0, type: PbdsDatavizBarSingleHorizontalComponent, decorators: [{
             type: Component,
             args: [{
                     selector: 'pbds-dataviz-bar-single-horizontal',
@@ -5519,16 +5650,1439 @@ i0.ɵɵngDeclareClassMetadata({ minVersion: "12.0.0", version: "13.1.2", ngImpor
                 type: Input
             }], theme: [{
                 type: Input
+            }], gradient: [{
+                type: Input
             }], hovered: [{
                 type: Output
             }], clicked: [{
                 type: Output
             }] } });
 
+class PbdsDatavizScatterplotComponent {
+    constructor(_dataviz, _element, _scroll) {
+        this._dataviz = _dataviz;
+        this._element = _element;
+        this._scroll = _scroll;
+        this.chartClass = true;
+        this.scatterplotClass = true;
+        this.width = 306;
+        this.height = 400;
+        this.jitterX = 4;
+        this.jitterY = 4;
+        this.xAxisType = 'date';
+        this.xAxisFormatString = '';
+        this.xAxisTicks = 6;
+        this.yAxisFormatString = '';
+        this.yAxisTicks = 5;
+        this.yAxisMinBuffer = 0.01;
+        this.yAxisMaxBuffer = 0.01;
+        this.hideXGrid = false;
+        this.hideYGrid = false;
+        this.hideLegend = false;
+        this.legendWidth = 105 + 28; // hardcoded legend width + left margin, do not document until feedback
+        this.legendPosition = 'right';
+        this.legendLabelFormatType = null;
+        this.tooltipXLabel = 'X';
+        this.tooltipXValueFormatType = null;
+        this.tooltipXValueFormatString = '';
+        this.tooltipYLabel = 'Y';
+        this.tooltipYValueFormatType = null;
+        this.tooltipYValueFormatString = '';
+        this.tooltipValueLabel = 'Value';
+        this.tooltipValueFormatType = null;
+        this.tooltipValueFormatString = '';
+        this.marginTop = 10;
+        this.marginRight = 20;
+        this.marginBottom = 30;
+        this.marginLeft = 55;
+        this.hovered = new EventEmitter();
+        this.clicked = new EventEmitter();
+        this.tooltipHovered = new EventEmitter();
+        this.tooltipClicked = new EventEmitter();
+        this.updateChart = () => {
+            // build color ranges
+            const labels = new Set();
+            this.data.map((d) => labels.add(d.key));
+            const labelsArray = Array.from(labels.values());
+            const colors = this._dataviz.getColors(false, this.theme);
+            this.colorRange = scaleOrdinal().domain(labelsArray).range(colors);
+            // update the xScale
+            if (this.xAxisType === 'date') {
+                this.xAxisScale.domain(extent(this.data, (d) => {
+                    return isoParse(d.x);
+                }));
+            }
+            else if (this.xAxisType === 'number') {
+                this.xAxisScale.domain(extent(this.data, (d) => {
+                    return +d.x;
+                }));
+            }
+            // update the yScale
+            this.yAxisScale
+                .domain([
+                min(this.data, (d, i) => {
+                    const minVal = +d.y;
+                    return minVal - minVal * +this.yAxisMinBuffer;
+                }),
+                max(this.data, (d, i) => {
+                    const maxVal = +d.y;
+                    return maxVal + maxVal * this.yAxisMaxBuffer;
+                })
+            ])
+                .nice();
+            this.xAxis.transition().duration(1000).call(this.xAxisCall);
+            this.yAxis.transition().duration(1000).call(this.yAxisCall);
+            // update the grids
+            if (!this.hideXGrid) {
+                this.xGrid.transition().duration(1000).call(this.xGridCall);
+            }
+            if (!this.hideYGrid) {
+                this.yGrid.transition().duration(1000).call(this.yGridCall);
+            }
+            this.svg
+                .selectAll('circle')
+                .data(this.data)
+                .join((enter) => {
+                return enter
+                    .append('circle')
+                    .attr('cx', (d) => {
+                    if (this.xAxisType === 'date') {
+                        return this.xAxisScale(isoParse(d.x)) - this.jitter(this.jitterX);
+                    }
+                    return this.xAxisScale(d.x) - this.jitter(this.jitterX);
+                })
+                    .attr('cy', (d) => this.yAxisScale(0))
+                    .attr('r', (d) => {
+                    if (d.value) {
+                        return this.valueScale(d.value);
+                    }
+                    return 5;
+                })
+                    .attr('fill', (d) => this.colorRange(d.key))
+                    .attr('stroke', (d) => this.colorRange(d.key))
+                    .call((enter) => {
+                    enter.attr('cy', (d) => this.yAxisScale(d.y) - this.jitter(this.jitterY));
+                });
+            }, (update) => {
+                update
+                    .transition()
+                    .duration(1000)
+                    .attr('cx', (d) => this.xAxisScale(d.x) - this.jitter(this.jitterX))
+                    .attr('cy', (d) => this.yAxisScale(d.y) - this.jitter(this.jitterY));
+                return update;
+            }, (exit) => {
+                exit
+                    .attr('cy', (d) => this.yAxisScale(0) - this.jitter(this.jitterY))
+                    .attr('r', 0)
+                    .remove();
+            })
+                .on('mouseover', (event, data) => this.tooltipShow(event, data))
+                .on('mouseout', (event, data) => this.tooltipHide())
+                .on('click', (event, data) => this.tooltipClicked.emit({ event, data: data }));
+            if (!this.hideLegend) {
+                const uniqueKeys = new Set();
+                this.data.forEach((d) => {
+                    uniqueKeys.add(d.key);
+                });
+                this.chart
+                    .select('.legend')
+                    .selectAll('.legend-item')
+                    .data(Array.from(uniqueKeys.values()))
+                    .join((enter) => {
+                    const li = enter.append('li').attr('class', 'legend-item');
+                    li.append('span')
+                        .attr('class', 'legend-key')
+                        .style('background-color', (d) => this.colorRange(d));
+                    li.append('span')
+                        .attr('class', 'legend-label')
+                        .html((d) => {
+                        switch (this.legendLabelFormatType) {
+                            case 'number':
+                                return this.legendLabelFormat(d);
+                            case 'time':
+                                const parsedTime = isoParse(d);
+                                return this.legendLabelFormat(parsedTime);
+                            default:
+                                return d;
+                        }
+                    });
+                    return li;
+                }, (update) => {
+                    update.select('.legend-label').html((d) => {
+                        switch (this.legendLabelFormatType) {
+                            case 'number':
+                                return this.legendLabelFormat(d);
+                            case 'time':
+                                const parsedTime = isoParse(d);
+                                return this.legendLabelFormat(parsedTime);
+                            default:
+                                return d;
+                        }
+                    });
+                    return update;
+                }, (exit) => exit.remove())
+                    .on('mouseover', (event, data) => this.legendMouseOver(event, data))
+                    .on('mouseout', () => this.legendMouseOut())
+                    .on('click', (event, data) => this.legendMouseClick(event, data));
+            }
+        };
+        this.legendMouseOver = (event, data) => {
+            const filteredData = this.data.filter((d) => d.key === data);
+            this.chart
+                .selectAll('.legend-item')
+                .filter((d, i) => {
+                return d !== data;
+            })
+                .classed('inactive', true);
+            this.svg
+                .selectAll('circle')
+                .filter((d, i) => {
+                return d.key !== data;
+            })
+                .classed('inactive', true);
+            this.hovered.emit({ event, data: filteredData });
+        };
+        this.legendMouseOut = () => {
+            this.chart.selectAll('.legend-item').classed('inactive', false);
+            this.svg.selectAll('circle').classed('inactive', false);
+        };
+        this.legendMouseClick = (event, data) => {
+            const filteredData = this.data.filter((d) => d.key === data);
+            this.clicked.emit({ event, data: filteredData });
+        };
+        this.tooltipShow = (event, data) => {
+            const scroll = this._scroll.getScrollPosition();
+            const boundRect = event.currentTarget.getBoundingClientRect();
+            this.svg.selectAll('circle').classed('inactive', true);
+            select(event.currentTarget).classed('inactive', false).classed('active', true);
+            const clientWidth = document.body.clientWidth - 10;
+            let html = `
+      <tr>
+        <td class="pr-3">${this.tooltipXLabel}</td><td class="text-right">${this.tooltipXValueFormatter(data.x)}</td>
+      </tr>
+      <tr>
+        <td class="pr-3">${this.tooltipYLabel}</td><td class="text-right">${this.tooltipYValueFormatter(data.y)}</td>
+      </tr>
+    `;
+            if (data.value) {
+                html += `
+      <tr>
+        <td class="pr-3">${this.tooltipValueLabel}</td><td class="text-right">${this.tooltipValueFormatter(data.value)}</td>
+      </tr>
+      `;
+            }
+            this.tooltip.select('tbody').html(html);
+            const tooltipOffsetHeight = +this.tooltip.node().offsetHeight;
+            const tooltipDimensions = this.tooltip.node().getBoundingClientRect();
+            const dimensionCalculated = boundRect.left + tooltipDimensions.width + 8;
+            let position;
+            // flip the tooltip positions if near the right edge of the screen
+            if (dimensionCalculated > clientWidth) {
+                this.tooltip.classed('east', true);
+                this.tooltip.classed('west', false);
+                position = `${boundRect.left - boundRect.width / 2 - tooltipDimensions.width - 8}px`;
+            }
+            else if (dimensionCalculated < clientWidth) {
+                this.tooltip.classed('east', false);
+                this.tooltip.classed('west', true);
+                position = `${boundRect.left + boundRect.width / 2 + 8}px`;
+            }
+            // set the tooltip styles
+            this.tooltip.style('top', `${boundRect.top + boundRect.height / 2 - tooltipOffsetHeight / 2 + scroll[1]}px`);
+            this.tooltip.style('left', position);
+            this.tooltip.style('opacity', 1);
+            this.tooltipHovered.emit({ event, data: data });
+        };
+        this.tooltipHide = () => {
+            this.svg.selectAll('circle').classed('inactive', false).classed('active', false);
+            this.tooltip.style('opacity', 0);
+        };
+        this.xAxisFormatter = (item) => {
+            if (this.xAxisType === 'date') {
+                const parseDate = isoParse(item);
+                return this.xAxisFormat(parseDate);
+            }
+            else if (this.xAxisType === 'number') {
+                return this.xAxisFormat(item);
+            }
+            else {
+                return item;
+            }
+        };
+        this.yAxisFormatter = (item) => {
+            return this.yAxisFormat(item);
+        };
+        this.tooltipXValueFormatter = (item) => {
+            if (this.tooltipXValueFormatType === 'time') {
+                const parseDate = isoParse(item);
+                return this.tooltipXValueFormat(parseDate);
+            }
+            else if (this.tooltipXValueFormatType === 'number') {
+                return this.tooltipXValueFormat(item);
+            }
+            else {
+                return item;
+            }
+        };
+        this.tooltipYValueFormatter = (item) => {
+            if (this.tooltipYValueFormatType === 'time') {
+                const parseDate = isoParse(item);
+                return this.tooltipYValueFormat(parseDate);
+            }
+            else if (this.tooltipYValueFormatType === 'number') {
+                return this.tooltipYValueFormat(item);
+            }
+            else {
+                return item;
+            }
+        };
+        this.tooltipValueFormatter = (item) => {
+            if (this.tooltipValueFormatType === 'time') {
+                const parseDate = isoParse(item);
+                return this.tooltipValueFormat(parseDate);
+            }
+            else if (this.tooltipValueFormatType === 'number') {
+                return this.tooltipValueFormat(item);
+            }
+            else {
+                return item;
+            }
+        };
+    }
+    ngOnInit() {
+        this.margin = {
+            top: +this.marginTop,
+            right: +this.marginRight,
+            bottom: +this.marginBottom,
+            left: +this.marginLeft
+        };
+        // create formatters
+        this.xAxisFormat =
+            this.xAxisType === 'date' ? timeFormat$1(this.xAxisFormatString) : format$1(this.xAxisFormatString);
+        this.yAxisFormat = format$1(this.yAxisFormatString);
+        this.tooltipXValueFormat = this._dataviz.d3Format(this.tooltipXValueFormatType, this.tooltipXValueFormatString);
+        this.tooltipYValueFormat = this._dataviz.d3Format(this.tooltipYValueFormatType, this.tooltipYValueFormatString);
+        this.tooltipValueFormat = this._dataviz.d3Format(this.tooltipValueFormatType, this.tooltipValueFormatString);
+        this.xAxisTickSize = 8;
+        this.xAxisTickSizeOuter = 0;
+        this.yAxisTickSize = 8;
+        this.yAxisTickSizeOuter = 0;
+        // create the chart
+        this.chart = select(this._element.nativeElement).attr('aria-hidden', 'true');
+        // create chart svg
+        this.svg = this.chart
+            .append('svg')
+            .attr('width', +this.width + this.margin.right)
+            .attr('height', +this.height + this.margin.top + this.margin.bottom)
+            .attr('class', 'img-fluid')
+            .attr('preserveAspectRatio', 'xMinYMin meet')
+            .attr('viewBox', `-${this.margin.left} -${this.margin.top} ${+this.width + this.margin.right} ${+this.height + this.margin.top + this.margin.bottom}`);
+        // X AXIS
+        if (this.xAxisType === 'date') {
+            this.xAxisScale = scaleTime()
+                .domain(extent(this.data, (d) => {
+                return isoParse(d.x);
+            }))
+                .range([0, this.width - this.margin.left - this.margin.right]);
+        }
+        else if (this.xAxisType === 'number') {
+            this.xAxisScale = scaleLinear()
+                .domain(extent(this.data, (d) => {
+                return +d.x;
+            }))
+                .range([0, this.width - this.margin.left - this.margin.right]);
+        }
+        else {
+            const keys = this.data.map((d) => d.x);
+            console.log('KEYS: ', keys);
+            this.xAxisScale = scalePoint()
+                .domain(keys)
+                .range([0, this.width - this.margin.left - this.margin.right]);
+        }
+        this.xAxisCall = axisBottom(this.xAxisScale)
+            .ticks(+this.xAxisTicks)
+            .tickSize(this.xAxisTickSize)
+            .tickSizeOuter(this.xAxisTickSizeOuter)
+            .tickFormat(this.xAxisFormatter);
+        this.xAxis = this.svg
+            .append('g')
+            .attr('class', 'axis axis-x')
+            .attr('transform', `translate(0, ${this.height})`)
+            .classed('axis-hidden', this.hideXAxis)
+            .classed('axis-zero-hidden', this.hideXAxisZero)
+            .classed('axis-domain-hidden', this.hideXAxisDomain)
+            .classed('axis-ticks-hidden', this.hideXAxisTicks)
+            .call(this.xAxisCall);
+        // X GRIDLINES
+        if (!this.hideXGrid) {
+            if (this.xAxisType === 'string') {
+                this.xGridCall = axisBottom(this.xAxisScale)
+                    .tickSize(-this.height)
+                    .tickValues(this.xAxisScale.domain().filter((d, i) => {
+                    console.log('GRID: ', d, i);
+                    // see https://github.com/d3/d3-scale/issues/182
+                    // d3 cannot determine number of strings to show on xaxis with scalePoint()
+                    return i % this.xAxisTicks === 0;
+                }));
+            }
+            else {
+                this.xGridCall = axisBottom(this.xAxisScale).tickSize(-this.height);
+            }
+            this.xGrid = this.svg
+                .append('g')
+                .attr('class', 'grid grid-x')
+                .classed('grid-zero-hidden', this.hideXAxisZero)
+                .attr('transform', `translate(0, ${this.height})`)
+                .call(this.xGridCall);
+        }
+        // Y AXIS
+        this.yAxisScale = scaleLinear()
+            .domain([
+            min(this.data, (d, i) => {
+                const minVal = +d.y;
+                return minVal - minVal * +this.yAxisMinBuffer;
+            }),
+            max(this.data, (d, i) => {
+                const maxVal = +d.y;
+                return maxVal + maxVal * this.yAxisMaxBuffer;
+            })
+        ])
+            .nice()
+            .range([this.height, 0]);
+        this.yAxisCall = axisLeft(this.yAxisScale)
+            .ticks(this.yAxisTicks)
+            .tickSize(this.yAxisTickSize)
+            .tickSizeOuter(this.yAxisTickSizeOuter)
+            .tickFormat(this.yAxisFormatter);
+        this.yAxis = this.svg
+            .append('g')
+            .attr('class', 'axis axis-y')
+            .classed('axis-hidden', this.hideYAxis)
+            .classed('axis-zero-hidden', this.hideYAxisZero)
+            .classed('axis-domain-hidden', this.hideYAxisDomain)
+            .classed('axis-ticks-hidden', this.hideYAxisTicks)
+            .call(this.yAxisCall);
+        // Y GRIDLINES
+        if (!this.hideYGrid) {
+            this.yGridCall = axisLeft(this.yAxisScale)
+                .ticks(this.yAxisTicks)
+                .tickSize(-this.width + this.margin.left + this.margin.right);
+            this.yGrid = this.svg
+                .append('g')
+                .attr('class', 'grid grid-y')
+                .classed('grid-zero-hidden', this.hideYAxisZero)
+                .attr('transform', `translate(0, 0)`)
+                .call(this.yGridCall);
+        }
+        // create value scale if passed in data
+        if ('value' in this.data[0]) {
+            this.valueScale = scaleLinear()
+                .domain(extent(this.data, (d) => {
+                return +d.value;
+            }))
+                .range([5, 50]);
+        }
+        // TOOLTIP
+        if (!this.hideTooltip) {
+            this.tooltip = select('body')
+                .append('div')
+                .attr('class', 'pbds-tooltip west')
+                .style('opacity', 0)
+                .attr('aria-hidden', 'true'); // hide tooltip for accessibility
+            // tooltip header
+            this.tooltip.append('div').attr('class', 'tooltip-header');
+            // tooltip table
+            this.tooltip.append('table').attr('class', 'tooltip-table text-left w-100').append('tbody');
+        }
+        // add legend classes
+        if (!this.hideLegend) {
+            this.chart.classed('pbds-chart-legend-bottom', this.legendPosition === 'bottom' ? true : false);
+            this.chart.append('ul').attr('class', `legend legend-${this.legendPosition}`);
+        }
+        this.updateChart();
+    }
+    ngOnChanges(changes) {
+        if (changes.data && !changes.data.firstChange) {
+            this.updateChart();
+        }
+    }
+    ngOnDestroy() {
+        if (this.tooltip)
+            this.tooltip.remove();
+    }
+    jitter(jitter) {
+        return Math.random() * jitter;
+    }
+}
+PbdsDatavizScatterplotComponent.ɵfac = i0.ɵɵngDeclareFactory({ minVersion: "12.0.0", version: "13.3.6", ngImport: i0, type: PbdsDatavizScatterplotComponent, deps: [{ token: PbdsDatavizService }, { token: i0.ElementRef }, { token: i2.ViewportScroller }], target: i0.ɵɵFactoryTarget.Component });
+PbdsDatavizScatterplotComponent.ɵcmp = i0.ɵɵngDeclareComponent({ minVersion: "12.0.0", version: "13.3.6", type: PbdsDatavizScatterplotComponent, selector: "pbds-dataviz-scatterplot", inputs: { data: "data", width: "width", height: "height", jitterX: "jitterX", jitterY: "jitterY", xAxisType: "xAxisType", xAxisFormatString: "xAxisFormatString", xAxisTicks: "xAxisTicks", yAxisFormatString: "yAxisFormatString", yAxisTicks: "yAxisTicks", yAxisMinBuffer: "yAxisMinBuffer", yAxisMaxBuffer: "yAxisMaxBuffer", hideXGrid: "hideXGrid", hideYGrid: "hideYGrid", hideLegend: "hideLegend", legendWidth: "legendWidth", legendPosition: "legendPosition", legendLabelFormatType: "legendLabelFormatType", tooltipXLabel: "tooltipXLabel", tooltipXValueFormatType: "tooltipXValueFormatType", tooltipXValueFormatString: "tooltipXValueFormatString", tooltipYLabel: "tooltipYLabel", tooltipYValueFormatType: "tooltipYValueFormatType", tooltipYValueFormatString: "tooltipYValueFormatString", tooltipValueLabel: "tooltipValueLabel", tooltipValueFormatType: "tooltipValueFormatType", tooltipValueFormatString: "tooltipValueFormatString", marginTop: "marginTop", marginRight: "marginRight", marginBottom: "marginBottom", marginLeft: "marginLeft", theme: "theme" }, outputs: { hovered: "hovered", clicked: "clicked", tooltipHovered: "tooltipHovered", tooltipClicked: "tooltipClicked" }, host: { properties: { "class.pbds-chart": "this.chartClass", "class.pbds-chart-scatterplot": "this.scatterplotClass" } }, usesOnChanges: true, ngImport: i0, template: ``, isInline: true, changeDetection: i0.ChangeDetectionStrategy.OnPush });
+i0.ɵɵngDeclareClassMetadata({ minVersion: "12.0.0", version: "13.3.6", ngImport: i0, type: PbdsDatavizScatterplotComponent, decorators: [{
+            type: Component,
+            args: [{
+                    selector: 'pbds-dataviz-scatterplot',
+                    template: ``,
+                    styles: [],
+                    changeDetection: ChangeDetectionStrategy.OnPush
+                }]
+        }], ctorParameters: function () { return [{ type: PbdsDatavizService }, { type: i0.ElementRef }, { type: i2.ViewportScroller }]; }, propDecorators: { chartClass: [{
+                type: HostBinding,
+                args: ['class.pbds-chart']
+            }], scatterplotClass: [{
+                type: HostBinding,
+                args: ['class.pbds-chart-scatterplot']
+            }], data: [{
+                type: Input
+            }], width: [{
+                type: Input
+            }], height: [{
+                type: Input
+            }], jitterX: [{
+                type: Input
+            }], jitterY: [{
+                type: Input
+            }], xAxisType: [{
+                type: Input
+            }], xAxisFormatString: [{
+                type: Input
+            }], xAxisTicks: [{
+                type: Input
+            }], yAxisFormatString: [{
+                type: Input
+            }], yAxisTicks: [{
+                type: Input
+            }], yAxisMinBuffer: [{
+                type: Input
+            }], yAxisMaxBuffer: [{
+                type: Input
+            }], hideXGrid: [{
+                type: Input
+            }], hideYGrid: [{
+                type: Input
+            }], hideLegend: [{
+                type: Input
+            }], legendWidth: [{
+                type: Input
+            }], legendPosition: [{
+                type: Input
+            }], legendLabelFormatType: [{
+                type: Input
+            }], tooltipXLabel: [{
+                type: Input
+            }], tooltipXValueFormatType: [{
+                type: Input
+            }], tooltipXValueFormatString: [{
+                type: Input
+            }], tooltipYLabel: [{
+                type: Input
+            }], tooltipYValueFormatType: [{
+                type: Input
+            }], tooltipYValueFormatString: [{
+                type: Input
+            }], tooltipValueLabel: [{
+                type: Input
+            }], tooltipValueFormatType: [{
+                type: Input
+            }], tooltipValueFormatString: [{
+                type: Input
+            }], marginTop: [{
+                type: Input
+            }], marginRight: [{
+                type: Input
+            }], marginBottom: [{
+                type: Input
+            }], marginLeft: [{
+                type: Input
+            }], theme: [{
+                type: Input
+            }], hovered: [{
+                type: Output
+            }], clicked: [{
+                type: Output
+            }], tooltipHovered: [{
+                type: Output
+            }], tooltipClicked: [{
+                type: Output
+            }] } });
+
+const ANNOTATION_MARGIN_TOP$3 = 62;
+const ANNOTATION_OFFSET$3 = -22;
+const ANNOTATION_COMMENT_OFFSET$3 = -47;
+const TRANSITION_DURATION$3 = 1000;
+const TRANSITION_DELAY$3 = 500;
+class PbdsBarStackedAnnotationsDirective {
+    constructor(component) {
+        this.component = component;
+        this.annotationsHilight = null;
+        this.annotationClicked = new EventEmitter();
+        component.marginTop = ANNOTATION_MARGIN_TOP$3;
+    }
+    ngOnInit() {
+        this.annotationsGroup = this.component.svg.append('g').attr('class', 'annotations');
+        this.hilightBox = this.annotationsGroup
+            .append('rect')
+            .classed('annotations-hilight', true)
+            .attr('opacity', 0)
+            .attr('width', this.component.xAxisScale.bandwidth())
+            .attr('height', this.component.height)
+            .attr('transform', `translate(${0}, ${0})`);
+        this.update();
+    }
+    ngOnChanges(changes) {
+        if (changes && changes.annotationsHilight && !changes.annotationsHilight.firstChange) {
+            if (changes.annotationsHilight.currentValue) {
+                this.updateHilight();
+            }
+            else {
+                this.hilightBox.transition().duration(200).attr('opacity', 0);
+            }
+        }
+        if (changes.annotations && !changes.annotations.firstChange) {
+            this.update();
+        }
+    }
+    update() {
+        const isAnotations = this.annotations;
+        const isIncidents = this.annotations?.incidents?.length > 0;
+        const isComments = this.annotations?.comments?.length > 0;
+        if (isAnotations && isIncidents) {
+            const bandwidth = this.component.xAxisScale.bandwidth();
+            this.annotationsGroup
+                .selectAll('g.incident')
+                .data(this.annotations.incidents)
+                .join((enter) => {
+                const g = enter.append('g').attr('class', 'incident');
+                g.attr('transform', (d, i) => {
+                    const x = this.component.xAxisScale(d.key) + bandwidth / 2;
+                    const y = ANNOTATION_OFFSET$3;
+                    return `translate(${x}, ${y})`;
+                }).attr('index', (d, i) => i);
+                g.append('circle')
+                    .attr('r', 0)
+                    .attr('cx', 0)
+                    .attr('cy', 0)
+                    .transition()
+                    .duration(TRANSITION_DURATION$3)
+                    .ease(easeQuadInOut)
+                    .attr('r', 15);
+                g.append('text')
+                    .attr('x', 0)
+                    .attr('y', 0)
+                    .attr('dx', 1)
+                    .attr('dy', 9)
+                    .attr('text-anchor', 'middle')
+                    .text((d) => {
+                    return d.icon || '';
+                })
+                    .attr('style', 'font-size: 0')
+                    .transition()
+                    .duration(TRANSITION_DURATION$3)
+                    .ease(easeQuadInOut)
+                    .attr('style', 'font-size: 17px');
+                return g;
+            }, (update) => {
+                update
+                    .transition()
+                    .duration(TRANSITION_DURATION$3)
+                    .ease(easeQuadInOut)
+                    .attr('transform', (d) => {
+                    const x = this.component.xAxisScale(d.key) + bandwidth / 2;
+                    const y = ANNOTATION_OFFSET$3;
+                    return `translate(${x}, ${y})`;
+                });
+                return update;
+            }, (exit) => {
+                exit.select('circle').transition().duration(TRANSITION_DURATION$3).attr('r', 0);
+                exit.select('text').transition().duration(TRANSITION_DURATION$3).attr('style', 'font-size: 0');
+                return exit.transition().delay(TRANSITION_DELAY$3).remove();
+            })
+                .on('mouseover', (event, data) => {
+                select(event.currentTarget).classed('hovered', true);
+            })
+                .on('mouseout', (event, data) => {
+                select(event.currentTarget).classed('hovered', false);
+            })
+                .on('click', (event, data) => {
+                // console.log('incident clicked', this.index.get(event.currentTarget.node));
+                this.annotationClicked.emit({ event, data, index: +select(event.currentTarget).attr('index') });
+            });
+        }
+        if (isAnotations && isComments) {
+            const bandwidth = this.component.xAxisScale.bandwidth();
+            this.annotationsGroup
+                .selectAll('g.comment')
+                .data(this.annotations.comments)
+                .join((enter) => {
+                const g = enter.append('g').attr('class', 'comment');
+                g.attr('transform', (d) => {
+                    const x = this.component.xAxisScale(d.key) + bandwidth / 2;
+                    let y = ANNOTATION_OFFSET$3;
+                    const isIncidents = this.annotations?.incidents?.some((incident) => incident.key === d.key);
+                    if (isIncidents) {
+                        y = ANNOTATION_COMMENT_OFFSET$3;
+                    }
+                    return `translate(${x}, ${y})`;
+                }).attr('index', (d, i) => i);
+                g.append('circle')
+                    .attr('r', 0)
+                    .attr('cx', 0)
+                    .attr('cy', 0)
+                    .transition()
+                    .duration(TRANSITION_DURATION$3)
+                    .ease(easeQuadInOut)
+                    .attr('r', 15);
+                g.append('text')
+                    .attr('x', 0)
+                    .attr('y', 3)
+                    .attr('dx', 0)
+                    .attr('dy', 5)
+                    .attr('text-anchor', 'middle')
+                    .text('')
+                    .attr('style', 'font-size: 0')
+                    .transition()
+                    .duration(TRANSITION_DURATION$3)
+                    .ease(easeQuadInOut)
+                    .attr('style', 'font-size: 17px');
+                return g;
+            }, (update) => {
+                update
+                    .transition()
+                    .duration(TRANSITION_DURATION$3)
+                    .ease(easeQuadInOut)
+                    .attr('transform', (d) => {
+                    const x = this.component.xAxisScale(d.key) + bandwidth / 2;
+                    let y = ANNOTATION_OFFSET$3;
+                    const isIncidents = this.annotations?.incidents?.some((incident) => incident.key === d.key);
+                    if (isIncidents) {
+                        y = ANNOTATION_COMMENT_OFFSET$3;
+                    }
+                    return `translate(${x}, ${y})`;
+                });
+                return update;
+            }, (exit) => {
+                exit.select('circle').transition().duration(TRANSITION_DURATION$3).attr('r', 0);
+                exit.select('text').transition().duration(TRANSITION_DURATION$3).attr('style', 'font-size: 0');
+                return exit.transition().delay(TRANSITION_DELAY$3).remove();
+            })
+                .on('mouseover', (event) => {
+                select(event.currentTarget).classed('hovered', true);
+            })
+                .on('mouseout', (event) => {
+                select(event.currentTarget).classed('hovered', false);
+            })
+                .on('click', (event, data) => {
+                this.annotationClicked.emit({ event, data, index: +select(event.currentTarget).attr('index') });
+            });
+        }
+        // hilight
+        if (this.annotationsHilight) {
+            this.updateHilight();
+        }
+        this.component.svg.selectAll('.mouseover-bar').classed('pbds-annotation-add', true);
+    }
+    updateHilight() {
+        const opacity = this.hilightBox.attr('opacity');
+        const duration = opacity === 0 ? 0 : 300;
+        this.hilightBox
+            .transition()
+            .duration(duration)
+            .ease(easeQuadInOut)
+            .attr('transform', () => {
+            const x = this.component.xAxisScale(this.annotationsHilight);
+            const y = 0;
+            return `translate(${x}, ${y})`;
+        })
+            .transition()
+            .duration(200)
+            .attr('opacity', 1);
+    }
+}
+PbdsBarStackedAnnotationsDirective.ɵfac = i0.ɵɵngDeclareFactory({ minVersion: "12.0.0", version: "13.3.6", ngImport: i0, type: PbdsBarStackedAnnotationsDirective, deps: [{ token: forwardRef(() => PbdsDatavizBarStackedComponent) }], target: i0.ɵɵFactoryTarget.Directive });
+PbdsBarStackedAnnotationsDirective.ɵdir = i0.ɵɵngDeclareDirective({ minVersion: "12.0.0", version: "13.3.6", type: PbdsBarStackedAnnotationsDirective, selector: "pbds-dataviz-bar-stacked[annotations]", inputs: { annotations: "annotations", annotationsHilight: "annotationsHilight" }, outputs: { annotationClicked: "annotationClicked" }, usesOnChanges: true, ngImport: i0 });
+i0.ɵɵngDeclareClassMetadata({ minVersion: "12.0.0", version: "13.3.6", ngImport: i0, type: PbdsBarStackedAnnotationsDirective, decorators: [{
+            type: Directive,
+            args: [{
+                    selector: 'pbds-dataviz-bar-stacked[annotations]'
+                }]
+        }], ctorParameters: function () { return [{ type: undefined, decorators: [{
+                    type: Inject,
+                    args: [forwardRef(() => PbdsDatavizBarStackedComponent)]
+                }] }]; }, propDecorators: { annotations: [{
+                type: Input,
+                args: ['annotations']
+            }], annotationsHilight: [{
+                type: Input,
+                args: ['annotationsHilight']
+            }], annotationClicked: [{
+                type: Output
+            }] } });
+
+const ANNOTATION_MARGIN_TOP$2 = 62;
+const ANNOTATION_OFFSET$2 = -22;
+const ANNOTATION_COMMENT_OFFSET$2 = -47;
+const ANNOTATION_WIDTH = 26;
+const TRANSITION_DURATION$2 = 1000;
+const TRANSITION_DELAY$2 = 500;
+class PbdsLineAnnotationsDirective {
+    constructor(component) {
+        this.component = component;
+        this.annotationsHilight = null;
+        this.annotationClicked = new EventEmitter();
+        component.marginTop = ANNOTATION_MARGIN_TOP$2;
+    }
+    ngOnInit() {
+        this.annotationsGroup = this.component.svg.append('g').attr('class', 'annotations');
+        this.hilightBox = this.annotationsGroup
+            .append('rect')
+            .classed('annotations-hilight', true)
+            .attr('opacity', 0)
+            .attr('width', ANNOTATION_WIDTH)
+            .attr('height', this.component.height)
+            .attr('transform', `translate(${ANNOTATION_WIDTH / 2}, ${0})`);
+        this.update();
+    }
+    ngOnChanges(changes) {
+        if (changes && changes.annotationsHilight && !changes.annotationsHilight.firstChange) {
+            if (changes.annotationsHilight.currentValue) {
+                this.updateHilight();
+            }
+            else {
+                this.hilightBox.transition().duration(200).attr('opacity', 0);
+            }
+        }
+        if (changes.annotations && !changes.annotations.firstChange) {
+            this.update();
+        }
+    }
+    update() {
+        const isAnotations = this.annotations;
+        const isIncidents = this.annotations?.incidents?.length > 0;
+        const isComments = this.annotations?.comments?.length > 0;
+        if (isAnotations && isIncidents) {
+            this.annotationsGroup
+                .selectAll('g.incident')
+                .data(this.annotations.incidents)
+                .join((enter) => {
+                const g = enter.append('g').attr('class', 'incident');
+                g.attr('transform', (d, i) => {
+                    let x;
+                    const y = ANNOTATION_OFFSET$2;
+                    if (this.component.xAxisType === 'date') {
+                        x = this.component.xAxisScale(isoParse(d.key));
+                    }
+                    else {
+                        x = this.component.xAxisScale(d.key);
+                    }
+                    return `translate(${x}, ${y})`;
+                }).attr('index', (d, i) => i);
+                g.append('circle')
+                    .attr('r', 0)
+                    .attr('cx', 0)
+                    .attr('cy', 0)
+                    .transition()
+                    .duration(TRANSITION_DURATION$2)
+                    .ease(easeQuadInOut)
+                    .attr('r', 15);
+                g.append('text')
+                    .attr('x', 0)
+                    .attr('y', 0)
+                    .attr('dx', 1)
+                    .attr('dy', 9)
+                    .attr('text-anchor', 'middle')
+                    .text((d) => {
+                    return d.icon || '';
+                })
+                    .attr('style', 'font-size: 0')
+                    .transition()
+                    .duration(TRANSITION_DURATION$2)
+                    .ease(easeQuadInOut)
+                    .attr('style', 'font-size: 17px');
+                return g;
+            }, (update) => {
+                update
+                    .transition()
+                    .duration(TRANSITION_DURATION$2)
+                    .ease(easeQuadInOut)
+                    .attr('transform', (d) => {
+                    let x;
+                    const y = ANNOTATION_OFFSET$2;
+                    if (this.component.xAxisType === 'date') {
+                        x = this.component.xAxisScale(isoParse(d.key));
+                    }
+                    else {
+                        x = this.component.xAxisScale(d.key);
+                    }
+                    return `translate(${x}, ${y})`;
+                });
+                return update;
+            }, (exit) => {
+                exit.select('circle').transition().duration(TRANSITION_DURATION$2).attr('r', 0);
+                exit.select('text').transition().duration(TRANSITION_DURATION$2).attr('style', 'font-size: 0');
+                return exit.transition().delay(TRANSITION_DELAY$2).remove();
+            })
+                .on('mouseover', (event, data) => {
+                select(event.currentTarget).classed('hovered', true);
+            })
+                .on('mouseout', (event, data) => {
+                select(event.currentTarget).classed('hovered', false);
+            })
+                .on('click', (event, data) => {
+                // console.log('incident clicked', this.index.get(event.currentTarget.node));
+                this.annotationClicked.emit({ event, data, index: +select(event.currentTarget).attr('index') });
+            });
+        }
+        if (isAnotations && isComments) {
+            this.annotationsGroup
+                .selectAll('g.comment')
+                .data(this.annotations.comments)
+                .join((enter) => {
+                const g = enter.append('g').attr('class', 'comment');
+                g.attr('transform', (d) => {
+                    let x;
+                    let y = ANNOTATION_OFFSET$2;
+                    const isIncidents = this.annotations?.incidents?.some((incident) => incident.key === d.key);
+                    if (this.component.xAxisType === 'date') {
+                        x = this.component.xAxisScale(isoParse(d.key));
+                    }
+                    else {
+                        x = this.component.xAxisScale(d.key);
+                    }
+                    if (isIncidents) {
+                        y = ANNOTATION_COMMENT_OFFSET$2;
+                    }
+                    return `translate(${x}, ${y})`;
+                }).attr('index', (d, i) => i);
+                g.append('circle')
+                    .attr('r', 0)
+                    .attr('cx', 0)
+                    .attr('cy', 0)
+                    .transition()
+                    .duration(TRANSITION_DURATION$2)
+                    .ease(easeQuadInOut)
+                    .attr('r', 15);
+                g.append('text')
+                    .attr('x', 0)
+                    .attr('y', 3)
+                    .attr('dx', 0)
+                    .attr('dy', 5)
+                    .attr('text-anchor', 'middle')
+                    .text('')
+                    .attr('style', 'font-size: 0')
+                    .transition()
+                    .duration(TRANSITION_DURATION$2)
+                    .ease(easeQuadInOut)
+                    .attr('style', 'font-size: 17px');
+                return g;
+            }, (update) => {
+                update
+                    .transition()
+                    .duration(TRANSITION_DURATION$2)
+                    .ease(easeQuadInOut)
+                    .attr('transform', (d) => {
+                    let x;
+                    let y = ANNOTATION_OFFSET$2;
+                    const isIncidents = this.annotations?.incidents?.some((incident) => incident.key === d.key);
+                    if (this.component.xAxisType === 'date') {
+                        x = this.component.xAxisScale(isoParse(d.key));
+                    }
+                    else {
+                        x = this.component.xAxisScale(d.key);
+                    }
+                    if (isIncidents) {
+                        y = ANNOTATION_COMMENT_OFFSET$2;
+                    }
+                    return `translate(${x}, ${y})`;
+                });
+                return update;
+            }, (exit) => {
+                exit.select('circle').transition().duration(TRANSITION_DURATION$2).attr('r', 0);
+                exit.select('text').transition().duration(TRANSITION_DURATION$2).attr('style', 'font-size: 0');
+                return exit.transition().delay(TRANSITION_DELAY$2).remove();
+            })
+                .on('mouseover', (event) => {
+                select(event.currentTarget).classed('hovered', true);
+            })
+                .on('mouseout', (event) => {
+                select(event.currentTarget).classed('hovered', false);
+            })
+                .on('click', (event, data) => {
+                this.annotationClicked.emit({ event, data, index: +select(event.currentTarget).attr('index') });
+            });
+        }
+        // hilight
+        if (this.annotationsHilight) {
+            this.updateHilight();
+        }
+        this.component.svg.selectAll('.mouserect').classed('pbds-annotation-add', true);
+    }
+    updateHilight() {
+        const opacity = this.hilightBox.attr('opacity');
+        const duration = opacity === 0 ? 0 : 300;
+        const xAxisType = this.component.xAxisType;
+        this.hilightBox
+            .transition()
+            .duration(duration)
+            .ease(easeQuadInOut)
+            .attr('transform', () => {
+            let x = 0;
+            const y = 0;
+            if (xAxisType === 'date') {
+                x = this.component.xAxisScale(isoParse(this.annotationsHilight));
+            }
+            else {
+                x = this.component.xAxisScale(this.annotationsHilight);
+            }
+            return `translate(${x - ANNOTATION_WIDTH / 2}, ${y})`;
+        })
+            .transition()
+            .duration(200)
+            .attr('opacity', 1);
+    }
+}
+PbdsLineAnnotationsDirective.ɵfac = i0.ɵɵngDeclareFactory({ minVersion: "12.0.0", version: "13.3.6", ngImport: i0, type: PbdsLineAnnotationsDirective, deps: [{ token: forwardRef(() => PbdsDatavizLineComponent) }], target: i0.ɵɵFactoryTarget.Directive });
+PbdsLineAnnotationsDirective.ɵdir = i0.ɵɵngDeclareDirective({ minVersion: "12.0.0", version: "13.3.6", type: PbdsLineAnnotationsDirective, selector: "pbds-dataviz-line[annotations]", inputs: { annotations: "annotations", annotationsHilight: "annotationsHilight" }, outputs: { annotationClicked: "annotationClicked" }, usesOnChanges: true, ngImport: i0 });
+i0.ɵɵngDeclareClassMetadata({ minVersion: "12.0.0", version: "13.3.6", ngImport: i0, type: PbdsLineAnnotationsDirective, decorators: [{
+            type: Directive,
+            args: [{
+                    selector: 'pbds-dataviz-line[annotations]'
+                }]
+        }], ctorParameters: function () { return [{ type: undefined, decorators: [{
+                    type: Inject,
+                    args: [forwardRef(() => PbdsDatavizLineComponent)]
+                }] }]; }, propDecorators: { annotations: [{
+                type: Input,
+                args: ['annotations']
+            }], annotationsHilight: [{
+                type: Input,
+                args: ['annotationsHilight']
+            }], annotationClicked: [{
+                type: Output
+            }] } });
+
+const ANNOTATION_MARGIN_TOP$1 = 62;
+const ANNOTATION_OFFSET$1 = -22;
+const ANNOTATION_COMMENT_OFFSET$1 = -47;
+const TRANSITION_DURATION$1 = 1000;
+const TRANSITION_DELAY$1 = 500;
+class PbdsBarGroupedAnnotationsDirective {
+    constructor(component) {
+        this.component = component;
+        this.annotationsHilight = null;
+        this.annotationClicked = new EventEmitter();
+        component.marginTop = ANNOTATION_MARGIN_TOP$1;
+    }
+    ngOnInit() {
+        this.annotationsGroup = this.component.svg.append('g').attr('class', 'annotations');
+        this.hilightBox = this.annotationsGroup
+            .append('rect')
+            .classed('annotations-hilight', true)
+            .attr('opacity', 0)
+            .attr('width', this.component.xAxisScale.bandwidth())
+            .attr('height', this.component.height)
+            .attr('transform', `translate(${0}, ${0})`);
+        this.update();
+    }
+    ngOnChanges(changes) {
+        if (changes && changes.annotationsHilight && !changes.annotationsHilight.firstChange) {
+            if (changes.annotationsHilight.currentValue) {
+                this.updateHilight();
+            }
+            else {
+                this.hilightBox.transition().duration(200).attr('opacity', 0);
+            }
+        }
+        if (changes.annotations && !changes.annotations.firstChange) {
+            this.update();
+        }
+    }
+    update() {
+        const isAnotations = this.annotations;
+        const isIncidents = this.annotations?.incidents?.length > 0;
+        const isComments = this.annotations?.comments?.length > 0;
+        if (isAnotations && isIncidents) {
+            const bandwidth = this.component.xAxisScale.bandwidth();
+            this.annotationsGroup
+                .selectAll('g.incident')
+                .data(this.annotations.incidents)
+                .join((enter) => {
+                const g = enter.append('g').attr('class', 'incident');
+                g.attr('transform', (d, i) => {
+                    const x = this.component.xAxisScale(d.key) + bandwidth / 2;
+                    const y = ANNOTATION_OFFSET$1;
+                    return `translate(${x}, ${y})`;
+                }).attr('index', (d, i) => i);
+                g.append('circle')
+                    .attr('r', 0)
+                    .attr('cx', 0)
+                    .attr('cy', 0)
+                    .transition()
+                    .duration(TRANSITION_DURATION$1)
+                    .ease(easeQuadInOut)
+                    .attr('r', 15);
+                g.append('text')
+                    .attr('x', 0)
+                    .attr('y', 0)
+                    .attr('dx', 1)
+                    .attr('dy', 9)
+                    .attr('text-anchor', 'middle')
+                    .text((d) => {
+                    return d.icon || '';
+                })
+                    .attr('style', 'font-size: 0')
+                    .transition()
+                    .duration(TRANSITION_DURATION$1)
+                    .ease(easeQuadInOut)
+                    .attr('style', 'font-size: 17px');
+                return g;
+            }, (update) => {
+                update
+                    .transition()
+                    .duration(TRANSITION_DURATION$1)
+                    .ease(easeQuadInOut)
+                    .attr('transform', (d) => {
+                    const x = this.component.xAxisScale(d.key) + bandwidth / 2;
+                    const y = ANNOTATION_OFFSET$1;
+                    return `translate(${x}, ${y})`;
+                });
+                return update;
+            }, (exit) => {
+                exit.select('circle').transition().duration(TRANSITION_DURATION$1).attr('r', 0);
+                exit.select('text').transition().duration(TRANSITION_DURATION$1).attr('style', 'font-size: 0');
+                return exit.transition().delay(TRANSITION_DELAY$1).remove();
+            })
+                .on('mouseover', (event, data) => {
+                select(event.currentTarget).classed('hovered', true);
+            })
+                .on('mouseout', (event, data) => {
+                select(event.currentTarget).classed('hovered', false);
+            })
+                .on('click', (event, data) => {
+                // console.log('incident clicked', this.index.get(event.currentTarget.node));
+                this.annotationClicked.emit({ event, data, index: +select(event.currentTarget).attr('index') });
+            });
+        }
+        if (isAnotations && isComments) {
+            const bandwidth = this.component.xAxisScale.bandwidth();
+            this.annotationsGroup
+                .selectAll('g.comment')
+                .data(this.annotations.comments)
+                .join((enter) => {
+                const g = enter.append('g').attr('class', 'comment');
+                g.attr('transform', (d) => {
+                    const x = this.component.xAxisScale(d.key) + bandwidth / 2;
+                    let y = ANNOTATION_OFFSET$1;
+                    const isIncidents = this.annotations?.incidents?.some((incident) => incident.key === d.key);
+                    if (isIncidents) {
+                        y = ANNOTATION_COMMENT_OFFSET$1;
+                    }
+                    return `translate(${x}, ${y})`;
+                }).attr('index', (d, i) => i);
+                g.append('circle')
+                    .attr('r', 0)
+                    .attr('cx', 0)
+                    .attr('cy', 0)
+                    .transition()
+                    .duration(TRANSITION_DURATION$1)
+                    .ease(easeQuadInOut)
+                    .attr('r', 15);
+                g.append('text')
+                    .attr('x', 0)
+                    .attr('y', 3)
+                    .attr('dx', 0)
+                    .attr('dy', 5)
+                    .attr('text-anchor', 'middle')
+                    .text('')
+                    .attr('style', 'font-size: 0')
+                    .transition()
+                    .duration(TRANSITION_DURATION$1)
+                    .ease(easeQuadInOut)
+                    .attr('style', 'font-size: 17px');
+                return g;
+            }, (update) => {
+                update
+                    .transition()
+                    .duration(TRANSITION_DURATION$1)
+                    .ease(easeQuadInOut)
+                    .attr('transform', (d) => {
+                    const x = this.component.xAxisScale(d.key) + bandwidth / 2;
+                    let y = ANNOTATION_OFFSET$1;
+                    const isIncidents = this.annotations?.incidents?.some((incident) => incident.key === d.key);
+                    if (isIncidents) {
+                        y = ANNOTATION_COMMENT_OFFSET$1;
+                    }
+                    return `translate(${x}, ${y})`;
+                });
+                return update;
+            }, (exit) => {
+                exit.select('circle').transition().duration(TRANSITION_DURATION$1).attr('r', 0);
+                exit.select('text').transition().duration(TRANSITION_DURATION$1).attr('style', 'font-size: 0');
+                return exit.transition().delay(TRANSITION_DELAY$1).remove();
+            })
+                .on('mouseover', (event) => {
+                select(event.currentTarget).classed('hovered', true);
+            })
+                .on('mouseout', (event) => {
+                select(event.currentTarget).classed('hovered', false);
+            })
+                .on('click', (event, data) => {
+                this.annotationClicked.emit({ event, data, index: +select(event.currentTarget).attr('index') });
+            });
+        }
+        // hilight
+        if (this.annotationsHilight) {
+            this.updateHilight();
+        }
+        this.component.svg.selectAll('.bar').classed('pbds-annotation-add', true);
+    }
+    updateHilight() {
+        const opacity = this.hilightBox.attr('opacity');
+        const duration = opacity === 0 ? 0 : 300;
+        this.hilightBox
+            .transition()
+            .duration(duration)
+            .ease(easeQuadInOut)
+            .attr('transform', () => {
+            const x = this.component.xAxisScale(this.annotationsHilight);
+            const y = 0;
+            return `translate(${x}, ${y})`;
+        })
+            .transition()
+            .duration(200)
+            .attr('opacity', 1);
+    }
+}
+PbdsBarGroupedAnnotationsDirective.ɵfac = i0.ɵɵngDeclareFactory({ minVersion: "12.0.0", version: "13.3.6", ngImport: i0, type: PbdsBarGroupedAnnotationsDirective, deps: [{ token: forwardRef(() => PbdsDatavizBarGroupedComponent) }], target: i0.ɵɵFactoryTarget.Directive });
+PbdsBarGroupedAnnotationsDirective.ɵdir = i0.ɵɵngDeclareDirective({ minVersion: "12.0.0", version: "13.3.6", type: PbdsBarGroupedAnnotationsDirective, selector: "pbds-dataviz-bar-grouped[annotations]", inputs: { annotations: "annotations", annotationsHilight: "annotationsHilight" }, outputs: { annotationClicked: "annotationClicked" }, usesOnChanges: true, ngImport: i0 });
+i0.ɵɵngDeclareClassMetadata({ minVersion: "12.0.0", version: "13.3.6", ngImport: i0, type: PbdsBarGroupedAnnotationsDirective, decorators: [{
+            type: Directive,
+            args: [{
+                    selector: 'pbds-dataviz-bar-grouped[annotations]'
+                }]
+        }], ctorParameters: function () { return [{ type: undefined, decorators: [{
+                    type: Inject,
+                    args: [forwardRef(() => PbdsDatavizBarGroupedComponent)]
+                }] }]; }, propDecorators: { annotations: [{
+                type: Input,
+                args: ['annotations']
+            }], annotationsHilight: [{
+                type: Input,
+                args: ['annotationsHilight']
+            }], annotationClicked: [{
+                type: Output
+            }] } });
+
+const ANNOTATION_MARGIN_TOP = 62;
+const ANNOTATION_OFFSET = -22;
+const ANNOTATION_COMMENT_OFFSET = -47;
+const TRANSITION_DURATION = 1000;
+const TRANSITION_DELAY = 500;
+class PbdsBarAnnotationsDirective {
+    constructor(component) {
+        this.component = component;
+        this.annotationsHilight = null;
+        this.annotationClicked = new EventEmitter();
+        component.marginTop = ANNOTATION_MARGIN_TOP;
+    }
+    ngOnInit() {
+        this.annotationsGroup = this.component.svg.append('g').attr('class', 'annotations');
+        this.hilightBox = this.annotationsGroup
+            .append('rect')
+            .classed('annotations-hilight', true)
+            .attr('opacity', 0)
+            .attr('width', this.component.xAxisScale.bandwidth())
+            .attr('height', this.component.height)
+            .attr('transform', `translate(${0}, ${0})`);
+        this.update();
+    }
+    ngOnChanges(changes) {
+        if (changes && changes.annotationsHilight && !changes.annotationsHilight.firstChange) {
+            if (changes.annotationsHilight.currentValue) {
+                this.updateHilight();
+            }
+            else {
+                this.hilightBox.transition().duration(200).attr('opacity', 0);
+            }
+        }
+    }
+    update() {
+        const isAnotations = this.annotations;
+        const isIncidents = this.annotations?.incidents?.length > 0;
+        const isComments = this.annotations?.comments?.length > 0;
+        const bandwidth = this.component.xAxisScale.bandwidth();
+        if (isAnotations && isIncidents) {
+            this.annotationsGroup
+                .selectAll('g.incident')
+                .data(this.annotations.incidents)
+                .join((enter) => {
+                const g = enter.append('g').attr('class', 'incident');
+                g.attr('transform', (d, i) => {
+                    const x = this.component.xAxisScale(d.key) + bandwidth / 2;
+                    const y = ANNOTATION_OFFSET;
+                    return `translate(${x}, ${y})`;
+                }).attr('index', (d, i) => i);
+                g.append('circle')
+                    .attr('r', 0)
+                    .attr('cx', 0)
+                    .attr('cy', 0)
+                    .transition()
+                    .duration(TRANSITION_DURATION)
+                    .ease(easeQuadInOut)
+                    .attr('r', 15);
+                g.append('text')
+                    .attr('x', 0)
+                    .attr('y', 0)
+                    .attr('dx', 1)
+                    .attr('dy', 9)
+                    .attr('text-anchor', 'middle')
+                    .text((d) => {
+                    return d.icon || '';
+                })
+                    .attr('style', 'font-size: 0')
+                    .transition()
+                    .duration(TRANSITION_DURATION)
+                    .ease(easeQuadInOut)
+                    .attr('style', 'font-size: 17px');
+                return g;
+            }, (update) => {
+                update
+                    .transition()
+                    .duration(TRANSITION_DURATION)
+                    .ease(easeQuadInOut)
+                    .attr('transform', (d) => {
+                    const x = this.component.xAxisScale(d.key) + bandwidth / 2;
+                    const y = ANNOTATION_OFFSET;
+                    return `translate(${x}, ${y})`;
+                });
+                return update;
+            }, (exit) => {
+                exit.select('circle').transition().duration(TRANSITION_DURATION).attr('r', 0);
+                exit.select('text').transition().duration(TRANSITION_DURATION).attr('style', 'font-size: 0');
+                return exit.transition().delay(TRANSITION_DELAY).remove();
+            })
+                .on('mouseover', (event, data) => {
+                select(event.currentTarget).classed('hovered', true);
+            })
+                .on('mouseout', (event, data) => {
+                select(event.currentTarget).classed('hovered', false);
+            })
+                .on('click', (event, data) => {
+                // console.log('incident clicked', this.index.get(event.currentTarget.node));
+                this.annotationClicked.emit({ event, data, index: +select(event.currentTarget).attr('index') });
+            });
+        }
+        if (isAnotations && isComments) {
+            this.annotationsGroup
+                .selectAll('g.comment')
+                .data(this.annotations.comments)
+                .join((enter) => {
+                const g = enter.append('g').attr('class', 'comment');
+                g.attr('transform', (d) => {
+                    const x = this.component.xAxisScale(d.key) + bandwidth / 2;
+                    let y = ANNOTATION_OFFSET;
+                    const isIncidents = this.annotations?.incidents?.some((incident) => incident.key === d.key);
+                    if (isIncidents) {
+                        y = ANNOTATION_COMMENT_OFFSET;
+                    }
+                    return `translate(${x}, ${y})`;
+                }).attr('index', (d, i) => i);
+                g.append('circle')
+                    .attr('r', 0)
+                    .attr('cx', 0)
+                    .attr('cy', 0)
+                    .transition()
+                    .duration(TRANSITION_DURATION)
+                    .ease(easeQuadInOut)
+                    .attr('r', 15);
+                g.append('text')
+                    .attr('x', 0)
+                    .attr('y', 3)
+                    .attr('dx', 0)
+                    .attr('dy', 5)
+                    .attr('text-anchor', 'middle')
+                    .text('')
+                    .attr('style', 'font-size: 0')
+                    .transition()
+                    .duration(TRANSITION_DURATION)
+                    .ease(easeQuadInOut)
+                    .attr('style', 'font-size: 17px');
+                return g;
+            }, (update) => {
+                update
+                    .transition()
+                    .duration(TRANSITION_DURATION)
+                    .ease(easeQuadInOut)
+                    .attr('transform', (d) => {
+                    const x = this.component.xAxisScale(d.key) + bandwidth / 2;
+                    let y = ANNOTATION_OFFSET;
+                    const isIncidents = this.annotations?.incidents?.some((incident) => incident.key === d.key);
+                    if (isIncidents) {
+                        y = ANNOTATION_COMMENT_OFFSET;
+                    }
+                    return `translate(${x}, ${y})`;
+                });
+                return update;
+            }, (exit) => {
+                exit.select('circle').transition().duration(TRANSITION_DURATION).attr('r', 0);
+                exit.select('text').transition().duration(TRANSITION_DURATION).attr('style', 'font-size: 0');
+                return exit.transition().delay(TRANSITION_DELAY).remove();
+            })
+                .on('mouseover', (event, data) => {
+                select(event.currentTarget).classed('hovered', true);
+            })
+                .on('mouseout', (event, data) => {
+                select(event.currentTarget).classed('hovered', false);
+            })
+                .on('click', (event, data) => {
+                this.annotationClicked.emit({ event, data, index: +select(event.currentTarget).attr('index') });
+            });
+        }
+        // hilight
+        if (this.annotationsHilight) {
+            this.updateHilight();
+        }
+        this.component.svg.selectAll('.bar').classed('pbds-annotation-add', true);
+    }
+    updateHilight() {
+        const opacity = this.hilightBox.attr('opacity');
+        const duration = opacity === 0 ? 0 : 300;
+        this.hilightBox
+            .transition()
+            .duration(duration)
+            .ease(easeQuadInOut)
+            .attr('transform', () => {
+            const x = this.component.xAxisScale(this.annotationsHilight);
+            const y = 0;
+            return `translate(${x}, ${y})`;
+        })
+            .transition()
+            .duration(200)
+            .attr('opacity', 1);
+    }
+}
+PbdsBarAnnotationsDirective.ɵfac = i0.ɵɵngDeclareFactory({ minVersion: "12.0.0", version: "13.3.6", ngImport: i0, type: PbdsBarAnnotationsDirective, deps: [{ token: forwardRef(() => PbdsDatavizBarComponent) }], target: i0.ɵɵFactoryTarget.Directive });
+PbdsBarAnnotationsDirective.ɵdir = i0.ɵɵngDeclareDirective({ minVersion: "12.0.0", version: "13.3.6", type: PbdsBarAnnotationsDirective, selector: "pbds-dataviz-bar[annotations]", inputs: { annotations: "annotations", annotationsHilight: "annotationsHilight" }, outputs: { annotationClicked: "annotationClicked" }, usesOnChanges: true, ngImport: i0 });
+i0.ɵɵngDeclareClassMetadata({ minVersion: "12.0.0", version: "13.3.6", ngImport: i0, type: PbdsBarAnnotationsDirective, decorators: [{
+            type: Directive,
+            args: [{
+                    selector: 'pbds-dataviz-bar[annotations]'
+                }]
+        }], ctorParameters: function () { return [{ type: undefined, decorators: [{
+                    type: Inject,
+                    args: [forwardRef(() => PbdsDatavizBarComponent)]
+                }] }]; }, propDecorators: { annotations: [{
+                type: Input,
+                args: ['annotations']
+            }], annotationsHilight: [{
+                type: Input,
+                args: ['annotationsHilight']
+            }], annotationClicked: [{
+                type: Output,
+                args: ['annotationClicked']
+            }] } });
+
 class PbdsDatavizModule {
 }
-PbdsDatavizModule.ɵfac = i0.ɵɵngDeclareFactory({ minVersion: "12.0.0", version: "13.1.2", ngImport: i0, type: PbdsDatavizModule, deps: [], target: i0.ɵɵFactoryTarget.NgModule });
-PbdsDatavizModule.ɵmod = i0.ɵɵngDeclareNgModule({ minVersion: "12.0.0", version: "13.1.2", ngImport: i0, type: PbdsDatavizModule, declarations: [PbdsDatavizPieComponent,
+PbdsDatavizModule.ɵfac = i0.ɵɵngDeclareFactory({ minVersion: "12.0.0", version: "13.3.6", ngImport: i0, type: PbdsDatavizModule, deps: [], target: i0.ɵɵFactoryTarget.NgModule });
+PbdsDatavizModule.ɵmod = i0.ɵɵngDeclareNgModule({ minVersion: "12.0.0", version: "13.3.6", ngImport: i0, type: PbdsDatavizModule, declarations: [PbdsDatavizPieComponent,
         PbdsDatavizBarComponent,
         PbdsDatavizLineComponent,
         PbdsDatavizGaugeComponent,
@@ -5540,7 +7094,12 @@ PbdsDatavizModule.ɵmod = i0.ɵɵngDeclareNgModule({ minVersion: "12.0.0", versi
         PbdsDatavizHeatmapComponent,
         PbdsDatavizChoroplethMapComponent,
         PbdsDatavizBarGroupedComponent,
-        PbdsDatavizBarSingleHorizontalComponent], imports: [CommonModule, NgbTooltipModule], exports: [PbdsDatavizPieComponent,
+        PbdsDatavizBarSingleHorizontalComponent,
+        PbdsDatavizScatterplotComponent,
+        PbdsBarStackedAnnotationsDirective,
+        PbdsLineAnnotationsDirective,
+        PbdsBarGroupedAnnotationsDirective,
+        PbdsBarAnnotationsDirective], imports: [CommonModule, NgbTooltipModule], exports: [PbdsDatavizPieComponent,
         PbdsDatavizBarComponent,
         PbdsDatavizLineComponent,
         PbdsDatavizGaugeComponent,
@@ -5552,9 +7111,14 @@ PbdsDatavizModule.ɵmod = i0.ɵɵngDeclareNgModule({ minVersion: "12.0.0", versi
         PbdsDatavizHeatmapComponent,
         PbdsDatavizChoroplethMapComponent,
         PbdsDatavizBarGroupedComponent,
-        PbdsDatavizBarSingleHorizontalComponent] });
-PbdsDatavizModule.ɵinj = i0.ɵɵngDeclareInjector({ minVersion: "12.0.0", version: "13.1.2", ngImport: i0, type: PbdsDatavizModule, imports: [[CommonModule, NgbTooltipModule]] });
-i0.ɵɵngDeclareClassMetadata({ minVersion: "12.0.0", version: "13.1.2", ngImport: i0, type: PbdsDatavizModule, decorators: [{
+        PbdsDatavizBarSingleHorizontalComponent,
+        PbdsDatavizScatterplotComponent,
+        PbdsBarStackedAnnotationsDirective,
+        PbdsLineAnnotationsDirective,
+        PbdsBarGroupedAnnotationsDirective,
+        PbdsBarAnnotationsDirective] });
+PbdsDatavizModule.ɵinj = i0.ɵɵngDeclareInjector({ minVersion: "12.0.0", version: "13.3.6", ngImport: i0, type: PbdsDatavizModule, imports: [[CommonModule, NgbTooltipModule]] });
+i0.ɵɵngDeclareClassMetadata({ minVersion: "12.0.0", version: "13.3.6", ngImport: i0, type: PbdsDatavizModule, decorators: [{
             type: NgModule,
             args: [{
                     declarations: [
@@ -5570,7 +7134,12 @@ i0.ɵɵngDeclareClassMetadata({ minVersion: "12.0.0", version: "13.1.2", ngImpor
                         PbdsDatavizHeatmapComponent,
                         PbdsDatavizChoroplethMapComponent,
                         PbdsDatavizBarGroupedComponent,
-                        PbdsDatavizBarSingleHorizontalComponent
+                        PbdsDatavizBarSingleHorizontalComponent,
+                        PbdsDatavizScatterplotComponent,
+                        PbdsBarStackedAnnotationsDirective,
+                        PbdsLineAnnotationsDirective,
+                        PbdsBarGroupedAnnotationsDirective,
+                        PbdsBarAnnotationsDirective
                     ],
                     imports: [CommonModule, NgbTooltipModule],
                     exports: [
@@ -5586,7 +7155,12 @@ i0.ɵɵngDeclareClassMetadata({ minVersion: "12.0.0", version: "13.1.2", ngImpor
                         PbdsDatavizHeatmapComponent,
                         PbdsDatavizChoroplethMapComponent,
                         PbdsDatavizBarGroupedComponent,
-                        PbdsDatavizBarSingleHorizontalComponent
+                        PbdsDatavizBarSingleHorizontalComponent,
+                        PbdsDatavizScatterplotComponent,
+                        PbdsBarStackedAnnotationsDirective,
+                        PbdsLineAnnotationsDirective,
+                        PbdsBarGroupedAnnotationsDirective,
+                        PbdsBarAnnotationsDirective
                     ]
                 }]
         }] });
@@ -5597,5 +7171,5 @@ i0.ɵɵngDeclareClassMetadata({ minVersion: "12.0.0", version: "13.1.2", ngImpor
  * Generated bundle index. Do not edit.
  */
 
-export { PbdsDatavizBarComponent, PbdsDatavizBarGroupedComponent, PbdsDatavizBarSingleHorizontalComponent, PbdsDatavizBarStackedComponent, PbdsDatavizBubbleMapComponent, PbdsDatavizChoroplethMapComponent, PbdsDatavizGaugeComponent, PbdsDatavizHeatmapComponent, PbdsDatavizLineComponent, PbdsDatavizMetricBlockComponent, PbdsDatavizMetricIndicatorComponent, PbdsDatavizModule, PbdsDatavizPieComponent, PbdsDatavizService, PbdsDatavizSparklineComponent };
+export { PbdsBarAnnotationsDirective, PbdsBarGroupedAnnotationsDirective, PbdsBarStackedAnnotationsDirective, PbdsDatavizBarComponent, PbdsDatavizBarGroupedComponent, PbdsDatavizBarSingleHorizontalComponent, PbdsDatavizBarStackedComponent, PbdsDatavizBubbleMapComponent, PbdsDatavizChoroplethMapComponent, PbdsDatavizGaugeComponent, PbdsDatavizHeatmapComponent, PbdsDatavizLineComponent, PbdsDatavizMetricBlockComponent, PbdsDatavizMetricIndicatorComponent, PbdsDatavizModule, PbdsDatavizPieComponent, PbdsDatavizScatterplotComponent, PbdsDatavizService, PbdsDatavizSparklineComponent, PbdsLineAnnotationsDirective };
 //# sourceMappingURL=pb-design-system-dataviz.mjs.map
