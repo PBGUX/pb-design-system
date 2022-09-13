@@ -1,3 +1,19 @@
+# 6.15
+
+## Additions
+
+- Dark Mode: new class `bgdark` can be applied to body tag in any theme
+- Added DHL package images to Package Library
+- Added Impersonation pattern
+- Added Device Profile Patterns
+- Added Bubble Chart to DataViz components
+
+## Changes
+
+- Added Dark modes to Theme Switcher component
+
+---
+
 # 6.14
 
 ## Additions
