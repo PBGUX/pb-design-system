@@ -30,6 +30,8 @@ export declare class PbdsDatavizBarComponent implements OnInit, OnDestroy, OnCha
     legendLabelFormatString: string;
     tooltipLabelFormatType: 'number' | 'time';
     tooltipLabelFormatString: string;
+    tooltipLabelSuffix: string;
+    hideTooltipLabel: boolean;
     tooltipValueFormatType: 'number' | 'time';
     tooltipValueFormatString: string;
     marginTop: number;
@@ -81,7 +83,6 @@ export declare class PbdsDatavizBarComponent implements OnInit, OnDestroy, OnCha
     private legendLabelFormat;
     private tooltip;
     private hideTooltip;
-    private hideTooltipLabel;
     private tooltipValueFormat;
     private tooltipLabelFormat;
     constructor(_dataviz: PbdsDatavizService, _element: ElementRef, _scroll: ViewportScroller, _location: Location);
@@ -101,5 +102,5 @@ export declare class PbdsDatavizBarComponent implements OnInit, OnDestroy, OnCha
     private yAxisFormatter;
     private barFill;
     static ɵfac: i0.ɵɵFactoryDeclaration<PbdsDatavizBarComponent, never>;
-    static ɵcmp: i0.ɵɵComponentDeclaration<PbdsDatavizBarComponent, "pbds-dataviz-bar", never, { "data": "data"; "width": "width"; "height": "height"; "type": "type"; "singleSeries": "singleSeries"; "xAxisFormatType": "xAxisFormatType"; "xAxisFormatString": "xAxisFormatString"; "xAxisTitle": "xAxisTitle"; "yAxisFormatType": "yAxisFormatType"; "yAxisFormatString": "yAxisFormatString"; "yAxisTicks": "yAxisTicks"; "yAxisMinBuffer": "yAxisMinBuffer"; "yAxisMaxBuffer": "yAxisMaxBuffer"; "hideLegend": "hideLegend"; "legendWidth": "legendWidth"; "legendPosition": "legendPosition"; "legendLabelFormatType": "legendLabelFormatType"; "legendLabelFormatString": "legendLabelFormatString"; "tooltipLabelFormatType": "tooltipLabelFormatType"; "tooltipLabelFormatString": "tooltipLabelFormatString"; "tooltipValueFormatType": "tooltipValueFormatType"; "tooltipValueFormatString": "tooltipValueFormatString"; "marginTop": "marginTop"; "marginRight": "marginRight"; "marginBottom": "marginBottom"; "marginLeft": "marginLeft"; "threshold": "threshold"; "thresholdLabel": "thresholdLabel"; "average": "average"; "averageLabel": "averageLabel"; "theme": "theme"; "gradient": "gradient"; }, { "hovered": "hovered"; "clicked": "clicked"; }, never, never>;
+    static ɵcmp: i0.ɵɵComponentDeclaration<PbdsDatavizBarComponent, "pbds-dataviz-bar", never, { "data": "data"; "width": "width"; "height": "height"; "type": "type"; "singleSeries": "singleSeries"; "xAxisFormatType": "xAxisFormatType"; "xAxisFormatString": "xAxisFormatString"; "xAxisTitle": "xAxisTitle"; "yAxisFormatType": "yAxisFormatType"; "yAxisFormatString": "yAxisFormatString"; "yAxisTicks": "yAxisTicks"; "yAxisMinBuffer": "yAxisMinBuffer"; "yAxisMaxBuffer": "yAxisMaxBuffer"; "hideLegend": "hideLegend"; "legendWidth": "legendWidth"; "legendPosition": "legendPosition"; "legendLabelFormatType": "legendLabelFormatType"; "legendLabelFormatString": "legendLabelFormatString"; "tooltipLabelFormatType": "tooltipLabelFormatType"; "tooltipLabelFormatString": "tooltipLabelFormatString"; "tooltipLabelSuffix": "tooltipLabelSuffix"; "hideTooltipLabel": "hideTooltipLabel"; "tooltipValueFormatType": "tooltipValueFormatType"; "tooltipValueFormatString": "tooltipValueFormatString"; "marginTop": "marginTop"; "marginRight": "marginRight"; "marginBottom": "marginBottom"; "marginLeft": "marginLeft"; "threshold": "threshold"; "thresholdLabel": "thresholdLabel"; "average": "average"; "averageLabel": "averageLabel"; "theme": "theme"; "gradient": "gradient"; }, { "hovered": "hovered"; "clicked": "clicked"; }, never, never>;
 }

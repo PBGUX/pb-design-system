@@ -32,6 +32,7 @@ export declare class PbdsDatavizBubbleMapComponent implements OnInit, OnChanges,
     bubbleLabelFormatString: string;
     hideTooltip: boolean;
     hideTooltipValue: boolean;
+    tooltipHeaderSuffix: string;
     tooltipValueFormatType: 'number';
     tooltipValueFormatString: string;
     hovered: EventEmitter<object>;
@@ -59,5 +60,5 @@ export declare class PbdsDatavizBubbleMapComponent implements OnInit, OnChanges,
     private tooltipShow;
     private tooltipHide;
     static ɵfac: i0.ɵɵFactoryDeclaration<PbdsDatavizBubbleMapComponent, never>;
-    static ɵcmp: i0.ɵɵComponentDeclaration<PbdsDatavizBubbleMapComponent, "pbds-dataviz-bubble-map", never, { "data": "data"; "topojson": "topojson"; "feature": "feature"; "projectionType": "projectionType"; "scale": "scale"; "center": "center"; "width": "width"; "height": "height"; "type": "type"; "dot": "dot"; "marginTop": "marginTop"; "marginRight": "marginRight"; "marginBottom": "marginBottom"; "marginLeft": "marginLeft"; "color": "color"; "textColor": "textColor"; "textSizeRange": "textSizeRange"; "dotSize": "dotSize"; "bubbleSizeRange": "bubbleSizeRange"; "bubbleLabelFormatType": "bubbleLabelFormatType"; "bubbleLabelFormatString": "bubbleLabelFormatString"; "hideTooltip": "hideTooltip"; "hideTooltipValue": "hideTooltipValue"; "tooltipValueFormatType": "tooltipValueFormatType"; "tooltipValueFormatString": "tooltipValueFormatString"; }, { "hovered": "hovered"; "clicked": "clicked"; }, never, never>;
+    static ɵcmp: i0.ɵɵComponentDeclaration<PbdsDatavizBubbleMapComponent, "pbds-dataviz-bubble-map", never, { "data": "data"; "topojson": "topojson"; "feature": "feature"; "projectionType": "projectionType"; "scale": "scale"; "center": "center"; "width": "width"; "height": "height"; "type": "type"; "dot": "dot"; "marginTop": "marginTop"; "marginRight": "marginRight"; "marginBottom": "marginBottom"; "marginLeft": "marginLeft"; "color": "color"; "textColor": "textColor"; "textSizeRange": "textSizeRange"; "dotSize": "dotSize"; "bubbleSizeRange": "bubbleSizeRange"; "bubbleLabelFormatType": "bubbleLabelFormatType"; "bubbleLabelFormatString": "bubbleLabelFormatString"; "hideTooltip": "hideTooltip"; "hideTooltipValue": "hideTooltipValue"; "tooltipHeaderSuffix": "tooltipHeaderSuffix"; "tooltipValueFormatType": "tooltipValueFormatType"; "tooltipValueFormatString": "tooltipValueFormatString"; }, { "hovered": "hovered"; "clicked": "clicked"; }, never, never>;
 }
