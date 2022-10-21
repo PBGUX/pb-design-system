@@ -1,3 +1,25 @@
+# 6.16
+
+## Additions
+
+- Added a Knob Slider to Sliders
+- Added an Acessibility Dos and Don'ts page
+- Added a color variant of Feedback Ratings
+- Added a working example of the Editable Card
+- Added latest VPATs and accessibility scores
+
+## Changes
+
+- "Tab Tile Buttons" have moved to the buttons page
+
+## Fixes
+
+- Fix background color on input error examples
+- Link for PB Brand Site has changed
+- Update screen shots in Account Access to show correct alignment of alert icons
+
+---
+
 # 6.15
 
 ## Additions
