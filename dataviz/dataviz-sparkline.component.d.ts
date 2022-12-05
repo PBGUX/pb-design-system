@@ -22,5 +22,5 @@ export declare class PbdsDatavizSparklineComponent implements OnInit, OnChanges 
     ngOnChanges(changes: SimpleChanges): void;
     updateChart(): void;
     static ɵfac: i0.ɵɵFactoryDeclaration<PbdsDatavizSparklineComponent, never>;
-    static ɵcmp: i0.ɵɵComponentDeclaration<PbdsDatavizSparklineComponent, "pbds-dataviz-sparkline", never, { "data": "data"; "width": "width"; "height": "height"; "type": "type"; "color": "color"; "colorNegative": "colorNegative"; "strokeWidth": "strokeWidth"; "yAxisMinBuffer": "yAxisMinBuffer"; "yAxisMaxBuffer": "yAxisMaxBuffer"; }, {}, never, never>;
+    static ɵcmp: i0.ɵɵComponentDeclaration<PbdsDatavizSparklineComponent, "pbds-dataviz-sparkline", never, { "data": "data"; "width": "width"; "height": "height"; "type": "type"; "color": "color"; "colorNegative": "colorNegative"; "strokeWidth": "strokeWidth"; "yAxisMinBuffer": "yAxisMinBuffer"; "yAxisMaxBuffer": "yAxisMaxBuffer"; }, {}, never, never, false>;
 }

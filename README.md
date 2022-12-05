@@ -1,6 +1,11 @@
-# PB Design System 6
+# PB Design System 7
 
-This repo is for distribution of the Design System on `npm` using Bootstrap 4.6.0 and Angular 12.2.1
+This is a beta release of the Design System with Bootstrap 5. It requires Bootstrap 5, Angular 14, and NG-Bootstrap 13 to be installed.
+
+Please see **Migration.md** or **CHANGELOG.md** for breaking changes migrating from 6.x
+
+Your npm version must be 6.14.17, please check by running `npm -v`.
+Your node version must be 14.20.0, please check by running `node -v`.
 
 ## Installation
 
@@ -10,10 +15,10 @@ Install this package with `npm`:
 npm install pb-design-system --save
 ```
 
-Also you will need to install Boostrap 4.6.0 and Angular Material 11:
+Also you will need to install Boostrap 5.x and Angular Material 14.x:
 
 ```shell
-npm install bootstrap@4.6.0 @angular/material@12.2.1 --save
+npm install bootstrap@5 @angular/material@14 --save
 ```
 
 You will see warnings about peer dependencies (such as D3); those only need to be installed if you need them.

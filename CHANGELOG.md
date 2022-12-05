@@ -1,3 +1,32 @@
+# 7.0.0
+
+## BREAKING CHANGES
+
+**Design System 7 requires Bootstrap 5, Angular 14, and NG-Bootstrap 13 to be installed.**
+
+Your npm version must be 6.14.17, please check by running `npm -v`.
+Your node version must be 14.20.0, please check by running `node -v`.
+
+- For Bootstrap dropdowns, popovers, tooltips, etc. be sure to include `bootstrap.bundle.min.js` or `bootstrap.bundle.js` which contains Popper.
+- Everywhere there was a `data-toggle`, this needs to be changed to `data-bs-toggle`. This applies to Bootstrap dropdowns, header menus, tooptips, popovers, and modals.
+- Modals
+  - Bootstrap modals now need to be opened with `data-bs-toggle` and `data-bs-target`. The close button now requires `data-bs-close`
+  - Both Bootstrap and NG-Bootstrap modals' close button (the "X") require a class of `btn-close` instead of `close`. This affects dismissable notificationns as well.
+- Accordions have [new HTML](https://getbootstrap.com/docs/5.2/components/accordion/)
+- class `form-row` removed, needs to be replaced with `row g-3` to use new gutter utilities
+- `badge-pill` becomes `rounded-pill`
+- Toggle buttons require [new HTML](https://getbootstrap.com/docs/5.2/components/button-group/#checkbox-and-radio-button-groups)
+- Text alignment classes are [different](https://getbootstrap.com/docs/5.2/utilities/text/):
+  - `text-left` is now `text-start`
+  - `text-right` is now `text-end`
+  - these can still be set by viewport size
+- Due to the above new text classes, Footer HTML has changes
+- Card Deck and Card Columns have been removed
+- Remove `.input-group-append` and `.input-group-prepend`. You now just add buttons and `.input-group-text` span or divs as direct children of the input groups.
+- NG Bootstrap dropdown items no longer need a class, instead each menu item (button) needs `ngbDropdownItem`. See input fields > with dropdown.
+
+---
+
 # 6.16
 
 ## Additions

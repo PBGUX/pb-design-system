@@ -6,5 +6,5 @@ export declare class PbdsHeaderShadowDirective {
     onWindowScroll(): void;
     constructor(_scroll: ViewportScroller);
     static ɵfac: i0.ɵɵFactoryDeclaration<PbdsHeaderShadowDirective, never>;
-    static ɵdir: i0.ɵɵDirectiveDeclaration<PbdsHeaderShadowDirective, "header.bg-brand-header", never, {}, {}, never>;
+    static ɵdir: i0.ɵɵDirectiveDeclaration<PbdsHeaderShadowDirective, "header.bg-brand-header", never, {}, {}, never, never, false>;
 }

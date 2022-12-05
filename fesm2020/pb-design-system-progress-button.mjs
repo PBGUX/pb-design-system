@@ -18,13 +18,13 @@ class PbdsProgressButtonComponent {
         }
     }
 }
-PbdsProgressButtonComponent.ɵfac = i0.ɵɵngDeclareFactory({ minVersion: "12.0.0", version: "13.3.6", ngImport: i0, type: PbdsProgressButtonComponent, deps: [], target: i0.ɵɵFactoryTarget.Component });
-PbdsProgressButtonComponent.ɵcmp = i0.ɵɵngDeclareComponent({ minVersion: "12.0.0", version: "13.3.6", type: PbdsProgressButtonComponent, selector: "pbds-progress-button", inputs: { initLabel: "initLabel", btnClasses: "btnClasses", loadingLabel: "loadingLabel", isLoading: "isLoading" }, host: { properties: { "class.pbdsProgressButton": "this.classPbdsProgressButton" } }, usesOnChanges: true, ngImport: i0, template: `
+PbdsProgressButtonComponent.ɵfac = i0.ɵɵngDeclareFactory({ minVersion: "12.0.0", version: "14.2.12", ngImport: i0, type: PbdsProgressButtonComponent, deps: [], target: i0.ɵɵFactoryTarget.Component });
+PbdsProgressButtonComponent.ɵcmp = i0.ɵɵngDeclareComponent({ minVersion: "14.0.0", version: "14.2.12", type: PbdsProgressButtonComponent, selector: "pbds-progress-button", inputs: { initLabel: "initLabel", btnClasses: "btnClasses", loadingLabel: "loadingLabel", isLoading: "isLoading" }, host: { properties: { "class.pbdsProgressButton": "this.classPbdsProgressButton" } }, usesOnChanges: true, ngImport: i0, template: `
     <button class="{{ btnClasses }}" matRipple type="button">
       <ng-container *ngIf="this.isLoading" aria-live="assertive">
         <svg xmlns="http://www.w3.org/2000/svg" height="14" width="14" viewBox="0 0 16 16">
           <title>circle anim 3</title>
-          <g fill="currentColor" class="nc-icon-wrapper">
+          <g class="nc-icon-wrapper" fill="currentColor">
             <g class="nc-loop-circle-3-16-icon-f">
               <path
                 d="M8 16a8 8 0 1 1 8-8 1 1 0 0 1-2 0 6 6 0 1 0-1.8 4.286 1 1 0 1 1 1.4 1.428A7.956 7.956 0 0 1 8 16z"
@@ -48,16 +48,16 @@ PbdsProgressButtonComponent.ɵcmp = i0.ɵɵngDeclareComponent({ minVersion: "12.
             </style>
           </g>
         </svg>
-        {{ loadingLabel }} <span class="sr-only">in progress...</span>
+        {{ loadingLabel }} <span class="visually-hidden">in progress...</span>
       </ng-container>
 
       <ng-container *ngIf="!this.isLoading">
         {{ this.initLabel }}
       </ng-container>
     </button>
-    <div *ngIf="this.isCompleted" aria-live="assertive" class="sr-only">{{ this.loadingLabel }} complete,</div>
-  `, isInline: true, directives: [{ type: i1.NgIf, selector: "[ngIf]", inputs: ["ngIf", "ngIfThen", "ngIfElse"] }] });
-i0.ɵɵngDeclareClassMetadata({ minVersion: "12.0.0", version: "13.3.6", ngImport: i0, type: PbdsProgressButtonComponent, decorators: [{
+    <div class="visually-hidden" *ngIf="this.isCompleted" aria-live="assertive">{{ this.loadingLabel }} complete,</div>
+  `, isInline: true, dependencies: [{ kind: "directive", type: i1.NgIf, selector: "[ngIf]", inputs: ["ngIf", "ngIfThen", "ngIfElse"] }] });
+i0.ɵɵngDeclareClassMetadata({ minVersion: "12.0.0", version: "14.2.12", ngImport: i0, type: PbdsProgressButtonComponent, decorators: [{
             type: Component,
             args: [{
                     selector: 'pbds-progress-button',
@@ -66,7 +66,7 @@ i0.ɵɵngDeclareClassMetadata({ minVersion: "12.0.0", version: "13.3.6", ngImpor
       <ng-container *ngIf="this.isLoading" aria-live="assertive">
         <svg xmlns="http://www.w3.org/2000/svg" height="14" width="14" viewBox="0 0 16 16">
           <title>circle anim 3</title>
-          <g fill="currentColor" class="nc-icon-wrapper">
+          <g class="nc-icon-wrapper" fill="currentColor">
             <g class="nc-loop-circle-3-16-icon-f">
               <path
                 d="M8 16a8 8 0 1 1 8-8 1 1 0 0 1-2 0 6 6 0 1 0-1.8 4.286 1 1 0 1 1 1.4 1.428A7.956 7.956 0 0 1 8 16z"
@@ -90,14 +90,14 @@ i0.ɵɵngDeclareClassMetadata({ minVersion: "12.0.0", version: "13.3.6", ngImpor
             </style>
           </g>
         </svg>
-        {{ loadingLabel }} <span class="sr-only">in progress...</span>
+        {{ loadingLabel }} <span class="visually-hidden">in progress...</span>
       </ng-container>
 
       <ng-container *ngIf="!this.isLoading">
         {{ this.initLabel }}
       </ng-container>
     </button>
-    <div *ngIf="this.isCompleted" aria-live="assertive" class="sr-only">{{ this.loadingLabel }} complete,</div>
+    <div class="visually-hidden" *ngIf="this.isCompleted" aria-live="assertive">{{ this.loadingLabel }} complete,</div>
   `
                 }]
         }], propDecorators: { classPbdsProgressButton: [{
@@ -115,10 +115,10 @@ i0.ɵɵngDeclareClassMetadata({ minVersion: "12.0.0", version: "13.3.6", ngImpor
 
 class PbdsProgressButtonModule {
 }
-PbdsProgressButtonModule.ɵfac = i0.ɵɵngDeclareFactory({ minVersion: "12.0.0", version: "13.3.6", ngImport: i0, type: PbdsProgressButtonModule, deps: [], target: i0.ɵɵFactoryTarget.NgModule });
-PbdsProgressButtonModule.ɵmod = i0.ɵɵngDeclareNgModule({ minVersion: "12.0.0", version: "13.3.6", ngImport: i0, type: PbdsProgressButtonModule, declarations: [PbdsProgressButtonComponent], imports: [CommonModule], exports: [PbdsProgressButtonComponent] });
-PbdsProgressButtonModule.ɵinj = i0.ɵɵngDeclareInjector({ minVersion: "12.0.0", version: "13.3.6", ngImport: i0, type: PbdsProgressButtonModule, imports: [[CommonModule]] });
-i0.ɵɵngDeclareClassMetadata({ minVersion: "12.0.0", version: "13.3.6", ngImport: i0, type: PbdsProgressButtonModule, decorators: [{
+PbdsProgressButtonModule.ɵfac = i0.ɵɵngDeclareFactory({ minVersion: "12.0.0", version: "14.2.12", ngImport: i0, type: PbdsProgressButtonModule, deps: [], target: i0.ɵɵFactoryTarget.NgModule });
+PbdsProgressButtonModule.ɵmod = i0.ɵɵngDeclareNgModule({ minVersion: "14.0.0", version: "14.2.12", ngImport: i0, type: PbdsProgressButtonModule, declarations: [PbdsProgressButtonComponent], imports: [CommonModule], exports: [PbdsProgressButtonComponent] });
+PbdsProgressButtonModule.ɵinj = i0.ɵɵngDeclareInjector({ minVersion: "12.0.0", version: "14.2.12", ngImport: i0, type: PbdsProgressButtonModule, imports: [CommonModule] });
+i0.ɵɵngDeclareClassMetadata({ minVersion: "12.0.0", version: "14.2.12", ngImport: i0, type: PbdsProgressButtonModule, decorators: [{
             type: NgModule,
             args: [{
                     declarations: [PbdsProgressButtonComponent],

@@ -13,5 +13,5 @@ export declare class PbdsBarGroupedAnnotationsDirective implements OnInit, OnCha
     private update;
     private updateHilight;
     static ɵfac: i0.ɵɵFactoryDeclaration<PbdsBarGroupedAnnotationsDirective, never>;
-    static ɵdir: i0.ɵɵDirectiveDeclaration<PbdsBarGroupedAnnotationsDirective, "pbds-dataviz-bar-grouped[annotations]", never, { "annotations": "annotations"; "annotationsHilight": "annotationsHilight"; }, { "annotationClicked": "annotationClicked"; }, never>;
+    static ɵdir: i0.ɵɵDirectiveDeclaration<PbdsBarGroupedAnnotationsDirective, "pbds-dataviz-bar-grouped[annotations]", never, { "annotations": "annotations"; "annotationsHilight": "annotationsHilight"; }, { "annotationClicked": "annotationClicked"; }, never, never, false>;
 }
