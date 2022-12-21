@@ -17,5 +17,5 @@ export declare class PbdsDatavizMetricBlockComponent implements OnInit {
     indicatorRef: ElementRef;
     ngOnInit(): void;
     static ɵfac: i0.ɵɵFactoryDeclaration<PbdsDatavizMetricBlockComponent, never>;
-    static ɵcmp: i0.ɵɵComponentDeclaration<PbdsDatavizMetricBlockComponent, "pbds-dataviz-metric-block", never, { "class": "class"; "heading": "heading"; "value": "value"; "unit": "unit"; "description": "description"; "centered": "centered"; "centeredText": "centeredText"; "vertical": "vertical"; "infoMessage": "infoMessage"; }, {}, ["indicatorRef"], ["pbds-dataviz-metric-indicator", "pbds-dataviz-sparkline"]>;
+    static ɵcmp: i0.ɵɵComponentDeclaration<PbdsDatavizMetricBlockComponent, "pbds-dataviz-metric-block", never, { "class": "class"; "heading": "heading"; "value": "value"; "unit": "unit"; "description": "description"; "centered": "centered"; "centeredText": "centeredText"; "vertical": "vertical"; "infoMessage": "infoMessage"; }, {}, ["indicatorRef"], ["pbds-dataviz-metric-indicator", "pbds-dataviz-sparkline"], false>;
 }

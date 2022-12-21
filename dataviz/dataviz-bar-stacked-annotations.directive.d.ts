@@ -13,5 +13,5 @@ export declare class PbdsBarStackedAnnotationsDirective implements OnInit, OnCha
     private update;
     private updateHilight;
     static ɵfac: i0.ɵɵFactoryDeclaration<PbdsBarStackedAnnotationsDirective, never>;
-    static ɵdir: i0.ɵɵDirectiveDeclaration<PbdsBarStackedAnnotationsDirective, "pbds-dataviz-bar-stacked[annotations]", never, { "annotations": "annotations"; "annotationsHilight": "annotationsHilight"; }, { "annotationClicked": "annotationClicked"; }, never>;
+    static ɵdir: i0.ɵɵDirectiveDeclaration<PbdsBarStackedAnnotationsDirective, "pbds-dataviz-bar-stacked[annotations]", never, { "annotations": "annotations"; "annotationsHilight": "annotationsHilight"; }, { "annotationClicked": "annotationClicked"; }, never, never, false>;
 }

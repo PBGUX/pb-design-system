@@ -1,3 +1,24 @@
+# 6.17
+
+## Additions
+
+- Added option for Divergent Stacked bar chart
+- Added "password expired" flow to Account Access screens
+- Added Action List & Panel pattern
+- Maps page now has documentation for using the Google Maps API. Leaflet and the Precisely API are no longer used.
+
+## Changes
+
+- Design System updated to Angular 14.2.12
+- Expanded table rows are now white when on gray background, and gray when on a white background.
+- Changed order of US/CA address blocks to be city/state/zip by default
+
+## Fixes
+
+- Fixed gap in Multiselect with Checkboxes dropdown
+
+---
+
 # 6.16
 
 ## Additions

@@ -1,6 +1,6 @@
 {
   "name": "pb-design-system",
-  "version": "6.16.0",
+  "version": "6.17.0",
   "description": "Pitney Bowes Design System",
   "repository": {
     "type": "git",
@@ -13,12 +13,12 @@
   },
   "homepage": "https://github.com/PBGUX/pb-design-system",
   "module": "fesm2015/pb-design-system.mjs",
-  "typings": "pb-design-system.d.ts",
+  "typings": "index.d.ts",
   "peerDependencies": {
-    "@angular/common": "^10.0.0 || ^11.0.0 ||^12.0.0 || ^13.0.0",
-    "@angular/core": "^10.0.0 || ^11.0.0 ||^12.0.0 || ^13.0.0",
-    "@angular/cdk": "^10.0.0 || ^11.0.0 ||^12.0.0 || ^13.0.0",
-    "@angular/material": "^11.0.0 ||^12.0.0 || ^13.0.0",
+    "@angular/common": "^10.0.0 || ^11.0.0 ||^12.0.0 || ^13.0.0 || ^14.0.0",
+    "@angular/core": "^10.0.0 || ^11.0.0 ||^12.0.0 || ^13.0.0 || ^14.0.0",
+    "@angular/cdk": "^10.0.0 || ^11.0.0 ||^12.0.0 || ^13.0.0 || ^14.0.0",
+    "@angular/material": "^11.0.0 ||^12.0.0 || ^13.0.0 || ^14.0.0",
     "@ng-bootstrap/ng-bootstrap": "^10.0.0 || ^11.0.0",
     "d3": "^6.2.0 || ^7.0.0",
     "topojson-client": "^3.0.0"
@@ -35,7 +35,7 @@
       "default": "./package.json"
     },
     ".": {
-      "types": "./pb-design-system.d.ts",
+      "types": "./index.d.ts",
       "esm2020": "./esm2020/pb-design-system.mjs",
       "es2020": "./fesm2020/pb-design-system.mjs",
       "es2015": "./fesm2015/pb-design-system.mjs",
@@ -43,7 +43,7 @@
       "default": "./fesm2020/pb-design-system.mjs"
     },
     "./avatar": {
-      "types": "./avatar/pb-design-system-avatar.d.ts",
+      "types": "./avatar/index.d.ts",
       "esm2020": "./esm2020/avatar/pb-design-system-avatar.mjs",
       "es2020": "./fesm2020/pb-design-system-avatar.mjs",
       "es2015": "./fesm2015/pb-design-system-avatar.mjs",
@@ -51,7 +51,7 @@
       "default": "./fesm2020/pb-design-system-avatar.mjs"
     },
     "./column-toggle": {
-      "types": "./column-toggle/pb-design-system-column-toggle.d.ts",
+      "types": "./column-toggle/index.d.ts",
       "esm2020": "./esm2020/column-toggle/pb-design-system-column-toggle.mjs",
       "es2020": "./fesm2020/pb-design-system-column-toggle.mjs",
       "es2015": "./fesm2015/pb-design-system-column-toggle.mjs",
@@ -59,7 +59,7 @@
       "default": "./fesm2020/pb-design-system-column-toggle.mjs"
     },
     "./dataviz": {
-      "types": "./dataviz/pb-design-system-dataviz.d.ts",
+      "types": "./dataviz/index.d.ts",
       "esm2020": "./esm2020/dataviz/pb-design-system-dataviz.mjs",
       "es2020": "./fesm2020/pb-design-system-dataviz.mjs",
       "es2015": "./fesm2015/pb-design-system-dataviz.mjs",
@@ -67,7 +67,7 @@
       "default": "./fesm2020/pb-design-system-dataviz.mjs"
     },
     "./daterange-popover": {
-      "types": "./daterange-popover/pb-design-system-daterange-popover.d.ts",
+      "types": "./daterange-popover/index.d.ts",
       "esm2020": "./esm2020/daterange-popover/pb-design-system-daterange-popover.mjs",
       "es2020": "./fesm2020/pb-design-system-daterange-popover.mjs",
       "es2015": "./fesm2015/pb-design-system-daterange-popover.mjs",
@@ -75,15 +75,23 @@
       "default": "./fesm2020/pb-design-system-daterange-popover.mjs"
     },
     "./empty-state": {
-      "types": "./empty-state/pb-design-system-empty-state.d.ts",
+      "types": "./empty-state/index.d.ts",
       "esm2020": "./esm2020/empty-state/pb-design-system-empty-state.mjs",
       "es2020": "./fesm2020/pb-design-system-empty-state.mjs",
       "es2015": "./fesm2015/pb-design-system-empty-state.mjs",
       "node": "./fesm2015/pb-design-system-empty-state.mjs",
       "default": "./fesm2020/pb-design-system-empty-state.mjs"
     },
+    "./feedback-rating": {
+      "types": "./feedback-rating/index.d.ts",
+      "esm2020": "./esm2020/feedback-rating/pb-design-system-feedback-rating.mjs",
+      "es2020": "./fesm2020/pb-design-system-feedback-rating.mjs",
+      "es2015": "./fesm2015/pb-design-system-feedback-rating.mjs",
+      "node": "./fesm2015/pb-design-system-feedback-rating.mjs",
+      "default": "./fesm2020/pb-design-system-feedback-rating.mjs"
+    },
     "./header-shadow": {
-      "types": "./header-shadow/pb-design-system-header-shadow.d.ts",
+      "types": "./header-shadow/index.d.ts",
       "esm2020": "./esm2020/header-shadow/pb-design-system-header-shadow.mjs",
       "es2020": "./fesm2020/pb-design-system-header-shadow.mjs",
       "es2015": "./fesm2015/pb-design-system-header-shadow.mjs",
@@ -91,7 +99,7 @@
       "default": "./fesm2020/pb-design-system-header-shadow.mjs"
     },
     "./multiple-values": {
-      "types": "./multiple-values/pb-design-system-multiple-values.d.ts",
+      "types": "./multiple-values/index.d.ts",
       "esm2020": "./esm2020/multiple-values/pb-design-system-multiple-values.mjs",
       "es2020": "./fesm2020/pb-design-system-multiple-values.mjs",
       "es2015": "./fesm2015/pb-design-system-multiple-values.mjs",
@@ -99,7 +107,7 @@
       "default": "./fesm2020/pb-design-system-multiple-values.mjs"
     },
     "./page-title": {
-      "types": "./page-title/pb-design-system-page-title.d.ts",
+      "types": "./page-title/index.d.ts",
       "esm2020": "./esm2020/page-title/pb-design-system-page-title.mjs",
       "es2020": "./fesm2020/pb-design-system-page-title.mjs",
       "es2015": "./fesm2015/pb-design-system-page-title.mjs",
@@ -107,7 +115,7 @@
       "default": "./fesm2020/pb-design-system-page-title.mjs"
     },
     "./progress-button": {
-      "types": "./progress-button/pb-design-system-progress-button.d.ts",
+      "types": "./progress-button/index.d.ts",
       "esm2020": "./esm2020/progress-button/pb-design-system-progress-button.mjs",
       "es2020": "./fesm2020/pb-design-system-progress-button.mjs",
       "es2015": "./fesm2015/pb-design-system-progress-button.mjs",
@@ -115,7 +123,7 @@
       "default": "./fesm2020/pb-design-system-progress-button.mjs"
     },
     "./progress-spinner": {
-      "types": "./progress-spinner/pb-design-system-progress-spinner.d.ts",
+      "types": "./progress-spinner/index.d.ts",
       "esm2020": "./esm2020/progress-spinner/pb-design-system-progress-spinner.mjs",
       "es2020": "./fesm2020/pb-design-system-progress-spinner.mjs",
       "es2015": "./fesm2015/pb-design-system-progress-spinner.mjs",
