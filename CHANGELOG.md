@@ -1,3 +1,25 @@
+# 6.18
+
+## Additions
+
+- Added new dropdown with autocomplete and ability to add entered item if it's not in the list
+- Added examples of progress bars without numbers
+- Added Accessibility Checklists for Designers and Developers
+- Added new content to Accessibility Color Contrast page
+- Added option for custom color palette for most charts
+
+## Changes
+
+-- Removed Precisely APIs from address blocks
+
+## Fixes
+
+- Fixed color of Error Pages headers
+- Fixed bug in bar graph tooltips in Firefox
+
+---
+
+
 # 6.17
 
 ## Additions
