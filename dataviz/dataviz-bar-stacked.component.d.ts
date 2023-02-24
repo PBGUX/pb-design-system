@@ -1,7 +1,7 @@
-import { OnInit, OnChanges, EventEmitter, ElementRef, OnDestroy, SimpleChanges } from '@angular/core';
+import { ElementRef, EventEmitter, OnChanges, OnDestroy, OnInit, SimpleChanges } from '@angular/core';
 import { ViewportScroller } from '@angular/common';
-import { PbdsDatavizService } from './dataviz.service';
 import { PbdsDatavizBarStacked } from './dataviz.interfaces';
+import { PbdsDatavizService } from './dataviz.service';
 import * as i0 from "@angular/core";
 export declare class PbdsDatavizBarStackedComponent implements OnInit, OnDestroy, OnChanges {
     private _dataviz;
@@ -40,6 +40,9 @@ export declare class PbdsDatavizBarStackedComponent implements OnInit, OnDestroy
     tooltipValueFormatType: 'number';
     tooltipValueFormatString: string;
     theme: any;
+    totalSavings: any;
+    rotateXaxis: boolean;
+    isDiverging: boolean;
     hovered: EventEmitter<object>;
     clicked: EventEmitter<object>;
     private dataStack;
@@ -86,6 +89,8 @@ export declare class PbdsDatavizBarStackedComponent implements OnInit, OnDestroy
     private tooltipHeadingValueFormat;
     private tooltipValueFormat;
     private tooltipLabelFormat;
+    private centerline;
+    yAxisMin: any;
     constructor(_dataviz: PbdsDatavizService, _element: ElementRef, _scroll: ViewportScroller);
     ngOnInit(): void;
     ngOnDestroy(): void;
@@ -102,5 +107,5 @@ export declare class PbdsDatavizBarStackedComponent implements OnInit, OnDestroy
     private tooltipHide;
     private yAxisFormatter;
     static ɵfac: i0.ɵɵFactoryDeclaration<PbdsDatavizBarStackedComponent, never>;
-    static ɵcmp: i0.ɵɵComponentDeclaration<PbdsDatavizBarStackedComponent, "pbds-dataviz-bar-stacked", never, { "data": "data"; "width": "width"; "height": "height"; "type": "type"; "marginTop": "marginTop"; "marginRight": "marginRight"; "marginBottom": "marginBottom"; "marginLeft": "marginLeft"; "hideXAxis": "hideXAxis"; "xAxisFormatType": "xAxisFormatType"; "xAxisFormatString": "xAxisFormatString"; "xAxisTitle": "xAxisTitle"; "yAxisFormatType": "yAxisFormatType"; "yAxisFormatString": "yAxisFormatString"; "yAxisTicks": "yAxisTicks"; "yAxisMaxBuffer": "yAxisMaxBuffer"; "hideLegend": "hideLegend"; "legendWidth": "legendWidth"; "legendPosition": "legendPosition"; "legendLabelFormatType": "legendLabelFormatType"; "legendLabelFormatString": "legendLabelFormatString"; "tooltipHeadingFormatType": "tooltipHeadingFormatType"; "tooltipHeadingFormatString": "tooltipHeadingFormatString"; "tooltipHeadingSuffix": "tooltipHeadingSuffix"; "tooltipHeadingValueFormatType": "tooltipHeadingValueFormatType"; "tooltipHeadingValueFormatString": "tooltipHeadingValueFormatString"; "tooltipLabelFormatType": "tooltipLabelFormatType"; "tooltipLabelFormatString": "tooltipLabelFormatString"; "tooltipValueFormatType": "tooltipValueFormatType"; "tooltipValueFormatString": "tooltipValueFormatString"; "theme": "theme"; }, { "hovered": "hovered"; "clicked": "clicked"; }, never, never, false>;
+    static ɵcmp: i0.ɵɵComponentDeclaration<PbdsDatavizBarStackedComponent, "pbds-dataviz-bar-stacked", never, { "data": "data"; "width": "width"; "height": "height"; "type": "type"; "marginTop": "marginTop"; "marginRight": "marginRight"; "marginBottom": "marginBottom"; "marginLeft": "marginLeft"; "hideXAxis": "hideXAxis"; "xAxisFormatType": "xAxisFormatType"; "xAxisFormatString": "xAxisFormatString"; "xAxisTitle": "xAxisTitle"; "yAxisFormatType": "yAxisFormatType"; "yAxisFormatString": "yAxisFormatString"; "yAxisTicks": "yAxisTicks"; "yAxisMaxBuffer": "yAxisMaxBuffer"; "hideLegend": "hideLegend"; "legendWidth": "legendWidth"; "legendPosition": "legendPosition"; "legendLabelFormatType": "legendLabelFormatType"; "legendLabelFormatString": "legendLabelFormatString"; "tooltipHeadingFormatType": "tooltipHeadingFormatType"; "tooltipHeadingFormatString": "tooltipHeadingFormatString"; "tooltipHeadingSuffix": "tooltipHeadingSuffix"; "tooltipHeadingValueFormatType": "tooltipHeadingValueFormatType"; "tooltipHeadingValueFormatString": "tooltipHeadingValueFormatString"; "tooltipLabelFormatType": "tooltipLabelFormatType"; "tooltipLabelFormatString": "tooltipLabelFormatString"; "tooltipValueFormatType": "tooltipValueFormatType"; "tooltipValueFormatString": "tooltipValueFormatString"; "theme": "theme"; "totalSavings": "totalSavings"; "rotateXaxis": "rotateXaxis"; "isDiverging": "isDiverging"; }, { "hovered": "hovered"; "clicked": "clicked"; }, never, never, false, never>;
 }

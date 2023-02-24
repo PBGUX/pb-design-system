@@ -12,9 +12,9 @@ class PbdsHeaderShadowDirective {
         this.shadow = offset[1] > 20;
     }
 }
-PbdsHeaderShadowDirective.ɵfac = i0.ɵɵngDeclareFactory({ minVersion: "12.0.0", version: "14.2.12", ngImport: i0, type: PbdsHeaderShadowDirective, deps: [{ token: i1.ViewportScroller }], target: i0.ɵɵFactoryTarget.Directive });
-PbdsHeaderShadowDirective.ɵdir = i0.ɵɵngDeclareDirective({ minVersion: "14.0.0", version: "14.2.12", type: PbdsHeaderShadowDirective, selector: "header.bg-brand-header", host: { listeners: { "window:scroll": "onWindowScroll()" }, properties: { "class.pbds-header-shadow": "this.shadow" } }, ngImport: i0 });
-i0.ɵɵngDeclareClassMetadata({ minVersion: "12.0.0", version: "14.2.12", ngImport: i0, type: PbdsHeaderShadowDirective, decorators: [{
+PbdsHeaderShadowDirective.ɵfac = i0.ɵɵngDeclareFactory({ minVersion: "12.0.0", version: "15.1.0", ngImport: i0, type: PbdsHeaderShadowDirective, deps: [{ token: i1.ViewportScroller }], target: i0.ɵɵFactoryTarget.Directive });
+PbdsHeaderShadowDirective.ɵdir = i0.ɵɵngDeclareDirective({ minVersion: "14.0.0", version: "15.1.0", type: PbdsHeaderShadowDirective, selector: "header.bg-brand-header", host: { listeners: { "window:scroll": "onWindowScroll()" }, properties: { "class.pbds-header-shadow": "this.shadow" } }, ngImport: i0 });
+i0.ɵɵngDeclareClassMetadata({ minVersion: "12.0.0", version: "15.1.0", ngImport: i0, type: PbdsHeaderShadowDirective, decorators: [{
             type: Directive,
             args: [{
                     selector: 'header.bg-brand-header'
@@ -29,10 +29,10 @@ i0.ɵɵngDeclareClassMetadata({ minVersion: "12.0.0", version: "14.2.12", ngImpo
 
 class PbdsHeaderShadowModule {
 }
-PbdsHeaderShadowModule.ɵfac = i0.ɵɵngDeclareFactory({ minVersion: "12.0.0", version: "14.2.12", ngImport: i0, type: PbdsHeaderShadowModule, deps: [], target: i0.ɵɵFactoryTarget.NgModule });
-PbdsHeaderShadowModule.ɵmod = i0.ɵɵngDeclareNgModule({ minVersion: "14.0.0", version: "14.2.12", ngImport: i0, type: PbdsHeaderShadowModule, declarations: [PbdsHeaderShadowDirective], imports: [CommonModule], exports: [PbdsHeaderShadowDirective] });
-PbdsHeaderShadowModule.ɵinj = i0.ɵɵngDeclareInjector({ minVersion: "12.0.0", version: "14.2.12", ngImport: i0, type: PbdsHeaderShadowModule, imports: [CommonModule] });
-i0.ɵɵngDeclareClassMetadata({ minVersion: "12.0.0", version: "14.2.12", ngImport: i0, type: PbdsHeaderShadowModule, decorators: [{
+PbdsHeaderShadowModule.ɵfac = i0.ɵɵngDeclareFactory({ minVersion: "12.0.0", version: "15.1.0", ngImport: i0, type: PbdsHeaderShadowModule, deps: [], target: i0.ɵɵFactoryTarget.NgModule });
+PbdsHeaderShadowModule.ɵmod = i0.ɵɵngDeclareNgModule({ minVersion: "14.0.0", version: "15.1.0", ngImport: i0, type: PbdsHeaderShadowModule, declarations: [PbdsHeaderShadowDirective], imports: [CommonModule], exports: [PbdsHeaderShadowDirective] });
+PbdsHeaderShadowModule.ɵinj = i0.ɵɵngDeclareInjector({ minVersion: "12.0.0", version: "15.1.0", ngImport: i0, type: PbdsHeaderShadowModule, imports: [CommonModule] });
+i0.ɵɵngDeclareClassMetadata({ minVersion: "12.0.0", version: "15.1.0", ngImport: i0, type: PbdsHeaderShadowModule, decorators: [{
             type: NgModule,
             args: [{
                     declarations: [PbdsHeaderShadowDirective],

@@ -6,5 +6,5 @@ export declare class PbdsDatavizMetricIndicatorComponent {
     inverse: boolean;
     get hostClasses(): string;
     static ɵfac: i0.ɵɵFactoryDeclaration<PbdsDatavizMetricIndicatorComponent, never>;
-    static ɵcmp: i0.ɵɵComponentDeclaration<PbdsDatavizMetricIndicatorComponent, "pbds-dataviz-metric-indicator", never, { "value": "value"; "class": "class"; "indicator": "indicator"; "inverse": "inverse"; }, {}, never, never, false>;
+    static ɵcmp: i0.ɵɵComponentDeclaration<PbdsDatavizMetricIndicatorComponent, "pbds-dataviz-metric-indicator", never, { "value": "value"; "class": "class"; "indicator": "indicator"; "inverse": "inverse"; }, {}, never, never, false, never>;
 }

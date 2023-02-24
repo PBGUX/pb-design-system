@@ -1,11 +1,12 @@
+
 # 7.0.0
 
 ## BREAKING CHANGES
 
-**Design System 7 requires Bootstrap 5, Angular 14, and NG-Bootstrap 13 to be installed.**
+**Design System 7.x requires Bootstrap 5, Angular 14, and NG-Bootstrap 13 to be installed.**
 
-Your npm version must be 6.14.17, please check by running `npm -v`.
-Your node version must be 14.20.0, please check by running `node -v`.
+Your npm version must be at least 6.14.17, please check by running `npm -v`.
+Your node version must be at least 14.20.0, please check by running `node -v`.
 
 - For Bootstrap dropdowns, popovers, tooltips, etc. be sure to include `bootstrap.bundle.min.js` or `bootstrap.bundle.js` which contains Popper.
 - Everywhere there was a `data-toggle`, this needs to be changed to `data-bs-toggle`. This applies to Bootstrap dropdowns, header menus, tooptips, popovers, and modals.
@@ -13,17 +14,62 @@ Your node version must be 14.20.0, please check by running `node -v`.
   - Bootstrap modals now need to be opened with `data-bs-toggle` and `data-bs-target`. The close button now requires `data-bs-close`
   - Both Bootstrap and NG-Bootstrap modals' close button (the "X") require a class of `btn-close` instead of `close`. This affects dismissable notificationns as well.
 - Accordions have [new HTML](https://getbootstrap.com/docs/5.2/components/accordion/)
-- class `form-row` removed, needs to be replaced with `row g-3` to use new gutter utilities
+- The Class `form-row` was removed, needs to be replaced with `row g-3` to use new gutter utilities
 - `badge-pill` becomes `rounded-pill`
 - Toggle buttons require [new HTML](https://getbootstrap.com/docs/5.2/components/button-group/#checkbox-and-radio-button-groups)
 - Text alignment classes are [different](https://getbootstrap.com/docs/5.2/utilities/text/):
   - `text-left` is now `text-start`
   - `text-right` is now `text-end`
-  - these can still be set by viewport size
-- Due to the above new text classes, Footer HTML has changes
+  - these can still be set by viewport size (e.g., `xs`, `md`)
+- Due to the above new text classes, our Footer HTML has changes
 - Card Deck and Card Columns have been removed
 - Remove `.input-group-append` and `.input-group-prepend`. You now just add buttons and `.input-group-text` span or divs as direct children of the input groups.
-- NG Bootstrap dropdown items no longer need a class, instead each menu item (button) needs `ngbDropdownItem`. See input fields > with dropdown.
+- NG Bootstrap dropdown items no longer need a class, instead each menu item (button) needs `ngbDropdownItem`. See input fields > with dropdown for an example.
+- There were extensive css class name changes to Angular Material 15 components.  The changes were integrated into the Design System css, so no work should be required unless you made your own overrides to the Design System.
+
+
+---
+
+# 6.18
+
+## Additions
+
+- Added new dropdown with autocomplete and ability to add entered item if it's not in the list
+- Added examples of progress bars without numbers
+- Added Accessibility Checklists for Designers and Developers
+- Added new content to Accessibility Color Contrast page
+- Added option for custom color palette for most charts
+
+## Changes
+
+-- Removed Precisely APIs from address blocks
+
+## Fixes
+
+- Fixed color of Error Pages headers
+- Fixed bug in bar graph tooltips in Firefox
+
+---
+
+
+# 6.17
+
+## Additions
+
+- Added option for Divergent Stacked bar chart
+- Added "password expired" flow to Account Access screens
+- Added Action List & Panel pattern
+- Maps page now has documentation for using the Google Maps API. Leaflet and the Precisely API are no longer used.
+
+## Changes
+
+- Design System updated to Angular 14.2.12
+- Expanded table rows are now white when on gray background, and gray when on a white background.
+- Changed order of US/CA address blocks to be city/state/zip by default
+
+## Fixes
+
+- Fixed gap in Multiselect with Checkboxes dropdown
 
 ---
 
