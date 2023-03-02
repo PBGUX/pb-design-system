@@ -1,10 +1,5 @@
-# 6.18.1
 
-## Changes
-
-- Changed styling for Sliding Step-Based Wizard (Progress Indicators)
-
-# 6.18
+# 6.18 - 6.18.2
 
 ## Additions
 
