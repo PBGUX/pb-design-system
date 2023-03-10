@@ -1,5 +1,5 @@
 
-# 6.18 - 6.18.2
+# 6.18 - 6.18.e
 
 ## Additions
 
@@ -11,7 +11,8 @@
 
 ## Changes
 
--- Removed Precisely APIs from address blocks
+- Removed Precisely APIs from address blocks
+- Changed style of sliding step-based wizard to better match other step-based progress indicator
 
 ## Fixes
 
