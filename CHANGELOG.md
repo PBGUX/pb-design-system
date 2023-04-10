@@ -3,7 +3,7 @@
 
 ## BREAKING CHANGES
 
-**Design System 7.x requires Bootstrap 5, Angular 14, and NG-Bootstrap 13 to be installed.**
+**Design System 7.x requires Bootstrap 5, Angular 15, and NG-Bootstrap 14 to be installed.**
 
 Your npm version must be at least 6.14.17, please check by running `npm -v`.
 Your node version must be at least 14.20.0, please check by running `node -v`.
