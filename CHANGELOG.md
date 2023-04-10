@@ -8,6 +8,8 @@
 Your npm version must be at least 6.14.17, please check by running `npm -v`.
 Your node version must be at least 14.20.0, please check by running `node -v`.
 
+### IMPORTANT NOTE: if updating from a version older than 6.7.0: Please see the breaking changes in the 6.7.0 listing below.
+
 - For Bootstrap dropdowns, popovers, tooltips, etc. be sure to include `bootstrap.bundle.min.js` or `bootstrap.bundle.js` which contains Popper.
 - Everywhere there was a `data-toggle`, this needs to be changed to `data-bs-toggle`. This applies to Bootstrap dropdowns, header menus, tooptips, popovers, and modals.
 - Modals
