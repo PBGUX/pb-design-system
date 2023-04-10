@@ -36,7 +36,7 @@ export declare class PbdsMultipleValuesDirective implements ControlValueAccessor
     writeValue(value: any): void;
     registerOnChange(onChange: (value: string[]) => void): void;
     registerOnTouched(onTouched: () => void): void;
-    setDisabledState(disabled: boolean): void;
+    setDisabledState(isDisabled: boolean): void;
     /**
      * Get values
      *

@@ -4,10 +4,10 @@ import { PbdsAvatarComponent } from './avatar.component';
 import * as i0 from "@angular/core";
 export class PbdsAvatarModule {
 }
-PbdsAvatarModule.ɵfac = i0.ɵɵngDeclareFactory({ minVersion: "12.0.0", version: "15.1.0", ngImport: i0, type: PbdsAvatarModule, deps: [], target: i0.ɵɵFactoryTarget.NgModule });
-PbdsAvatarModule.ɵmod = i0.ɵɵngDeclareNgModule({ minVersion: "14.0.0", version: "15.1.0", ngImport: i0, type: PbdsAvatarModule, declarations: [PbdsAvatarComponent], imports: [CommonModule], exports: [PbdsAvatarComponent] });
-PbdsAvatarModule.ɵinj = i0.ɵɵngDeclareInjector({ minVersion: "12.0.0", version: "15.1.0", ngImport: i0, type: PbdsAvatarModule, imports: [CommonModule] });
-i0.ɵɵngDeclareClassMetadata({ minVersion: "12.0.0", version: "15.1.0", ngImport: i0, type: PbdsAvatarModule, decorators: [{
+PbdsAvatarModule.ɵfac = i0.ɵɵngDeclareFactory({ minVersion: "12.0.0", version: "15.2.4", ngImport: i0, type: PbdsAvatarModule, deps: [], target: i0.ɵɵFactoryTarget.NgModule });
+PbdsAvatarModule.ɵmod = i0.ɵɵngDeclareNgModule({ minVersion: "14.0.0", version: "15.2.4", ngImport: i0, type: PbdsAvatarModule, declarations: [PbdsAvatarComponent], imports: [CommonModule], exports: [PbdsAvatarComponent] });
+PbdsAvatarModule.ɵinj = i0.ɵɵngDeclareInjector({ minVersion: "12.0.0", version: "15.2.4", ngImport: i0, type: PbdsAvatarModule, imports: [CommonModule] });
+i0.ɵɵngDeclareClassMetadata({ minVersion: "12.0.0", version: "15.2.4", ngImport: i0, type: PbdsAvatarModule, decorators: [{
             type: NgModule,
             args: [{
                     declarations: [PbdsAvatarComponent],

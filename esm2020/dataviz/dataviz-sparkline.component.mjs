@@ -118,9 +118,9 @@ export class PbdsDatavizSparklineComponent {
         }
     }
 }
-PbdsDatavizSparklineComponent.ɵfac = i0.ɵɵngDeclareFactory({ minVersion: "12.0.0", version: "15.1.0", ngImport: i0, type: PbdsDatavizSparklineComponent, deps: [{ token: i0.ElementRef }], target: i0.ɵɵFactoryTarget.Component });
-PbdsDatavizSparklineComponent.ɵcmp = i0.ɵɵngDeclareComponent({ minVersion: "14.0.0", version: "15.1.0", type: PbdsDatavizSparklineComponent, selector: "pbds-dataviz-sparkline", inputs: { data: "data", width: "width", height: "height", type: "type", color: "color", colorNegative: "colorNegative", strokeWidth: "strokeWidth", yAxisMinBuffer: "yAxisMinBuffer", yAxisMaxBuffer: "yAxisMaxBuffer" }, host: { properties: { "class.pbds-chart": "this.chartClass", "class.pbds-chart-sparkline": "this.sparklineClass" } }, usesOnChanges: true, ngImport: i0, template: ``, isInline: true, changeDetection: i0.ChangeDetectionStrategy.OnPush });
-i0.ɵɵngDeclareClassMetadata({ minVersion: "12.0.0", version: "15.1.0", ngImport: i0, type: PbdsDatavizSparklineComponent, decorators: [{
+PbdsDatavizSparklineComponent.ɵfac = i0.ɵɵngDeclareFactory({ minVersion: "12.0.0", version: "15.2.4", ngImport: i0, type: PbdsDatavizSparklineComponent, deps: [{ token: i0.ElementRef }], target: i0.ɵɵFactoryTarget.Component });
+PbdsDatavizSparklineComponent.ɵcmp = i0.ɵɵngDeclareComponent({ minVersion: "14.0.0", version: "15.2.4", type: PbdsDatavizSparklineComponent, selector: "pbds-dataviz-sparkline", inputs: { data: "data", width: "width", height: "height", type: "type", color: "color", colorNegative: "colorNegative", strokeWidth: "strokeWidth", yAxisMinBuffer: "yAxisMinBuffer", yAxisMaxBuffer: "yAxisMaxBuffer" }, host: { properties: { "class.pbds-chart": "this.chartClass", "class.pbds-chart-sparkline": "this.sparklineClass" } }, usesOnChanges: true, ngImport: i0, template: ``, isInline: true, changeDetection: i0.ChangeDetectionStrategy.OnPush });
+i0.ɵɵngDeclareClassMetadata({ minVersion: "12.0.0", version: "15.2.4", ngImport: i0, type: PbdsDatavizSparklineComponent, decorators: [{
             type: Component,
             args: [{ selector: 'pbds-dataviz-sparkline', template: ``, changeDetection: ChangeDetectionStrategy.OnPush }]
         }], ctorParameters: function () { return [{ type: i0.ElementRef }]; }, propDecorators: { chartClass: [{

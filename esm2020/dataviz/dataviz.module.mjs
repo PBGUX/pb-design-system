@@ -23,8 +23,8 @@ import { PbdsBarAnnotationsDirective } from './dataviz-bar-annotations.directive
 import * as i0 from "@angular/core";
 export class PbdsDatavizModule {
 }
-PbdsDatavizModule.ɵfac = i0.ɵɵngDeclareFactory({ minVersion: "12.0.0", version: "15.1.0", ngImport: i0, type: PbdsDatavizModule, deps: [], target: i0.ɵɵFactoryTarget.NgModule });
-PbdsDatavizModule.ɵmod = i0.ɵɵngDeclareNgModule({ minVersion: "14.0.0", version: "15.1.0", ngImport: i0, type: PbdsDatavizModule, declarations: [PbdsDatavizPieComponent,
+PbdsDatavizModule.ɵfac = i0.ɵɵngDeclareFactory({ minVersion: "12.0.0", version: "15.2.4", ngImport: i0, type: PbdsDatavizModule, deps: [], target: i0.ɵɵFactoryTarget.NgModule });
+PbdsDatavizModule.ɵmod = i0.ɵɵngDeclareNgModule({ minVersion: "14.0.0", version: "15.2.4", ngImport: i0, type: PbdsDatavizModule, declarations: [PbdsDatavizPieComponent,
         PbdsDatavizBarComponent,
         PbdsDatavizLineComponent,
         PbdsDatavizGaugeComponent,
@@ -59,8 +59,8 @@ PbdsDatavizModule.ɵmod = i0.ɵɵngDeclareNgModule({ minVersion: "14.0.0", versi
         PbdsLineAnnotationsDirective,
         PbdsBarGroupedAnnotationsDirective,
         PbdsBarAnnotationsDirective] });
-PbdsDatavizModule.ɵinj = i0.ɵɵngDeclareInjector({ minVersion: "12.0.0", version: "15.1.0", ngImport: i0, type: PbdsDatavizModule, imports: [CommonModule, NgbTooltipModule] });
-i0.ɵɵngDeclareClassMetadata({ minVersion: "12.0.0", version: "15.1.0", ngImport: i0, type: PbdsDatavizModule, decorators: [{
+PbdsDatavizModule.ɵinj = i0.ɵɵngDeclareInjector({ minVersion: "12.0.0", version: "15.2.4", ngImport: i0, type: PbdsDatavizModule, imports: [CommonModule, NgbTooltipModule] });
+i0.ɵɵngDeclareClassMetadata({ minVersion: "12.0.0", version: "15.2.4", ngImport: i0, type: PbdsDatavizModule, decorators: [{
             type: NgModule,
             args: [{
                     declarations: [

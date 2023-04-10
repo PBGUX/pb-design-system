@@ -42,6 +42,14 @@
       "node": "./fesm2015/pb-design-system.mjs",
       "default": "./fesm2020/pb-design-system.mjs"
     },
+    "./a11y-widget": {
+      "types": "./a11y-widget/index.d.ts",
+      "esm2020": "./esm2020/a11y-widget/pb-design-system-a11y-widget.mjs",
+      "es2020": "./fesm2020/pb-design-system-a11y-widget.mjs",
+      "es2015": "./fesm2015/pb-design-system-a11y-widget.mjs",
+      "node": "./fesm2015/pb-design-system-a11y-widget.mjs",
+      "default": "./fesm2020/pb-design-system-a11y-widget.mjs"
+    },
     "./avatar": {
       "types": "./avatar/index.d.ts",
       "esm2020": "./esm2020/avatar/pb-design-system-avatar.mjs",

@@ -4,10 +4,10 @@ import { PbdsProgressButtonComponent } from './progress-button.component';
 import * as i0 from "@angular/core";
 export class PbdsProgressButtonModule {
 }
-PbdsProgressButtonModule.ɵfac = i0.ɵɵngDeclareFactory({ minVersion: "12.0.0", version: "15.1.0", ngImport: i0, type: PbdsProgressButtonModule, deps: [], target: i0.ɵɵFactoryTarget.NgModule });
-PbdsProgressButtonModule.ɵmod = i0.ɵɵngDeclareNgModule({ minVersion: "14.0.0", version: "15.1.0", ngImport: i0, type: PbdsProgressButtonModule, declarations: [PbdsProgressButtonComponent], imports: [CommonModule], exports: [PbdsProgressButtonComponent] });
-PbdsProgressButtonModule.ɵinj = i0.ɵɵngDeclareInjector({ minVersion: "12.0.0", version: "15.1.0", ngImport: i0, type: PbdsProgressButtonModule, imports: [CommonModule] });
-i0.ɵɵngDeclareClassMetadata({ minVersion: "12.0.0", version: "15.1.0", ngImport: i0, type: PbdsProgressButtonModule, decorators: [{
+PbdsProgressButtonModule.ɵfac = i0.ɵɵngDeclareFactory({ minVersion: "12.0.0", version: "15.2.4", ngImport: i0, type: PbdsProgressButtonModule, deps: [], target: i0.ɵɵFactoryTarget.NgModule });
+PbdsProgressButtonModule.ɵmod = i0.ɵɵngDeclareNgModule({ minVersion: "14.0.0", version: "15.2.4", ngImport: i0, type: PbdsProgressButtonModule, declarations: [PbdsProgressButtonComponent], imports: [CommonModule], exports: [PbdsProgressButtonComponent] });
+PbdsProgressButtonModule.ɵinj = i0.ɵɵngDeclareInjector({ minVersion: "12.0.0", version: "15.2.4", ngImport: i0, type: PbdsProgressButtonModule, imports: [CommonModule] });
+i0.ɵɵngDeclareClassMetadata({ minVersion: "12.0.0", version: "15.2.4", ngImport: i0, type: PbdsProgressButtonModule, decorators: [{
             type: NgModule,
             args: [{
                     declarations: [PbdsProgressButtonComponent],

@@ -191,9 +191,9 @@ export class PbdsBarAnnotationsDirective {
             .attr('opacity', 1);
     }
 }
-PbdsBarAnnotationsDirective.ɵfac = i0.ɵɵngDeclareFactory({ minVersion: "12.0.0", version: "15.1.0", ngImport: i0, type: PbdsBarAnnotationsDirective, deps: [{ token: forwardRef(() => PbdsDatavizBarComponent) }], target: i0.ɵɵFactoryTarget.Directive });
-PbdsBarAnnotationsDirective.ɵdir = i0.ɵɵngDeclareDirective({ minVersion: "14.0.0", version: "15.1.0", type: PbdsBarAnnotationsDirective, selector: "pbds-dataviz-bar[annotations]", inputs: { annotations: "annotations", annotationsHilight: "annotationsHilight" }, outputs: { annotationClicked: "annotationClicked" }, usesOnChanges: true, ngImport: i0 });
-i0.ɵɵngDeclareClassMetadata({ minVersion: "12.0.0", version: "15.1.0", ngImport: i0, type: PbdsBarAnnotationsDirective, decorators: [{
+PbdsBarAnnotationsDirective.ɵfac = i0.ɵɵngDeclareFactory({ minVersion: "12.0.0", version: "15.2.4", ngImport: i0, type: PbdsBarAnnotationsDirective, deps: [{ token: forwardRef(() => PbdsDatavizBarComponent) }], target: i0.ɵɵFactoryTarget.Directive });
+PbdsBarAnnotationsDirective.ɵdir = i0.ɵɵngDeclareDirective({ minVersion: "14.0.0", version: "15.2.4", type: PbdsBarAnnotationsDirective, selector: "pbds-dataviz-bar[annotations]", inputs: { annotations: "annotations", annotationsHilight: "annotationsHilight" }, outputs: { annotationClicked: "annotationClicked" }, usesOnChanges: true, ngImport: i0 });
+i0.ɵɵngDeclareClassMetadata({ minVersion: "12.0.0", version: "15.2.4", ngImport: i0, type: PbdsBarAnnotationsDirective, decorators: [{
             type: Directive,
             args: [{
                     selector: 'pbds-dataviz-bar[annotations]'

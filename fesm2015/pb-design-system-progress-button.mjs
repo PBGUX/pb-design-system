@@ -18,8 +18,8 @@ class PbdsProgressButtonComponent {
         }
     }
 }
-PbdsProgressButtonComponent.ɵfac = i0.ɵɵngDeclareFactory({ minVersion: "12.0.0", version: "15.1.0", ngImport: i0, type: PbdsProgressButtonComponent, deps: [], target: i0.ɵɵFactoryTarget.Component });
-PbdsProgressButtonComponent.ɵcmp = i0.ɵɵngDeclareComponent({ minVersion: "14.0.0", version: "15.1.0", type: PbdsProgressButtonComponent, selector: "pbds-progress-button", inputs: { initLabel: "initLabel", btnClasses: "btnClasses", loadingLabel: "loadingLabel", isLoading: "isLoading" }, host: { properties: { "class.pbdsProgressButton": "this.classPbdsProgressButton" } }, usesOnChanges: true, ngImport: i0, template: `
+PbdsProgressButtonComponent.ɵfac = i0.ɵɵngDeclareFactory({ minVersion: "12.0.0", version: "15.2.4", ngImport: i0, type: PbdsProgressButtonComponent, deps: [], target: i0.ɵɵFactoryTarget.Component });
+PbdsProgressButtonComponent.ɵcmp = i0.ɵɵngDeclareComponent({ minVersion: "14.0.0", version: "15.2.4", type: PbdsProgressButtonComponent, selector: "pbds-progress-button", inputs: { initLabel: "initLabel", btnClasses: "btnClasses", loadingLabel: "loadingLabel", isLoading: "isLoading" }, host: { properties: { "class.pbdsProgressButton": "this.classPbdsProgressButton" } }, usesOnChanges: true, ngImport: i0, template: `
     <button class="{{ btnClasses }}" matRipple type="button">
       <ng-container *ngIf="this.isLoading" aria-live="assertive">
         <svg xmlns="http://www.w3.org/2000/svg" height="14" width="14" viewBox="0 0 16 16">
@@ -57,7 +57,7 @@ PbdsProgressButtonComponent.ɵcmp = i0.ɵɵngDeclareComponent({ minVersion: "14.
     </button>
     <div class="visually-hidden" *ngIf="this.isCompleted" aria-live="assertive">{{ this.loadingLabel }} complete,</div>
   `, isInline: true, dependencies: [{ kind: "directive", type: i1.NgIf, selector: "[ngIf]", inputs: ["ngIf", "ngIfThen", "ngIfElse"] }] });
-i0.ɵɵngDeclareClassMetadata({ minVersion: "12.0.0", version: "15.1.0", ngImport: i0, type: PbdsProgressButtonComponent, decorators: [{
+i0.ɵɵngDeclareClassMetadata({ minVersion: "12.0.0", version: "15.2.4", ngImport: i0, type: PbdsProgressButtonComponent, decorators: [{
             type: Component,
             args: [{
                     selector: 'pbds-progress-button',
@@ -115,10 +115,10 @@ i0.ɵɵngDeclareClassMetadata({ minVersion: "12.0.0", version: "15.1.0", ngImpor
 
 class PbdsProgressButtonModule {
 }
-PbdsProgressButtonModule.ɵfac = i0.ɵɵngDeclareFactory({ minVersion: "12.0.0", version: "15.1.0", ngImport: i0, type: PbdsProgressButtonModule, deps: [], target: i0.ɵɵFactoryTarget.NgModule });
-PbdsProgressButtonModule.ɵmod = i0.ɵɵngDeclareNgModule({ minVersion: "14.0.0", version: "15.1.0", ngImport: i0, type: PbdsProgressButtonModule, declarations: [PbdsProgressButtonComponent], imports: [CommonModule], exports: [PbdsProgressButtonComponent] });
-PbdsProgressButtonModule.ɵinj = i0.ɵɵngDeclareInjector({ minVersion: "12.0.0", version: "15.1.0", ngImport: i0, type: PbdsProgressButtonModule, imports: [CommonModule] });
-i0.ɵɵngDeclareClassMetadata({ minVersion: "12.0.0", version: "15.1.0", ngImport: i0, type: PbdsProgressButtonModule, decorators: [{
+PbdsProgressButtonModule.ɵfac = i0.ɵɵngDeclareFactory({ minVersion: "12.0.0", version: "15.2.4", ngImport: i0, type: PbdsProgressButtonModule, deps: [], target: i0.ɵɵFactoryTarget.NgModule });
+PbdsProgressButtonModule.ɵmod = i0.ɵɵngDeclareNgModule({ minVersion: "14.0.0", version: "15.2.4", ngImport: i0, type: PbdsProgressButtonModule, declarations: [PbdsProgressButtonComponent], imports: [CommonModule], exports: [PbdsProgressButtonComponent] });
+PbdsProgressButtonModule.ɵinj = i0.ɵɵngDeclareInjector({ minVersion: "12.0.0", version: "15.2.4", ngImport: i0, type: PbdsProgressButtonModule, imports: [CommonModule] });
+i0.ɵɵngDeclareClassMetadata({ minVersion: "12.0.0", version: "15.2.4", ngImport: i0, type: PbdsProgressButtonModule, decorators: [{
             type: NgModule,
             args: [{
                     declarations: [PbdsProgressButtonComponent],

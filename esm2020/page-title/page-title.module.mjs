@@ -4,10 +4,10 @@ import { PbdsPageTitleComponent } from './page-title.component';
 import * as i0 from "@angular/core";
 export class PbdsPageTitleModule {
 }
-PbdsPageTitleModule.ɵfac = i0.ɵɵngDeclareFactory({ minVersion: "12.0.0", version: "15.1.0", ngImport: i0, type: PbdsPageTitleModule, deps: [], target: i0.ɵɵFactoryTarget.NgModule });
-PbdsPageTitleModule.ɵmod = i0.ɵɵngDeclareNgModule({ minVersion: "14.0.0", version: "15.1.0", ngImport: i0, type: PbdsPageTitleModule, declarations: [PbdsPageTitleComponent], imports: [CommonModule], exports: [PbdsPageTitleComponent] });
-PbdsPageTitleModule.ɵinj = i0.ɵɵngDeclareInjector({ minVersion: "12.0.0", version: "15.1.0", ngImport: i0, type: PbdsPageTitleModule, imports: [CommonModule] });
-i0.ɵɵngDeclareClassMetadata({ minVersion: "12.0.0", version: "15.1.0", ngImport: i0, type: PbdsPageTitleModule, decorators: [{
+PbdsPageTitleModule.ɵfac = i0.ɵɵngDeclareFactory({ minVersion: "12.0.0", version: "15.2.4", ngImport: i0, type: PbdsPageTitleModule, deps: [], target: i0.ɵɵFactoryTarget.NgModule });
+PbdsPageTitleModule.ɵmod = i0.ɵɵngDeclareNgModule({ minVersion: "14.0.0", version: "15.2.4", ngImport: i0, type: PbdsPageTitleModule, declarations: [PbdsPageTitleComponent], imports: [CommonModule], exports: [PbdsPageTitleComponent] });
+PbdsPageTitleModule.ɵinj = i0.ɵɵngDeclareInjector({ minVersion: "12.0.0", version: "15.2.4", ngImport: i0, type: PbdsPageTitleModule, imports: [CommonModule] });
+i0.ɵɵngDeclareClassMetadata({ minVersion: "12.0.0", version: "15.2.4", ngImport: i0, type: PbdsPageTitleModule, decorators: [{
             type: NgModule,
             args: [{
                     declarations: [PbdsPageTitleComponent],

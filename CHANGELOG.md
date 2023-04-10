@@ -22,6 +22,7 @@ Your node version must be at least 14.20.0, please check by running `node -v`.
   - `text-right` is now `text-end`
   - these can still be set by viewport size (e.g., `xs`, `md`)
 - Due to the above new text classes, our Footer HTML has changes
+- Font weight and italic classes such as `font-weight-*` have been changed to `fw-*` and `fst-*`.  [See the table](https://getbootstrap.com/docs/5.3/utilities/text/#font-weight-and-italics).
 - Card Deck and Card Columns have been removed
 - Remove `.input-group-append` and `.input-group-prepend`. You now just add buttons and `.input-group-text` span or divs as direct children of the input groups.
 - NG Bootstrap dropdown items no longer need a class, instead each menu item (button) needs `ngbDropdownItem`. See input fields > with dropdown for an example.

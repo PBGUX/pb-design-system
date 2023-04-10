@@ -4,10 +4,10 @@ import { PbdsFeedbackRatingComponent } from './feedback-rating.component';
 import * as i0 from "@angular/core";
 export class PbdsFeedbackRatingModule {
 }
-PbdsFeedbackRatingModule.ɵfac = i0.ɵɵngDeclareFactory({ minVersion: "12.0.0", version: "15.1.0", ngImport: i0, type: PbdsFeedbackRatingModule, deps: [], target: i0.ɵɵFactoryTarget.NgModule });
-PbdsFeedbackRatingModule.ɵmod = i0.ɵɵngDeclareNgModule({ minVersion: "14.0.0", version: "15.1.0", ngImport: i0, type: PbdsFeedbackRatingModule, declarations: [PbdsFeedbackRatingComponent], imports: [CommonModule], exports: [PbdsFeedbackRatingComponent] });
-PbdsFeedbackRatingModule.ɵinj = i0.ɵɵngDeclareInjector({ minVersion: "12.0.0", version: "15.1.0", ngImport: i0, type: PbdsFeedbackRatingModule, imports: [CommonModule] });
-i0.ɵɵngDeclareClassMetadata({ minVersion: "12.0.0", version: "15.1.0", ngImport: i0, type: PbdsFeedbackRatingModule, decorators: [{
+PbdsFeedbackRatingModule.ɵfac = i0.ɵɵngDeclareFactory({ minVersion: "12.0.0", version: "15.2.4", ngImport: i0, type: PbdsFeedbackRatingModule, deps: [], target: i0.ɵɵFactoryTarget.NgModule });
+PbdsFeedbackRatingModule.ɵmod = i0.ɵɵngDeclareNgModule({ minVersion: "14.0.0", version: "15.2.4", ngImport: i0, type: PbdsFeedbackRatingModule, declarations: [PbdsFeedbackRatingComponent], imports: [CommonModule], exports: [PbdsFeedbackRatingComponent] });
+PbdsFeedbackRatingModule.ɵinj = i0.ɵɵngDeclareInjector({ minVersion: "12.0.0", version: "15.2.4", ngImport: i0, type: PbdsFeedbackRatingModule, imports: [CommonModule] });
+i0.ɵɵngDeclareClassMetadata({ minVersion: "12.0.0", version: "15.2.4", ngImport: i0, type: PbdsFeedbackRatingModule, decorators: [{
             type: NgModule,
             args: [{
                     declarations: [PbdsFeedbackRatingComponent],

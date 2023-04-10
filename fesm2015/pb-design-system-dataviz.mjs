@@ -204,9 +204,9 @@ class PbdsDatavizService {
         return format$1;
     }
 }
-PbdsDatavizService.ɵfac = i0.ɵɵngDeclareFactory({ minVersion: "12.0.0", version: "15.1.0", ngImport: i0, type: PbdsDatavizService, deps: [], target: i0.ɵɵFactoryTarget.Injectable });
-PbdsDatavizService.ɵprov = i0.ɵɵngDeclareInjectable({ minVersion: "12.0.0", version: "15.1.0", ngImport: i0, type: PbdsDatavizService, providedIn: 'root' });
-i0.ɵɵngDeclareClassMetadata({ minVersion: "12.0.0", version: "15.1.0", ngImport: i0, type: PbdsDatavizService, decorators: [{
+PbdsDatavizService.ɵfac = i0.ɵɵngDeclareFactory({ minVersion: "12.0.0", version: "15.2.4", ngImport: i0, type: PbdsDatavizService, deps: [], target: i0.ɵɵFactoryTarget.Injectable });
+PbdsDatavizService.ɵprov = i0.ɵɵngDeclareInjectable({ minVersion: "12.0.0", version: "15.2.4", ngImport: i0, type: PbdsDatavizService, providedIn: 'root' });
+i0.ɵɵngDeclareClassMetadata({ minVersion: "12.0.0", version: "15.2.4", ngImport: i0, type: PbdsDatavizService, decorators: [{
             type: Injectable,
             args: [{
                     providedIn: 'root'
@@ -493,9 +493,9 @@ class PbdsDatavizPieComponent {
             this.tooltip.remove();
     }
 }
-PbdsDatavizPieComponent.ɵfac = i0.ɵɵngDeclareFactory({ minVersion: "12.0.0", version: "15.1.0", ngImport: i0, type: PbdsDatavizPieComponent, deps: [{ token: PbdsDatavizService }, { token: i0.ElementRef }], target: i0.ɵɵFactoryTarget.Component });
-PbdsDatavizPieComponent.ɵcmp = i0.ɵɵngDeclareComponent({ minVersion: "14.0.0", version: "15.1.0", type: PbdsDatavizPieComponent, selector: "pbds-dataviz-pie", inputs: { data: "data", width: "width", type: "type", monochrome: "monochrome", legendLabelFormatType: "legendLabelFormatType", legendLabelFormatString: "legendLabelFormatString", legendValueFormatString: "legendValueFormatString", tooltipLabelFormatType: "tooltipLabelFormatType", tooltipLabelFormatString: "tooltipLabelFormatString", tooltipLabelSuffix: "tooltipLabelSuffix", tooltipValueFormatString: "tooltipValueFormatString", theme: "theme", customColor: "customColor", colorsArray: "colorsArray" }, outputs: { hovered: "hovered", clicked: "clicked" }, host: { properties: { "class.pbds-chart": "this.chartClass", "class.pbds-chart-pie": "this.pieClass" } }, usesOnChanges: true, ngImport: i0, template: ``, isInline: true, changeDetection: i0.ChangeDetectionStrategy.OnPush });
-i0.ɵɵngDeclareClassMetadata({ minVersion: "12.0.0", version: "15.1.0", ngImport: i0, type: PbdsDatavizPieComponent, decorators: [{
+PbdsDatavizPieComponent.ɵfac = i0.ɵɵngDeclareFactory({ minVersion: "12.0.0", version: "15.2.4", ngImport: i0, type: PbdsDatavizPieComponent, deps: [{ token: PbdsDatavizService }, { token: i0.ElementRef }], target: i0.ɵɵFactoryTarget.Component });
+PbdsDatavizPieComponent.ɵcmp = i0.ɵɵngDeclareComponent({ minVersion: "14.0.0", version: "15.2.4", type: PbdsDatavizPieComponent, selector: "pbds-dataviz-pie", inputs: { data: "data", width: "width", type: "type", monochrome: "monochrome", legendLabelFormatType: "legendLabelFormatType", legendLabelFormatString: "legendLabelFormatString", legendValueFormatString: "legendValueFormatString", tooltipLabelFormatType: "tooltipLabelFormatType", tooltipLabelFormatString: "tooltipLabelFormatString", tooltipLabelSuffix: "tooltipLabelSuffix", tooltipValueFormatString: "tooltipValueFormatString", theme: "theme", customColor: "customColor", colorsArray: "colorsArray" }, outputs: { hovered: "hovered", clicked: "clicked" }, host: { properties: { "class.pbds-chart": "this.chartClass", "class.pbds-chart-pie": "this.pieClass" } }, usesOnChanges: true, ngImport: i0, template: ``, isInline: true, changeDetection: i0.ChangeDetectionStrategy.OnPush });
+i0.ɵɵngDeclareClassMetadata({ minVersion: "12.0.0", version: "15.2.4", ngImport: i0, type: PbdsDatavizPieComponent, decorators: [{
             type: Component,
             args: [{ selector: 'pbds-dataviz-pie', template: ``, changeDetection: ChangeDetectionStrategy.OnPush }]
         }], ctorParameters: function () { return [{ type: PbdsDatavizService }, { type: i0.ElementRef }]; }, propDecorators: { chartClass: [{
@@ -1093,9 +1093,9 @@ class PbdsDatavizBarComponent {
         }
     }
 }
-PbdsDatavizBarComponent.ɵfac = i0.ɵɵngDeclareFactory({ minVersion: "12.0.0", version: "15.1.0", ngImport: i0, type: PbdsDatavizBarComponent, deps: [{ token: PbdsDatavizService }, { token: i0.ElementRef }, { token: i2.ViewportScroller }, { token: i2.Location }], target: i0.ɵɵFactoryTarget.Component });
-PbdsDatavizBarComponent.ɵcmp = i0.ɵɵngDeclareComponent({ minVersion: "14.0.0", version: "15.1.0", type: PbdsDatavizBarComponent, selector: "pbds-dataviz-bar", inputs: { data: "data", width: "width", height: "height", type: "type", singleSeries: "singleSeries", xAxisFormatType: "xAxisFormatType", xAxisFormatString: "xAxisFormatString", xAxisTitle: "xAxisTitle", yAxisFormatType: "yAxisFormatType", yAxisFormatString: "yAxisFormatString", yAxisTicks: "yAxisTicks", yAxisMinBuffer: "yAxisMinBuffer", yAxisMaxBuffer: "yAxisMaxBuffer", hideLegend: "hideLegend", legendWidth: "legendWidth", legendPosition: "legendPosition", legendLabelFormatType: "legendLabelFormatType", legendLabelFormatString: "legendLabelFormatString", tooltipLabelFormatType: "tooltipLabelFormatType", tooltipLabelFormatString: "tooltipLabelFormatString", tooltipLabelSuffix: "tooltipLabelSuffix", hideTooltipLabel: "hideTooltipLabel", tooltipValueFormatType: "tooltipValueFormatType", tooltipValueFormatString: "tooltipValueFormatString", marginTop: "marginTop", marginRight: "marginRight", marginBottom: "marginBottom", marginLeft: "marginLeft", threshold: "threshold", thresholdLabel: "thresholdLabel", average: "average", averageLabel: "averageLabel", theme: "theme", gradient: "gradient" }, outputs: { hovered: "hovered", clicked: "clicked" }, host: { properties: { "class.pbds-chart": "this.chartClass", "class.pbds-chart-bar": "this.barClass" } }, usesOnChanges: true, ngImport: i0, template: ``, isInline: true, changeDetection: i0.ChangeDetectionStrategy.OnPush });
-i0.ɵɵngDeclareClassMetadata({ minVersion: "12.0.0", version: "15.1.0", ngImport: i0, type: PbdsDatavizBarComponent, decorators: [{
+PbdsDatavizBarComponent.ɵfac = i0.ɵɵngDeclareFactory({ minVersion: "12.0.0", version: "15.2.4", ngImport: i0, type: PbdsDatavizBarComponent, deps: [{ token: PbdsDatavizService }, { token: i0.ElementRef }, { token: i2.ViewportScroller }, { token: i2.Location }], target: i0.ɵɵFactoryTarget.Component });
+PbdsDatavizBarComponent.ɵcmp = i0.ɵɵngDeclareComponent({ minVersion: "14.0.0", version: "15.2.4", type: PbdsDatavizBarComponent, selector: "pbds-dataviz-bar", inputs: { data: "data", width: "width", height: "height", type: "type", singleSeries: "singleSeries", xAxisFormatType: "xAxisFormatType", xAxisFormatString: "xAxisFormatString", xAxisTitle: "xAxisTitle", yAxisFormatType: "yAxisFormatType", yAxisFormatString: "yAxisFormatString", yAxisTicks: "yAxisTicks", yAxisMinBuffer: "yAxisMinBuffer", yAxisMaxBuffer: "yAxisMaxBuffer", hideLegend: "hideLegend", legendWidth: "legendWidth", legendPosition: "legendPosition", legendLabelFormatType: "legendLabelFormatType", legendLabelFormatString: "legendLabelFormatString", tooltipLabelFormatType: "tooltipLabelFormatType", tooltipLabelFormatString: "tooltipLabelFormatString", tooltipLabelSuffix: "tooltipLabelSuffix", hideTooltipLabel: "hideTooltipLabel", tooltipValueFormatType: "tooltipValueFormatType", tooltipValueFormatString: "tooltipValueFormatString", marginTop: "marginTop", marginRight: "marginRight", marginBottom: "marginBottom", marginLeft: "marginLeft", threshold: "threshold", thresholdLabel: "thresholdLabel", average: "average", averageLabel: "averageLabel", theme: "theme", gradient: "gradient" }, outputs: { hovered: "hovered", clicked: "clicked" }, host: { properties: { "class.pbds-chart": "this.chartClass", "class.pbds-chart-bar": "this.barClass" } }, usesOnChanges: true, ngImport: i0, template: ``, isInline: true, changeDetection: i0.ChangeDetectionStrategy.OnPush });
+i0.ɵɵngDeclareClassMetadata({ minVersion: "12.0.0", version: "15.2.4", ngImport: i0, type: PbdsDatavizBarComponent, decorators: [{
             type: Component,
             args: [{ selector: 'pbds-dataviz-bar', template: ``, changeDetection: ChangeDetectionStrategy.OnPush }]
         }], ctorParameters: function () { return [{ type: PbdsDatavizService }, { type: i0.ElementRef }, { type: i2.ViewportScroller }, { type: i2.Location }]; }, propDecorators: { chartClass: [{
@@ -1964,9 +1964,9 @@ class PbdsDatavizLineComponent {
             this.tooltip.remove();
     }
 }
-PbdsDatavizLineComponent.ɵfac = i0.ɵɵngDeclareFactory({ minVersion: "12.0.0", version: "15.1.0", ngImport: i0, type: PbdsDatavizLineComponent, deps: [{ token: PbdsDatavizService }, { token: i0.ElementRef }, { token: i2.ViewportScroller }, { token: i2.Location }], target: i0.ɵɵFactoryTarget.Component });
-PbdsDatavizLineComponent.ɵcmp = i0.ɵɵngDeclareComponent({ minVersion: "14.0.0", version: "15.1.0", type: PbdsDatavizLineComponent, selector: "pbds-dataviz-line", inputs: { data: "data", width: "width", height: "height", type: "type", area: "area", xAxisType: "xAxisType", xAxisFormatString: "xAxisFormatString", xAxisTicks: "xAxisTicks", xAxisTitle: "xAxisTitle", yAxisFormatString: "yAxisFormatString", yAxisTicks: "yAxisTicks", yAxisMinBuffer: "yAxisMinBuffer", yAxisMaxBuffer: "yAxisMaxBuffer", hideXGrid: "hideXGrid", hideYGrid: "hideYGrid", hideLegend: "hideLegend", legendWidth: "legendWidth", legendPosition: "legendPosition", legendLabelFormatType: "legendLabelFormatType", legendLabelFormatString: "legendLabelFormatString", tooltipHeadingFormatString: "tooltipHeadingFormatString", tooltipHeadingSuffix: "tooltipHeadingSuffix", tooltipLabelFormatType: "tooltipLabelFormatType", tooltipLabelFormatString: "tooltipLabelFormatString", tooltipValueFormatType: "tooltipValueFormatType", tooltipValueFormatString: "tooltipValueFormatString", marginTop: "marginTop", marginRight: "marginRight", marginBottom: "marginBottom", marginLeft: "marginLeft", theme: "theme", customColor: "customColor", colorsArray: "colorsArray", lineCurved: "lineCurved" }, outputs: { hovered: "hovered", clicked: "clicked", tooltipHovered: "tooltipHovered", tooltipClicked: "tooltipClicked" }, host: { properties: { "class.pbds-chart": "this.chartClass", "class.pbds-chart-line": "this.lineClass" } }, usesOnChanges: true, ngImport: i0, template: ``, isInline: true, changeDetection: i0.ChangeDetectionStrategy.OnPush });
-i0.ɵɵngDeclareClassMetadata({ minVersion: "12.0.0", version: "15.1.0", ngImport: i0, type: PbdsDatavizLineComponent, decorators: [{
+PbdsDatavizLineComponent.ɵfac = i0.ɵɵngDeclareFactory({ minVersion: "12.0.0", version: "15.2.4", ngImport: i0, type: PbdsDatavizLineComponent, deps: [{ token: PbdsDatavizService }, { token: i0.ElementRef }, { token: i2.ViewportScroller }, { token: i2.Location }], target: i0.ɵɵFactoryTarget.Component });
+PbdsDatavizLineComponent.ɵcmp = i0.ɵɵngDeclareComponent({ minVersion: "14.0.0", version: "15.2.4", type: PbdsDatavizLineComponent, selector: "pbds-dataviz-line", inputs: { data: "data", width: "width", height: "height", type: "type", area: "area", xAxisType: "xAxisType", xAxisFormatString: "xAxisFormatString", xAxisTicks: "xAxisTicks", xAxisTitle: "xAxisTitle", yAxisFormatString: "yAxisFormatString", yAxisTicks: "yAxisTicks", yAxisMinBuffer: "yAxisMinBuffer", yAxisMaxBuffer: "yAxisMaxBuffer", hideXGrid: "hideXGrid", hideYGrid: "hideYGrid", hideLegend: "hideLegend", legendWidth: "legendWidth", legendPosition: "legendPosition", legendLabelFormatType: "legendLabelFormatType", legendLabelFormatString: "legendLabelFormatString", tooltipHeadingFormatString: "tooltipHeadingFormatString", tooltipHeadingSuffix: "tooltipHeadingSuffix", tooltipLabelFormatType: "tooltipLabelFormatType", tooltipLabelFormatString: "tooltipLabelFormatString", tooltipValueFormatType: "tooltipValueFormatType", tooltipValueFormatString: "tooltipValueFormatString", marginTop: "marginTop", marginRight: "marginRight", marginBottom: "marginBottom", marginLeft: "marginLeft", theme: "theme", customColor: "customColor", colorsArray: "colorsArray", lineCurved: "lineCurved" }, outputs: { hovered: "hovered", clicked: "clicked", tooltipHovered: "tooltipHovered", tooltipClicked: "tooltipClicked" }, host: { properties: { "class.pbds-chart": "this.chartClass", "class.pbds-chart-line": "this.lineClass" } }, usesOnChanges: true, ngImport: i0, template: ``, isInline: true, changeDetection: i0.ChangeDetectionStrategy.OnPush });
+i0.ɵɵngDeclareClassMetadata({ minVersion: "12.0.0", version: "15.2.4", ngImport: i0, type: PbdsDatavizLineComponent, decorators: [{
             type: Component,
             args: [{ selector: 'pbds-dataviz-line', template: ``, changeDetection: ChangeDetectionStrategy.OnPush }]
         }], ctorParameters: function () { return [{ type: PbdsDatavizService }, { type: i0.ElementRef }, { type: i2.ViewportScroller }, { type: i2.Location }]; }, propDecorators: { chartClass: [{
@@ -2207,8 +2207,8 @@ class PbdsDatavizGaugeComponent {
         }
     }
 }
-PbdsDatavizGaugeComponent.ɵfac = i0.ɵɵngDeclareFactory({ minVersion: "12.0.0", version: "15.1.0", ngImport: i0, type: PbdsDatavizGaugeComponent, deps: [{ token: PbdsDatavizService }, { token: i0.ElementRef }], target: i0.ɵɵFactoryTarget.Component });
-PbdsDatavizGaugeComponent.ɵcmp = i0.ɵɵngDeclareComponent({ minVersion: "14.0.0", version: "15.1.0", type: PbdsDatavizGaugeComponent, selector: "pbds-dataviz-gauge", inputs: { data: "data", width: "width", type: "type", color: "color", hideLabel: "hideLabel", labelFormatString: "labelFormatString", description: "description", gaugeWidth: "gaugeWidth" }, host: { properties: { "class.pbds-chart": "this.chartClass", "class.pbds-chart-gauge": "this.gaugeClass" } }, usesOnChanges: true, ngImport: i0, template: `
+PbdsDatavizGaugeComponent.ɵfac = i0.ɵɵngDeclareFactory({ minVersion: "12.0.0", version: "15.2.4", ngImport: i0, type: PbdsDatavizGaugeComponent, deps: [{ token: PbdsDatavizService }, { token: i0.ElementRef }], target: i0.ɵɵFactoryTarget.Component });
+PbdsDatavizGaugeComponent.ɵcmp = i0.ɵɵngDeclareComponent({ minVersion: "14.0.0", version: "15.2.4", type: PbdsDatavizGaugeComponent, selector: "pbds-dataviz-gauge", inputs: { data: "data", width: "width", type: "type", color: "color", hideLabel: "hideLabel", labelFormatString: "labelFormatString", description: "description", gaugeWidth: "gaugeWidth" }, host: { properties: { "class.pbds-chart": "this.chartClass", "class.pbds-chart-gauge": "this.gaugeClass" } }, usesOnChanges: true, ngImport: i0, template: `
     <div
       *ngIf="!hideLabel"
       class="gauge-details"
@@ -2219,7 +2219,7 @@ PbdsDatavizGaugeComponent.ɵcmp = i0.ɵɵngDeclareComponent({ minVersion: "14.0.
       <div *ngIf="description" class="gauge-description text-center">{{ description }}</div>
     </div>
   `, isInline: true, dependencies: [{ kind: "directive", type: i2.NgClass, selector: "[ngClass]", inputs: ["class", "ngClass"] }, { kind: "directive", type: i2.NgIf, selector: "[ngIf]", inputs: ["ngIf", "ngIfThen", "ngIfElse"] }, { kind: "directive", type: i2.NgStyle, selector: "[ngStyle]", inputs: ["ngStyle"] }] });
-i0.ɵɵngDeclareClassMetadata({ minVersion: "12.0.0", version: "15.1.0", ngImport: i0, type: PbdsDatavizGaugeComponent, decorators: [{
+i0.ɵɵngDeclareClassMetadata({ minVersion: "12.0.0", version: "15.2.4", ngImport: i0, type: PbdsDatavizGaugeComponent, decorators: [{
             type: Component,
             args: [{ selector: 'pbds-dataviz-gauge', template: `
     <div
@@ -2370,9 +2370,9 @@ class PbdsDatavizSparklineComponent {
         }
     }
 }
-PbdsDatavizSparklineComponent.ɵfac = i0.ɵɵngDeclareFactory({ minVersion: "12.0.0", version: "15.1.0", ngImport: i0, type: PbdsDatavizSparklineComponent, deps: [{ token: i0.ElementRef }], target: i0.ɵɵFactoryTarget.Component });
-PbdsDatavizSparklineComponent.ɵcmp = i0.ɵɵngDeclareComponent({ minVersion: "14.0.0", version: "15.1.0", type: PbdsDatavizSparklineComponent, selector: "pbds-dataviz-sparkline", inputs: { data: "data", width: "width", height: "height", type: "type", color: "color", colorNegative: "colorNegative", strokeWidth: "strokeWidth", yAxisMinBuffer: "yAxisMinBuffer", yAxisMaxBuffer: "yAxisMaxBuffer" }, host: { properties: { "class.pbds-chart": "this.chartClass", "class.pbds-chart-sparkline": "this.sparklineClass" } }, usesOnChanges: true, ngImport: i0, template: ``, isInline: true, changeDetection: i0.ChangeDetectionStrategy.OnPush });
-i0.ɵɵngDeclareClassMetadata({ minVersion: "12.0.0", version: "15.1.0", ngImport: i0, type: PbdsDatavizSparklineComponent, decorators: [{
+PbdsDatavizSparklineComponent.ɵfac = i0.ɵɵngDeclareFactory({ minVersion: "12.0.0", version: "15.2.4", ngImport: i0, type: PbdsDatavizSparklineComponent, deps: [{ token: i0.ElementRef }], target: i0.ɵɵFactoryTarget.Component });
+PbdsDatavizSparklineComponent.ɵcmp = i0.ɵɵngDeclareComponent({ minVersion: "14.0.0", version: "15.2.4", type: PbdsDatavizSparklineComponent, selector: "pbds-dataviz-sparkline", inputs: { data: "data", width: "width", height: "height", type: "type", color: "color", colorNegative: "colorNegative", strokeWidth: "strokeWidth", yAxisMinBuffer: "yAxisMinBuffer", yAxisMaxBuffer: "yAxisMaxBuffer" }, host: { properties: { "class.pbds-chart": "this.chartClass", "class.pbds-chart-sparkline": "this.sparklineClass" } }, usesOnChanges: true, ngImport: i0, template: ``, isInline: true, changeDetection: i0.ChangeDetectionStrategy.OnPush });
+i0.ɵɵngDeclareClassMetadata({ minVersion: "12.0.0", version: "15.2.4", ngImport: i0, type: PbdsDatavizSparklineComponent, decorators: [{
             type: Component,
             args: [{ selector: 'pbds-dataviz-sparkline', template: ``, changeDetection: ChangeDetectionStrategy.OnPush }]
         }], ctorParameters: function () { return [{ type: i0.ElementRef }]; }, propDecorators: { chartClass: [{
@@ -2437,6 +2437,8 @@ class PbdsDatavizBarStackedComponent {
         this.tooltipLabelFormatString = '';
         this.tooltipValueFormatType = null;
         this.tooltipValueFormatString = '';
+        this.customColor = false;
+        this.colorsArray = [];
         this.rotateXaxis = true;
         this.isDiverging = false;
         this.hovered = new EventEmitter();
@@ -2743,7 +2745,9 @@ class PbdsDatavizBarStackedComponent {
                 .select('tbody')
                 .html((d) => {
                 let html = ``;
-                Object.keys(data.data).map((key, index) => {
+                Object.keys(data.data)
+                    .filter((key) => key !== 'key') // remove the 'key' property
+                    .map((key, index) => {
                     let label;
                     let value = data.data[key];
                     switch (this.tooltipLabelFormatType) {
@@ -2766,17 +2770,15 @@ class PbdsDatavizBarStackedComponent {
                         default:
                             value = data.data[key];
                     }
-                    if (key !== 'key') {
-                        html += `
+                    html += `
               <tr class='tooltip-item'>
-                <td style="color: ${this.colorRange(index - 1)}">
+                <td style="color: ${this.colorRange(index)}">
                   <span class="pbds-tooltip-key"></span>
                 </td>
                 <td class="tooltip-label pr-2 text-nowrap">${label}</td>
                 <td class="tooltip-value text-right text-nowrap">${value}</td>
               </tr>
             `;
-                    }
                 });
                 return html;
             });
@@ -2932,7 +2934,9 @@ class PbdsDatavizBarStackedComponent {
         this.mouseBars = this.svg.append('g').attr('class', 'mouseover-bars');
         this.bars = this.svg.append('g').attr('class', 'bars');
         // build color ranges
-        this.colorRange = scaleOrdinal().range(this._dataviz.getColors(false, this.theme));
+        const colors = this.customColor ? this.colorsArray : this._dataviz.getColors(false, this.theme);
+        this.colorRange = scaleOrdinal().range(colors);
+        // this.colorRange = d3_scaleOrdinal().range(this._dataviz.getColors(false, this.theme));
         // X AXIS
         this.xAxisScale = scaleBand()
             .domain(this.data.map((d) => d.key))
@@ -3062,9 +3066,9 @@ class PbdsDatavizBarStackedComponent {
         }
     }
 }
-PbdsDatavizBarStackedComponent.ɵfac = i0.ɵɵngDeclareFactory({ minVersion: "12.0.0", version: "15.1.0", ngImport: i0, type: PbdsDatavizBarStackedComponent, deps: [{ token: PbdsDatavizService }, { token: i0.ElementRef }, { token: i2.ViewportScroller }], target: i0.ɵɵFactoryTarget.Component });
-PbdsDatavizBarStackedComponent.ɵcmp = i0.ɵɵngDeclareComponent({ minVersion: "14.0.0", version: "15.1.0", type: PbdsDatavizBarStackedComponent, selector: "pbds-dataviz-bar-stacked", inputs: { data: "data", width: "width", height: "height", type: "type", marginTop: "marginTop", marginRight: "marginRight", marginBottom: "marginBottom", marginLeft: "marginLeft", hideXAxis: "hideXAxis", xAxisFormatType: "xAxisFormatType", xAxisFormatString: "xAxisFormatString", xAxisTitle: "xAxisTitle", yAxisFormatType: "yAxisFormatType", yAxisFormatString: "yAxisFormatString", yAxisTicks: "yAxisTicks", yAxisMaxBuffer: "yAxisMaxBuffer", hideLegend: "hideLegend", legendWidth: "legendWidth", legendPosition: "legendPosition", legendLabelFormatType: "legendLabelFormatType", legendLabelFormatString: "legendLabelFormatString", tooltipHeadingFormatType: "tooltipHeadingFormatType", tooltipHeadingFormatString: "tooltipHeadingFormatString", tooltipHeadingSuffix: "tooltipHeadingSuffix", tooltipHeadingValueFormatType: "tooltipHeadingValueFormatType", tooltipHeadingValueFormatString: "tooltipHeadingValueFormatString", tooltipLabelFormatType: "tooltipLabelFormatType", tooltipLabelFormatString: "tooltipLabelFormatString", tooltipValueFormatType: "tooltipValueFormatType", tooltipValueFormatString: "tooltipValueFormatString", theme: "theme", totalSavings: "totalSavings", rotateXaxis: "rotateXaxis", isDiverging: "isDiverging" }, outputs: { hovered: "hovered", clicked: "clicked" }, host: { properties: { "class.pbds-chart": "this.chartClass", "class.pbds-chart-stacked-bar": "this.stackedBarClass" } }, usesOnChanges: true, ngImport: i0, template: ``, isInline: true, changeDetection: i0.ChangeDetectionStrategy.OnPush });
-i0.ɵɵngDeclareClassMetadata({ minVersion: "12.0.0", version: "15.1.0", ngImport: i0, type: PbdsDatavizBarStackedComponent, decorators: [{
+PbdsDatavizBarStackedComponent.ɵfac = i0.ɵɵngDeclareFactory({ minVersion: "12.0.0", version: "15.2.4", ngImport: i0, type: PbdsDatavizBarStackedComponent, deps: [{ token: PbdsDatavizService }, { token: i0.ElementRef }, { token: i2.ViewportScroller }], target: i0.ɵɵFactoryTarget.Component });
+PbdsDatavizBarStackedComponent.ɵcmp = i0.ɵɵngDeclareComponent({ minVersion: "14.0.0", version: "15.2.4", type: PbdsDatavizBarStackedComponent, selector: "pbds-dataviz-bar-stacked", inputs: { data: "data", width: "width", height: "height", type: "type", marginTop: "marginTop", marginRight: "marginRight", marginBottom: "marginBottom", marginLeft: "marginLeft", hideXAxis: "hideXAxis", xAxisFormatType: "xAxisFormatType", xAxisFormatString: "xAxisFormatString", xAxisTitle: "xAxisTitle", yAxisFormatType: "yAxisFormatType", yAxisFormatString: "yAxisFormatString", yAxisTicks: "yAxisTicks", yAxisMaxBuffer: "yAxisMaxBuffer", hideLegend: "hideLegend", legendWidth: "legendWidth", legendPosition: "legendPosition", legendLabelFormatType: "legendLabelFormatType", legendLabelFormatString: "legendLabelFormatString", tooltipHeadingFormatType: "tooltipHeadingFormatType", tooltipHeadingFormatString: "tooltipHeadingFormatString", tooltipHeadingSuffix: "tooltipHeadingSuffix", tooltipHeadingValueFormatType: "tooltipHeadingValueFormatType", tooltipHeadingValueFormatString: "tooltipHeadingValueFormatString", tooltipLabelFormatType: "tooltipLabelFormatType", tooltipLabelFormatString: "tooltipLabelFormatString", tooltipValueFormatType: "tooltipValueFormatType", tooltipValueFormatString: "tooltipValueFormatString", theme: "theme", customColor: "customColor", colorsArray: "colorsArray", totalSavings: "totalSavings", rotateXaxis: "rotateXaxis", isDiverging: "isDiverging" }, outputs: { hovered: "hovered", clicked: "clicked" }, host: { properties: { "class.pbds-chart": "this.chartClass", "class.pbds-chart-stacked-bar": "this.stackedBarClass" } }, usesOnChanges: true, ngImport: i0, template: ``, isInline: true, changeDetection: i0.ChangeDetectionStrategy.OnPush });
+i0.ɵɵngDeclareClassMetadata({ minVersion: "12.0.0", version: "15.2.4", ngImport: i0, type: PbdsDatavizBarStackedComponent, decorators: [{
             type: Component,
             args: [{ selector: 'pbds-dataviz-bar-stacked', template: ``, changeDetection: ChangeDetectionStrategy.OnPush }]
         }], ctorParameters: function () { return [{ type: PbdsDatavizService }, { type: i0.ElementRef }, { type: i2.ViewportScroller }]; }, propDecorators: { chartClass: [{
@@ -3135,6 +3139,10 @@ i0.ɵɵngDeclareClassMetadata({ minVersion: "12.0.0", version: "15.1.0", ngImpor
                 type: Input
             }], theme: [{
                 type: Input
+            }], customColor: [{
+                type: Input
+            }], colorsArray: [{
+                type: Input
             }], totalSavings: [{
                 type: Input
             }], rotateXaxis: [{
@@ -3158,11 +3166,11 @@ class PbdsDatavizMetricIndicatorComponent {
         return ['metric-block-indicator', this.indicator, this.inverse ? 'inverse' : '', this.class].join(' ');
     }
 }
-PbdsDatavizMetricIndicatorComponent.ɵfac = i0.ɵɵngDeclareFactory({ minVersion: "12.0.0", version: "15.1.0", ngImport: i0, type: PbdsDatavizMetricIndicatorComponent, deps: [], target: i0.ɵɵFactoryTarget.Component });
-PbdsDatavizMetricIndicatorComponent.ɵcmp = i0.ɵɵngDeclareComponent({ minVersion: "14.0.0", version: "15.1.0", type: PbdsDatavizMetricIndicatorComponent, selector: "pbds-dataviz-metric-indicator", inputs: { value: "value", class: "class", indicator: "indicator", inverse: "inverse" }, host: { properties: { "class": "this.hostClasses" } }, ngImport: i0, template: `
+PbdsDatavizMetricIndicatorComponent.ɵfac = i0.ɵɵngDeclareFactory({ minVersion: "12.0.0", version: "15.2.4", ngImport: i0, type: PbdsDatavizMetricIndicatorComponent, deps: [], target: i0.ɵɵFactoryTarget.Component });
+PbdsDatavizMetricIndicatorComponent.ɵcmp = i0.ɵɵngDeclareComponent({ minVersion: "14.0.0", version: "15.2.4", type: PbdsDatavizMetricIndicatorComponent, selector: "pbds-dataviz-metric-indicator", inputs: { value: "value", class: "class", indicator: "indicator", inverse: "inverse" }, host: { properties: { "class": "this.hostClasses" } }, ngImport: i0, template: `
     <span>{{ value }}</span>
   `, isInline: true });
-i0.ɵɵngDeclareClassMetadata({ minVersion: "12.0.0", version: "15.1.0", ngImport: i0, type: PbdsDatavizMetricIndicatorComponent, decorators: [{
+i0.ɵɵngDeclareClassMetadata({ minVersion: "12.0.0", version: "15.2.4", ngImport: i0, type: PbdsDatavizMetricIndicatorComponent, decorators: [{
             type: Component,
             args: [{ selector: 'pbds-dataviz-metric-indicator', template: `
     <span>{{ value }}</span>
@@ -3216,8 +3224,8 @@ class PbdsDatavizMetricBlockComponent {
         }
     }
 }
-PbdsDatavizMetricBlockComponent.ɵfac = i0.ɵɵngDeclareFactory({ minVersion: "12.0.0", version: "15.1.0", ngImport: i0, type: PbdsDatavizMetricBlockComponent, deps: [], target: i0.ɵɵFactoryTarget.Component });
-PbdsDatavizMetricBlockComponent.ɵcmp = i0.ɵɵngDeclareComponent({ minVersion: "14.0.0", version: "15.1.0", type: PbdsDatavizMetricBlockComponent, selector: "pbds-dataviz-metric-block", inputs: { class: "class", heading: "heading", value: "value", unit: "unit", description: "description", centered: "centered", centeredText: "centeredText", vertical: "vertical", infoMessage: "infoMessage" }, host: { properties: { "class": "this.hostClasses" } }, queries: [{ propertyName: "indicatorRef", first: true, predicate: PbdsDatavizMetricIndicatorComponent, descendants: true, static: true }], ngImport: i0, template: `
+PbdsDatavizMetricBlockComponent.ɵfac = i0.ɵɵngDeclareFactory({ minVersion: "12.0.0", version: "15.2.4", ngImport: i0, type: PbdsDatavizMetricBlockComponent, deps: [], target: i0.ɵɵFactoryTarget.Component });
+PbdsDatavizMetricBlockComponent.ɵcmp = i0.ɵɵngDeclareComponent({ minVersion: "14.0.0", version: "15.2.4", type: PbdsDatavizMetricBlockComponent, selector: "pbds-dataviz-metric-block", inputs: { class: "class", heading: "heading", value: "value", unit: "unit", description: "description", centered: "centered", centeredText: "centeredText", vertical: "vertical", infoMessage: "infoMessage" }, host: { properties: { "class": "this.hostClasses" } }, queries: [{ propertyName: "indicatorRef", first: true, predicate: PbdsDatavizMetricIndicatorComponent, descendants: true, static: true }], ngImport: i0, template: `
     <div class="metric-block-inner">
       <div *ngIf="heading" class="metric-block-heading">
         {{ heading }}
@@ -3246,7 +3254,7 @@ PbdsDatavizMetricBlockComponent.ɵcmp = i0.ɵɵngDeclareComponent({ minVersion: 
       </div>
     </div>
   `, isInline: true, dependencies: [{ kind: "directive", type: i2.NgClass, selector: "[ngClass]", inputs: ["class", "ngClass"] }, { kind: "directive", type: i2.NgIf, selector: "[ngIf]", inputs: ["ngIf", "ngIfThen", "ngIfElse"] }, { kind: "directive", type: i2$1.NgbTooltip, selector: "[ngbTooltip]", inputs: ["animation", "autoClose", "placement", "popperOptions", "triggers", "positionTarget", "container", "disableTooltip", "tooltipClass", "openDelay", "closeDelay", "ngbTooltip"], outputs: ["shown", "hidden"], exportAs: ["ngbTooltip"] }] });
-i0.ɵɵngDeclareClassMetadata({ minVersion: "12.0.0", version: "15.1.0", ngImport: i0, type: PbdsDatavizMetricBlockComponent, decorators: [{
+i0.ɵɵngDeclareClassMetadata({ minVersion: "12.0.0", version: "15.2.4", ngImport: i0, type: PbdsDatavizMetricBlockComponent, decorators: [{
             type: Component,
             args: [{ selector: 'pbds-dataviz-metric-block', template: `
     <div class="metric-block-inner">
@@ -3526,9 +3534,9 @@ class PbdsDatavizBubbleMapComponent {
             this.tooltip.remove();
     }
 }
-PbdsDatavizBubbleMapComponent.ɵfac = i0.ɵɵngDeclareFactory({ minVersion: "12.0.0", version: "15.1.0", ngImport: i0, type: PbdsDatavizBubbleMapComponent, deps: [{ token: i0.ElementRef }, { token: i2.ViewportScroller }, { token: PbdsDatavizService }], target: i0.ɵɵFactoryTarget.Component });
-PbdsDatavizBubbleMapComponent.ɵcmp = i0.ɵɵngDeclareComponent({ minVersion: "14.0.0", version: "15.1.0", type: PbdsDatavizBubbleMapComponent, selector: "pbds-dataviz-bubble-map", inputs: { data: "data", topojson: "topojson", feature: "feature", projectionType: "projectionType", scale: "scale", center: "center", width: "width", height: "height", type: "type", dot: "dot", marginTop: "marginTop", marginRight: "marginRight", marginBottom: "marginBottom", marginLeft: "marginLeft", color: "color", textColor: "textColor", textSizeRange: "textSizeRange", dotSize: "dotSize", bubbleSizeRange: "bubbleSizeRange", bubbleLabelFormatType: "bubbleLabelFormatType", bubbleLabelFormatString: "bubbleLabelFormatString", hideTooltip: "hideTooltip", hideTooltipValue: "hideTooltipValue", tooltipHeaderSuffix: "tooltipHeaderSuffix", tooltipValueFormatType: "tooltipValueFormatType", tooltipValueFormatString: "tooltipValueFormatString" }, outputs: { hovered: "hovered", clicked: "clicked" }, host: { properties: { "class.pbds-chart": "this.chartClass", "class.pbds-chart-bubble-map": "this.bubbleMapClass" } }, usesOnChanges: true, ngImport: i0, template: ``, isInline: true, changeDetection: i0.ChangeDetectionStrategy.OnPush });
-i0.ɵɵngDeclareClassMetadata({ minVersion: "12.0.0", version: "15.1.0", ngImport: i0, type: PbdsDatavizBubbleMapComponent, decorators: [{
+PbdsDatavizBubbleMapComponent.ɵfac = i0.ɵɵngDeclareFactory({ minVersion: "12.0.0", version: "15.2.4", ngImport: i0, type: PbdsDatavizBubbleMapComponent, deps: [{ token: i0.ElementRef }, { token: i2.ViewportScroller }, { token: PbdsDatavizService }], target: i0.ɵɵFactoryTarget.Component });
+PbdsDatavizBubbleMapComponent.ɵcmp = i0.ɵɵngDeclareComponent({ minVersion: "14.0.0", version: "15.2.4", type: PbdsDatavizBubbleMapComponent, selector: "pbds-dataviz-bubble-map", inputs: { data: "data", topojson: "topojson", feature: "feature", projectionType: "projectionType", scale: "scale", center: "center", width: "width", height: "height", type: "type", dot: "dot", marginTop: "marginTop", marginRight: "marginRight", marginBottom: "marginBottom", marginLeft: "marginLeft", color: "color", textColor: "textColor", textSizeRange: "textSizeRange", dotSize: "dotSize", bubbleSizeRange: "bubbleSizeRange", bubbleLabelFormatType: "bubbleLabelFormatType", bubbleLabelFormatString: "bubbleLabelFormatString", hideTooltip: "hideTooltip", hideTooltipValue: "hideTooltipValue", tooltipHeaderSuffix: "tooltipHeaderSuffix", tooltipValueFormatType: "tooltipValueFormatType", tooltipValueFormatString: "tooltipValueFormatString" }, outputs: { hovered: "hovered", clicked: "clicked" }, host: { properties: { "class.pbds-chart": "this.chartClass", "class.pbds-chart-bubble-map": "this.bubbleMapClass" } }, usesOnChanges: true, ngImport: i0, template: ``, isInline: true, changeDetection: i0.ChangeDetectionStrategy.OnPush });
+i0.ɵɵngDeclareClassMetadata({ minVersion: "12.0.0", version: "15.2.4", ngImport: i0, type: PbdsDatavizBubbleMapComponent, decorators: [{
             type: Component,
             args: [{ selector: 'pbds-dataviz-bubble-map', template: ``, changeDetection: ChangeDetectionStrategy.OnPush }]
         }], ctorParameters: function () { return [{ type: i0.ElementRef }, { type: i2.ViewportScroller }, { type: PbdsDatavizService }]; }, propDecorators: { chartClass: [{
@@ -3932,9 +3940,9 @@ class PbdsDatavizHeatmapComponent {
         }
     }
 }
-PbdsDatavizHeatmapComponent.ɵfac = i0.ɵɵngDeclareFactory({ minVersion: "12.0.0", version: "15.1.0", ngImport: i0, type: PbdsDatavizHeatmapComponent, deps: [{ token: PbdsDatavizService }, { token: i0.ElementRef }, { token: i2.ViewportScroller }], target: i0.ɵɵFactoryTarget.Component });
-PbdsDatavizHeatmapComponent.ɵcmp = i0.ɵɵngDeclareComponent({ minVersion: "14.0.0", version: "15.1.0", type: PbdsDatavizHeatmapComponent, selector: "pbds-dataviz-heatmap", inputs: { data: "data", width: "width", height: "height", marginTop: "marginTop", marginRight: "marginRight", marginBottom: "marginBottom", marginLeft: "marginLeft", scale: "scale", domain: "domain", xAxisFormatType: "xAxisFormatType", xAxisFormatString: "xAxisFormatString", yAxisFormatType: "yAxisFormatType", yAxisFormatString: "yAxisFormatString", hideLegend: "hideLegend", legendWidth: "legendWidth", legendPosition: "legendPosition", legendLabelFormatType: "legendLabelFormatType", legendLabelFormatString: "legendLabelFormatString", tooltipXLabelFormatType: "tooltipXLabelFormatType", tooltipXLabelFormatString: "tooltipXLabelFormatString", tooltipYLabelFormatType: "tooltipYLabelFormatType", tooltipYLabelFormatString: "tooltipYLabelFormatString", tooltipValueFormatType: "tooltipValueFormatType", tooltipValueFormatString: "tooltipValueFormatString", theme: "theme" }, outputs: { hovered: "hovered", clicked: "clicked" }, host: { properties: { "class.pbds-chart": "this.chartClass", "class.pbds-chart-heatmap": "this.heatmapClass" } }, usesOnChanges: true, ngImport: i0, template: ``, isInline: true, changeDetection: i0.ChangeDetectionStrategy.OnPush });
-i0.ɵɵngDeclareClassMetadata({ minVersion: "12.0.0", version: "15.1.0", ngImport: i0, type: PbdsDatavizHeatmapComponent, decorators: [{
+PbdsDatavizHeatmapComponent.ɵfac = i0.ɵɵngDeclareFactory({ minVersion: "12.0.0", version: "15.2.4", ngImport: i0, type: PbdsDatavizHeatmapComponent, deps: [{ token: PbdsDatavizService }, { token: i0.ElementRef }, { token: i2.ViewportScroller }], target: i0.ɵɵFactoryTarget.Component });
+PbdsDatavizHeatmapComponent.ɵcmp = i0.ɵɵngDeclareComponent({ minVersion: "14.0.0", version: "15.2.4", type: PbdsDatavizHeatmapComponent, selector: "pbds-dataviz-heatmap", inputs: { data: "data", width: "width", height: "height", marginTop: "marginTop", marginRight: "marginRight", marginBottom: "marginBottom", marginLeft: "marginLeft", scale: "scale", domain: "domain", xAxisFormatType: "xAxisFormatType", xAxisFormatString: "xAxisFormatString", yAxisFormatType: "yAxisFormatType", yAxisFormatString: "yAxisFormatString", hideLegend: "hideLegend", legendWidth: "legendWidth", legendPosition: "legendPosition", legendLabelFormatType: "legendLabelFormatType", legendLabelFormatString: "legendLabelFormatString", tooltipXLabelFormatType: "tooltipXLabelFormatType", tooltipXLabelFormatString: "tooltipXLabelFormatString", tooltipYLabelFormatType: "tooltipYLabelFormatType", tooltipYLabelFormatString: "tooltipYLabelFormatString", tooltipValueFormatType: "tooltipValueFormatType", tooltipValueFormatString: "tooltipValueFormatString", theme: "theme" }, outputs: { hovered: "hovered", clicked: "clicked" }, host: { properties: { "class.pbds-chart": "this.chartClass", "class.pbds-chart-heatmap": "this.heatmapClass" } }, usesOnChanges: true, ngImport: i0, template: ``, isInline: true, changeDetection: i0.ChangeDetectionStrategy.OnPush });
+i0.ɵɵngDeclareClassMetadata({ minVersion: "12.0.0", version: "15.2.4", ngImport: i0, type: PbdsDatavizHeatmapComponent, decorators: [{
             type: Component,
             args: [{ selector: 'pbds-dataviz-heatmap', template: ``, changeDetection: ChangeDetectionStrategy.OnPush }]
         }], ctorParameters: function () { return [{ type: PbdsDatavizService }, { type: i0.ElementRef }, { type: i2.ViewportScroller }]; }, propDecorators: { chartClass: [{
@@ -4231,9 +4239,9 @@ class PbdsDatavizChoroplethMapComponent {
             this.tooltip.remove();
     }
 }
-PbdsDatavizChoroplethMapComponent.ɵfac = i0.ɵɵngDeclareFactory({ minVersion: "12.0.0", version: "15.1.0", ngImport: i0, type: PbdsDatavizChoroplethMapComponent, deps: [{ token: PbdsDatavizService }, { token: i0.ElementRef }, { token: i2.ViewportScroller }], target: i0.ɵɵFactoryTarget.Component });
-PbdsDatavizChoroplethMapComponent.ɵcmp = i0.ɵɵngDeclareComponent({ minVersion: "14.0.0", version: "15.1.0", type: PbdsDatavizChoroplethMapComponent, selector: "pbds-dataviz-choropleth-map", inputs: { data: "data", topojson: "topojson", feature: "feature", projectionType: "projectionType", dataField: "dataField", mesh: "mesh", scale: "scale", center: "center", width: "width", height: "height", marginTop: "marginTop", marginRight: "marginRight", marginBottom: "marginBottom", marginLeft: "marginLeft", theme: "theme", colorScale: "colorScale", domain: "domain", hideTooltip: "hideTooltip", tooltipHeaderSuffix: "tooltipHeaderSuffix", tooltipValueFormatType: "tooltipValueFormatType", tooltipValueFormatString: "tooltipValueFormatString", hideLegend: "hideLegend", legendWidth: "legendWidth", legendLabel: "legendLabel", legendValueFormatType: "legendValueFormatType", legendValueFormatString: "legendValueFormatString", legendLeft: "legendLeft", legendTop: "legendTop" }, outputs: { hovered: "hovered", clicked: "clicked" }, host: { properties: { "class.pbds-chart": "this.chartClass", "class.pbds-chart-choropleth-map": "this.choroplethMapClass" } }, usesOnChanges: true, ngImport: i0, template: ``, isInline: true, changeDetection: i0.ChangeDetectionStrategy.OnPush });
-i0.ɵɵngDeclareClassMetadata({ minVersion: "12.0.0", version: "15.1.0", ngImport: i0, type: PbdsDatavizChoroplethMapComponent, decorators: [{
+PbdsDatavizChoroplethMapComponent.ɵfac = i0.ɵɵngDeclareFactory({ minVersion: "12.0.0", version: "15.2.4", ngImport: i0, type: PbdsDatavizChoroplethMapComponent, deps: [{ token: PbdsDatavizService }, { token: i0.ElementRef }, { token: i2.ViewportScroller }], target: i0.ɵɵFactoryTarget.Component });
+PbdsDatavizChoroplethMapComponent.ɵcmp = i0.ɵɵngDeclareComponent({ minVersion: "14.0.0", version: "15.2.4", type: PbdsDatavizChoroplethMapComponent, selector: "pbds-dataviz-choropleth-map", inputs: { data: "data", topojson: "topojson", feature: "feature", projectionType: "projectionType", dataField: "dataField", mesh: "mesh", scale: "scale", center: "center", width: "width", height: "height", marginTop: "marginTop", marginRight: "marginRight", marginBottom: "marginBottom", marginLeft: "marginLeft", theme: "theme", colorScale: "colorScale", domain: "domain", hideTooltip: "hideTooltip", tooltipHeaderSuffix: "tooltipHeaderSuffix", tooltipValueFormatType: "tooltipValueFormatType", tooltipValueFormatString: "tooltipValueFormatString", hideLegend: "hideLegend", legendWidth: "legendWidth", legendLabel: "legendLabel", legendValueFormatType: "legendValueFormatType", legendValueFormatString: "legendValueFormatString", legendLeft: "legendLeft", legendTop: "legendTop" }, outputs: { hovered: "hovered", clicked: "clicked" }, host: { properties: { "class.pbds-chart": "this.chartClass", "class.pbds-chart-choropleth-map": "this.choroplethMapClass" } }, usesOnChanges: true, ngImport: i0, template: ``, isInline: true, changeDetection: i0.ChangeDetectionStrategy.OnPush });
+i0.ɵɵngDeclareClassMetadata({ minVersion: "12.0.0", version: "15.2.4", ngImport: i0, type: PbdsDatavizChoroplethMapComponent, decorators: [{
             type: Component,
             args: [{ selector: 'pbds-dataviz-choropleth-map', template: ``, changeDetection: ChangeDetectionStrategy.OnPush }]
         }], ctorParameters: function () { return [{ type: PbdsDatavizService }, { type: i0.ElementRef }, { type: i2.ViewportScroller }]; }, propDecorators: { chartClass: [{
@@ -4969,9 +4977,9 @@ class PbdsDatavizBarGroupedComponent {
         }
     }
 }
-PbdsDatavizBarGroupedComponent.ɵfac = i0.ɵɵngDeclareFactory({ minVersion: "12.0.0", version: "15.1.0", ngImport: i0, type: PbdsDatavizBarGroupedComponent, deps: [{ token: PbdsDatavizService }, { token: i0.ElementRef }, { token: i2.ViewportScroller }, { token: i2.Location }], target: i0.ɵɵFactoryTarget.Component });
-PbdsDatavizBarGroupedComponent.ɵcmp = i0.ɵɵngDeclareComponent({ minVersion: "14.0.0", version: "15.1.0", type: PbdsDatavizBarGroupedComponent, selector: "pbds-dataviz-bar-grouped", inputs: { data: "data", width: "width", height: "height", vertical: "vertical", hideXAxis: "hideXAxis", xAxisMaxBuffer: "xAxisMaxBuffer", xAxisFormatType: "xAxisFormatType", xAxisFormatString: "xAxisFormatString", xAxisTicks: "xAxisTicks", xAxisTitle: "xAxisTitle", hideYAxis: "hideYAxis", yAxisMaxBuffer: "yAxisMaxBuffer", yAxisFormatType: "yAxisFormatType", yAxisFormatString: "yAxisFormatString", yAxisTicks: "yAxisTicks", marginTop: "marginTop", marginRight: "marginRight", marginBottom: "marginBottom", marginLeft: "marginLeft", hideLegend: "hideLegend", legendWidth: "legendWidth", legendPosition: "legendPosition", legendLabelFormatType: "legendLabelFormatType", legendLabelFormatString: "legendLabelFormatString", hideTooltip: "hideTooltip", tooltipLabelFormatType: "tooltipLabelFormatType", tooltipLabelFormatString: "tooltipLabelFormatString", tooltipValueFormatType: "tooltipValueFormatType", tooltipValueFormatString: "tooltipValueFormatString", showGrid: "showGrid", theme: "theme", gradient: "gradient" }, outputs: { hovered: "hovered", clicked: "clicked" }, host: { properties: { "class.pbds-chart": "this.chartClass", "class.pbds-chart-bar-grouped": "this.groupedBarClass" } }, usesOnChanges: true, ngImport: i0, template: ``, isInline: true, changeDetection: i0.ChangeDetectionStrategy.OnPush });
-i0.ɵɵngDeclareClassMetadata({ minVersion: "12.0.0", version: "15.1.0", ngImport: i0, type: PbdsDatavizBarGroupedComponent, decorators: [{
+PbdsDatavizBarGroupedComponent.ɵfac = i0.ɵɵngDeclareFactory({ minVersion: "12.0.0", version: "15.2.4", ngImport: i0, type: PbdsDatavizBarGroupedComponent, deps: [{ token: PbdsDatavizService }, { token: i0.ElementRef }, { token: i2.ViewportScroller }, { token: i2.Location }], target: i0.ɵɵFactoryTarget.Component });
+PbdsDatavizBarGroupedComponent.ɵcmp = i0.ɵɵngDeclareComponent({ minVersion: "14.0.0", version: "15.2.4", type: PbdsDatavizBarGroupedComponent, selector: "pbds-dataviz-bar-grouped", inputs: { data: "data", width: "width", height: "height", vertical: "vertical", hideXAxis: "hideXAxis", xAxisMaxBuffer: "xAxisMaxBuffer", xAxisFormatType: "xAxisFormatType", xAxisFormatString: "xAxisFormatString", xAxisTicks: "xAxisTicks", xAxisTitle: "xAxisTitle", hideYAxis: "hideYAxis", yAxisMaxBuffer: "yAxisMaxBuffer", yAxisFormatType: "yAxisFormatType", yAxisFormatString: "yAxisFormatString", yAxisTicks: "yAxisTicks", marginTop: "marginTop", marginRight: "marginRight", marginBottom: "marginBottom", marginLeft: "marginLeft", hideLegend: "hideLegend", legendWidth: "legendWidth", legendPosition: "legendPosition", legendLabelFormatType: "legendLabelFormatType", legendLabelFormatString: "legendLabelFormatString", hideTooltip: "hideTooltip", tooltipLabelFormatType: "tooltipLabelFormatType", tooltipLabelFormatString: "tooltipLabelFormatString", tooltipValueFormatType: "tooltipValueFormatType", tooltipValueFormatString: "tooltipValueFormatString", showGrid: "showGrid", theme: "theme", gradient: "gradient" }, outputs: { hovered: "hovered", clicked: "clicked" }, host: { properties: { "class.pbds-chart": "this.chartClass", "class.pbds-chart-bar-grouped": "this.groupedBarClass" } }, usesOnChanges: true, ngImport: i0, template: ``, isInline: true, changeDetection: i0.ChangeDetectionStrategy.OnPush });
+i0.ɵɵngDeclareClassMetadata({ minVersion: "12.0.0", version: "15.2.4", ngImport: i0, type: PbdsDatavizBarGroupedComponent, decorators: [{
             type: Component,
             args: [{ selector: 'pbds-dataviz-bar-grouped', template: ``, changeDetection: ChangeDetectionStrategy.OnPush }]
         }], ctorParameters: function () { return [{ type: PbdsDatavizService }, { type: i0.ElementRef }, { type: i2.ViewportScroller }, { type: i2.Location }]; }, propDecorators: { chartClass: [{
@@ -5591,9 +5599,9 @@ class PbdsDatavizBarSingleHorizontalComponent {
         }
     }
 }
-PbdsDatavizBarSingleHorizontalComponent.ɵfac = i0.ɵɵngDeclareFactory({ minVersion: "12.0.0", version: "15.1.0", ngImport: i0, type: PbdsDatavizBarSingleHorizontalComponent, deps: [{ token: PbdsDatavizService }, { token: i0.ElementRef }, { token: i2.ViewportScroller }, { token: i2.Location }], target: i0.ɵɵFactoryTarget.Component });
-PbdsDatavizBarSingleHorizontalComponent.ɵcmp = i0.ɵɵngDeclareComponent({ minVersion: "14.0.0", version: "15.1.0", type: PbdsDatavizBarSingleHorizontalComponent, selector: "pbds-dataviz-bar-single-horizontal", inputs: { data: "data", width: "width", height: "height", nullValueText: "nullValueText", percentage: "percentage", marginTop: "marginTop", marginRight: "marginRight", marginBottom: "marginBottom", marginLeft: "marginLeft", barMargin: "barMargin", hideXAxis: "hideXAxis", xAxisTicks: "xAxisTicks", xAxisTitle: "xAxisTitle", xAxisFormatType: "xAxisFormatType", xAxisFormatString: "xAxisFormatString", xAxisTickLabelSuffix: "xAxisTickLabelSuffix", hideXGrid: "hideXGrid", hideLegend: "hideLegend", hideLegendTooltip: "hideLegendTooltip", legendWidth: "legendWidth", legendPosition: "legendPosition", legendLabelFormatType: "legendLabelFormatType", legendLabelFormatString: "legendLabelFormatString", hideTooltip: "hideTooltip", tooltipLabelFormatType: "tooltipLabelFormatType", tooltipLabelFormatString: "tooltipLabelFormatString", tooltipDateFormatString: "tooltipDateFormatString", tooltipValueFormatType: "tooltipValueFormatType", tooltipValueFormatString: "tooltipValueFormatString", tooltipValueSuffix: "tooltipValueSuffix", tooltipPercentFormatString: "tooltipPercentFormatString", compareChangeFormatString: "compareChangeFormatString", monochrome: "monochrome", customColor: "customColor", colorsArray: "colorsArray", theme: "theme", gradient: "gradient" }, outputs: { hovered: "hovered", clicked: "clicked" }, host: { properties: { "class.pbds-chart": "this.chartClass", "class.pbds-chart-bar-single-horizontal": "this.singleStackedBarClass" } }, usesOnChanges: true, ngImport: i0, template: ``, isInline: true, changeDetection: i0.ChangeDetectionStrategy.OnPush });
-i0.ɵɵngDeclareClassMetadata({ minVersion: "12.0.0", version: "15.1.0", ngImport: i0, type: PbdsDatavizBarSingleHorizontalComponent, decorators: [{
+PbdsDatavizBarSingleHorizontalComponent.ɵfac = i0.ɵɵngDeclareFactory({ minVersion: "12.0.0", version: "15.2.4", ngImport: i0, type: PbdsDatavizBarSingleHorizontalComponent, deps: [{ token: PbdsDatavizService }, { token: i0.ElementRef }, { token: i2.ViewportScroller }, { token: i2.Location }], target: i0.ɵɵFactoryTarget.Component });
+PbdsDatavizBarSingleHorizontalComponent.ɵcmp = i0.ɵɵngDeclareComponent({ minVersion: "14.0.0", version: "15.2.4", type: PbdsDatavizBarSingleHorizontalComponent, selector: "pbds-dataviz-bar-single-horizontal", inputs: { data: "data", width: "width", height: "height", nullValueText: "nullValueText", percentage: "percentage", marginTop: "marginTop", marginRight: "marginRight", marginBottom: "marginBottom", marginLeft: "marginLeft", barMargin: "barMargin", hideXAxis: "hideXAxis", xAxisTicks: "xAxisTicks", xAxisTitle: "xAxisTitle", xAxisFormatType: "xAxisFormatType", xAxisFormatString: "xAxisFormatString", xAxisTickLabelSuffix: "xAxisTickLabelSuffix", hideXGrid: "hideXGrid", hideLegend: "hideLegend", hideLegendTooltip: "hideLegendTooltip", legendWidth: "legendWidth", legendPosition: "legendPosition", legendLabelFormatType: "legendLabelFormatType", legendLabelFormatString: "legendLabelFormatString", hideTooltip: "hideTooltip", tooltipLabelFormatType: "tooltipLabelFormatType", tooltipLabelFormatString: "tooltipLabelFormatString", tooltipDateFormatString: "tooltipDateFormatString", tooltipValueFormatType: "tooltipValueFormatType", tooltipValueFormatString: "tooltipValueFormatString", tooltipValueSuffix: "tooltipValueSuffix", tooltipPercentFormatString: "tooltipPercentFormatString", compareChangeFormatString: "compareChangeFormatString", monochrome: "monochrome", customColor: "customColor", colorsArray: "colorsArray", theme: "theme", gradient: "gradient" }, outputs: { hovered: "hovered", clicked: "clicked" }, host: { properties: { "class.pbds-chart": "this.chartClass", "class.pbds-chart-bar-single-horizontal": "this.singleStackedBarClass" } }, usesOnChanges: true, ngImport: i0, template: ``, isInline: true, changeDetection: i0.ChangeDetectionStrategy.OnPush });
+i0.ɵɵngDeclareClassMetadata({ minVersion: "12.0.0", version: "15.2.4", ngImport: i0, type: PbdsDatavizBarSingleHorizontalComponent, decorators: [{
             type: Component,
             args: [{ selector: 'pbds-dataviz-bar-single-horizontal', template: ``, changeDetection: ChangeDetectionStrategy.OnPush }]
         }], ctorParameters: function () { return [{ type: PbdsDatavizService }, { type: i0.ElementRef }, { type: i2.ViewportScroller }, { type: i2.Location }]; }, propDecorators: { chartClass: [{
@@ -6141,9 +6149,9 @@ class PbdsDatavizScatterplotComponent {
         return Math.random() * jitter;
     }
 }
-PbdsDatavizScatterplotComponent.ɵfac = i0.ɵɵngDeclareFactory({ minVersion: "12.0.0", version: "15.1.0", ngImport: i0, type: PbdsDatavizScatterplotComponent, deps: [{ token: PbdsDatavizService }, { token: i0.ElementRef }, { token: i2.ViewportScroller }], target: i0.ɵɵFactoryTarget.Component });
-PbdsDatavizScatterplotComponent.ɵcmp = i0.ɵɵngDeclareComponent({ minVersion: "14.0.0", version: "15.1.0", type: PbdsDatavizScatterplotComponent, selector: "pbds-dataviz-scatterplot", inputs: { data: "data", width: "width", height: "height", jitterX: "jitterX", jitterY: "jitterY", xAxisType: "xAxisType", xAxisFormatString: "xAxisFormatString", xAxisTicks: "xAxisTicks", yAxisFormatString: "yAxisFormatString", yAxisTicks: "yAxisTicks", yAxisMinBuffer: "yAxisMinBuffer", yAxisMaxBuffer: "yAxisMaxBuffer", hideXGrid: "hideXGrid", hideYGrid: "hideYGrid", hideLegend: "hideLegend", legendWidth: "legendWidth", legendPosition: "legendPosition", legendLabelFormatType: "legendLabelFormatType", tooltipXLabel: "tooltipXLabel", tooltipXValueFormatType: "tooltipXValueFormatType", tooltipXValueFormatString: "tooltipXValueFormatString", tooltipYLabel: "tooltipYLabel", tooltipYValueFormatType: "tooltipYValueFormatType", tooltipYValueFormatString: "tooltipYValueFormatString", tooltipValueLabel: "tooltipValueLabel", tooltipValueFormatType: "tooltipValueFormatType", tooltipValueFormatString: "tooltipValueFormatString", marginTop: "marginTop", marginRight: "marginRight", marginBottom: "marginBottom", marginLeft: "marginLeft", theme: "theme", customColor: "customColor", colorsArray: "colorsArray" }, outputs: { hovered: "hovered", clicked: "clicked", tooltipHovered: "tooltipHovered", tooltipClicked: "tooltipClicked" }, host: { properties: { "class.pbds-chart": "this.chartClass", "class.pbds-chart-scatterplot": "this.scatterplotClass" } }, usesOnChanges: true, ngImport: i0, template: ``, isInline: true, changeDetection: i0.ChangeDetectionStrategy.OnPush });
-i0.ɵɵngDeclareClassMetadata({ minVersion: "12.0.0", version: "15.1.0", ngImport: i0, type: PbdsDatavizScatterplotComponent, decorators: [{
+PbdsDatavizScatterplotComponent.ɵfac = i0.ɵɵngDeclareFactory({ minVersion: "12.0.0", version: "15.2.4", ngImport: i0, type: PbdsDatavizScatterplotComponent, deps: [{ token: PbdsDatavizService }, { token: i0.ElementRef }, { token: i2.ViewportScroller }], target: i0.ɵɵFactoryTarget.Component });
+PbdsDatavizScatterplotComponent.ɵcmp = i0.ɵɵngDeclareComponent({ minVersion: "14.0.0", version: "15.2.4", type: PbdsDatavizScatterplotComponent, selector: "pbds-dataviz-scatterplot", inputs: { data: "data", width: "width", height: "height", jitterX: "jitterX", jitterY: "jitterY", xAxisType: "xAxisType", xAxisFormatString: "xAxisFormatString", xAxisTicks: "xAxisTicks", yAxisFormatString: "yAxisFormatString", yAxisTicks: "yAxisTicks", yAxisMinBuffer: "yAxisMinBuffer", yAxisMaxBuffer: "yAxisMaxBuffer", hideXGrid: "hideXGrid", hideYGrid: "hideYGrid", hideLegend: "hideLegend", legendWidth: "legendWidth", legendPosition: "legendPosition", legendLabelFormatType: "legendLabelFormatType", tooltipXLabel: "tooltipXLabel", tooltipXValueFormatType: "tooltipXValueFormatType", tooltipXValueFormatString: "tooltipXValueFormatString", tooltipYLabel: "tooltipYLabel", tooltipYValueFormatType: "tooltipYValueFormatType", tooltipYValueFormatString: "tooltipYValueFormatString", tooltipValueLabel: "tooltipValueLabel", tooltipValueFormatType: "tooltipValueFormatType", tooltipValueFormatString: "tooltipValueFormatString", marginTop: "marginTop", marginRight: "marginRight", marginBottom: "marginBottom", marginLeft: "marginLeft", theme: "theme", customColor: "customColor", colorsArray: "colorsArray" }, outputs: { hovered: "hovered", clicked: "clicked", tooltipHovered: "tooltipHovered", tooltipClicked: "tooltipClicked" }, host: { properties: { "class.pbds-chart": "this.chartClass", "class.pbds-chart-scatterplot": "this.scatterplotClass" } }, usesOnChanges: true, ngImport: i0, template: ``, isInline: true, changeDetection: i0.ChangeDetectionStrategy.OnPush });
+i0.ɵɵngDeclareClassMetadata({ minVersion: "12.0.0", version: "15.2.4", ngImport: i0, type: PbdsDatavizScatterplotComponent, decorators: [{
             type: Component,
             args: [{ selector: 'pbds-dataviz-scatterplot', template: ``, changeDetection: ChangeDetectionStrategy.OnPush }]
         }], ctorParameters: function () { return [{ type: PbdsDatavizService }, { type: i0.ElementRef }, { type: i2.ViewportScroller }]; }, propDecorators: { chartClass: [{
@@ -6425,9 +6433,9 @@ class PbdsBarStackedAnnotationsDirective {
             .attr('opacity', 1);
     }
 }
-PbdsBarStackedAnnotationsDirective.ɵfac = i0.ɵɵngDeclareFactory({ minVersion: "12.0.0", version: "15.1.0", ngImport: i0, type: PbdsBarStackedAnnotationsDirective, deps: [{ token: forwardRef(() => PbdsDatavizBarStackedComponent) }], target: i0.ɵɵFactoryTarget.Directive });
-PbdsBarStackedAnnotationsDirective.ɵdir = i0.ɵɵngDeclareDirective({ minVersion: "14.0.0", version: "15.1.0", type: PbdsBarStackedAnnotationsDirective, selector: "pbds-dataviz-bar-stacked[annotations]", inputs: { annotations: "annotations", annotationsHilight: "annotationsHilight" }, outputs: { annotationClicked: "annotationClicked" }, usesOnChanges: true, ngImport: i0 });
-i0.ɵɵngDeclareClassMetadata({ minVersion: "12.0.0", version: "15.1.0", ngImport: i0, type: PbdsBarStackedAnnotationsDirective, decorators: [{
+PbdsBarStackedAnnotationsDirective.ɵfac = i0.ɵɵngDeclareFactory({ minVersion: "12.0.0", version: "15.2.4", ngImport: i0, type: PbdsBarStackedAnnotationsDirective, deps: [{ token: forwardRef(() => PbdsDatavizBarStackedComponent) }], target: i0.ɵɵFactoryTarget.Directive });
+PbdsBarStackedAnnotationsDirective.ɵdir = i0.ɵɵngDeclareDirective({ minVersion: "14.0.0", version: "15.2.4", type: PbdsBarStackedAnnotationsDirective, selector: "pbds-dataviz-bar-stacked[annotations]", inputs: { annotations: "annotations", annotationsHilight: "annotationsHilight" }, outputs: { annotationClicked: "annotationClicked" }, usesOnChanges: true, ngImport: i0 });
+i0.ɵɵngDeclareClassMetadata({ minVersion: "12.0.0", version: "15.2.4", ngImport: i0, type: PbdsBarStackedAnnotationsDirective, decorators: [{
             type: Directive,
             args: [{
                     selector: 'pbds-dataviz-bar-stacked[annotations]'
@@ -6672,9 +6680,9 @@ class PbdsLineAnnotationsDirective {
             .attr('opacity', 1);
     }
 }
-PbdsLineAnnotationsDirective.ɵfac = i0.ɵɵngDeclareFactory({ minVersion: "12.0.0", version: "15.1.0", ngImport: i0, type: PbdsLineAnnotationsDirective, deps: [{ token: forwardRef(() => PbdsDatavizLineComponent) }], target: i0.ɵɵFactoryTarget.Directive });
-PbdsLineAnnotationsDirective.ɵdir = i0.ɵɵngDeclareDirective({ minVersion: "14.0.0", version: "15.1.0", type: PbdsLineAnnotationsDirective, selector: "pbds-dataviz-line[annotations]", inputs: { annotations: "annotations", annotationsHilight: "annotationsHilight" }, outputs: { annotationClicked: "annotationClicked" }, usesOnChanges: true, ngImport: i0 });
-i0.ɵɵngDeclareClassMetadata({ minVersion: "12.0.0", version: "15.1.0", ngImport: i0, type: PbdsLineAnnotationsDirective, decorators: [{
+PbdsLineAnnotationsDirective.ɵfac = i0.ɵɵngDeclareFactory({ minVersion: "12.0.0", version: "15.2.4", ngImport: i0, type: PbdsLineAnnotationsDirective, deps: [{ token: forwardRef(() => PbdsDatavizLineComponent) }], target: i0.ɵɵFactoryTarget.Directive });
+PbdsLineAnnotationsDirective.ɵdir = i0.ɵɵngDeclareDirective({ minVersion: "14.0.0", version: "15.2.4", type: PbdsLineAnnotationsDirective, selector: "pbds-dataviz-line[annotations]", inputs: { annotations: "annotations", annotationsHilight: "annotationsHilight" }, outputs: { annotationClicked: "annotationClicked" }, usesOnChanges: true, ngImport: i0 });
+i0.ɵɵngDeclareClassMetadata({ minVersion: "12.0.0", version: "15.2.4", ngImport: i0, type: PbdsLineAnnotationsDirective, decorators: [{
             type: Directive,
             args: [{
                     selector: 'pbds-dataviz-line[annotations]'
@@ -6889,9 +6897,9 @@ class PbdsBarGroupedAnnotationsDirective {
             .attr('opacity', 1);
     }
 }
-PbdsBarGroupedAnnotationsDirective.ɵfac = i0.ɵɵngDeclareFactory({ minVersion: "12.0.0", version: "15.1.0", ngImport: i0, type: PbdsBarGroupedAnnotationsDirective, deps: [{ token: forwardRef(() => PbdsDatavizBarGroupedComponent) }], target: i0.ɵɵFactoryTarget.Directive });
-PbdsBarGroupedAnnotationsDirective.ɵdir = i0.ɵɵngDeclareDirective({ minVersion: "14.0.0", version: "15.1.0", type: PbdsBarGroupedAnnotationsDirective, selector: "pbds-dataviz-bar-grouped[annotations]", inputs: { annotations: "annotations", annotationsHilight: "annotationsHilight" }, outputs: { annotationClicked: "annotationClicked" }, usesOnChanges: true, ngImport: i0 });
-i0.ɵɵngDeclareClassMetadata({ minVersion: "12.0.0", version: "15.1.0", ngImport: i0, type: PbdsBarGroupedAnnotationsDirective, decorators: [{
+PbdsBarGroupedAnnotationsDirective.ɵfac = i0.ɵɵngDeclareFactory({ minVersion: "12.0.0", version: "15.2.4", ngImport: i0, type: PbdsBarGroupedAnnotationsDirective, deps: [{ token: forwardRef(() => PbdsDatavizBarGroupedComponent) }], target: i0.ɵɵFactoryTarget.Directive });
+PbdsBarGroupedAnnotationsDirective.ɵdir = i0.ɵɵngDeclareDirective({ minVersion: "14.0.0", version: "15.2.4", type: PbdsBarGroupedAnnotationsDirective, selector: "pbds-dataviz-bar-grouped[annotations]", inputs: { annotations: "annotations", annotationsHilight: "annotationsHilight" }, outputs: { annotationClicked: "annotationClicked" }, usesOnChanges: true, ngImport: i0 });
+i0.ɵɵngDeclareClassMetadata({ minVersion: "12.0.0", version: "15.2.4", ngImport: i0, type: PbdsBarGroupedAnnotationsDirective, decorators: [{
             type: Directive,
             args: [{
                     selector: 'pbds-dataviz-bar-grouped[annotations]'
@@ -7102,9 +7110,9 @@ class PbdsBarAnnotationsDirective {
             .attr('opacity', 1);
     }
 }
-PbdsBarAnnotationsDirective.ɵfac = i0.ɵɵngDeclareFactory({ minVersion: "12.0.0", version: "15.1.0", ngImport: i0, type: PbdsBarAnnotationsDirective, deps: [{ token: forwardRef(() => PbdsDatavizBarComponent) }], target: i0.ɵɵFactoryTarget.Directive });
-PbdsBarAnnotationsDirective.ɵdir = i0.ɵɵngDeclareDirective({ minVersion: "14.0.0", version: "15.1.0", type: PbdsBarAnnotationsDirective, selector: "pbds-dataviz-bar[annotations]", inputs: { annotations: "annotations", annotationsHilight: "annotationsHilight" }, outputs: { annotationClicked: "annotationClicked" }, usesOnChanges: true, ngImport: i0 });
-i0.ɵɵngDeclareClassMetadata({ minVersion: "12.0.0", version: "15.1.0", ngImport: i0, type: PbdsBarAnnotationsDirective, decorators: [{
+PbdsBarAnnotationsDirective.ɵfac = i0.ɵɵngDeclareFactory({ minVersion: "12.0.0", version: "15.2.4", ngImport: i0, type: PbdsBarAnnotationsDirective, deps: [{ token: forwardRef(() => PbdsDatavizBarComponent) }], target: i0.ɵɵFactoryTarget.Directive });
+PbdsBarAnnotationsDirective.ɵdir = i0.ɵɵngDeclareDirective({ minVersion: "14.0.0", version: "15.2.4", type: PbdsBarAnnotationsDirective, selector: "pbds-dataviz-bar[annotations]", inputs: { annotations: "annotations", annotationsHilight: "annotationsHilight" }, outputs: { annotationClicked: "annotationClicked" }, usesOnChanges: true, ngImport: i0 });
+i0.ɵɵngDeclareClassMetadata({ minVersion: "12.0.0", version: "15.2.4", ngImport: i0, type: PbdsBarAnnotationsDirective, decorators: [{
             type: Directive,
             args: [{
                     selector: 'pbds-dataviz-bar[annotations]'
@@ -7127,8 +7135,8 @@ i0.ɵɵngDeclareClassMetadata({ minVersion: "12.0.0", version: "15.1.0", ngImpor
 
 class PbdsDatavizModule {
 }
-PbdsDatavizModule.ɵfac = i0.ɵɵngDeclareFactory({ minVersion: "12.0.0", version: "15.1.0", ngImport: i0, type: PbdsDatavizModule, deps: [], target: i0.ɵɵFactoryTarget.NgModule });
-PbdsDatavizModule.ɵmod = i0.ɵɵngDeclareNgModule({ minVersion: "14.0.0", version: "15.1.0", ngImport: i0, type: PbdsDatavizModule, declarations: [PbdsDatavizPieComponent,
+PbdsDatavizModule.ɵfac = i0.ɵɵngDeclareFactory({ minVersion: "12.0.0", version: "15.2.4", ngImport: i0, type: PbdsDatavizModule, deps: [], target: i0.ɵɵFactoryTarget.NgModule });
+PbdsDatavizModule.ɵmod = i0.ɵɵngDeclareNgModule({ minVersion: "14.0.0", version: "15.2.4", ngImport: i0, type: PbdsDatavizModule, declarations: [PbdsDatavizPieComponent,
         PbdsDatavizBarComponent,
         PbdsDatavizLineComponent,
         PbdsDatavizGaugeComponent,
@@ -7163,8 +7171,8 @@ PbdsDatavizModule.ɵmod = i0.ɵɵngDeclareNgModule({ minVersion: "14.0.0", versi
         PbdsLineAnnotationsDirective,
         PbdsBarGroupedAnnotationsDirective,
         PbdsBarAnnotationsDirective] });
-PbdsDatavizModule.ɵinj = i0.ɵɵngDeclareInjector({ minVersion: "12.0.0", version: "15.1.0", ngImport: i0, type: PbdsDatavizModule, imports: [CommonModule, NgbTooltipModule] });
-i0.ɵɵngDeclareClassMetadata({ minVersion: "12.0.0", version: "15.1.0", ngImport: i0, type: PbdsDatavizModule, decorators: [{
+PbdsDatavizModule.ɵinj = i0.ɵɵngDeclareInjector({ minVersion: "12.0.0", version: "15.2.4", ngImport: i0, type: PbdsDatavizModule, imports: [CommonModule, NgbTooltipModule] });
+i0.ɵɵngDeclareClassMetadata({ minVersion: "12.0.0", version: "15.2.4", ngImport: i0, type: PbdsDatavizModule, decorators: [{
             type: NgModule,
             args: [{
                     declarations: [

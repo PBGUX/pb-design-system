@@ -195,9 +195,9 @@ export class PbdsBarGroupedAnnotationsDirective {
             .attr('opacity', 1);
     }
 }
-PbdsBarGroupedAnnotationsDirective.ɵfac = i0.ɵɵngDeclareFactory({ minVersion: "12.0.0", version: "15.1.0", ngImport: i0, type: PbdsBarGroupedAnnotationsDirective, deps: [{ token: forwardRef(() => PbdsDatavizBarGroupedComponent) }], target: i0.ɵɵFactoryTarget.Directive });
-PbdsBarGroupedAnnotationsDirective.ɵdir = i0.ɵɵngDeclareDirective({ minVersion: "14.0.0", version: "15.1.0", type: PbdsBarGroupedAnnotationsDirective, selector: "pbds-dataviz-bar-grouped[annotations]", inputs: { annotations: "annotations", annotationsHilight: "annotationsHilight" }, outputs: { annotationClicked: "annotationClicked" }, usesOnChanges: true, ngImport: i0 });
-i0.ɵɵngDeclareClassMetadata({ minVersion: "12.0.0", version: "15.1.0", ngImport: i0, type: PbdsBarGroupedAnnotationsDirective, decorators: [{
+PbdsBarGroupedAnnotationsDirective.ɵfac = i0.ɵɵngDeclareFactory({ minVersion: "12.0.0", version: "15.2.4", ngImport: i0, type: PbdsBarGroupedAnnotationsDirective, deps: [{ token: forwardRef(() => PbdsDatavizBarGroupedComponent) }], target: i0.ɵɵFactoryTarget.Directive });
+PbdsBarGroupedAnnotationsDirective.ɵdir = i0.ɵɵngDeclareDirective({ minVersion: "14.0.0", version: "15.2.4", type: PbdsBarGroupedAnnotationsDirective, selector: "pbds-dataviz-bar-grouped[annotations]", inputs: { annotations: "annotations", annotationsHilight: "annotationsHilight" }, outputs: { annotationClicked: "annotationClicked" }, usesOnChanges: true, ngImport: i0 });
+i0.ɵɵngDeclareClassMetadata({ minVersion: "12.0.0", version: "15.2.4", ngImport: i0, type: PbdsBarGroupedAnnotationsDirective, decorators: [{
             type: Directive,
             args: [{
                     selector: 'pbds-dataviz-bar-grouped[annotations]'

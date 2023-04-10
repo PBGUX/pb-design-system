@@ -195,9 +195,9 @@ export class PbdsBarStackedAnnotationsDirective {
             .attr('opacity', 1);
     }
 }
-PbdsBarStackedAnnotationsDirective.ɵfac = i0.ɵɵngDeclareFactory({ minVersion: "12.0.0", version: "15.1.0", ngImport: i0, type: PbdsBarStackedAnnotationsDirective, deps: [{ token: forwardRef(() => PbdsDatavizBarStackedComponent) }], target: i0.ɵɵFactoryTarget.Directive });
-PbdsBarStackedAnnotationsDirective.ɵdir = i0.ɵɵngDeclareDirective({ minVersion: "14.0.0", version: "15.1.0", type: PbdsBarStackedAnnotationsDirective, selector: "pbds-dataviz-bar-stacked[annotations]", inputs: { annotations: "annotations", annotationsHilight: "annotationsHilight" }, outputs: { annotationClicked: "annotationClicked" }, usesOnChanges: true, ngImport: i0 });
-i0.ɵɵngDeclareClassMetadata({ minVersion: "12.0.0", version: "15.1.0", ngImport: i0, type: PbdsBarStackedAnnotationsDirective, decorators: [{
+PbdsBarStackedAnnotationsDirective.ɵfac = i0.ɵɵngDeclareFactory({ minVersion: "12.0.0", version: "15.2.4", ngImport: i0, type: PbdsBarStackedAnnotationsDirective, deps: [{ token: forwardRef(() => PbdsDatavizBarStackedComponent) }], target: i0.ɵɵFactoryTarget.Directive });
+PbdsBarStackedAnnotationsDirective.ɵdir = i0.ɵɵngDeclareDirective({ minVersion: "14.0.0", version: "15.2.4", type: PbdsBarStackedAnnotationsDirective, selector: "pbds-dataviz-bar-stacked[annotations]", inputs: { annotations: "annotations", annotationsHilight: "annotationsHilight" }, outputs: { annotationClicked: "annotationClicked" }, usesOnChanges: true, ngImport: i0 });
+i0.ɵɵngDeclareClassMetadata({ minVersion: "12.0.0", version: "15.2.4", ngImport: i0, type: PbdsBarStackedAnnotationsDirective, decorators: [{
             type: Directive,
             args: [{
                     selector: 'pbds-dataviz-bar-stacked[annotations]'

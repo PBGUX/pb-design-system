@@ -4,10 +4,10 @@ import { PbdsHeaderShadowDirective } from './header-shadow.directive';
 import * as i0 from "@angular/core";
 export class PbdsHeaderShadowModule {
 }
-PbdsHeaderShadowModule.ɵfac = i0.ɵɵngDeclareFactory({ minVersion: "12.0.0", version: "15.1.0", ngImport: i0, type: PbdsHeaderShadowModule, deps: [], target: i0.ɵɵFactoryTarget.NgModule });
-PbdsHeaderShadowModule.ɵmod = i0.ɵɵngDeclareNgModule({ minVersion: "14.0.0", version: "15.1.0", ngImport: i0, type: PbdsHeaderShadowModule, declarations: [PbdsHeaderShadowDirective], imports: [CommonModule], exports: [PbdsHeaderShadowDirective] });
-PbdsHeaderShadowModule.ɵinj = i0.ɵɵngDeclareInjector({ minVersion: "12.0.0", version: "15.1.0", ngImport: i0, type: PbdsHeaderShadowModule, imports: [CommonModule] });
-i0.ɵɵngDeclareClassMetadata({ minVersion: "12.0.0", version: "15.1.0", ngImport: i0, type: PbdsHeaderShadowModule, decorators: [{
+PbdsHeaderShadowModule.ɵfac = i0.ɵɵngDeclareFactory({ minVersion: "12.0.0", version: "15.2.4", ngImport: i0, type: PbdsHeaderShadowModule, deps: [], target: i0.ɵɵFactoryTarget.NgModule });
+PbdsHeaderShadowModule.ɵmod = i0.ɵɵngDeclareNgModule({ minVersion: "14.0.0", version: "15.2.4", ngImport: i0, type: PbdsHeaderShadowModule, declarations: [PbdsHeaderShadowDirective], imports: [CommonModule], exports: [PbdsHeaderShadowDirective] });
+PbdsHeaderShadowModule.ɵinj = i0.ɵɵngDeclareInjector({ minVersion: "12.0.0", version: "15.2.4", ngImport: i0, type: PbdsHeaderShadowModule, imports: [CommonModule] });
+i0.ɵɵngDeclareClassMetadata({ minVersion: "12.0.0", version: "15.2.4", ngImport: i0, type: PbdsHeaderShadowModule, decorators: [{
             type: NgModule,
             args: [{
                     declarations: [PbdsHeaderShadowDirective],
