@@ -36,7 +36,7 @@ export declare class PbdsMultipleValuesDirective implements ControlValueAccessor
     writeValue(value: any): void;
     registerOnChange(onChange: (value: string[]) => void): void;
     registerOnTouched(onTouched: () => void): void;
-    setDisabledState(disabled: boolean): void;
+    setDisabledState(isDisabled: boolean): void;
     /**
      * Get values
      *
@@ -72,5 +72,5 @@ export declare class PbdsMultipleValuesDirective implements ControlValueAccessor
      */
     private clean;
     static ɵfac: i0.ɵɵFactoryDeclaration<PbdsMultipleValuesDirective, never>;
-    static ɵdir: i0.ɵɵDirectiveDeclaration<PbdsMultipleValuesDirective, "[pbdsMultipleValues]", ["PbdsMultipleValues"], { "delimiters": "delimiters"; "delimetersSwitches": "delimetersSwitches"; "replacements": "replacements"; "replacementsSwtiches": "replacementsSwtiches"; "placeholder": "placeholder"; "submitOnEnter": "submitOnEnter"; "maximumHeight": "maximumHeight"; }, { "submit": "submit"; }, never, never, false>;
+    static ɵdir: i0.ɵɵDirectiveDeclaration<PbdsMultipleValuesDirective, "[pbdsMultipleValues]", ["PbdsMultipleValues"], { "delimiters": "delimiters"; "delimetersSwitches": "delimetersSwitches"; "replacements": "replacements"; "replacementsSwtiches": "replacementsSwtiches"; "placeholder": "placeholder"; "submitOnEnter": "submitOnEnter"; "maximumHeight": "maximumHeight"; }, { "submit": "submit"; }, never, never, false, never>;
 }

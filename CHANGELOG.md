@@ -1,18 +1,39 @@
-# 6.19.0
-## Additions
-- Added new "no-image" icon for missing images
+# 7.0.0
 
-## Changes
-- Changed style of pick list component
+## BREAKING CHANGES
 
-## Fixes
-- Fixed some accessibility issues and marked all inaccessible compoennts
-- Fix "sticky table column" table styling errors
-- Fix wrong title on "discard changes" modal
+**Design System 7.x requires Bootstrap 5, Angular 15, and NG-Bootstrap 14 to be installed.**
+
+Your npm version must be at least 6.14.17, please check by running `npm -v`.
+Your node version must be at least 14.20.0, please check by running `node -v`.
+
+### IMPORTANT NOTE: if updating from a version older than 6.7.0: Please see the breaking changes in the 6.7.0 listing below.
+
+- For Bootstrap dropdowns, popovers, tooltips, etc. be sure to include `bootstrap.bundle.min.js` or `bootstrap.bundle.js` which contains Popper.
+- Everywhere there was a `data-toggle`, this needs to be changed to `data-bs-toggle`. This applies to Bootstrap dropdowns, header menus, tooptips, popovers, and modals.
+- Modals
+  - Bootstrap modals now need to be opened with `data-bs-toggle` and `data-bs-target`. The close button now requires `data-bs-close`
+  - Both Bootstrap and NG-Bootstrap modals' close button (the "X") require a class of `btn-close` instead of `close`. This affects dismissable notificationns as well.
+- Accordions have [new HTML](https://getbootstrap.com/docs/5.2/components/accordion/)
+- The Class `form-row` was removed, needs to be replaced with `row g-3` to use new gutter utilities
+- `badge-pill` becomes `rounded-pill`
+- Toggle buttons require [new HTML](https://getbootstrap.com/docs/5.2/components/button-group/#checkbox-and-radio-button-groups)
+- Text alignment classes are [different](https://getbootstrap.com/docs/5.2/utilities/text/):
+  - `text-left` is now `text-start`
+  - `text-right` is now `text-end`
+  - these can still be set by viewport size (e.g., `xs`, `md`)
+- Due to the above new text classes, our Footer HTML has changes
+- Font weight and italic classes such as `font-weight-*` have been changed to `fw-*` and `fst-*`. [See the table](https://getbootstrap.com/docs/5.3/utilities/text/#font-weight-and-italics).
+- Card Deck and Card Columns have been removed
+- Remove `.input-group-append` and `.input-group-prepend` DIVs. You now just add buttons and `.input-group-text` span or divs as direct children of the input groups.
+- NG Bootstrap dropdown items no longer need a class, instead each menu item (button) needs `ngbDropdownItem`. See input fields > with dropdown for an example.
+- There were extensive css class name changes to Angular Material 15 components. The changes were integrated into the Design System css, so no work should be required unless you made your own overrides to the Design System.
+
+### For more information about the changes in Bootstrap 5, [please see their migration guide](https://getbootstrap.com/docs/5.1/migration/).
 
 ---
 
-# 6.18 - 6.18.5
+# 6.18
 
 ## Additions
 
@@ -24,8 +45,7 @@
 
 ## Changes
 
-- Removed Precisely APIs from address blocks
-- Changed style of sliding step-based wizard to better match other step-based progress indicator
+-- Removed Precisely APIs from address blocks
 
 ## Fixes
 
@@ -33,7 +53,6 @@
 - Fixed bug in bar graph tooltips in Firefox
 
 ---
-
 
 # 6.17
 

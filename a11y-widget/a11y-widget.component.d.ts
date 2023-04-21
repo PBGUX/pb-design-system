@@ -24,5 +24,5 @@ export declare class PbdsA11yWidgetComponent implements OnInit, AfterContentInit
     toggleLimitDistrations(event: MatSlideToggleChange): void;
     openA11yWidget(event: MouseEvent, a11yWidget: NgbModal): void;
     static ɵfac: i0.ɵɵFactoryDeclaration<PbdsA11yWidgetComponent, never>;
-    static ɵcmp: i0.ɵɵComponentDeclaration<PbdsA11yWidgetComponent, "pbds-a11y-widget", never, {}, {}, never, never, false>;
+    static ɵcmp: i0.ɵɵComponentDeclaration<PbdsA11yWidgetComponent, "pbds-a11y-widget", never, {}, {}, never, never, false, never>;
 }
