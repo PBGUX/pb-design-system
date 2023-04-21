@@ -8,6 +8,7 @@ export declare class PbdsAvatarComponent {
     style: any;
     styleClass: string;
     value: string;
+    title: string;
     containerClass(): {
         'pb-avatar': boolean;
         'pb-avatar-image': boolean;
@@ -17,5 +18,5 @@ export declare class PbdsAvatarComponent {
         'pb-avatar-xl': boolean;
     };
     static ɵfac: i0.ɵɵFactoryDeclaration<PbdsAvatarComponent, never>;
-    static ɵcmp: i0.ɵɵComponentDeclaration<PbdsAvatarComponent, "pbds-avatar", never, { "label": "label"; "icon": "icon"; "image": "image"; "size": "size"; "shape": "shape"; "style": "style"; "styleClass": "styleClass"; "value": "value"; }, {}, never, never, false>;
+    static ɵcmp: i0.ɵɵComponentDeclaration<PbdsAvatarComponent, "pbds-avatar", never, { "label": "label"; "icon": "icon"; "image": "image"; "size": "size"; "shape": "shape"; "style": "style"; "styleClass": "styleClass"; "value": "value"; "title": "title"; }, {}, never, never, false>;
 }

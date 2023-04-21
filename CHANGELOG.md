@@ -1,3 +1,16 @@
+# 6.19.0
+## Additions
+- Added new "no-image" icon for missing images
+
+## Changes
+- Changed style of pick list component
+
+## Fixes
+- Fixed some accessibility issues and marked all inaccessible compoennts
+- Fix "sticky table column" table styling errors
+- Fix wrong title on "discard changes" modal
+
+---
 
 # 6.18 - 6.18.5
 

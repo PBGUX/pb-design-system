@@ -2738,7 +2738,9 @@ class PbdsDatavizBarStackedComponent {
                 .select('tbody')
                 .html((d) => {
                 let html = ``;
-                Object.keys(data.data).map((key, index) => {
+                Object.keys(data.data)
+                    .filter((key) => key !== 'key') // remove the 'key' property
+                    .map((key, index) => {
                     let label;
                     let value = data.data[key];
                     switch (this.tooltipLabelFormatType) {
@@ -2761,17 +2763,15 @@ class PbdsDatavizBarStackedComponent {
                         default:
                             value = data.data[key];
                     }
-                    if (key !== 'key') {
-                        html += `
+                    html += `
               <tr class='tooltip-item'>
-                <td style="color: ${this.colorRange(index - 1)}">
+                <td style="color: ${this.colorRange(index)}">
                   <span class="pbds-tooltip-key"></span>
                 </td>
                 <td class="tooltip-label pr-2 text-nowrap">${label}</td>
                 <td class="tooltip-value text-right text-nowrap">${value}</td>
               </tr>
             `;
-                    }
                 });
                 return html;
             });
@@ -2926,7 +2926,6 @@ class PbdsDatavizBarStackedComponent {
         this.mouseBars = this.svg.append('g').attr('class', 'mouseover-bars');
         this.bars = this.svg.append('g').attr('class', 'bars');
         // build color ranges
-        debugger;
         const colors = this.customColor ? this.colorsArray : this._dataviz.getColors(false, this.theme);
         this.colorRange = scaleOrdinal().range(colors);
         // X AXIS
