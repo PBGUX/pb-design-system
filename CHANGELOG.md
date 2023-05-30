@@ -1,3 +1,24 @@
+# 7.0.1
+
+## BREAKING CHANGE
+
+- If you update to PrimeNG 15.4 or higher, please note that they have changed the way they apply icons to their components. The way we previously overrided their icons with our own with CSS overrides no longer works. They now use ng-templates for icons in their components. **Please see our updated HTML code snippets** for:
+  - Table Sort icons
+  - File upload component
+  - Chips component
+
+## Changes/Fixes
+
+- Changed pb-icon-mini "pbi-delivery-fast" icon to better match the pb-icon-outline version
+- Fixed color incorrect in Color Contrast Ratios chart
+
+## Additions
+
+- Add Annotations Pattern
+- Added Error page icons as pbds components. To used import `PbdsErrorIconsModule` from `pb-design-system/error-icons`;
+
+---
+
 # 7.0.0
 
 ## BREAKING CHANGES

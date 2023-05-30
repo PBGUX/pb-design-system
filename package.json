@@ -1,6 +1,6 @@
 {
   "name": "pb-design-system",
-  "version": "7.0.0",
+  "version": "7.0.1",
   "description": "Pitney Bowes Design System",
   "repository": {
     "type": "git",
@@ -89,6 +89,14 @@
       "es2015": "./fesm2015/pb-design-system-empty-state.mjs",
       "node": "./fesm2015/pb-design-system-empty-state.mjs",
       "default": "./fesm2020/pb-design-system-empty-state.mjs"
+    },
+    "./error-icons": {
+      "types": "./error-icons/index.d.ts",
+      "esm2020": "./esm2020/error-icons/pb-design-system-error-icons.mjs",
+      "es2020": "./fesm2020/pb-design-system-error-icons.mjs",
+      "es2015": "./fesm2015/pb-design-system-error-icons.mjs",
+      "node": "./fesm2015/pb-design-system-error-icons.mjs",
+      "default": "./fesm2020/pb-design-system-error-icons.mjs"
     },
     "./feedback-rating": {
       "types": "./feedback-rating/index.d.ts",
