@@ -1,7 +1,7 @@
 import { EventEmitter, OnChanges, OnInit, SimpleChanges } from '@angular/core';
 import { ControlValueAccessor } from '@angular/forms';
 import { NgbCalendar, NgbDate, NgbDatepickerI18n, NgbDateStruct } from '@ng-bootstrap/ng-bootstrap';
-import { PbdsDaterangeChange, PbdsDaterangeFilter, PbdsDaterangePlacement, PbdsDaterangePreset, PbdsDaterangePresetValue } from './daterange-popover.interfaces';
+import { PbdsDaterangeChange, PbdsDaterangeFilter, PbdsDaterangeFilterChange, PbdsDaterangePlacement, PbdsDaterangePreset, PbdsDaterangePresetValue } from './daterange-popover.interfaces';
 import { PbdsDaterangeService } from './daterange-popover.service';
 import * as i0 from "@angular/core";
 export declare class CustomDatepickerI18n extends NgbDatepickerI18n {
@@ -38,6 +38,7 @@ export declare class PbdsDaterangePopoverComponent implements OnInit, OnChanges,
     ariaLabel: string;
     ariaLabelSelected: string;
     dateChange: EventEmitter<PbdsDaterangeChange>;
+    filterChange: EventEmitter<PbdsDaterangeFilterChange>;
     cancel: EventEmitter<any>;
     firstDayOfWeek: import("@angular/common").WeekDay;
     hoveredDate: NgbDate;
@@ -66,7 +67,7 @@ export declare class PbdsDaterangePopoverComponent implements OnInit, OnChanges,
     isInside: (date: NgbDate) => boolean;
     isRange: (date: NgbDate) => boolean;
     showDatepicker(): void;
-    onFilterChange(filter: any, index: any): void;
+    onFilterChange($event: Event, filter: PbdsDaterangeFilter, index: number): void;
     setPreset(value: PbdsDaterangePresetValue): void;
     setFilter(index: number): void;
     setDateRange(value: any): void;
@@ -77,5 +78,5 @@ export declare class PbdsDaterangePopoverComponent implements OnInit, OnChanges,
     private getFromAndToDates;
     private setDateProperties;
     static ɵfac: i0.ɵɵFactoryDeclaration<PbdsDaterangePopoverComponent, never>;
-    static ɵcmp: i0.ɵɵComponentDeclaration<PbdsDaterangePopoverComponent, "pbds-daterange-popover", never, { "presets": "presets"; "presetSelected": "presetSelected"; "filters": "filters"; "filterSelected": "filterSelected"; "showCustomPreset": "showCustomPreset"; "applyText": "applyText"; "cancelText": "cancelText"; "container": "container"; "customRangeText": "customRangeText"; "displayMonths": "displayMonths"; "displayInput": "displayInput"; "minDate": "minDate"; "maxDate": "maxDate"; "placement": "placement"; "fromDate": "fromDate"; "toDate": "toDate"; "inputFormat": "inputFormat"; "ariaLabel": "ariaLabel"; "ariaLabelSelected": "ariaLabelSelected"; }, { "dateChange": "dateChange"; "cancel": "cancel"; }, never, never, false>;
+    static ɵcmp: i0.ɵɵComponentDeclaration<PbdsDaterangePopoverComponent, "pbds-daterange-popover", never, { "presets": "presets"; "presetSelected": "presetSelected"; "filters": "filters"; "filterSelected": "filterSelected"; "showCustomPreset": "showCustomPreset"; "applyText": "applyText"; "cancelText": "cancelText"; "container": "container"; "customRangeText": "customRangeText"; "displayMonths": "displayMonths"; "displayInput": "displayInput"; "minDate": "minDate"; "maxDate": "maxDate"; "placement": "placement"; "fromDate": "fromDate"; "toDate": "toDate"; "inputFormat": "inputFormat"; "ariaLabel": "ariaLabel"; "ariaLabelSelected": "ariaLabelSelected"; }, { "dateChange": "dateChange"; "filterChange": "filterChange"; "cancel": "cancel"; }, never, never, false>;
 }

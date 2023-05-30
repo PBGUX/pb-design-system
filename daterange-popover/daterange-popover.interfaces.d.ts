@@ -16,6 +16,11 @@ export interface PbdsDaterangeChange {
     filter: string;
     value: PbdsDaterangePresetValue;
 }
+export interface PbdsDaterangeFilterChange {
+    event: Event;
+    filter: PbdsDaterangeFilter;
+    index: number;
+}
 export interface PbdsDaterangeLocale {
     language: string;
     country: string;

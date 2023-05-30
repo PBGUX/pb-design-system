@@ -1,11 +1,21 @@
+# 6.19.1
+
+- Added ability for PBDS date ranger picker to have presets for future dates.
+
+---
+
 # 6.19.0
+
 ## Additions
+
 - Added new "no-image" icon for missing images
 
 ## Changes
+
 - Changed style of pick list component
 
 ## Fixes
+
 - Fixed some accessibility issues and marked all inaccessible compoennts
 - Fix "sticky table column" table styling errors
 - Fix wrong title on "discard changes" modal
@@ -33,7 +43,6 @@
 - Fixed bug in bar graph tooltips in Firefox
 
 ---
-
 
 # 6.17
 
