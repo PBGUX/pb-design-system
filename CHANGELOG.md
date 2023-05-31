@@ -1,6 +1,12 @@
+# 6.19.2
+
+- Updated "pbi-delivery-fast" icon in pbi-icon-mini font
+
+---
+
 # 6.19.1
 
-- Added ability for PBDS date ranger picker to have presets for future dates.
+- Added ability for PBDS date ranger picker to have presets for future dates
 
 ---
 
