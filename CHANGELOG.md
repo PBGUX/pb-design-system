@@ -1,3 +1,11 @@
+# 7.0.2
+
+## Changes
+
+- Changed Speed of Animated Error Icons
+
+---
+
 # 7.0.1
 
 ## BREAKING CHANGE
