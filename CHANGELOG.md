@@ -1,3 +1,11 @@
+# 6.19.3
+
+- fixed compact UI standard table and prime ng table
+- Updated pbi-icon-outline font "pbi-history", "pbi-stamps","pbi-lockers","pbi-receiving","pbi-end-of-day",
+
+
+
+
 # 6.19.2
 
 - Updated "pbi-delivery-fast" icon in pbi-icon-mini font
