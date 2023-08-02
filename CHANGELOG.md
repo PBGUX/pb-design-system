@@ -1,3 +1,13 @@
+# 7.0.3
+
+## Changes/Fixes
+
+- New Outline Icons -`pbi-lockers`,`pbi-end-of-day`,`pbi-history`,`pbi-receiving`,`pbi-stamps`
+- Fixed alignment for row action menu and row action buttons headers
+- Change in comment for Column Toggle
+- Fixed table - small variation
+- Added latest Accessibility Compliance Score and Report
+
 # 7.0.2
 
 ## Changes
