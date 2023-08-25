@@ -1,3 +1,12 @@
+# 7.0.4
+
+## Changes/Fixes
+
+- New Empty State for Charts
+- Fixed sort icon for Table with Filter
+- Fixed Header Menu and item active state styling
+- Added latest VPAT
+
 # 7.0.3
 
 ## Changes/Fixes
