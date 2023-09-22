@@ -1,3 +1,15 @@
+# 7.0.5
+
+## Changes/Fixes
+
+- Home page What's New Updates
+- New Mini Icons -`pbi-lockers`,`pbi-end-of-day`,`pbi-history`,`pbi-receiving`,`pbi-stamps`
+- Fixed Date Range Picker with Presets scrolling issue
+- Updated NG-Bootstrap to version 14.2.0
+- Fixed Infinite Scrolling Table toolbar
+- Fixed Faceted Search token remove icon
+- Fixed Line chart tooltip display issue with single data point
+
 # 7.0.4
 
 ## Changes/Fixes
@@ -1019,7 +1031,7 @@ Abhinav Shrivastav, Adam Czarnik, Ajay Manas, Andrezej Krzystof Gdula, Ania Mast
 - Added PrimeNG table with all options to Compact UI and theme demo and confirmed compliance
 - Added PrimeNG Tree Control
 - Added Show/Hide password fields
-- Added Payment Blocks
+- Added Payment Blockps
 
 ---
 

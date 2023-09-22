@@ -11,7 +11,7 @@ import { interpolate } from 'd3-interpolate';
 import { format as format$1 } from 'd3-format';
 import { isoParse, isoFormat, timeFormat as timeFormat$1 } from 'd3-time-format';
 import { timeFormat, format } from 'd3';
-import { min, max, extent, bisectLeft, range, bisect, sum } from 'd3-array';
+import { min, max, extent, bisectRight, range, bisect, sum } from 'd3-array';
 import { axisBottom, axisLeft } from 'd3-axis';
 import { easeQuadInOut, easeLinear } from 'd3-ease';
 import { geoMercator, geoAlbersUsa, geoAlbers, geoPath } from 'd3-geo';
@@ -1535,9 +1535,8 @@ class PbdsDatavizLineComponent {
             else {
                 mouseX = this.xAxisScale.invert(pointer(event)[0]);
             }
-            // console.log(mouseX);
             if (this.xAxisType === 'date') {
-                leftIndex = bisectLeft(this.data.labels, isoFormat(mouseX));
+                leftIndex = bisectRight(this.data.labels, isoFormat(mouseX));
                 // prevent error for 0 index
                 if (leftIndex === 0)
                     return false;
@@ -1548,7 +1547,7 @@ class PbdsDatavizLineComponent {
                 // console.log(+mouseXDate, leftIndex, +dateLower, +dateUpper, +closestDate, closestIndex);
             }
             else if (this.xAxisType === 'number') {
-                leftIndex = bisectLeft(this.data.labels, mouseX);
+                leftIndex = bisectRight(this.data.labels, mouseX);
                 // prevent error for 0 index
                 if (leftIndex === 0)
                     return false;
