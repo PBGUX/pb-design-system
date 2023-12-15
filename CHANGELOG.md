@@ -1,3 +1,14 @@
+# 7.0.6
+
+## Changes/Fixes
+
+- Added disabled style for ng-select dropdown
+- File Upload component spacing and border-radius fix
+- Input field with chips border issue fix
+- Starter app angular version updated to 15.2.10
+- Added form-label class from Bootstrap 5
+- Updated documentation for Rich text editor dependencies
+
 # 7.0.5
 
 ## Changes/Fixes

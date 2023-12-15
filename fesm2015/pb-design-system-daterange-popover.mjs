@@ -122,6 +122,7 @@ class PbdsDaterangePopoverComponent {
         this.firstDayOfWeek = getLocaleFirstDayOfWeek(this.daterangeService.getCurrentLocale());
         this.dateRange = '';
         this.isDatepickerVisible = false;
+        this.canEmit = true;
         this.onTouched = () => { };
         this.onChange = (obj) => { };
         this.presetSelect = ($event) => {
@@ -147,7 +148,7 @@ class PbdsDaterangePopoverComponent {
         if (this.presets) {
             if (!this.filters && this.presetSelected) {
                 this.presetClick(this.presets.find((p, index) => {
-                    return index === this.presetSelected;
+                    return p.value === this.presetSelected;
                 }));
             }
             else if (this.presetSelected) {
@@ -193,7 +194,7 @@ class PbdsDaterangePopoverComponent {
         if (changes.presets && changes.presets.isFirstChange()) {
             if (!this.filters && this.presetSelected) {
                 this.presetClick(this.presets.find((p, index) => {
-                    return index === this.presetSelected;
+                    return p.value === this.presetSelected;
                 }));
             }
             else if (this.presetSelected) {

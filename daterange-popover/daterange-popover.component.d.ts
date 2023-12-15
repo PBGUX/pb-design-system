@@ -48,6 +48,7 @@ export declare class PbdsDaterangePopoverComponent implements OnInit, OnChanges,
     startDate: NgbDate;
     formattedDate: any;
     emitValue: PbdsDaterangeChange;
+    canEmit: boolean;
     private onTouched;
     private onChange;
     constructor(calendar: NgbCalendar, daterangeService: PbdsDaterangeService);
