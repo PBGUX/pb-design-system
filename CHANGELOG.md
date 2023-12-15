@@ -1,3 +1,9 @@
+# 6.19.5
+
+- File Upload component spacing and border-radius fix
+- Input field with chips border issue fix
+- Updated documentation for Rich text editor dependencies
+
 # 6.19.4
 
 - 
