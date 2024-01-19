@@ -1,3 +1,7 @@
+# 6.19.6
+
+- Fixed pbi-icon-mini issues
+
 # 6.19.5
 
 - File Upload component spacing and border-radius fix
