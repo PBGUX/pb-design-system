@@ -1,3 +1,10 @@
+# 7.0.7
+
+## Changes/Fixes
+
+- Fixed pbi-icon-mini issues
+- Updated Links Component with accessibility guideline and with Text Link with Underline
+
 # 7.0.6
 
 ## Changes/Fixes
