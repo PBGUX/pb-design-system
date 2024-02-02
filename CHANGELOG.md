@@ -1,3 +1,9 @@
+# 6.19.7
+
+- Added Multiple Datepicker component in Date and Timepickers
+- Fixed Theme Switcher Demo issue with dark themes and updated code snippet
+
+
 # 6.19.6
 
 - Fixed pbi-icon-mini issues
