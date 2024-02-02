@@ -1,3 +1,11 @@
+# 7.0.8
+
+## Changes/Fixes
+
+- Added Multiple Datepicker component in Date and Timepickers
+- Added new content to Globalization section - Process and Guidelines
+- Fixed Theme Switcher Demo issue with dark themes and updated code snippet
+
 # 7.0.7
 
 ## Changes/Fixes
