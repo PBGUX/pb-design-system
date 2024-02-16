@@ -1,3 +1,13 @@
+# 7.0.9
+
+## Changes/Fixes
+
+- Updated placeholder text color to meet 4.5:1 accessibility contrast criteria
+- Updated Bootstrap class .text-success to have --green700 color as per our success text color
+- Fixed Twilight theme secondary color hex code value
+- Fixed Tree Select dropdown tinted background color in white background
+- Updated VPATs table to remove links and uploaded new VPAT template
+
 # 7.0.8
 
 ## Changes/Fixes
