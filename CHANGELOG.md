@@ -1,3 +1,25 @@
+# 7.1.0-beta.0
+
+In this release the Design System documentation fully implements Bootstrap 5 classes, refer to all code snippets for changes. **Future versions of the Design System will remove Bootstrap 4 classes that were included to ease migration.** Be sure to replace all Bootstrap 4 classes in your application, refer to the migration guide on the Design System website and the Bootstrap 5.2 [migration guide](https://getbootstrap.com/docs/5.2/migration/#sass). A few examples of Bootstrap 5.2 changes are:
+
+- Margin and padding utility classes use start and end instead of left and right. Use `ms-`, `me-`, `ps-`, `pe-` insted of `ml-`, `mr-`, `pl-`, `pr-`
+- Replace all `form-group` classes with `mb-3`. The `form-group` class is removed.
+- All labels require the `form-label` class.
+- Replace `no-gutter` with `g-0`.
+- Table class `.thead-light` is replaced with `.table-light`.
+- Media query mixins have changed and use the breakpoint itself instead of the next breakpoint. Refer to the breaking change on the Bootstrap 5 migration guide.
+
+## BREAKING CHANGE
+
+- If using an ng-bootstrap as a select in a form, the dropdown requires adding the `form-select` class for proper styling. See the dropdowns page for an example.
+- Updated to `ngx-slider-v2`, the original plugin does not have full Angular 15 support yet. See [this issue](https://github.com/angular-slider/ngx-slider/issues/355#issuecomment-1601732500) for details. Future versions will change back to the original `ngx-slider`.
+
+## Documentation
+
+- All third-party plugins links go to the base url instead of particular versions and components. Be sure to select the correct version and component in the plugin documentation.
+
+---
+
 # 7.0.9
 
 ## Changes/Fixes
@@ -119,13 +141,13 @@ Your node version must be at least 14.20.0, please check by running `node -v`.
   - `text-right` is now `text-end`
   - these can still be set by viewport size (e.g., `xs`, `md`)
 - Due to the above new text classes, our Footer HTML has changes
-- Font weight and italic classes such as `font-weight-*` have been changed to `fw-*` and `fst-*`. [See the table](https://getbootstrap.com/docs/5.3/utilities/text/#font-weight-and-italics).
+- Font weight and italic classes such as `font-weight-*` have been changed to `fw-*` and `fst-*`. [See the table](https://getbootstrap.com/docs/5.2/utilities/text/#font-weight-and-italics).
 - Card Deck and Card Columns have been removed
 - Remove `.input-group-append` and `.input-group-prepend` DIVs. You now just add buttons and `.input-group-text` span or divs as direct children of the input groups.
 - NG Bootstrap dropdown items no longer need a class, instead each menu item (button) needs `ngbDropdownItem`. See input fields > with dropdown for an example.
 - There were extensive css class name changes to Angular Material 15 components. The changes were integrated into the Design System css, so no work should be required unless you made your own overrides to the Design System.
 
-### For more information about the changes in Bootstrap 5, [please see their migration guide](https://getbootstrap.com/docs/5.1/migration/).
+### For more information about the changes in Bootstrap 5, [please see their migration guide](https://getbootstrap.com/docs/5.2/migration/).
 
 ---
 

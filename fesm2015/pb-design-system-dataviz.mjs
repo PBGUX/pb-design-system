@@ -1455,7 +1455,7 @@ class PbdsDatavizLineComponent {
                         .attr('class', 'pbds-tooltip-key');
                     tooltipItem
                         .append('td')
-                        .attr('class', 'tooltip-label pr-2 text-nowrap')
+                        .attr('class', 'tooltip-label pe-2 text-nowrap')
                         .html((d) => {
                         return this.tooltipLabelFormatType ? this.tooltipLabelFormat(d.label) : d.label;
                     });
@@ -1923,7 +1923,7 @@ class PbdsDatavizLineComponent {
             // tooltip header
             this.tooltip.append('div').attr('class', 'tooltip-header');
             // tooltip table
-            const tooltipTable = this.tooltip.append('table').attr('class', 'tooltip-table text-left w-100');
+            const tooltipTable = this.tooltip.append('table').attr('class', 'tooltip-table text-start w-100');
             const tooltipTableTbody = tooltipTable.append('tbody');
             tooltipTableTbody
                 .selectAll('tr')
@@ -2774,7 +2774,7 @@ class PbdsDatavizBarStackedComponent {
                 <td style="color: ${this.colorRange(index)}">
                   <span class="pbds-tooltip-key"></span>
                 </td>
-                <td class="tooltip-label pr-2 text-nowrap">${label}</td>
+                <td class="tooltip-label pe-2 text-nowrap">${label}</td>
                 <td class="tooltip-value text-right text-nowrap">${value}</td>
               </tr>
             `;
@@ -3046,7 +3046,7 @@ class PbdsDatavizBarStackedComponent {
             this.tooltip.append('div').attr('class', 'tooltip-header');
             this.tooltip.append('div').attr('class', 'tooltip-header-value');
             // tooltip table
-            this.tooltip.append('table').attr('class', 'tooltip-table text-left w-100').append('tbody');
+            this.tooltip.append('table').attr('class', 'tooltip-table text-start w-100').append('tbody');
         }
         // add legend classes
         if (!this.hideLegend) {
@@ -3226,18 +3226,18 @@ class PbdsDatavizMetricBlockComponent {
 PbdsDatavizMetricBlockComponent.ɵfac = i0.ɵɵngDeclareFactory({ minVersion: "12.0.0", version: "15.2.7", ngImport: i0, type: PbdsDatavizMetricBlockComponent, deps: [], target: i0.ɵɵFactoryTarget.Component });
 PbdsDatavizMetricBlockComponent.ɵcmp = i0.ɵɵngDeclareComponent({ minVersion: "14.0.0", version: "15.2.7", type: PbdsDatavizMetricBlockComponent, selector: "pbds-dataviz-metric-block", inputs: { class: "class", heading: "heading", value: "value", unit: "unit", description: "description", centered: "centered", centeredText: "centeredText", vertical: "vertical", infoMessage: "infoMessage" }, host: { properties: { "class": "this.hostClasses" } }, queries: [{ propertyName: "indicatorRef", first: true, predicate: PbdsDatavizMetricIndicatorComponent, descendants: true, static: true }], ngImport: i0, template: `
     <div class="metric-block-inner">
-      <div *ngIf="heading" class="metric-block-heading">
+      <div class="metric-block-heading" *ngIf="heading">
         {{ heading }}
         <i
+          class="pbi-icon-mini pbi-info-circle-open ms-1 align-middle"
           *ngIf="infoMessage"
-          class="pbi-icon-mini pbi-info-circle-open ml-1 align-middle"
           ngbTooltip="{{ infoMessage }}"
           container="body"
         ></i>
       </div>
       <div class="metric-block-data-block">
         <div class="metric-block-contents">
-          <div class="metric-block-value" [ngClass]="{ 'mr-0': hideValueMargin }">
+          <div class="metric-block-value" [ngClass]="{ 'me-0': hideValueMargin }">
             {{ value
             }}<span [ngClass]="{ 'metric-block-unit': isUnit, 'metric-block-percentage': isPercentUnit }">{{
               unit
@@ -3247,7 +3247,7 @@ PbdsDatavizMetricBlockComponent.ɵcmp = i0.ɵɵngDeclareComponent({ minVersion: 
           <div>
             <ng-content select="pbds-dataviz-metric-indicator"></ng-content>
           </div>
-          <div *ngIf="description" class="metric-block-description">{{ description }}</div>
+          <div class="metric-block-description" *ngIf="description">{{ description }}</div>
         </div>
         <ng-content select="pbds-dataviz-sparkline"></ng-content>
       </div>
@@ -3257,18 +3257,18 @@ i0.ɵɵngDeclareClassMetadata({ minVersion: "12.0.0", version: "15.2.7", ngImpor
             type: Component,
             args: [{ selector: 'pbds-dataviz-metric-block', template: `
     <div class="metric-block-inner">
-      <div *ngIf="heading" class="metric-block-heading">
+      <div class="metric-block-heading" *ngIf="heading">
         {{ heading }}
         <i
+          class="pbi-icon-mini pbi-info-circle-open ms-1 align-middle"
           *ngIf="infoMessage"
-          class="pbi-icon-mini pbi-info-circle-open ml-1 align-middle"
           ngbTooltip="{{ infoMessage }}"
           container="body"
         ></i>
       </div>
       <div class="metric-block-data-block">
         <div class="metric-block-contents">
-          <div class="metric-block-value" [ngClass]="{ 'mr-0': hideValueMargin }">
+          <div class="metric-block-value" [ngClass]="{ 'me-0': hideValueMargin }">
             {{ value
             }}<span [ngClass]="{ 'metric-block-unit': isUnit, 'metric-block-percentage': isPercentUnit }">{{
               unit
@@ -3278,7 +3278,7 @@ i0.ɵɵngDeclareClassMetadata({ minVersion: "12.0.0", version: "15.2.7", ngImpor
           <div>
             <ng-content select="pbds-dataviz-metric-indicator"></ng-content>
           </div>
-          <div *ngIf="description" class="metric-block-description">{{ description }}</div>
+          <div class="metric-block-description" *ngIf="description">{{ description }}</div>
         </div>
         <ng-content select="pbds-dataviz-sparkline"></ng-content>
       </div>
@@ -5209,15 +5209,15 @@ class PbdsDatavizBarSingleHorizontalComponent {
             }
             // tooltip metric indicator
             if (!this.isSingleData && this.isCompare && data.value !== null && data.compareValue !== null) {
-                tooltipIndicator = `<div class="metric-block-indicator ${data.compareChangeDirection} ${data.compareChangeInverse ? 'inverse' : ''} ml-2"><span>${this.tooltipCompareChangeFormat(data.compareChangeValue)}</span></div>`;
+                tooltipIndicator = `<div class="metric-block-indicator ${data.compareChangeDirection} ${data.compareChangeInverse ? 'inverse' : ''} ms-2"><span>${this.tooltipCompareChangeFormat(data.compareChangeValue)}</span></div>`;
             }
             this.tooltip.html(() => {
                 return `
-        <div class="tooltip-label font-weight-bold">${tooltipLabel}</div>
+        <div class="tooltip-label fw-bold">${tooltipLabel}</div>
         <div class="${tooltipCompareDaterangeMargin}">${tooltipCompareDaterange}</div>
-        <div class="tooltip-value font-weight-bold">${tooltipCompareValue}</div>
+        <div class="tooltip-value fw-bold">${tooltipCompareValue}</div>
         <div class="${tooltipDaterangeMargin}">${tooltipDaterange}</div>
-        <div class="tooltip-value"><span class="font-weight-bold">${tooltipValue}</span> <span>${tooltipIndicator}</span></div>
+        <div class="tooltip-value"><span class="fw-bold">${tooltipValue}</span> <span>${tooltipIndicator}</span></div>
       `;
             });
             const tooltipOffsetWidth = +this.tooltip.node().offsetWidth / 2;
@@ -5370,7 +5370,6 @@ class PbdsDatavizBarSingleHorizontalComponent {
                 .text(this.xAxisTitle);
         }
         // build color ranges
-        debugger;
         let colors;
         if (this.isSingleData) {
             colors = this._dataviz.createGradientDefs(this.svg, this.monochrome, this.theme, false);
@@ -5892,16 +5891,16 @@ class PbdsDatavizScatterplotComponent {
             const clientWidth = document.body.clientWidth - 10;
             let html = `
       <tr>
-        <td class="pr-3">${this.tooltipXLabel}</td><td class="text-right">${this.tooltipXValueFormatter(data.x)}</td>
+        <td class="pe-3">${this.tooltipXLabel}</td><td class="text-right">${this.tooltipXValueFormatter(data.x)}</td>
       </tr>
       <tr>
-        <td class="pr-3">${this.tooltipYLabel}</td><td class="text-right">${this.tooltipYValueFormatter(data.y)}</td>
+        <td class="pe-3">${this.tooltipYLabel}</td><td class="text-right">${this.tooltipYValueFormatter(data.y)}</td>
       </tr>
     `;
             if (data.value) {
                 html += `
       <tr>
-        <td class="pr-3">${this.tooltipValueLabel}</td><td class="text-right">${this.tooltipValueFormatter(data.value)}</td>
+        <td class="pe-3">${this.tooltipValueLabel}</td><td class="text-right">${this.tooltipValueFormatter(data.value)}</td>
       </tr>
       `;
             }
@@ -6126,7 +6125,7 @@ class PbdsDatavizScatterplotComponent {
             // tooltip header
             this.tooltip.append('div').attr('class', 'tooltip-header');
             // tooltip table
-            this.tooltip.append('table').attr('class', 'tooltip-table text-left w-100').append('tbody');
+            this.tooltip.append('table').attr('class', 'tooltip-table text-start w-100').append('tbody');
         }
         // add legend classes
         if (!this.hideLegend) {
