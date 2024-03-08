@@ -1,4 +1,4 @@
-# 7.1.0
+# 7.1.1
 
 In this release the Design System documentation fully implements Bootstrap 5 classes, refer to all code snippets for changes. **Future versions of the Design System will remove Bootstrap 4 classes that were included to ease migration.** Be sure to replace all Bootstrap 4 classes in your application, refer to the migration guide on the Design System website and the Bootstrap 5.2 [migration guide](https://getbootstrap.com/docs/5.2/migration/#sass). A few examples of Bootstrap 5.2 changes are:
 
