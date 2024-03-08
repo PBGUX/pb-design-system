@@ -1,7 +1,7 @@
-import { OnInit, ElementRef, OnChanges, SimpleChanges, EventEmitter, OnDestroy } from '@angular/core';
-import { ViewportScroller, Location } from '@angular/common';
-import { PbdsDatavizService } from './dataviz.service';
+import { ElementRef, EventEmitter, OnChanges, OnDestroy, OnInit, SimpleChanges } from '@angular/core';
+import { Location, ViewportScroller } from '@angular/common';
 import { PbdsDatavizBarSingleHorizontal, PbdsDatavizBarSingleHorizontalCompare } from './dataviz.interfaces';
+import { PbdsDatavizService } from './dataviz.service';
 import * as i0 from "@angular/core";
 export declare class PbdsDatavizBarSingleHorizontalComponent implements OnInit, OnDestroy, OnChanges {
     private _dataviz;

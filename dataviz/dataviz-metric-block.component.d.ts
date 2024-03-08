@@ -1,4 +1,4 @@
-import { OnInit, ElementRef } from '@angular/core';
+import { ElementRef, OnInit } from '@angular/core';
 import * as i0 from "@angular/core";
 export declare class PbdsDatavizMetricBlockComponent implements OnInit {
     class: string;

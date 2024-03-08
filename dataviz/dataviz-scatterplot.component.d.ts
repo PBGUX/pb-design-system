@@ -1,4 +1,4 @@
-import { OnInit, OnChanges, EventEmitter, ElementRef, OnDestroy, SimpleChanges } from '@angular/core';
+import { ElementRef, EventEmitter, OnChanges, OnDestroy, OnInit, SimpleChanges } from '@angular/core';
 import { ViewportScroller } from '@angular/common';
 import { PbdsDatavizService } from './dataviz.service';
 import { PbdsDatavizScatterplot } from './dataviz.interfaces';
