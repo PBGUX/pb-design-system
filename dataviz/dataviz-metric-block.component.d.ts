@@ -17,5 +17,5 @@ export declare class PbdsDatavizMetricBlockComponent implements OnInit {
     indicatorRef: ElementRef;
     ngOnInit(): void;
     static ɵfac: i0.ɵɵFactoryDeclaration<PbdsDatavizMetricBlockComponent, never>;
-    static ɵcmp: i0.ɵɵComponentDeclaration<PbdsDatavizMetricBlockComponent, "pbds-dataviz-metric-block", never, { "class": "class"; "heading": "heading"; "value": "value"; "unit": "unit"; "description": "description"; "centered": "centered"; "centeredText": "centeredText"; "vertical": "vertical"; "infoMessage": "infoMessage"; }, {}, ["indicatorRef"], ["pbds-dataviz-metric-indicator", "pbds-dataviz-sparkline"], false, never>;
+    static ɵcmp: i0.ɵɵComponentDeclaration<PbdsDatavizMetricBlockComponent, "pbds-dataviz-metric-block", never, { "class": { "alias": "class"; "required": false; }; "heading": { "alias": "heading"; "required": false; }; "value": { "alias": "value"; "required": false; }; "unit": { "alias": "unit"; "required": false; }; "description": { "alias": "description"; "required": false; }; "centered": { "alias": "centered"; "required": false; }; "centeredText": { "alias": "centeredText"; "required": false; }; "vertical": { "alias": "vertical"; "required": false; }; "infoMessage": { "alias": "infoMessage"; "required": false; }; }, {}, ["indicatorRef"], ["pbds-dataviz-metric-indicator", "pbds-dataviz-sparkline"], false, never>;
 }

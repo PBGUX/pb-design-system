@@ -4,5 +4,5 @@ export declare class PbdsPageTitleComponent {
     sub?: string;
     layout: string;
     static ɵfac: i0.ɵɵFactoryDeclaration<PbdsPageTitleComponent, never>;
-    static ɵcmp: i0.ɵɵComponentDeclaration<PbdsPageTitleComponent, "pbds-page-title", never, { "ttl": "ttl"; "sub": "sub"; "layout": "layout"; }, {}, never, never, false, never>;
+    static ɵcmp: i0.ɵɵComponentDeclaration<PbdsPageTitleComponent, "pbds-page-title", never, { "ttl": { "alias": "ttl"; "required": false; }; "sub": { "alias": "sub"; "required": false; }; "layout": { "alias": "layout"; "required": false; }; }, {}, never, never, false, never>;
 }

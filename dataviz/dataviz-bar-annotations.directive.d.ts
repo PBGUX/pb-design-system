@@ -13,5 +13,5 @@ export declare class PbdsBarAnnotationsDirective implements OnInit, OnChanges {
     private update;
     private updateHilight;
     static ɵfac: i0.ɵɵFactoryDeclaration<PbdsBarAnnotationsDirective, never>;
-    static ɵdir: i0.ɵɵDirectiveDeclaration<PbdsBarAnnotationsDirective, "pbds-dataviz-bar[annotations]", never, { "annotations": "annotations"; "annotationsHilight": "annotationsHilight"; }, { "annotationClicked": "annotationClicked"; }, never, never, false, never>;
+    static ɵdir: i0.ɵɵDirectiveDeclaration<PbdsBarAnnotationsDirective, "pbds-dataviz-bar[annotations]", never, { "annotations": { "alias": "annotations"; "required": false; }; "annotationsHilight": { "alias": "annotationsHilight"; "required": false; }; }, { "annotationClicked": "annotationClicked"; }, never, never, false, never>;
 }

@@ -18,5 +18,5 @@ export declare class PbdsAvatarComponent {
         'pb-avatar-xl': boolean;
     };
     static ɵfac: i0.ɵɵFactoryDeclaration<PbdsAvatarComponent, never>;
-    static ɵcmp: i0.ɵɵComponentDeclaration<PbdsAvatarComponent, "pbds-avatar", never, { "label": "label"; "icon": "icon"; "image": "image"; "size": "size"; "shape": "shape"; "style": "style"; "styleClass": "styleClass"; "value": "value"; "title": "title"; }, {}, never, never, false, never>;
+    static ɵcmp: i0.ɵɵComponentDeclaration<PbdsAvatarComponent, "pbds-avatar", never, { "label": { "alias": "label"; "required": false; }; "icon": { "alias": "icon"; "required": false; }; "image": { "alias": "image"; "required": false; }; "size": { "alias": "size"; "required": false; }; "shape": { "alias": "shape"; "required": false; }; "style": { "alias": "style"; "required": false; }; "styleClass": { "alias": "styleClass"; "required": false; }; "value": { "alias": "value"; "required": false; }; "title": { "alias": "title"; "required": false; }; }, {}, never, never, false, never>;
 }

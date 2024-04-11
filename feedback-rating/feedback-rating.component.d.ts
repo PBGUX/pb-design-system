@@ -18,5 +18,5 @@ export declare class PbdsFeedbackRatingComponent implements OnInit, ControlValue
     setDisabledState(disabled: boolean): void;
     onNewText($event: any): void;
     static ɵfac: i0.ɵɵFactoryDeclaration<PbdsFeedbackRatingComponent, never>;
-    static ɵcmp: i0.ɵɵComponentDeclaration<PbdsFeedbackRatingComponent, "pbds-feedback-rating", never, { "ariaLabels": "ariaLabels"; "color": "color"; }, {}, never, never, false, never>;
+    static ɵcmp: i0.ɵɵComponentDeclaration<PbdsFeedbackRatingComponent, "pbds-feedback-rating", never, { "ariaLabels": { "alias": "ariaLabels"; "required": false; }; "color": { "alias": "color"; "required": false; }; }, {}, never, never, false, never>;
 }

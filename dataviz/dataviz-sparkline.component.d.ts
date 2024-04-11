@@ -22,5 +22,5 @@ export declare class PbdsDatavizSparklineComponent implements OnInit, OnChanges 
     ngOnChanges(changes: SimpleChanges): void;
     updateChart(): void;
     static ɵfac: i0.ɵɵFactoryDeclaration<PbdsDatavizSparklineComponent, never>;
-    static ɵcmp: i0.ɵɵComponentDeclaration<PbdsDatavizSparklineComponent, "pbds-dataviz-sparkline", never, { "data": "data"; "width": "width"; "height": "height"; "type": "type"; "color": "color"; "colorNegative": "colorNegative"; "strokeWidth": "strokeWidth"; "yAxisMinBuffer": "yAxisMinBuffer"; "yAxisMaxBuffer": "yAxisMaxBuffer"; }, {}, never, never, false, never>;
+    static ɵcmp: i0.ɵɵComponentDeclaration<PbdsDatavizSparklineComponent, "pbds-dataviz-sparkline", never, { "data": { "alias": "data"; "required": false; }; "width": { "alias": "width"; "required": false; }; "height": { "alias": "height"; "required": false; }; "type": { "alias": "type"; "required": false; }; "color": { "alias": "color"; "required": false; }; "colorNegative": { "alias": "colorNegative"; "required": false; }; "strokeWidth": { "alias": "strokeWidth"; "required": false; }; "yAxisMinBuffer": { "alias": "yAxisMinBuffer"; "required": false; }; "yAxisMaxBuffer": { "alias": "yAxisMaxBuffer"; "required": false; }; }, {}, never, never, false, never>;
 }

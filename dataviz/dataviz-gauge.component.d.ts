@@ -43,5 +43,5 @@ export declare class PbdsDatavizGaugeComponent implements OnInit, OnChanges {
     arcTween: (transition: any, value: any) => void;
     textTween: (transition: any, value: any) => void;
     static ɵfac: i0.ɵɵFactoryDeclaration<PbdsDatavizGaugeComponent, never>;
-    static ɵcmp: i0.ɵɵComponentDeclaration<PbdsDatavizGaugeComponent, "pbds-dataviz-gauge", never, { "data": "data"; "width": "width"; "type": "type"; "color": "color"; "hideLabel": "hideLabel"; "labelFormatString": "labelFormatString"; "description": "description"; "gaugeWidth": "gaugeWidth"; }, {}, never, never, false, never>;
+    static ɵcmp: i0.ɵɵComponentDeclaration<PbdsDatavizGaugeComponent, "pbds-dataviz-gauge", never, { "data": { "alias": "data"; "required": false; }; "width": { "alias": "width"; "required": false; }; "type": { "alias": "type"; "required": false; }; "color": { "alias": "color"; "required": false; }; "hideLabel": { "alias": "hideLabel"; "required": false; }; "labelFormatString": { "alias": "labelFormatString"; "required": false; }; "description": { "alias": "description"; "required": false; }; "gaugeWidth": { "alias": "gaugeWidth"; "required": false; }; }, {}, never, never, false, never>;
 }
