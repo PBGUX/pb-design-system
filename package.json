@@ -1,6 +1,6 @@
 {
   "name": "pb-design-system",
-  "version": "16.0.0-beta.1",
+  "version": "16.0.0-beta.2",
   "description": "Pitney Bowes Design System",
   "repository": {
     "type": "git",
@@ -55,17 +55,17 @@
       "esm": "./esm2022/column-toggle/pb-design-system-column-toggle.mjs",
       "default": "./fesm2022/pb-design-system-column-toggle.mjs"
     },
-    "./dataviz": {
-      "types": "./dataviz/index.d.ts",
-      "esm2022": "./esm2022/dataviz/pb-design-system-dataviz.mjs",
-      "esm": "./esm2022/dataviz/pb-design-system-dataviz.mjs",
-      "default": "./fesm2022/pb-design-system-dataviz.mjs"
-    },
     "./daterange-popover": {
       "types": "./daterange-popover/index.d.ts",
       "esm2022": "./esm2022/daterange-popover/pb-design-system-daterange-popover.mjs",
       "esm": "./esm2022/daterange-popover/pb-design-system-daterange-popover.mjs",
       "default": "./fesm2022/pb-design-system-daterange-popover.mjs"
+    },
+    "./dataviz": {
+      "types": "./dataviz/index.d.ts",
+      "esm2022": "./esm2022/dataviz/pb-design-system-dataviz.mjs",
+      "esm": "./esm2022/dataviz/pb-design-system-dataviz.mjs",
+      "default": "./fesm2022/pb-design-system-dataviz.mjs"
     },
     "./empty-state": {
       "types": "./empty-state/index.d.ts",
@@ -73,17 +73,17 @@
       "esm": "./esm2022/empty-state/pb-design-system-empty-state.mjs",
       "default": "./fesm2022/pb-design-system-empty-state.mjs"
     },
-    "./error-icons": {
-      "types": "./error-icons/index.d.ts",
-      "esm2022": "./esm2022/error-icons/pb-design-system-error-icons.mjs",
-      "esm": "./esm2022/error-icons/pb-design-system-error-icons.mjs",
-      "default": "./fesm2022/pb-design-system-error-icons.mjs"
-    },
     "./feedback-rating": {
       "types": "./feedback-rating/index.d.ts",
       "esm2022": "./esm2022/feedback-rating/pb-design-system-feedback-rating.mjs",
       "esm": "./esm2022/feedback-rating/pb-design-system-feedback-rating.mjs",
       "default": "./fesm2022/pb-design-system-feedback-rating.mjs"
+    },
+    "./error-icons": {
+      "types": "./error-icons/index.d.ts",
+      "esm2022": "./esm2022/error-icons/pb-design-system-error-icons.mjs",
+      "esm": "./esm2022/error-icons/pb-design-system-error-icons.mjs",
+      "default": "./fesm2022/pb-design-system-error-icons.mjs"
     },
     "./header-shadow": {
       "types": "./header-shadow/index.d.ts",

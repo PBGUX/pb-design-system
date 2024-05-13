@@ -29,6 +29,23 @@ PrimeNG
 - p-table sort icons are styled in the css, the `&lt;ng-template pTemplate="sorticon"&gt;...&lt;ng-template&gt;` can be
   removed.
 
+# 7.1.2
+
+# Addition/Changes
+
+- Updated focus indicator style as per accessibility guidelines for components -
+  - Input Fields
+  - Dropdowns and Menus
+  - Tabs
+  - Accordions
+  - Buttons
+  - Radio Buttons
+  - Checkboxes
+  - Links
+- Updated border-color (sass variable `input_border_color`) for input fields and dropdowns to meet the color contrast ratio as per accessibility guidelines
+- New content in Globalisation section
+- Updated Links Component to use Bootstrap 5 class for text decoration
+
 # 7.1.1
 
 In this release the Design System documentation fully implements Bootstrap 5 classes, refer to all code snippets for changes. **Future versions of the Design System will remove Bootstrap 4 classes that were included to ease migration.** Be sure to replace all Bootstrap 4 classes in your application, refer to the migration guide on the Design System website and the Bootstrap 5.2 [migration guide](https://getbootstrap.com/docs/5.2/migration/#sass). A few examples of Bootstrap 5.2 changes are:
