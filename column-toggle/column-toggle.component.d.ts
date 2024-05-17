@@ -20,5 +20,5 @@ export declare class PbdsColumnToggleComponent {
     private updateTotalSelected;
     setShowAllChecked(): void;
     static ɵfac: i0.ɵɵFactoryDeclaration<PbdsColumnToggleComponent, never>;
-    static ɵcmp: i0.ɵɵComponentDeclaration<PbdsColumnToggleComponent, "pbds-column-toggle", never, { "label": "label"; "showAllLabel": "showAllLabel"; "columns": "columns"; "storagekey": "storagekey"; "minimum": "minimum"; "placement": "placement"; }, { "toggle": "toggle"; }, never, never, false, never>;
+    static ɵcmp: i0.ɵɵComponentDeclaration<PbdsColumnToggleComponent, "pbds-column-toggle", never, { "label": { "alias": "label"; "required": false; }; "showAllLabel": { "alias": "showAllLabel"; "required": false; }; "columns": { "alias": "columns"; "required": false; }; "storagekey": { "alias": "storagekey"; "required": false; }; "minimum": { "alias": "minimum"; "required": false; }; "placement": { "alias": "placement"; "required": false; }; }, { "toggle": "toggle"; }, never, never, false, never>;
 }

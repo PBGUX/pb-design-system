@@ -72,5 +72,5 @@ export declare class PbdsMultipleValuesDirective implements ControlValueAccessor
      */
     private clean;
     static ɵfac: i0.ɵɵFactoryDeclaration<PbdsMultipleValuesDirective, never>;
-    static ɵdir: i0.ɵɵDirectiveDeclaration<PbdsMultipleValuesDirective, "[pbdsMultipleValues]", ["PbdsMultipleValues"], { "delimiters": "delimiters"; "delimetersSwitches": "delimetersSwitches"; "replacements": "replacements"; "replacementsSwtiches": "replacementsSwtiches"; "placeholder": "placeholder"; "submitOnEnter": "submitOnEnter"; "maximumHeight": "maximumHeight"; }, { "submit": "submit"; }, never, never, false, never>;
+    static ɵdir: i0.ɵɵDirectiveDeclaration<PbdsMultipleValuesDirective, "[pbdsMultipleValues]", ["PbdsMultipleValues"], { "delimiters": { "alias": "delimiters"; "required": false; }; "delimetersSwitches": { "alias": "delimetersSwitches"; "required": false; }; "replacements": { "alias": "replacements"; "required": false; }; "replacementsSwtiches": { "alias": "replacementsSwtiches"; "required": false; }; "placeholder": { "alias": "placeholder"; "required": false; }; "submitOnEnter": { "alias": "submitOnEnter"; "required": false; }; "maximumHeight": { "alias": "maximumHeight"; "required": false; }; }, { "submit": "submit"; }, never, never, false, never>;
 }

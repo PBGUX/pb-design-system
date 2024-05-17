@@ -1,3 +1,34 @@
+# 16.0.0 &ndash; Angular 16 and Bootstrap 5.2
+
+## BREAKING CHANGES
+
+- Removed all old Bootstrap 4 classes, be sure to replace all Bootstrap 4 classes in your application, refer
+  to the migration guide on the Design System version 7.0.0 below and the Bootstrap 5.2
+  [migration guide](https://getbootstrap.com/docs/5.2/migration/#sass)
+- Removed `.label-allcaps` class, replace with `.form-label`
+- Removed `.link-icon` class, replace with `me-2`
+- Removed button spacing css which added margin to the left of a series of buttons. This was problematic with
+  button groups, paging buttons, etc. Per the Bootstrap documentation, use display flex with a gap class, such
+  as `&lt;div class="d-flex gap-2"&gt;` on the element wrapping a group of
+  buttons. Note that modal footers have this spacing applied by default. See the modal demos for an example.
+- Links are underlined by default for accessibility, the
+  `.a11y-accessible` class to add an underline removed, use the Bootstrap
+  `.text-decoration-none` class to remove the underline on a link if needed
+- Removed unused mapping point-of-interst (poi) icons and font
+- Removed unused canvas objects css
+
+ng-bootstrap
+
+- Accordions changed to use directives instead of components, see the ng-bootstrap documentation for details
+
+PrimeNG
+
+- p-table should use the `tableStyleClass="table"` input for proper table
+  styling. Additional Bootstrap classes can be applied for hover, stripe, etc. The p-table css is deprecated
+  and will be removed in the next version, see the tables page for examples.
+- p-table sort icons are styled in the css, the `&lt;ng-template pTemplate="sorticon"&gt;...&lt;ng-template&gt;` can be
+  removed.
+
 # 7.1.2
 
 # Addition/Changes
