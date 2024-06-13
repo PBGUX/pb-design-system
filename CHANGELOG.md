@@ -1,3 +1,16 @@
+# 16.0.1
+
+# Additions/Changes
+
+- Added 5 new countries in Address Blocks
+  - Australia
+  - Germany
+  - Canada
+  - Japan
+  - France
+- Added new Table toolbar with Outline
+
+
 # 16.0.0 &ndash; Angular 16 and Bootstrap 5.2
 
 ## BREAKING CHANGES
