@@ -1,3 +1,16 @@
+# 16.0.3
+
+# Additions/Fixes
+
+- Fixed missing container input in Daterange Popover
+
+# 16.0.2
+
+# Additions/Fixes
+
+- Added Resizeable Columns Component to Tables
+- Fixed issue of button border in PBDS Datepicker in Toolbar
+
 # 16.0.1
 
 # Additions/Changes
@@ -9,7 +22,6 @@
   - Japan
   - France
 - Added new Table toolbar with Outline
-
 
 # 16.0.0 &ndash; Angular 16 and Bootstrap 5.2
 
