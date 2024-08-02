@@ -1,13 +1,10 @@
-# PB Design System 7
+# PB Design System 16
 
 This is a release of the Design System with Bootstrap 5.
 
-It requires Bootstrap ≥5, Angular ≥15, and NG-Bootstrap ≥14 to be installed.
+It requires Bootstrap 5, Angular 16, and NG-Bootstrap 15 to be installed.
 
-Please see **CHANGELOG.md** for breaking changes migrating from 6.x
-
-Your npm version must be 6.14.17, please check by running `npm -v`.
-Your node version must be 14.20.0, please check by running `node -v`.
+Your node version must be 16 or 18, please check by running `node -v`.
 
 ## Installation
 
