@@ -1,3 +1,7 @@
+# 7.1.3
+
+- Date Range Picker with Presets input `container` was removed to fix a scrolling issue, added it back as this broke modals that need to use container 'body'
+
 # 7.1.2
 
 # Addition/Changes
@@ -1334,7 +1338,7 @@ It is worth reviewing the [entire migration page](https://getbootstrap.com/docs/
 
 ## Missing
 
-As you use the site, you will see some placeholder "TODO" boxes for missing components. These are currently being investigated and/or worked on. If there are components you would like to see in the next beta, please use the HelpScout "beacon" at the lower right of every page.
+As you use the site, you will see some placeholder "TODO" boxes for missing components. These are currently being investigated and/or worked on.
 
 # 5.0.0-beta.3 - December 15, 2017
 
