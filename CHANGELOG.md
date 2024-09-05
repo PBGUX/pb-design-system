@@ -1,3 +1,9 @@
+#5.1.1 - September 5, 2024
+
+## Additions
+
+- added ShipAccel theme
+
 # 5.1.0 - May 1, 2019 (includes changes from beta)
 
 ## Changes
@@ -10,15 +16,19 @@
 
 ## Fixes
 
-- FIX PrimeNG icon-only button, as in drag-and-drop UI
-- FIX Metric block badge color for accessiblity issue
+- Fix PrimeNG calendar pushing down content below
+- Fix `pbi-screen-reduce` icon class name (closes [#67](https://github.com/PBGUX/pb-design-system/issues/67))
+- Fix background color of search field in header (closes [#61](https://github.com/PBGUX/pb-design-system/issues/61))
+- Fix styling of items in table toolbars
+- Fix code snippet for cards
+- Fix hover color for striped tables
 
 ## **Additions**
 
-- Added Pricing Plans 
+- Added Pricing Plans
 - Added Sliding Tabs (Angular Material)
 - Added Draggable table rows (PrimeNG)
-- Added table row "action menu" 
+- Added table row "action menu"
 - Added example of table with row headers
 - Added PrimeNG "Virtual Scroller" component
 - Added links to download fonts and icons
@@ -27,13 +37,27 @@
 - We now have approval from the PB Open Source Committee for all our open-source plugins, so teams will not need separate approval for these plugins. See the Tech Stack page for details.
 - Updated Geosearch API information
 
-
 ## Thank You
 
 As always, we've relied on the ideas and support from the entire PB community to keep Design System moving forward. Please keep the feedback coming. In particular, we'd like to thank the following individuals for helping with this release:
 
 Andrew Dimola, Beth Jennings, Bhalchandra Bhosale, Gaston Hummel, Joan Doutney, Joe Cotton, Ken Zaldo, Rich Collette, Richard Morris, Rick Dukeshier, Ron Cianfaglione, Shawn Sharifi, Tanuj Chauhan, Yuhua “Jennie” Lee
 
+---
+
+# 5.0.1 - November 29, 2018
+
+## Fixes
+
+- FIX Remove mutiple attribute in email template
+- FIX PrimeNG icon-only button, as in drag-and-drop UI
+- FIX Metric block badge color for accessiblity issue
+
+## Additions
+
+- Added PrimeNG calendar "date and time" picker (closes [#57](https://github.com/PBGUX/pb-design-system/issues/57))
+- Added "expand all" and "collapse all" icons (closes [#65](https://github.com/PBGUX/pb-design-system/issues/65))
+- Added additional requested icons: help (without circle), coins, left&amp;right direction arrows, newsletter, glasses, basket, palette, telephone, bullet, outline mini envelope, and a second style of globe.
 
 ---
 
