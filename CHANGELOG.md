@@ -1,4 +1,4 @@
-#5.1.1 - September 5, 2024
+#5.1.1 - September 13, 2024
 
 ## Additions
 
