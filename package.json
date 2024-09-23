@@ -1,6 +1,6 @@
 {
   "name": "pb-design-system",
-  "version": "16.0.3",
+  "version": "16.0.4",
   "description": "Pitney Bowes Design System",
   "repository": {
     "type": "git",
@@ -67,17 +67,17 @@
       "esm": "./esm2022/daterange-popover/pb-design-system-daterange-popover.mjs",
       "default": "./fesm2022/pb-design-system-daterange-popover.mjs"
     },
-    "./empty-state": {
-      "types": "./empty-state/index.d.ts",
-      "esm2022": "./esm2022/empty-state/pb-design-system-empty-state.mjs",
-      "esm": "./esm2022/empty-state/pb-design-system-empty-state.mjs",
-      "default": "./fesm2022/pb-design-system-empty-state.mjs"
-    },
     "./feedback-rating": {
       "types": "./feedback-rating/index.d.ts",
       "esm2022": "./esm2022/feedback-rating/pb-design-system-feedback-rating.mjs",
       "esm": "./esm2022/feedback-rating/pb-design-system-feedback-rating.mjs",
       "default": "./fesm2022/pb-design-system-feedback-rating.mjs"
+    },
+    "./empty-state": {
+      "types": "./empty-state/index.d.ts",
+      "esm2022": "./esm2022/empty-state/pb-design-system-empty-state.mjs",
+      "esm": "./esm2022/empty-state/pb-design-system-empty-state.mjs",
+      "default": "./fesm2022/pb-design-system-empty-state.mjs"
     },
     "./error-icons": {
       "types": "./error-icons/index.d.ts",
@@ -97,12 +97,6 @@
       "esm": "./esm2022/multiple-values/pb-design-system-multiple-values.mjs",
       "default": "./fesm2022/pb-design-system-multiple-values.mjs"
     },
-    "./progress-spinner": {
-      "types": "./progress-spinner/index.d.ts",
-      "esm2022": "./esm2022/progress-spinner/pb-design-system-progress-spinner.mjs",
-      "esm": "./esm2022/progress-spinner/pb-design-system-progress-spinner.mjs",
-      "default": "./fesm2022/pb-design-system-progress-spinner.mjs"
-    },
     "./page-title": {
       "types": "./page-title/index.d.ts",
       "esm2022": "./esm2022/page-title/pb-design-system-page-title.mjs",
@@ -114,6 +108,12 @@
       "esm2022": "./esm2022/progress-button/pb-design-system-progress-button.mjs",
       "esm": "./esm2022/progress-button/pb-design-system-progress-button.mjs",
       "default": "./fesm2022/pb-design-system-progress-button.mjs"
+    },
+    "./progress-spinner": {
+      "types": "./progress-spinner/index.d.ts",
+      "esm2022": "./esm2022/progress-spinner/pb-design-system-progress-spinner.mjs",
+      "esm": "./esm2022/progress-spinner/pb-design-system-progress-spinner.mjs",
+      "default": "./fesm2022/pb-design-system-progress-spinner.mjs"
     }
   },
   "sideEffects": false
